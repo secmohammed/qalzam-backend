@@ -1,0 +1,72 @@
+<?php
+
+namespace App\Domain\Discount\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Joovlly\DDD\Traits\Responder;
+use App\Domain\Discount\Entities\Discount;
+use App\Domain\Discount\Http\Resources\Discount\DiscountResource;
+use App\Domain\Discount\Repositories\Contracts\DiscountRepository;
+use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use App\Domain\Discount\Http\Requests\DiscountUser\DiscountUserStoreFormRequest;
+
+class DiscountUserController extends Controller
+{
+    use Responder;
+
+    /**
+     * @var DiscountRepository
+     */
+    protected $discountRepository;
+
+    /**
+     * Domain Alias.
+     *
+     * @var string
+     */
+    protected $domainAlias = 'discounts';
+
+    /**
+     * Resource Route.
+     *
+     * @var string
+     */
+    protected $resourceRoute = 'discounts';
+
+    /**
+     * View Path
+     *
+     * @var string
+     */
+    protected $viewPath = 'discount';
+
+    /**
+     * @param DiscountRepository $discountRepository
+     */
+    public function __construct(DiscountRepository $discountRepository)
+    {
+        $this->discountRepository = $discountRepository;
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(DiscountUserStoreFormRequest $request)
+    {
+        $discount = $this->discountRepository->where($request->validated())->firstOrFail();
+        try {
+            $discount->attachToUser(auth()->user());
+            $this->setData('data', $discount);
+            $this->redirectRoute("{$this->resourceRoute}.show", [$discount->id]);
+            $this->useCollection(DiscountResource::class, 'data');
+        } catch (Exception $e) {
+            $this->redirectBack();
+            $this->setApiResponse(fn() => response()->json(['created' => false, 'message' => $e->getMessage()], 422));
+        }
+
+        return $this->response();
+    }
+}
