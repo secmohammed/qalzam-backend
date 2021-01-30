@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('theme.app')
 
 @section('content')
 
@@ -137,8 +137,3 @@
         </div>
     </div>
 @endsection
-
-
-
-
-

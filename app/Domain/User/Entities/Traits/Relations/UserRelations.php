@@ -11,6 +11,7 @@ use App\Domain\User\Entities\Remindable;
 use App\Domain\User\Entities\DeviceToken;
 use App\Domain\Category\Entities\Category;
 use App\Domain\Discount\Entities\Discount;
+use App\Domain\Reservation\Entities\Reservation;
 use App\Domain\Product\Entities\ProductVariation;
 
 trait UserRelations
@@ -96,6 +97,14 @@ trait UserRelations
     public function remindables()
     {
         return $this->hasMany(Remindable::class);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
     }
 
     /**

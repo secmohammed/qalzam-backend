@@ -35,7 +35,7 @@ class DiscountUpdateFormRequest extends DiscountStoreFormRequest
     public function rules()
     {
         $rules = [
-            'code' => ['required', 'unique:discounts,code,' . $this->route('discount')],
+            'code' => ['required', 'unique:discounts,code,' . $this->discount->id],
 
         ];
 

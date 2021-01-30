@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('theme.app')
 
 @push('styles')
 
@@ -185,8 +185,3 @@
         });
     </script>
 @endpush
-
-
-
-
-

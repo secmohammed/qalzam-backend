@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('theme.app')
 @section('content')
     <!--begin::Subheader-->
     <div class="subheader py-2 py-lg-6  subheader-transparent  breadcrumb_custom" id="kt_subheader">

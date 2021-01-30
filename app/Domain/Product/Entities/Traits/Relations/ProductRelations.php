@@ -3,11 +3,20 @@
 namespace App\Domain\Product\Entities\Traits\Relations;
 
 use App\Domain\User\Entities\User;
+use App\Domain\Branch\Entities\Branch;
 use App\Domain\Category\Entities\Category;
 use App\Domain\Product\Entities\ProductVariation;
 
 trait ProductRelations
 {
+    /**
+     * @return mixed
+     */
+    public function branches()
+    {
+        return $this->belongsToMany(Branch::class, 'branch_product', 'product_id', 'branch_id');
+    }
+
     /**
      * @return mixed
      */

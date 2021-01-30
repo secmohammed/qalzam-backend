@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('theme.app')
 
 @section('content')
     <!--begin::Subheader-->
@@ -74,7 +74,7 @@
                                     <div class="col-xl-10">
                                         @include("{$alias}::category._partials._fields", [
                                             'action' => 'edit',
-                                            'data' => $edit,
+                                            'edit' => $edit,
                                             'categories'=>$categories
                                         ])
                                     </div>

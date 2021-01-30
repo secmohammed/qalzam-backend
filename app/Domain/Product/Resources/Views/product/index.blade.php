@@ -1,4 +1,4 @@
-@extends('backend.layout')
+@extends('theme.app')
 
 @push('styles')
     <link href="{{ asset('layout-dist/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />

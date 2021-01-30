@@ -97,13 +97,13 @@ class ProductVariationTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProductVariationType $productvariationtype)
+    public function edit(ProductVariationType $product_variation_type)
     {
-        $this->setData('title', __('main.edit') . ' ' . __('main.productvariationtype') . ' : ' . $productvariationtype->id, 'web');
+        $this->setData('title', __('main.edit') . ' ' . __('main.product_variation_type') . ' : ' . $product_variation_type->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
 
-        $this->setData('edit', $productvariationtype);
+        $this->setData('edit', $product_variation_type);
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.edit");
 

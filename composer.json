@@ -20,7 +20,8 @@
         "joovlly/reviewable": "dev-master",
         "joovlly/sms": "dev-master",
         "joovlly/translatable": "dev-master",
-                "kalnoy/nestedset": "^5.0",
+        "joovlly/toaster": "dev-master",
+        "kalnoy/nestedset": "^5.0",
         "laravel-notification-channels/fcm": "dev-master",
 
    "moneyphp/money": "^3.3",
@@ -53,6 +54,11 @@
             "name": "joovlly/ddd",
             "type": "vcs",
             "url": "https://github.com/Joovlly/ddd.git"
+        },
+        {
+            "name": "joovlly/toaster",
+            "type": "vcs",
+            "url": "https://github.com/Joovlly/toaster.git"
         },
         {
             "name": "joovlly/translatable",

@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('theme.app')
 @section('content')
     <!--begin::Subheader-->
     <div class="subheader py-2 py-lg-6  subheader-transparent  breadcrumb_custom" id="kt_subheader">
@@ -8,7 +8,7 @@
                 <!--begin::Mobile Toggle-->
                 <button class="burger-icon burger-icon-left mr-4 d-inline-block d-lg-none"
                         id="kt_subheader_mobile_toggle">
-                    <span></span>l
+                    <span></span>
                 </button>
                 <!--end::Mobile Toggle-->
                 <!--begin::Page Heading-->

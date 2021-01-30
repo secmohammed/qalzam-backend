@@ -23,7 +23,7 @@ class CustomAllowedFilter extends AllowedFilter
      * @param string $name
      * @param $internalName
      */
-    public static function scope(string $name, $internalName = null): self
+    public static function scope(string $name, $internalName = null,  ? string $arrayValueDelimiter = null) : self
     {
         return new static($name, new CustomFilterScope, $internalName);
     }

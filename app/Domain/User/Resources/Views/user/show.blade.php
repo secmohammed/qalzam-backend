@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('theme.app')
 
 @push('styles')
     <link rel="stylesheet"

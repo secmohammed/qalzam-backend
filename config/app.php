@@ -174,19 +174,17 @@ return [
         App\Common\Providers\DomainServiceProvider::class,
 
         \App\Domain\User\Providers\DomainServiceProvider::class,
-        \App\Domain\Child\Providers\DomainServiceProvider::class,
-        \App\Domain\Competition\Providers\DomainServiceProvider::class,
         \App\Domain\Category\Providers\DomainServiceProvider::class,
-        \App\Domain\Feed\Providers\DomainServiceProvider::class,
         \App\Domain\Post\Providers\DomainServiceProvider::class,
         \App\Domain\Order\Providers\DomainServiceProvider::class,
         \App\Domain\Discount\Providers\DomainServiceProvider::class,
         \App\Domain\Product\Providers\DomainServiceProvider::class,
-        \App\Domain\Product\Providers\DomainServiceProvider::class,
         \App\Domain\Location\Providers\DomainServiceProvider::class,
         \App\Domain\Ingredient\Providers\DomainServiceProvider::class,
         \App\Domain\Dashboard\Providers\DomainServiceProvider::class,
-        \App\Domain\Message\Providers\DomainServiceProvider::class,
+        \App\Domain\Branch\Providers\DomainServiceProvider::class,
+		\App\Domain\Reservation\Providers\DomainServiceProvider::class,
+		\App\Domain\Accommodation\Providers\DomainServiceProvider::class,
 		###DOMAINS SERVICE PROVIDERS###
     ],
 
@@ -241,6 +239,6 @@ return [
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'Sms' => \Joovlly\SMS\Facades\SMS::class,
-
+        'Toaster' => \Joovlly\Toaster\Facades\Toaster::class,
     ],
 ];

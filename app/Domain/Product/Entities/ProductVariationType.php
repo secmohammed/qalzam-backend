@@ -2,6 +2,7 @@
 
 namespace App\Domain\Product\Entities;
 
+use Joovlly\Translatable\Traits\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Infrastructure\AbstractModels\BaseModel as Model;
 use App\Domain\Product\Repositories\Contracts\ProductVariationTypeRepository;
@@ -10,7 +11,7 @@ use App\Domain\Product\Entities\Traits\CustomAttributes\ProductVariationTypeAttr
 
 class ProductVariationType extends Model
 {
-    use ProductVariationTypeRelations, ProductVariationTypeAttributes, HasFactory;
+    use ProductVariationTypeRelations, ProductVariationTypeAttributes, HasFactory, Translatable;
 
     /**
      * @var array
@@ -48,6 +49,11 @@ class ProductVariationType extends Model
      * @var array
      */
     protected $table = "product_variation_types";
+
+    /**
+     * @var array
+     */
+    protected static $translatables = ['name'];
 
     public static function newFactory()
     {

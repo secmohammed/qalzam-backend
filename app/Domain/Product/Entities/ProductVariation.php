@@ -3,21 +3,22 @@
 namespace App\Domain\Product\Entities;
 
 use App\Common\Traits\HasPrice;
+use Spatie\MediaLibrary\HasMedia;
+use Illuminate\Database\Eloquent\Builder;
 use App\Common\Traits\FetchesMediaCollection;
+use Joovlly\Translatable\Traits\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Infrastructure\AbstractModels\BaseModel as Model;
+use App\Domain\Product\Entities\Traits\Scopes\PriceSortable;
+use App\Domain\Product\Entities\Traits\Scopes\PriceOrderable;
 use App\Domain\Product\Repositories\Contracts\ProductVariationRepository;
 use App\Domain\Product\Entities\Traits\Relations\ProductVariationRelations;
 use App\Domain\Product\Collections\CustomProductVariationResourceCollection;
 use App\Domain\Product\Entities\Traits\CustomAttributes\ProductVariationAttributes;
-use App\Domain\Product\Entities\Traits\Scopes\PriceOrderable;
-use App\Domain\Product\Entities\Traits\Scopes\PriceSortable;
-use Illuminate\Database\Eloquent\Builder;
-use Spatie\MediaLibrary\HasMedia;
 
 class ProductVariation extends Model implements HasMedia
 {
-    use HasPrice, ProductVariationRelations, ProductVariationAttributes, HasFactory, FetchesMediaCollection,  PriceSortable, PriceOrderable {
+    use HasPrice, ProductVariationRelations, ProductVariationAttributes, HasFactory, Translatable, FetchesMediaCollection,  PriceSortable, PriceOrderable {
         ProductVariationAttributes::getPriceAttribute insteadof HasPrice;
     }
 
@@ -44,7 +45,7 @@ class ProductVariation extends Model implements HasMedia
     protected $casts = [
         'details' => 'array'
     ];
-
+    protected static $translatables = ['name'];
     /**
      * The attributes that are going to be logged.
      *

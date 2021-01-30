@@ -7,7 +7,9 @@ use Illuminate\Pipeline\Pipeline;
 use Joovlly\DDD\Traits\Responder;
 use App\Common\Pipeline\HandleFileUpload;
 use App\Domain\Product\Entities\ProductVariation;
+use App\Domain\Product\Repositories\Contracts\ProductRepository;
 use App\Domain\Product\Repositories\Contracts\ProductVariationRepository;
+use App\Domain\Product\Repositories\Contracts\ProductVariationTypeRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 use App\Domain\Product\Http\Resources\ProductVariation\ProductVariationResource;
 use App\Domain\Product\Http\Requests\ProductVariation\ProductVariationStoreFormRequest;
@@ -47,9 +49,11 @@ class ProductVariationController extends Controller
     /**
      * @param ProductVariationRepository $productvariationRepository
      */
-    public function __construct(ProductVariationRepository $productvariationRepository)
+    public function __construct(ProductVariationRepository $productvariationRepository, ProductRepository $productRepository, ProductVariationTypeRepository $productVariationTypeRepository)
     {
         $this->productvariationRepository = $productvariationRepository;
+        $this->productRepository = $productRepository;
+        $this->productVariationTypeRepository = $productVariationTypeRepository;
     }
 
     /**
@@ -99,14 +103,15 @@ class ProductVariationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProductVariation $productvariation)
+    public function edit(ProductVariation $product_variation)
     {
-        $this->setData('title', __('main.edit') . ' ' . __('main.productvariation') . ' : ' . $productvariation->id, 'web');
+        $this->setData('title', __('main.edit') . ' ' . __('main.productvariation') . ' : ' . $product_variation->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
 
-        $this->setData('edit', $productvariation);
-
+        $this->setData('edit', $product_variation);
+        $this->setData('products', $this->productRepository->all());
+        $this->setData('productVariationTypes', $this->productVariationTypeRepository->all());
         $this->addView("{$this->domainAlias}::{$this->viewPath}.edit");
 
         $this->useCollection(ProductVariationResource::class, 'edit');

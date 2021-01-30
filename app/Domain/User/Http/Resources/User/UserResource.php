@@ -9,6 +9,7 @@ use App\Domain\Feed\Http\Resources\Feed\FeedResource;
 use App\Domain\User\Http\Resources\User\CartResource;
 use App\Domain\Child\Http\Resources\Child\ChildResource;
 use App\Domain\User\Http\Resources\User\WishlistResource;
+use App\Domain\Reservation\Http\Resources\Reservation\ReservationResource;
 use App\Infrastructure\Http\AbstractResources\BaseResource as JsonResource;
 
 class UserResource extends JsonResource
@@ -51,6 +52,7 @@ class UserResource extends JsonResource
             $this->mergeWhen(array_key_exists('roles', $this->getRelations()), [
                 'permissions' => array_merge($this->roles->sortByDesc('created_at')->pluck('permissions')->collapse()->toArray(), $this->permissions ?? []),
             ]),
+            'reservations' => ReservationResource::collection($this->whenLoaded('reservations')),
             'cart' => (new CartResource($this->whenLoaded('cart')))->additional($meta ?? []),
         ] + $meta;
     }

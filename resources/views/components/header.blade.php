@@ -20,7 +20,7 @@
             </button>
             <!--end::Aside Toggle-->
             <!--begin::Logo-->
-            <a href="#">
+            <a href="{{ route('dashboard') }}">
                 <img alt="Logo" src="{{ asset('assets/images/qalzam-logo.svg') }}" class="logo-sticky max-h-45px" />
             </a>
             <!--end::Logo-->

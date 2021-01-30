@@ -10,6 +10,7 @@ use App\Domain\Product\Repositories\Contracts\StockRepository;
 use App\Domain\Product\Http\Requests\Stock\StockStoreFormRequest;
 use App\Domain\Product\Http\Requests\Stock\StockUpdateFormRequest;
 use App\Domain\Product\Http\Resources\Stock\StockResourceCollection;
+use App\Domain\Product\Repositories\Contracts\ProductVariationRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 
 class StockController extends Controller
@@ -45,9 +46,10 @@ class StockController extends Controller
     /**
      * @param StockRepository $stockRepository
      */
-    public function __construct(StockRepository $stockRepository)
+    public function __construct(StockRepository $stockRepository, ProductVariationRepository $productVariationRepository)
     {
         $this->stockRepository = $stockRepository;
+        $this->productVariationRepository = $productVariationRepository;
     }
 
     /**
@@ -102,7 +104,7 @@ class StockController extends Controller
         $this->setData('title', __('main.edit') . ' ' . __('main.stock') . ' : ' . $stock->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
-
+        $this->setData('productVariations', $this->productVariationRepository->all());
         $this->setData('edit', $stock);
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.edit");

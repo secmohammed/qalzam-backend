@@ -1,4 +1,4 @@
-@extends('layouts.layout-basic')
+@extends('theme.auth')
 
 @section('body-class','login-page')
 

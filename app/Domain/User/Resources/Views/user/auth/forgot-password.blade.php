@@ -1,4 +1,4 @@
-@extends('layouts.layout-basic')
+@extends('theme.auth')
 
 @section('body-class','login-page')
 
@@ -29,7 +29,7 @@
 
         <!--begin::Action-->
         <div class="form-group d-flex flex-wrap justify-content-between align-items-center">
-            <a href="{{route('login')}}" class="text-dark-50 text-hover-primary my-3 mr-2"
+            <a href="{{route('login')}}" class="text-dark-50 text-hover-primary my-6 mr-20"
                id="kt_login_forgot">Return to login</a>
             <button type="submit" id="kt_login_signin_submit"
                     class="btn btn-primary btn-sm font-weight-bold px-9  my-3">Request new password</button>

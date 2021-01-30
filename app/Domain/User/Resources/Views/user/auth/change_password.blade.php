@@ -1,4 +1,4 @@
-@extends('layouts.layout-basic')
+@extends('theme.auth')
 
 @section('content')
     <div class="card" style="border-radius:0.72rem">

@@ -4,6 +4,7 @@ namespace App\Domain\Ingredient\Entities;
 
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Joovlly\Translatable\Traits\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Infrastructure\AbstractModels\BaseModel as Model;
 use App\Domain\Ingredient\Repositories\Contracts\IngredientRepository;
@@ -12,7 +13,7 @@ use App\Domain\Ingredient\Entities\Traits\CustomAttributes\IngredientAttributes;
 
 class Ingredient extends Model implements HasMedia
 {
-    use IngredientRelations, IngredientAttributes, HasFactory, InteractsWithMedia;
+    use IngredientRelations, IngredientAttributes, HasFactory, Translatable, InteractsWithMedia;
 
     /**
      * @var array
@@ -51,6 +52,11 @@ class Ingredient extends Model implements HasMedia
      * @var array
      */
     protected $table = "ingredients";
+
+    /**
+     * @var array
+     */
+    protected static $translatables = ['name', 'description'];
 
     public static function newFactory()
     {

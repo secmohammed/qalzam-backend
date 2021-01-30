@@ -4,7 +4,7 @@ namespace App\Common\Cart;
 
 use App\Common\Transformers\Money;
 use App\Domain\User\Entities\User;
-
+use App\Domain\Reservation\Entities\Reservation;
 
 class Cart
 {
@@ -14,9 +14,15 @@ class Cart
 
     protected $shipping;
     protected $discount;
+    protected $reservation;
     public function __construct(User $user = null)
     {
         $this->user = $user;
+    }
+    public function withReservations($reservationId)
+    {
+        $this->reservation = $this->user->reservations()->findMany($reservationId);
+        return $this;
     }
     public function withShipping($shippingId)
     {
@@ -46,16 +52,21 @@ class Cart
     public function empty()
     {
         $this->user->cart()->detach();
+        $this->shipping = null;
+        $this->reservation = null;
     }
     public function isEmpty()
     {
-        return $this->user->cart->sum('pivot.quantity') <= 0;
+        return $this->user->cart->sum('pivot.quantity') <= 0 && !$this->reservation;
     }
     public function subtotal()
     {
         $subtotal = $this->user->cart->sum(function ($product) {
             return $product->price->amount() * $product->pivot->quantity;
         });
+        if ($this->reservation) {
+            $subtotal = $subtotal + $this->reservation->sum('price');
+        }
         if ($this->discount) {
             $subtotal = $subtotal - ($subtotal * $this->discount->percentage / 100);
         }

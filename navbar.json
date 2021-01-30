@@ -1,0 +1,47 @@
+[
+    {
+        "name": "branches",
+        "icon": "nav-icon fas fa-tachometer-alt",
+        "route": "branches.index",
+        "children": [
+            {
+                "name": "list branches",
+                "route": "branches.index"
+            },
+            {
+                "name": "create new branch",
+                "route": "branches.create"
+            }
+        ]
+    },
+    {
+        "name": "reservations",
+        "icon": "nav-icon fas fa-tachometer-alt",
+        "route": "reservations.index",
+        "children": [
+            {
+                "name": "list reservations",
+                "route": "reservations.index"
+            },
+            {
+                "name": "create new reservation",
+                "route": "reservations.create"
+            }
+        ]
+    },
+    {
+        "name": "accommodations",
+        "icon": "nav-icon fas fa-tachometer-alt",
+        "route": "accommodations.index",
+        "children": [
+            {
+                "name": "list accommodations",
+                "route": "accommodations.index"
+            },
+            {
+                "name": "create new accommodation",
+                "route": "accommodations.create"
+            }
+        ]
+    }
+]

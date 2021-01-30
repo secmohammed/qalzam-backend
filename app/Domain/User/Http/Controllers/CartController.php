@@ -70,7 +70,7 @@ class CartController extends Controller
     public function index(Request $request, Cart $cart)
     {
         $cart->sync();
-        $request->user()->load(['cart.product', 'cart.product.variations.stock', 'cart.stock', 'cart.type']);
+        $request->user()->load(['cart.product', 'cart.product.variations.stock', 'cart.stock', 'cart.type', 'reservations']);
         $this->setData('title', __('main.show-all') . ' ' . __('main.address'));
 
         $this->setData('alias', $this->domainAlias);

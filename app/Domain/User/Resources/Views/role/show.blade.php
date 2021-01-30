@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('theme.app')
 
 @section('content')
     <div class="subheader py-2 py-lg-6  subheader-transparent " id="kt_subheader">

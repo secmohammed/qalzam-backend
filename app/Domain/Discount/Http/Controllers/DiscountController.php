@@ -63,6 +63,9 @@ class DiscountController extends Controller
         $this->setData('title', __('main.add') . ' ' . __('main.discount'), 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
+        $this->setData('users', $this->userRepository->whereHas('roles', function ($query) {
+            $query->where('slug', '!=', 'admin');
+        })->get());
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
 
@@ -105,9 +108,11 @@ class DiscountController extends Controller
         $this->setData('title', __('main.edit') . ' ' . __('main.discount') . ' : ' . $discount->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
-
+        $discount->load('users');
         $this->setData('edit', $discount);
-
+        $this->setData('users', $this->userRepository->whereHas('roles', function ($query) {
+            $query->where('slug', '!=', 'admin');
+        })->get());
         $this->addView("{$this->domainAlias}::{$this->viewPath}.edit");
 
         $this->useCollection(DiscountResource::class, 'edit');
@@ -148,6 +153,7 @@ class DiscountController extends Controller
      */
     public function show(Discount $discount)
     {
+        $discount->remaining_purchases = $discount->number_of_usage - $discount->users()->count();
         $this->setData('title', __('main.show') . ' ' . __('main.discount') . ' : ' . $discount->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
@@ -193,7 +199,7 @@ class DiscountController extends Controller
     public function update(DiscountUpdateFormRequest $request, Discount $discount)
     {
         $discount->update($request->validated());
-
+        $discount->users()->sync($request->users);
         $this->redirectRoute("{$this->resourceRoute}.show", [$discount->id]);
         $this->setData('data', $discount);
         $this->useCollection(DiscountResource::class, 'data');
