@@ -28,7 +28,7 @@ class CreateReservationsTable extends Migration
             $table->id();
             $table->float('price');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreign('creator_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('creator_id')->constrained('users', 'id')->onDelete('cascade');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->foreignId('accommodation_id')->constrained()->onDelete('cascade');

@@ -4,6 +4,7 @@ namespace App\Domain\Branch\Entities;
 
 use Spatie\MediaLibrary\HasMedia;
 use App\Common\Traits\FetchesMediaCollection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Infrastructure\AbstractModels\BaseModel as Model;
 use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 use App\Domain\Branch\Entities\Traits\Relations\BranchRelations;
@@ -11,7 +12,7 @@ use App\Domain\Branch\Entities\Traits\CustomAttributes\BranchAttributes;
 
 class Branch extends Model implements HasMedia
 {
-    use BranchRelations, BranchAttributes, FetchesMediaCollection;
+    use BranchRelations, BranchAttributes, FetchesMediaCollection, HasFactory;
 
     /**
      * @var array
@@ -54,24 +55,8 @@ class Branch extends Model implements HasMedia
      */
     protected $table = "branches";
 
-    /**
-     * define belongsTo relations.
-     *
-     * @var array
-     */
-    private $belongsTo = [];
-
-    /**
-     * define belongsToMany relations.
-     *
-     * @var array
-     */
-    private $belongsToMany = [];
-
-    /**
-     * define hasMany relations.
-     *
-     * @var array
-     */
-    private $hasMany = [];
+    public static function newFactory()
+    {
+        return app(\App\Domain\Branch\Database\Factories\BranchFactory::class)->new();
+    }
 }

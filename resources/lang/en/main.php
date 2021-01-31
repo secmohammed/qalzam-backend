@@ -13,6 +13,7 @@ return [
     'create' => 'Create',
     'body' => 'Body',
     'broadcast' => 'Broadcast',
+    'add-product' => 'Add Product',
     'add-discount' => 'Add Discount',
     'messages' => 'Messages',
     'percentage' => 'Percentage',

@@ -60,6 +60,7 @@ class StockController extends Controller
     public function create()
     {
         $this->setData('title', __('main.add') . ' ' . __('main.stock'), 'web');
+        $this->setData('productVariations', $this->productVariationRepository->all());
 
         $this->setData('alias', $this->domainAlias, 'web');
 

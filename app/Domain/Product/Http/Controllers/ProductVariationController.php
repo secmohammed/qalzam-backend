@@ -64,8 +64,9 @@ class ProductVariationController extends Controller
     public function create()
     {
         $this->setData('title', __('main.add') . ' ' . __('main.productvariation'), 'web');
-
         $this->setData('alias', $this->domainAlias, 'web');
+        $this->setData('products', $this->productRepository->all());
+        $this->setData('productVariationTypes', $this->productVariationTypeRepository->all());
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
 
@@ -108,7 +109,6 @@ class ProductVariationController extends Controller
         $this->setData('title', __('main.edit') . ' ' . __('main.productvariation') . ' : ' . $product_variation->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
-
         $this->setData('edit', $product_variation);
         $this->setData('products', $this->productRepository->all());
         $this->setData('productVariationTypes', $this->productVariationTypeRepository->all());

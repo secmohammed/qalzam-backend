@@ -2,9 +2,11 @@
 
 namespace App\Domain\Branch\Database\Factories;
 
-use App\Domain\Branch\Entities\Branch;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Domain\User\Entities\User;
+use App\Domain\Branch\Entities\Branch;
+use App\Domain\Location\Entities\Location;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class BranchFactory extends Factory
 {
@@ -23,7 +25,18 @@ class BranchFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
+            'name' => $this->faker->unique()->name,
+            'location_id' => function () {
+                return Location::factory()->create()->id;
+            },
+            'latitude' => $this->faker->latitude(),
+            'longitude' => $this->faker->longitude(),
+            'user_id' => function () {
+                return User::factory()->create()->id;
+            },
+            'creator_id' => function () {
+                return User::factory()->create()->id;
+            },
         ];
     }
 }

@@ -64,8 +64,9 @@
                             <div class="row container-fluid mb-5">
                                 <div class="col-xl-0"></div>
                                 <div class="col-xl-10">
-                                    @include("{$alias}::productvariation._partials._fields", [
+                                    @include("{$alias}::stock._partials._fields", [
                                     'action' => 'create',
+                                    'productVariations' => $productVariations,
                                     ])
                                 </div>
                                 <div class="col-md-4"></div>

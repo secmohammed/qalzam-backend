@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e118c5295811c9424b12f8937dc6aa38",
+    "content-hash": "c642dfd0136cdb489c67dc71501f0fb4",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -10805,6 +10805,77 @@
                 }
             ],
             "time": "2020-09-28T06:39:44+00:00"
+        },
+        {
+            "name": "styde/enlighten",
+            "version": "0.3.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/StydeNet/enlighten.git",
+                "reference": "fcc3fe57b6ee4e5028c9dda04d3a608cd78e209c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/StydeNet/enlighten/zipball/fcc3fe57b6ee4e5028c9dda04d3a608cd78e209c",
+                "reference": "fcc3fe57b6ee4e5028c9dda04d3a608cd78e209c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "laravel/framework": "^7.28|^8.0",
+                "php": "^7.3"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "orchestra/testbench": "^5.0|^6.0",
+                "phpunit/phpunit": "^9.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Styde\\Enlighten\\Providers\\EnlightenServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Styde\\Enlighten\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Duilio Palacios",
+                    "email": "duilio@styde.net"
+                },
+                {
+                    "name": "Jeffer Ochoa",
+                    "email": "jeffer.8a@gmail.com"
+                }
+            ],
+            "description": "Enlighten your APIs with auto-generated documentation",
+            "support": {
+                "issues": "https://github.com/StydeNet/enlighten/issues",
+                "source": "https://github.com/StydeNet/enlighten/tree/0.3.6"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sileence",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/duiliopalacios",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2020-10-29T11:04:58+00:00"
         },
         {
             "name": "theseer/tokenizer",

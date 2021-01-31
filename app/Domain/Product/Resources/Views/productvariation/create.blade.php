@@ -66,6 +66,8 @@
                                 <div class="col-xl-10">
                                     @include("{$alias}::productvariation._partials._fields", [
                                     'action' => 'create',
+                                    'products' => $products,
+                                    'productVariationTypes' => $productVariationTypes
                                     ])
                                 </div>
                                 <div class="col-md-4"></div>

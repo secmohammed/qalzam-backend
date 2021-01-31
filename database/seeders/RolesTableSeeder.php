@@ -26,6 +26,14 @@ class RolesTableSeeder extends Seeder
                 'index-discount' => true,
                 'update-discount' => true,
 
+                'store-branch' => true,
+                'create-branch' => true,
+                'edit-branch' => true,
+                'show-branch' => true,
+                'destroy-branch' => true,
+                'index-branch' => true,
+                'update-branch' => true,
+
                 'store-ingredient' => true,
                 'create-ingredient' => true,
                 'edit-ingredient' => true,

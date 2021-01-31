@@ -1,5 +1,5 @@
 <div class="form-group row">
-    <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.product_variation_type") }} <span
+    <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.product_variation") }} <span
             style="color: red"> * </span> </label>
     <div class="col-lg-10 col-md-9 col-sm-12">
         <select class="form-control select2 {{$errors->has('product_variation_id') ? 'is-invalid':''}}" name="product_variation_id">
