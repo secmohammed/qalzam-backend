@@ -15,6 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth.api'], function () {
     Route::apiResource('/branches', 'BranchController');
-    Route::post('/branch_products/{branch}', 'BranchProductController@store')->name('branch.products.store');
+    Route::post('branch_products/{branch}', 'BranchProductController@store')->name('branch.products.store');
     ###CRUD_PLACEHOLDER###
 });

@@ -5,6 +5,7 @@ namespace App\Domain\Branch\Database\Factories;
 use Illuminate\Support\Str;
 use App\Domain\User\Entities\User;
 use App\Domain\Branch\Entities\Branch;
+use App\Domain\Product\Entities\Product;
 use App\Domain\Location\Entities\Location;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -38,5 +39,15 @@ class BranchFactory extends Factory
                 return User::factory()->create()->id;
             },
         ];
+    }
+
+    /**
+     * @param int $count
+     * @param array $attributes
+     * @return mixed
+     */
+    public function withProducts(int $count = 1, $attributes = [])
+    {
+        return $this->hasAttached(Product::factory()->count($count), $attributes);
     }
 }

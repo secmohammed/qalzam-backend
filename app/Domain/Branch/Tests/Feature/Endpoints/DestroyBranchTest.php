@@ -7,6 +7,7 @@ use App\Domain\User\Entities\User;
 use Joovlly\Authorizable\Models\Role;
 use App\Domain\Branch\Entities\Branch;
 use Database\Seeders\RolesTableSeeder;
+use App\Domain\Location\Entities\Location;
 
 class DestroyBranchTest extends TestCase
 {
@@ -24,17 +25,16 @@ class DestroyBranchTest extends TestCase
     }
 
     /** @test */
-    public function it_should_delete_children_of_branches_when_parent_is_deleted()
+    public function it_should_delete_branch_when_location_is_deleted()
     {
         $user = $this->userFactory->create();
-        $branch = $this->branchFactory->withParent()->create();
+        $branch = $this->branchFactory->create();
         $this->seed(RolesTableSeeder::class);
         $user->roles()->attach(Role::first());
-        $this->jsonAs($user, 'DELETE',
-            route('api.branches.destroy', $branch->parent->id)
-        )->assertStatus(200);
+        Location::whereId($branch->location_id)->delete();
         $this->assertDatabaseMissing('branches', [
             'id' => $branch->id,
+            'name' => $branch->name,
         ]);
     }
 

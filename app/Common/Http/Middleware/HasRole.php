@@ -14,6 +14,7 @@ class HasRole
     protected $doesntRequirePermissions = [
         'api.auth.me',
         'api.media.destroy',
+        'api.branch.products.store',
         'api.auth.logout',
         'api.auth.me.update',
         'api.auth.forgot-password',

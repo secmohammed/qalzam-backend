@@ -78,16 +78,15 @@ class BranchController extends Controller
      */
     public function destroy($id)
     {
-        $ids = request()->get('ids', [$id]);
+        $ids = request()->get('ids', $id);
 
-        $delete = $this->branchRepository->destroy($ids);
-
+        $delete = $this->branchRepository->destroy($ids)->count();
         if ($delete) {
             $this->redirectRoute("{$this->resourceRoute}.index");
             $this->setApiResponse(fn() => response()->json(['deleted' => true], 200));
         } else {
             $this->redirectBack();
-            $this->setApiResponse(fn() => response()->json(['updated' => false], 422));
+            $this->setApiResponse(fn() => response()->json(['deleted' => false], 404));
         }
 
         return $this->response();
@@ -121,7 +120,9 @@ class BranchController extends Controller
      */
     public function index(Request $request)
     {
-        $index = $this->branchRepository->spatie()->all();
+        $index = $this->branchRepository->spatie()->paginate(
+            $request->per_page ?? config('qalzam.pagination')
+        );
 
         $this->setData('title', __('main.show-all') . ' ' . __('main.branch'));
 

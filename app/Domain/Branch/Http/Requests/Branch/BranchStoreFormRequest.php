@@ -2,6 +2,7 @@
 
 namespace App\Domain\Branch\Http\Requests\Branch;
 
+use App\Domain\Branch\Entities\Branch;
 use App\Infrastructure\Http\AbstractRequests\BaseRequest as FormRequest;
 
 class BranchStoreFormRequest extends FormRequest
@@ -38,8 +39,8 @@ class BranchStoreFormRequest extends FormRequest
         $rules = [
             'name' => 'required|unique:branches,name|min:8|max:255',
             'location_id' => 'required|exists:locations,id',
-            'latitude' => ['nullable', 'regex:/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/', 'unique:stores,latitude'],
-            'longitude' => ['nullable', 'regex:/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/', 'unique:stores,longitude'],
+            'latitude' => ['nullable', 'regex:/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/', 'unique:branches,latitude'],
+            'longitude' => ['nullable', 'regex:/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/', 'unique:branches,longitude'],
             'branch-gallery' => ['required', 'array'],
             'branch-gallery.*' => ['required', 'image', 'mimes:png,jpeg,jpg', 'max:2048'],
             'user_id' => 'required|exists:users,id',

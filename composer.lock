@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c642dfd0136cdb489c67dc71501f0fb4",
+    "content-hash": "ec90b74a8d992f677adcda3621aeace4",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1536,17 +1536,17 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:Joovlly/commentable.git",
-                "reference": "0edbc24ee7557c687df187ba72c78fe4dc16891c"
+                "reference": "7b4647775e52719e028a519ad448d9683195bdc6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Joovlly/commentable/zipball/0edbc24ee7557c687df187ba72c78fe4dc16891c",
-                "reference": "0edbc24ee7557c687df187ba72c78fe4dc16891c",
+                "url": "https://api.github.com/repos/Joovlly/commentable/zipball/7b4647775e52719e028a519ad448d9683195bdc6",
+                "reference": "7b4647775e52719e028a519ad448d9683195bdc6",
                 "shasum": ""
             },
             "require": {
                 "kalnoy/nestedset": "^5.0",
-                "php": "^7.2"
+                "php": "^7.3|^8.0"
             },
             "require-dev": {
                 "graham-campbell/testbench": "^5.0",
@@ -1589,10 +1589,10 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/Joovlly/commentable/tree/v1.1.1",
+                "source": "https://github.com/Joovlly/commentable/tree/master",
                 "issues": "https://github.com/Joovlly/commentable/issues"
             },
-            "time": "2020-08-30T18:04:32+00:00"
+            "time": "2021-02-02T14:26:17+00:00"
         },
         {
             "name": "joovlly/ddd",
@@ -1600,18 +1600,18 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:Joovlly/ddd.git",
-                "reference": "37a5b794c44dd997d539bae89832a342cf8c660b"
+                "reference": "6a981a9c2cee368fd73b4fafa4c313e3e695908c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Joovlly/ddd/zipball/37a5b794c44dd997d539bae89832a342cf8c660b",
-                "reference": "37a5b794c44dd997d539bae89832a342cf8c660b",
+                "url": "https://api.github.com/repos/Joovlly/ddd/zipball/6a981a9c2cee368fd73b4fafa4c313e3e695908c",
+                "reference": "6a981a9c2cee368fd73b4fafa4c313e3e695908c",
                 "shasum": ""
             },
             "require": {
                 "laravel/ui": "^3.2",
                 "livewire/livewire": "^2.3",
-                "mediconesystems/livewire-datatables": "^0.4.0",
+                "mediconesystems/livewire-datatables": "^0.4.3",
                 "prettus/l5-repository": "^2.7",
                 "spatie/laravel-activitylog": "^3.16",
                 "spatie/laravel-query-builder": "^3.3"
@@ -1654,7 +1654,7 @@
                 "source": "https://github.com/Joovlly/ddd/tree/master",
                 "issues": "https://github.com/Joovlly/ddd/issues"
             },
-            "time": "2021-01-28T10:46:47+00:00"
+            "time": "2021-02-02T14:29:53+00:00"
         },
         {
             "name": "joovlly/reviewable",
@@ -1773,16 +1773,16 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:Joovlly/toaster.git",
-                "reference": "8d57efd3df5dc882e3f94fd66ec0f5f867a92495"
+                "reference": "8a948833cba0ee81000547d844e67a283001d534"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Joovlly/toaster/zipball/8d57efd3df5dc882e3f94fd66ec0f5f867a92495",
-                "reference": "8d57efd3df5dc882e3f94fd66ec0f5f867a92495",
+                "url": "https://api.github.com/repos/Joovlly/toaster/zipball/8a948833cba0ee81000547d844e67a283001d534",
+                "reference": "8a948833cba0ee81000547d844e67a283001d534",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2"
+                "php": "^7.3|^8.0"
             },
             "default-branch": true,
             "type": "library",
@@ -1819,7 +1819,7 @@
                 "source": "https://github.com/Joovlly/toaster/tree/master",
                 "issues": "https://github.com/Joovlly/toaster/issues"
             },
-            "time": "2020-07-09T09:09:42+00:00"
+            "time": "2021-02-02T14:27:48+00:00"
         },
         {
             "name": "joovlly/translatable",
@@ -2309,16 +2309,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.25.0",
+            "version": "v8.26.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "05da44d6823c2923597519ac10151f5827a24f80"
+                "reference": "275c78c97e007e4a9d771d4d1caa1c77ebfdcf94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/05da44d6823c2923597519ac10151f5827a24f80",
-                "reference": "05da44d6823c2923597519ac10151f5827a24f80",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/275c78c97e007e4a9d771d4d1caa1c77ebfdcf94",
+                "reference": "275c78c97e007e4a9d771d4d1caa1c77ebfdcf94",
                 "shasum": ""
             },
             "require": {
@@ -2473,7 +2473,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-01-26T14:40:21+00:00"
+            "time": "2021-02-02T14:07:24+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -8506,16 +8506,16 @@
         },
         {
             "name": "facade/ignition",
-            "version": "2.5.9",
+            "version": "2.5.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/ignition.git",
-                "reference": "66b3138ecce38024723fb3bfc66ef8852a779ea9"
+                "reference": "98154e8b991fb616304c213cd405299ffedc26f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/ignition/zipball/66b3138ecce38024723fb3bfc66ef8852a779ea9",
-                "reference": "66b3138ecce38024723fb3bfc66ef8852a779ea9",
+                "url": "https://api.github.com/repos/facade/ignition/zipball/98154e8b991fb616304c213cd405299ffedc26f5",
+                "reference": "98154e8b991fb616304c213cd405299ffedc26f5",
                 "shasum": ""
             },
             "require": {
@@ -8579,7 +8579,7 @@
                 "issues": "https://github.com/facade/ignition/issues",
                 "source": "https://github.com/facade/ignition"
             },
-            "time": "2021-01-26T14:45:19+00:00"
+            "time": "2021-02-02T10:15:48+00:00"
         },
         {
             "name": "facade/ignition-contracts",
@@ -10944,7 +10944,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.3|^8.0"
+        "php": "^7.2|^8.0"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"

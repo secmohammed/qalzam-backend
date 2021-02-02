@@ -32,7 +32,7 @@ class CreateReservationsTable extends Migration
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->foreignId('accommodation_id')->constrained()->onDelete('cascade');
-            $table->index(['accommodation_id', 'user_id', ' creator_id']);
+            $table->index(['accommodation_id', 'user_id', 'creator_id']);
             $table->timestamps();
 
         });

@@ -4,6 +4,7 @@ namespace App\Domain\Branch\Http\Resources\Branch;
 
 use Illuminate\Http\Request;
 use App\Domain\User\Http\Resources\User\UserResource;
+use App\Domain\Product\Http\Resources\Product\ProductResource;
 use App\Domain\Location\Http\Resources\Location\LocationResource;
 use App\Infrastructure\Http\AbstractResources\BaseResource as JsonResource;
 
@@ -20,8 +21,12 @@ class BranchResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'location_id' => $this->location_id,
+            'creator_id' => $this->creator_id,
+            'user_id' => $this->user_id,
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
+            'products' => ProductResource::collection($this->whenLoaded('products')),
             'user' => new UserResource($this->whenLoaded('user')),
             'creator' => new UserResource($this->whenLoaded('creator')),
             'location' => new LocationResource($this->whenLoaded('location')),
