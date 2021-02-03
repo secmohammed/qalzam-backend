@@ -1,10 +1,21 @@
 <?php
 
 namespace App\Domain\Accommodation\Http\Requests\Accommodation;
+
 use App\Domain\Accommodation\Http\Requests\Accommodation\AccommodationStoreFormRequest;
 
 class AccommodationUpdateFormRequest extends AccommodationStoreFormRequest
 {
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return parent::attributes();
+    }
+
     /**
      * Determine if the accommodation is authorized to make this request.
      *
@@ -23,19 +34,11 @@ class AccommodationUpdateFormRequest extends AccommodationStoreFormRequest
     public function rules()
     {
         $rules = [
-        // 'email'    => ['required','unique:accommodations,name,'.$this->route()->parameter('accommodation').',id'],
+            'name' => 'required|string|max:255|unique:accommodations,name,' . $this->accommodation->id,
+
+            'code' => 'required|unique:accommodations,code,' . $this->accommodation->id,
         ];
 
         return array_merge(parent::rules(), $rules);
-    }
-
-    /**
-     * Get custom attributes for validator errors.
-     *
-     * @return array
-     */
-    public function attributes()
-    {
-        return parent::attributes();
     }
 }

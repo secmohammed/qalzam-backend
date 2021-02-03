@@ -7,6 +7,18 @@ use App\Infrastructure\Http\AbstractRequests\BaseRequest as FormRequest;
 class AccommodationStoreFormRequest extends FormRequest
 {
     /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'name' => __('main.name'),
+        ];
+    }
+
+    /**
      * Determine if the Accommodation is authorized to make this request.
      *
      * @return bool
@@ -24,20 +36,24 @@ class AccommodationStoreFormRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name'        => ['required', 'string', 'max:255'],
+            'name' => 'required|string|max:255|unique:accommodations,name',
+            'accommodation-gallery' => 'required|array',
+            'type' => 'required|in:table,room',
+            'accommodation-gallery.*' => ['required', 'image', 'mimes:png,jpeg,jpg', 'max:2048'],
+            'branch_id' => 'required|exists:branches,id',
+            'price' => 'required|numeric|min:1|max:999',
+            'code' => 'required|unique:accommodations,code',
+            'capacity' => 'required|integer|min:1|max:100',
+
         ];
+
         return $rules;
     }
 
-    /**
-     * Get custom attributes for validator errors.
-     *
-     * @return array
-     */
-    public function attributes()
+    public function validated()
     {
-        return [
-            'name'        =>  __('main.name'),
-        ];
+        return array_merge(parent::validated(), [
+            'user_id' => auth()->id(),
+        ]);
     }
 }

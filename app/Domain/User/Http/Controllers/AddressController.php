@@ -117,7 +117,7 @@ class AddressController extends Controller
     public function index(Request $request)
     {
         $addresses = $this->addressRepository->spatie()->where('user_id', $request->user()->id)->paginate(
-            $request->per_page ?? config('semak.pagination')
+            $request->per_page ?? config('qalzam.pagination')
         );
         $this->setData('title', __('main.show-all') . ' ' . __('main.address'));
 

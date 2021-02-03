@@ -2,14 +2,17 @@
 
 namespace App\Domain\Accommodation\Entities;
 
+use Spatie\MediaLibrary\HasMedia;
+use App\Common\Traits\FetchesMediaCollection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Infrastructure\AbstractModels\BaseModel as Model;
 use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
 use App\Domain\Accommodation\Entities\Traits\Relations\AccommodationRelations;
 use App\Domain\Accommodation\Entities\Traits\CustomAttributes\AccommodationAttributes;
 
-class Accommodation extends Model
+class Accommodation extends Model implements HasMedia
 {
-    use AccommodationRelations, AccommodationAttributes;
+    use AccommodationRelations, AccommodationAttributes, HasFactory, FetchesMediaCollection;
 
     /**
      * @var array
@@ -26,6 +29,7 @@ class Accommodation extends Model
         'branch_id',
         'type',
         'code',
+        'user_id',
         'capacity',
     ];
 
@@ -50,24 +54,9 @@ class Accommodation extends Model
      */
     protected $table = "accommodations";
 
-    /**
-     * define belongsTo relations.
-     *
-     * @var array
-     */
-    private $belongsTo = [];
+    public static function newFactory()
+    {
 
-    /**
-     * define belongsToMany relations.
-     *
-     * @var array
-     */
-    private $belongsToMany = [];
-
-    /**
-     * define hasMany relations.
-     *
-     * @var array
-     */
-    private $hasMany = [];
+        return app(\App\Domain\Accommodation\Database\Factories\AccommodationFactory::class)->new();
+    }
 }

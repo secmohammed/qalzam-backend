@@ -82,7 +82,7 @@ class RemindableRepositoryEloquent extends EloquentRepository implements Reminda
                 'type' => $type,
                 'created_at' => now(),
                 'token' => $this->generateTokenBasedOnType($type),
-                'expires_at' => now()->addHours(config('semak.remindable.expiration')),
+                'expires_at' => now()->addHours(config('qalzam.remindable.expiration')),
             ]);
 
         }
@@ -112,7 +112,7 @@ class RemindableRepositoryEloquent extends EloquentRepository implements Reminda
      */
     public function hasToken(User $user, string $token = null)
     {
-        $remindable = $user->remindables()->where(['completed_at' => null, ['expires_at', '>=', now()->subHours(config("semak.remindable.expiration"))->format('Y-m-d H:i')]]);
+        $remindable = $user->remindables()->where(['completed_at' => null, ['expires_at', '>=', now()->subHours(config("qalzam.remindable.expiration"))->format('Y-m-d H:i')]]);
         if ($token) {
             $remindable->whereToken($token);
         }
@@ -148,7 +148,7 @@ class RemindableRepositoryEloquent extends EloquentRepository implements Reminda
             $remindable->update([
                 'token' => $this->generateTokenBasedOnType($type),
                 'completed_at' => null,
-                'expires_at' => now()->addHours(config('semak.remindable.expiration')),
+                'expires_at' => now()->addHours(config('qalzam.remindable.expiration')),
                 'updated_at' => now(),
             ]);
 
@@ -178,7 +178,7 @@ class RemindableRepositoryEloquent extends EloquentRepository implements Reminda
      */
     public function removeExpired(int $hours = null)
     {
-        return $this->where(['completed_at' => null, ['expires_at', '<=', now()->subHours($hours ?? config("semak.remindable.expiration"))]])->delete();
+        return $this->where(['completed_at' => null, ['expires_at', '<=', now()->subHours($hours ?? config("qalzam.remindable.expiration"))]])->delete();
     }
 
     /**

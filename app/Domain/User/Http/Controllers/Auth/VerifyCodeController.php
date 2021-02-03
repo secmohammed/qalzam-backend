@@ -58,7 +58,7 @@ class VerifyCodeController extends Controller
             [
                 'expires_at',
                 '>=',
-                now()->subHours(config("semak.remindable.expiration"))->format('Y-m-d H:i'),
+                now()->subHours(config("qalzam.remindable.expiration"))->format('Y-m-d H:i'),
             ],
         ])->firstOrFail();
 

@@ -80,7 +80,7 @@ trait IssueTokens
      */
     public function hasToken(User $user, string $token = null)
     {
-        ${$this->process} = $user->{$this->process}()->where(['completed_at' => null, ['created_at', '>=', now()->subDays(config("semak.{$this->process}.expiration"))->format('Y-m-d H:i:s')]]);
+        ${$this->process} = $user->{$this->process}()->where(['completed_at' => null, ['created_at', '>=', now()->subDays(config("qalzam.{$this->process}.expiration"))->format('Y-m-d H:i:s')]]);
         if ($token) {
             ${$this->process}->whereToken($token);
         }
@@ -122,6 +122,6 @@ trait IssueTokens
      */
     public function removeExpired(int $days = null)
     {
-        return $this->where(['completed_at' => null, ['created_at', '<=', now()->subDays($days ?? config("sectheater.{$this->process}.expiration"))]])->delete();
+        return $this->where(['completed_at' => null, ['created_at', '<=', now()->subDays($days ?? config("qalzam.{$this->process}.expiration"))]])->delete();
     }
 }

@@ -51,7 +51,7 @@ class Money
     public function formatted()
     {
         $formatter = new IntlMoneyFormatter(
-            new NumberFormatter(config('semak.currency'), NumberFormatter::CURRENCY),
+            new NumberFormatter(config('qalzam.currency'), NumberFormatter::CURRENCY),
             new ISOCurrencies
         );
 

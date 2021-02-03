@@ -26,6 +26,14 @@ class RolesTableSeeder extends Seeder
                 'index-discount' => true,
                 'update-discount' => true,
 
+                'store-accommodation' => true,
+                'create-accommodation' => true,
+                'edit-accommodation' => true,
+                'show-accommodation' => true,
+                'destroy-accommodation' => true,
+                'index-accommodation' => true,
+                'update-accommodation' => true,
+
                 'store-branch' => true,
                 'create-branch' => true,
                 'edit-branch' => true,

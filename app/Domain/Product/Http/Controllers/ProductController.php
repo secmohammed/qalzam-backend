@@ -123,7 +123,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $products = $this->productRepository->spatie()->paginate(
-            $request->per_page ?? config('semak.pagination')
+            $request->per_page ?? config('qalzam.pagination')
         );
 
         $this->setData('title', __('main.show-all') . ' ' . __('main.product'));

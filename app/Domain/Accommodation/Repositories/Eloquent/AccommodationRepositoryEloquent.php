@@ -2,9 +2,10 @@
 
 namespace App\Domain\Accommodation\Repositories\Eloquent;
 
-use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
+use Spatie\QueryBuilder\AllowedFilter;
 use App\Domain\Accommodation\Entities\Accommodation;
 use App\Infrastructure\AbstractRepositories\EloquentRepository;
+use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
 
 /**
  * Class AccommodationRepositoryEloquent.
@@ -13,7 +14,6 @@ use App\Infrastructure\AbstractRepositories\EloquentRepository;
  */
 class AccommodationRepositoryEloquent extends EloquentRepository implements AccommodationRepository
 {
-    
     /**
      * Specify Fields
      *
@@ -21,7 +21,7 @@ class AccommodationRepositoryEloquent extends EloquentRepository implements Acco
      */
     protected $allowedFields = [
         ###allowedFields###
-    	###\allowedFields###
+        ###\allowedFields###
     ];
 
     /**
@@ -30,9 +30,30 @@ class AccommodationRepositoryEloquent extends EloquentRepository implements Acco
      * @return string
      */
     protected $allowedIncludes = [
-        ###allowedIncludes###
-    	###\allowedIncludes###
+        'user',
+        'branch',
     ];
+
+    /**
+     * @var array
+     */
+    protected $allowedSorts = [
+        'created_at',
+    ];
+
+    public function __construct()
+    {
+        parent::__construct(app());
+        $this->allowedFilters = [
+            'code',
+            'name',
+            'price',
+            AllowedFilter::exact('capacity'),
+            'type',
+            AllowedFilter::exact('branch.id'),
+            AllowedFilter::exact('user.id'),
+        ];
+    }
 
     /**
      * Specify Model class name
@@ -43,7 +64,7 @@ class AccommodationRepositoryEloquent extends EloquentRepository implements Acco
     {
         return Accommodation::class;
     }
-    
+
     /**
      * Specify Model Relationships
      *

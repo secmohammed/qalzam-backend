@@ -39,7 +39,7 @@ class RemindableFactory extends Factory
             'user_id' => function () {
                 return User::factory()->create()->id;
             },
-            'expires_at' => now()->addHour(config('semak.remindable.expiration')),
+            'expires_at' => now()->addHour(config('qalzam.remindable.expiration')),
             'completed_at' => $this->faker->randomElement([null, now()]),
             'token' => $this->faker->unique()->text(32),
         ];

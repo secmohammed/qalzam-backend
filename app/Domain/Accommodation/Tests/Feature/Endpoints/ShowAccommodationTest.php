@@ -1,70 +1,70 @@
 <?php
 
-namespace App\Domain\Branch\Tests\Feature\Endpoints;
+namespace App\Domain\Accommodation\Tests\Feature\Endpoints;
 
 use Tests\TestCase;
 use App\Domain\User\Entities\Role;
 use App\Domain\User\Entities\User;
-use App\Domain\Branch\Entities\Branch;
 use Database\Seeders\RolesTableSeeder;
+use App\Domain\Accommodation\Entities\Accommodation;
 
-class ShowBranchTest extends TestCase
+class ShowAccommodationTest extends TestCase
 {
     /** @test */
-    public function it_should_fetch_branch_by_id_if_authenticated_and_has_permissions()
+    public function it_should_fetch_accommodation_by_id_if_authenticated_and_has_permissions()
     {
-        $branch = $this->branchFactory->create();
+        $accommodation = $this->accommodationFactory->create();
         $user = $this->userFactory->create();
         $this->seed(RolesTableSeeder::class);
         $user->roles()->attach(Role::first());
         $this->jsonAs(
             $user,
             'GET',
-            route('api.branches.show', $branch->id)
+            route('api.accommodations.show', $accommodation->id)
         )->assertStatus(200)->assertJsonStructure([
             'data' => [
                 'name',
                 'id',
-                'creator_id',
-                'latitude',
-                'longitude',
-                'location_id',
+                'code',
+                'branch_id',
                 'user_id',
+                'price',
+                'capacity',
                 'media',
                 'created_at_human',
-                'media',
+                'type',
             ],
         ]);
 
     }
 
     /** @test */
-    public function it_shouldnt_fetch_branch_by_id_if_not_found()
+    public function it_shouldnt_fetch_accommodation_by_id_if_not_found()
     {
         $this->get(
-            route('api.branches.show', 100)
+            route('api.accommodations.show', 100)
         )->assertStatus(404);
 
     }
 
     /** @test */
-    public function it_shouldnt_fetch_branch_if_not_authenticated()
+    public function it_shouldnt_fetch_accommodation_if_not_authenticated()
     {
-        $branch = $this->branchFactory->create();
+        $accommodation = $this->accommodationFactory->create();
         $this->get(
-            route('api.branches.show', $branch->id)
+            route('api.accommodations.show', $accommodation->id)
         )->assertStatus(401);
     }
 
     /** @test */
     public function it_shouldnt_fetch_brnach_if_authenticated_but_doesnt_have_permissions()
     {
-        $branch = $this->branchFactory->create();
+        $accommodation = $this->accommodationFactory->create();
         $user = $this->userFactory->create();
         $this->jsonAs(
             $user,
             'GET',
-            route('api.branches.show', $branch->id)
+            route('api.accommodations.show', $accommodation->id)
         )->assertStatus(401);
 
     }
@@ -72,7 +72,7 @@ class ShowBranchTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->branchFactory = Branch::factory();
+        $this->accommodationFactory = Accommodation::factory();
         $this->userFactory = User::factory();
     }
 }

@@ -132,7 +132,7 @@ class User extends Authenticatable implements JWTSubject, HasMedia
      */
     public function hasToken(string $token = null)
     {
-        $remindable = $this->remindables()->where(['completed_at' => null, ['expires_at', '>=', now()->subHours(config("semak.remindable.expiration"))->format('Y-m-d H:i')]]);
+        $remindable = $this->remindables()->where(['completed_at' => null, ['expires_at', '>=', now()->subHours(config("qalzam.remindable.expiration"))->format('Y-m-d H:i')]]);
         if ($token) {
             $remindable->whereToken($token);
         }

@@ -120,7 +120,7 @@ class IngredientController extends Controller
     public function index(Request $request)
     {
         $index = $this->ingredientRepository->spatie()->paginate(
-            $request->per_page ?? config('semak.pagination')
+            $request->per_page ?? config('qalzam.pagination')
         );
 
         $this->setData('title', __('main.show-all') . ' ' . __('main.ingredient'));

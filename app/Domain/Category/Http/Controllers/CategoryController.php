@@ -127,7 +127,7 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $index = $this->categoryRepository->spatie()->paginate(
-            $request->per_page ?? config('semak.pagination')
+            $request->per_page ?? config('qalzam.pagination')
         );
         $this->setData('title', __('main.show-all') . ' ' . __('main.category'));
 
