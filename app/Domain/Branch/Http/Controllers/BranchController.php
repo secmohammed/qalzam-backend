@@ -7,9 +7,11 @@ use Illuminate\Pipeline\Pipeline;
 use Joovlly\DDD\Traits\Responder;
 use App\Domain\Branch\Entities\Branch;
 use App\Common\Pipeline\HandleFileUpload;
+use App\Domain\User\Repositories\Contracts\UserRepository;
 use App\Domain\Branch\Http\Resources\Branch\BranchResource;
 use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 use App\Domain\Branch\Http\Requests\Branch\BranchStoreFormRequest;
+use App\Domain\Location\Repositories\Contracts\LocationRepository;
 use App\Domain\Branch\Http\Requests\Branch\BranchUpdateFormRequest;
 use App\Domain\Branch\Http\Resources\Branch\BranchResourceCollection;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
@@ -57,12 +59,13 @@ class BranchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(UserRepository $userRepository, LocationRepository $locationRepository)
     {
         $this->setData('title', __('main.add') . ' ' . __('main.branch'), 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
-
+        $this->setData('users', $userRepository->all());
+        $this->setData('locations', $locationRepository->all());
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
 
         $this->setApiResponse(fn() => response()->json(['create_your_own_form' => true]));

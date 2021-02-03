@@ -2,15 +2,13 @@
 
 namespace App\Domain\Product\Datatables;
 
-use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
+use App\Http\Livewire\MainLivewire;
 use App\Domain\Product\Entities\Product;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\DateColumn;
-use Mediconesystems\LivewireDatatables\TimeColumn;
 use Mediconesystems\LivewireDatatables\NumberColumn;
-use Mediconesystems\LivewireDatatables\BooleanColumn;
 
-class ProductDatatable extends LivewireDatatable
+class ProductDatatable extends MainLivewire
 {
     public function builder()
     {

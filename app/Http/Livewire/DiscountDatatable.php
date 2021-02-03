@@ -1,16 +1,14 @@
 <?php
 
-namespace App\Domain\Discount\Datatables;
+namespace App\Http\Livewire;
 
-use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
+use App\Http\Livewire\MainLivewire;
 use App\Domain\Discount\Entities\Discount;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\DateColumn;
-use Mediconesystems\LivewireDatatables\TimeColumn;
 use Mediconesystems\LivewireDatatables\NumberColumn;
-use Mediconesystems\LivewireDatatables\BooleanColumn;
 
-class DiscountDatatable extends LivewireDatatable
+class DiscountDatatable extends MainLivewire
 {
     public function builder()
     {
@@ -24,7 +22,7 @@ class DiscountDatatable extends LivewireDatatable
                 ->label('ID')
                 ->linkTo('job', 6),
 
-            Column::name('name')
+            Column::name('code')
                 ->defaultSort('asc')
                 ->searchable()
                 ->filterable(),
