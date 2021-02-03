@@ -101,11 +101,13 @@ class BranchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Branch $branch)
+    public function edit(Branch $branch, UserRepository $userRepository, LocationRepository $locationRepository)
     {
         $this->setData('title', __('main.edit') . ' ' . __('main.branch') . ' : ' . $branch->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
+        $this->setData('users', $userRepository->all());
+        $this->setData('locations', $locationRepository->all());
 
         $this->setData('edit', $branch);
 
@@ -152,7 +154,7 @@ class BranchController extends Controller
 
         $this->setData('alias', $this->domainAlias, 'web');
 
-        $this->setData('show', $branch);
+        $this->setData('branch', $branch);
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.show");
 

@@ -50,7 +50,7 @@
     </div>
 
     <livewire:category-datatable
-        model="App\Domain\Discount\Entities\Discount"
+        model="App\Domain\Category\Entities\Category"
         exclude="updated_at"
         hideable="select"
         params="categories"

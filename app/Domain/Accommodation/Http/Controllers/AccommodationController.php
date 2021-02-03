@@ -7,6 +7,7 @@ use Illuminate\Pipeline\Pipeline;
 use Joovlly\DDD\Traits\Responder;
 use App\Common\Pipeline\HandleFileUpload;
 use App\Domain\Accommodation\Entities\Accommodation;
+use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 use App\Domain\Accommodation\Http\Resources\Accommodation\AccommodationResource;
@@ -57,12 +58,12 @@ class AccommodationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(BranchRepository $branchRepository)
     {
         $this->setData('title', __('main.add') . ' ' . __('main.accommodation'), 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
-
+        $this->setData('branches', $branchRepository->all());
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
 
         $this->setApiResponse(fn() => response()->json(['create_your_own_form' => true]));
@@ -99,12 +100,12 @@ class AccommodationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Accommodation $accommodation)
+    public function edit(Accommodation $accommodation, BranchRepository $branchRepository)
     {
         $this->setData('title', __('main.edit') . ' ' . __('main.accommodation') . ' : ' . $accommodation->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
-
+        $this->setData('branches', $branchRepository->all());
         $this->setData('edit', $accommodation);
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.edit");
@@ -150,7 +151,7 @@ class AccommodationController extends Controller
 
         $this->setData('alias', $this->domainAlias, 'web');
 
-        $this->setData('show', $accommodation);
+        $this->setData('accommodation', $accommodation);
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.show");
 
