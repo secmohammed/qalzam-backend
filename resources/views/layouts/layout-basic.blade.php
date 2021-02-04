@@ -4,13 +4,11 @@
 <!--begin::Head-->
 <head>
     <meta charset="utf-8"/>
-    <title>Qalzam | Login Page</title>
-    <meta name="description" content="Login page example"/>
+    <title>Penduline | Login Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <!--begin::Fonts-->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400&display=swap" rel="stylesheet">
-    <!--end::Fonts-->
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+
     <!--begin::Page Custom Styles(used by this page)-->
     <link href="{{ asset('assets/css/pages/login/login-1.css?v=7.0.5') }}" rel="stylesheet" type="text/css"/>
     <!--end::Page Custom Styles-->
@@ -33,24 +31,17 @@
     <!--begin::Login-->
     <div class="login login-1 login-signin-on d-flex flex-column flex-lg-row flex-column-fluid bg-white" id="kt_login">
         <!--begin::Aside-->
-        <div class="login-aside d-flex flex-column flex-row-auto" style="background-color: #d13629;">
+        <div class="login-aside d-flex flex-column flex-row-auto" style="background: url({{ asset('assets/pattern.png') }}) no-repeat #c01e85">
             <!--begin::Aside Top-->
             <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
                 <!--begin::Aside header-->
                 <a href="#" class="text-center mb-10">
-                    <img src="{{ asset('assets/images/logo-white.png') }}" class="max-h-90px" alt=""/>
+                    <img src="{{ asset('assets/logo.svg') }}" style="width: 180px; margin-top: 25px"  alt=""/>
                 </a>
-                <!--end::Aside header-->
-                <!--begin::Aside title-->
-                <h3 class="font-weight-bolder text-center font-size-h4 font-size-h1-lg" style="color: #fff;line-height: 40px">If it swims we have it
-                </h3>
-                <p class="font-weight-bolder text-center font-size-h4 font-size-h4-lg" style="color: #fff">Healthy , Convenient , Delicious </p>
-                <!--end::Aside title-->
             </div>
             <!--end::Aside Top-->
             <!--begin::Aside Bottom-->
-            <div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center"
-                 style="background-image: url({{ asset('assets/images/food.svg') }});background-size: 50%"></div>
+            <div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center"></div>
             <!--end::Aside Bottom-->
         </div>
         <!--begin::Aside-->
@@ -58,21 +49,27 @@
         <div class="login-content flex-row-fluid d-flex flex-column justify-content-center position-relative overflow-hidden p-7 mx-auto">
             <!--begin::Content body-->
             <div class="d-flex flex-column-fluid flex-center">
-                <!--begin::Signin-->
-            @yield('content')
-                <!--begin::Forgot-->
-                <!--end::Forgot-->
+                @yield('content')
             </div>
             <!--end::Content body-->
-            <!--begin::Content footer-->
-            <div class="d-flex justify-content-lg-start justify-content-center align-items-end py-7 py-lg-0">
-                <div class="text-primary font-weight-bolder font-size-lg mr-10">
-                    <span class="mr-1">2020©</span>
-                    <a href="#" target="_blank"
-                       class="text-primary font-weight-bolder font-size-lg">Qalzam Co.</a>
-                </div>
 
+            <!--begin::Content footer-->
+            <div class="row">
+                <div class="col-md-6 d-flex justify-content-lg-start justify-content-center align-items-end py-7 py-lg-0">
+                    <div class="text-primary font-weight-bolder font-size-lg mr-10">
+                        <span class="mr-1">2020©</span>
+                        <a href="https://joovlly.com" target="_blank" class="font-weight-bolder font-size-lg">Joovlly Co.</a>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-lg-end d-inline col-md-6">
+                    <div>
+                        <a href="#" class="text-primary font-weight-bolder font-size-lg">Terms</a>
+                        <a href="#" class="text-primary ml-5 font-weight-bolder font-size-lg">About</a>
+                        <a href="#" class="text-primary ml-5 font-weight-bolder font-size-lg">Contact Us</a>
+                    </div>
+                </div>
             </div>
+            <!--end::Content footer-->
 
         </div>
         <!--end::Content footer-->
@@ -80,7 +77,7 @@
     <!--end::Content-->
 </div>
 <!--end::Login-->
-</div>
+
 <!--end::Main-->
 <!--begin::Global Config(global config for global JS scripts)-->
 <script>var KTAppSettings = {"breakpoints": {"sm": 576, "md": 768, "lg": 992, "xl": 1200, "xxl": 1200},
@@ -135,14 +132,13 @@
         "font-family": "Poppins"
     };</script>
 <!--end::Global Config-->
+<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 <!--begin::Global Theme Bundle(used by all pages)-->
 <script src="{{ asset('assets/plugins/global/plugins.bundle.js?v=7.0.5') }}"></script>
 <script src="{{ asset('assets/plugins/custom/prismjs/prismjs.bundle.js?v=7.0.5') }}"></script>
 <script src="{{ asset('assets/js/scripts.bundle.js?v=7.0.5') }}"></script>
 <!--end::Global Theme Bundle-->
-<!--begin::Page Scripts(used by this page)-->
-<script src="{{ asset('assets/js/pages/custom/login/login-general.js?v=7.0.5') }}"></script>
-<!--end::Page Scripts-->
 </body>
 <!--end::Body-->
 </html>
