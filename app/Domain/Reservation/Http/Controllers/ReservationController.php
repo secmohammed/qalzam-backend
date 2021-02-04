@@ -164,11 +164,14 @@ class ReservationController extends Controller
 
         $this->setData('alias', $this->domainAlias, 'web');
 
-        $this->setData('show', $reservation);
+        $this->setData('reservation', $reservation);
+        $this->setData('meta', [
+            'total_price' => $reservation->formatted_total_price,
+        ]);
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.show");
 
-        $this->useCollection(ReservationResource::class, 'show');
+        $this->useCollection(ReservationResource::class, 'reservation');
 
         return $this->response();
     }
