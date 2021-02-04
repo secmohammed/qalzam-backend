@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
         \App\Domain\Discount\Entities\Discount::factory()->doesntExpire()->create();
         \App\Domain\Discount\Entities\Discount::factory()->alreadyExpired()->create();
         \App\Domain\Location\Entities\Location::factory()->withChildren(2)->count(10)->create();
-
+        \App\Domain\Order\Entities\Order::factory()->withProducts(3)->count(10)->create();
+        \App\Domain\Reservation\Entities\Reservation::factory()->count(10)->create();
         \App\Domain\Post\Entities\Post::factory()->count(100)->create();
         $user = \App\Domain\User\Entities\User::first();
         $user->update([

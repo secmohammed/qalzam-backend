@@ -7,6 +7,8 @@ use Illuminate\Pipeline\Pipeline;
 use Joovlly\DDD\Traits\Responder;
 use App\Domain\Reservation\Entities\Reservation;
 use App\Domain\Reservation\Pipelines\CreateReservation;
+use App\Domain\User\Repositories\Contracts\UserRepository;
+use App\Domain\Order\Repositories\Contracts\OrderRepository;
 use App\Domain\Reservation\Notifications\ReservationCreated;
 use App\Domain\Reservation\Notifications\ReservationUpdated;
 use App\Domain\Reservation\Repositories\Contracts\ReservationRepository;
@@ -60,10 +62,12 @@ class ReservationController extends Controller
     /**
      * @param ReservationRepository $reservationRepository
      */
-    public function __construct(ReservationRepository $reservationRepository, AccommodationRepository $accommodationRepository)
+    public function __construct(ReservationRepository $reservationRepository, AccommodationRepository $accommodationRepository, OrderRepository $orderRepository, UserRepository $userRepository)
     {
         $this->reservationRepository = $reservationRepository;
         $this->accommodationRepository = $accommodationRepository;
+        $this->orderRepository = $orderRepository;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -74,7 +78,9 @@ class ReservationController extends Controller
     public function create()
     {
         $this->setData('title', __('main.add') . ' ' . __('main.reservation'), 'web');
-
+        $this->setData('accommodations', $this->accommodationRepository->all());
+        $this->setData('orders', $this->orderRepository->all());
+        $this->setData('users', $this->userRepository->all());
         $this->setData('alias', $this->domainAlias, 'web');
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
@@ -93,7 +99,6 @@ class ReservationController extends Controller
     public function destroy($id)
     {
         $ids = request()->get('ids', $id);
-
         $delete = $this->reservationRepository->destroy($ids)->count();
 
         if ($delete) {
@@ -118,6 +123,9 @@ class ReservationController extends Controller
         $this->setData('title', __('main.edit') . ' ' . __('main.reservation') . ' : ' . $reservation->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
+        $this->setData('accommodations', $this->accommodationRepository->all());
+        $this->setData('orders', $this->orderRepository->all());
+        $this->setData('users', $this->userRepository->all());
 
         $this->setData('edit', $reservation);
 
@@ -163,8 +171,10 @@ class ReservationController extends Controller
         $this->setData('title', __('main.show') . ' ' . __('main.reservation') . ' : ' . $reservation->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
-
-        $this->setData('reservation', $reservation);
+        if (!request()->wantsJson()) {
+            $reservation->load(['accommodation']);
+        }
+        $this->setData('show', $reservation);
         $this->setData('meta', [
             'total_price' => $reservation->formatted_total_price,
         ]);

@@ -30,7 +30,7 @@ class ReservationFactory extends Factory
             'start_date' => now()->addMinutes(60)->format('Y-m-d H:i'),
             'end_date' => now()->addMinutes(120)->format('Y-m-d H:i'),
             'order_id' => function () {
-                return Order::factory()->create()->id;
+                return Order::factory()->withProducts(1)->create()->id;
             },
             'accommodation_id' => function () {
                 return Accommodation::factory()->create()->id;
