@@ -39,6 +39,7 @@ class ReservationStoreFormRequest extends FormRequest
             'start_date' => 'required|after_or_equal:' . now()->format('Y-m-d H:i:s'),
             'end_date' => 'required|after_or_equal:' . $this->request->get('start_date'),
             'accommodation_id' => 'required|exists:accommodations,id',
+            'order_id' => 'required|exists:orders,id',
             'user_id' => 'required|exists:users,id',
 
         ];

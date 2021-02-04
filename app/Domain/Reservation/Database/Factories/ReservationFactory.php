@@ -2,9 +2,12 @@
 
 namespace App\Domain\Reservation\Database\Factories;
 
+use Illuminate\Support\Str;
+use App\Domain\User\Entities\User;
+use App\Domain\Order\Entities\Order;
 use App\Domain\Reservation\Entities\Reservation;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
+use App\Domain\Accommodation\Entities\Accommodation;
 
 class ReservationFactory extends Factory
 {
@@ -23,7 +26,21 @@ class ReservationFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
+            'price' => $this->faker->numberBetween(100, 2000),
+            'start_date' => now()->addMinutes(60)->format('Y-m-d H:i'),
+            'end_date' => now()->addMinutes(120)->format('Y-m-d H:i'),
+            'order_id' => function () {
+                return Order::factory()->create()->id;
+            },
+            'accommodation_id' => function () {
+                return Accommodation::factory()->create()->id;
+            },
+            'user_id' => function () {
+                return User::factory()->create()->id;
+            },
+            'creator_id' => function () {
+                return User::factory()->create()->id;
+            },
         ];
     }
 }

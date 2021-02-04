@@ -30,7 +30,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('creator_id');
             $table->enum('status', ['pending', 'processing', 'shipping', 'delivered'])->default('pending');
             $table->integer('subtotal');
-            $table->integer('address_id')->unsigned()->index();
+            $table->integer('address_id')->unsigned()->index()->nullable();
 
             $table->timestamps();
 

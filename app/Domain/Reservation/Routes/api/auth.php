@@ -11,10 +11,9 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+ */
 
-
-Route::group(['middleware' => 'auth:api'], function () {
-    Route::resource('/reservations','ReservationController');
-	###CRUD_PLACEHOLDER###
+Route::group(['middleware' => 'auth.api'], function () {
+    Route::apiResource('/reservations', 'ReservationController');
+    ###CRUD_PLACEHOLDER###
 });

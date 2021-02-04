@@ -29,10 +29,12 @@ class CreateReservationsTable extends Migration
             $table->float('price');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('creator_id')->constrained('users', 'id')->onDelete('cascade');
+            $table->enum('status', ['upcoming', 'done'])->default('upcoming');
+            $table->foreignId('order_id')->constrained('orders', 'id')->onDelete('cascade');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->foreignId('accommodation_id')->constrained()->onDelete('cascade');
-            $table->index(['accommodation_id', 'user_id', 'creator_id']);
+            $table->index(['accommodation_id', 'user_id', 'creator_id', 'order_id']);
             $table->timestamps();
 
         });

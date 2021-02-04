@@ -3,8 +3,12 @@
 namespace App\Domain\Reservation\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Pipeline\Pipeline;
 use Joovlly\DDD\Traits\Responder;
 use App\Domain\Reservation\Entities\Reservation;
+use App\Domain\Reservation\Pipelines\CreateReservation;
+use App\Domain\Reservation\Notifications\ReservationCreated;
+use App\Domain\Reservation\Notifications\ReservationUpdated;
 use App\Domain\Reservation\Repositories\Contracts\ReservationRepository;
 use App\Domain\Reservation\Http\Resources\Reservation\ReservationResource;
 use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
@@ -12,6 +16,7 @@ use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 use App\Domain\Reservation\Http\Requests\Reservation\ReservationStoreFormRequest;
 use App\Domain\Reservation\Http\Requests\Reservation\ReservationUpdateFormRequest;
 use App\Domain\Reservation\Http\Resources\Reservation\ReservationResourceCollection;
+use App\Domain\Reservation\Pipelines\ValidateReservationStartDateAndEndDateIfAvailable;
 
 /*
  * When Creating a reservation, it must be during the working hour of the branch,
@@ -20,6 +25,7 @@ use App\Domain\Reservation\Http\Resources\Reservation\ReservationResourceCollect
  * when creating the reservation, we will take the accommodation_id in order to take the
  *  price as well, in order to log the reservation price due to the accommodation price
  * may varies.
+ * the reservation must have an order_id which is mandatory to have the order price as well concatencated with the reservation price.
  */
 class ReservationController extends Controller
 {
@@ -86,16 +92,16 @@ class ReservationController extends Controller
      */
     public function destroy($id)
     {
-        $ids = request()->get('ids', [$id]);
+        $ids = request()->get('ids', $id);
 
-        $delete = $this->reservationRepository->destroy($ids);
+        $delete = $this->reservationRepository->destroy($ids)->count();
 
         if ($delete) {
             $this->redirectRoute("{$this->resourceRoute}.index");
             $this->setApiResponse(fn() => response()->json(['deleted' => true], 200));
         } else {
             $this->redirectBack();
-            $this->setApiResponse(fn() => response()->json(['updated' => false], 422));
+            $this->setApiResponse(fn() => response()->json(['deleted' => false], 404));
         }
 
         return $this->response();
@@ -129,7 +135,9 @@ class ReservationController extends Controller
      */
     public function index(Request $request)
     {
-        $index = $this->reservationRepository->spatie()->all();
+        $index = $this->reservationRepository->spatie()->paginate(
+            $request->per_page ?? config('qalzam.pagination')
+        );
 
         $this->setData('title', __('main.show-all') . ' ' . __('main.reservation'));
 
@@ -173,22 +181,18 @@ class ReservationController extends Controller
      */
     public function store(ReservationStoreFormRequest $request)
     {
-        if (
-            $this->reservationRepository->whereBetween('start_date', [$request->start_date, $request->end_date])->orWhereBetween('end_date', [$request->start_date, $request->end_date])->exists()
-        ) {
-            $this->redirectBack();
-            $this->setApiResponse(fn() => response()->json(['created' => false]));
+        $reservation = app(Pipeline::class)->send($request)->through([
+            ValidateReservationStartDateAndEndDateIfAvailable::class,
+            CreateReservation::class,
+        ])->thenReturn();
+        $reservation->user->notify(new ReservationCreated($reservation));
 
-            return $this->response();
-
-        }
-        $store = $this->reservationRepository->create($request->validated() + [
-            'price' => $this->accommodationRepository->find($request->accommodation_id)->price,
+        $this->setData('meta', [
+            'total_price' => $reservation->formatted_total_price,
         ]);
+        $this->setData('data', $reservation);
 
-        $this->setData('data', $store);
-
-        $this->redirectRoute("{$this->resourceRoute}.show", [$store->id]);
+        $this->redirectRoute("{$this->resourceRoute}.show", [$reservation->id]);
         $this->useCollection(ReservationResource::class, 'data');
 
         return $this->response();
@@ -203,26 +207,16 @@ class ReservationController extends Controller
      */
     public function update(ReservationUpdateFormRequest $request, Reservation $reservation)
     {
-        if (
-            $this->reservationRepository->whereBetween('start_date', [$request->start_date, $request->end_date])->orWhereBetween('end_date', [$request->start_date, $request->end_date])->exists()
-        ) {
-            $this->redirectBack();
-            $this->setApiResponse(fn() => response()->json(['updated' => false]));
-
-            return $this->response();
-
-        }
+        app(Pipeline::class)->send($request)->through([
+            ValidateReservationStartDateAndEndDateIfAvailable::class,
+        ])->thenReturn();
 
         $reservation->update($request->validated());
+        $reservation->user->notify(new ReservationUpdated($reservation));
 
-        if ($update) {
-            $this->redirectRoute("{$this->resourceRoute}.show", [$update->id]);
-            $this->setData('data', $update);
-            $this->useCollection(ReservationResource::class, 'data');
-        } else {
-            $this->redirectBack();
-            $this->setApiResponse(fn() => response()->json(['updated' => false], 422));
-        }
+        $this->redirectRoute("{$this->resourceRoute}.show", [$reservation->id]);
+        $this->setData('data', $reservation);
+        $this->useCollection(ReservationResource::class, 'data');
 
         return $this->response();
     }

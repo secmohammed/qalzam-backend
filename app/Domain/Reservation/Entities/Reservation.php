@@ -2,14 +2,19 @@
 
 namespace App\Domain\Reservation\Entities;
 
+use App\Common\Traits\HasPrice;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Infrastructure\AbstractModels\BaseModel as Model;
+use App\Domain\Product\Entities\Traits\Scopes\PriceSortable;
+use App\Domain\Product\Entities\Traits\Scopes\PriceOrderable;
 use App\Domain\Reservation\Repositories\Contracts\ReservationRepository;
 use App\Domain\Reservation\Entities\Traits\Relations\ReservationRelations;
 use App\Domain\Reservation\Entities\Traits\CustomAttributes\ReservationAttributes;
 
 class Reservation extends Model
 {
-    use ReservationRelations, ReservationAttributes;
+    use ReservationRelations, ReservationAttributes, HasFactory, HasPrice, PriceOrderable, PriceSortable;
 
     /**
      * @var array
@@ -35,6 +40,8 @@ class Reservation extends Model
         'price',
         'user_id',
         'creator_id',
+        'order_id',
+        'status',
         'accommodation_id',
     ];
 
@@ -58,4 +65,20 @@ class Reservation extends Model
      * @var array
      */
     protected $table = "reservations";
+
+    public static function newFactory()
+    {
+        return app(\App\Domain\Reservation\Database\Factories\ReservationFactory::class)->new();
+    }
+
+    /**
+     * @param Builder $builder
+     * @param $startDate
+     * @param $endDate
+     * @return mixed
+     */
+    public function scopeDateBetween(Builder $builder, $startDate, $endDate)
+    {
+        return $builder->whereDate('start_date', '>=', $startDate)->whereDate('end_date', '<=', $endDate);
+    }
 }
