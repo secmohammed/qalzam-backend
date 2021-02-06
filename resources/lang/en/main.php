@@ -13,6 +13,7 @@ return [
     'order' => 'Order',
     'add-branch' => 'Add Branch',
     'add-accommodation' => 'Add Accommodation',
+    'add-album' => 'Add Album',
     'accommodation' => 'Accommodation',
     'accommodations' => 'Accommodations',
     'edit' => 'Edit',
@@ -184,7 +185,7 @@ return [
     'min_age' => 'Min Age',
     'price' => 'Price',
     'capacity' => 'Capacity',
-    'accommodation-gallery'=> 'Accommodation Gallery',
+    'accommodation-gallery' => 'Accommodation Gallery',
     'day' => 'Day',
     'contract-type' => 'Contract Type',
     'saturday' => 'Saturday',
@@ -212,5 +213,5 @@ return [
     'quick-actions' => 'Quick Actions',
     'profile' => 'Profile',
     'discounts' => 'Coupons',
-    'discount' => 'Coupon'
+    'discount' => 'Coupon',
 ];

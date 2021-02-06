@@ -20,6 +20,7 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     private $repositories = [
         \App\Domain\Branch\Repositories\Contracts\BranchRepository::class => \App\Domain\Branch\Repositories\Eloquent\BranchRepositoryEloquent::class,
+			\App\Domain\Branch\Repositories\Contracts\AlbumRepository::class => \App\Domain\Branch\Repositories\Eloquent\AlbumRepositoryEloquent::class,
 			###REPOSITORIES_PLACEHOLDER###
 		// Your Repos Here "interface => eloquent class"
     ];

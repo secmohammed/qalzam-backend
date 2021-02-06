@@ -8,6 +8,8 @@ return [
     'delay' => 'التاخير',
     'body' => 'الجسم',
     'messages' => 'الرسائل',
+    'add-album' => 'اضافه البوم',
+
     'english' => 'انجليزي',
     'arabic' => 'عربي',
     'meeting' => 'أجتماع',
@@ -273,7 +275,7 @@ return [
     'delivery-mens' => 'مسئولين التوصيل',
     'delivery-man' => 'مسئول التوصيل',
     'capacity' => 'قدره الاستيعاب',
-    'accommodation-gallery'=> 'الصور',
+    'accommodation-gallery' => 'الصور',
     'day' => 'اليوم',
     'contract-type' => 'نوع التعاقد',
     'saturday' => 'السبت',

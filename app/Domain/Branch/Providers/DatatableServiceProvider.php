@@ -14,6 +14,7 @@ class DatatableServiceProvider extends ServiceProvider
      */
     private $datatables = [
         'branch' => \App\Domain\Branch\Datatables\BranchDatatable::class,
+			'album' => \App\Domain\Branch\Datatables\AlbumDatatable::class,
 			###DATATABLES_PLACEHOLDER###
 		// Your datatables Here "key => class"
     ];

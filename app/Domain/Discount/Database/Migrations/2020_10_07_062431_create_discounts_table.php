@@ -32,8 +32,7 @@ class CreateDiscountsTable extends Migration
             $table->string('code', 32)->unique();
             $table->integer('number_of_usage')->default(1);
             $table->float('percentage')->default(0);
-            $table->unsignedBigInteger('cateogry_id')->index();
-            $table->foreign('cateogry_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamp('expires_at')->nullable()->format('Y-m-d H:i');
             $table->timestamps();

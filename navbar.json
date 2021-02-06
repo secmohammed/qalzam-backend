@@ -43,5 +43,20 @@
                 "route": "accommodations.create"
             }
         ]
+    },
+    {
+        "name": "albums",
+        "icon": "nav-icon fas fa-tachometer-alt",
+        "route": "albums.index",
+        "children": [
+            {
+                "name": "list albums",
+                "route": "albums.index"
+            },
+            {
+                "name": "create new album",
+                "route": "albums.create"
+            }
+        ]
     }
 ]

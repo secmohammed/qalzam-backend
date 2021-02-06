@@ -4,6 +4,7 @@ namespace App\Domain\Discount\Database\Factories;
 
 use Illuminate\Support\Str;
 use App\Domain\User\Entities\User;
+use App\Domain\Category\Entities\Category;
 use App\Domain\Discount\Entities\Discount;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -42,6 +43,9 @@ class DiscountFactory extends Factory
             'expires_at' => $this->faker->randomElement([now()->format('Y-m-d H:m'), now()->addMinutes(10)->format('Y-m-d H:i')]),
             'user_id' => function () {
                 return User::factory()->create()->id;
+            },
+            'category_id' => function () {
+                return Category::factory()->create(['type' => 'accommodation'])->id;
             },
             'status' => $this->faker->randomElement(['active', 'inactive']),
 

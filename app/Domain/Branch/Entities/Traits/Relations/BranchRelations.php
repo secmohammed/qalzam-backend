@@ -4,11 +4,20 @@ namespace App\Domain\Branch\Entities\Traits\Relations;
 
 use App\Domain\User\Entities\User;
 use App\Domain\Order\Entities\Order;
+use App\Domain\Branch\Entities\Album;
 use App\Domain\Product\Entities\Product;
 use App\Domain\Location\Entities\Location;
 
 trait BranchRelations
 {
+    /**
+     * @return mixed
+     */
+    public function albums()
+    {
+        return $this->hasMany(Album::class);
+    }
+
     /**
      * @return mixed
      */

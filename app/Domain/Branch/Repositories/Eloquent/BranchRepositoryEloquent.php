@@ -40,6 +40,7 @@ class BranchRepositoryEloquent extends EloquentRepository implements BranchRepos
         'user',
         'location',
         'products',
+        'albums',
     ];
 
     /**
@@ -57,6 +58,7 @@ class BranchRepositoryEloquent extends EloquentRepository implements BranchRepos
             AllowedFilter::exact('location.id'),
             AllowedFilter::exact('products.id'),
             AllowedFilter::exact('user.id'),
+            AllowedFilter::exact('albums.name'),
             'name',
             AllowedFilter::exact('creator.id'),
         ];
