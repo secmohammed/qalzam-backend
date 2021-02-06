@@ -3,9 +3,18 @@
 namespace App\Domain\Discount\Entities\Traits\Relations;
 
 use App\Domain\User\Entities\User;
+use App\Domain\Category\Entities\Category;
 
 trait DiscountRelations
 {
+    /**
+     * @return mixed
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
     /**
      * @return mixed
      */

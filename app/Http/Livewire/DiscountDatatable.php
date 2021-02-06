@@ -12,28 +12,41 @@ class DiscountDatatable extends MainLivewire
 {
     public function builder()
     {
-        return Discount::query();
+        return Discount::query()->with('category');
     }
 
     public function columns()
     {
+
         return [
-            NumberColumn::name('id')
+            NumberColumn::name('discounts.id')
                 ->label('ID')
                 ->linkTo('job', 6),
 
-            Column::name('code')
+            Column::name('discounts.code')
                 ->defaultSort('asc')
                 ->searchable()
                 ->filterable(),
+            Column::name('category.name')
+                ->label(__('main.category'))
+                ->defaultSort('asc')
+                ->searchable()
+                ->filterable('cateogry.name'),
 
-            DateColumn::name('created_at')
+            DateColumn::name('discounts.created_at')
                 ->label('created at')
                 ->filterable(),
+            DateColumn::name('discounts.expires_at')
+                ->label('expires at')
+                ->filterable(),
 
-            DateColumn::name('updated_at')
+            DateColumn::name('discounts.updated_at')
                 ->label('updated at')
                 ->filterable(),
+            Column::callback(['discounts.id'], function ($id) {
+                return view("discounts::discount.buttons.actions", ['id' => $id]);
+            })->label(__('main.actions')),
+
         ];
     }
 }

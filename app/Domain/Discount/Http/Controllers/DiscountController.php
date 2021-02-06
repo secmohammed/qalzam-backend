@@ -4,10 +4,12 @@ namespace App\Domain\Discount\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Joovlly\DDD\Traits\Responder;
+use App\Domain\Category\Entities\Category;
 use App\Domain\Discount\Entities\Discount;
 use App\Domain\User\Repositories\Contracts\UserRepository;
 use App\Domain\Discount\Notifications\DiscountAttachedToUser;
 use App\Domain\Discount\Http\Resources\Discount\DiscountResource;
+use App\Domain\Category\Repositories\Contracts\CategoryRepository;
 use App\Domain\Discount\Repositories\Contracts\DiscountRepository;
 use App\Domain\Discount\Http\Requests\Discount\DiscountStoreFormRequest;
 use App\Domain\Discount\Http\Requests\Discount\DiscountUpdateFormRequest;
@@ -47,10 +49,11 @@ class DiscountController extends Controller
     /**
      * @param DiscountRepository $discountRepository
      */
-    public function __construct(DiscountRepository $discountRepository, UserRepository $userRepository)
+    public function __construct(DiscountRepository $discountRepository, UserRepository $userRepository, Category $categoryRepository)
     {
         $this->discountRepository = $discountRepository;
         $this->userRepository = $userRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -61,7 +64,7 @@ class DiscountController extends Controller
     public function create()
     {
         $this->setData('title', __('main.add') . ' ' . __('main.discount'), 'web');
-
+        $this->setData('categories', $this->categoryRepository->where('type', 'product')->get());
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('users', $this->userRepository->whereHas('roles', function ($query) {
             $query->where('slug', '!=', 'admin');
@@ -106,6 +109,7 @@ class DiscountController extends Controller
     public function edit(Discount $discount)
     {
         $this->setData('title', __('main.edit') . ' ' . __('main.discount') . ' : ' . $discount->id, 'web');
+        $this->setData('categories', $this->categoryRepository->where('type', 'product')->get());
 
         $this->setData('alias', $this->domainAlias, 'web');
         $discount->load('users');
