@@ -45,7 +45,9 @@ class BranchStoreFormRequest extends FormRequest
             'delivery_fee' => 'required|numeric|min:1|max:999',
             'branch-gallery.*' => ['required', 'image', 'mimes:png,jpeg,jpg', 'max:2048'],
             'users' => 'required|array',
+            'deliverers' => 'nullable|array',
             'user_id' => 'required|exists:users,id',
+            'deliverers.*' => 'required|exists:users,id',
             'users.*' => 'required|exists:users,id',
         ];
 

@@ -21,6 +21,15 @@ trait BranchRelations
     /**
      * @return mixed
      */
+    public function deliverers()
+    {
+        return $this->belongsToMany(User::class, 'branch_delivery', 'branch_id', 'user_id');
+
+    }
+
+    /**
+     * @return mixed
+     */
     public function location()
     {
         return $this->belongsTo(Location::class);

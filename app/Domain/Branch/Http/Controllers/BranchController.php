@@ -67,6 +67,9 @@ class BranchController extends Controller
         $this->setData('users', $userRepository->whereHas('roles', function ($query) {
             $query->whereNotIn('slug', ['user', 'admin', 'delivery']);
         })->all());
+        $this->setData('deliverers', $userRepository->whereHas('roles', function ($query) {
+            $query->where('slug', 'delivery');
+        })->all());
         $this->setData('locations', $locationRepository->all());
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
 
@@ -111,6 +114,10 @@ class BranchController extends Controller
         $this->setData('users', $userRepository->whereHas('roles', function ($query) {
             $query->whereNotIn('slug', ['user', 'admin', 'delivery']);
         })->all());
+        $this->setData('deliverers', $userRepository->whereHas('roles', function ($query) {
+            $query->where('slug', 'delivery');
+        })->all());
+
         $this->setData('locations', $locationRepository->all());
 
         $this->setData('edit', $branch);
@@ -177,6 +184,9 @@ class BranchController extends Controller
     {
         $branch = $this->branchRepository->create($request->validated());
         $branch->users()->attach($request->users);
+        if ($request->has('deliverers')) {
+            $branch->deliverers()->attach($request->deliverers);
+        }
         app(Pipeline::class)->send([
             'model' => $branch,
             'request' => $request,
@@ -205,6 +215,9 @@ class BranchController extends Controller
         $branch->update($request->validated());
         if ($request->has('users')) {
             $branch->users()->sync($request->users);
+        }
+        if ($request->has('deliverers')) {
+            $branch->deliverers()->sync($request->deliverers);
         }
 
         app(Pipeline::class)->send([

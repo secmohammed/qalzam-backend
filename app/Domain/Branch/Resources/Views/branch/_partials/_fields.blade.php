@@ -41,6 +41,27 @@
     </div>
 </div>
 <div class="form-group row">
+    <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.deliverers") }}</label>
+    <div class="col-lg-10 col-md-9 col-sm-12">
+        <select class="form-control select2 {{$errors->has('deliverers') ? 'is-invalid':''}}" name="deliverers[]" data-placeholder="{{ __('main.select') .' '.__('main.deliverers')  }}" multiple>
+            <option label="Label"></option>
+            @foreach($deliverers as $delivery)
+            <option
+            value="{{$delivery->id}}" {{ ($action == 'edit') && $edit->deliverers->contains('id', $delivery->id)  ? 'selected' : '' }}>{{$delivery->name}} ({{ $delivery->mobile }})</option>
+            @endforeach
+        </select>
+        <div class="row">
+            <div class="col-md-12">
+                @if($errors->has('deliverers'))
+                <div class="alert alert-danger w-100 m-0" role="alert">
+                    {{$errors->first('deliverers')}}
+                </div>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group row">
     <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.location") }}</label>
     <div class="col-lg-10 col-md-9 col-sm-12">
         <select class="form-control select2 {{$errors->has('location_id') ? 'is-invalid':''}}" name="location_id" data-placeholder="{{ __('main.select') .' '.__('main.location')  }}">
