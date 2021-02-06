@@ -58,10 +58,10 @@ class AccommodationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(BranchRepository $branchRepository)
+    public function create(BranchRepository $branchRepository, Accommodation $accommodation)
     {
         $this->setData('title', __('main.add') . ' ' . __('main.accommodation'), 'web');
-
+        $this->setData('categories', $accommodation->categories);
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('branches', $branchRepository->all());
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");

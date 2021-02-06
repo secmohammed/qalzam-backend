@@ -49,6 +49,7 @@ class UserStoreFormRequest extends FormRequest
             'email' => 'required|unique:users,email',
             'mobile' => ['required', 'unique:users,mobile'],
             'image' => ['required', 'image', 'mimes:jpeg,png,jpg,svg'],
+            'type' => 'nullable|in:user,admin,branch,kitchen',
             'role_id' => ['required', 'exists:roles,id'],
         ];
 

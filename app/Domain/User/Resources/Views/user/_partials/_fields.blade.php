@@ -124,6 +124,32 @@
         </div>
     </div>
 </div>
+<div class="form-group row">
+    <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.type") }} <span
+            style="color: red"> * </span> </label>
+    <div class="col-lg-10 col-md-9 col-sm-12">
+        <select class="form-control select2 {{$errors->has('type') ? 'is-invalid':''}}" name="type">
+            <option label="Label"></option>
+                <option
+                    value="user" {{ ($action == 'edit') && $edit->type === 'user' ? 'selected' : '' }}>User</option>
+                <option
+                    value="admin" {{ ($action == 'edit') && $edit->type === 'admin' ? 'selected' : '' }}>Admin</option>
+                <option
+                    value="branch" {{ ($action == 'edit') && $edit->type === 'branch' ? 'selected' : '' }}>Branch</option>
+                <option
+                    value="kitchen" {{ ($action == 'edit') && $edit->type === 'kitchen' ? 'selected' : '' }}>Kitchen</option>
+        </select>
+        <div class="row">
+            <div class="col-md-12">
+                @if($errors->has('role_id'))
+                    <div class="alert alert-danger w-100 m-0" role="alert">
+                        {{$errors->first('role_id')}}
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="form-group row">
     <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.image") }}</label>

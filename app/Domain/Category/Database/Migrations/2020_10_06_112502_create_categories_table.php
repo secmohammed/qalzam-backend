@@ -24,13 +24,10 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        //categories for the time being are allocated to users in form of speciality
-        // and for posts in form of categories.
         Schema::create('categories', function (Blueprint $table) {
-
             $table->id();
             $table->string('name')->unique();
-            $table->enum('type', ['product', 'post'])->index(); // reference for 'speciality' to help while indexing.
+            $table->enum('type', ['product', 'post', 'accommodation'])->index();
             $table->unsignedBigInteger('parent_id')->nullable()->index();
             $table->unsignedInteger('_lft')->default(0)->index();
             $table->unsignedInteger('_rgt')->default(0)->index();

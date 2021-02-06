@@ -69,7 +69,7 @@
             <option
             value="post" {{ ($action == 'edit') && $edit->type == 'post' ? 'selected' : '' }}>{{ __('main.post') }}</option>
             <option
-                value="post" {{ ($action == 'edit') && $edit->type == 'accommodation' ? 'selected' : '' }}>{{ __('main.accommodation') }}</option>
+                value="accommodation" {{ ($action == 'edit') && $edit->type == 'accommodation' ? 'selected' : '' }}>{{ __('main.accommodation') }}</option>
         </select>
         <div class="row">
             <div class="col-md-12">

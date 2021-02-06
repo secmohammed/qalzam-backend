@@ -44,6 +44,7 @@ class User extends Authenticatable implements JWTSubject, HasMedia
     protected $fillable = [
         'name',
         'email',
+        'type',
         'national_id',
         'mobile',
         'status',

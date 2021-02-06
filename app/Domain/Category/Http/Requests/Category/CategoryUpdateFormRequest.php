@@ -35,7 +35,7 @@ class CategoryUpdateFormRequest extends CategoryStoreFormRequest
     public function rules()
     {
         $rules = [
-            'name' => ['required', 'unique:categories,name,' . $this->route('category')->id],
+            'name' => ['required', 'unique:categories,name,' . $this->category->id],
 
         ];
 

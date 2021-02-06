@@ -4,6 +4,7 @@ namespace App\Domain\Accommodation\Entities\Traits\Relations;
 
 use App\Domain\User\Entities\User;
 use App\Domain\Branch\Entities\Branch;
+use App\Domain\Category\Entities\Category;
 
 trait AccommodationRelations
 {
@@ -13,6 +14,14 @@ trait AccommodationRelations
     public function branch()
     {
         return $this->belongsTo(Branch::class);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function categories()
+    {
+        return $this->morphToMany(Category::class, 'categorizable');
     }
 
     /**
