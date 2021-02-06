@@ -42,6 +42,7 @@ class DiscountStoreFormRequest extends FormRequest
             'percentage' => 'required|integer|min:1|max:99',
             'number_of_usage' => 'required|integer|min:1|max:200',
             'expires_at' => 'nullable|after_or_equal:' . now()->format('Y-m-d H:i'),
+            'category_id' => 'required|exists:categories,id',
             'users' => ['nullable', 'array'],
             'users.*' => ['required', 'exists:users,id'],
             'broadcast' => 'required_if:users,==,null|boolean',

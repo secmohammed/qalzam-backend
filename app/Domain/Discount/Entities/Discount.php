@@ -35,6 +35,7 @@ class Discount extends Model
         'percentage',
         'status',
         'expires_at',
+        'category_id',
     ];
 
     /**

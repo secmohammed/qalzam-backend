@@ -110,6 +110,8 @@ abstract class ServiceProvider extends LaravelServiceProvider
             if ($app->auth->user()) {
                 $app->auth->user()->load([
                     'cart.stock',
+                    'cart.product',
+                    'cart.product.categories',
                 ]);
             }
 
