@@ -64,7 +64,9 @@ class BranchController extends Controller
         $this->setData('title', __('main.add') . ' ' . __('main.branch'), 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
-        $this->setData('users', $userRepository->all());
+        $this->setData('users', $userRepository->whereHas('roles', function ($query) {
+            $query->whereNotIn('slug', ['user', 'admin', 'delivery']);
+        })->all());
         $this->setData('locations', $locationRepository->all());
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
 
@@ -106,7 +108,9 @@ class BranchController extends Controller
         $this->setData('title', __('main.edit') . ' ' . __('main.branch') . ' : ' . $branch->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
-        $this->setData('users', $userRepository->all());
+        $this->setData('users', $userRepository->whereHas('roles', function ($query) {
+            $query->whereNotIn('slug', ['user', 'admin', 'delivery']);
+        })->all());
         $this->setData('locations', $locationRepository->all());
 
         $this->setData('edit', $branch);
