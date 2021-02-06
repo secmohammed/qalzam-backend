@@ -3,7 +3,7 @@
     <!--begin::Head-->
     <head>
         <meta charset="utf-8" />
-        <title>القلزم</title>
+        <title>{{ __('main.qalzam') }}</title>
         <meta name="description" content="Updates and statistics" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <!--begin::Fonts-->
@@ -81,8 +81,8 @@
                 <div id="kt_quick_notifications" class="offcanvas offcanvas-right p-10">
                     <!--begin::Header-->
                     <div class="offcanvas-header d-flex align-items-center justify-content-between mb-10">
-                        <h3 class="font-weight-bold m-0">التنبيهات
-                        <small class="text-muted font-size-sm ml-2">24 جديد</small></h3>
+                        <h3 class="font-weight-bold m-0">{{ __('main.notifications') }}
+                        <small class="text-muted font-size-sm ml-2"> 0 {{ __('main.new') }} </small></h3>
                         <a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_notifications_close">
                             <i class="ki ki-close icon-xs text-muted"></i>
                         </a>
@@ -147,7 +147,7 @@
                 <div id="kt_quick_actions" class="offcanvas offcanvas-right p-10">
                     <!--begin::Header-->
                     <div class="offcanvas-header d-flex align-items-center justify-content-between pb-10">
-                        <h3 class="font-weight-bold m-0">الاجراءات السريعة</h3>
+                        <h3 class="font-weight-bold m-0">{{ __('main.quick-actions') }}</h3>
                         <a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_actions_close">
                             <i class="ki ki-close icon-xs text-muted"></i>
                         </a>
@@ -279,7 +279,7 @@
                     <div id="kt_quick_user" class="offcanvas offcanvas-right p-10">
                         <!--begin::Header-->
                         <div class="offcanvas-header d-flex align-items-center justify-content-between pb-5">
-                            <h3 class="font-weight-bold m-0">الصفحة الشخصية
+                            <h3 class="font-weight-bold m-0">{{ __('main.profile') }}
                             </h3>
                             <a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_user_close">
                                 <i class="ki ki-close icon-xs text-muted"></i>
@@ -295,8 +295,8 @@
                                     <i class="symbol-badge bg-success"></i>
                                 </div>
                                 <div class="d-flex flex-column">
-                                    <a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">مهاب محمد</a>
-                                    <div class="text-muted mt-1">مدير القلزم</div>
+                                    <a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">{{ auth()->user()->name }}</a>
+                                    <div class="text-muted mt-1">{{ auth()->user()->title ? : '' }}</div>
                                     <div class="navi mt-2">
                                         <a href="#" class="navi-item">
                                             <span class="navi-link p-0 pb-2">
@@ -313,10 +313,10 @@
                                                         <!--end::Svg Icon-->
                                                     </span>
                                                 </span>
-                                                <span class="navi-text text-muted text-hover-primary">mohab@nivicloud.com</span>
+                                                <span class="navi-text text-muted text-hover-primary">{{ auth()->user()->email }}</span>
                                             </span>
                                         </a>
-                                        <a href="#" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">تسجيل الخروج</a>
+                                        <a href="#" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">{{ __('main.logout') }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -327,7 +327,7 @@
                             <!--begin::Nav-->
                             <div class="navi navi-spacer-x-0 p-0">
                                 <!--begin::Item-->
-                                <a href="custom/apps/user/profile-1/personal-information.html" class="navi-item">
+                                <a href="#" class="navi-item">
                                     <div class="navi-link">
                                         <div class="symbol symbol-40 bg-light mr-3">
                                             <div class="symbol-label">
@@ -345,33 +345,7 @@
                                             </div>
                                         </div>
                                         <div class="navi-text">
-                                            <div class="font-weight-bold">تعديل الملف الشخصي</div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <!--end:Item-->
-                                <!--begin::Item-->
-                                <a href="custom/apps/user/profile-3.html" class="navi-item">
-                                    <div class="navi-link">
-                                        <div class="symbol symbol-40 bg-light mr-3">
-                                            <div class="symbol-label">
-                                                <span class="svg-icon svg-icon-md svg-icon-warning">
-                                                    <!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Chart-bar1.svg-->
-                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                            <rect x="0" y="0" width="24" height="24" />
-                                                            <rect fill="#000000" opacity="0.3" x="12" y="4" width="3" height="13" rx="1.5" />
-                                                            <rect fill="#000000" opacity="0.3" x="7" y="9" width="3" height="8" rx="1.5" />
-                                                            <path d="M5,19 L20,19 C20.5522847,19 21,19.4477153 21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 C4.55228475,3 5,3.44771525 5,4 L5,19 Z" fill="#000000" fill-rule="nonzero" />
-                                                            <rect fill="#000000" opacity="0.3" x="17" y="11" width="3" height="6" rx="1.5" />
-                                                        </g>
-                                                    </svg>
-                                                    <!--end::Svg Icon-->
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="navi-text">
-                                            <div class="font-weight-bold">قائمة الحجوزاتي</div>
+                                            <div class="font-weight-bold">{{ __('main.update') }} {{ __('main.profile') }}</div>
                                         </div>
                                     </div>
                                 </a>
@@ -385,8 +359,6 @@
                     <!--begin::Scrolltop-->
                     <x-scroll-top></x-scroll-top>
                     <!--end::Scrolltop-->
-                    <!--begin::Global Config(global config for global JS scripts)-->
-                   <script>var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";</script>
 <!--begin::Global Config(global config for global JS scripts)-->
 <script>var KTAppSettings = {"breakpoints": {"sm": 576, "md": 768, "lg": 992, "xl": 1200, "xxl": 1200},
         "colors": {

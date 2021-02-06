@@ -28,6 +28,8 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('mobile')->unique();
+            $table->string('title')->nullable();
+            $table->enum('type', ['user', 'admin','branch','kitchen'])->default('user');
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->enum('default_language', ['en', 'ar'])->default('ar');
             $table->string('password');

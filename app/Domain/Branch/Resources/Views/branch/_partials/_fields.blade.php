@@ -20,28 +20,6 @@
 </div>
 
 <div class="form-group row">
-    <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.user") }}</label>
-    <div class="col-lg-10 col-md-9 col-sm-12">
-        <select class="form-control select2 {{$errors->has('user_id') ? 'is-invalid':''}}" name="user_id" data-placeholder="{{ __('main.select') .' '.__('main.user')  }}" multiple>
-            <option label="Label"></option>
-            @foreach($users as $user)
-            <option
-            value="{{$user->id}}" {{ ($action == 'edit') && $edit->user_id ==  $user->id  ? 'selected' : '' }}>{{$user->name}}</option>
-            @endforeach
-        </select>
-        <div class="row">
-            <div class="col-md-12">
-                @if($errors->has('user_id'))
-                <div class="alert alert-danger w-100 m-0" role="alert">
-                    {{$errors->first('user_id')}}
-                </div>
-                @endif
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="form-group row">
     <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.users") }}</label>
     <div class="col-lg-10 col-md-9 col-sm-12">
         <select class="form-control select2 {{$errors->has('users') ? 'is-invalid':''}}" name="users[]" data-placeholder="{{ __('main.select') .' '.__('main.users')  }}" multiple>
@@ -119,6 +97,97 @@
         </div>
     </div>
 </div>
+
+<div class="form-group row">
+    <label class="col-form-label text-right col-lg-2 col-sm-12">
+        {{ __("main.working-hours") }}
+    </label>
+    <div class="col-lg-10 col-md-9 col-sm-12">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">{{ __('main.day') }}</th>
+                <th scope="col">{{ __('main.start-time') }}</th>
+                <th scope="col">{{ __('main.end-time') }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>{{ __('main.saturday') }}</td>
+                <td>
+                    <input class="form-control" id="kt_timepicker_1" readonly placeholder="{{ __('main.start-time') }}" type="text"/>
+                </td>
+                <td>
+                    <input class="form-control" id="kt_timepicker_1" readonly placeholder="{{ __('main.end-time') }}" type="text"/>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>{{ __('main.sunday') }}</td>
+                <td>
+                    <input class="form-control" id="kt_timepicker_1" readonly placeholder="{{ __('main.start-time') }}" type="text"/>
+                </td>
+                <td>
+                    <input class="form-control" id="kt_timepicker_1" readonly placeholder="{{ __('main.end-time') }}" type="text"/>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>{{ __('main.monday') }}</td>
+                <td>
+                    <input class="form-control" id="kt_timepicker_1" readonly placeholder="{{ __('main.start-time') }}" type="text"/>
+                </td>
+                <td>
+                    <input class="form-control" id="kt_timepicker_1" readonly placeholder="{{ __('main.end-time') }}" type="text"/>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">4</th>
+                <td>{{ __('main.tuesday') }}</td>
+                <td>
+                    <input class="form-control" id="kt_timepicker_1" readonly placeholder="{{ __('main.start-time') }}" type="text"/>
+                </td>
+                <td>
+                    <input class="form-control" id="kt_timepicker_1" readonly placeholder="{{ __('main.end-time') }}" type="text"/>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">5</th>
+                <td>{{ __('main.wednesday') }}</td>
+                <td>
+                    <input class="form-control" id="kt_timepicker_1" readonly placeholder="{{ __('main.start-time') }}" type="text"/>
+                </td>
+                <td>
+                    <input class="form-control" id="kt_timepicker_1" readonly placeholder="{{ __('main.end-time') }}" type="text"/>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">6</th>
+                <td>{{ __('main.thursday') }}</td>
+                <td>
+                    <input class="form-control" id="kt_timepicker_1" readonly placeholder="{{ __('main.start-time') }}" type="text"/>
+                </td>
+                <td>
+                    <input class="form-control" id="kt_timepicker_1" readonly placeholder="{{ __('main.end-time') }}" type="text"/>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">7</th>
+                <td>{{ __('main.friday') }}</td>
+                <td>
+                    <input class="form-control" id="kt_timepicker_1" readonly placeholder="{{ __('main.start-time') }}" type="text"/>
+                </td>
+                <td>
+                    <input class="form-control" id="kt_timepicker_1" readonly placeholder="{{ __('main.end-time') }}" type="text"/>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
 <div class="form-group row">
     <label class="col-form-label text-right col-lg-2 col-sm-12">
         {{ __("main.branch-gallery") }}
@@ -136,3 +205,6 @@
         </div>
     </div>
 </div>
+@push('scripts')
+<script src="{{ asset('assets/js/pages/crud/forms/widgets/bootstrap-timepicker.js') }}"></script>
+@endpush

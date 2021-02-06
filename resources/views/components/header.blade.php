@@ -44,7 +44,7 @@
 													</span>
 												</span>
                         </div>
-                        <input type="text" class="form-control h-45px" placeholder="ابحث ..." />
+                        <input type="text" class="form-control h-45px" placeholder="{{ __('main.search') }} ..." />
                         <div class="input-group-append">
 												<span class="input-group-text">
 													<i class="quick-search-close ki ki-close icon-sm text-muted"></i>
@@ -128,7 +128,7 @@
             <div class="dropdown">
                 <!--begin::Toggle-->
                 <div class="topbar-item mr-4" data-toggle="dropdown" data-offset="10px,0px">
-                    <div class="btn font-weight-bolder btn-sm btn-light-success px-5">اضافة</div>
+                    <div class="btn font-weight-bolder btn-sm btn-light-success px-5">{{ __('main.add') }}</div>
                 </div>
                 <!--end::Toggle-->
                 <!--begin::Dropdown-->
@@ -140,7 +140,7 @@
 													<span class="navi-icon">
 														<i class="flaticon2-drop"></i>
 													</span>
-                                <span class="navi-text">اضافة طلب جديد</span>
+                                <span class="navi-text">{{ __('main.add') }}</span>
                             </a>
                         </li>
                         <li class="navi-item">
@@ -148,7 +148,7 @@
 													<span class="navi-icon">
 														<i class="flaticon2-list-3"></i>
 													</span>
-                                <span class="navi-text">اضافة عميل جديد</span>
+                                <span class="navi-text">{{ __('main.add') }}</span>
                             </a>
                         </li>
                         <li class="navi-item">
@@ -156,7 +156,7 @@
 													<span class="navi-icon">
 														<i class="flaticon2-rocket-1"></i>
 													</span>
-                                <span class="navi-text">اضافة منتج جديد</span>
+                                <span class="navi-text">{{ __('main.add') }}</span>
                             </a>
                         </li>
                         <li class="navi-item">
@@ -164,7 +164,7 @@
 													<span class="navi-icon">
 														<i class="flaticon2-bell-2"></i>
 													</span>
-                                <span class="navi-text">اضافة تصنيف جديد</span>
+                                <span class="navi-text">{{ __('main.add') }}</span>
                             </a>
                         </li>
                         <li class="navi-item">
@@ -172,7 +172,7 @@
 													<span class="navi-icon">
 														<i class="flaticon2-gear"></i>
 													</span>
-                                <span class="navi-text">اضافة كود خصم</span>
+                                <span class="navi-text">{{ __('main.add') }}</span>
                             </a>
                         </li>
                         <li class="navi-item">
@@ -180,7 +180,15 @@
 													<span class="navi-icon">
 														<i class="flaticon2-magnifier-tool"></i>
 													</span>
-                                <span class="navi-text">حجز جديد</span>
+                                <span class="navi-text">{{ __('main.add') }}</span>
+                            </a>
+                        </li>
+                        <li class="navi-item">
+                            <a href="#" class="navi-link">
+													<span class="navi-icon">
+														<i class="flaticon2-magnifier-tool"></i>
+													</span>
+                                <span class="navi-text">{{ __('main.add') }}</span>
                             </a>
                         </li>
                     </ul>
@@ -225,7 +233,7 @@
             <!--end::User-->
             <!--begin::Notifications-->
             <div class="topbar-item">
-                <div class="btn btn-icon btn-sm btn-primary font-weight-bolder p-0" id="kt_quick_notifications_toggle">3</div>
+                <div class="btn btn-icon btn-sm btn-primary font-weight-bolder p-0" id="kt_quick_notifications_toggle">0</div>
             </div>
             <!--end::Notifications-->
         </div>

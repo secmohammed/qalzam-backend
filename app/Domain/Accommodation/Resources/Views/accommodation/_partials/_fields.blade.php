@@ -132,3 +132,113 @@
         </div>
     </div>
 </div>
+<div class="form-group row">
+    <label class="col-form-label text-right col-lg-2 col-sm-12">
+        {{ __("main.contract-type") }}
+    </label>
+    <div class="col-lg-10 col-md-9 col-sm-12">
+        <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">{{ __('main.day') }}</th>
+            <th scope="col" style="width: 80%">{{ __('main.contract-type') }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>{{ __('main.saturday') }}</td>
+            <td>
+                <select class="form-control select2 {{$errors->has('type') ? 'is-invalid':''}}" name="type" data-placeholder="{{ __('main.select') .' '.__('main.contract-type')  }}">
+                    <option label="Label"></option>
+                    <option
+                        value="room" {{ ($action == 'edit') && $edit->type == 'room' ? 'selected' : '' }}>Room</option>
+                    <option
+                        value="table" {{ ($action == 'edit') && $edit->type == 'table' ? 'selected' : '' }}>Table</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>{{ __('main.sunday') }}</td>
+            <td>
+                <select class="form-control select2 {{$errors->has('type') ? 'is-invalid':''}}" name="type" data-placeholder="{{ __('main.select') .' '.__('main.contract-type')  }}">
+                    <option label="Label"></option>
+                    <option
+                        value="room" {{ ($action == 'edit') && $edit->type == 'room' ? 'selected' : '' }}>Room</option>
+                    <option
+                        value="table" {{ ($action == 'edit') && $edit->type == 'table' ? 'selected' : '' }}>Table</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>{{ __('main.monday') }}</td>
+            <td>
+                <select class="form-control select2 {{$errors->has('type') ? 'is-invalid':''}}" name="type" data-placeholder="{{ __('main.select') .' '.__('main.contract-type')  }}">
+                    <option label="Label"></option>
+                    <option
+                        value="room" {{ ($action == 'edit') && $edit->type == 'room' ? 'selected' : '' }}>Room</option>
+                    <option
+                        value="table" {{ ($action == 'edit') && $edit->type == 'table' ? 'selected' : '' }}>Table</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">4</th>
+            <td>{{ __('main.tuesday') }}</td>
+            <td>
+                <select class="form-control select2 {{$errors->has('type') ? 'is-invalid':''}}" name="type" data-placeholder="{{ __('main.select') .' '.__('main.contract-type')  }}">
+                    <option label="Label"></option>
+                    <option
+                        value="room" {{ ($action == 'edit') && $edit->type == 'room' ? 'selected' : '' }}>Room</option>
+                    <option
+                        value="table" {{ ($action == 'edit') && $edit->type == 'table' ? 'selected' : '' }}>Table</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">5</th>
+            <td>{{ __('main.wednesday') }}</td>
+            <td>
+                <select class="form-control select2 {{$errors->has('type') ? 'is-invalid':''}}" name="type" data-placeholder="{{ __('main.select') .' '.__('main.contract-type')  }}">
+                    <option label="Label"></option>
+                    <option
+                        value="room" {{ ($action == 'edit') && $edit->type == 'room' ? 'selected' : '' }}>Room</option>
+                    <option
+                        value="table" {{ ($action == 'edit') && $edit->type == 'table' ? 'selected' : '' }}>Table</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">6</th>
+            <td>{{ __('main.thursday') }}</td>
+            <td>
+                <select class="form-control select2 {{$errors->has('type') ? 'is-invalid':''}}" name="type" data-placeholder="{{ __('main.select') .' '.__('main.contract-type')  }}">
+                    <option label="Label"></option>
+                    <option
+                        value="room" {{ ($action == 'edit') && $edit->type == 'room' ? 'selected' : '' }}>Room</option>
+                    <option
+                        value="table" {{ ($action == 'edit') && $edit->type == 'table' ? 'selected' : '' }}>Table</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">7</th>
+            <td>{{ __('main.friday') }}</td>
+            <td>
+                <select class="form-control select2 {{$errors->has('type') ? 'is-invalid':''}}" name="type" data-placeholder="{{ __('main.select') .' '.__('main.contract-type')  }}">
+                    <option label="Label"></option>
+                    <option
+                        value="room" {{ ($action == 'edit') && $edit->type == 'room' ? 'selected' : '' }}>Room</option>
+                    <option
+                        value="table" {{ ($action == 'edit') && $edit->type == 'table' ? 'selected' : '' }}>Table</option>
+                </select>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+    </div>
+</div>
