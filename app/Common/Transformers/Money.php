@@ -23,7 +23,7 @@ class Money
      */
     public function __construct($value)
     {
-        $this->money = new BaseMoney($value, new Currency('EGP'));
+        $this->money = new BaseMoney($value, new Currency('SAR'));
     }
 
     /**

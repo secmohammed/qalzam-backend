@@ -9,7 +9,7 @@
             <option label="Label"></option>
 
             @foreach($users as $user)
-                <option value="{{$user->id}}" {{ ($action == 'edit')  && $edit->user_id == $user->id ? 'selected' : '' }}>{{$user->name}}</option>
+                <option value="{{$user->id}}" {{ ($action == 'edit')  && $edit->user_id == $user->id ? 'selected' : '' }}>{{$user->name}} ({{ $user->mobile }})</option>
             @endforeach
         </select>
         <div class="row">
@@ -23,7 +23,6 @@
         </div>
     </div>
 </div>
-
 <div class="form-group row">
     <label class="col-form-label text-right col-lg-2 col-sm-12 ">{{ __("main.order") }}  <span
             style="color: red"> * </span> </label>
@@ -33,7 +32,7 @@
             <option label="Label"></option>
 
             @foreach($orders as $order)
-                <option value="{{$order->id}}" {{ ($action == 'edit')  && $edit->order_id == $order->id ? 'selected' : '' }}>{{$order->id}}</option>
+                <option value="{{$order->id}}" {{ ($action == 'edit')  && $edit->order_id == $order->id ? 'selected' : '' }}> #{{$order->id}} ({{ $order->user->mobile }}) ({{ $order->subtotal->formatted() }})</option>
             @endforeach
         </select>
         <div class="row">

@@ -5,5 +5,5 @@ return [
     'remindable' => [
         'expiration' => 1, // 1 hour
     ],
-    'currency' => 'ar_EG',
+    'currency' => 'ar_SA',
 ];

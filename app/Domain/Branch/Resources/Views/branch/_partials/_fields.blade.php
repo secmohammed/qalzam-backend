@@ -26,7 +26,7 @@
             <option label="Label"></option>
             @foreach($users as $user)
             <option
-            value="{{$user->id}}" {{ ($action == 'edit') && $edit->users->contains('id', $user->id)  ? 'selected' : '' }}>{{$user->name}}</option>
+            value="{{$user->id}}" {{ ($action == 'edit') && $edit->users->contains('id', $user->id)  ? 'selected' : '' }}>{{$user->name}} ({{ $user->mobile }})</option>
             @endforeach
         </select>
         <div class="row">
