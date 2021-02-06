@@ -35,9 +35,10 @@ class CreateBranchesTable extends Migration
             $table->foreignId('location_id')->constrained()->onDelete('cascade');
             $table->string('latitude');
             $table->string('longitude');
+            $table->string('delivery_fee');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('creator_id')->constrained('users', 'id')->onDelete('cascade');
-            $table->index(['creator_id', 'location_id', 'user_id']);
+            $table->index(['location_id', 'user_id', 'creator_id']);
             $table->timestamps();
 
         });
@@ -46,6 +47,13 @@ class CreateBranchesTable extends Migration
             $table->foreignId('branch_id')->constrained()->onDelete('cascade');
             $table->foreignId('product_id')->constrained('products', 'id')->onDelete('cascade');
             $table->index(['branch_id', 'product_id']);
+        });
+        Schema::create('delivery_order', function (Blueprint $table) {
+            $table->primary(['user_id', 'order_id']);
+            $table->foreignId('order_id')->constrained('orders', 'id')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users', 'id')->onDelete('cascade');
+            $table->index(['order_id', 'user_id']);
+
         });
     }
 }

@@ -6,3 +6,6 @@
  ☐ Create Order UI
  ☐ Create Tab UI at branch for displaying products
  ☐ Make Dashboard page Dynamic.
+ ☐ Add Album.
+ - Order belongs to Branch, Delivery_order is a pivot table to connect the user who is delivery guy with the order to deliver, the branch has delivery_fees to use at the cart instance to sum it up in case of online ordering
+ - branch, order, delivery_guy (user) has one through.

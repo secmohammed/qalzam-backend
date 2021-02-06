@@ -22,11 +22,11 @@
 <div class="form-group row">
     <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.user") }}</label>
     <div class="col-lg-10 col-md-9 col-sm-12">
-        <select class="form-control select2 {{$errors->has('user_id') ? 'is-invalid':''}}" name="user_id" data-placeholder="{{ __('main.select') .' '.__('main.user')  }}">
+        <select class="form-control select2 {{$errors->has('user_id') ? 'is-invalid':''}}" name="user_id" data-placeholder="{{ __('main.select') .' '.__('main.user')  }}" multiple>
             <option label="Label"></option>
             @foreach($users as $user)
             <option
-            value="{{$user->id}}" {{ ($action == 'edit') && $edit->user_id == $user->id ? 'selected' : '' }}>{{$user->name}}</option>
+            value="{{$user->id}}" {{ ($action == 'edit') && $edit->user_id ==  $user->id  ? 'selected' : '' }}>{{$user->name}}</option>
             @endforeach
         </select>
         <div class="row">
@@ -34,6 +34,28 @@
                 @if($errors->has('user_id'))
                 <div class="alert alert-danger w-100 m-0" role="alert">
                     {{$errors->first('user_id')}}
+                </div>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-group row">
+    <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.users") }}</label>
+    <div class="col-lg-10 col-md-9 col-sm-12">
+        <select class="form-control select2 {{$errors->has('users') ? 'is-invalid':''}}" name="users[]" data-placeholder="{{ __('main.select') .' '.__('main.users')  }}" multiple>
+            <option label="Label"></option>
+            @foreach($users as $user)
+            <option
+            value="{{$user->id}}" {{ ($action == 'edit') && $edit->users->contains('id', $user->id)  ? 'selected' : '' }}>{{$user->name}}</option>
+            @endforeach
+        </select>
+        <div class="row">
+            <div class="col-md-12">
+                @if($errors->has('users'))
+                <div class="alert alert-danger w-100 m-0" role="alert">
+                    {{$errors->first('users')}}
                 </div>
                 @endif
             </div>

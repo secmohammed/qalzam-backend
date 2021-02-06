@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use App\Domain\User\Entities\User;
 use App\Domain\Order\Entities\Order;
 use App\Domain\User\Entities\Address;
+use App\Domain\Branch\Entities\Branch;
 use App\Domain\Product\Entities\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -35,6 +36,9 @@ class OrderFactory extends Factory
             },
             'address_id' => function () {
                 return Address::factory()->create()->id;
+            },
+            'branch_id' => function () {
+                return Branch::factory()->create()->id;
             },
         ];
     }

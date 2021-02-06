@@ -36,6 +36,7 @@ class Order extends Model
         // 'shipping_method_id',
         // 'payment_method_id',
         'subtotal',
+        'branch_id',
         'creator_id',
         'user_id',
     ];

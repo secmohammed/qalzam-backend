@@ -39,7 +39,7 @@ class UserRegisterFormRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'password' => 'required|min:8|max:32|confirmed',
             'email' => 'required|unique:users,email',
-            'mobile' => ['required', 'regex:/^(010|011|012|015)([0-9]{8})$/', 'unique:users,mobile'],
+            'mobile' => ['required', 'unique:users,mobile'],
         ];
 
         return $rules;

@@ -16,7 +16,11 @@ trait ReservationAttributes
 
     public function getTotalPriceAttribute()
     {
+        if ($this->order) {
+            return new Money(round($this->price->amount()) + round($this->order->subtotal->amount()));
 
-        return new Money(round($this->price->amount()) + round($this->order->subtotal->amount()));
+        }
+
+        return new Money(round($this->price->amount()));
     }
 }

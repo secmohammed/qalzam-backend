@@ -2,6 +2,7 @@
 
 namespace App\Domain\Reservation\Http\Requests\Reservation;
 
+use Carbon\Carbon;
 use App\Infrastructure\Http\AbstractRequests\BaseRequest as FormRequest;
 
 class ReservationStoreFormRequest extends FormRequest
@@ -37,9 +38,9 @@ class ReservationStoreFormRequest extends FormRequest
     {
         $rules = [
             'start_date' => 'required|after_or_equal:' . now()->format('Y-m-d H:i:s'),
-            'end_date' => 'required|after_or_equal:' . $this->request->get('start_date'),
+            'end_date' => 'nullable|after_or_equal:' . $this->request->get('start_date'),
             'accommodation_id' => 'required|exists:accommodations,id',
-            'order_id' => 'required|exists:orders,id',
+            'order_id' => 'nullable|exists:orders,id',
             'user_id' => 'required|exists:users,id',
 
         ];
@@ -49,6 +50,13 @@ class ReservationStoreFormRequest extends FormRequest
 
     public function validated()
     {
+        if (!$this->request->get('end_date')) {
+            return array_merge(parent::validated(), [
+                'creator_id' => auth()->id(),
+                'end_date' => Carbon::parse($this->request->get('start_date'))->addHour(4)->format('Y-m-d H:i:s'),
+            ]);
+        }
+
         return array_merge(parent::validated(), [
             'creator_id' => auth()->id(),
         ]);

@@ -39,6 +39,8 @@ class BranchUpdateFormRequest extends BranchStoreFormRequest
             'branch-gallery.*' => ['required', 'image', 'mimes:png,jpeg,jpg', 'max:2048'],
             'latitude' => ['nullable', 'regex:/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/', 'unique:branches,latitude,' . $this->branch->id],
             'longitude' => ['nullable', 'regex:/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/', 'unique:branches,longitude,' . $this->branch->id],
+            'users' => 'nullable|array',
+            'users.*' => 'required|exists:users,id',
 
         ];
 

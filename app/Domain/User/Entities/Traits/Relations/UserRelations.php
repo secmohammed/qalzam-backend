@@ -4,6 +4,7 @@ namespace App\Domain\User\Entities\Traits\Relations;
 
 use App\Domain\Order\Entities\Order;
 use App\Domain\User\Entities\Address;
+use App\Domain\Branch\Entities\Branch;
 use App\Domain\Product\Entities\Product;
 use App\Domain\User\Entities\Remindable;
 use App\Domain\User\Entities\DeviceToken;
@@ -24,6 +25,14 @@ trait UserRelations
     /**
      * @return mixed
      */
+    public function branches()
+    {
+        return $this->belongsToMany(Branch::class, 'branch_user', 'user_id', 'branch_id');
+    }
+
+    /**
+     * @return mixed
+     */
     public function cart()
     {
         return $this->belongsToMany(ProductVariation::class, 'cart_user')
@@ -36,6 +45,18 @@ trait UserRelations
     public function categories()
     {
         return $this->hasMany(Category::class);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function deliverables()
+    {
+        return $this->belongsToMany(Order::class, 'delivery_order', 'user_id', 'order_id')->addSelect([
+            'delivery_fee' => Branch::select('delivery_fee')
+                ->whereColumn('id', 'orders.branch_id')
+                ->limit(1),
+        ]);
     }
 
     /**

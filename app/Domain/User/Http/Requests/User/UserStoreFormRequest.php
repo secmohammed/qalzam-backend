@@ -47,7 +47,7 @@ class UserStoreFormRequest extends FormRequest
             'name_ar' => ['required', 'string', 'max:255'],
             'password' => 'required|min:8|max:32|confirmed',
             'email' => 'required|unique:users,email',
-            'mobile' => ['required', 'regex:/^(010|011|012|015)([0-9]{8})$/', 'unique:users,mobile'],
+            'mobile' => ['required', 'unique:users,mobile'],
             'image' => ['required', 'image', 'mimes:jpeg,png,jpg,svg'],
             'role_id' => ['required', 'exists:roles,id'],
         ];

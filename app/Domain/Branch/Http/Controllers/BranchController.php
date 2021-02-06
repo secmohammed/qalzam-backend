@@ -172,6 +172,7 @@ class BranchController extends Controller
     public function store(BranchStoreFormRequest $request)
     {
         $branch = $this->branchRepository->create($request->validated());
+        $branch->users()->attach($request->users);
         app(Pipeline::class)->send([
             'model' => $branch,
             'request' => $request,
@@ -198,6 +199,10 @@ class BranchController extends Controller
     public function update(BranchUpdateFormRequest $request, Branch $branch)
     {
         $branch->update($request->validated());
+        if ($request->has('users')) {
+            $branch->users()->sync($request->users);
+        }
+
         app(Pipeline::class)->send([
             'model' => $branch,
             'request' => $request,

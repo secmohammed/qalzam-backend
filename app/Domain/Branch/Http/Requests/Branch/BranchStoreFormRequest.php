@@ -43,7 +43,9 @@ class BranchStoreFormRequest extends FormRequest
             'longitude' => ['nullable', 'regex:/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/', 'unique:branches,longitude'],
             'branch-gallery' => ['required', 'array'],
             'branch-gallery.*' => ['required', 'image', 'mimes:png,jpeg,jpg', 'max:2048'],
+            'users' => 'required|array',
             'user_id' => 'required|exists:users,id',
+            'users.*' => 'required|exists:users,id',
         ];
 
         return $rules;
