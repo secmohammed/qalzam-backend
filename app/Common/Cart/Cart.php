@@ -55,11 +55,14 @@ class Cart
     public function subtotal()
     {
         $subtotal = $this->user->cart->sum(function ($product) {
+            if  ($product->product->categories->contains('id', $this->discount->category->id)) {
+                $subtotal = $product->price->amount() * $product->pivot->quantity;
+
+                $subtotal = $subtotal - ($subtotal * $this->discount->percentage / 100);
+
+            }
             return $product->price->amount() * $product->pivot->quantity;
         });
-        if ($this->discount) {
-            $subtotal = $subtotal - ($subtotal * $this->discount->percentage / 100);
-        }
         return new Money($subtotal);
     }
     public function sync()
