@@ -233,4 +233,9 @@ class ReservationController extends Controller
 
         return $this->response();
     }
+
+    public function inout()
+    {
+        return view("{$this->domainAlias}::{$this->viewPath}.inout");
+    }
 }
