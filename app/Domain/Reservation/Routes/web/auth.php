@@ -16,5 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('/reservations','ReservationController');
+    Route::get('/inout','ReservationController@inout')->name('inout');
 	###CRUD_PLACEHOLDER###
 });

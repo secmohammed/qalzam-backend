@@ -470,6 +470,14 @@
                             <i class="menu-arrow"></i>
                             <ul class="menu-subnav">
                                 <li class="menu-item" aria-haspopup="true">
+                                    <a href="{{ route('inout') }}" class="menu-link">
+                                        <i class="menu-bullet menu-bullet-dot">
+                                            <span></span>
+                                        </i>
+                                        <span class="menu-text">{{ __('main.inout') }}</span>
+                                    </a>
+                                </li>
+                                <li class="menu-item" aria-haspopup="true">
                                     <a href="{{ route('reservations.index') }}" class="menu-link">
                                         <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
