@@ -26,15 +26,14 @@ class CreateReservationsTable extends Migration
         Schema::create('reservations', function (Blueprint $table) {
 
             $table->id();
-            $table->float('price');
+            $table->float('price')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('creator_id')->constrained('users', 'id')->onDelete('cascade');
-            $table->enum('status', ['upcoming', 'done'])->default('upcoming');
-            $table->foreignId('order_id')->nullable()->constrained('orders', 'id')->onDelete('cascade');
+            $table->enum('status', ['upcoming', 'done', 'delivered'])->default('upcoming');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->foreignId('accommodation_id')->constrained()->onDelete('cascade');
-            $table->index(['accommodation_id', 'user_id', 'creator_id', 'order_id']);
+            $table->index(['accommodation_id', 'user_id', 'creator_id']);
             $table->timestamps();
 
         });

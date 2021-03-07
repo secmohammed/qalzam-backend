@@ -155,7 +155,7 @@ class AccommodationController extends Controller
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.show");
 
-        $this->useCollection(AccommodationResource::class, 'show');
+        $this->useCollection(AccommodationResource::class, 'accommodation');
 
         return $this->response();
     }

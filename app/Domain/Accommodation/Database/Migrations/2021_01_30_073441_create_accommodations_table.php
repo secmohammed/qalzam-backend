@@ -28,7 +28,6 @@ class CreateAccommodationsTable extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->foreignId('branch_id')->constrained()->onDelete('cascade');
-            $table->float('price');
             $table->enum('type', ['table', 'room']);
             $table->string('code')->unique();
             $table->integer('capacity');

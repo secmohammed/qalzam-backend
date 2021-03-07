@@ -3,6 +3,7 @@
 namespace App\Domain\Accommodation\Entities;
 
 use Spatie\MediaLibrary\HasMedia;
+use Illuminate\Database\Eloquent\Builder;
 use App\Common\Traits\FetchesMediaCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Infrastructure\AbstractModels\BaseModel as Model;
@@ -25,8 +26,8 @@ class Accommodation extends Model implements HasMedia
      * @var array
      */
     protected $fillable = [
-        'price',
         'branch_id',
+        'contract_id',
         'type',
         'code',
         'user_id',
@@ -58,5 +59,16 @@ class Accommodation extends Model implements HasMedia
     {
 
         return app(\App\Domain\Accommodation\Database\Factories\AccommodationFactory::class)->new();
+    }
+
+    /**
+     * @param Builder $builder
+     * @param $day
+     */
+    public function scopeAccommodationByContractContainingDay(Builder $builder, ...$days)
+    {
+        $builder->whereHas('contract', function ($query) use ($days) {
+            $query->whereJsonContains('days', $days);
+        });
     }
 }

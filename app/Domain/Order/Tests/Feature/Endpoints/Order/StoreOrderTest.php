@@ -10,6 +10,7 @@ use App\Domain\User\Entities\User;
 use App\Domain\Order\Entities\Order;
 use App\Domain\User\Entities\Address;
 use Joovlly\Authorizable\Models\Role;
+use App\Domain\Branch\Entities\Branch;
 use Database\Seeders\RolesTableSeeder;
 use App\Domain\Discount\Entities\Discount;
 use App\Domain\Order\Http\Events\OrderCreated;
@@ -29,6 +30,7 @@ class StoreOrderTest extends TestCase
         $this->jsonAs($user, 'POST', route('api.orders.store'), [
             'address_id' => $address->id,
             'user_id' => $user->id,
+            'branch_id' => $this->branchFactory->create()->id,
             'products' => $products->pluck('id')->toArray(),
 
         ])->assertJsonStructure([
@@ -54,6 +56,8 @@ class StoreOrderTest extends TestCase
         $address = $this->addAddressTo($user);
         $response = $this->jsonAs($user, 'POST', route('api.orders.store'), [
             'address_id' => $address->id,
+            'branch_id' => $this->branchFactory->create()->id,
+
             'user_id' => $user->id,
             'products' => $products->pluck('id')->toArray(),
 
@@ -70,7 +74,8 @@ class StoreOrderTest extends TestCase
     {
         Event::fake();
         $products = $this->productVariationFactory->count(3)->withStatus('active')->create();
-
+        $branch = $this->branchFactory->create();
+        $branch->products()->attach($products);
         $discount = $this->discountFactory->doesntExpire()->create();
         $user = $this->userFactory->create();
         $this->seed(RolesTableSeeder::class);
@@ -81,6 +86,8 @@ class StoreOrderTest extends TestCase
             'address_id' => $address->id,
             'user_id' => $user->id,
             'discount_id' => $discount->id,
+            'branch_id' => $branch->id,
+
             'products' => $products->pluck('id')->toArray(),
 
         ]);
@@ -103,6 +110,8 @@ class StoreOrderTest extends TestCase
         $response = $this->jsonAs($user, 'POST', route('api.orders.store'), [
             'address_id' => $address->id,
             'user_id' => $user->id,
+            'branch_id' => $this->branchFactory->create()->id,
+
             'products' => $products->pluck('id')->toArray(),
 
         ]);
@@ -209,6 +218,7 @@ class StoreOrderTest extends TestCase
         $this->productVariationFactory = ProductVariation::factory();
         $this->addressFactory = Address::factory();
         $this->discountFactory = Discount::factory();
+        $this->branchFactory = Branch::factory();
 
     }
 

@@ -28,10 +28,9 @@ class CreateReservation implements Pipeline
      */
     public function handle($request, \Closure $next)
     {
-
         return $next(
             $this->reservationRepository->create($request->validated() + [
-                'price' => $this->accommodationRepository->find($request->accommodation_id)->price,
+                'price' => $request->price,
             ])
         );
     }

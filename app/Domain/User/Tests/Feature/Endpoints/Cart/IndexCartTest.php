@@ -4,6 +4,7 @@ namespace App\Domain\User\Tests\Feature\Endpoints\Cart;
 
 use Tests\TestCase;
 use App\Domain\User\Entities\User;
+use App\Domain\Branch\Entities\Branch;
 use App\Domain\Product\Entities\ProductVariation;
 
 class IndexCartTest extends TestCase
@@ -11,23 +12,22 @@ class IndexCartTest extends TestCase
     /** @test */
     public function it_fails_if_unauthenticated()
     {
-        $this->get('/api/cart')->assertStatus(401);
+        $this->get(route('api.auth.cart.index', $this->branch->id))->assertStatus(401);
     }
 
     /** @test */
     public function it_shows_a_formatted_subtotal()
     {
         $user = User::factory()->create();
-
-        $this->assertEquals("٠٫٠٠ ج.م.‏", $this->jsonAs($user, 'GET', 'api/cart')->getData(true)['data']['meta']['cart']['subtotal']);
+        $this->assertEquals('٠٫٠٠ ر.س.‏', $this->jsonAs($user, 'GET', route('api.auth.cart.index', $this->branch->id))->getData(true)['data']['meta']['cart']['subtotal']);
     }
 
     /** @test */
-    public function it_shows_a_formatted_total()
+    public function it_shows_a_formatted_total_with_delivery_fee()
     {
         $user = User::factory()->create();
 
-        $this->assertEquals("٠٫٠٠ ج.م.‏", $this->jsonAs($user, 'GET', 'api/cart')->getData(true)['data']['meta']['cart']['total']);
+        $this->assertEquals('٠٫٠٠ ر.س.‏', $this->jsonAs($user, 'GET', route('api.auth.cart.index', $this->branch->id))->getData(true)['data']['meta']['cart']['total']);
     }
 
     /** @test */
@@ -35,7 +35,7 @@ class IndexCartTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $this->jsonAs($user, 'GET', 'api/cart')->assertJsonFragment([
+        $this->jsonAs($user, 'GET', route('api.auth.cart.index', $this->branch->id))->assertJsonFragment([
             'empty' => true,
         ]);
     }
@@ -44,12 +44,14 @@ class IndexCartTest extends TestCase
     public function it_shows_products_in_the_user_cart()
     {
         $user = User::factory()->create();
+        $product = ProductVariation::factory()->create([
+        ]);
+        $product->branches()->attach($this->branch->id);
+        $user->cart()->sync([
+            $product->id => ['branch_id' => $this->branch->id, 'type' => 'cart', 'quantity' => 3],
+        ]);
 
-        $user->cart()->sync(
-            $product = ProductVariation::factory()->create()
-        );
-
-        $this->jsonAs($user, 'GET', 'api/cart')->assertJsonFragment([
+        $this->jsonAs($user, 'GET', route('api.auth.cart.index', $this->branch->id))->assertJsonFragment([
             'id' => $product->id,
         ]);
     }
@@ -61,10 +63,20 @@ class IndexCartTest extends TestCase
         $user->cart()->attach(
             $product = ProductVariation::factory()->create(), [
                 'quantity' => 2,
+                'type' => 'cart',
+                'branch_id' => $this->branch->id,
             ]
         );
-        $this->jsonAs($user, 'GET', 'api/cart')->assertJsonFragment([
+        $product->branches()->attach($this->branch->id);
+
+        $this->jsonAs($user, 'GET', route('api.auth.cart.index', $this->branch->id))->assertJsonFragment([
             'changed' => true,
         ]);
+    }
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->branch = Branch::factory()->create();
     }
 }

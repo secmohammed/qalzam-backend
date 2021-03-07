@@ -2,8 +2,8 @@
 
 namespace App\Domain\Branch\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Livewire;
+use Illuminate\Support\ServiceProvider;
 
 class DatatableServiceProvider extends ServiceProvider
 {
@@ -14,9 +14,10 @@ class DatatableServiceProvider extends ServiceProvider
      */
     private $datatables = [
         'branch' => \App\Domain\Branch\Datatables\BranchDatatable::class,
-			'album' => \App\Domain\Branch\Datatables\AlbumDatatable::class,
-			###DATATABLES_PLACEHOLDER###
-		// Your datatables Here "key => class"
+        'album' => \App\Domain\Branch\Datatables\AlbumDatatable::class,
+        'branchshift' => \App\Domain\Branch\Datatables\BranchShiftDatatable::class,
+        ###DATATABLES_PLACEHOLDER###
+        // Your datatables Here "key => class"
     ];
 
     /**
@@ -26,11 +27,11 @@ class DatatableServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        /**
+        /*
          * Bind all datatables to application.
          */
         foreach ($this->datatables as $key => $class) {
-            Livewire::component($key,$class);
+            Livewire::component($key, $class);
         }
     }
 }

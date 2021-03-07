@@ -2,6 +2,7 @@
 
 namespace App\Domain\User\Http\Requests\Wishlist;
 
+use Illuminate\Validation\Rule;
 use App\Infrastructure\Http\AbstractRequests\BaseRequest as FormRequest;
 
 class WishlistStoreFormRequest extends FormRequest
@@ -37,7 +38,12 @@ class WishlistStoreFormRequest extends FormRequest
     {
         $rules = [
             'products' => 'required|array',
-            'products.*' => 'required|exists:product_variations,id',
+            'products.*' => ['required', 'exists:product_variations,id',
+                Rule::exists('branch_product', 'product_variation_id')->where(function ($builder) {
+                    $builder->where('branch_id', $this->branch->id);
+                }),
+
+            ],
         ];
 
         return $rules;

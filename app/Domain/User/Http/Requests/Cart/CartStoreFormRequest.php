@@ -2,6 +2,7 @@
 
 namespace App\Domain\User\Http\Requests\Cart;
 
+use Illuminate\Validation\Rule;
 use App\Infrastructure\Http\AbstractRequests\BaseRequest as FormRequest;
 
 class CartStoreFormRequest extends FormRequest
@@ -37,7 +38,11 @@ class CartStoreFormRequest extends FormRequest
     {
         $rules = [
             'products' => 'required|array',
-            'products.*.id' => 'required|exists:product_variations,id',
+            'products.*.id' => ['required', 'exists:product_variations,id',
+                Rule::exists('branch_product', 'product_variation_id')->where(function ($builder) {
+                    $builder->where('branch_id', $this->branch->id);
+                }),
+            ],
             'products.*.quantity' => 'numeric|min:1',
         ];
 

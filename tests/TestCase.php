@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use Illuminate\Support\Carbon;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Styde\Enlighten\Tests\EnlightenSetup;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -42,7 +43,9 @@ abstract class TestCase extends BaseTestCase
     protected function setUp(): void
     {
         parent::setUp();
-
+        if (in_array(now()->dayName, ['Saturday', 'Friday'])) {
+            Carbon::setTestNow(now()->addDays(2));
+        }
         $this->setUpEnlighten();
     }
 }

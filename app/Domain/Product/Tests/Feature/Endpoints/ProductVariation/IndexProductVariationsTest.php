@@ -303,7 +303,7 @@ class IndexProductVariationsTest extends TestCase
             'data',
         ]);
         $this->assertEquals(
-            '١٫٠٠ ج.م.‏',
+            '١٫٠٠ ر.س.‏',
             $response->getData(true)['data'][0]['price']
         );
 
@@ -327,7 +327,7 @@ class IndexProductVariationsTest extends TestCase
             'data',
         ]);
         $this->assertEquals(
-            '٢٫٠٠ ج.م.‏',
+            '٢٫٠٠ ر.س.‏',
             $response->getData(true)['data'][0]['price']
         );
 

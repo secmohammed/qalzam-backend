@@ -11,6 +11,7 @@ use App\Domain\User\Repositories\Contracts\UserRepository;
 use App\Domain\Order\Repositories\Contracts\OrderRepository;
 use App\Domain\Reservation\Notifications\ReservationCreated;
 use App\Domain\Reservation\Notifications\ReservationUpdated;
+use App\Domain\Reservation\Pipelines\CalculateReservationPrice;
 use App\Domain\Reservation\Repositories\Contracts\ReservationRepository;
 use App\Domain\Reservation\Http\Resources\Reservation\ReservationResource;
 use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
@@ -19,15 +20,17 @@ use App\Domain\Reservation\Http\Requests\Reservation\ReservationStoreFormRequest
 use App\Domain\Reservation\Http\Requests\Reservation\ReservationUpdateFormRequest;
 use App\Domain\Reservation\Http\Resources\Reservation\ReservationResourceCollection;
 use App\Domain\Reservation\Pipelines\ValidateReservationStartDateAndEndDateIfAvailable;
+use App\Domain\Reservation\Pipelines\ValidateReservationStartDateAndEndDateIsWithinBranchAvailability;
 
 /*
  * When Creating a reservation, it must be during the working hour of the branch,
  * we will validate that through the form request for sake of simplicity.
- * when user is trying to attempt a reservation, we will check if the datetime range of it * isn't during any other reservation datetime (start_date, end_date)
+ * when user is trying to attempt a reservation, we will check if the datetime range of it *
+ *  isn't during any other reservation datetime (start_date, end_date)
  * when creating the reservation, we will take the accommodation_id in order to take the
  *  price as well, in order to log the reservation price due to the accommodation price
  * may varies.
- * the reservation must have an order_id which is mandatory to have the order price as well concatencated with the reservation price.
+ * the reservation must have a price which formulates the total submission of the products of the template which attachedd to the contract (that's only in case of the type of accommodation is room.)
  */
 class ReservationController extends Controller
 {
@@ -174,7 +177,7 @@ class ReservationController extends Controller
         if (!request()->wantsJson()) {
             $reservation->load(['accommodation']);
         }
-        $this->setData('show', $reservation);
+        $this->setData('reservation', $reservation);
         $this->setData('meta', [
             'total_price' => $reservation->formatted_total_price,
         ]);
@@ -194,15 +197,15 @@ class ReservationController extends Controller
      */
     public function store(ReservationStoreFormRequest $request)
     {
+
         $reservation = app(Pipeline::class)->send($request)->through([
+            ValidateReservationStartDateAndEndDateIsWithinBranchAvailability::class,
             ValidateReservationStartDateAndEndDateIfAvailable::class,
+            CalculateReservationPrice::class,
             CreateReservation::class,
         ])->thenReturn();
         $reservation->user->notify(new ReservationCreated($reservation));
 
-        $this->setData('meta', [
-            'total_price' => $reservation->formatted_total_price,
-        ]);
         $this->setData('data', $reservation);
 
         $this->redirectRoute("{$this->resourceRoute}.show", [$reservation->id]);
@@ -221,10 +224,13 @@ class ReservationController extends Controller
     public function update(ReservationUpdateFormRequest $request, Reservation $reservation)
     {
         app(Pipeline::class)->send($request)->through([
+            ValidateReservationStartDateAndEndDateIsWithinBranchAvailability::class,
             ValidateReservationStartDateAndEndDateIfAvailable::class,
+            CalculateReservationPrice::class,
+
         ])->thenReturn();
 
-        $reservation->update($request->validated());
+        $reservation->update($request->validated() + ['price' => $request->price]);
         $reservation->user->notify(new ReservationUpdated($reservation));
 
         $this->redirectRoute("{$this->resourceRoute}.show", [$reservation->id]);

@@ -20,24 +20,10 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     private $repositories = [
         \App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository::class => \App\Domain\Accommodation\Repositories\Eloquent\AccommodationRepositoryEloquent::class,
-			###REPOSITORIES_PLACEHOLDER###
-		// Your Repos Here "interface => eloquent class"
+        \App\Domain\Accommodation\Repositories\Contracts\ContractRepository::class => \App\Domain\Accommodation\Repositories\Eloquent\ContractRepositoryEloquent::class,
+        ###REPOSITORIES_PLACEHOLDER###
+        // Your Repos Here "interface => eloquent class"
     ];
-
-    /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        /**
-         * Bind all repositories to application.
-         */
-        foreach ($this->repositories as $interface => $eloquent) {
-            $this->app->singleton($interface, $eloquent);
-        }
-    }
 
     /**
      * Bootstrap services.
@@ -57,5 +43,20 @@ class RepositoryServiceProvider extends ServiceProvider
     public function provides()
     {
         return array_keys($this->repositories);
+    }
+
+    /**
+     * Register services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        /*
+         * Bind all repositories to application.
+         */
+        foreach ($this->repositories as $interface => $eloquent) {
+            $this->app->singleton($interface, $eloquent);
+        }
     }
 }

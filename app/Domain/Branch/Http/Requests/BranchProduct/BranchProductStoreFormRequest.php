@@ -37,9 +37,21 @@ class BranchProductStoreFormRequest extends FormRequest
     {
         $rules = [
             'products' => 'required|array',
-            'products.*' => 'required|exists:products,id',
+            'products.*.id' => 'required|exists:product_variations,id',
+            'products.*.price' => ['nullable', 'numeric', 'min:10', 'max:10000'],
+
         ];
 
         return $rules;
+    }
+
+    public function validated()
+    {
+
+        return collect($this->request->get('products'))->keyBy('id')->map(function ($product) {
+            return [
+                'price' => $product['price'],
+            ];
+        })->toArray();
     }
 }

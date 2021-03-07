@@ -14,25 +14,25 @@ class DomainServiceProvider extends ServiceProvider
     protected $alias = 'accommodations';
 
     /**
+     * List of custom Artisan commands.
+     *
+     * @var array
+     */
+    protected $commands = [];
+
+    /**
+     * List of model factories to load.
+     *
+     * @var array
+     */
+    protected $factories = [];
+
+    /**
      * Set if will load commands or not.
      *
      * @var bool
      */
     protected $hasCommands = true;
-
-    /**
-     * Set if will load migrations or not.
-     *
-     * @var bool
-     */
-    protected $hasMigrations = true;
-
-    /**
-     * Set if will load translations or not.
-     *
-     * @var bool
-     */
-    protected $hasTranslations = true;
 
     /**
      * Set if will load factories or not.
@@ -42,18 +42,11 @@ class DomainServiceProvider extends ServiceProvider
     protected $hasFactories = true;
 
     /**
-     * Set if will load policies or not.
+     * Set if will load migrations or not.
      *
      * @var bool
      */
-    protected $hasPolicies = true;
-
-    /**
-     * Set if will load Views or not.
-     *
-     * @var bool
-     */
-    protected $hasViews = true;
+    protected $hasMigrations = true;
 
     /**
      * Set if will load Views or not.
@@ -63,11 +56,39 @@ class DomainServiceProvider extends ServiceProvider
     protected $hasObservers = true;
 
     /**
-     * List of custom Artisan commands.
+     * Set if will load policies or not.
+     *
+     * @var bool
+     */
+    protected $hasPolicies = true;
+
+    /**
+     * Set if will load translations or not.
+     *
+     * @var bool
+     */
+    protected $hasTranslations = true;
+
+    /**
+     * Set if will load Views or not.
+     *
+     * @var bool
+     */
+    protected $hasViews = true;
+
+    /**
+     * List of Model Obserbers to load.
      *
      * @var array
      */
-    protected $commands = [];
+    protected $observers = [];
+
+    /**
+     * List of policies to load.
+     *
+     * @var array
+     */
+    protected $policies = [];
 
     /**
      * List of providers to load.
@@ -80,28 +101,6 @@ class DomainServiceProvider extends ServiceProvider
         HelperServiceProvider::class,
         EventServiceProvider::class,
         PolicyServiceProvider::class,
-        DatatableServiceProvider::class
+        DatatableServiceProvider::class,
     ];
-
-    /**
-     * List of policies to load.
-     *
-     * @var array
-     */
-    protected $policies = [];
-
-    /**
-     * List of model factories to load.
-     *
-     * @var array
-     */
-    protected $factories = [];
-
-
-    /**
-     * List of Model Obserbers to load.
-     *
-     * @var array
-     */
-    protected $observers = [];
 }

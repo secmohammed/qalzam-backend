@@ -3,6 +3,7 @@
 namespace App\Domain\Branch\Repositories\Eloquent;
 
 use App\Domain\Branch\Entities\Album;
+use Spatie\QueryBuilder\AllowedFilter;
 use App\Domain\Branch\Repositories\Contracts\AlbumRepository;
 use App\Infrastructure\AbstractRepositories\EloquentRepository;
 
@@ -35,7 +36,24 @@ class AlbumRepositoryEloquent extends EloquentRepository implements AlbumReposit
      */
     protected $allowedIncludes = [
         'branch',
+        'user',
     ];
+
+    /**
+     * @var array
+     */
+    protected $allowedSorts = ['created_at'];
+
+    public function __construct()
+    {
+        parent::__construct(app());
+        $this->allowedFilters = [
+            'branch.name',
+            'name',
+            AllowedFilter::exact('branch.id'),
+            AllowedFilter::exact('user.id'),
+        ];
+    }
 
     /**
      * Specify Model class name

@@ -37,7 +37,6 @@ class ReservationRepositoryEloquent extends EloquentRepository implements Reserv
     protected $allowedIncludes = [
         'user',
         'creator',
-        'order',
         'accommodation',
         'branch',
         'order.products',
@@ -62,7 +61,6 @@ class ReservationRepositoryEloquent extends EloquentRepository implements Reserv
             AllowedFilter::scope('date_between'),
 
             AllowedFilter::exact('status'),
-            AllowedFilter::exact('order.id'),
         ];
     }
 

@@ -30,30 +30,6 @@ class LoginUserTest extends TestCase
     }
 
     /** @test */
-    public function it_should_login_user_with_children_relation_if_data_is_correct()
-    {
-        $user = User::factory()->create([
-            'email' => 'mohammedosama@ieee.org',
-        ]);
-        $response = $this->post(
-            '/api/auth/login?include=children',
-            [
-                'email' => $user->email,
-                'password' => 'password',
-                'device_token' => 'abc',
-                'device' => 'ios',
-            ]
-        )->assertJsonStructure([
-            'data' => [
-                'children',
-            ], 'meta' => [
-                'token',
-            ],
-        ]);
-
-    }
-
-    /** @test */
     public function it_should_login_user_with_roles_relation_if_data_is_correct()
     {
         $user = User::factory()->create([

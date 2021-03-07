@@ -36,21 +36,17 @@ class ShowReservationTest extends TestCase
     }
 
     /** @test */
-    public function it_shouldnt_fetch_reservation_by_id_if_not_currently_active()
-    {
-        $reservation = $this->reservationFactory->create();
-        $this->get(
-            route('api.reservations.show', $reservation->id)
-        )->assertStatus(404);
-    }
-
-    /** @test */
     public function it_shouldnt_fetch_reservation_by_id_if_not_found()
     {
-        $this->get(
-            route('api.reservations.show', 100)
-        )->assertStatus(404);
+        $this->seed(RolesTableSeeder::class);
 
+        $user = $this->userFactory->create();
+        $user->roles()->attach(Role::first());
+        $this->jsonAs(
+            $user,
+            'GET',
+            route('api.reservations.show', 400)
+        )->assertStatus(404);
     }
 
     public function setUp(): void

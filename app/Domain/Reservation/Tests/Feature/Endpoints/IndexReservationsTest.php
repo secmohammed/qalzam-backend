@@ -93,22 +93,6 @@ class IndexReservationsTest extends TestCase
     }
 
     /** @test */
-    public function it_should_fetch_reservations_with_order()
-    {
-        $this->reservationFactory->create();
-        $user = $this->userFactory->create();
-        $this->seed(RolesTableSeeder::class);
-        $user->roles()->attach(Role::first());
-        $response = $this->jsonAs(
-            $user,
-            'GET',
-            route('api.reservations.index') . '?include=order'
-        );
-        $this->assertTrue(array_key_exists('order', $response->getData(true)['data'][0]));
-
-    }
-
-    /** @test */
     public function it_should_fetch_reservations_with_user()
     {
         $this->reservationFactory->create();
@@ -175,32 +159,6 @@ class IndexReservationsTest extends TestCase
 
         ]);
         $this->assertEquals(3, count($response->getData(true)['data']));
-    }
-
-    /** @test */
-    public function it_should_filter_reservations_by_order_id()
-    {
-        $this->reservationFactory->count(5)->create([
-            'status' => 'upcoming',
-        ]);
-        $user = $this->userFactory->create();
-        $this->seed(RolesTableSeeder::class);
-        $user->roles()->attach(Role::first());
-        $reservation = $this->reservationFactory->create([
-            'status' => 'done',
-            'user_id' => $user->id,
-        ]);
-        $response = $this->jsonAs(
-            $user,
-            'GET',
-            sprintf('%s?%s=%s', route('api.reservations.index'), 'filter[order.id]', $reservation->order->id)
-        )->assertJsonStructure([
-            'data',
-            'links',
-            'meta',
-
-        ]);
-        $this->assertEquals(1, count($response->getData(true)['data']));
     }
 
     /** @test */
@@ -296,7 +254,7 @@ class IndexReservationsTest extends TestCase
         $response = $this->jsonAs(
             $user,
             'GET',
-            route('api.reservations.index')
+            route('api.reservations.index') . '?sort=created_at'
         )->assertJsonStructure([
             'data',
         ]);

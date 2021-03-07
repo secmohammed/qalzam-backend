@@ -4,6 +4,7 @@ namespace App\Domain\Order\Entities\Traits\Relations;
 
 use App\Domain\User\Entities\User;
 use App\Domain\User\Entities\Address;
+use App\Domain\Branch\Entities\Branch;
 use App\Domain\Product\Entities\ProductVariation;
 
 trait OrderRelations
@@ -14,6 +15,14 @@ trait OrderRelations
     public function address()
     {
         return $this->belongsTo(Address::class);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
     }
 
     /**

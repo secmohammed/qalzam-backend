@@ -47,13 +47,25 @@ class BranchProductController extends Controller
         $this->branchRepository = $branchRepository;
     }
 
+    public function create()
+    {
+
+    }
+
+    public function edit()
+    {
+
+    }
+
     /**
      * @param Branch $branch
      * @param BranchProductStoreFormRequest $request
      */
     public function store(Branch $branch, BranchProductStoreFormRequest $request)
     {
-        $branch->products()->sync($request->products);
+        $branch->products()->sync(
+            $request->validated()
+        );
         $this->setData('data', $branch);
         $this->redirectRoute("{$this->resourceRoute}.show", [$branch->id]);
         $this->useCollection(BranchResource::class, 'data');

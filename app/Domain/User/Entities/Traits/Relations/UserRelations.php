@@ -36,7 +36,8 @@ trait UserRelations
     public function cart()
     {
         return $this->belongsToMany(ProductVariation::class, 'cart_user')
-            ->withPivot('quantity')->withTimestamps();
+            ->where('type', 'cart')
+            ->withPivot(['quantity', 'branch_id'])->withTimestamps();
     }
 
     /**
@@ -106,6 +107,6 @@ trait UserRelations
      */
     public function wishlist()
     {
-        return $this->belongsToMany(ProductVariation::class, 'user_wishlist')->withTimestamps();
+        return $this->belongsToMany(ProductVariation::class, 'cart_user')->where('type', 'wishlist')->withPivot('branch_id')->withTimestamps();
     }
 }

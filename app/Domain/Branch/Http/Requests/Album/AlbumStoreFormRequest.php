@@ -36,12 +36,19 @@ class AlbumStoreFormRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255', 'unique:albums,name'],
             'branch_id' => 'required|exists:branches,id',
             'album-gallery' => ['required', 'array'],
             'album-gallery.*' => ['required', 'image', 'mimes:png,jpeg,jpg', 'max:2048'],
         ];
 
         return $rules;
+    }
+
+    public function validated()
+    {
+        return array_merge(parent::validated(), [
+            'user_id' => auth()->id(),
+        ]);
     }
 }

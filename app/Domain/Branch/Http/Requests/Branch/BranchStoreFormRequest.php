@@ -2,6 +2,7 @@
 
 namespace App\Domain\Branch\Http\Requests\Branch;
 
+use Illuminate\Support\Arr;
 use App\Domain\Branch\Entities\Branch;
 use App\Infrastructure\Http\AbstractRequests\BaseRequest as FormRequest;
 
@@ -56,8 +57,9 @@ class BranchStoreFormRequest extends FormRequest
 
     public function validated()
     {
-        return array_merge(parent::validated(), [
+        return array_merge(Arr::except(parent::validated(), ['deliverers', 'users']), [
             'creator_id' => auth()->id(),
+            'users' => array_merge($this->request->get('users'), $this->request->get('deliverers', [])),
         ]);
     }
 }

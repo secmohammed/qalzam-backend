@@ -3,7 +3,9 @@
 namespace App\Domain\Reservation\Http\Requests\Reservation;
 
 use Carbon\Carbon;
+use Illuminate\Validation\Rule;
 use App\Infrastructure\Http\AbstractRequests\BaseRequest as FormRequest;
+use App\Domain\Reservation\Http\Rules\EnsureAccommodationIsAvailableTodayForReservationAtContractDays;
 
 class ReservationStoreFormRequest extends FormRequest
 {
@@ -36,29 +38,53 @@ class ReservationStoreFormRequest extends FormRequest
      */
     public function rules()
     {
+
         $rules = [
             'start_date' => 'required|after_or_equal:' . now()->format('Y-m-d H:i:s'),
             'end_date' => 'nullable|after_or_equal:' . $this->request->get('start_date'),
-            'accommodation_id' => 'required|exists:accommodations,id',
-            'order_id' => 'nullable|exists:orders,id',
+            'accommodation_id' => [
+                'required',
+                new EnsureAccommodationIsAvailableTodayForReservationAtContractDays,
+            ],
             'user_id' => 'required|exists:users,id',
 
         ];
+
+        if (request()->is('/api/*')) {
+            unset($rules['user_id']);
+        }
 
         return $rules;
     }
 
     public function validated()
     {
-        if (!$this->request->get('end_date')) {
-            return array_merge(parent::validated(), [
-                'creator_id' => auth()->id(),
+        $validated = [
+            'creator_id' => auth()->id(),
+
+        ];
+        if (!$this->request->get('end_date') && $this->method() !== "PUT") {
+            $validated = array_merge($validated, [
                 'end_date' => Carbon::parse($this->request->get('start_date'))->addHour(4)->format('Y-m-d H:i:s'),
+
+            ]);
+        }
+        if (request()->is('/api/*')) {
+            $validated = array_merge($validated, [
+                'user_id' => auth()->id(),
             ]);
         }
 
-        return array_merge(parent::validated(), [
-            'creator_id' => auth()->id(),
-        ]);
+        return array_merge(parent::validated(), $validated);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function validationData()
+    {
+        $this->merge(['price' => null]);
+
+        return $this->all();
     }
 }

@@ -169,7 +169,7 @@ class BranchController extends Controller
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.show");
 
-        $this->useCollection(BranchResource::class, 'show');
+        $this->useCollection(BranchResource::class, 'branch');
 
         return $this->response();
     }
@@ -183,10 +183,7 @@ class BranchController extends Controller
     public function store(BranchStoreFormRequest $request)
     {
         $branch = $this->branchRepository->create($request->validated());
-        $branch->users()->attach($request->users);
-        if ($request->has('deliverers')) {
-            $branch->deliverers()->attach($request->deliverers);
-        }
+        $branch->employees()->attach($request->users);
         app(Pipeline::class)->send([
             'model' => $branch,
             'request' => $request,
@@ -214,10 +211,7 @@ class BranchController extends Controller
     {
         $branch->update($request->validated());
         if ($request->has('users')) {
-            $branch->users()->sync($request->users);
-        }
-        if ($request->has('deliverers')) {
-            $branch->deliverers()->sync($request->deliverers);
+            $branch->employees()->sync($request->users);
         }
 
         app(Pipeline::class)->send([

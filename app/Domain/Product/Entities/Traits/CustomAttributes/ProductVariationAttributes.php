@@ -20,6 +20,9 @@ trait ProductVariationAttributes
      */
     public function getPriceAttribute($value)
     {
+        if (session()->has('current_branch')) {
+            $value = $this->branches->where('id', session('current_branch'))->first()->pivot->price;
+        }
         if (is_null($value)) {
             return $this->product->price;
         }

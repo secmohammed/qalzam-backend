@@ -74,7 +74,7 @@ class ProductTest extends TestCase
         $product = $this->productFactory->create([
             'price' => 1000,
         ]);
-        $this->assertEquals($product->formattedPrice, '١٠٫٠٠ ج.م.‏');
+        $this->assertEquals($product->formattedPrice, '١٠٫٠٠ ر.س.‏');
     }
 
     public function setUp(): void

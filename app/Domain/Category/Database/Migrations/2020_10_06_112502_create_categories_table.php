@@ -27,7 +27,7 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->enum('type', ['product', 'post', 'accommodation'])->index();
+            $table->enum('type', ['product', 'post'])->index();
             $table->unsignedBigInteger('parent_id')->nullable()->index();
             $table->unsignedInteger('_lft')->default(0)->index();
             $table->unsignedInteger('_rgt')->default(0)->index();

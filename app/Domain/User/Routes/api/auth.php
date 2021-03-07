@@ -14,14 +14,14 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::group(['middleware' => 'auth.api'], function () {
-    Route::post('cart', 'CartController@store')->name('auth.cart.store');
-    Route::get('cart', 'CartController@index')->name('auth.cart.index');
-    Route::put('cart/{productVariation}', 'CartController@update')->name('auth.cart.update');
-    Route::delete('cart/{productVariation}', 'CartController@destroy')->name('auth.cart.destroy');
-    Route::post('wishlist', 'WishlistController@store')->name('auth.wishlist.store');
-    Route::get('wishlist', 'WishlistController@index')->name('auth.wishlist.index');
-    Route::put('wishlist/{productVariation}', 'WishlistController@update')->name('auth.wishlist.update');
-    Route::delete('wishlist/{productVariation}', 'WishlistController@destroy')->name('auth.wishlist.destroy');
+    Route::post('/branches/{branch}/cart', 'CartController@store')->name('auth.cart.store');
+    Route::get('/branches/{branch}/cart', 'CartController@index')->name('auth.cart.index');
+    Route::put('/branches/{branch}/cart/{productVariation}', 'CartController@update')->name('auth.cart.update');
+    Route::delete('/branches/{branch}/cart/{productVariation}', 'CartController@destroy')->name('auth.cart.destroy');
+    Route::post('/branches/{branch}/wishlist', 'WishlistController@store')->name('auth.wishlist.store');
+    Route::get('/branches/{branch}/wishlist', 'WishlistController@index')->name('auth.wishlist.index');
+    Route::put('branches/{branch}/wishlist/{productVariation}', 'WishlistController@update')->name('auth.wishlist.update');
+    Route::delete('branches/{branch}/wishlist/{productVariation}', 'WishlistController@destroy')->name('auth.wishlist.destroy');
     Route::resource('/users', 'UserController')->only(['store', 'update', 'destroy']);
     Route::get('notifications', 'NotificationController@index')->name('notifications.index');
     Route::put('notifications/{notification?}', 'NotificationController@update')->name('notifications.update');

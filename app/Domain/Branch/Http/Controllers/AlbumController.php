@@ -156,7 +156,7 @@ class AlbumController extends Controller
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.show");
 
-        $this->useCollection(AlbumResource::class, 'show');
+        $this->useCollection(AlbumResource::class, 'album');
 
         return $this->response();
     }

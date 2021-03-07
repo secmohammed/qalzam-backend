@@ -3,7 +3,9 @@ namespace App\Domain\User\Database\Factories;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use App\Domain\User\Entities\Role;
 use App\Domain\User\Entities\User;
+use App\Domain\Order\Entities\Order;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -41,6 +43,17 @@ class UserFactory extends Factory
     }
 
     /**
+     * @param int $count
+     * @param array $attributes
+     * @return mixed
+     */
+    public function withDeliverables(int $count = 1, $attributes = [])
+    {
+        return $this->hasAttached(Order::factory()->count($count), [], 'deliverables');
+
+    }
+
+    /**
      * @return mixed
      */
     public function withRealPhoneNumber()
@@ -66,5 +79,14 @@ class UserFactory extends Factory
     public function withRemindables($attributes = [])
     {
         return $this->hasRemindables($attributes);
+    }
+
+    /**
+     * @param $slug
+     * @return mixed
+     */
+    public function withRole($slug)
+    {
+        return $this->hasAttached(Role::whereSlug($slug)->firstOrFail());
     }
 }

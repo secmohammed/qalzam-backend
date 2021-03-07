@@ -40,7 +40,6 @@ class Reservation extends Model
         'price',
         'user_id',
         'creator_id',
-        'order_id',
         'status',
         'accommodation_id',
     ];

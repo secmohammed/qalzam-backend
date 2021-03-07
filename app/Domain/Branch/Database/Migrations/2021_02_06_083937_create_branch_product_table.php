@@ -14,7 +14,7 @@ class CreateBranchProductTable extends Migration
     public function down()
     {
         Schema::table('branch_product', function (Blueprint $table) {
-            $table->dropForeign(['product_id', 'branch_id']);
+            $table->dropForeign(['product_variation_id', 'branch_id']);
         });
 
         Schema::dropIfExists('branch_product');
@@ -28,10 +28,11 @@ class CreateBranchProductTable extends Migration
     public function up()
     {
         Schema::create('branch_product', function (Blueprint $table) {
-            $table->primary(['branch_id', 'product_id']);
+            $table->primary(['branch_id', 'product_variation_id']);
             $table->foreignId('branch_id')->constrained()->onDelete('cascade');
-            $table->foreignId('product_id')->constrained('products', 'id')->onDelete('cascade');
-            $table->index(['branch_id', 'product_id']);
+            $table->integer('price')->nullable();
+            $table->foreignId('product_variation_id')->constrained('product_variations', 'id')->onDelete('cascade');
+            $table->index(['branch_id', 'product_variation_id']);
         });
     }
 }

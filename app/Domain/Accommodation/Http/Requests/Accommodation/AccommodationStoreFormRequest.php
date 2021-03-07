@@ -2,7 +2,9 @@
 
 namespace App\Domain\Accommodation\Http\Requests\Accommodation;
 
+use Illuminate\Validation\Rule;
 use App\Infrastructure\Http\AbstractRequests\BaseRequest as FormRequest;
+use App\Domain\Accommodation\Http\Rules\EnsureContractHasTemplateProducts;
 
 class AccommodationStoreFormRequest extends FormRequest
 {
@@ -41,11 +43,17 @@ class AccommodationStoreFormRequest extends FormRequest
             'type' => 'required|in:table,room',
             'accommodation-gallery.*' => ['required', 'image', 'mimes:png,jpeg,jpg', 'max:2048'],
             'branch_id' => 'required|exists:branches,id',
-            'price' => 'required|numeric|min:1|max:999',
             'code' => 'required|unique:accommodations,code',
             'capacity' => 'required|integer|min:1|max:100',
-
         ];
+        if ($this->request->get('type') === 'room') {
+            $rules = array_merge($rules, [
+                'contract_id' => [
+                    'required',
+                    new EnsureContractHasTemplateProducts,
+                ],
+            ]);
+        }
 
         return $rules;
     }

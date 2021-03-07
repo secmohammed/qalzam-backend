@@ -18,10 +18,10 @@ class CustomFilterScope implements Filter
      * @param string $property
      * @return mixed
      */
-    public function __invoke(Builder $query, $values, string $property): Builder
+    public function __invoke(Builder $query, $value, string $property): Builder
     {
         $scope = Str::camel($property);
-        $values = $this->resolveParameters($query, $values, $scope);
+        $values = $this->resolveParameters($query, $value, $scope);
 
         return $query->$scope($values);
     }

@@ -18,6 +18,7 @@ class DatatableServiceProvider extends ServiceProvider
         'productvariationtype' => \App\Domain\Product\Datatables\ProductVariationTypeDatatable::class,
         'stock' => \App\Domain\Product\Datatables\StockDatatable::class,
 			'stock' => \App\Domain\Product\Datatables\StockDatatable::class,
+			'template' => \App\Domain\Product\Datatables\TemplateDatatable::class,
 			###DATATABLES_PLACEHOLDER###
         // Your datatables Here "key => class"
     ];

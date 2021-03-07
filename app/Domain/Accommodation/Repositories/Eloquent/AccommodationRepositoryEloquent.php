@@ -31,6 +31,7 @@ class AccommodationRepositoryEloquent extends EloquentRepository implements Acco
      */
     protected $allowedIncludes = [
         'user',
+        'contract',
         'branch',
     ];
 
@@ -47,10 +48,11 @@ class AccommodationRepositoryEloquent extends EloquentRepository implements Acco
         $this->allowedFilters = [
             'code',
             'name',
-            'price',
             AllowedFilter::exact('capacity'),
             'type',
+            AllowedFilter::scope('accommodation_by_contract_containing_day'),
             AllowedFilter::exact('branch.id'),
+            AllowedFilter::exact('contract.id'),
             AllowedFilter::exact('user.id'),
         ];
     }

@@ -16,5 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('/accommodations','AccommodationController');
+	Route::resource('/contracts','ContractController');
 	###CRUD_PLACEHOLDER###
 });

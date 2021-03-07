@@ -2,9 +2,11 @@
 
 namespace App\Domain\Branch\Database\Factories;
 
-use App\Domain\Branch\Entities\Album;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Domain\User\Entities\User;
+use App\Domain\Branch\Entities\Album;
+use App\Domain\Branch\Entities\Branch;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AlbumFactory extends Factory
 {
@@ -24,6 +26,12 @@ class AlbumFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
+            'branch_id' => function () {
+                return Branch::factory()->create()->id;
+            },
+            'user_id' => function () {
+                return User::factory()->create()->id;
+            },
         ];
     }
 }

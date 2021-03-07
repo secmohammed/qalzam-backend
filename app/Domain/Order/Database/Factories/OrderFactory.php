@@ -7,7 +7,7 @@ use App\Domain\User\Entities\User;
 use App\Domain\Order\Entities\Order;
 use App\Domain\User\Entities\Address;
 use App\Domain\Branch\Entities\Branch;
-use App\Domain\Product\Entities\Product;
+use App\Domain\Product\Entities\ProductVariation;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class OrderFactory extends Factory
@@ -50,9 +50,9 @@ class OrderFactory extends Factory
      */
     public function withProducts(int $count = 1, $attributes = [])
     {
-        return $this->hasAttached(Product::factory()->count($count), $attributes + [
+        return $this->hasAttached(ProductVariation::factory()->count($count), $attributes + [
             'quantity' => 1,
-        ]);
+        ], 'products');
     }
 
     /**

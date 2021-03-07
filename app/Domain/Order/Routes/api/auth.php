@@ -18,5 +18,6 @@ Route::group(['middleware' => 'auth.api'], function () {
         'user_order' => 'order',
     ]);
     Route::apiResource('orders', 'OrderController');
+    Route::resource('/delivery_orders', 'DeliveryOrderController');
     ###CRUD_PLACEHOLDER###
 });

@@ -5,6 +5,7 @@ namespace App\Domain\User\Http\Controllers;
 use App\Common\Cart\Cart;
 use Illuminate\Http\Request;
 use Joovlly\DDD\Traits\Responder;
+use App\Domain\Branch\Entities\Branch;
 use App\Domain\Product\Entities\ProductVariation;
 use App\Domain\User\Http\Resources\User\UserResource;
 use App\Domain\User\Http\Requests\Cart\CartStoreFormRequest;
@@ -47,10 +48,10 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, Cart $cart)
+    public function destroy(Branch $branch, Cart $cart, $id)
     {
         $ids = request()->get('ids', [$id]);
-        $delete = $cart->delete($ids);
+        $delete = $cart->setCartType('cart')->withBranch($branch)->delete($ids);
         if ($delete) {
             $this->redirectRoute("{$this->resourceRoute}.index");
             $this->setApiResponse(fn() => response()->json(['deleted' => true], 200));
@@ -67,10 +68,10 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, Cart $cart)
+    public function index(Request $request, Cart $cart, Branch $branch)
     {
-        $cart->sync();
-        $request->user()->load(['cart.product', 'cart.product.variations.stock', 'cart.stock', 'cart.type', 'reservations']);
+        $cart->setCartType('cart')->withBranch($branch)->sync();
+        $request->user()->load(['cart.product', 'cart.product.variations.stock', 'cart.stock', 'cart.type']);
         $this->setData('title', __('main.show-all') . ' ' . __('main.address'));
 
         $this->setData('alias', $this->domainAlias);
@@ -90,9 +91,9 @@ class CartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CartStoreFormRequest $request, Cart $cart)
+    public function store(CartStoreFormRequest $request, Cart $cart, Branch $branch)
     {
-        $store = $cart->add($request->validated());
+        $store = $cart->setCartType('cart')->withBranch($branch)->add($request->validated());
         if (count($store['attached']) || count($store['updated'])) {
             $this->setApiResponse(fn() => response()->json(['message' => 'added to cart successfully']));
             $this->redirectBack();
@@ -111,9 +112,11 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CartUpdateFormRequest $request, ProductVariation $productVariation, Cart $cart)
+    public function update(Branch $branch, ProductVariation $productVariation, CartUpdateFormRequest $request, Cart $cart)
     {
-        $cart->update($productVariation->id, $request->quantity);
+        if (!$cart->setCartType('cart')->withBranch($branch)->update($productVariation->id, $request->quantity)) {
+            $this->setApiResponse(fn() => response()->json(['message' => 'Cart Could not be updated.'], 422));
+        }
         // $this->redirectRoute("{$this->resourceRoute}.show", [$update->id]);
         $this->setData('data', $request->user());
         $this->useCollection(UserResource::class, 'data');

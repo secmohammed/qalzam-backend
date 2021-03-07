@@ -17,5 +17,6 @@ Route::group(['middleware' => 'auth.api'], function () {
     Route::apiResource('/branches', 'BranchController');
     Route::post('branch_products/{branch}', 'BranchProductController@store')->name('branch.products.store');
     Route::apiResource('/albums', 'AlbumController');
+    Route::resource('/branch_shifts', 'BranchShiftController');
     ###CRUD_PLACEHOLDER###
 });

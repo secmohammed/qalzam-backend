@@ -111,7 +111,6 @@ abstract class EloquentRepository extends BaseRepository
             $model = $this->model;
             $this->model = QueryBuilder::for ($this->model())
                     ->allowedFields($this->allowedFields)->allowedFilters($this->allowedFilters)->allowedIncludes($this->allowedIncludes)->allowedSorts($this->allowedSorts);
-
             if (in_array('status', $model->getFillable()) && !Str::endsWith($this->model(), ['Feed', 'Post', 'Order', 'Reservation']) && request()->wantsJson()) {
                 $this->model = $this->model->where(app($this->model())->getTable() . '.status', 'active');
             }

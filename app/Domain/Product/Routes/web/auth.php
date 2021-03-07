@@ -18,5 +18,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/product_variations', 'ProductVariationController');
     Route::resource('/product_variation_types', 'ProductVariationTypeController');
     Route::resource('/stocks','StockController');
+	Route::resource('/templates','TemplateController');
 	###CRUD_PLACEHOLDER###
 });

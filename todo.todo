@@ -1,11 +1,30 @@
- ☐ Fix Failing Tests
- ☐ Create Delivery domain
- ☐ Attach Delivery To Order
+ ✔ Fix Failing Tests @done (21-03-07 05:12)
+ ✔ Attach Delivery To Order @done (21-03-07 05:12)
  ✔ Reservation UI @done (21-02-04 06:42)
  ☐ Create Multistep Form Product UI
  ☐ Create Order UI
  ☐ Create Tab UI at branch for displaying products
  ☐ Make Dashboard page Dynamic.
- ☐ Add Album.
- - Order belongs to Branch, Delivery_order is a pivot table to connect the user who is delivery guy with the order to deliver, the branch has delivery_fees to use at the cart instance to sum it up in case of online ordering
- - branch, order, delivery_guy (user) has one through.
+ ✔ Add Album. @done (21-03-07 05:12)
+ ✔ reservation must check if the date is within the branch working hour and is available to reserve. @done (21-03-07 05:12)
+ ☐ Notifications and its test cases.
+ ✔ Detach order from reservation. @done (21-02-25 20:05)
+ ✔ Reservation has subtotal according to the contract type in case of room only, and the subtotal is calculated by submission of products that are related to the template of the contract. @done (21-03-07 05:12)
+ ✔ Accommodation with type of room can't have multiple contracts at same days. @done (21-03-07 05:11)
+ ☐ Make discount applied in form of percentage or amount.
+ ✔ Refactor Orders, cart, wishlist, products to be based on branch. @done (21-02-25 20:06)
+ ✔ branch_user contains the employees of the concerened branch. @done (21-02-25 20:06)
+ ✔ Branch->users is to display all of the employees. @done (21-02-25 20:06)
+ ✔ Branch->deliverers is to display all of the employees using the same table branch_user using the relationship whereHas to fetch the only employees where has role of delivery_guy @done (21-02-25 20:06)
+ ✔ branch_product is placed to represent the menu with a pivot optional price. @done (21-02-25 20:06)
+ ✔ at placing the order, check if the product variation has different price at the branch_product and then use it at placing order ( use the getter at product variation to determine the price) @done (21-02-25 20:48)
+ ✔ order has branch_id to determine at which branch the order is being placed. @done (21-02-25 20:12)
+ ✔ delivery_order is used to determine which delivery guy is going to deliver the order @done (21-02-25 20:12)
+   ✔ We must validate the user_id that he belongs to the branch and the order is actually belonging to the same branch in order to attach it to the delivery_order. @done (21-02-25 20:40)
+ ✔ Create a templates table which contains a name and status only. @done (21-03-07 05:11)
+   ✔ Create a product_template which contains the product_variation_id and template_id and a pivot price which is optional to determine(if not determined fallback to the branch product variation price). @done (21-03-07 05:11)
+   ✔ Create a contracts table which contains a name and days[json] and product_template_id. @done (21-03-07 05:11)
+   ✔ create a accommodation_contract which is a pivot between accommodation and contract to assign the contract to a certain accommodation @done (21-03-07 05:11)
+ ✔ Create availability_branch which contains the start_date and end_date of the shift, the day, branch_id @done (21-03-07 05:11)
+ ✔ When creating a reservation check for the availability_branch if the start and end date are within range of the branch shift then check if slot is available. @done (21-02-25 20:13)
+ ✔ When creating a reservation and selected a contract and an accommodation, we will fetch the contract template_id then the products of this template and place them as order for the authenticated then with this order attach it to the reservation (when taking the products from template don't forget to use the price there if exists.) @done (21-03-07 05:11)

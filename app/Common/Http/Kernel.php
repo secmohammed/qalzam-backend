@@ -49,7 +49,8 @@ class Kernel extends HttpKernel
             \Fruitcake\Cors\HandleCors::class,
             \App\Common\Http\Middleware\HasRole::class,
             \App\Common\Http\Middleware\OptimizeImages::class,
-
+            \App\Common\Http\Middleware\Branch\SetCurrentBranch::class,
+            \App\Common\Http\Middleware\Branch\ResetCurrentBranch::class,
             'throttle:60,1',
             'bindings',
 

@@ -21,7 +21,8 @@ class UserResource extends JsonResource
     public function data(Request $request): array
     {
         $meta = [];
-        if (($cart = app(Cart::class))->user) {
+        if (($cart = app(Cart::class))->user && $cart->hasBranch() && $cart->getType() === 'cart') {
+
             $meta = [
                 'meta' => [
                     'cart' => [
@@ -29,7 +30,6 @@ class UserResource extends JsonResource
                         'subtotal' => $cart->subtotal()->formatted(),
                         'total' => $cart->total()->formatted(),
                         'changed' => $cart->hasChanged(),
-
                     ],
 
                 ],

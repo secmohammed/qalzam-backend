@@ -3,7 +3,6 @@
 namespace App\Domain\Reservation\Entities\Traits\Relations;
 
 use App\Domain\User\Entities\User;
-use App\Domain\Order\Entities\Order;
 use App\Domain\Branch\Entities\Branch;
 use App\Domain\Accommodation\Entities\Accommodation;
 
@@ -22,7 +21,7 @@ trait ReservationRelations
      */
     public function branch()
     {
-        return $this->hasOneThrough(Branch::class, Accommodation::class, 'id', 'id', null, 'branch_id');
+        return $this->hasOneThrough(Branch::class, Accommodation::class, 'id', 'id', 'accommodation_id', 'branch_id');
     }
 
     /**
@@ -31,14 +30,6 @@ trait ReservationRelations
     public function creator()
     {
         return $this->belongsTo(User::class, 'creator_id');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function order()
-    {
-        return $this->belongsTo(Order::class);
     }
 
     /**

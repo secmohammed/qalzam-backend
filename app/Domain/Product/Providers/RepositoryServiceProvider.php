@@ -24,6 +24,7 @@ class RepositoryServiceProvider extends ServiceProvider
         \App\Domain\Product\Repositories\Contracts\ProductVariationTypeRepository::class => \App\Domain\Product\Repositories\Eloquent\ProductVariationTypeRepositoryEloquent::class,
         \App\Domain\Product\Repositories\Contracts\StockRepository::class => \App\Domain\Product\Repositories\Eloquent\StockRepositoryEloquent::class,
 			\App\Domain\Product\Repositories\Contracts\StockRepository::class => \App\Domain\Product\Repositories\Eloquent\StockRepositoryEloquent::class,
+			\App\Domain\Product\Repositories\Contracts\TemplateRepository::class => \App\Domain\Product\Repositories\Eloquent\TemplateRepositoryEloquent::class,
 			###REPOSITORIES_PLACEHOLDER###
         // Your Repos Here "interface => eloquent class"
     ];

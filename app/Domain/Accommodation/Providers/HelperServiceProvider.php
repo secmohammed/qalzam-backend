@@ -7,6 +7,15 @@ use Illuminate\Support\ServiceProvider;
 class HelperServiceProvider extends ServiceProvider
 {
     /**
+     * Bootstrap services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+    }
+
+    /**
      * Register services.
      *
      * @return void
@@ -16,18 +25,9 @@ class HelperServiceProvider extends ServiceProvider
         $this->loadHelpers();
     }
 
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-    }
-
     protected function loadHelpers()
     {
-        foreach (glob(__DIR__.'/../Helpers/*.php') as $filename) {
+        foreach (glob(__DIR__ . '/../Helpers/*.php') as $filename) {
             require_once $filename;
         }
     }

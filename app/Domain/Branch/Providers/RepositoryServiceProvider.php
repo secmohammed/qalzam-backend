@@ -20,25 +20,11 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     private $repositories = [
         \App\Domain\Branch\Repositories\Contracts\BranchRepository::class => \App\Domain\Branch\Repositories\Eloquent\BranchRepositoryEloquent::class,
-			\App\Domain\Branch\Repositories\Contracts\AlbumRepository::class => \App\Domain\Branch\Repositories\Eloquent\AlbumRepositoryEloquent::class,
-			###REPOSITORIES_PLACEHOLDER###
-		// Your Repos Here "interface => eloquent class"
+        \App\Domain\Branch\Repositories\Contracts\AlbumRepository::class => \App\Domain\Branch\Repositories\Eloquent\AlbumRepositoryEloquent::class,
+        \App\Domain\Branch\Repositories\Contracts\BranchShiftRepository::class => \App\Domain\Branch\Repositories\Eloquent\BranchShiftRepositoryEloquent::class,
+        ###REPOSITORIES_PLACEHOLDER###
+        // Your Repos Here "interface => eloquent class"
     ];
-
-    /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        /**
-         * Bind all repositories to application.
-         */
-        foreach ($this->repositories as $interface => $eloquent) {
-            $this->app->singleton($interface, $eloquent);
-        }
-    }
 
     /**
      * Bootstrap services.
@@ -58,5 +44,20 @@ class RepositoryServiceProvider extends ServiceProvider
     public function provides()
     {
         return array_keys($this->repositories);
+    }
+
+    /**
+     * Register services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        /*
+         * Bind all repositories to application.
+         */
+        foreach ($this->repositories as $interface => $eloquent) {
+            $this->app->singleton($interface, $eloquent);
+        }
     }
 }

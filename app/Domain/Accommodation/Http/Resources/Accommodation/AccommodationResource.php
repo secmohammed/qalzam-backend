@@ -5,6 +5,7 @@ namespace App\Domain\Accommodation\Http\Resources\Accommodation;
 use Illuminate\Http\Request;
 use App\Domain\User\Http\Resources\User\UserResource;
 use App\Domain\Branch\Http\Resources\Branch\BranchResource;
+use App\Domain\Accommodation\Http\Resources\Contract\ContractResource;
 use App\Infrastructure\Http\AbstractResources\BaseResource as JsonResource;
 
 class AccommodationResource extends JsonResource
@@ -23,6 +24,8 @@ class AccommodationResource extends JsonResource
             'code' => $this->code,
             'branch_id' => $this->branch_id,
             'user_id' => $this->user_id,
+            'contract_id' => $this->contract_id,
+            'contract' => new ContractResource($this->whenLoaded('contract')),
             'user' => new UserResource($this->whenLoaded('user')),
             'branch' => new BranchResource($this->whenLoaded('branch')),
             'price' => $this->price,

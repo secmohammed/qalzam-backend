@@ -15,5 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth.api'], function () {
     Route::resource('/accommodations', 'AccommodationController');
+    Route::resource('/contracts', 'ContractController');
     ###CRUD_PLACEHOLDER###
 });

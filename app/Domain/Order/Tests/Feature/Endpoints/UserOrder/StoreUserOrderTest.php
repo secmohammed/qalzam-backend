@@ -8,6 +8,7 @@ use App\Domain\User\Entities\User;
 use App\Domain\Order\Entities\Order;
 use App\Domain\User\Entities\Address;
 use Joovlly\Authorizable\Models\Role;
+use App\Domain\Branch\Entities\Branch;
 use App\Domain\Product\Entities\Stock;
 use Database\Seeders\RolesTableSeeder;
 use App\Domain\Order\Http\Events\OrderCreated;
@@ -21,15 +22,17 @@ class StoreUserOrderTest extends TestCase
         $user = $this->userFactory->create();
         $this->seed(RolesTableSeeder::class);
         $user->roles()->attach(Role::first());
+
         $user->cart()->sync(
             $product = $this->productWithStock()
         );
         $address = $this->addAddressTo($user);
         $response = $this->jsonAs($user, 'POST', route('api.user_orders.store'), [
             'address_id' => $address->id,
-        ])->assertStatus(201);
+            'branch_id' => $this->branch->id,
+        ]);
         $this->assertDatabaseHas('product_variation_order', [
-            'product_variation_id' => $product->id,
+            'product_variation_id' => array_keys($product)[0],
             'order_id' => json_decode($response->getContent())->data->id,
         ]);
 
@@ -47,7 +50,9 @@ class StoreUserOrderTest extends TestCase
         $address = $this->addAddressTo($user);
         $this->jsonAs($user, 'POST', route('api.user_orders.store'), [
             'address_id' => $address->id,
-        ])->assertStatus(201);
+            'branch_id' => $this->branch->id,
+
+        ]);
         $this->assertDatabaseHas('orders', [
             'user_id' => $user->id,
             'address_id' => $address->id,
@@ -66,6 +71,7 @@ class StoreUserOrderTest extends TestCase
         $address = $this->addAddressTo($user);
         $response = $this->jsonAs($user, 'POST', route('api.user_orders.store'), [
             'address_id' => $address->id,
+            'branch_id' => $this->branch->id,
 
         ]);
         $this->assertEmpty($user->cart);
@@ -78,22 +84,33 @@ class StoreUserOrderTest extends TestCase
     }
 
     /** @test */
+    public function it_fails_to_create_order_if_branch_isnt_set()
+    {
+        Event::fake();
+        $user = $this->userFactory->create();
+        $this->seed(RolesTableSeeder::class);
+        $user->roles()->attach(Role::first());
+        $user->cart()->sync($product = $this->productWithStock());
+        $address = $this->addAddressTo($user);
+        $response = $this->jsonAs($user, 'POST', route('api.user_orders.store'), [
+            'address_id' => $address->id,
+
+        ])->assertStatus(422);
+
+    }
+
+    /** @test */
     public function it_fails_to_create_order_if_cart_is_empty()
     {
         Event::fake();
         $user = $this->userFactory->create();
         $this->seed(RolesTableSeeder::class);
         $user->roles()->attach(Role::first());
-
-        $user->cart()->sync([
-            ($product = $this->productWithStock())->id => [
-                'quantity' => 0,
-            ],
-        ]);
+        $user->cart()->sync($product = $this->productWithStock(0));
         $address = $this->addAddressTo($user);
         $response = $this->jsonAs($user, 'POST', route('api.user_orders.store'), [
             'address_id' => $address->id,
-
+            'branch_id' => $this->branch->id,
         ])->assertStatus(400);
 
     }
@@ -111,6 +128,7 @@ class StoreUserOrderTest extends TestCase
         $address = $this->addAddressTo($user);
         $response = $this->jsonAs($user, 'POST', route('api.user_orders.store'), [
             'address_id' => $address->id,
+            'branch_id' => $this->branch->id,
 
         ]);
         Event::assertDispatched(OrderCreated::class, function ($event) use ($response) {
@@ -127,8 +145,10 @@ class StoreUserOrderTest extends TestCase
         $user->cart()->sync(
             $product = $this->productWithStock()
         );
+        $this->jsonAs($user, 'POST', route('api.user_orders.store'), [
+            'branch_id' => $this->branch->id,
 
-        $this->jsonAs($user, 'POST', route('api.user_orders.store'))->assertJsonValidationErrors(['address_id']);
+        ])->assertJsonValidationErrors(['address_id']);
     }
 
     /** @test */
@@ -144,6 +164,8 @@ class StoreUserOrderTest extends TestCase
         $address = $this->addressFactory->create();
         $this->jsonAs($user, 'POST', route('api.user_orders.store'), [
             'address_id' => $address->id,
+            'branch_id' => $this->branch->id,
+
         ])->assertJsonValidationErrors(['address_id']);
 
     }
@@ -160,6 +182,8 @@ class StoreUserOrderTest extends TestCase
 
         $this->jsonAs($user, 'POST', route('api.user_orders.store'), [
             'address_id' => 1,
+            'branch_id' => $this->branch->id,
+
         ])->assertJsonValidationErrors(['address_id']);
 
     }
@@ -171,7 +195,9 @@ class StoreUserOrderTest extends TestCase
         $this->stockFactory = Stock::factory();
         $this->orderFactory = Order::factory();
         $this->addressFactory = Address::factory();
+        $this->branchFactory = Branch::factory();
         $this->productVariationFactory = ProductVariation::factory();
+        $this->branch = $this->branchFactory->create();
     }
 
     /**
@@ -189,13 +215,16 @@ class StoreUserOrderTest extends TestCase
     /**
      * @return mixed
      */
-    protected function productWithStock()
+    protected function productWithStock($quantity = 1)
     {
         $product = $this->productVariationFactory->create();
         $this->stockFactory->create([
             'product_variation_id' => $product->id,
         ]);
+        $product->branches()->attach($this->branch, [
+            'price' => 130,
+        ]);
 
-        return $product;
+        return [$product->id => ['branch_id' => $this->branch->id, 'type' => 'cart', 'quantity' => $quantity]];
     }
 }

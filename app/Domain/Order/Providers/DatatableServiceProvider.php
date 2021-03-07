@@ -14,6 +14,7 @@ class DatatableServiceProvider extends ServiceProvider
      */
     private $datatables = [
         'order' => \App\Domain\Order\Datatables\OrderDatatable::class,
+			'deliveryorder' => \App\Domain\Order\Datatables\DeliveryorderDatatable::class,
 			###DATATABLES_PLACEHOLDER###
 		// Your datatables Here "key => class"
     ];

@@ -2,20 +2,17 @@
 
 namespace App\Domain\User\Http\Controllers;
 
+use App\Common\Cart\Cart;
 use Illuminate\Http\Request;
 use Joovlly\DDD\Traits\Responder;
+use App\Domain\Branch\Entities\Branch;
 use App\Domain\User\Http\Resources\User\UserResource;
-use App\Domain\User\Http\Requests\Wishlist\WishlistStoreFormRequest;
+use App\Domain\User\Http\Requests\Cart\CartStoreFormRequest;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 
 class WishlistController extends Controller
 {
     use Responder;
-
-    /**
-     * @var AddressRepository
-     */
-    protected $cart;
 
     /**
      * Domain Alias.
@@ -36,7 +33,12 @@ class WishlistController extends Controller
      *
      * @var string
      */
-    protected $viewPath = 'cart';
+    protected $viewPath = 'wishlist';
+
+    /**
+     * @var AddressRepository
+     */
+    protected $wishlist;
 
     /**
      * Remove the specified resource from storage.
@@ -44,12 +46,10 @@ class WishlistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Branch $branch, Cart $wishlist, $id)
     {
-        $ids = request()->get('ids', $id);
-        $ids = explode(',', $ids);
-        auth()->user()->wishlist()->detach($ids);
-
+        $ids = request()->get('ids', [$id]);
+        $delete = $wishlist->setCartType('wishlist')->withBranch($branch)->delete($ids);
         if ($delete) {
             $this->redirectRoute("{$this->resourceRoute}.index");
             $this->setApiResponse(fn() => response()->json(['deleted' => true], 200));
@@ -66,14 +66,13 @@ class WishlistController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, Cart $wishlist, Branch $branch)
     {
-
-        $request->user()->load(['wishlist', 'wishlist.product', 'wishlist.product.variations', 'wishlist.type']);
-
+        $request->user()->load(['wishlist.product', 'wishlist.product.variations.stock', 'wishlist.stock', 'wishlist.type']);
         $this->setData('title', __('main.show-all') . ' ' . __('main.address'));
 
         $this->setData('alias', $this->domainAlias);
+
         $this->setData('data', $request->user());
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.index");
@@ -89,12 +88,12 @@ class WishlistController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(WishlistStoreFormRequest $request)
+    public function store(CartStoreFormRequest $request, Cart $wishlist, Branch $branch)
     {
-        $store = auth()->user()->wishlist()->syncWithoutDetaching($request->products);
-        if (count($store['attached'])) {
-            $this->setApiResponse(fn() => response()->json(['message' => 'added to cart successfully']));
-            $this->redirectRoute("{$this->resourceRoute}.show", [$request->products]);
+        $store = $wishlist->setCartType('wishlist')->withBranch($branch)->add($request->validated());
+        if (count($store['attached']) || count($store['updated'])) {
+            $this->setApiResponse(fn() => response()->json(['message' => 'added to wishlist successfully']));
+            $this->redirectBack();
         } else {
             $this->redirectBack();
             $this->setApiResponse(fn() => response()->json(['created' => false]));

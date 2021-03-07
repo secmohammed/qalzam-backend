@@ -3,13 +3,23 @@
 namespace App\Domain\Product\Entities\Traits\Relations;
 
 use App\Domain\User\Entities\User;
+use App\Domain\Branch\Entities\Branch;
 use App\Domain\Product\Entities\Stock;
 use App\Domain\Product\Entities\Product;
+use App\Domain\Product\Entities\Template;
 use App\Domain\Product\Entities\ProductVariation;
 use App\Domain\Product\Entities\ProductVariationType;
 
 trait ProductVariationRelations
 {
+    /**
+     * @return mixed
+     */
+    public function branches()
+    {
+        return $this->belongsToMany(Branch::class, 'branch_product', 'product_variation_id', 'branch_id')->withPivot('price');
+    }
+
     /**
      * @return mixed
      */
@@ -36,6 +46,15 @@ trait ProductVariationRelations
     public function stocks()
     {
         return $this->hasMany(Stock::class);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function templates()
+    {
+        return $this->belongsToMany(Template::class, 'product_variation_template', 'product_variation_id', 'template_id')->withPivot(['quantity', 'price']);
+
     }
 
     /**

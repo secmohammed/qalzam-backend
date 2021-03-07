@@ -27,7 +27,9 @@ class CreateAlbumsTable extends Migration
 
             $table->id();
             $table->string('name')->unique();
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->foreignId('branch_id')->constrained()->index()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
 
         });

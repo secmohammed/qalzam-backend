@@ -27,6 +27,33 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
     }
 
+    /**
+     * Define the "api" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapApiRoutes()
+    {
+        Route::middleware('api')
+            ->prefix('api/')
+            ->name('api.')
+            ->namespace($this->namespace)
+            ->group(app_path("Domain/Accommodation/Routes/api/public.php"));
+
+        Route::middleware('api')
+            ->prefix('api/')
+            ->name('api.')
+            ->namespace($this->namespace)
+            ->group(app_path("Domain/Accommodation/Routes/api/guest.php"));
+
+        Route::middleware('api')
+            ->prefix('api/')
+            ->name('api.')
+            ->namespace($this->namespace)
+            ->group(app_path("Domain/Accommodation/Routes/api/auth.php"));
+    }
 
     /**
      * Define the "web" routes for the application.
@@ -52,33 +79,5 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace)
             ->group(app_path('Domain/Accommodation/Routes/web/auth.php'));
 
-    }
-
-    /**
-     * Define the "api" routes for the application.
-     *
-     * These routes are typically stateless.
-     *
-     * @return void
-     */
-    protected function mapApiRoutes()
-    {
-        Route::middleware('api')
-            ->prefix('api/')
-            ->name('api.')
-            ->namespace($this->namespace)
-            ->group(app_path("Domain/Accommodation/Routes/api/public.php"));
-
-        Route::middleware('api')
-            ->prefix('api/')
-            ->name('api.')
-            ->namespace($this->namespace)
-            ->group(app_path("Domain/Accommodation/Routes/api/guest.php"));
-        
-        Route::middleware('api')
-            ->prefix('api/')
-            ->name('api.')
-            ->namespace($this->namespace)
-            ->group(app_path("Domain/Accommodation/Routes/api/auth.php"));
     }
 }

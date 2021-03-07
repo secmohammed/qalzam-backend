@@ -58,5 +58,65 @@
                 "route": "albums.create"
             }
         ]
+    },
+    {
+        "name": "branchshifts",
+        "icon": "nav-icon fas fa-tachometer-alt",
+        "route": "branchshifts.index",
+        "children": [
+            {
+                "name": "list branchshifts",
+                "route": "branchshifts.index"
+            },
+            {
+                "name": "create new branchshift",
+                "route": "branchshifts.create"
+            }
+        ]
+    },
+    {
+        "name": "deliveryorders",
+        "icon": "nav-icon fas fa-tachometer-alt",
+        "route": "deliveryorders.index",
+        "children": [
+            {
+                "name": "list deliveryorders",
+                "route": "deliveryorders.index"
+            },
+            {
+                "name": "create new deliveryorder",
+                "route": "deliveryorders.create"
+            }
+        ]
+    },
+    {
+        "name": "templates",
+        "icon": "nav-icon fas fa-tachometer-alt",
+        "route": "templates.index",
+        "children": [
+            {
+                "name": "list templates",
+                "route": "templates.index"
+            },
+            {
+                "name": "create new template",
+                "route": "templates.create"
+            }
+        ]
+    },
+    {
+        "name": "contracts",
+        "icon": "nav-icon fas fa-tachometer-alt",
+        "route": "contracts.index",
+        "children": [
+            {
+                "name": "list contracts",
+                "route": "contracts.index"
+            },
+            {
+                "name": "create new contract",
+                "route": "contracts.create"
+            }
+        ]
     }
 ]

@@ -38,6 +38,7 @@ class OrderStoreFormRequest extends FormRequest
     {
         $rules = [
             'discount_id' => 'nullable|exists:discounts,id',
+            'branch_id' => 'required|exists:branches,id',
             'address_id' => [
                 'required',
                 Rule::exists('addresses', 'id')->where(function ($builder) {

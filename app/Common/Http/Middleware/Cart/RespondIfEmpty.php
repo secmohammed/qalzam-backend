@@ -4,6 +4,7 @@ namespace App\Common\Http\Middleware\Cart;
 
 use Closure;
 use App\Common\Cart\Cart;
+use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 
 class RespondIfEmpty
 {
@@ -15,9 +16,11 @@ class RespondIfEmpty
     /**
      * @param Cart $cart
      */
-    public function __construct(Cart $cart)
+    public function __construct(Cart $cart, BranchRepository $branchRepository)
     {
+
         $this->cart = $cart;
+        $this->branchRepository = $branchRepository;
     }
 
     /**
@@ -30,7 +33,19 @@ class RespondIfEmpty
      */
     public function handle($request, Closure $next)
     {
-        if ($this->cart->isEmpty()) {
+        if (!session()->has('current_branch')) {
+            return response()->json([
+                'message' => 'You have to select a branch in order to display its cart.',
+            ], 422);
+        }
+
+        if (
+            $this->cart->setCartType('cart')->withBranch(
+                $this->branchRepository->find(
+                    session('current_branch')
+                )
+            )->isEmpty()
+        ) {
             return response()->json([
                 'message' => 'Cart is empty',
             ], 400);

@@ -11,11 +11,11 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
-
+ */
 
 Route::middleware(['auth'])->group(function () {
-    Route::resource('/branches','BranchController');
-	Route::resource('/albums','AlbumController');
-	###CRUD_PLACEHOLDER###
+    Route::resource('/branches', 'BranchController');
+    Route::resource('/albums', 'AlbumController');
+    Route::resource('/branch_shifts', 'BranchShiftController');
+    ###CRUD_PLACEHOLDER###
 });

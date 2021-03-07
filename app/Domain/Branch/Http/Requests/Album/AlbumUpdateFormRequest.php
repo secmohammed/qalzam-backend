@@ -35,6 +35,9 @@ class AlbumUpdateFormRequest extends AlbumStoreFormRequest
     {
         $rules = [
             'name' => ['required', 'unique:albums,name,' . $this->album->id],
+            'album-gallery' => ['nullable', 'array'],
+            'album-gallery.*' => ['required', 'image', 'mimes:png,jpeg,jpg', 'max:2048'],
+
         ];
 
         return array_merge(parent::rules(), $rules);

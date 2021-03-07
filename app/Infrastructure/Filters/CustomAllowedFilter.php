@@ -15,7 +15,7 @@ class CustomAllowedFilter extends AllowedFilter
     public function filter(QueryBuilder $query, $value = null)
     {
         $valueToFilter = $this->resolveValueForFiltering($value);
-        ($this->filterClass)($query, $valueToFilter, $this->internalName);
+        ($this->filterClass)($query->getEloquentBuilder(), $valueToFilter, $this->internalName);
 
     }
 

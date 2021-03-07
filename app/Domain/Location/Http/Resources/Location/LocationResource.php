@@ -21,6 +21,7 @@ class LocationResource extends JsonResource
             'name' => $this->name,
             'user' => new UserResource($this->whenLoaded('user')),
             'parent' => new self($this->whenLoaded('parent')),
+            'children' => self::collection($this->whenLoaded('children')),
             'created_at_human' => $this->created_at->diffForHumans(),
             'users' => UserResource::collection($this->whenLoaded('users')),
         ];

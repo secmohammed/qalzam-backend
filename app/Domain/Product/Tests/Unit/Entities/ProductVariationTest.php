@@ -136,7 +136,7 @@ class ProductVariationTest extends TestCase
         $variation = $this->productVariationFactory->create([
             'price' => 1000,
         ]);
-        $this->assertEquals($variation->formattedPrice, "١٠٫٠٠ ج.م.‏");
+        $this->assertEquals($variation->formattedPrice, '١٠٫٠٠ ر.س.‏');
     }
 
     /** @test */
