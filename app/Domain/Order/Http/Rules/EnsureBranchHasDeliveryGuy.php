@@ -2,8 +2,8 @@
 
 namespace App\Domain\Order\Http\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
 use App\Domain\Branch\Repositories\Contracts\BranchRepository;
+use Illuminate\Contracts\Validation\Rule;
 
 class EnsureBranchHasDeliveryGuy implements Rule
 {
@@ -18,7 +18,7 @@ class EnsureBranchHasDeliveryGuy implements Rule
     public function __construct($id)
     {
         $this->branch = app(BranchRepository::class)->with([
-            'users' => function ($query) {
+            'employees' => function ($query) {
                 $query->whereHas('roles', function ($query) {
                     $query->whereSlug('delivery');
                 });
@@ -46,6 +46,6 @@ class EnsureBranchHasDeliveryGuy implements Rule
      */
     public function passes($attribute, $value)
     {
-        return $this->branch->users->contains('id', $value);
+        return $this->branch->employees->contains('id', $value);
     }
 }

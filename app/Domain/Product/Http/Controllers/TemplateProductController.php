@@ -2,14 +2,13 @@
 
 namespace App\Domain\Product\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Joovlly\DDD\Traits\Responder;
-use App\Domain\Product\Entities\Template;
 use App\Domain\Product\Entities\ProductVariation;
-use App\Domain\Product\Http\Resources\Template\TemplateResource;
+use App\Domain\Product\Entities\Template;
+use App\Domain\Product\Http\Requests\TemplateProduct\TemplateProductStoreFormRequest;
 use App\Domain\Product\Repositories\Contracts\ProductVariationRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
-use App\Domain\Product\Http\Requests\TemplateProduct\TemplateProductStoreFormRequest;
+use Illuminate\Http\Request;
+use Joovlly\DDD\Traits\Responder;
 
 class TemplateProductController extends Controller
 {
@@ -39,14 +38,25 @@ class TemplateProductController extends Controller
      *
      * @var string
      */
-    protected $viewPath = 'template';
+    protected $viewPath = 'template.product';
 
     /**
      * @param ProductVariationRepository $productvariationRepository
      */
-    public function create()
+    public function create(Template $template, ProductVariation $products)
     {
-        //TODO
+
+        $this->setData('title', __('main.add') . ' ' . __('main.order'), 'web');
+
+        $this->setData('template', $template, 'web');
+        $this->setData('alias', $this->domainAlias, 'web');
+        $this->setData('products', $products, 'web');
+
+        $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
+
+        $this->setApiResponse(fn() => response()->json(['create_your_own_form' => true]));
+
+        return $this->response();
     }
 
     public function edit()
@@ -60,14 +70,16 @@ class TemplateProductController extends Controller
      */
     public function store(Template $template, TemplateProductStoreFormRequest $request)
     {
+
         $template->products()->sync(
             $request->validated()
         );
-        $this->setData('data', $template);
-        $this->redirectRoute("{$this->resourceRoute}.show", [$template->id]);
-        $this->useCollection(TemplateResource::class, 'data');
+        return $template;
+        // $this->setData('$', $template);
+        // $this->r("{$this->resourceRoute}.show", [$template->id]);
+        // $this->useCollection(TemplateResource::class, 'data');
 
-        return $this->response();
+        // return $this->response();
 
     }
 }

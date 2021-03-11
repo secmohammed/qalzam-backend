@@ -36,8 +36,10 @@ class DeliveryOrderStoreFormRequest extends FormRequest
      */
     public function rules()
     {
+        // dd($this->request);
         $rules = [
             'branch_id' => ['required', 'exists:branches,id'],
+            'order_id' => ['required', 'exists:orders,id'],
             'user_id' => ['required', 'exists:users,id', new EnsureBranchHasDeliveryGuy($this->request->get('branch_id'))],
         ];
 

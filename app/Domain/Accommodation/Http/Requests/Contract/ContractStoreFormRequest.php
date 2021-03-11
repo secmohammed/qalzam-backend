@@ -36,6 +36,7 @@ class ContractStoreFormRequest extends FormRequest
      */
     public function rules()
     {
+        // dd($this->request);
         $rules = [
             'name' => ['required', 'string', 'max:255', 'unique:contracts,name'],
             'template_id' => ['required', new EnsureTemplateHasProducts],

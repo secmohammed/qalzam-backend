@@ -2,21 +2,24 @@
 
 namespace App\Domain\Order\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Pipeline\Pipeline;
-use Joovlly\DDD\Traits\Responder;
+use App\Domain\Branch\Repositories\Contracts\BranchRepository;
+use App\Domain\Discount\Repositories\Contracts\DiscountRepository;
 use App\Domain\Order\Entities\Order;
 use App\Domain\Order\Http\Events\OrderDestroyed;
-use App\Domain\Order\Pipelines\CreateOrderPipeline;
+use App\Domain\Order\Http\Requests\Order\OrderStoreFormRequest;
+use App\Domain\Order\Http\Requests\Order\OrderUpdateFormRequest;
 use App\Domain\Order\Http\Resources\Order\OrderResource;
+use App\Domain\Order\Http\Resources\Order\OrderResourceCollection;
+use App\Domain\Order\Pipelines\ApplyDiscountToOrderIfPresent;
+use App\Domain\Order\Pipelines\CreateOrderPipeline;
 use App\Domain\Order\Pipelines\NotifyUserWithOrderStatus;
 use App\Domain\Order\Pipelines\NotifyUserWithPlacedOrder;
 use App\Domain\Order\Repositories\Contracts\OrderRepository;
-use App\Domain\Order\Pipelines\ApplyDiscountToOrderIfPresent;
-use App\Domain\Order\Http\Requests\Order\OrderStoreFormRequest;
-use App\Domain\Order\Http\Requests\Order\OrderUpdateFormRequest;
-use App\Domain\Order\Http\Resources\Order\OrderResourceCollection;
+use App\Domain\User\Repositories\Contracts\AddressRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use Illuminate\Http\Request;
+use Illuminate\Pipeline\Pipeline;
+use Joovlly\DDD\Traits\Responder;
 
 class OrderController extends Controller
 {
@@ -33,6 +36,9 @@ class OrderController extends Controller
      * @var OrderRepository
      */
     protected $orderRepository;
+    protected $branchRepository;
+    protected $addressRepository;
+    protected $discountRepository;
 
     /**
      * Resource Route.
@@ -51,9 +57,12 @@ class OrderController extends Controller
     /**
      * @param OrderRepository $orderRepository
      */
-    public function __construct(OrderRepository $orderRepository)
+    public function __construct(OrderRepository $orderRepository, BranchRepository $branchRepository, AddressRepository $addressRepository, DiscountRepository $discountRepository)
     {
         $this->orderRepository = $orderRepository;
+        $this->branchRepository = $branchRepository;
+        $this->addressRepository = $addressRepository;
+        $this->discountRepository = $discountRepository;
 
     }
 
@@ -64,10 +73,14 @@ class OrderController extends Controller
      */
     public function create()
     {
+
         $this->setData('title', __('main.add') . ' ' . __('main.order'), 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
-
+        $this->setData('branches', $this->branchRepository->all(), 'web');
+        $this->setData('addresses', auth()->user()->addresses->all(), 'web');
+        $this->setData('discounts', $this->discountRepository->withoutExpired()->get(), 'web');
+        // dd($this->discountRepository->withoutExpired()->toSql());
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
 
         $this->setApiResponse(fn() => response()->json(['create_your_own_form' => true]));
@@ -152,11 +165,14 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
+        // dd();
         $this->setData('title', __('main.show') . ' ' . __('main.order') . ' : ' . $order->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
 
-        $this->setData('show', $order);
+        $this->setData('show', $order->where('id', $order->id)->deliverersWithFee()->first());
+        // dd($order->products->all());
+        $this->setData('order_products', $order->products->all());
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.show");
 

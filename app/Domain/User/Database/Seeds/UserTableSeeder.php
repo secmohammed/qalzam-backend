@@ -2,8 +2,8 @@
 
 namespace App\Domain\User\Database\Seeds;
 
-use Illuminate\Database\Seeder;
 use App\Domain\User\Entities\User;
+use Illuminate\Database\Seeder;
 
 class UserTableSeeder extends Seeder
 {

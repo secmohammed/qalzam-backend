@@ -2,19 +2,19 @@
 
 namespace App\Domain\Product\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Pipeline\Pipeline;
-use Joovlly\DDD\Traits\Responder;
 use App\Common\Pipeline\HandleFileUpload;
 use App\Domain\Product\Entities\ProductVariation;
+use App\Domain\Product\Http\Requests\ProductVariation\ProductVariationStoreFormRequest;
+use App\Domain\Product\Http\Requests\ProductVariation\ProductVariationUpdateFormRequest;
+use App\Domain\Product\Http\Resources\ProductVariation\ProductVariationResource;
+use App\Domain\Product\Http\Resources\ProductVariation\ProductVariationResourceCollection;
 use App\Domain\Product\Repositories\Contracts\ProductRepository;
 use App\Domain\Product\Repositories\Contracts\ProductVariationRepository;
 use App\Domain\Product\Repositories\Contracts\ProductVariationTypeRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
-use App\Domain\Product\Http\Resources\ProductVariation\ProductVariationResource;
-use App\Domain\Product\Http\Requests\ProductVariation\ProductVariationStoreFormRequest;
-use App\Domain\Product\Http\Requests\ProductVariation\ProductVariationUpdateFormRequest;
-use App\Domain\Product\Http\Resources\ProductVariation\ProductVariationResourceCollection;
+use Illuminate\Http\Request;
+use Illuminate\Pipeline\Pipeline;
+use Joovlly\DDD\Traits\Responder;
 
 class ProductVariationController extends Controller
 {
@@ -37,7 +37,7 @@ class ProductVariationController extends Controller
      *
      * @var string
      */
-    protected $resourceRoute = 'productvariations';
+    protected $resourceRoute = 'product_variations';
 
     /**
      * View Path

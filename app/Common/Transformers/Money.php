@@ -2,11 +2,13 @@
 
 namespace App\Common\Transformers;
 
-use Money\Currency;
-use NumberFormatter;
-use Money\Money as BaseMoney;
 use Money\Currencies\ISOCurrencies;
+use Money\Currency;
 use Money\Formatter\IntlMoneyFormatter;
+use Money\Money as BaseMoney;
+use NumberFormatter;
+
+// use NumberFormatter;
 
 /**
  * Money Transformer

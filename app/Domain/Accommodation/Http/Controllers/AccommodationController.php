@@ -2,18 +2,18 @@
 
 namespace App\Domain\Accommodation\Http\Controllers;
 
+use App\Common\Pipeline\HandleFileUpload;
+use App\Domain\Accommodation\Entities\Accommodation;
+use App\Domain\Accommodation\Http\Requests\Accommodation\AccommodationStoreFormRequest;
+use App\Domain\Accommodation\Http\Requests\Accommodation\AccommodationUpdateFormRequest;
+use App\Domain\Accommodation\Http\Resources\Accommodation\AccommodationResource;
+use App\Domain\Accommodation\Http\Resources\Accommodation\AccommodationResourceCollection;
+use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
+use App\Domain\Branch\Repositories\Contracts\BranchRepository;
+use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 use Joovlly\DDD\Traits\Responder;
-use App\Common\Pipeline\HandleFileUpload;
-use App\Domain\Accommodation\Entities\Accommodation;
-use App\Domain\Branch\Repositories\Contracts\BranchRepository;
-use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
-use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
-use App\Domain\Accommodation\Http\Resources\Accommodation\AccommodationResource;
-use App\Domain\Accommodation\Http\Requests\Accommodation\AccommodationStoreFormRequest;
-use App\Domain\Accommodation\Http\Requests\Accommodation\AccommodationUpdateFormRequest;
-use App\Domain\Accommodation\Http\Resources\Accommodation\AccommodationResourceCollection;
 
 class AccommodationController extends Controller
 {
@@ -168,6 +168,7 @@ class AccommodationController extends Controller
      */
     public function store(AccommodationStoreFormRequest $request)
     {
+        dd($request->all());
         $accommodation = $this->accommodationRepository->create($request->validated());
 
         app(Pipeline::class)->send([

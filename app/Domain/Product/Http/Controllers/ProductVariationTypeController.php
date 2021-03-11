@@ -2,15 +2,15 @@
 
 namespace App\Domain\Product\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Joovlly\DDD\Traits\Responder;
 use App\Domain\Product\Entities\ProductVariationType;
-use App\Domain\Product\Repositories\Contracts\ProductVariationTypeRepository;
-use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
-use App\Domain\Product\Http\Resources\ProductVariationType\ProductVariationTypeResource;
 use App\Domain\Product\Http\Requests\ProductVariationType\ProductVariationTypeStoreFormRequest;
 use App\Domain\Product\Http\Requests\ProductVariationType\ProductVariationTypeUpdateFormRequest;
+use App\Domain\Product\Http\Resources\ProductVariationType\ProductVariationTypeResource;
 use App\Domain\Product\Http\Resources\ProductVariationType\ProductVariationTypeResourceCollection;
+use App\Domain\Product\Repositories\Contracts\ProductVariationTypeRepository;
+use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use Illuminate\Http\Request;
+use Joovlly\DDD\Traits\Responder;
 
 class ProductVariationTypeController extends Controller
 {
@@ -33,7 +33,7 @@ class ProductVariationTypeController extends Controller
      *
      * @var string
      */
-    protected $resourceRoute = 'productvariationtypes';
+    protected $resourceRoute = 'product_variation_types';
 
     /**
      * View Path

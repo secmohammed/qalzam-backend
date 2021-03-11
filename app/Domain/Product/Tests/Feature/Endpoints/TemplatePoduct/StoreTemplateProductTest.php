@@ -2,12 +2,12 @@
 
 namespace App\Domain\Product\Tests\Feature\Endpoints\TemplatePoduct;
 
-use Tests\TestCase;
+use App\Domain\Product\Entities\ProductVariation;
+use App\Domain\Product\Entities\Template;
 use App\Domain\User\Entities\Role;
 use App\Domain\User\Entities\User;
 use Database\Seeders\RolesTableSeeder;
-use App\Domain\Product\Entities\Template;
-use App\Domain\Product\Entities\ProductVariation;
+use Tests\TestCase;
 
 class StoreTemplateProductTest extends TestCase
 {
@@ -44,6 +44,7 @@ class StoreTemplateProductTest extends TestCase
             'price' => 100,
             'quantity' => 100,
         ]);
+        dd($this->template->products->first());
         $response = $this->jsonAs($user, 'POST', route('api.templates.products.store', $this->template), [
             'products' => [
                 ['quantity' => 10, 'id' => $this->productVariationFactory->create()->id, 'price' => 120],

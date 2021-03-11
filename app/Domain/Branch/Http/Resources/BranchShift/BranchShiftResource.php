@@ -2,10 +2,10 @@
 
 namespace App\Domain\Branch\Http\Resources\BranchShift;
 
-use Illuminate\Http\Request;
-use App\Domain\User\Http\Resources\User\UserResource;
 use App\Domain\Branch\Http\Resources\Branch\BranchResource;
+use App\Domain\User\Http\Resources\User\UserResource;
 use App\Infrastructure\Http\AbstractResources\BaseResource as JsonResource;
+use Illuminate\Http\Request;
 
 class BranchShiftResource extends JsonResource
 {

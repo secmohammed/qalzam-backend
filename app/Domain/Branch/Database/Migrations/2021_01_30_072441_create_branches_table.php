@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateBranchesTable extends Migration
 {
@@ -30,6 +30,7 @@ class CreateBranchesTable extends Migration
             $table->string('name')->unique();
             $table->foreignId('location_id')->constrained()->onDelete('cascade');
             $table->string('latitude');
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->string('longitude');
             $table->string('delivery_fee');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');

@@ -15,7 +15,6 @@ class BranchShiftResourceCollection extends ResourceCollection
     public function data(Request $request): array
     {
         // don't use $this->collection, but $this->toArray($request)
-
         return parent::toArray($request);
     }
 }

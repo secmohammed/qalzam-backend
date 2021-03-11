@@ -1,41 +1,9 @@
 <br>
-<div class="form-group row">
-    <label class="col-form-label text-right col-lg-2 col-sm-12">
-        {{ __("main.name_en") }}
-        <span style="color: red"> * </span>
-    </label>
-    <div class="col-lg-10 col-md-9 col-sm-12">
-        <input name="name" type="text" class="form-control {{$errors->has('name') ? 'is-invalid':''}}"
-        value="{{ ($action == 'edit') ? $edit->name : old('name') }}" placeholder="{{ __("main.name_en") }}">
-        <div class="row">
-            <div class="col-md-12">
-                @if($errors->has('name'))
-                <div class="alert alert-danger w-100 m-0" role="alert">
-                    {{$errors->first('name')}}
-                </div>
-                @endif
-            </div>
-        </div>
-    </div>
-</div>
-<div class="form-group row">
-    <label class="col-form-label text-right col-lg-2 col-sm-12">
-        {{ __("main.name_ar") }} <span style="color: red"> * </span>
-    </label>
-    <div class="col-lg-10 col-md-9 col-sm-12">
-        <input name="name_ar" type="text" class="form-control {{$errors->has('name_ar') ? 'is-invalid':''}}"
-        value="{{ ($action == 'edit') ? $edit->getArAttribute('name') : old('name_ar') }}" placeholder="{{ __("main.name_ar") }}">
-        <div class="row">
-            <div class="col-md-12">
-                @if($errors->has('name_ar'))
-                <div class="alert alert-danger w-100 m-0" role="alert">
-                    {{$errors->first('name_ar')}}
-                </div>
-                @endif
-            </div>
-        </div>
-    </div>
-</div>
+
+    <x-forms.name :action="$action" :edit="$edit??null"/>
+
+    <x-forms.ar_name :action="$action" :edit="$edit??null"/>
+
 <div class="form-group row">
     <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.parent") }}</label>
     <div class="col-lg-10 col-md-9 col-sm-12">
