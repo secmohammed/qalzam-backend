@@ -4,7 +4,7 @@
     <div class="col-md-2 col-form-label">
         {{__('main.product')}}
     </div>
-{{-- <div class="row">
+<div class="row">
     <div class="col-md">
             <select
             wire:model="product.id"
@@ -36,16 +36,16 @@
 
     </div>
    
-</div> --}}
+</div>
  </div>
  
  <div class="form-group row">
+     @foreach($products as $i => $prod)
     <div class="col-md-2 col-form-label">
         {{__('main.products')}}
     </div>
 
     <div class="col-md">
-            @foreach($products as $i => $prod)
             <div class="row">
             <div class="col-md">
                     <select
@@ -88,22 +88,26 @@
                 </button>
             </div>
     </div>
-            @endforeach
-
-                
-
-
-
-        <div class="d-flex justify-content-between mt-5">
-            <button class="btn btn-primary " wire:click="save" >
-                {{__('main.save')}} {{__('main.product')}} 
-            </button>
-
-            <button class="btn btn-secondary "    wire:click="addProduct">
-                {{__('main.add')}} {{__('main.product')}} 
-            </button>
-            
-        </div>
+    
+    
+    
+    
+    
+    
+        
+       
+        
     </div>
+    @endforeach
+    
+<div class="d-flex justify-content-between mt-5">
+    
+    <button class="btn btn-primary mr-5 " wire:click="save" >
+        {{__('main.save')}} {{__('main.product')}} 
+    </button>
+    <button class="btn btn-secondary   "    wire:click="addProduct">
+        {{__('main.add')}} {{__('main.product')}} 
+    </button>
+</div>
 </div>
 
