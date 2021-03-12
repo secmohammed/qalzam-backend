@@ -41,9 +41,17 @@ class TemplateProductController extends Controller
     protected $viewPath = 'template.product';
 
     /**
+     * @param $productVariationRepository
+     */
+    public function __construct(ProductVariationRepository $productVariationRepository)
+    {
+        $this->productVariationRepository = $productVariationRepository;
+    }
+
+    /**
      * @param ProductVariationRepository $productvariationRepository
      */
-    public function create(Template $template, ProductVariation $products)
+    public function create(Template $template)
     {
 
         $this->setData('title', __('main.add') . ' ' . __('main.order'), 'web');
@@ -51,7 +59,7 @@ class TemplateProductController extends Controller
         $this->setData('template', $template, 'web');
         $this->setData('auth_token', auth()->user()->generateAuthToken());
         $this->setData('alias', $this->domainAlias, 'web');
-        $this->setData('products', $products, 'web');
+        $this->setData('products', $this->productVariationRepository->all(), 'web');
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
 

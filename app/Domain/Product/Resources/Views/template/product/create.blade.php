@@ -63,7 +63,7 @@
                         {{-- <form class="form  action="{{ route('templates.store') }}" method="POST"> --}}
                             @csrf
 
-                            <template-products action="create" :template="{{ $template }}" auth_token="{{ $auth_token}}"/>
+                            <template-products action="create" :products="{{ $products }}" :template="{{ $template }}" auth_token="{{ $auth_token}}"/>
                             {{-- <div class="row container-fluid mb-5">
                                 <div class="col-xl-0"></div>
                                 <div class="col-xl-10">

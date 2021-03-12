@@ -49,7 +49,7 @@
                     <div class="card card-custom">
                         <div class="card-header">
                             <h3 class="card-title">
-                                {{ __('main.show') }} {{ __('main.reservation') }} : # {{ $show->id }}
+                                {{ __('main.show') }} {{ __('main.reservation') }} : # {{ $reservation->id }}
                             </h3>
                             <div class="card-toolbar">
                                 <a title="{{ __('main.create') }} {{ __('main.reservation') }}"
@@ -58,13 +58,13 @@
                                     <i class="flaticon2-plus"
                                        style="color: #FFF"></i> {{ __("main.add") }} {{ __("main.reservation") }} </a>
                                 <a title="{{ __('main.delete') }} {{ __('main.reservation') }}"
-                                   href="{{ route('reservations.destroy', $show->id) }}"
+                                   href="{{ route('reservations.destroy', $reservation->id) }}"
                                    class="btn btn-light-danger font-weight-bolder mr-2" data-toggle="modal"
-                                   data-target="#delete_{{$show->id}}">
+                                   data-target="#delete_{{$reservation->id}}">
                                     <i class="flaticon2-trash"></i> {{ __("main.delete") }} {{ __("main.reservation") }}
                                 </a>
                                 <a title="{{ __('main.edit') }} {{ __('main.reservation') }}"
-                                   href="{{ route('reservations.edit', $show->id) }}"
+                                   href="{{ route('reservations.edit', $reservation->id) }}"
                                    class="btn btn-light-warning font-weight-bolder mr-2">
                                     <i class="flaticon2-edit"></i> {{ __("main.edit") }} {{ __("main.reservation") }} </a>
                             </div>
@@ -75,60 +75,43 @@
                                 <div class="col-md-6 mb-5">
                                     <div class="row mb-2">
                                         <strong class="ml-3"><span>{{ __("main.user") }} : </span></strong>
-                                        <span>{{ $show->user->name  }} </span>
+                                        <span>{{ $reservation->user->name  }} </span>
                                     </div>
                                     <hr>
                                 </div>
                                 <div class="col-md-6 mb-5">
                                     <div class="row mb-2">
                                         <strong class="ml-3"><span>{{ __("main.creator") }} : </span></strong>
-                                        <span>{{ $show->creator->name }} </span>
+                                        <span>{{ $reservation->creator->name }} </span>
                                     </div>
                                     <hr>
                                 </div>
                                 <div class="col-md-6 mb-5">
                                     <div class="row mb-2">
                                         <strong class="ml-3"><span>{{ __("main.accommodation") }} : </span></strong>
-                                        <span>{{ $show->accommodation->name }} | {{ $show->accommodation->branch->name }} </span>
+                                        <span>{{ $reservation->accommodation->name }} | {{ $reservation->accommodation->branch->name }} </span>
                                     </div>
                                     <hr>
                                 </div>
                                 <div class="col-md-6 mb-5">
                                     <div class="row mb-2">
                                         <strong class="ml-3"><span>{{ __("main.status") }} : </span></strong>
-                                        <span>{{ $show->status  }} </span>
+                                        <span>{{ $reservation->status  }} </span>
                                     </div>
                                     <hr>
                                 </div>
-                                @if($show->order)
-                                  <div class="col-md-6 mb-5">
-                                    <div class="row mb-2">
-                                        <strong class='ml-3'><span>{{ __("main.products") }} : </span></strong>
-                                        @if ($show->order->products->count())
-                                        <ul>
-                                            @foreach($show->order->products as $product)
-                                                <li>{{ $product->name }} </li>
-                                            @endforeach
-                                        </ul>
-                                        @else
-                                         N/A
-                                        @endif
-                                    </div>
-                                    <hr>
-                                </div>
-                                @endif
 
                                 <div class="col-md-6 mb-5">
                                     <div class="row mb-2">
                                         <strong class='ml-3'><span>{{ __("main.start_date") }} : </span></strong>
-                                        <span>{{$show->start_date ?? 'N/A'}}</span>
+                                        <span>{{$reservation->start_date ?? 'N/A'}}</span>
                                     </div>
                                     <hr>
                                 </div>
                                 <div class="col-md-6 mb-5">
                                     <div class="row mb-2">
                                         <strong class='ml-3'><span>{{ __("main.end_date") }} : </span></strong>
-                                        <span>{{$show->end_date ?? 'N/A'}}</span>
+                                        <span>{{$reservation->end_date ?? 'N/A'}}</span>
                                     </div>
                                     <hr>
                                 </div>
@@ -136,7 +119,7 @@
                                 <div class="col-md-6 mb-5">
                                     <div class="row mb-2">
                                         <strong class='ml-3'><span>{{ __("main.total_price") }} : </span></strong>
-                                        <span>{{$show->formatted_total_price }}</span>
+                                        <span>{{$reservation->formatted_total_price }}</span>
                                     </div>
                                     <hr>
                                 </div>
@@ -144,7 +127,7 @@
                                 <div class="col-md-6 mb-5">
                                     <div class="row mb-2">
                                         <strong class='ml-3'><span>{{ __("main.created_at") }} : </span></strong>
-                                        <span>{{$show->created_at}}</span>
+                                        <span>{{$reservation->created_at}}</span>
                                     </div>
                                     <hr>
                                 </div>
@@ -157,22 +140,22 @@
     </div>
 
 
-    <div class="modal fade" id="delete_{{$show->id}}" tabindex="-1" role="dialog"
+    <div class="modal fade" id="delete_{{$reservation->id}}" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">{{ __('main.delete') }} {{ __('main.reservation') }}
-                        : {{ __('main.reservations') }} #({{ $show->name }})</h5>
+                        : {{ __('main.reservations') }} #({{ $reservation->name }})</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
-                <form action="{{ route('reservations.destroy', $show->id) }}" method="POST">
+                <form action="{{ route('reservations.destroy', $reservation->id) }}" method="POST">
                     @csrf
                     @method("DELETE")
                     <div class="modal-body">
                         {{ __('main.delete') }} {{ __('main.reservations') }}: {{ __('main.reservations') }}
-                        #({{ $show->id }})
+                        #({{ $reservation->id }})
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"

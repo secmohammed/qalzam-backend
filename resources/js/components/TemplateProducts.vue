@@ -1,31 +1,32 @@
 <template>
     <form action="" @submit.prevent="save">
         
-     <div class="form-group row">
-         <div v-for="(product, index) in form.products">
+        <div class="form-group row">
 
+         <div v-for="(product, index) in form.products" class="mr-12">
              <div class="col-md-2 col-form-label">
                  products
              </div>
 
+
              <div class="col-md">
                  <div class="row">
                      <div class="col-md">
-                         <select v:model="form.products[index].id" class="form-control kt_select2_products ">
+                         <select v:model="form.products[index].id" class="form-control">
                              <option label="Label"></option>
-                             <option v-for="procutsVariation in productVariations" :value="procutsVariation.id">{{ procutsVariation.name }}</option>
+                             <option v-for="product in products" :value="product.id">{{ product.name }}</option>
 
                          </select>
 
                      </div>
                      <div class="form-group mr-2">
 
-                         <input class="form-control " v-model="form.products[index].quantity" type="numeric" placeholder="quantity" />
+                         <input class="form-control" v-model="form.products[index].quantity" type="numeric" placeholder="quantity" />
 
                      </div>
                      <div class="form-group">
 
-                         <input class="form-control price " v-model="form.products[index].price" type="numeric" placeholder="price" />
+                         <input class="form-control price" v-model="form.products[index].price" type="numeric" placeholder="price" />
 
                      </div>
                      <div class="col-md-auto">
@@ -38,13 +39,14 @@
 
              </div>
          </div>
-     </div>
-
-   <div class="d-flex justify-content-end mt-5">
-        <button class=" btn btn-secondary " @click.prevent="addProduct">Add Product</button>
-        <button type="submit"></button>
         </div>
-        
+
+        <div class="d-flex justify-content-between mt-12">
+
+            <button class=" btn btn-secondary" @click.prevent="addProduct">Add Product</button>
+                        <button type="submit" class="btn btn-primary" @click.prevent="save">Create Product Template</button>
+
+        </div>
     </form>
 </template>
 <script>
@@ -56,6 +58,10 @@
             },
 
             template: {
+                required: true,
+                type: Object
+            },
+            products: {
                 required: true,
                 type: Object
             },
@@ -83,11 +89,14 @@
                         Authorization: 'Bearer ' + this.auth_token
                     }
                 }).then(res => {
-                    // window.location = '/templates'
+                    window.location = '/templates'
                 }).catch(err => {
                     // console.log(err.response.data.errors)
                     //set errors array
                 })
+            },
+            removeProduct(index) {
+                this.form.products.splice(index, 1)
             },
             addProduct() {
                 this.form.products.push(
