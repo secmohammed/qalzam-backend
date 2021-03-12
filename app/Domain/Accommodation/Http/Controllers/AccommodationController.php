@@ -107,7 +107,6 @@ class AccommodationController extends Controller
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('branches', $branchRepository->all());
         $this->setData('edit', $accommodation);
-
         $this->addView("{$this->domainAlias}::{$this->viewPath}.edit");
 
         $this->useCollection(AccommodationResource::class, 'edit');
@@ -168,7 +167,7 @@ class AccommodationController extends Controller
      */
     public function store(AccommodationStoreFormRequest $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $accommodation = $this->accommodationRepository->create($request->validated());
 
         app(Pipeline::class)->send([

@@ -62,7 +62,7 @@
         </div>
     </div>
 </div>
-<div class="form-group row">
+{{-- <div class="form-group row">
     <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.price") }} <span
             style="color: red"> * </span> </label>
     <div class="col-lg-10 col-md-9 col-sm-12">
@@ -79,7 +79,8 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
+
 <div class="form-group row">
     <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.capacity") }} <span
             style="color: red"> * </span> </label>

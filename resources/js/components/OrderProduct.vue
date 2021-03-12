@@ -8,7 +8,7 @@
                  <option label="Label"></option>
                  <option v-for="address in addresses" :value="address.id">{{address.name}}</option>
              </select>
-             =
+             
          </div>
      </div>
      <div class="form-group row">

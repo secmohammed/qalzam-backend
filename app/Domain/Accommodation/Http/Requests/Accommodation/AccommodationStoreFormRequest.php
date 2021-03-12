@@ -2,9 +2,9 @@
 
 namespace App\Domain\Accommodation\Http\Requests\Accommodation;
 
-use Illuminate\Validation\Rule;
-use App\Infrastructure\Http\AbstractRequests\BaseRequest as FormRequest;
 use App\Domain\Accommodation\Http\Rules\EnsureContractHasTemplateProducts;
+use App\Infrastructure\Http\AbstractRequests\BaseRequest as FormRequest;
+use Illuminate\Validation\Rule;
 
 class AccommodationStoreFormRequest extends FormRequest
 {
