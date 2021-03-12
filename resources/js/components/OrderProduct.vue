@@ -1,6 +1,6 @@
 <template>
- <!-- step 1 -->
  <form action="">
+<<<<<<< HEAD
      <div class="form-group row">
          <label class="col-form-label text-right col-lg-2 col-sm-12">address</label>
          <div class="col-lg-10 col-md-9 col-sm-12">
@@ -11,6 +11,10 @@
              
          </div>
      </div>
+=======
+    <template v-if="step == 1">
+      
+>>>>>>> 85c36a8220962729abeacd16e3881f46dfa8dbb9
      <div class="form-group row">
          <label class="col-form-label text-right col-lg-2 col-sm-12">branch</label>
          <div class="col-lg-10 col-md-9 col-sm-12">
@@ -26,26 +30,37 @@
          <div class="col-lg-10 col-md-9 col-sm-12">
              <select class="form-control select2 " v-model="form.user_id" data-placeholder="select user">
                  <option label="Label"></option>
-                 <option v-for="user in  users " :value="user.id">{{user.name}}</option>
+                 <option v-for="user in  users" :value="user.id">{{user.name}}</option>
+             </select>
+         </div>
+     </div>
+        <div class="form-group row">
+         <label class="col-form-label text-right col-lg-2 col-sm-12">address</label>
+         <div class="col-lg-10 col-md-9 col-sm-12">
+             <select class="form-control select2" v-model="form.address_id" data-placeholder="select address">
+                 <option label="Label"></option>
+                 <option v-for="address in addresses" :value="address.id">{{address.name}}</option>
              </select>
          </div>
      </div>
 
+    </template>
      <!-- step2 -->
-
-     <div class="form-group row">
-         <div v-for="(product, index) in form.products">
-
+     <template v-if="step == 2">
+           <div class="form-group row">
              <div class="col-md-2 col-form-label">
                  products
              </div>
 
+         <div v-for="(product, index) in form.products">
+
+
              <div class="col-md">
                  <div class="row">
                      <div class="col-md">
-                         <select v:model="form.products[index].id" class="form-control kt_select2_products ">
+                         <select v-model="form.products[index].id" class="form-control kt_select2_products ">
                              <option label="Label"></option>
-                             <option v-for="procutsVariation in productVariations" :value="procutsVariation.id">{{ procutsVariation.name }}</option>
+                             <option v-for="product in products" :value="product.id">{{ product.name }}</option>
 
                          </select>
 
@@ -55,14 +70,9 @@
                          <input class="form-control " v-model="form.products[index].quantity" type="numeric" placeholder="quantity" />
 
                      </div>
-                     <div class="form-group">
-
-                         <input class="form-control price " v-model="form.products[index].price" type="numeric" placeholder="price" />
-
-                     </div>
                      <div class="col-md-auto">
 
-                         <button class="btn btn-sm btn-danger land_phones-delete-button" onclick="confirm('Are you sure?') || event.stopImmediatePropagation();" @click="removeProduct(index)">
+                         <button class="btn btn-sm btn-danger land_phones-delete-button" onclick="confirm('Are you sure?') || event.stopImmediatePropagation();" @click.prevent="removeProduct(index)">
                              <i class="fa fa-trash-alt"></i>
                          </button>
                      </div>
@@ -71,25 +81,36 @@
              </div>
          </div>
      </div>
+          <div class="d-flex justify-content-end mt-5">
 
-     <div class="d-flex justify-content-end mt-5">
-
-         <button class="btn btn-secondary " @click="addProduct">
-             add porduct
+         <button class="btn btn-secondary" @click.prevent="addProduct">
+            Add Product
          </button>
 
      </div>
+
+     </template>
+   
 
      <div class="d-flex justify-content-between mt-5">
-         <button class="btn btn-primary " @click.prevent="">
-             previous
+         <button class="btn btn-primary " @click.prevent="previousStep" v-if="step != 1">
+             Previous Step
          </button>
-
-         <button class="btn btn-secondary " @click.prevent="submit">
-             create order
-         </button>
+         <template v-if="step == 1">
+             <button class="btn btn-secondary " @click.prevent="nextStep" :disabled="!isNextStepDisabled">
+                 Next Step
+             </button>
+            
+         </template>
+         <template v-else>
+             <button class="btn btn-secondary" @click.prevent="submit" :disabled="!isCreateOrderButtonDisabled">
+                 Create Order
+             </button>
+             
+         </template>
 
      </div>
+    </form>
 </template>
 
 <script>
@@ -118,8 +139,13 @@ export default {
             step: 1,
             discounts: [],
             addresses: [],
+            products: [],
             form: {
-                products: [],
+                products: [
+                {
+                    id: null,
+                    quantity: null
+                }],
                 user_id: null,
                 branch_id: null,
                 address_id: null,
@@ -127,7 +153,6 @@ export default {
             },
         };
     },
-    mounted() {},
     watch: {
         "form.user_id"(val) {
             const {
@@ -139,16 +164,36 @@ export default {
             this.addresses = addresses;
             this.discounts = discounts;
         },
+        "form.branch_id"(val) {
+            this.products = this.branches.find(branch => branch.id == val).products
+        }
     },
-    methods: {
+    computed: {
+        isCreateOrderButtonDisabled() {
+            return this.form.products.length && this.form.discount_id
+        },
+        isNextStepDisabled() {
+            return this.form.user_id && this.form.branch_id &&  this.form.address_id
+        },
         canBeSubmited() {
             return this.errors.length === 0;
         },
+
+    },
+    methods: {
         nextStep() {
             this.step++;
         },
         previousStep() {
             this.step--;
+        },
+        removeProduct(index) {
+            this.form.products.splice(index, 1)
+        },
+        addProduct() {
+            this.form.products.push(
+                {id: null, quantity: null}
+            )
         },
         save() {
             axios.post("/api/orders", this.form, {

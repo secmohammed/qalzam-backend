@@ -89,9 +89,8 @@ class OrderController extends Controller
 
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('auth_token', auth()->user()->generateAuthToken());
-        $this->setData('branches', $this->branchRepository->all(), 'web');
+        $this->setData('branches', $this->branchRepository->with(['products'])->all(), 'web');
         $this->setData('users', $this->userRepository->with(['addresses', 'discounts'])->get(), 'web');
-        // dd($this->discountRepository->withoutExpired()->toSql());
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
 
         $this->setApiResponse(fn() => response()->json(['create_your_own_form' => true]));

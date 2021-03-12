@@ -72,13 +72,7 @@
                                     <div class="col-xl-10" id="app">
                                     <order-form :users="{{ $users}}" :branches="{{ $branches}}" auth_token="{{ $auth_token }}" action="create" />
                                     </div>
-                                    <div class="col-md-4"></div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-lg-2">
-                                        <button type="submit"
-                                                class="btn btn-block btn-sm btn-light-primary font-weight-bolder text-uppercase py-4">{{ __("main.create") }}
-                                            &nbsp; {{ __("main.order") }}</button>
-                                    </div>
+
                                 </div>
                             {{-- </form> --}}
                         </div>

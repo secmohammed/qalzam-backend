@@ -37,8 +37,8 @@ class CreateOrderPipeline implements Pipeline
         //orders for dashboard perspective.
         if ($request->is('api/orders')) {
             $products = $this->productVariationRepository->branches()->wherePivot('branch_id', $request->branch_id)->wherePivotIn('product_variation_id', $request->products)->get();
-            $subtotal = $products->reduce(function ($carry, $product) {
-                return $carry + $product->pivot->price;
+            $subtotal = $products->reduce(function ($carry, $product) use ($request) {
+                return $carry + ($product->pivot->price * $request->validated()['products'][$product->id]['quantity']);
             }, 0);
             if ($request->discount) {
                 $subtotal = $subtotal - ($subtotal * $request->discount->percentage / 100);
@@ -47,7 +47,7 @@ class CreateOrderPipeline implements Pipeline
             $order = $this->orderRepository->firstOrCreate(
                 Arr::except($request->validated(), ['products', 'discount_id']) + compact('subtotal')
             );
-            $order->products()->sync($products);
+            $order->products()->sync($request->validated()['products']);
         } else {
             //user_orders
             $order = auth()->user()->orders()->firstOrCreate(
