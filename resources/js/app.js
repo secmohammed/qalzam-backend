@@ -9,7 +9,8 @@ require('./bootstrap');
 window.Vue = require('vue').default;
 
 
-Vue.component('order-product', require('./components/OrderProduct.vue').default);
+Vue.component('order-form', require('./components/OrderProduct.vue').default);
+Vue.component('template-products', require('./components/TemplateProducts.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

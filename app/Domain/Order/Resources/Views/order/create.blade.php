@@ -70,7 +70,7 @@
                                 <div class="row container-fluid mb-5">
                                     <div class="col-xl-0"></div>
                                     <div class="col-xl-10" id="app">
-                                    <order-product :users="{{ $users}}" :branches="{{ $branches}}" auth_token="{{ $auth_token }}"/>
+                                    <order-form :users="{{ $users}}" :branches="{{ $branches}}" auth_token="{{ $auth_token }}" action="create" />
                                     </div>
                                     <div class="col-md-4"></div>
                                     <div class="col-md-1"></div>

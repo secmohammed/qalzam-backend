@@ -3,6 +3,10 @@
 <script>
 export default {
     props: {
+        action: {
+            required: true,
+            type: String,
+        }
         auth_token: {
             required: true,
             type: String,
