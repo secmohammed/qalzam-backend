@@ -422,6 +422,7 @@
                     <!--end::Page Vendors-->
                     <!--begin::Page Scripts(used by this page)-->
                     <script src="{{ asset('assets/js/pages/widgets.js') }}"></script>
+
                     @livewireScripts
                     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
                     @stack('scripts')

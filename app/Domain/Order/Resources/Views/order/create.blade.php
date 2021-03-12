@@ -69,8 +69,8 @@
                                 {{-- @csrf --}}
                                 <div class="row container-fluid mb-5">
                                     <div class="col-xl-0"></div>
-                                    <div class="col-xl-10">
-                                      <livewire:order-product  />
+                                    <div class="col-xl-10" id="app">
+                                    <order-product :users="{{ $users}}" :branches="{{ $branches}}" auth_token="{{ $auth_token }}"/>
                                     </div>
                                     <div class="col-md-4"></div>
                                     <div class="col-md-1"></div>
@@ -92,14 +92,5 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('assets/js/pages/crud/forms/widgets/select2.js?v=7.1.5') }}"></script>
-    <script>
-        $('.select2').select2({
-                        placeholder: '{{ __('main.select_option') }}'
-
-
-        });
-
-    </script>
-
+    <script src="{{ asset('js/app.js')}}"></script>
 @endpush

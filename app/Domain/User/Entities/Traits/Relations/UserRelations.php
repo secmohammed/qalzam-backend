@@ -73,7 +73,7 @@ trait UserRelations
      */
     public function discounts()
     {
-        return $this->belongsToMany(Discount::class)->withPivot('used_at');
+        return $this->belongsToMany(Discount::class, 'discount_user', 'user_id', 'discount_id')->withPivot('used_at');
     }
 
     /**
