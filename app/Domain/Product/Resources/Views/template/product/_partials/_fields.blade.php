@@ -1,4 +1,4 @@
-
+{{-- 
 
  <div class="form-group row">
     <div class="col-md-2 col-form-label">
@@ -37,7 +37,7 @@
     </div>
    
 </div>
- </div>
+ </div> --}}
  
  <div class="form-group row">
      @foreach($products as $i => $prod)

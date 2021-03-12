@@ -11,7 +11,7 @@ class step1 extends Component
 {
     public $state = [];
     protected $listeners = [
-        "submit",
+        "step1Submit",
     ];
 
     protected $rule = [
@@ -24,8 +24,9 @@ class step1 extends Component
         "state.user_id.required" => 'the user is required',
         "state.address_id.required" => 'the address is required',
     ];
-    public function submit()
+    public function step1Submit()
     {
+        dd(1);
         $this->validate();
         $this->emit("mergeState", $this->state);
         $this->emit('goToStep', 2);

@@ -7,7 +7,7 @@ use Livewire\Component;
 class OrderProduct extends Component
 {
 
-    public $step = 2;
+    public $step = 1;
     public $state = [];
     protected $listeners = [
         "goToStep",
