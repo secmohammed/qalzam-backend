@@ -59,12 +59,11 @@
                             style="color: #fff"></i> {{ __('main.back') }} </a>
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" id="app">
                         {{-- <form class="form  action="{{ route('templates.store') }}" method="POST"> --}}
                             @csrf
 
-                            <livewire:template-product :template="$template" />
-                            
+                            <template-products action="create" :template="{{ $template }}" auth_token="{{ $auth_token}}"/>
                             {{-- <div class="row container-fluid mb-5">
                                 <div class="col-xl-0"></div>
                                 <div class="col-xl-10">
@@ -88,27 +87,5 @@
 </div>
 @endsection
 @push('scripts')
-<script src="{{ asset('assets/js/pages/crud/forms/widgets/select2.js?v=7.1.5') }}"></script>
-<script>
-   
-        $('.kt_select2_test').on('change',function(e){
-            console.log("🚀 ~ file: create.blade.php ~ line 143 ~ $ ~ e", e)
-            window.livewire.emit('selectTest', e.target.value)
-        });
-        
-
-    
-
-
-        // $('.kt_select2_products').on('change',function(e){
-        //     console.log("🚀 ~ file: create.blade.php ~ line 167 ~ $ ~ e", e)
-        //     window.livewire.emit('selectProduct', e.target.value)
-        // });
-        $('.price',onchange).map((_,el) => {
-        console.log("🚀 ~ file: create.blade.php ~ line 108 ~ $ ~ el", el)
-            
-        
-        }).get()
-
-</script>
+    <script src="{{ asset('js/app.js')}}"></script>
 @endpush

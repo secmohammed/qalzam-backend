@@ -1,10 +1,10 @@
 <template>
     <form action="" @submit.prevent="save">
     <div>
-        <div v-for="(index, product) in form.products">
-            <input type="text" v-model="product[index].id">
-            <input type="text" v-model="product[index].price">
-            <input type="text" v-model="product[index].quantity">
+        <div v-for="(product, index) in form.products">
+            <input type="text" v-model="form.products[index].id">
+            <input type="text" v-model="form.products[index].price">
+            <input type="text" v-model="form.products[index].quantity">
         </div>
         <button @click.prevent="addProduct">Add Product</button>
         <button type="submit"></button>
@@ -38,6 +38,8 @@
                     ],
                 }
             }
+        },
+        mounted() {
         },
         methods: {
             save() {

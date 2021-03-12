@@ -2,13 +2,13 @@
 
 namespace App\Domain\Product\Http\Controllers;
 
-use App\Domain\Product\Entities\ProductVariation;
-use App\Domain\Product\Entities\Template;
-use App\Domain\Product\Http\Requests\TemplateProduct\TemplateProductStoreFormRequest;
-use App\Domain\Product\Repositories\Contracts\ProductVariationRepository;
-use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 use Illuminate\Http\Request;
 use Joovlly\DDD\Traits\Responder;
+use App\Domain\Product\Entities\Template;
+use App\Domain\Product\Entities\ProductVariation;
+use App\Domain\Product\Repositories\Contracts\ProductVariationRepository;
+use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use App\Domain\Product\Http\Requests\TemplateProduct\TemplateProductStoreFormRequest;
 
 class TemplateProductController extends Controller
 {
@@ -49,6 +49,7 @@ class TemplateProductController extends Controller
         $this->setData('title', __('main.add') . ' ' . __('main.order'), 'web');
 
         $this->setData('template', $template, 'web');
+        $this->setData('auth_token', auth()->user()->generateAuthToken());
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('products', $products, 'web');
 
@@ -74,12 +75,12 @@ class TemplateProductController extends Controller
         $template->products()->sync(
             $request->validated()
         );
+
         return $template;
         // $this->setData('$', $template);
         // $this->r("{$this->resourceRoute}.show", [$template->id]);
         // $this->useCollection(TemplateResource::class, 'data');
 
         // return $this->response();
-
     }
 }
