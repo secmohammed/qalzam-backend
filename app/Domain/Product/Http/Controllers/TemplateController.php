@@ -2,15 +2,15 @@
 
 namespace App\Domain\Product\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Joovlly\DDD\Traits\Responder;
 use App\Domain\Product\Entities\Template;
-use App\Domain\Product\Http\Resources\Template\TemplateResource;
-use App\Domain\Product\Repositories\Contracts\TemplateRepository;
 use App\Domain\Product\Http\Requests\Template\TemplateStoreFormRequest;
 use App\Domain\Product\Http\Requests\Template\TemplateUpdateFormRequest;
+use App\Domain\Product\Http\Resources\Template\TemplateResource;
 use App\Domain\Product\Http\Resources\Template\TemplateResourceCollection;
+use App\Domain\Product\Repositories\Contracts\TemplateRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use Illuminate\Http\Request;
+use Joovlly\DDD\Traits\Responder;
 
 class TemplateController extends Controller
 {
@@ -144,11 +144,17 @@ class TemplateController extends Controller
      */
     public function show(Template $template)
     {
+        $template_products = $template->products->map(function ($product) {
+            // dd($product->pivot->price);
+            return array_merge($product->pivot->only("quantity", "price"), $product->product->only("name", "id"), ["image" => $product->getFirstMediaUrl("product-images")]);
+        });
+
         $this->setData('title', __('main.show') . ' ' . __('main.template') . ' : ' . $template->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
 
         $this->setData('show', $template);
+        $this->setData('template_products', $template_products);
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.show");
 

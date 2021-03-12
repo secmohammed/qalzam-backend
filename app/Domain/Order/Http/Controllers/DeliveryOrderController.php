@@ -2,16 +2,18 @@
 
 namespace App\Domain\Order\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Joovlly\DDD\Traits\Responder;
 use App\Domain\Branch\Entities\Branch;
+use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 use App\Domain\Order\Entities\Deliveryorder;
-use App\Domain\Order\Http\Resources\Order\OrderResource;
-use App\Domain\Order\Repositories\Contracts\OrderRepository;
-use App\Domain\Order\Repositories\Contracts\DeliveryorderRepository;
-use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 use App\Domain\Order\Http\Requests\Deliveryorder\DeliveryorderStoreFormRequest;
 use App\Domain\Order\Http\Requests\Deliveryorder\DeliveryorderUpdateFormRequest;
+use App\Domain\Order\Http\Resources\Order\OrderResource;
+use App\Domain\Order\Repositories\Contracts\DeliveryorderRepository;
+use App\Domain\Order\Repositories\Contracts\OrderRepository;
+use App\Domain\User\Repositories\Contracts\UserRepository;
+use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use Illuminate\Http\Request;
+use Joovlly\DDD\Traits\Responder;
 
 class DeliveryOrderController extends Controller
 {
@@ -34,14 +36,14 @@ class DeliveryOrderController extends Controller
      *
      * @var string
      */
-    protected $resourceRoute = 'orders';
+    protected $resourceRoute = 'delivery_orders';
 
     /**
      * View Path
      *
      * @var string
      */
-    protected $viewPath = 'order';
+    protected $viewPath = 'deliveryorder';
 
     /**
      * @param OrderRepository $orderRepository
@@ -56,11 +58,15 @@ class DeliveryOrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(UserRepository $userRepository, BranchRepository $branchRepository, OrderRepository $orderRepository)
     {
         $this->setData('title', __('main.add') . ' ' . __('main.order'), 'web');
-
         $this->setData('alias', $this->domainAlias, 'web');
+        $this->setData('orders', $orderRepository->with("user")->all(), 'web');
+        $this->setData('branches', $branchRepository->all(), 'web');
+        $this->setData('users', $userRepository->whereHas("roles", function ($query) {
+            $query->where("slug", "delivery");
+        })->all(), 'web');
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
 
@@ -119,10 +125,12 @@ class DeliveryOrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Branch $branch, DeliveryorderStoreFormRequest $request)
+    public function store(DeliveryorderStoreFormRequest $request)
     {
+        dd($request->all());
         $store = $this->orderRepository->create($request->validated());
-
+        //find (user,order)
+        // $user->deliverables->attach($order)
         if ($store) {
             $this->setData('data', $store);
 

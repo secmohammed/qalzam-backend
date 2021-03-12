@@ -75,6 +75,9 @@
                                             'action' => 'edit',
                                             'edit' => $edit,
                                             'users' => $users,
+                                            'branch_managers' => $branch_managers,
+                                            'deliverers' => $deliverers,
+                                            'selected_users' => $selected_users,
                                             'locations' => $locations
                                         ])
                                     </div>

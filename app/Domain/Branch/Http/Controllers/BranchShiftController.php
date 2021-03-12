@@ -2,16 +2,16 @@
 
 namespace App\Domain\Branch\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Joovlly\DDD\Traits\Responder;
 use App\Domain\Branch\Entities\BranchShift;
-use App\Domain\Branch\Repositories\Contracts\BranchRepository;
-use App\Domain\Branch\Repositories\Contracts\BranchShiftRepository;
-use App\Domain\Branch\Http\Resources\BranchShift\BranchShiftResource;
 use App\Domain\Branch\Http\Requests\BranchShift\BranchShiftStoreFormRequest;
 use App\Domain\Branch\Http\Requests\BranchShift\BranchShiftUpdateFormRequest;
-use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use App\Domain\Branch\Http\Resources\BranchShift\BranchShiftResource;
 use App\Domain\Branch\Http\Resources\BranchShift\BranchShiftResourceCollection;
+use App\Domain\Branch\Repositories\Contracts\BranchRepository;
+use App\Domain\Branch\Repositories\Contracts\BranchShiftRepository;
+use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use Illuminate\Http\Request;
+use Joovlly\DDD\Traits\Responder;
 
 class BranchShiftController extends Controller
 {
@@ -41,7 +41,7 @@ class BranchShiftController extends Controller
      *
      * @var string
      */
-    protected $viewPath = 'branch_shift';
+    protected $viewPath = 'branchshift';
 
     /**
      * @param BranchShiftRepository $branchshiftRepository
@@ -59,15 +59,15 @@ class BranchShiftController extends Controller
      */
     public function create()
     {
+        // dd($this->branchshiftRepository);
         $this->setData('title', __('main.add') . ' ' . __('main.branch_shift'), 'web');
-        $this->setData('branches', $this->branchRepository->where('status', 'active')->all());
+        $this->setData('branches', $this->branchRepository->where("status", "active")->get());
 
         $this->setData('alias', $this->domainAlias, 'web');
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
 
         $this->setApiResponse(fn() => response()->json(['create_your_own_form' => true]));
-
         return $this->response();
     }
 
@@ -102,8 +102,9 @@ class BranchShiftController extends Controller
      */
     public function edit(BranchShift $branch_shift)
     {
+        // dd(1)
         $this->setData('title', __('main.edit') . ' ' . __('main.branch_shift') . ' : ' . $branch_shift->id, 'web');
-        $this->setData('branches', $this->branchRepository->where('status', 'active')->all());
+        $this->setData('branches', $this->branchRepository->where("status", "active")->get());
 
         $this->setData('alias', $this->domainAlias, 'web');
 
@@ -123,6 +124,7 @@ class BranchShiftController extends Controller
      */
     public function index(Request $request)
     {
+
         $index = $this->branchshiftRepository->spatie()->paginate(
             config('qalzam.pagination')
         );
@@ -136,8 +138,8 @@ class BranchShiftController extends Controller
         $this->addView("{$this->domainAlias}::{$this->viewPath}.index");
 
         $this->useCollection(BranchShiftResourceCollection::class, 'data');
-
         return $this->response();
+
     }
 
     /**
@@ -151,12 +153,11 @@ class BranchShiftController extends Controller
         $this->setData('title', __('main.show') . ' ' . __('main.branch_shift') . ' : ' . $branch_shift->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
-
-        $this->setData('show', $branch_shift);
+        $this->setData('branch_shift', $branch_shift->load("branch"));
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.show");
 
-        $this->useCollection(BranchShiftResource::class, 'show');
+        $this->useCollection(BranchShiftResource::class, 'branch_shift');
 
         return $this->response();
     }

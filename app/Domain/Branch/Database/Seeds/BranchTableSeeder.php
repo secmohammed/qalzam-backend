@@ -2,8 +2,8 @@
 
 namespace App\Domain\Branch\Database\Seeds;
 
-use Illuminate\Database\Seeder;
 use App\Domain\Branch\Entities\Branch;
+use Illuminate\Database\Seeder;
 
 class BranchTableSeeder extends Seeder
 {

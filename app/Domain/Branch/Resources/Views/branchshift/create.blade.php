@@ -17,7 +17,7 @@
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
                     <!--begin::Page Title-->
                     <h5 class=" text-dark font-weight-bold my-1 mr-5 {{ GetLanguage() == 'ar' ? 'ml-2' : '' }}">
-                        {{ __('main.add') }} {{ __('main.branch_shift') }} </h5>
+                        {{ __('main.add') }} {{ __('main.branch-shifts') }} </h5>
                     <!--end::Page Title-->
 
                     <!--begin::Breadcrumb-->
@@ -28,11 +28,11 @@
                         </li>
                         <li class="breadcrumb-item">
                             <a href="{{ route('branch_shifts.index') }}" class="text-muted">
-                                {{ __('main.branch_shifts') }} </a>
+                                {{ __('main.branch-shifts_shifts') }} </a>
                         </li>
                         <li class="breadcrumb-item">
                             <a href="#" class="text-muted">
-                                {{ __('main.add') }} {{ __('main.branch_shifts') }} </a>
+                                {{ __('main.add') }} {{ __('main.branch-shifts_shifts') }} </a>
                         </li>
                     </ul>
                     <!--end::Breadcrumb-->
@@ -53,7 +53,7 @@
                     <div class="card card-custom">
                         <div class="card-header">
                             <h3 class="card-title">
-                                {{ __('main.add') }} {{ __('main.branch_shift') }}
+                                {{ __('main.add') }} {{ __('main.branch-shifts') }}
                             </h3>
                             <div class="card-toolbar">
                                 <a href="{{ route('branch_shifts.index') }}"
@@ -70,9 +70,8 @@
                                 <div class="row container-fluid mb-5">
                                     <div class="col-xl-0"></div>
                                     <div class="col-xl-10">
-                                        @include("{$alias}::branch_shift._partials._fields", [
+                                        @include("{$alias}::branchshift._partials._fields", [
                                             'action' => 'create',
-                                            'branches' => $branches
                                         ])
                                     </div>
                                     <div class="col-md-4"></div>
@@ -80,7 +79,7 @@
                                     <div class="col-lg-2">
                                         <button type="submit"
                                                 class="btn btn-block btn-sm btn-light-primary font-weight-bolder text-uppercase py-4">{{ __("main.create") }}
-                                            &nbsp; {{ __("main.branch_shift") }}</button>
+                                            &nbsp; {{ __("main.branch-shifts") }}</button>
                                     </div>
                                 </div>
                             </form>

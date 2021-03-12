@@ -1,40 +1,18 @@
 <br>
-<div class="form-group row">
-    <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.day") }}  <span
-            style="color: red"> * </span></label>
-    <div class="col-lg-10 col-md-9 col-sm-12">
-        <select class="form-control select2 {{$errors->has('day') ? 'is-invalid':''}}" name="day">
-            <option label="Label"></option>
-            <option value="saturday" {{ ($action == 'edit') && $edit->day == 'saturday' ? 'selected' : '' }}>{{ __('main.saturday') }}</option>
-            <option value="sunday" {{ ($action == 'edit') && $edit->day == 'sunday' ? 'selected' : '' }}>{{ __('main.sunday') }}</option>
-            <option value="monday" {{ ($action == 'edit') && $edit->day == 'monday' ? 'selected' : '' }}>{{ __('main.monday') }}</option>
-            <option value="tuesday" {{ ($action == 'edit') && $edit->day == 'tuesday' ? 'selected' : '' }}>{{ __('main.tuesday') }}</option>
-            <option value="wednesday" {{ ($action == 'edit') && $edit->day == 'wednesday' ? 'selected' : '' }}>{{ __('main.wednesday') }}</option>
-            <option value="thursday" {{ ($action == 'edit') && $edit->day == 'thursday' ? 'selected' : '' }}>{{ __('main.thursday') }}</option>
-            <option value="friday" {{ ($action == 'edit') && $edit->day == 'friday' ? 'selected' : '' }}>{{ __('main.friday') }}</option>
-        </select>
-        <div class="row">
-            <div class="col-md-12">
-                @if($errors->has('day'))
-                    <div class="alert alert-danger w-100 m-0" role="alert">
-                        {{$errors->first('day')}}
-                    </div>
-                @endif
-            </div>
-        </div>
-    </div>
-</div>
+
+<x-forms.days   :action="$action"  :edit="$edit??null" :name="'day'" label="main.day" />
+<x-forms.status :action="$action"  :edit="$edit??null"/>
+
+
 
 <div class="form-group row">
-    <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.start_time") }}</label>
+    <label  class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.start-time") }}</label>
     <div class="col-lg-10 col-md-9 col-sm-12">
-        <input
-            class="form-control kt_timepicker_1 {{$errors->has('start_time') ? 'is-invalid':''}}"
-            name="start_time"
-            readonly="readonly"
-            placeholder="{{ __("main.start_time") }}"
-            type="text"
-            value="{{ $action == 'edit' ? $edit->start_time : '' }}">
+        <input   class="form-control kt_timepicker_1 {{$errors->has('start_time') ? 'is-invalid':''}}"
+        name="start_time" type="time" 
+       id="example-time-input"
+        value="{{ $action == 'edit' ? $edit->start_time : '13:45' }}">
+        
         <div class="row">
             <div class="col-md-12">
                 @if($errors->has('start_time'))
@@ -48,15 +26,14 @@
 </div>
 
 <div class="form-group row">
-    <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.end_time") }}</label>
+    <label  class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.end-time") }}</label>
     <div class="col-lg-10 col-md-9 col-sm-12">
-        <input
-            class="form-control kt_timepicker_1 {{$errors->has('end_time') ? 'is-invalid':''}}"
-            name="end_time"
-            readonly="readonly"
-            placeholder="{{ __("main.end_time") }}"
-            type="text"
-            value="{{ $action == 'edit' ? $edit->end_time : '' }}">
+        <input   class="form-control kt_timepicker_1 {{$errors->has('end_time') ? 'is-invalid':''}}"
+       type="time" 
+        id="example-time-input"
+        name="end_time" 
+        value="{{ $action == 'edit' ? $edit->end_time : '13:45' }}">
+        
         <div class="row">
             <div class="col-md-12">
                 @if($errors->has('end_time'))
@@ -78,7 +55,7 @@
                 name="branch_id">
             <option label="Label"></option>
 
-            @foreach($branchs as $branch)
+            @foreach($branches as $branch)
                 <option value="{{$branch->id}}" {{ ($action == 'edit')  && $edit->branch_id == $branch->id ? 'selected' : '' }}>{{$branch->name}}</option>
             @endforeach
         </select>

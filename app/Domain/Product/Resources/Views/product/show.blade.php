@@ -172,7 +172,7 @@
             </div>
         </div>
     </div>
-
+{{-- {{ dd(1) }} --}}
 
     <div class="modal fade" id="delete_{{$show->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">

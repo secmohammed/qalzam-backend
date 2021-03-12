@@ -1,6 +1,9 @@
-@include('backend.globals.vue_validation')
+<x-forms.name :action="$action" :edit="$edit??null"/>
 
-<div class="form-group">
-    <label for="name">Name</label>
-    <input type="text" v-model="fData.name" class="form-control" id="name" placeholder="name">
-</div>
+
+<x-forms.status :action="$action"  :edit="$edit??null"/>
+
+
+
+
+

@@ -49,7 +49,8 @@ class OrderStoreFormRequest extends FormRequest
         if (request()->is('api/orders')) {
             $rules = [
                 'products' => 'required|array',
-                'products.*' => 'required|exists:product_variations,id',
+                'products.*.id' => 'required|exists:product_variations,id',
+                'products.*.quantity' => 'required|numeric|min:1',
                 'address_id' => [
                     'required',
                     Rule::exists('addresses', 'id')->where(function ($builder) {
@@ -66,6 +67,16 @@ class OrderStoreFormRequest extends FormRequest
 
     public function validated()
     {
+        if (request()->is('api/orders')) {
+            return array_merge(parent::validated(), [
+                'creator_id' => auth()->id(),
+                'products' => collect($this->request->get('products'))->keyBy('id')->map(function ($product) {
+                    return [
+                        'quantity' => $product['quantity'],
+                    ];
+                })->toArray(),
+            ]);
+        }
 
         return array_merge(parent::validated(), [
             'creator_id' => auth()->id(),

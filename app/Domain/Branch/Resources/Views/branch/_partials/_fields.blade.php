@@ -1,23 +1,30 @@
+{{-- {{ dd($edit, $users ,$locations ) }} --}}
 <br>
+<x-forms.name :action="$action" :edit="$edit??null"/>
+
+
 <div class="form-group row">
-    <label class="col-form-label text-right col-lg-2 col-sm-12">
-        {{ __("main.name_en") }}
-        <span style="color: red"> * </span>
-    </label>
+    <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.branch-managers") }}</label>
     <div class="col-lg-10 col-md-9 col-sm-12">
-        <input name="name" type="text" class="form-control {{$errors->has('name') ? 'is-invalid':''}}"
-        value="{{ ($action == 'edit') ? $edit->name : old('name') }}" placeholder="{{ __("main.name_en") }}">
+        <select class="form-control select2 {{$errors->has('user_id') ? 'is-invalid':''}}" name="user_id" data-placeholder="{{ __('main.select') .' '.__('main.branch-managers')  }}" >
+            <option label="Label"></option>
+            @foreach($branch_managers as $branch_maneg)
+            <option
+            value="{{$branch_maneg->id}}" {{ ($action == 'edit') && $edit->user_id === $branch_maneg->id  ? 'selected' : '' }}>{{$branch_maneg->name}} ({{ $branch_maneg->mobile }})</option>
+            @endforeach
+        </select>
         <div class="row">
             <div class="col-md-12">
-                @if($errors->has('name'))
+                @if($errors->has('user_id'))
                 <div class="alert alert-danger w-100 m-0" role="alert">
-                    {{$errors->first('name')}}
+                    {{$errors->first('user_id')}}
                 </div>
                 @endif
             </div>
         </div>
     </div>
 </div>
+<x-forms.status :action="$action" :edit="$edit??null"/>
 
 <div class="form-group row">
     <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.users") }}</label>
@@ -26,7 +33,7 @@
             <option label="Label"></option>
             @foreach($users as $user)
             <option
-            value="{{$user->id}}" {{ ($action == 'edit') && $edit->users->contains('id', $user->id)  ? 'selected' : '' }}>{{$user->name}} ({{ $user->mobile }})</option>
+            value="{{$user->id}}" {{ ($action == 'edit') && $selected_users->contains('id', $user->id)  ? 'selected' : '' }}>{{$user->name}} ({{ $user->mobile }})</option>
             @endforeach
         </select>
         <div class="row">
@@ -41,13 +48,14 @@
     </div>
 </div>
 <div class="form-group row">
+
     <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.deliverers") }}</label>
     <div class="col-lg-10 col-md-9 col-sm-12">
         <select class="form-control select2 {{$errors->has('deliverers') ? 'is-invalid':''}}" name="deliverers[]" data-placeholder="{{ __('main.select') .' '.__('main.deliverers')  }}" multiple>
             <option label="Label"></option>
             @foreach($deliverers as $delivery)
             <option
-            value="{{$delivery->id}}" {{ ($action == 'edit') && $edit->deliverers->contains('id', $delivery->id)  ? 'selected' : '' }}>{{$delivery->name}} ({{ $delivery->mobile }})</option>
+            value="{{$delivery->id}}" {{ ($action == 'edit') && $selected_users->contains('id', $delivery->id)  ? 'selected' : '' }}>{{$delivery->name}} ({{ $delivery->mobile }})</option>
             @endforeach
         </select>
         <div class="row">

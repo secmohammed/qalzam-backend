@@ -2,13 +2,13 @@
 
 namespace App\Domain\Discount\Entities;
 
-use Illuminate\Database\Eloquent\Builder;
-use App\Domain\Discount\Entities\Traits\Discountable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Infrastructure\AbstractModels\BaseModel as Model;
-use App\Domain\Discount\Repositories\Contracts\DiscountRepository;
-use App\Domain\Discount\Entities\Traits\Relations\DiscountRelations;
 use App\Domain\Discount\Entities\Traits\CustomAttributes\DiscountAttributes;
+use App\Domain\Discount\Entities\Traits\Discountable;
+use App\Domain\Discount\Entities\Traits\Relations\DiscountRelations;
+use App\Domain\Discount\Repositories\Contracts\DiscountRepository;
+use App\Infrastructure\AbstractModels\BaseModel as Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Discount extends Model
 {

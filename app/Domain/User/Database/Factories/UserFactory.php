@@ -1,13 +1,13 @@
 <?php
 namespace App\Domain\User\Database\Factories;
 
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
+use App\Domain\Order\Entities\Order;
 use App\Domain\User\Entities\Role;
 use App\Domain\User\Entities\User;
-use App\Domain\Order\Entities\Order;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class UserFactory extends Factory
 {
@@ -35,7 +35,8 @@ class UserFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
-            'email' => preg_replace('/@example\..*/', '@joovlly.com', $this->faker->unique()->safeEmail),
+            // 'email' => $this->faker->unique()->email,
+            'email' => preg_replace('/@example\..*/', '@joovlly.com', $this->faker->unique()->email),
             'mobile' => $this->faker->regexify('^(010|011|012|015)([0-9]{8})$'),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
 

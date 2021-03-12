@@ -2,12 +2,12 @@
 
 namespace App\Domain\Accommodation\Tests\Feature\Endpoints\Accommodation;
 
-use Tests\TestCase;
-use App\Domain\User\Entities\User;
-use Joovlly\Authorizable\Models\Role;
-use App\Domain\Branch\Entities\Branch;
-use Database\Seeders\RolesTableSeeder;
 use App\Domain\Accommodation\Entities\Accommodation;
+use App\Domain\Branch\Entities\Branch;
+use App\Domain\User\Entities\User;
+use Database\Seeders\RolesTableSeeder;
+use Joovlly\Authorizable\Models\Role;
+use Tests\TestCase;
 
 class DestroyAccommodationTest extends TestCase
 {

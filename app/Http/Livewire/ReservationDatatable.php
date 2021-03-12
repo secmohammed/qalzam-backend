@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Domain\Reservation\Entities\Reservation;
 use App\Http\Livewire\MainLivewire;
 use Mediconesystems\LivewireDatatables\Column;
-use App\Domain\Reservation\Entities\Reservation;
 use Mediconesystems\LivewireDatatables\DateColumn;
 use Mediconesystems\LivewireDatatables\NumberColumn;
 
@@ -12,7 +12,7 @@ class ReservationDatatable extends MainLivewire
 {
     public function builder()
     {
-        return Reservation::query()->with(['accommodation', 'branch', 'user', 'creator']);
+        return Reservation::query()->leftJoin('users as creator', 'creator.id', 'reservations.creator_id')->with(['accommodation', 'branch', 'user']);
     }
 
     public function columns()
@@ -27,7 +27,7 @@ class ReservationDatatable extends MainLivewire
             Column::name('accommodation.name')
                 ->label(__('main.accommodation'))
                 ->filterable($this->builder()->get()->pluck('accommodation.name')->unique()),
-            Column::name('user.name')
+            Column::name('users.name')
                 ->label(__('main.user'))
                 ->filterable($this->builder()->get()->pluck('user.name')->unique()),
             Column::name('creator.name')

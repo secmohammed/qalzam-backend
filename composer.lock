@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ec90b74a8d992f677adcda3621aeace4",
+    "content-hash": "3b43e1097077d298533520ac1b765616",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -10936,8 +10936,8 @@
         "joovlly/ddd": 20,
         "joovlly/reviewable": 20,
         "joovlly/sms": 20,
-        "joovlly/translatable": 20,
         "joovlly/toaster": 20,
+        "joovlly/translatable": 20,
         "laravel-notification-channels/fcm": 20,
         "tymon/jwt-auth": 20
     },

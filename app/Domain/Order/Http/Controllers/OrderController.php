@@ -11,16 +11,34 @@ use App\Domain\Order\Pipelines\CreateOrderPipeline;
 use App\Domain\Order\Http\Resources\Order\OrderResource;
 use App\Domain\Order\Pipelines\NotifyUserWithOrderStatus;
 use App\Domain\Order\Pipelines\NotifyUserWithPlacedOrder;
+use App\Domain\User\Repositories\Contracts\UserRepository;
 use App\Domain\Order\Repositories\Contracts\OrderRepository;
 use App\Domain\Order\Pipelines\ApplyDiscountToOrderIfPresent;
+use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 use App\Domain\Order\Http\Requests\Order\OrderStoreFormRequest;
 use App\Domain\Order\Http\Requests\Order\OrderUpdateFormRequest;
+use App\Domain\Discount\Repositories\Contracts\DiscountRepository;
 use App\Domain\Order\Http\Resources\Order\OrderResourceCollection;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 
 class OrderController extends Controller
 {
     use Responder;
+
+    /**
+     * @var mixed
+     */
+    protected $addressRepository;
+
+    /**
+     * @var mixed
+     */
+    protected $branchRepository;
+
+    /**
+     * @var mixed
+     */
+    protected $discountRepository;
 
     /**
      * Domain Alias.
@@ -51,10 +69,12 @@ class OrderController extends Controller
     /**
      * @param OrderRepository $orderRepository
      */
-    public function __construct(OrderRepository $orderRepository)
+    public function __construct(OrderRepository $orderRepository, BranchRepository $branchRepository, UserRepository $userRepository, DiscountRepository $discountRepository)
     {
         $this->orderRepository = $orderRepository;
-
+        $this->branchRepository = $branchRepository;
+        $this->userRepository = $userRepository;
+        $this->discountRepository = $discountRepository;
     }
 
     /**
@@ -64,10 +84,13 @@ class OrderController extends Controller
      */
     public function create()
     {
+
         $this->setData('title', __('main.add') . ' ' . __('main.order'), 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
-
+        $this->setData('auth_token', auth()->user()->generateAuthToken());
+        $this->setData('branches', $this->branchRepository->with(['products'])->all(), 'web');
+        $this->setData('users', $this->userRepository->with(['addresses', 'discounts'])->get(), 'web');
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
 
         $this->setApiResponse(fn() => response()->json(['create_your_own_form' => true]));
@@ -152,11 +175,14 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
+        // dd();
         $this->setData('title', __('main.show') . ' ' . __('main.order') . ' : ' . $order->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
 
-        $this->setData('show', $order);
+        $this->setData('show', $order->where('id', $order->id)->deliverersWithFee()->first());
+        // dd($order->products->all());
+        $this->setData('order_products', $order->products->all());
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.show");
 

@@ -2,8 +2,8 @@
 
 namespace App\Domain\Accommodation\Http\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
 use App\Domain\Product\Repositories\Contracts\TemplateRepository;
+use Illuminate\Contracts\Validation\Rule;
 
 class EnsureTemplateHasProducts implements Rule
 {

@@ -35,6 +35,7 @@ class TemplateProductStoreFormRequest extends FormRequest
      */
     public function rules()
     {
+        // dd($this->request);
         $rules = [
             'products' => 'required|array',
             'products.*.id' => 'required|exists:product_variations,id',

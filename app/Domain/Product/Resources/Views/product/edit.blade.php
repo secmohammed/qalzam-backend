@@ -73,8 +73,9 @@
                                 <div class="col-md-4"></div>
                                 <div class="col-md-1"></div>
                                 <div class="col-lg-2">
+                                    {{-- {{ dd($edit ?__('main.edit'): __('main.create')) }} --}}
                                     <button type="submit"
-                                    class="btn btn-block btn-sm btn-light-primary font-weight-bolder text-uppercase py-4">{{__('main.create')}} {{__('main.product')}}</button>
+                                    class="btn btn-block btn-sm btn-light-primary font-weight-bolder text-uppercase py-4">{{ __('main.edit')}}  {{__('main.product')}}</button>
                                 </div>
                             </div>
                         </form>

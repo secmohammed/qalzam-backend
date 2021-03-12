@@ -150,6 +150,7 @@
 <!--end::Page Vendors-->
 <!--begin::Page Scripts(used by this page)-->
 <script src="{{ asset('assets/js/pages/widgets.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 <!--end::Page Scripts-->
 @livewireScripts
 

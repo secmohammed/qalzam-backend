@@ -1,5 +1,5 @@
+{{-- {{ dd() }} --}}
 @extends('theme.app')
-
 @push('styles')
 
     <link rel="stylesheet"
@@ -105,6 +105,13 @@
                                     <div class="row mb-2">
                                         <strong class='ml-3'><span>{{ __("main.location") }} : </span></strong>
                                         <span>{{$branch->location->name }}</span>
+                                    </div>
+                                    <hr>
+                                </div>
+                                <div class="col-md-6 mb-5">
+                                    <div class="row mb-2">
+                                        <strong class='ml-3'><span>{{ __("main.status") }} : </span></strong>
+                                        <span>{{ $branch->status ? __("main.{$branch->status}") : 'N/A' }} </span>
                                     </div>
                                     <hr>
                                 </div>

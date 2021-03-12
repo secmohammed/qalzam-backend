@@ -2,9 +2,9 @@
 
 namespace App\Domain\Branch\Http\Requests\Branch;
 
-use Illuminate\Support\Arr;
 use App\Domain\Branch\Entities\Branch;
 use App\Infrastructure\Http\AbstractRequests\BaseRequest as FormRequest;
+use Illuminate\Support\Arr;
 
 class BranchStoreFormRequest extends FormRequest
 {
@@ -47,6 +47,7 @@ class BranchStoreFormRequest extends FormRequest
             'branch-gallery.*' => ['required', 'image', 'mimes:png,jpeg,jpg', 'max:2048'],
             'users' => 'required|array',
             'deliverers' => 'nullable|array',
+            'status' => 'nullable|in:active,inactive',
             'user_id' => 'required|exists:users,id',
             'deliverers.*' => 'required|exists:users,id',
             'users.*' => 'required|exists:users,id',
@@ -57,9 +58,10 @@ class BranchStoreFormRequest extends FormRequest
 
     public function validated()
     {
+        // dd(array_unique(array_merge($this->request->get('users'), $this->request->get('deliverers', [])), SORT_REGULAR), $this->request->get('users'), $this->request->get('deliverers', []), array_merge($this->request->get('users'), $this->request->get('deliverers', [])));
         return array_merge(Arr::except(parent::validated(), ['deliverers', 'users']), [
             'creator_id' => auth()->id(),
-            'users' => array_merge($this->request->get('users'), $this->request->get('deliverers', [])),
+            'users' => array_unique(array_merge($this->request->get('deliverers', []), $this->request->get('users'))),
         ]);
     }
 }

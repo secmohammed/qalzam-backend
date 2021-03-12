@@ -2,11 +2,11 @@
 
 namespace App\Domain\Accommodation\Entities\Traits\Relations;
 
-use App\Domain\User\Entities\User;
-use App\Domain\Branch\Entities\Branch;
-use App\Domain\Product\Entities\Template;
-use App\Domain\Category\Entities\Category;
 use App\Domain\Accommodation\Entities\Contract;
+use App\Domain\Branch\Entities\Branch;
+use App\Domain\Category\Entities\Category;
+use App\Domain\Product\Entities\Template;
+use App\Domain\User\Entities\User;
 
 trait AccommodationRelations
 {

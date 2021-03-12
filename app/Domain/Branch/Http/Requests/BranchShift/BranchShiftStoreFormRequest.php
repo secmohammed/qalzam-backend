@@ -2,8 +2,8 @@
 
 namespace App\Domain\Branch\Http\Requests\BranchShift;
 
-use App\Infrastructure\Http\AbstractRequests\BaseRequest as FormRequest;
 use App\Domain\Branch\Http\Requests\Rules\EnsureBranchHasUniqueShiftPerDay;
+use App\Infrastructure\Http\AbstractRequests\BaseRequest as FormRequest;
 
 class BranchShiftStoreFormRequest extends FormRequest
 {
@@ -43,6 +43,7 @@ class BranchShiftStoreFormRequest extends FormRequest
             ],
             'start_time' => 'date_format:H:i',
             'end_time' => 'date_format:H:i',
+            'status' => 'nullable|in:active,inactive',
             'branch_id' => [
                 'required',
                 'exists:branches,id',

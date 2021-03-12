@@ -71,7 +71,7 @@
                                 <div class="row container-fluid mb-5">
                                     <div class="col-xl-0"></div>
                                     <div class="col-xl-10">
-                                        @include("{$alias}::branch._partials._fields", [
+                                        @include("{$alias}::branchshift._partials._fields", [
                                             'action' => 'edit',
                                             'edit' => $edit,
                                             'branches' => $branches

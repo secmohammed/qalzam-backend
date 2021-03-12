@@ -2,19 +2,19 @@
 
 namespace App\Domain\Branch\Http\Controllers;
 
+use App\Common\Pipeline\HandleFileUpload;
+use App\Domain\Branch\Entities\Branch;
+use App\Domain\Branch\Http\Requests\Branch\BranchStoreFormRequest;
+use App\Domain\Branch\Http\Requests\Branch\BranchUpdateFormRequest;
+use App\Domain\Branch\Http\Resources\Branch\BranchResource;
+use App\Domain\Branch\Http\Resources\Branch\BranchResourceCollection;
+use App\Domain\Branch\Repositories\Contracts\BranchRepository;
+use App\Domain\Location\Repositories\Contracts\LocationRepository;
+use App\Domain\User\Repositories\Contracts\UserRepository;
+use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 use Joovlly\DDD\Traits\Responder;
-use App\Domain\Branch\Entities\Branch;
-use App\Common\Pipeline\HandleFileUpload;
-use App\Domain\User\Repositories\Contracts\UserRepository;
-use App\Domain\Branch\Http\Resources\Branch\BranchResource;
-use App\Domain\Branch\Repositories\Contracts\BranchRepository;
-use App\Domain\Branch\Http\Requests\Branch\BranchStoreFormRequest;
-use App\Domain\Location\Repositories\Contracts\LocationRepository;
-use App\Domain\Branch\Http\Requests\Branch\BranchUpdateFormRequest;
-use App\Domain\Branch\Http\Resources\Branch\BranchResourceCollection;
-use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 
 class BranchController extends Controller
 {
@@ -61,6 +61,7 @@ class BranchController extends Controller
      */
     public function create(UserRepository $userRepository, LocationRepository $locationRepository)
     {
+        // dd($this->)
         $this->setData('title', __('main.add') . ' ' . __('main.branch'), 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
@@ -69,6 +70,9 @@ class BranchController extends Controller
         })->all());
         $this->setData('deliverers', $userRepository->whereHas('roles', function ($query) {
             $query->where('slug', 'delivery');
+        })->all());
+        $this->setData('branch_managers', $userRepository->whereHas('roles', function ($query) {
+            $query->where('slug', 'branch-manager');
         })->all());
         $this->setData('locations', $locationRepository->all());
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
@@ -108,6 +112,7 @@ class BranchController extends Controller
      */
     public function edit(Branch $branch, UserRepository $userRepository, LocationRepository $locationRepository)
     {
+
         $this->setData('title', __('main.edit') . ' ' . __('main.branch') . ' : ' . $branch->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
@@ -117,6 +122,10 @@ class BranchController extends Controller
         $this->setData('deliverers', $userRepository->whereHas('roles', function ($query) {
             $query->where('slug', 'delivery');
         })->all());
+        $this->setData('branch_managers', $userRepository->whereHas('roles', function ($query) {
+            $query->where('slug', 'branch-manager');
+        })->all());
+        $this->setData('selected_users', $branch->employees);
 
         $this->setData('locations', $locationRepository->all());
 
@@ -182,8 +191,10 @@ class BranchController extends Controller
      */
     public function store(BranchStoreFormRequest $request)
     {
-        $branch = $this->branchRepository->create($request->validated());
-        $branch->employees()->attach($request->users);
+        $validatedRequest = $request->validated();
+        // dd(array_merge($request->get('users'), $request->get('deliverers', [])), $request->get('users'), $request->get('deliverers', []));
+        $branch = $this->branchRepository->create($validatedRequest);
+        $branch->employees()->attach($validatedRequest['users']);
         app(Pipeline::class)->send([
             'model' => $branch,
             'request' => $request,
@@ -209,9 +220,11 @@ class BranchController extends Controller
      */
     public function update(BranchUpdateFormRequest $request, Branch $branch)
     {
-        $branch->update($request->validated());
+
+        $validatedRequest = $request->validated();
+        $branch->update($validatedRequest);
         if ($request->has('users')) {
-            $branch->employees()->sync($request->users);
+            $branch->employees()->sync($validatedRequest["users"]);
         }
 
         app(Pipeline::class)->send([

@@ -61,6 +61,8 @@
                     <div class="card-body">
                         <form class="form" enctype="multipart/form-data" action="{{ route('product_variation_types.update', $edit->id) }}" method="POST">
                             @csrf
+                            @method('PUT')
+
                             <div class="row container-fluid mb-5">
                                 <div class="col-xl-0"></div>
                                 <div class="col-xl-10">

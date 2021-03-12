@@ -21,12 +21,13 @@
                     <span></span>
                 </button>
                 <!--end::Mobile Toggle-->
+                {{-- {{ dd(1) }} --}}
 
                 <!--begin::Page Heading-->
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
                     <!--begin::Page Title-->
                     <h5 class=" text-dark font-weight-bold my-1 mr-5 {{ GetLanguage() == 'ar' ? 'ml-2' : '' }}">
-                        {{ __('main.show-all') }} {{ __('main.product_variations') }} </h5>
+                        {{ __('main.show-all') }} {{ __('main.product_variation') }} </h5>
                     <!--end::Page Title-->
 
                     <!--begin::Breadcrumb-->

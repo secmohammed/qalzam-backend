@@ -2,18 +2,18 @@
 
 namespace App\Domain\Product\Http\Controllers;
 
+use App\Common\Pipeline\HandleFileUpload;
+use App\Domain\Product\Entities\Product;
+use App\Domain\Product\Http\Requests\Product\ProductStoreFormRequest;
+use App\Domain\Product\Http\Requests\Product\ProductUpdateFormRequest;
+use App\Domain\Product\Http\Resources\Product\ProductResource;
+use App\Domain\Product\Http\Resources\Product\ProductWithVariationResource;
+use App\Domain\Product\Http\Resources\Product\ProductWithVariationResourceCollection;
+use App\Domain\Product\Repositories\Contracts\ProductRepository;
+use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 use Joovlly\DDD\Traits\Responder;
-use App\Domain\Product\Entities\Product;
-use App\Common\Pipeline\HandleFileUpload;
-use App\Domain\Product\Http\Resources\Product\ProductResource;
-use App\Domain\Product\Repositories\Contracts\ProductRepository;
-use App\Domain\Product\Http\Requests\Product\ProductStoreFormRequest;
-use App\Domain\Product\Http\Requests\Product\ProductUpdateFormRequest;
-use App\Domain\Product\Http\Resources\Product\ProductWithVariationResource;
-use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
-use App\Domain\Product\Http\Resources\Product\ProductWithVariationResourceCollection;
 
 class ProductController extends Controller
 {

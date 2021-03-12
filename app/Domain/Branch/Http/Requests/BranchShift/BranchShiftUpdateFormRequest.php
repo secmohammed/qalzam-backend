@@ -31,12 +31,13 @@ class BranchShiftUpdateFormRequest extends BranchShiftStoreFormRequest
      *
      * @return array
      */
-    public function rules()
-    {
-        $rules = [
-            // 'email'    => ['required','unique:branchshifts,name,'.$this->route()->parameter('branchshift').',id'],
-        ];
+    // public function rules()
+    // {
+    //     // dd($this->request);
+    //     $rules = [
+    //         // 'email'    => ['required','unique:branchshifts,name,'.$this->route()->parameter('branchshift').',id'],
+    //     ];
 
-        return array_merge(parent::rules(), $rules);
-    }
+    //     return array_merge(parent::rules(), $rules);
+    // }
 }

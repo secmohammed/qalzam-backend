@@ -2,14 +2,14 @@
 
 namespace App\Domain\User\Http\Controllers\Auth;
 
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use Joovlly\DDD\Traits\Responder;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Domain\User\Http\Requests\Auth\UserLoginFormRequest;
 use App\Domain\User\Http\Resources\User\UserResource;
 use App\Domain\User\Repositories\Contracts\UserRepository;
-use App\Domain\User\Http\Requests\Auth\UserLoginFormRequest;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Joovlly\DDD\Traits\Responder;
 
 class LoginController extends Controller
 {
@@ -73,7 +73,6 @@ class LoginController extends Controller
     public function login(UserLoginFormRequest $request)
     {
         if (!auth()->attempt($request->only(['email', 'password']))) {
-
             $this->setData('message', __('main.invalid-credentials'));
             $this->redirectBack();
             $this->setApiResponse(fn() => response()->json([

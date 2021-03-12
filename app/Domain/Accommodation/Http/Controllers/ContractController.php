@@ -2,15 +2,16 @@
 
 namespace App\Domain\Accommodation\Http\Controllers;
 
+use App\Domain\Accommodation\Entities\Contract;
+use App\Domain\Accommodation\Http\Requests\Contract\ContractStoreFormRequest;
+use App\Domain\Accommodation\Http\Requests\Contract\ContractUpdateFormRequest;
+use App\Domain\Accommodation\Http\Resources\Contract\ContractResource;
+use App\Domain\Accommodation\Http\Resources\Contract\ContractResourceCollection;
+use App\Domain\Accommodation\Repositories\Contracts\ContractRepository;
+use App\Domain\Product\Repositories\Contracts\TemplateRepository;
+use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 use Illuminate\Http\Request;
 use Joovlly\DDD\Traits\Responder;
-use App\Domain\Accommodation\Entities\Contract;
-use App\Domain\Accommodation\Http\Resources\Contract\ContractResource;
-use App\Domain\Accommodation\Repositories\Contracts\ContractRepository;
-use App\Domain\Accommodation\Http\Requests\Contract\ContractStoreFormRequest;
-use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
-use App\Domain\Accommodation\Http\Requests\Contract\ContractUpdateFormRequest;
-use App\Domain\Accommodation\Http\Resources\Contract\ContractResourceCollection;
 
 class ContractController extends Controller
 {
@@ -20,6 +21,7 @@ class ContractController extends Controller
      * @var ContractRepository
      */
     protected $contractRepository;
+    protected $templateRepository;
 
     /**
      * Domain Alias.
@@ -45,9 +47,10 @@ class ContractController extends Controller
     /**
      * @param ContractRepository $contractRepository
      */
-    public function __construct(ContractRepository $contractRepository)
+    public function __construct(ContractRepository $contractRepository, TemplateRepository $templateRepository)
     {
         $this->contractRepository = $contractRepository;
+        $this->templateRepository = $templateRepository;
     }
 
     /**
@@ -60,6 +63,7 @@ class ContractController extends Controller
         $this->setData('title', __('main.add') . ' ' . __('main.contract'), 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
+        $this->setData('templates', $this->templateRepository->all());
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
 
@@ -104,6 +108,7 @@ class ContractController extends Controller
         $this->setData('alias', $this->domainAlias, 'web');
 
         $this->setData('edit', $contract);
+        $this->setData('templates', $this->templateRepository->all());
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.edit");
 
@@ -148,11 +153,11 @@ class ContractController extends Controller
 
         $this->setData('alias', $this->domainAlias, 'web');
 
-        $this->setData('show', $contract);
+        $this->setData('contract', $contract);
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.show");
 
-        $this->useCollection(ContractResource::class, 'show');
+        $this->useCollection(ContractResource::class, 'contract');
 
         return $this->response();
     }

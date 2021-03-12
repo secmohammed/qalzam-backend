@@ -17,5 +17,11 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/users', 'UserController');
     Route::resource('/roles', 'RoleController');
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+    Route::get('notifications', 'NotificationController@index')->name('notifications.index');
+
+    Route::put('notifications/{notification?}', 'NotificationController@update')->name('notifications.update');
+
+    Route::get('change-password', 'Auth\ChangePasswordController@changePasswordForm')->name('change_password');
+    Route::put('change-password', 'Auth\ChangePasswordController@update')->name('change_password.update');
 
 });
