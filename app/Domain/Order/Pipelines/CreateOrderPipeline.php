@@ -36,10 +36,18 @@ class CreateOrderPipeline implements Pipeline
     {
         //orders for dashboard perspective.
         if ($request->is('api/orders')) {
-            $products = $this->productVariationRepository->branches()->wherePivot('branch_id', $request->branch_id)->wherePivotIn('product_variation_id', $request->products)->get();
+            $products = $this->productVariationRepository->whereHas('branches', function ($query) use ($request) {
+                $query->where('branches.id', $request->branch_id);
+                $query->whereIn('branch_product.product_variation_id', array_column($request->products, 'id'));
+            })->with('branches')->get();
             $subtotal = $products->reduce(function ($carry, $product) use ($request) {
+<<<<<<< HEAD
                 dd($product->pivot->price, "price");
                 return $carry + ($product->pivot->price * $request->validated()['products'][$product->id]['quantity']);
+=======
+                $price = $product->branches->where('id', $request->branch_id)->first()->pivot->price ?? $product->price->amount();
+                return $carry + $price * $request->validated()['products'][$product->id]['quantity'];
+>>>>>>> 3bd68365ee6c3abf38009d5602584e644a827c1e
             }, 0);
             // dd($subtotal);
 
@@ -57,7 +65,6 @@ class CreateOrderPipeline implements Pipeline
                 $this->prepareOrder($request->validated())
             );
             $order->products()->sync($this->cart->products()->forSyncing());
-
         }
         $request->merge(compact('order'));
         event(new OrderCreated($order));

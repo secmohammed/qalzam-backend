@@ -31,7 +31,10 @@ class StoreOrderTest extends TestCase
             'address_id' => $address->id,
             'user_id' => $user->id,
             'branch_id' => $this->branchFactory->create()->id,
-            'products' => $products->pluck('id')->toArray(),
+            'products' => [
+                ['id' => $products->first()->id,
+                    'quantity' => 2],
+            ],
 
         ])->assertJsonStructure([
             'data' => [
@@ -180,14 +183,14 @@ class StoreOrderTest extends TestCase
         )->assertJsonValidationErrors([
             'discount_id',
         ]);
-
     }
 
     /** @test */
     public function it_shouldnt_store_order_if_unauthenticated()
     {
         $this->post(
-            route('api.orders.store'), []
+            route('api.orders.store'),
+            []
         )->assertStatus(401);
     }
 
@@ -219,7 +222,6 @@ class StoreOrderTest extends TestCase
         $this->addressFactory = Address::factory();
         $this->discountFactory = Discount::factory();
         $this->branchFactory = Branch::factory();
-
     }
 
     /**
