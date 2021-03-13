@@ -14,7 +14,7 @@ class OrderDestroyed
     /**
      * @var mixed
      */
-    public $order;
+    public $orders;
 
     /**
      * Create a new event instance.

@@ -52,7 +52,7 @@ class OrderStoreFormRequest extends FormRequest
                 'products.*.id' => 'required|exists:product_variations,id',
                 'products.*.quantity' => 'required|numeric|min:1',
                 'address_id' => [
-                    'required',
+                    'nullable',
                     Rule::exists('addresses', 'id')->where(function ($builder) {
                         $builder->where('user_id', $this->request->get('user_id'));
                     }),

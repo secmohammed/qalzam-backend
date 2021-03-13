@@ -21,6 +21,7 @@ class RollbackStock implements ShouldQueue
     public function handle(OrderDestroyed $event)
     {
         $event->orders->each(function ($order) {
+            
             $order->products->each(function ($product) use ($order) {
                 $product->stocks()->create([
                     'quantity' => $product->pivot->quantity,

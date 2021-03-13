@@ -3,6 +3,7 @@
 namespace App\Domain\Product\Http\Controllers;
 
 use App\Common\Pipeline\HandleFileUpload;
+use App\Domain\Category\Repositories\Contracts\CategoryRepository;
 use App\Domain\Product\Entities\Product;
 use App\Domain\Product\Http\Requests\Product\ProductStoreFormRequest;
 use App\Domain\Product\Http\Requests\Product\ProductUpdateFormRequest;
@@ -48,8 +49,9 @@ class ProductController extends Controller
     /**
      * @param ProductRepository $productRepository
      */
-    public function __construct(ProductRepository $productRepository)
+    public function __construct(ProductRepository $productRepository, CategoryRepository $categoryRepository)
     {
+        $this->categoryRepository = $categoryRepository;
         $this->productRepository = $productRepository;
     }
 
@@ -63,7 +65,7 @@ class ProductController extends Controller
         $this->setData('title', __('main.add') . ' ' . __('main.product'), 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
-
+        $this->setData('categories', $this->categoryRepository->where('status', 'active')->where('type', 'product')->get());
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
 
         $this->setApiResponse(fn() => response()->json(['create_your_own_form' => true]));
@@ -105,6 +107,7 @@ class ProductController extends Controller
         $this->setData('title', __('main.edit') . ' ' . __('main.product') . ' : ' . $product->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
+        $this->setData('categories', $this->categoryRepository->where('status', 'active')->where('type', 'product')->get());
 
         $this->setData('edit', $product);
 
@@ -166,6 +169,7 @@ class ProductController extends Controller
     public function store(ProductStoreFormRequest $request)
     {
         $product = $this->productRepository->create($request->validated());
+        $product->categories()->attach($request->categories);
         app(Pipeline::class)->send([
             'model' => $product,
             'request' => $request,
@@ -193,6 +197,8 @@ class ProductController extends Controller
     {
 
         $product->update($request->validated());
+        $product->categories()->sync($request->categories);
+
         app(Pipeline::class)->send([
             'model' => $product,
             'request' => $request,

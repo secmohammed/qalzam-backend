@@ -50,16 +50,13 @@ class ReservationDatatable extends MainLivewire
 
             DateColumn::name('reservations.start_date')
                 ->label(__('main.start_date'))
-                ->filterable('start_date')
-                ->format('h:m:s Y-m-d'),
+                ->filterable(),
+
             DateColumn::name('reservations.end_date')
                 ->label(__('main.end_date'))
-                ->filterable('end_date')
-                ->format('h:m:s Y-m-d'),
-
+                ->filterable(),
             DateColumn::name('reservations.created_at')
-                ->label(__('main.created_at'))
-                ->format('h:m:s Y-m-d'),
+                ->label(__('main.created_at')),
 
             Column::callback(['reservations.id'], function ($id) {
                 return view("reservations::reservation.buttons.actions", ['id' => $id]);

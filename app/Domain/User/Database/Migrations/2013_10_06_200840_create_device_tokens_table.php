@@ -27,7 +27,8 @@ class CreateDeviceTokensTable extends Migration
             $table->id();
             $table->enum('device', ['ios', 'android']);
             $table->string('token');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->index();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

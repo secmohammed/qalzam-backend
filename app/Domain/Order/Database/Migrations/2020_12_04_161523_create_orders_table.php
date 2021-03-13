@@ -30,10 +30,11 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('creator_id');
             $table->enum('status', ['pending', 'processing', 'picked', 'delivered'])->default('pending');
             $table->integer('subtotal');
-            $table->integer('address_id')->unsigned()->index()->nullable();
-
+            $table->unsignedBigInteger('address_id')->unsigned()->index()->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('creator_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('address_id')->references('id')->on('addresses')->onDelete('cascade');
             $table->timestamps();
-
         });
     }
 }

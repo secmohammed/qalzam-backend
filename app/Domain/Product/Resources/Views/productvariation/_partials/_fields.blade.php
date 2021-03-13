@@ -3,7 +3,6 @@
 <x-forms.ar_name :action="$action" :edit="$edit??null"/>
 
 
-
 <div class="form-group row">
     <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.product") }} <span
             style="color: red"> * </span> </label>

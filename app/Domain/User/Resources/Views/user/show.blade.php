@@ -114,13 +114,6 @@
                                     </div>
                                     <hr>
                                 </div>
-                                <div class="col-md-6 mb-5">
-                                    <div class="row mb-2">
-                                        <strong class='ml-3'><span>{{ __("main.national_id") }} : </span></strong>
-                                        <span>{{ $show->national_id ?? 'N/A' }} </span>
-                                    </div>
-                                    <hr>
-                                </div>
 
                                 <div class="col-md-6 mb-5">
                                     <div class="row mb-2">

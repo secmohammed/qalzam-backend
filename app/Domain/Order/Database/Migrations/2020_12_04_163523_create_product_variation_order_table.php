@@ -28,8 +28,8 @@ class CreateProductVariationOrderTable extends Migration
             $table->unsignedBigInteger('product_variation_id')->index();
             $table->unsignedBigInteger('quantity');
             $table->timestamps();
-            $table->foreign('order_id')->references('id')->on('orders');
-            // $table->foreign('product_variation_id')->references('id')->on('product_variations');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->foreign('product_variation_id')->references('id')->on('product_variations')->onDelete('cascade');
         });
     }
 }

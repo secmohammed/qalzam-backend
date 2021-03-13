@@ -42,6 +42,8 @@ class ProductStoreFormRequest extends FormRequest
             'product-images' => 'required|array',
             'product-images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'name' => 'required|string|max:255',
+            'categories' => 'required|array',
+            'categories.*' => 'required|exists:categories,id'
         ];
 
         return $rules;

@@ -33,7 +33,7 @@ class CreatePostsTable extends Migration
             $table->enum('type', ['featured', 'normal'])->default('normal');
             $table->enum('status', ['approved', 'disapproved'])->default('disapproved');
             $table->timestamps();
-            // $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 }

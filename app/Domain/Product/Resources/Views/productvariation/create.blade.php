@@ -52,14 +52,14 @@
                         {{ __('main.add') }} {{ __('main.product_variation') }}
                         </h3>
                         <div class="card-toolbar">
-                            <a href="{{ route('products.index') }}"
+                            <a href="{{ route('product_variations.index') }}"
                                 class="btn btn-light-primary font-weight-bolder mr-2">
                                 <i class="ki ki-long-arrow-back icon-sm"
                             style="color: #fff"></i> {{ __('main.back') }} </a>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form class="form" enctype="multipart/form-data" action="{{ route('products.store') }}" method="POST">
+                        <form class="form" enctype="multipart/form-data" action="{{ route('product_variations.store') }}" method="POST">
                             @csrf
                             <div class="row container-fluid mb-5">
                                 <div class="col-xl-0"></div>

@@ -15,7 +15,7 @@
             <div class="d-flex align-items-baseline flex-wrap mr-5">
                 <!--begin::Page Title-->
                 <h5 class=" text-dark font-weight-bold my-1 mr-5 {{ GetLanguage() == 'ar' ? 'ml-2' : '' }}">
-                {{ __('main.add') }} {{ __('main.product') }} </h5>
+                {{ __('main.add') }} {{ __('main.template') }} </h5>
                 <!--end::Page Title-->
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
@@ -24,12 +24,12 @@
                         {{ __('main.home') }} </a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('products.index') }}" class="text-muted">
-                        {{ __('main.products') }} </a>
+                        <a href="{{ route('templates.index') }}" class="text-muted">
+                        {{ __('main.templates') }} </a>
                     </li>
                     <li class="breadcrumb-item">
                         <a href="#" class="text-muted">
-                        {{ __('main.add') }} {{ __('main.products') }} </a>
+                        {{ __('main.add') }} {{ __('main.templates') }} </a>
                     </li>
                 </ul>
                 <!--end::Breadcrumb-->
@@ -49,10 +49,10 @@
                 <div class="card card-custom">
                     <div class="card-header">
                         <h3 class="card-title">
-                        {{ __('main.add') }} {{ __('main.product') }}
+                        {{ __('main.add') }} {{ __('main.template') }}
                         </h3>
                         <div class="card-toolbar">
-                            <a href="{{ route('products.index') }}"
+                            <a href="{{ route('templates.index') }}"
                                 class="btn btn-light-primary font-weight-bolder mr-2">
                                 <i class="ki ki-long-arrow-back icon-sm"
                             style="color: #fff"></i> {{ __('main.back') }} </a>
@@ -72,7 +72,7 @@
                                 <div class="col-md-1"></div>
                                 <div class="col-lg-2">
                                     <button type="submit"
-                                    class="btn btn-block btn-sm btn-light-primary font-weight-bolder text-uppercase py-4">{{__('main.create')}} {{__('main.product')}}</button>
+                                    class="btn btn-block btn-sm btn-light-primary font-weight-bolder text-uppercase py-4">{{__('main.create')}} {{__('main.template')}}</button>
                                 </div>
                             </div>
                         </form>

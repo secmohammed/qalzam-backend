@@ -25,12 +25,10 @@ class DiscountDatatable extends MainLivewire
 
             Column::name('discounts.code')
                 ->defaultSort('asc')
-                ->searchable()
                 ->filterable(),
             Column::name('category.name')
                 ->label(__('main.category'))
                 ->defaultSort('asc')
-                ->searchable()
                 ->filterable('cateogry.name'),
 
             DateColumn::name('discounts.created_at')
