@@ -3,12 +3,12 @@
 namespace App\Domain\Order\Pipelines;
 
 use App\Common\Cart\Cart;
-use Illuminate\Support\Arr;
-use App\Infrastructure\Pipelines\Pipeline;
+use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 use App\Domain\Order\Http\Events\OrderCreated;
 use App\Domain\Order\Repositories\Contracts\OrderRepository;
-use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 use App\Domain\Product\Repositories\Contracts\ProductVariationRepository;
+use App\Infrastructure\Pipelines\Pipeline;
+use Illuminate\Support\Arr;
 
 class CreateOrderPipeline implements Pipeline
 {
@@ -38,8 +38,11 @@ class CreateOrderPipeline implements Pipeline
         if ($request->is('api/orders')) {
             $products = $this->productVariationRepository->branches()->wherePivot('branch_id', $request->branch_id)->wherePivotIn('product_variation_id', $request->products)->get();
             $subtotal = $products->reduce(function ($carry, $product) use ($request) {
+                dd($product->pivot->price, "price");
                 return $carry + ($product->pivot->price * $request->validated()['products'][$product->id]['quantity']);
             }, 0);
+            // dd($subtotal);
+
             if ($request->discount) {
                 $subtotal = $subtotal - ($subtotal * $request->discount->percentage / 100);
             }

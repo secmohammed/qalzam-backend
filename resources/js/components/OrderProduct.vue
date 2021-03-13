@@ -1,24 +1,12 @@
 <template>
  <form action="">
-<<<<<<< HEAD
-     <div class="form-group row">
-         <label class="col-form-label text-right col-lg-2 col-sm-12">address</label>
-         <div class="col-lg-10 col-md-9 col-sm-12">
-             <select class="form-control select2 " v-model="form.address_id" data-placeholder="select address">
-                 <option label="Label"></option>
-                 <option v-for="address in addresses" :value="address.id">{{address.name}}</option>
-             </select>
-             
-         </div>
-     </div>
-=======
+     
     <template v-if="step == 1">
       
->>>>>>> 85c36a8220962729abeacd16e3881f46dfa8dbb9
      <div class="form-group row">
          <label class="col-form-label text-right col-lg-2 col-sm-12">branch</label>
          <div class="col-lg-10 col-md-9 col-sm-12">
-             <select class="form-control select2 " v-model="form.branch_id" data-placeholder=" select branch">
+             <select class="form-control  " v-model="form.branch_id" data-placeholder=" select branch">
                  <option label="Label"></option>
                  <option v-for="branch in  branches " :value="branch.id">{{branch.name}}</option>
              </select>
@@ -28,31 +16,32 @@
      <div class="form-group row">
          <label class="col-form-label text-right col-lg-2 col-sm-12">user</label>
          <div class="col-lg-10 col-md-9 col-sm-12">
-             <select class="form-control select2 " v-model="form.user_id" data-placeholder="select user">
+             <select class="form-control  " v-model="form.user_id" data-placeholder="select user">
                  <option label="Label"></option>
                  <option v-for="user in  users" :value="user.id">{{user.name}}</option>
              </select>
          </div>
      </div>
-        <div class="form-group row">
+      <div class="form-group row">
          <label class="col-form-label text-right col-lg-2 col-sm-12">address</label>
          <div class="col-lg-10 col-md-9 col-sm-12">
-             <select class="form-control select2" v-model="form.address_id" data-placeholder="select address">
+             <select class=" form-control " v-model="form.address_id" data-placeholder="select address">
                  <option label="Label"></option>
                  <option v-for="address in addresses" :value="address.id">{{address.name}}</option>
              </select>
+             
          </div>
      </div>
 
     </template>
      <!-- step2 -->
      <template v-if="step == 2">
+         <div v-for="(product, index) in form.products">
            <div class="form-group row">
              <div class="col-md-2 col-form-label">
-                 products
+                 product
              </div>
 
-         <div v-for="(product, index) in form.products">
 
 
              <div class="col-md">
@@ -81,6 +70,18 @@
              </div>
          </div>
      </div>
+      <div class="form-group row">
+             <div class="col-md-2 col-form-label">
+                 discount
+             </div>
+         <div class="col-lg-10 col-md-9 col-sm-12">
+             <select class=" form-control " v-model="form.discount_id" data-placeholder="select discount">
+                 <option label="Label"></option>
+                 <option v-for="discount in discountes" :value="discount.id">{{discount.name}}</option>
+             </select>
+             
+         </div>
+     </div>
           <div class="d-flex justify-content-end mt-5">
 
          <button class="btn btn-secondary" @click.prevent="addProduct">
@@ -103,7 +104,7 @@
             
          </template>
          <template v-else>
-             <button class="btn btn-secondary" @click.prevent="submit" :disabled="!isCreateOrderButtonDisabled">
+             <button class="btn btn-secondary" @click.prevent="save" :disabled="!isCreateOrderButtonDisabled">
                  Create Order
              </button>
              
@@ -160,7 +161,7 @@ export default {
                 discounts
             } = this.users.find(
                 (user) => user.id == val
-            );
+            );1
             this.addresses = addresses;
             this.discounts = discounts;
         },
@@ -170,7 +171,8 @@ export default {
     },
     computed: {
         isCreateOrderButtonDisabled() {
-            return this.form.products.length && this.form.discount_id
+            // return this.form.products.length && this.form.discount_id
+            return this.form.products.length 
         },
         isNextStepDisabled() {
             return this.form.user_id && this.form.branch_id &&  this.form.address_id
@@ -180,6 +182,10 @@ export default {
         },
 
     },
+    // mounted() {
+    //     console.log(",smlddk")
+    // },
+    // ,
     methods: {
         nextStep() {
             this.step++;
@@ -196,6 +202,8 @@ export default {
             )
         },
         save() {
+                    console.log("🚀 ~ file: OrderProduct.vue ~ line 209 ~ save ~ this.auth_token", this.auth_token)
+
             axios.post("/api/orders", this.form, {
                 headers: {
                     Authorization: "Bearer " + this.auth_token,
