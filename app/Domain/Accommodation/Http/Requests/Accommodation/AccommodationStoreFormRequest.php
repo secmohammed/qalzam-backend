@@ -52,6 +52,7 @@ class AccommodationStoreFormRequest extends FormRequest
                     'required',
                     new EnsureContractHasTemplateProducts,
                 ],
+
             ]);
         }
 

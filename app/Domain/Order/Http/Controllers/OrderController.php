@@ -133,8 +133,7 @@ class OrderController extends Controller
         $this->setData('title', __('main.edit') . ' ' . __('main.order') . ' : ' . $order->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
-
-        $this->setData('edit', $order);
+        $this->setData('edit', $order->load("products"));
         $this->setData('auth_token', auth()->user()->generateAuthToken());
         $this->setData('branches', $this->branchRepository->with(['products'])->all(), 'web');
         $this->setData('users', $this->userRepository->with(['addresses', 'discounts'])->get(), 'web');
@@ -224,10 +223,11 @@ class OrderController extends Controller
      */
     public function update(OrderUpdateFormRequest $request, Order $order)
     {
-        app(Pipeline::class)->send($order)->through([
+        app(Pipeline::class)->send($request)->through([
+            CreateOrderPipeline::class,
             NotifyUserWithOrderStatus::class,
+
         ])->thenReturn();
-        $order->update($request->validated());
 
         $this->redirectRoute("{$this->resourceRoute}.show", [$order->id]);
         $this->setData('data', $order);

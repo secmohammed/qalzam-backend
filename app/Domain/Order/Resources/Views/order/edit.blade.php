@@ -17,7 +17,7 @@
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
                     <!--begin::Page Title-->
                     <h5 class=" text-dark font-weight-bold my-1 mr-5 {{ GetLanguage() == 'ar' ? 'ml-2' : '' }}">
-                        {{ __('main.add') }} {{ __('main.order') }} </h5>
+                        {{ __('main.edit') }} {{ __('main.order') }} </h5>
                     <!--end::Page Title-->
 
                     <!--begin::Breadcrumb-->
@@ -53,7 +53,7 @@
                     <div class="card card-custom">
                         <div class="card-header">
                             <h3 class="card-title">
-                                {{ __('main.add') }} {{ __('main.order') }}
+                                {{ __('main.edit') }} {{ __('main.order') }}
                             </h3>
                             <div class="card-toolbar">
                                 <a href="{{ route('orders.index') }}"
@@ -68,7 +68,7 @@
                             <div class="row container-fluid mb-5">
                                 <div class="col-xl-0"></div>
                                 <div class="col-xl-10" id="app">
-                                <order-form :users="{{ $users}}" :branches="{{ $branches}}" auth_token="{{ $auth_token }}" action="edit" />
+                                <order-form :users="{{ $users}}" :branches="{{ $branches}}" auth_token="{{ $auth_token }}" :edit="{{$edit}}" action="edit" />
                                 </div>
                                
                             </div>

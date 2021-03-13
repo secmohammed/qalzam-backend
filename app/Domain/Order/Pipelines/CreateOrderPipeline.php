@@ -7,6 +7,7 @@ use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 use App\Domain\Order\Http\Events\OrderCreated;
 use App\Domain\Order\Repositories\Contracts\OrderRepository;
 use App\Domain\Product\Repositories\Contracts\ProductVariationRepository;
+use App\Domain\User\Entities\User;
 use App\Infrastructure\Pipelines\Pipeline;
 use Illuminate\Support\Arr;
 
@@ -35,29 +36,30 @@ class CreateOrderPipeline implements Pipeline
     public function handle($request, \Closure $next)
     {
         //orders for dashboard perspective.
-        if ($request->is('api/orders')) {
+
+        if (request()->routeIs('api.orders.store', 'api.orders.update')) {
             $products = $this->productVariationRepository->whereHas('branches', function ($query) use ($request) {
                 $query->where('branches.id', $request->branch_id);
                 $query->whereIn('branch_product.product_variation_id', array_column($request->products, 'id'));
             })->with('branches')->get();
             $subtotal = $products->reduce(function ($carry, $product) use ($request) {
-<<<<<<< HEAD
-                dd($product->pivot->price, "price");
-                return $carry + ($product->pivot->price * $request->validated()['products'][$product->id]['quantity']);
-=======
+
                 $price = $product->branches->where('id', $request->branch_id)->first()->pivot->price ?? $product->price->amount();
-                return $carry + $price * $request->validated()['products'][$product->id]['quantity'];
->>>>>>> 3bd68365ee6c3abf38009d5602584e644a827c1e
+                $quantity = array_key_exists($product->id, $request->validated()['products']) ? $request->validated()['products'][$product->id]['quantity'] : 0;
+
+                return $carry + ($price * $quantity);
+
             }, 0);
-            // dd($subtotal);
 
             if ($request->discount) {
                 $subtotal = $subtotal - ($subtotal * $request->discount->percentage / 100);
             }
-
-            $order = $this->orderRepository->firstOrCreate(
-                Arr::except($request->validated(), ['products', 'discount_id']) + compact('subtotal')
-            );
+            $attributes = Arr::except($request->validated(), ['products', 'discount_id']) + compact('subtotal');
+            if ($request->order) {
+                $order = $request->order->update($attributes);
+            } else {
+                $order = $this->orderRepository->create($attributes);
+            }
             $order->products()->sync($request->validated()['products']);
         } else {
             //user_orders
@@ -67,9 +69,12 @@ class CreateOrderPipeline implements Pipeline
             $order->products()->sync($this->cart->products()->forSyncing());
         }
         $request->merge(compact('order'));
-        event(new OrderCreated($order));
+        if ($request->order) {
+            event(new OrderCreated($order));
 
-        return $next($request);
+        }
+
+        return $next($order);
     }
 
     /**
