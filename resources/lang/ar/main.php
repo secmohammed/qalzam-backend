@@ -203,6 +203,7 @@ return [
     'address' => 'العنوان',
     'zoom' => 'زوم',
     'product_variation' => 'المنتج المتغير',
+    'product_variations' => 'المنتج المتغير',
     'product_variation_type' => 'نوع المنتج المتغير',
     'product_variation_types' => 'نوع المنتجات المتغيره',
 

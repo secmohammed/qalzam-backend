@@ -2,15 +2,16 @@
 
 return [
     'product_variation' => 'Product Variation',
+    'product_variations' => 'Product Variations',
     'product_variation_type' => 'Product Variation Type',
     'product_variation_types' => 'Product Variation Types',
     'stocks' => 'Stocks',
     'quantity' => 'Quantity',
     'stock' => 'Stock',
     'previous' => 'previous',
-    'template' => 'template',
+    'template' => 'Template',
     'product-to-template' => 'product to template',
-    'add-template' => 'add-template',
+    'add-template' => 'Add template',
     'templates' => 'templates',
     'next' => 'next',
     'add' => 'Add',

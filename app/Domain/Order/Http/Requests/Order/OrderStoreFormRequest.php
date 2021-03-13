@@ -2,8 +2,8 @@
 
 namespace App\Domain\Order\Http\Requests\Order;
 
-use Illuminate\Validation\Rule;
 use App\Infrastructure\Http\AbstractRequests\BaseRequest as FormRequest;
+use Illuminate\Validation\Rule;
 
 class OrderStoreFormRequest extends FormRequest
 {
@@ -46,7 +46,7 @@ class OrderStoreFormRequest extends FormRequest
                 }),
             ],
         ];
-        if (request()->is('api/orders')) {
+        if (request()->routeIs('api.orders.store', 'api.orders.update')) {
             $rules = [
                 'products' => 'required|array',
                 'products.*.id' => 'required|exists:product_variations,id',
@@ -67,7 +67,7 @@ class OrderStoreFormRequest extends FormRequest
 
     public function validated()
     {
-        if (request()->is('api/orders')) {
+        if (request()->routeIs('api.orders.store', 'api.orders.update')) {
             return array_merge(parent::validated(), [
                 'creator_id' => auth()->id(),
                 'products' => collect($this->request->get('products'))->keyBy('id')->map(function ($product) {

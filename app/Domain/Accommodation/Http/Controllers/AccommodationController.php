@@ -9,6 +9,7 @@ use App\Domain\Accommodation\Http\Requests\Accommodation\AccommodationUpdateForm
 use App\Domain\Accommodation\Http\Resources\Accommodation\AccommodationResource;
 use App\Domain\Accommodation\Http\Resources\Accommodation\AccommodationResourceCollection;
 use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
+use App\Domain\Accommodation\Repositories\Contracts\ContractRepository;
 use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 use Illuminate\Http\Request;
@@ -58,12 +59,13 @@ class AccommodationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(BranchRepository $branchRepository, Accommodation $accommodation)
+    public function create(BranchRepository $branchRepository, Accommodation $accommodation, ContractRepository $contractRepository)
     {
         $this->setData('title', __('main.add') . ' ' . __('main.accommodation'), 'web');
         $this->setData('categories', $accommodation->categories);
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('branches', $branchRepository->all());
+        $this->setData('contracts', $contractRepository->all());
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
 
         $this->setApiResponse(fn() => response()->json(['create_your_own_form' => true]));
@@ -100,13 +102,14 @@ class AccommodationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Accommodation $accommodation, BranchRepository $branchRepository)
+    public function edit(Accommodation $accommodation, BranchRepository $branchRepository, ContractRepository $contractRepository)
     {
         $this->setData('title', __('main.edit') . ' ' . __('main.accommodation') . ' : ' . $accommodation->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('branches', $branchRepository->all());
         $this->setData('edit', $accommodation);
+        $this->setData('contracts', $contractRepository->all());
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.edit");
 
@@ -168,7 +171,7 @@ class AccommodationController extends Controller
      */
     public function store(AccommodationStoreFormRequest $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $accommodation = $this->accommodationRepository->create($request->validated());
 
         app(Pipeline::class)->send([
