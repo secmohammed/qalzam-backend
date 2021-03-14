@@ -6,7 +6,7 @@
         {{-- {{ dd($edit->price  ) }} --}}
         <input type="number"    step="any" name="price" min="10" max="10000" class="form-control {{$errors->has('price') ? 'is-invalid':''}}"
                placeholder="{{ __("main.price") }}" 
-               value="{{ ($action == 'edit') ? $edit->price->amount() : old('price') }}"
+               value="{{ ($action == 'edit') ? $edit->price->amount()/100 : old('price') }}"
                />
         <div class="row">
             <div class="col-md-12">
