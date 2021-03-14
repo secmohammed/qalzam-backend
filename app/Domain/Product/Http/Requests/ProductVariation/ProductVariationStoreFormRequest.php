@@ -37,7 +37,7 @@ class ProductVariationStoreFormRequest extends FormRequest
     {
         $rules = [
             'status' => 'nullable|in:active,inactive',
-            'price' => ['nullable', 'numeric', 'min:10', 'max:10000'],
+            'price' => ['nullable', 'numeric', 'min:1', 'max:10000'],
             'product_id' => 'required|exists:products,id',
             'product_variation_type_id' => 'required|exists:product_variation_types,id',
             'product-variation-images' => 'required|array',
