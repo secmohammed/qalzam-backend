@@ -38,7 +38,7 @@ class AccommodationStoreFormRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name' => 'required|string|max:255|unique:accommodations,name',
+            'name' => 'required|string|min:5|max:255|unique:accommodations,name',
             'accommodation-gallery' => 'required|array',
             'type' => 'required|in:table,room',
             'accommodation-gallery.*' => ['required', 'image', 'mimes:png,jpeg,jpg', 'max:2048'],

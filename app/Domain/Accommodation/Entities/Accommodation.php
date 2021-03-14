@@ -28,6 +28,7 @@ class Accommodation extends Model implements HasMedia
     protected $fillable = [
         'branch_id',
         'contract_id',
+        'name',
         'type',
         'code',
         'user_id',
