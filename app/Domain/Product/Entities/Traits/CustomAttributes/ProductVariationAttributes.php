@@ -27,7 +27,7 @@ trait ProductVariationAttributes
             return $this->product->price;
         }
 
-        return new Money(round($value));
+        return new Money(round($value * 100));
     }
 
     /**

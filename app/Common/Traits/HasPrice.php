@@ -20,6 +20,6 @@ trait HasPrice
      */
     public function getPriceAttribute($value)
     {
-        return new Money(round($value));
+        return new Money(round($value * 100));
     }
 }
