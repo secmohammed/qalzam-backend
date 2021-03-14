@@ -100,13 +100,9 @@
                         Authorization: 'Bearer ' + this.auth_token
                     }
                 }).then(res => {
-                    console.log(res)
-                    // window.location = '/templates'
+                    window.location = `/templates/${this.template.id}`
                 }).catch(err => {
-                this.errors = err.response.data.errors;
-
-                    console.log(err.response.data.errors)
-                    // set errors array
+                    this.errors = err.response.data?.errors || [];
                 })
             },
             removeProduct(index) {
