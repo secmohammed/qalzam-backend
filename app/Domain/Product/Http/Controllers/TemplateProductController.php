@@ -85,10 +85,5 @@ class TemplateProductController extends Controller
         );
 
         return $template;
-        // $this->setData('$', $template);
-        // $this->r("{$this->resourceRoute}.show", [$template->id]);
-        // $this->useCollection(TemplateResource::class, 'data');
-
-        // return $this->response();
     }
 }

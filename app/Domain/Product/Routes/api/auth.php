@@ -21,7 +21,7 @@ Route::group(['middleware' => 'auth.api'], function () {
     Route::apiResource('/product_variation_types', 'ProductVariationTypeController')->except('index', 'show');
     Route::apiResource('/stocks', 'StockController')->except('index', 'show');
     Route::resource('/templates', 'TemplateController');
-    Route::post('/templates/{template}/products', 'TemplateProductController@store')->name("post");
+    Route::post('/templates/{template}/products', 'TemplateProductController@store')->name('templates.products.store');
 
     ###CRUD_PLACEHOLDER###
 });

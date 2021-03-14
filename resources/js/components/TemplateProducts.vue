@@ -12,7 +12,7 @@
              <div class="col-md">
                  <div class="row">
                      <div class="col-md">
-                         <select v:model="form.products[index].id" class="form-control">
+                         <select v-model="form.products[index].id" class="form-control">
                              <option label="Label"></option>
                              <option v-for="product in products" :value="product.id">{{ product.name }}</option>
 
@@ -73,7 +73,7 @@
             },
             products: {
                 required: true,
-                type: Object
+                type: Array
             },
             auth_token: {
                 required: true,
@@ -95,11 +95,12 @@
         methods: {
             save() {
                 // console.log(`temlpates/${this.template.id}/products`);
-                axios.post(`temlpates/${this.template.id}/products`, this.form, {
+                axios.post(`/api/templates/${this.template.id}/products`, this.form, {
                     headers: {
                         Authorization: 'Bearer ' + this.auth_token
                     }
                 }).then(res => {
+                    console.log(res)
                     // window.location = '/templates'
                 }).catch(err => {
                 this.errors = err.response.data.errors;

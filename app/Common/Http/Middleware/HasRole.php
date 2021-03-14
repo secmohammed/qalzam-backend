@@ -13,6 +13,7 @@ class HasRole
      */
     protected $doesntRequirePermissions = [
         'api.auth.me',
+        // 'api.temlpates.products.store',
         'api.media.destroy',
         'api.branch.products.store',
         'api.auth.logout',
