@@ -24,18 +24,32 @@ class ValidateReservationStartDateAndEndDateIsWithinBranchAvailability implement
 
     /**
      * @param $request
-     * @param \Closure $next
+     * @param \Closure   $next
      */
-    public function handle($request, \Closure $next)
+    public function handle($request, \Closure$next)
     {
-
         $reservationStartDate = Carbon::parse($request->start_date);
         $reservationEndDate = Carbon::parse($request->end_date);
         $accommodation = $this->accommodationRepository->find($request->accommodation_id);
         $shift = $accommodation->branch->shifts()->where('day', strtolower(Carbon::parse($request->start_date)->dayName))->firstOrFail();
         $shiftStartDate = Carbon::parse($shift->start_time);
         $shiftEndDate = Carbon::parse($shift->end_time);
-        throw_if($shiftStartDate->gt($reservationStartDate) || $reservationStartDate->gt($shiftEndDate) || $reservationEndDate->gt($shiftEndDate) || $reservationEndDate->lt($shiftStartDate), ReservationTimeIsntWithinBranchShiftDurationException::class);
+        $parseReservationStartDateToToday = Carbon::parse(
+            Carbon::parse($reservationStartDate)->format('H:i:s')
+        );
+        $parseReservationEndDateToToday = Carbon::parse(
+            Carbon::parse($reservationEndDate)->format('H:i:s')
+        );
+
+        throw_if($shiftStartDate->gt(
+            $parseReservationStartDateToToday
+        ) ||
+            $shiftEndDate->lt(
+                $parseReservationEndDateToToday
+
+            ) ||
+            $parseReservationStartDateToToday->gt($shiftEndDate) ||
+            $parseReservationEndDateToToday->lt($shiftStartDate), ReservationTimeIsntWithinBranchShiftDurationException::class);
 
         return $next($request);
     }
