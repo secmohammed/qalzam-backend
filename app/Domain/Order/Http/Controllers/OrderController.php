@@ -4,6 +4,7 @@ namespace App\Domain\Order\Http\Controllers;
 
 use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 use App\Domain\Discount\Repositories\Contracts\DiscountRepository;
+use App\Domain\Location\Repositories\Contracts\LocationRepository;
 use App\Domain\Order\Entities\Order;
 use App\Domain\Order\Http\Events\OrderDestroyed;
 use App\Domain\Order\Http\Requests\Order\OrderStoreFormRequest;
@@ -15,6 +16,7 @@ use App\Domain\Order\Pipelines\CreateOrderPipeline;
 use App\Domain\Order\Pipelines\NotifyUserWithOrderStatus;
 use App\Domain\Order\Pipelines\NotifyUserWithPlacedOrder;
 use App\Domain\Order\Repositories\Contracts\OrderRepository;
+use App\Domain\User\Repositories\Contracts\RoleRepository;
 use App\Domain\User\Repositories\Contracts\UserRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 use Illuminate\Http\Request;
@@ -82,13 +84,16 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(RoleRepository $roleRepository, LocationRepository $locationRepository)
     {
+        // dd($locationRepository->all());
 
         $this->setData('title', __('main.add') . ' ' . __('main.order'), 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('auth_token', auth()->user()->generateAuthToken());
+        $this->setData('roles', $roleRepository->all());
+        $this->setData('locations', $locationRepository->all());
         $this->setData('branches', $this->branchRepository->with(['products'])->all(), 'web');
         $this->setData('users', $this->userRepository->with(['addresses', 'discounts'])->get(), 'web');
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
@@ -206,6 +211,7 @@ class OrderController extends Controller
             CreateOrderPipeline::class,
             NotifyUserWithPlacedOrder::class,
         ])->then(fn($rqeuest) => $request->order);
+        // dd(1);
         $this->setData('data', $order);
 
         $this->redirectRoute("{$this->resourceRoute}.show", [$order->id]);
@@ -235,4 +241,5 @@ class OrderController extends Controller
 
         return $this->response();
     }
+
 }

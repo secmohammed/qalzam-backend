@@ -70,9 +70,10 @@ class CreateOrderPipeline implements Pipeline
         }
         $request->merge(compact('order'));
         if ($request->order) {
-            event(new OrderCreated($order));
+            event(new OrderCreated($request->order));
 
         }
+        // dd($request->order);
 
         return $next($order);
     }

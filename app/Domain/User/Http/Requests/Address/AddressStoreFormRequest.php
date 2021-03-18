@@ -37,7 +37,7 @@ class AddressStoreFormRequest extends FormRequest
     {
         $rules = [
             'name' => 'required',
-            'address_1' => 'required',
+            'address_1' => 'required|unique:addresses,address_1',
             'landmark' => 'required',
             'location_id' => 'required|exists:locations,id',
             'postal_code' => 'required',

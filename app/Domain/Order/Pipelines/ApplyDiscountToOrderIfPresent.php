@@ -3,11 +3,11 @@
 namespace App\Domain\Order\Pipelines;
 
 use App\Common\Cart\Cart;
-use App\Infrastructure\Pipelines\Pipeline;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use App\Domain\User\Repositories\Contracts\UserRepository;
 use App\Domain\Discount\Http\Exceptions\DiscountExpiredException;
 use App\Domain\Discount\Http\Exceptions\DiscountIsAlreadyUsedException;
+use App\Domain\User\Repositories\Contracts\UserRepository;
+use App\Infrastructure\Pipelines\Pipeline;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ApplyDiscountToOrderIfPresent implements Pipeline
 {
@@ -32,6 +32,7 @@ class ApplyDiscountToOrderIfPresent implements Pipeline
     public function handle($request, \Closure $next)
     {
         if (!$request->discount_id) {
+
             return $next($request);
         }
         try {

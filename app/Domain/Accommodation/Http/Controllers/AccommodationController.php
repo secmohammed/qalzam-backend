@@ -11,6 +11,7 @@ use App\Domain\Accommodation\Http\Resources\Accommodation\AccommodationResourceC
 use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
 use App\Domain\Accommodation\Repositories\Contracts\ContractRepository;
 use App\Domain\Branch\Repositories\Contracts\BranchRepository;
+use App\Domain\Category\Repositories\Contracts\CategoryRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
@@ -24,6 +25,7 @@ class AccommodationController extends Controller
      * @var AccommodationRepository
      */
     protected $accommodationRepository;
+    protected $categoryRepository;
 
     /**
      * Domain Alias.
@@ -49,9 +51,10 @@ class AccommodationController extends Controller
     /**
      * @param AccommodationRepository $accommodationRepository
      */
-    public function __construct(AccommodationRepository $accommodationRepository)
+    public function __construct(AccommodationRepository $accommodationRepository, CategoryRepository $categoryRepository)
     {
         $this->accommodationRepository = $accommodationRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -62,7 +65,7 @@ class AccommodationController extends Controller
     public function create(BranchRepository $branchRepository, Accommodation $accommodation, ContractRepository $contractRepository)
     {
         $this->setData('title', __('main.add') . ' ' . __('main.accommodation'), 'web');
-        $this->setData('categories', $accommodation->categories);
+        $this->setData('categories', $this->categoryRepository->all());
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('branches', $branchRepository->all());
         $this->setData('contracts', $contractRepository->all());
@@ -104,12 +107,14 @@ class AccommodationController extends Controller
      */
     public function edit(Accommodation $accommodation, BranchRepository $branchRepository, ContractRepository $contractRepository)
     {
+        // dd($accommodation->categories);
         $this->setData('title', __('main.edit') . ' ' . __('main.accommodation') . ' : ' . $accommodation->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('branches', $branchRepository->all());
         $this->setData('edit', $accommodation);
         $this->setData('contracts', $contractRepository->all());
+        $this->setData('categories', $this->categoryRepository->all());
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.edit");
 
@@ -171,9 +176,8 @@ class AccommodationController extends Controller
      */
     public function store(AccommodationStoreFormRequest $request)
     {
-        // dd($request->all());
         $accommodation = $this->accommodationRepository->create($request->validated());
-
+        $accommodation->categories()->attach($request->category_ids);
         app(Pipeline::class)->send([
             'model' => $accommodation,
             'request' => $request,

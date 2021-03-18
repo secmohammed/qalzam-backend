@@ -2,6 +2,7 @@
 
 namespace App\Domain\Order\Http\Requests\Order;
 
+use App\Domain\Order\Http\Rules\EnsureOrderIsAvailableTodayForReservationAtBranch;
 use App\Infrastructure\Http\AbstractRequests\BaseRequest as FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -38,7 +39,10 @@ class OrderStoreFormRequest extends FormRequest
     {
         $rules = [
             'discount_id' => 'nullable|exists:discounts,id',
-            'branch_id' => 'required|exists:branches,id',
+            'branch_id' => [
+                // 'required|exists:branches,id',
+                new EnsureOrderIsAvailableTodayForReservationAtBranch,
+            ],
             'address_id' => [
                 'required',
                 Rule::exists('addresses', 'id')->where(function ($builder) {

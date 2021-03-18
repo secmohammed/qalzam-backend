@@ -2,19 +2,18 @@
 
 namespace App\Domain\User\Http\Controllers;
 
+use App\Common\Pipeline\HandleFileUpload;
 use App\Domain\User\Entities\Role;
+use App\Domain\User\Entities\User;
+use App\Domain\User\Http\Requests\User\UserStoreFormRequest;
+use App\Domain\User\Http\Requests\User\UserUpdateFormRequest;
+use App\Domain\User\Http\Resources\User\UserResource;
+use App\Domain\User\Http\Resources\User\UserResourceCollection;
+use App\Domain\User\Repositories\Contracts\UserRepository;
+use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 use Joovlly\DDD\Traits\Responder;
-use App\Domain\User\Entities\User;
-use App\Common\Pipeline\HandleFileUpload;
-use App\Domain\Location\Entities\Location;
-use App\Domain\User\Http\Resources\User\UserResource;
-use App\Domain\User\Repositories\Contracts\UserRepository;
-use App\Domain\User\Http\Requests\User\UserStoreFormRequest;
-use App\Domain\User\Http\Requests\User\UserUpdateFormRequest;
-use App\Domain\User\Http\Resources\User\UserResourceCollection;
-use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 
 class UserController extends Controller
 {
@@ -183,8 +182,15 @@ class UserController extends Controller
      */
     public function store(UserStoreFormRequest $request)
     {
+        // dd($request);
+
         $store = $this->userRepository->create($request->validated());
         $store->roles()->attach($request->role_id);
+        if ($request->expectsJson()) {
+            $this->setData('meta', [
+                'token' => $store->generateAuthToken(),
+            ]);
+        }
 
         app(Pipeline::class)->send([
             'model' => $store,

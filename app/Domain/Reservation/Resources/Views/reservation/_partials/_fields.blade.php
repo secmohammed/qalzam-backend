@@ -58,7 +58,7 @@
                id="start_date"
                class="form-control datetimepicker-input kt_datetimepicker_5 {{$errors->has('start_date') ? 'is-invalid':''}}"
                placeholder="{{ __('main.start_date') }}"
-               value="{{ ($action == 'edit') ? $edit->start_date->format('Y/m/d h:i A') : '' }}"
+               value="{{ ($action == 'edit') ? $edit->start_date->format('Y/m/d h:i A') :old('start_date')  }}"
                data-toggle="datetimepicker"
                data-target="#start_date">
         <div class="row">
@@ -83,7 +83,7 @@
                id="end_date"
                class="form-control datetimepicker-input kt_datetimepicker_5 {{$errors->has('end_date') ? 'is-invalid':''}}"
                placeholder="{{ __('main.end_date') }}"
-               value="{{ ($action == 'edit') ? $edit->end_date->format('Y/m/d h:i A') : '' }}"
+               value="{{ ($action == 'edit') ? $edit->end_date->format('Y/m/d h:i A') : old('end_date') }}"
                data-toggle="datetimepicker"
                data-target="#end_date">
         <div class="row">

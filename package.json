@@ -10,7 +10,6 @@
         "production": "mix --production"
     },
     "devDependencies": {
-        "axios": "^0.21",
         "bootstrap": "^4.0.0",
         "jquery": "^3.2",
         "laravel-mix": "^6.0.13",
@@ -26,6 +25,8 @@
         "webpack-cli": "^4.5.0"
     },
     "dependencies": {
+        "axios": "^0.21.1",
+        "moment": "^2.29.1",
         "webpack": "^5.25.0"
     }
 }

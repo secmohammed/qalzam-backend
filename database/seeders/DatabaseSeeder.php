@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Domain\Accommodation\Entities\Accommodation;
 use App\Domain\Accommodation\Entities\Contract;
 use App\Domain\Branch\Entities\Album;
 use App\Domain\Branch\Entities\BranchShift;
+use App\Domain\Category\Entities\Category;
 use App\Domain\Product\Entities\Template;
 use App\Domain\User\Entities\Address;
 use App\Domain\User\Entities\User;
@@ -28,11 +30,13 @@ class DatabaseSeeder extends Seeder
         \App\Domain\Location\Entities\Location::factory()->withChildren(2)->count(10)->create();
         \App\Domain\Order\Entities\Order::factory()->withProducts(3)->count(10)->create();
         \App\Domain\Reservation\Entities\Reservation::factory()->count(10)->create();
-        \App\Domain\Post\Entities\Post::factory()->count(50)->create();
-        Album::factory()->count(50)->create();
-        Contract::factory()->count(50)->create();
-        BranchShift::factory()->count(50)->create();
-        Template::factory()->withProducts([], 10)->count(50)->create();
+        \App\Domain\Post\Entities\Post::factory()->count(30)->create();
+        Album::factory()->count(30)->create();
+        Contract::factory()->count(30)->create();
+        BranchShift::factory()->count(30)->create();
+        Category::factory()->count(20)->create();
+        Template::factory()->withProducts([], 10)->count(30)->create();
+        Accommodation::factory()->count(10)->create();
 
         $user = \App\Domain\User\Entities\User::first();
         $user2 = User::factory(["email" => "m@m.com", "password" => bcrypt("12345678")])->create();

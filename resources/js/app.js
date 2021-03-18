@@ -4,13 +4,19 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+require("./bootstrap");
 
-window.Vue = require('vue').default;
+window.Vue = require("vue").default;
 
-
-Vue.component('order-form', require('./components/OrderProduct.vue').default);
-Vue.component('template-products', require('./components/TemplateProducts.vue').default);
+Vue.component(
+    "reservation-form",
+    require("./components/ReservationProduct.vue").default
+);
+Vue.component("order-form", require("./components/OrderProduct.vue").default);
+Vue.component(
+    "template-products",
+    require("./components/TemplateProducts.vue").default
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -19,5 +25,5 @@ Vue.component('template-products', require('./components/TemplateProducts.vue').
  */
 
 const app = new Vue({
-    el: '#app',
+    el: "#app"
 });
