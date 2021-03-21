@@ -13,7 +13,9 @@ use App\Domain\Category\Entities\Category;
 
 class IndexProductsTest extends TestCase
 {
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_fetch_products_with_categories()
     {
         $user = $this->userFactory->create();
@@ -34,7 +36,9 @@ class IndexProductsTest extends TestCase
         $this->assertCount(3, $response->getData(true)['data'][0]['categories']);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_fetch_products_with_user()
     {
         $user = $this->userFactory->create();
@@ -52,7 +56,9 @@ class IndexProductsTest extends TestCase
         $this->assertTrue(array_key_exists('user', $response->getData(true)['data'][0]));
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_filter_products_by_categories_id()
     {
         $user = $this->userFactory->create();
@@ -69,7 +75,9 @@ class IndexProductsTest extends TestCase
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_filter_products_by_categories_ids()
     {
         $user = $this->userFactory->create();
@@ -86,7 +94,9 @@ class IndexProductsTest extends TestCase
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_filter_products_by_cateogry_or_product_name()
     {
         $products = $this->productFactory->withStatus('active')->count(5)
@@ -115,7 +125,9 @@ class IndexProductsTest extends TestCase
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_filter_products_by_price_range()
     {
         $this->productFactory->withStatus('active')->count(5)->create([
@@ -132,7 +144,9 @@ class IndexProductsTest extends TestCase
         $this->assertCount(5, $response->getData(true)['data']);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_filter_products_by_user_id()
     {
         $user = $this->userFactory->create();
@@ -149,7 +163,9 @@ class IndexProductsTest extends TestCase
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_let_user_filter_products_by_description()
     {
         $user = $this->userFactory->create();
@@ -173,7 +189,9 @@ class IndexProductsTest extends TestCase
         $this->assertCount(2, $response->getData(true)['data']);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_let_user_filter_products_by_name()
     {
         $user = $this->userFactory->create();
@@ -197,7 +215,9 @@ class IndexProductsTest extends TestCase
         $this->assertCount(1, $response->getData(true)['data']);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_let_user_filter_products_by_status()
     {
         $user = $this->userFactory->create();
@@ -220,7 +240,9 @@ class IndexProductsTest extends TestCase
         $this->assertCount(3, $response->getData(true)['data']);
     }
 
-    /**  @test */
+    /**
+     * @test
+     */
     public function it_should_list_all_of_active_products_paginated_by_default()
     {
         $this->productFactory->count(5)->withStatus('active')->create();
@@ -235,7 +257,9 @@ class IndexProductsTest extends TestCase
         $this->assertCount(5, $response['data']);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_sort_products_by_created_at_ascending()
     {
         $user = $this->userFactory->create();
@@ -270,7 +294,9 @@ class IndexProductsTest extends TestCase
         );
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_sort_products_by_created_at_descending()
     {
         $user = $this->userFactory->create();
@@ -306,7 +332,9 @@ class IndexProductsTest extends TestCase
         );
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_sort_products_by_prices_asc()
     {
         $this->productFactory->withStatus('active')->create([
@@ -324,13 +352,15 @@ class IndexProductsTest extends TestCase
             'data',
         ]);
         $this->assertEquals(
-            '١٫٠٠ ر.س.‏',
+            '١٠٠٫٠٠ ر.س.‏',
             $response->getData(true)['data'][0]['price']
         );
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_sort_products_by_prices_desc()
     {
         $this->productFactory->withStatus('active')->create([
@@ -348,7 +378,7 @@ class IndexProductsTest extends TestCase
             'data',
         ]);
         $this->assertEquals(
-            '٢٫٠٠ ر.س.‏',
+            '٢٠٠٫٠٠ ر.س.‏',
             $response->getData(true)['data'][0]['price']
         );
 

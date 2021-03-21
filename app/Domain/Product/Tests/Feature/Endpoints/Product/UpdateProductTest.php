@@ -7,10 +7,13 @@ use App\Domain\User\Entities\User;
 use Joovlly\Authorizable\Models\Role;
 use Database\Seeders\RolesTableSeeder;
 use App\Domain\Product\Entities\Product;
+use App\Domain\Category\Entities\Category;
 
 class UpdateProductTest extends TestCase
 {
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_update_product()
     {
         $user = $this->userFactory->create();
@@ -21,7 +24,7 @@ class UpdateProductTest extends TestCase
             'status' => 'active',
         ]);
         $response = $this->jsonAs($user, 'PUT',
-            route('api.products.update', $product), ['price' => 100] + $product->toArray()
+            route('api.products.update', $product), ['price' => 100, 'categories' => Category::factory()->count(3)->create()->pluck('id')] + $product->toArray()
         )->assertStatus(200)->assertJsonStructure([
             'data' => [
                 'id',
@@ -35,7 +38,9 @@ class UpdateProductTest extends TestCase
         ]);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_shouldnt_let_user_update_product_if_doesnt_exist()
     {
         $this->put(
@@ -43,7 +48,9 @@ class UpdateProductTest extends TestCase
         )->assertStatus(404);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_shouldnt_let_user_update_product_if_doesnt_have_permission()
     {
         $user = $this->userFactory->create();
@@ -57,7 +64,9 @@ class UpdateProductTest extends TestCase
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_shouldnt_update_product_if_unauthenticated()
     {
         $product = $this->productFactory->create([

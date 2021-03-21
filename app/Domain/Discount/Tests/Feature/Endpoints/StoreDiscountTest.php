@@ -6,17 +6,20 @@ use Tests\TestCase;
 use App\Domain\User\Entities\User;
 use Joovlly\Authorizable\Models\Role;
 use Database\Seeders\RolesTableSeeder;
+use App\Domain\Category\Entities\Category;
 use App\Domain\Discount\Entities\Discount;
 
 class StoreDiscountTest extends TestCase
 {
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_store_discount_if_code_doesnt_exist()
     {
         \Event::fake();
 
         $user = $this->userFactory->create();
-        $discount = $this->discountFactory->make([
+        $discount = $this->discountFactory->withCategory()->make([
             'expires_at' => now()->addMinutes(10)->format('Y-m-d H:i'),
             'broadcast' => true,
 
@@ -25,32 +28,41 @@ class StoreDiscountTest extends TestCase
         $user->roles()->attach(Role::first());
         $this->userFactory->create()->roles()->attach(Role::latest()->first());
 
-        $this->jsonAs($user, 'POST',
+        $repsonse = $this->jsonAs($user, 'POST',
             route('api.discounts.store'), $discount
-        )->assertStatus(201);
+        );
+        $repsonse->assertStatus(201);
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_shouldnt_store_discount_if_code_exists()
     {
         $user = $this->userFactory->create();
         $this->seed(RolesTableSeeder::class);
-        $discount = $this->discountFactory->create();
+        $discount = $this->discountFactory->withCategory()->create();
         $user->roles()->attach(Role::first());
-        $this->jsonAs($user, 'POST',
+        $response = $this->jsonAs($user, 'POST',
             route('api.discounts.store'), [
                 'broadcast' => true,
                 'code' => $discount->code,
-                'percentage' => 80,
+                'value' => 80,
+                'discountable_id' => Category::factory()->create()->id,
+                'discountable_type' => 'category',
+                'type' => 'percentage',
                 'number_of_usage' => 30,
                 'expires_at' => now()->addDays(1)->format('Y-m-d H:i'),
             ]
-        )->assertStatus(422);
+        );
+        $response->assertStatus(422)->assertJsonValidationErrors(['code']);
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_shouldnt_store_discount_if_doesnt_have_permission()
     {
         $user = $this->userFactory->create();
@@ -60,7 +72,9 @@ class StoreDiscountTest extends TestCase
         )->assertStatus(401);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_shouldnt_store_discount_if_unauthenticated()
     {
         $this->post(

@@ -3,8 +3,10 @@
 namespace App\Common\Cart;
 
 use App\Common\Transformers\Money;
-use App\Domain\User\Entities\User;
 use App\Domain\Branch\Entities\Branch;
+use App\Domain\Discount\Entities\Discount;
+use App\Domain\Discount\Entities\Traits\Discountable;
+use App\Domain\User\Entities\User;
 
 class Cart
 {
@@ -17,6 +19,7 @@ class Cart
     public function __construct(User $user = null)
     {
         $this->user = $user;
+        $this->discount = new Discount;
     }
     public function add($products)
     {
@@ -73,18 +76,10 @@ class Cart
     }
     public function subtotal()
     {
-        $subtotal = $this->user->{$this->getType()}->where('pivot.branch_id', $this->branch->id)->sum(function ($product) {
-            //TODO: after updating the discount to be using discountable, check if the model is category and product is belonging to this category
-            // TODO: Also, check if the discountable type is product, then check if the variation added is belonging to the product.
-            // if  ($product->product->categories->contains('id', $this->discount->category->id)) {
-            //     $subtotal = $product->price->amount() * $product->pivot->quantity;
-
-            //     $subtotal = $subtotal - ($subtotal * $this->discount->percentage / 100);
-
-            // }
-            return $product->price->amount() * $product->pivot->quantity;
-        });
-        return new Money($subtotal);
+        $products = $this->user->{$this->getType()}->where('pivot.branch_id', $this->branch->id);
+        return new Money(
+            app(Discountable::class)->calculcateDiscountedPrice($this->discount, $products)
+        );
     }
 
     public function sync()

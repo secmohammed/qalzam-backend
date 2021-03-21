@@ -2,19 +2,20 @@
 
 namespace App\Domain\Accommodation\Http\Controllers;
 
-use App\Common\Pipeline\HandleFileUpload;
-use App\Domain\Accommodation\Entities\Accommodation;
-use App\Domain\Accommodation\Http\Requests\Accommodation\AccommodationStoreFormRequest;
-use App\Domain\Accommodation\Http\Requests\Accommodation\AccommodationUpdateFormRequest;
-use App\Domain\Accommodation\Http\Resources\Accommodation\AccommodationResource;
-use App\Domain\Accommodation\Http\Resources\Accommodation\AccommodationResourceCollection;
-use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
-use App\Domain\Accommodation\Repositories\Contracts\ContractRepository;
-use App\Domain\Branch\Repositories\Contracts\BranchRepository;
-use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 use Joovlly\DDD\Traits\Responder;
+use App\Common\Pipeline\HandleFileUpload;
+use App\Domain\Accommodation\Entities\Accommodation;
+use App\Domain\Branch\Repositories\Contracts\BranchRepository;
+use App\Domain\Category\Repositories\Contracts\CategoryRepository;
+use App\Domain\Accommodation\Repositories\Contracts\ContractRepository;
+use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
+use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use App\Domain\Accommodation\Http\Resources\Accommodation\AccommodationResource;
+use App\Domain\Accommodation\Http\Requests\Accommodation\AccommodationStoreFormRequest;
+use App\Domain\Accommodation\Http\Requests\Accommodation\AccommodationUpdateFormRequest;
+use App\Domain\Accommodation\Http\Resources\Accommodation\AccommodationResourceCollection;
 
 class AccommodationController extends Controller
 {
@@ -49,9 +50,10 @@ class AccommodationController extends Controller
     /**
      * @param AccommodationRepository $accommodationRepository
      */
-    public function __construct(AccommodationRepository $accommodationRepository)
+    public function __construct(AccommodationRepository $accommodationRepository, CategoryRepository $categoryRepository)
     {
         $this->accommodationRepository = $accommodationRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -62,7 +64,7 @@ class AccommodationController extends Controller
     public function create(BranchRepository $branchRepository, Accommodation $accommodation, ContractRepository $contractRepository)
     {
         $this->setData('title', __('main.add') . ' ' . __('main.accommodation'), 'web');
-        $this->setData('categories', $accommodation->categories);
+        $this->setData('categories', $this->categoryRepository->where('status', 'active')->where('type', 'accommodation')->get());
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('branches', $branchRepository->all());
         $this->setData('contracts', $contractRepository->all());
@@ -76,7 +78,7 @@ class AccommodationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int                         $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -99,7 +101,7 @@ class AccommodationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int                         $id
      * @return \Illuminate\Http\Response
      */
     public function edit(Accommodation $accommodation, BranchRepository $branchRepository, ContractRepository $contractRepository)
@@ -110,6 +112,7 @@ class AccommodationController extends Controller
         $this->setData('branches', $branchRepository->all());
         $this->setData('edit', $accommodation);
         $this->setData('contracts', $contractRepository->all());
+        $this->setData('categories', $this->categoryRepository->where('status', 'active')->where('type', 'accommodation')->get());
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.edit");
 
@@ -145,7 +148,7 @@ class AccommodationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int                         $id
      * @return \Illuminate\Http\Response
      */
     public function show(Accommodation $accommodation)
@@ -153,7 +156,7 @@ class AccommodationController extends Controller
         $this->setData('title', __('main.show') . ' ' . __('main.accommodation') . ' : ' . $accommodation->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
-
+        $this->setData('categories', $this->categoryRepository->where('status', 'active')->where('type', 'product')->get());
         $this->setData('accommodation', $accommodation);
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.show");
@@ -166,14 +169,13 @@ class AccommodationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request    $request
      * @return \Illuminate\Http\Response
      */
     public function store(AccommodationStoreFormRequest $request)
     {
-        // dd($request->all());
         $accommodation = $this->accommodationRepository->create($request->validated());
-
+        $accommodation->categories()->attach($request->categories);
         app(Pipeline::class)->send([
             'model' => $accommodation,
             'request' => $request,
@@ -193,13 +195,18 @@ class AccommodationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request    $request
+     * @param  int                         $id
      * @return \Illuminate\Http\Response
      */
     public function update(AccommodationUpdateFormRequest $request, Accommodation $accommodation)
     {
         $accommodation->update($request->validated());
+
+        if ($request->categories) {
+            $accommodation->categories()->sync($request->categories);
+        }
+
         app(Pipeline::class)->send([
             'model' => $accommodation,
             'request' => $request,
@@ -214,4 +221,5 @@ class AccommodationController extends Controller
 
         return $this->response();
     }
+
 }

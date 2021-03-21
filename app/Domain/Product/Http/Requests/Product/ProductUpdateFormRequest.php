@@ -37,7 +37,7 @@ class ProductUpdateFormRequest extends ProductStoreFormRequest
             'slug' => ['required', 'unique:products,slug,' . $this->product->id],
             'product-images' => 'nullable|array',
             'product-images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-
+            'categories' => 'nullable|array',
         ];
 
         return array_merge(parent::rules(), $rules);

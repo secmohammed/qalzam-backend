@@ -11,6 +11,14 @@ trait CategoryRelations
     /**
      * @return mixed
      */
+    public function discounts()
+    {
+        return $this->morphMany(Discount::class, 'discountable');
+    }
+
+    /**
+     * @return mixed
+     */
     public function posts()
     {
         return $this->morphedByMany(Post::class, 'categorizable');

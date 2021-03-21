@@ -8,10 +8,13 @@ use App\Domain\User\Entities\User;
 use Joovlly\Authorizable\Models\Role;
 use Database\Seeders\RolesTableSeeder;
 use App\Domain\Product\Entities\Product;
+use App\Domain\Category\Entities\Category;
 
 class StoreProductTest extends TestCase
 {
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_create_product()
     {
         $user = $this->userFactory->create();
@@ -22,8 +25,9 @@ class StoreProductTest extends TestCase
             'product-images' => [UploadedFile::fake()->image('image.jpg')],
         ]);
         $response = $this->jsonAs($user, 'POST',
-            route('api.products.store'), ['price' => 100] + $product->toArray()
-        )->assertStatus(201)->assertJsonStructure([
+            route('api.products.store'), ['price' => 100, 'categories' => Category::factory()->count(3)->create()->pluck('id')] + $product->toArray()
+        );
+        $response->assertStatus(201)->assertJsonStructure([
             'data' => [
                 'id',
                 'name',
@@ -36,7 +40,9 @@ class StoreProductTest extends TestCase
         ]);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_shouldnt_let_user_create_product_if_doesnt_have_permission()
     {
         $user = $this->userFactory->create();
@@ -46,7 +52,9 @@ class StoreProductTest extends TestCase
         )->assertStatus(401);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_shouldnt_store_product_if_unauthenticated()
     {
         $this->post(

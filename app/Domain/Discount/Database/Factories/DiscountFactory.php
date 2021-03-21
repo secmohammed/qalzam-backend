@@ -4,8 +4,10 @@ namespace App\Domain\Discount\Database\Factories;
 
 use Illuminate\Support\Str;
 use App\Domain\User\Entities\User;
+use App\Domain\Product\Entities\Product;
 use App\Domain\Category\Entities\Category;
 use App\Domain\Discount\Entities\Discount;
+use App\Domain\Product\Entities\ProductVariation;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class DiscountFactory extends Factory
@@ -39,13 +41,11 @@ class DiscountFactory extends Factory
         return [
             'code' => $this->faker->unique(true)->text(32),
             'number_of_usage' => $this->faker->numberBetween(1, 200),
-            'percentage' => $this->faker->numberBetween(1, 99),
+            'value' => $this->faker->numberBetween(1, 99),
+            'type' => $this->faker->randomElement(['amount', 'percentage']),
             'expires_at' => $this->faker->randomElement([now()->format('Y-m-d H:m'), now()->addMinutes(10)->format('Y-m-d H:i')]),
             'user_id' => function () {
                 return User::factory()->create()->id;
-            },
-            'category_id' => function () {
-                return Category::factory()->create(['type' => 'accommodation'])->id;
             },
             'status' => $this->faker->randomElement(['active', 'inactive']),
 
@@ -66,7 +66,33 @@ class DiscountFactory extends Factory
     }
 
     /**
-     * @param string $status
+     * @return mixed
+     */
+    public function withCategory()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'discountable_id' => Category::factory()->create()->id,
+                'discountable_type' => 'category',
+            ];
+        });
+    }
+
+    /**
+     * @return mixed
+     */
+    public function withProduct()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'discountable_id' => Product::factory()->create()->id,
+                'discountable_type' => 'product',
+            ];
+        });
+    }
+
+    /**
+     * @param  string  $status
      * @return mixed
      */
     public function withStatus(string $status)
@@ -78,8 +104,8 @@ class DiscountFactory extends Factory
     }
 
     /**
-     * @param User $user
-     * @param int $count
+     * @param  User    $user
+     * @param  int     $count
      * @return mixed
      */
     public function withUsersUsing(int $count = 1)
@@ -87,5 +113,18 @@ class DiscountFactory extends Factory
         return $this->hasAttached(User::factory()->count($count), [
             'used_at' => now()->format('Y-m-d H:m'),
         ]);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function withVariation()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'discountable_id' => ProductVariation::factory()->create()->id,
+                'discountable_type' => 'variation',
+            ];
+        });
     }
 }

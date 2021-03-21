@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Domain\Order\Http\Requests\Order;
+namespace App\Domain\Order\Http\Requests\UserOrder;
 
 use Illuminate\Validation\Rule;
 use App\Infrastructure\Http\AbstractRequests\BaseRequest as FormRequest;
 
-class OrderStoreFormRequest extends FormRequest
+class UserOrderStoreFormRequest extends FormRequest
 {
     /**
      * Get custom attributes for validator errors.
@@ -36,22 +36,15 @@ class OrderStoreFormRequest extends FormRequest
      */
     public function rules()
     {
-
         $rules = [
             'discount_id' => 'nullable|exists:discounts,id',
             'branch_id' => 'required|exists:branches,id',
-
-            'products' => 'required|array',
-            'products.*.id' => 'required|exists:product_variations,id',
-            'products.*.quantity' => 'required|numeric|min:1',
             'address_id' => [
-                'nullable',
+                'required',
                 Rule::exists('addresses', 'id')->where(function ($builder) {
-                    $builder->where('user_id', $this->request->get('user_id'));
+                    $builder->where('user_id', $this->user()->id);
                 }),
             ],
-            'user_id' => 'required|exists:users,id',
-
         ];
 
         return $rules;
@@ -59,13 +52,9 @@ class OrderStoreFormRequest extends FormRequest
 
     public function validated()
     {
+
         return array_merge(parent::validated(), [
             'creator_id' => auth()->id(),
-            'products' => collect($this->request->get('products'))->keyBy('id')->map(function ($product) {
-                return [
-                    'quantity' => $product['quantity'],
-                ];
-            })->toArray(),
         ]);
     }
 }

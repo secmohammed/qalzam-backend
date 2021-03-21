@@ -11,7 +11,9 @@ use App\Domain\Product\Entities\ProductVariation;
 
 class ShowBranchProductVariationTest extends TestCase
 {
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_return_404_if_branch_doenst_exist()
     {
         $this->jsonAs(
@@ -22,7 +24,9 @@ class ShowBranchProductVariationTest extends TestCase
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_return_404_if_product_variation_doesnt_exist()
     {
         $this->jsonAs(
@@ -33,7 +37,9 @@ class ShowBranchProductVariationTest extends TestCase
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_return_error_message_if_product_variation_doesnt_belong_to_the_showing_branch()
     {
         $this->jsonAs(
@@ -47,7 +53,9 @@ class ShowBranchProductVariationTest extends TestCase
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_show_product_variation_if_exists_and_belongs_to_the_showing_branch()
     {
         $branch = $this->branchFactory->create();
@@ -65,16 +73,18 @@ class ShowBranchProductVariationTest extends TestCase
         )->assertStatus(200);
         $this->assertDatabaseMissing('product_variations', [
             'id' => $product->id,
-            'price' => (int) $response->getOriginalContent()->price->amount(),
+            'price' => (int) $response->getOriginalContent()->price->amount() / 100,
         ]);
         $this->assertDatabaseHas('branch_product', [
             'product_variation_id' => $product->id,
             'branch_id' => $branch->id,
-            'price' => (int) $response->getOriginalContent()->price->amount(),
+            'price' => (int) $response->getOriginalContent()->price->amount() / 100,
         ]);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_shouldnt_show_branch_product_variation_if_unauthenticated()
     {
         $this->get(
