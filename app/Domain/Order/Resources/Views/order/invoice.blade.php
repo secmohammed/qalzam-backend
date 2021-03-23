@@ -1,3 +1,7 @@
+{{-- @dd($order->user->addresses()->activeAddress()->first()->location) --}}
+{{-- @dd($order->user->addresses->where("default",true)->first()->location) --}}
+{{-- @dd($order->user->addresses) --}}
+{{-- @dd($order->deliverersWithFee()->first()); --}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -71,7 +75,7 @@
             <th scope="col" >{{ __("main.zone") }}</th>
             <td >{{ $order->user->zone }}</td>
             <th scope="col" class="font-weight-bold">{{ __("main.street") }}</th>
-            <td scope="col">sdf</td>
+            <td scope="col">{{ $order->user->addresses()->activeAddress()->first()->location->name }}</td>
           </tr>
           <tr>
             <th scope="col" >{{ __("main.city") }}</th>
@@ -115,16 +119,16 @@
 
           <div class="row justify-content-between mt-5 ">
             <div class="col-6 d-flex flex-column">
-            <p class="h6  " style="font-weight: bold;">  {{ __("main.shipping-method") }}: <span class="font-weight-normal" style="font-weight: normal;" >sfss</span> </p>
-            <p class="h6  " style="font-weight: bold;">  {{ __("main.expected-time-deliver-service") }}: <span  style="font-weight: normal;" >skjldfhk</span> </p>
+            <p class="h6  " style="font-weight: bold;">  {{ __("main.shipping-method") }}: <span class="font-weight-normal" style="font-weight: normal;" >delivery</span> </p>
+            <p class="h6  " style="font-weight: bold;">  {{ __("main.expected-time-deliver-service") }}: <span  style="font-weight: normal;" >٣٠ دقيقة - ٤٥ دقيقة</span> </p>
             </div>
             <div class="col-6 ">
-              <p class="h6  " style="font-weight: bold;">  {{ __("main.value-product-without-tax") }}: <span  style="font-weight: normal;" >skjldfhk</span> </p>
-              <p class="h6  " style="font-weight: bold;">  {{ __("main.tax-additive") }}: <span  style="font-weight: normal;" >skjldfhk</span> </p>
-              <p class="h6  " style="font-weight: bold;">  {{ __("main.subtotal-inclusive-tax") }}: <span  style="font-weight: normal;" >skjldfhk</span> </p>
-              <p class="h6  " style="font-weight: bold;">  {{ __("main.delivery") }}: <span  style="font-weight: normal;" >skjldfhk</span> </p>
-              <p class="h6  " style="font-weight: bold;">  {{ __("main.pay-on-delivery") }}: <span  style="font-weight: normal;" >skjldfhk</span> </p>
-              <p class="h6  " style="font-weight: bold;">  {{ __("main.subtotal") }}: <span  style="font-weight: normal;" ></span> </p>
+              <p class="h6  " style="font-weight: bold;">  {{ __("main.value-product-without-tax") }}: <span  style="font-weight: normal;" >{{ $order->total()->formatted() }}</span> </p>
+              <p class="h6  " style="font-weight: bold;">  {{ __("main.tax-additive") }}: <span  style="font-weight: normal;" ></span>{{ (new App\Common\Transformers\Money ($order->amount() * .15))->formatted()}} </p>
+              <p class="h6  " style="font-weight: bold;">  {{ __("main.subtotal-inclusive-tax") }}: <span  style="font-weight: normal;" >{{ (new App\Common\Transformers\Money ($order->amount() * .15 + $order->amount() ))->formatted()   }}</span> </p>
+              <p class="h6  " style="font-weight: bold;">  {{ __("main.delivery") }}: <span  style="font-weight: normal;" >{{(new App\Common\Transformers\Money ( $order->deliverersWithFee()->first()->delivery_fee))->formatted() }}</span> </p>
+              {{-- <p class="h6  " style="font-weight: bold;">  {{ __("main.pay-on-delivery") }}: <span  style="font-weight: normal;" >skjldfhk</span> </p> --}}
+              <p class="h6  " style="font-weight: bold;">  {{ __("main.subtotal") }}: <span  style="font-weight: normal;" > {{(new App\Common\Transformers\Money( (new App\Common\Transformers\Money ( $order->deliverersWithFee()->first()->delivery_fee))->amount() + $order->amount()))->formatted() }}</span> </p>
              
             </div>
           </div>

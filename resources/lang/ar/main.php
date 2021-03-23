@@ -13,7 +13,6 @@ return [
     'next' => 'التالى',
     'messages' => 'الرسائل',
     'add-album' => 'اضافه البوم',
-
     'english' => 'انجليزي',
     'arabic' => 'عربي',
     'meeting' => 'أجتماع',
@@ -311,4 +310,31 @@ return [
     'quick-actions' => 'الاجراءات السريعة',
     'profile' => 'الصفحة الشخصية',
     "deliverers" => "الموصلون",
+
+    "pay-on-delivery" => "الدفع عند التوصيل ",
+    "invoice-print-date" => "تاريخ طباعة الفاتورة",
+    "request-date" => "تاريخ الطلب",
+    "tax-number" => "الرقم الضريبي",
+    "from" => "من",
+    "to" => "الى",
+    "product-code" => "رمز المنتج",
+    "shipping-method" => "وسيلة الشحن",
+    "expected-time-deliver-service" => "الوقت المتوقع لتوصيل الخدمة",
+    "value-product-without-tax" => "الوقت المتوقع
+    لتوصيل الخدمة",
+    "value-product-without-tax" => "قيمة المنتجات بدون الضريبة
+    المضافة",
+
+    "tax-additive" => "(%15) المضافة القيمة ضريبة",
+    "subtotal-inclusive-tax" => "القيمة الإجمالية شاملة ض.ق.م",
+    "delivery" => "التوصيل",
+    "subtotal" => "المجموع الكلى",
+    "client-name" => "اسم العميل",
+    "employee-name" => "اسم الموظف",
+    "room-number" => "رقم الغرفة ",
+    "entry-time" => "وقت الدخول",
+    "contract-number" => "رقم العقد",
+    "reservation-number" => "رقم الحجز",
+    "all-price-tax" => "جميع الاسعار اعلاه تشمل ضريبة القيمة المضافة",
+
 ];

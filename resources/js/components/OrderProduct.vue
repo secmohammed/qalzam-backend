@@ -288,7 +288,7 @@ export default {
         },
         userCreated(user){
             console.log("🚀 ~ file: OrderProduct.vue ~ line 269 ~ userCreated ~ id", user)
-            this.form.user_id =user.id; 
+          this.form.user_id =user.id; 
             this.newUserToken =user.token; 
             this.step = 0.5 
         },

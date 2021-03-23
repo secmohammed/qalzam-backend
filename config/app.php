@@ -142,6 +142,7 @@ return [
          * Laravel Framework Service Providers...
          */
         Illuminate\Auth\AuthServiceProvider::class,
+        Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
         Illuminate\Cache\CacheServiceProvider::class,
@@ -183,9 +184,9 @@ return [
         \App\Domain\Ingredient\Providers\DomainServiceProvider::class,
         \App\Domain\Dashboard\Providers\DomainServiceProvider::class,
         \App\Domain\Branch\Providers\DomainServiceProvider::class,
-		\App\Domain\Reservation\Providers\DomainServiceProvider::class,
-		\App\Domain\Accommodation\Providers\DomainServiceProvider::class,
-		###DOMAINS SERVICE PROVIDERS###
+        \App\Domain\Reservation\Providers\DomainServiceProvider::class,
+        \App\Domain\Accommodation\Providers\DomainServiceProvider::class,
+        ###DOMAINS SERVICE PROVIDERS###
     ],
 
     /*

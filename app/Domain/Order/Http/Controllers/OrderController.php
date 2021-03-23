@@ -6,6 +6,7 @@ use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 use App\Domain\Discount\Repositories\Contracts\DiscountRepository;
 use App\Domain\Location\Repositories\Contracts\LocationRepository;
 use App\Domain\Order\Entities\Order;
+use App\Domain\Order\Http\Events\GenerateOrderPdfInvoice;
 use App\Domain\Order\Http\Events\OrderDestroyed;
 use App\Domain\Order\Http\Requests\Order\OrderStoreFormRequest;
 use App\Domain\Order\Http\Requests\Order\OrderUpdateFormRequest;
@@ -211,6 +212,11 @@ class OrderController extends Controller
             CreateOrderPipeline::class,
             NotifyUserWithPlacedOrder::class,
         ])->then(fn($rqeuest) => $request->order);
+
+        GenerateOrderPdfInvoice::dispatch($order);
+
+        // return view("welcome", ["order" => Order::first()->load(["products", "user"])]);
+
         // dd(1);
         $this->setData('data', $order);
 

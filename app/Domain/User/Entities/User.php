@@ -2,19 +2,19 @@
 
 namespace App\Domain\User\Entities;
 
-use JWTAuth;
-use Spatie\MediaLibrary\HasMedia;
-use Tymon\JWTAuth\Contracts\JWTSubject;
+use App\Domain\User\Entities\Traits\CustomAttributes\UserAttributes;
+use App\Domain\User\Entities\Traits\Relations\UserRelations;
+use App\Domain\User\Repositories\Contracts\UserRepository;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
-use Spatie\Activitylog\Traits\LogsActivity;
-use Spatie\MediaLibrary\InteractsWithMedia;
+use Joovlly\Authorizable\Models\User as Authenticatable;
 use Joovlly\Authorizable\Traits\Authorizable;
 use Joovlly\Translatable\Traits\Translatable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Joovlly\Authorizable\Models\User as Authenticatable;
-use App\Domain\User\Repositories\Contracts\UserRepository;
-use App\Domain\User\Entities\Traits\Relations\UserRelations;
-use App\Domain\User\Entities\Traits\CustomAttributes\UserAttributes;
+use JWTAuth;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject, HasMedia
 {
@@ -158,4 +158,5 @@ class User extends Authenticatable implements JWTSubject, HasMedia
 
         return $this->deviceTokens()->pluck('token')->toArray();
     }
+
 }

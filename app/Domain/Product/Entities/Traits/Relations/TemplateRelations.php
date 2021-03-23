@@ -2,9 +2,10 @@
 
 namespace App\Domain\Product\Entities\Traits\Relations;
 
-use App\Domain\User\Entities\User;
+use App\Domain\Accommodation\Entities\Contract;
 use App\Domain\Product\Entities\Product;
 use App\Domain\Product\Entities\ProductVariation;
+use App\Domain\User\Entities\User;
 
 trait TemplateRelations
 {
@@ -14,6 +15,10 @@ trait TemplateRelations
     public function products()
     {
         return $this->belongsToMany(ProductVariation::class, 'product_variation_template', 'template_id', 'product_variation_id')->withPivot(['quantity', 'price']);
+    }
+    public function contracts()
+    {
+        return $this->hasMany(Contract::class);
     }
 
     /**

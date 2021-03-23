@@ -6,6 +6,7 @@ use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
 use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 use App\Domain\Order\Repositories\Contracts\OrderRepository;
 use App\Domain\Reservation\Entities\Reservation;
+use App\Domain\Reservation\Http\Events\GenerateReservationPdfInvoice;
 use App\Domain\Reservation\Http\Requests\Reservation\ReservationStoreFormRequest;
 use App\Domain\Reservation\Http\Requests\Reservation\ReservationUpdateFormRequest;
 use App\Domain\Reservation\Http\Resources\Reservation\ReservationResource;
@@ -17,6 +18,7 @@ use App\Domain\Reservation\Pipelines\CreateReservation;
 use App\Domain\Reservation\Pipelines\ValidateReservationStartDateAndEndDateIfAvailable;
 use App\Domain\Reservation\Pipelines\ValidateReservationStartDateAndEndDateIsWithinBranchAvailability;
 use App\Domain\Reservation\Repositories\Contracts\ReservationRepository;
+use App\Domain\User\Repositories\Contracts\RoleRepository;
 use App\Domain\User\Repositories\Contracts\UserRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 use Illuminate\Http\Request;
@@ -66,13 +68,14 @@ class ReservationController extends Controller
     /**
      * @param ReservationRepository $reservationRepository
      */
-    public function __construct(ReservationRepository $reservationRepository, AccommodationRepository $accommodationRepository, BranchRepository $branchRepository, OrderRepository $orderRepository, UserRepository $userRepository)
+    public function __construct(ReservationRepository $reservationRepository, AccommodationRepository $accommodationRepository, BranchRepository $branchRepository, OrderRepository $orderRepository, RoleRepository $roleRepository, UserRepository $userRepository)
     {
         $this->reservationRepository = $reservationRepository;
         $this->accommodationRepository = $accommodationRepository;
         $this->orderRepository = $orderRepository;
         $this->userRepository = $userRepository;
         $this->branchRepository = $branchRepository;
+        $this->roleRepository = $roleRepository;
     }
 
     /**
@@ -87,6 +90,8 @@ class ReservationController extends Controller
         $this->setData('branches', $this->branchRepository->with("accommodations")->all());
         $this->setData('orders', $this->orderRepository->all());
         $this->setData('users', $this->userRepository->all());
+        $this->setData('roles', $this->roleRepository->all());
+
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('auth_token', auth()->user()->generateAuthToken());
 
@@ -128,12 +133,15 @@ class ReservationController extends Controller
     public function edit(Reservation $reservation)
     {
         $this->setData('title', __('main.edit') . ' ' . __('main.reservation') . ' : ' . $reservation->id, 'web');
-
+        // dd($this->accommodationRepository->find($reservation->accommodation_id)->with("branch")->first());
         $this->setData('alias', $this->domainAlias, 'web');
-        $this->setData('accommodations', $this->accommodationRepository->all());
+        $this->setData('accommodation', $this->accommodationRepository->find($reservation->accommodation_id)->with("branch")->first());
         $this->setData('orders', $this->orderRepository->all());
-        $this->setData('users', $this->userRepository->all());
+        $this->setData('roles', $this->roleRepository->all());
 
+        $this->setData('users', $this->userRepository->all());
+        $this->setData('branches', $this->branchRepository->with("accommodations")->all());
+        $this->setData('auth_token', auth()->user()->generateAuthToken());
         $this->setData('edit', $reservation);
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.edit");
@@ -208,8 +216,8 @@ class ReservationController extends Controller
             CalculateReservationPrice::class,
             CreateReservation::class,
         ])->thenReturn();
-        dd(1, $reservation);
         $reservation->user->notify(new ReservationCreated($reservation));
+        GenerateReservationPdfInvoice::dispatch($reservation);
 
         $this->setData('data', $reservation);
 
