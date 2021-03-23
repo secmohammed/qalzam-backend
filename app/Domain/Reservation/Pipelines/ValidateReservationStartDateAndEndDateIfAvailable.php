@@ -5,7 +5,7 @@ namespace App\Domain\Reservation\Pipelines;
 use App\Infrastructure\Pipelines\Pipeline;
 use App\Domain\Reservation\Repositories\Contracts\ReservationRepository;
 use App\Domain\Reservation\Http\Exceptions\DateRangeIsntAvailableException;
-
+use Carbon\Carbon;
 class ValidateReservationStartDateAndEndDateIfAvailable implements Pipeline
 {
     /**

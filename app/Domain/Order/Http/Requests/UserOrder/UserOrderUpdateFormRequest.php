@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Domain\Branch\Http\Requests\BranchShift;
+namespace App\Domain\Order\Http\Requests\UserOrder;
 
-use App\Domain\Branch\Http\Requests\BranchShift\BranchShiftStoreFormRequest;
+use Illuminate\Validation\Rule;
+use App\Domain\Order\Http\Requests\UserOrder\UserOrderStoreFormRequest;
 
-class BranchShiftUpdateFormRequest extends BranchShiftStoreFormRequest
+class UserOrderUpdateFormRequest extends UserOrderStoreFormRequest
 {
     /**
      * Get custom attributes for validator errors.
@@ -17,7 +18,7 @@ class BranchShiftUpdateFormRequest extends BranchShiftStoreFormRequest
     }
 
     /**
-     * Determine if the branchshift is authorized to make this request.
+     * Determine if the order is authorized to make this request.
      *
      * @return bool
      */
@@ -33,12 +34,7 @@ class BranchShiftUpdateFormRequest extends BranchShiftStoreFormRequest
      */
     public function rules()
     {
-        $rules = [
-            'branch_id' => [
-                'required',
-                'exists:branches,id',
-            ],
-        ];
+        $rules = [];
 
         return array_merge(parent::rules(), $rules);
     }

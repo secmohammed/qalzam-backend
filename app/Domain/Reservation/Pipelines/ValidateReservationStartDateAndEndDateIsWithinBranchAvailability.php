@@ -42,15 +42,9 @@ class ValidateReservationStartDateAndEndDateIsWithinBranchAvailability implement
             Carbon::parse($reservationEndDate)->format('H:i:s')
         );
 
-        throw_if($shiftStartDate->gt(
-            $parseReservationStartDateToToday
-        ) ||
-            $shiftEndDate->lt(
-                $parseReservationEndDateToToday
-
-            ) ||
-            !$shift
-            ||
+        throw_if(
+            $shiftStartDate->gt($parseReservationStartDateToToday) ||
+            $shiftEndDate->lt($parseReservationEndDateToToday) ||
             $parseReservationStartDateToToday->gt($shiftEndDate) ||
             $parseReservationEndDateToToday->lt($shiftStartDate), ReservationTimeIsntWithinBranchShiftDurationException::class);
         return $next($request);

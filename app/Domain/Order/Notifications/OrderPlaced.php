@@ -16,7 +16,7 @@ class OrderPlaced extends Notification
     /**
      * @var mixed
      */
-    private $order;
+    public $order;
 
     /**
      * @param $meetingId
@@ -24,7 +24,7 @@ class OrderPlaced extends Notification
     public function __construct($order)
     {
         $this->order = $order;
-        $this->message = 'Order has been created';
+        $this->message = 'Order has been placed';
     }
 
     public function toDatabase()

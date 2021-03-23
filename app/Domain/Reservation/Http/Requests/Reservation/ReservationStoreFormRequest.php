@@ -4,8 +4,8 @@ namespace App\Domain\Reservation\Http\Requests\Reservation;
 
 use Carbon\Carbon;
 use Illuminate\Validation\Rule;
+use App\Domain\Reservation\Http\Rules\EnsureEndDateIsSameDayAsStartDate;
 use App\Infrastructure\Http\AbstractRequests\BaseRequest as FormRequest;
-use App\Domain\Reservation\Http\Rules\EnsureAccommodationIsAvailableTodayForReservationAtContractDays;
 
 class ReservationStoreFormRequest extends FormRequest
 {
@@ -41,10 +41,11 @@ class ReservationStoreFormRequest extends FormRequest
 
         $rules = [
             'start_date' => 'required|after_or_equal:' . now()->format('Y-m-d H:i:s'),
-            'end_date' => 'nullable|after_or_equal:' . $this->request->get('start_date'),
+            'end_date' => ['nullable', 'after_or_equal:' . $this->request->get('start_date'), new EnsureEndDateIsSameDayAsStartDate($this->request->get('start_date'))],
             'accommodation_id' => [
                 'required',
-                new EnsureAccommodationIsAvailableTodayForReservationAtContractDays,
+                'exists:accommodations,id',
+                // new EnsureAccommodationIsAvailableTodayForReservationAtContractDays,
             ],
             'user_id' => 'required|exists:users,id',
 
@@ -63,12 +64,14 @@ class ReservationStoreFormRequest extends FormRequest
             'creator_id' => auth()->id(),
 
         ];
+
         if (!$this->request->get('end_date') && $this->method() !== "PUT") {
             $validated = array_merge($validated, [
                 'end_date' => Carbon::parse($this->request->get('start_date'))->addHour(4)->format('Y-m-d H:i:s'),
 
             ]);
         }
+
         if (request()->is('/api/*')) {
             $validated = array_merge($validated, [
                 'user_id' => auth()->id(),
@@ -87,4 +90,5 @@ class ReservationStoreFormRequest extends FormRequest
 
         return $this->all();
     }
+
 }

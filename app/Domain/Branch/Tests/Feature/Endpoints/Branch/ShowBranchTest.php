@@ -71,7 +71,7 @@ class ShowBranchTest extends TestCase
                 'price' => 100,
                 'id' => $product->id,
             ]);
-            $this->assertEquals("100", $product->price->amount());
+            $this->assertEquals("10000", $product->price->amount());
         }
     }
 

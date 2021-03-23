@@ -42,19 +42,19 @@ class IndexDiscountsTest extends TestCase
     public function it_should_filter_discounts_by_percentage_between()
     {
         $this->discountFactory->count(5)->withStatus('active')->create([
-            'percentage' => 10,
+            'value' => 10,
         ]);
         $this->discountFactory->count(5)->withStatus('active')->create([
-            'percentage' => 30,
+            'value' => 30,
         ]);
         $this->discountFactory->count(5)->withStatus('active')->create([
-            'percentage' => 50,
+            'value' => 50,
         ]);
         $this->discountFactory->count(5)->withStatus('active')->create([
-            'percentage' => 70,
+            'value' => 70,
         ]);
         $response = $this->get(
-            sprintf('%s?%s=%s', route('api.discounts.index'), 'filter[percentage_between]', '10,50')
+            sprintf('%s?%s=%s', route('api.discounts.index'), 'filter[value_between]', '10,50')
         )->assertJsonStructure([
             'data',
             'links',

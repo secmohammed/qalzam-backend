@@ -2,16 +2,18 @@
 
 namespace App\Domain\Product\Tests\Feature\Endpoints\TemplatePoduct;
 
-use App\Domain\Product\Entities\ProductVariation;
-use App\Domain\Product\Entities\Template;
+use Tests\TestCase;
 use App\Domain\User\Entities\Role;
 use App\Domain\User\Entities\User;
 use Database\Seeders\RolesTableSeeder;
-use Tests\TestCase;
+use App\Domain\Product\Entities\Template;
+use App\Domain\Product\Entities\ProductVariation;
 
 class StoreTemplateProductTest extends TestCase
 {
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_let_user_attach_products_for_template()
     {
         $user = $this->userFactory->create();
@@ -26,7 +28,9 @@ class StoreTemplateProductTest extends TestCase
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_remove_old_products_and_attach_new_ones_to_template()
     {
         $user = $this->userFactory->create();
@@ -44,7 +48,6 @@ class StoreTemplateProductTest extends TestCase
             'price' => 100,
             'quantity' => 100,
         ]);
-        dd($this->template->products->first());
         $response = $this->jsonAs($user, 'POST', route('api.templates.products.store', $this->template), [
             'products' => [
                 ['quantity' => 10, 'id' => $this->productVariationFactory->create()->id, 'price' => 120],
@@ -53,7 +56,9 @@ class StoreTemplateProductTest extends TestCase
         $this->assertEquals(1, $this->template->fresh()->products()->count());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_shouldnt_store_products_for_template_if_price_isnt_numeric()
     {
         $user = $this->userFactory->create();
@@ -67,7 +72,9 @@ class StoreTemplateProductTest extends TestCase
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_shouldnt_store_products_for_template_if_price_isnt_provided()
     {
         $user = $this->userFactory->create();
@@ -81,7 +88,9 @@ class StoreTemplateProductTest extends TestCase
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_shouldnt_store_products_for_template_if_product_id_doesnt_exist()
     {
         $user = $this->userFactory->create();
@@ -95,7 +104,9 @@ class StoreTemplateProductTest extends TestCase
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_shouldnt_store_products_for_template_if_product_id_isnt_provided()
     {
         $user = $this->userFactory->create();
@@ -109,7 +120,9 @@ class StoreTemplateProductTest extends TestCase
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_shouldnt_store_products_for_template_if_quantity_isnt_numeric()
     {
         $user = $this->userFactory->create();
@@ -123,7 +136,9 @@ class StoreTemplateProductTest extends TestCase
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_shouldnt_store_products_for_template_if_quantity_isnt_provided()
     {
         $user = $this->userFactory->create();
@@ -136,7 +151,9 @@ class StoreTemplateProductTest extends TestCase
         ])->assertJsonValidationErrors(['products.0.quantity']);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_shouldnt_store_template_if_unauthenticated()
     {
         $this->post(

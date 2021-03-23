@@ -3,6 +3,7 @@
 namespace App\Domain\Order\Tests\Feature\Endpoints\Order;
 
 use Event;
+use Notification;
 use Tests\TestCase;
 use Illuminate\Support\Arr;
 use App\Common\Transformers\Money;
@@ -13,30 +14,35 @@ use Joovlly\Authorizable\Models\Role;
 use App\Domain\Branch\Entities\Branch;
 use Database\Seeders\RolesTableSeeder;
 use App\Domain\Discount\Entities\Discount;
-use App\Domain\Order\Http\Events\OrderCreated;
+use App\Domain\Order\Notifications\OrderPlaced;
 use App\Domain\Product\Entities\ProductVariation;
 
 class StoreOrderTest extends TestCase
 {
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_create_order_and_return_base_order_resource()
     {
         Event::fake();
         $user = $this->userFactory->create();
         $this->seed(RolesTableSeeder::class);
         $products = $this->productVariationFactory->count(3)->withStatus('active')->create();
+        $branch = $this->branchFactory->create();
+        $branch->products()->attach($products);
         $user->roles()->attach(Role::first());
         $address = $this->addAddressTo($user);
-        $this->jsonAs($user, 'POST', route('api.orders.store'), [
+        $response = $this->jsonAs($user, 'POST', route('api.orders.store'), [
             'address_id' => $address->id,
             'user_id' => $user->id,
-            'branch_id' => $this->branchFactory->create()->id,
+            'branch_id' => $branch->id,
             'products' => [
                 ['id' => $products->first()->id,
                     'quantity' => 2],
             ],
 
-        ])->assertJsonStructure([
+        ]);
+        $response->assertJsonStructure([
             'data' => [
                 'status',
                 'created_at',
@@ -45,13 +51,18 @@ class StoreOrderTest extends TestCase
                 'id',
             ],
         ]);
+
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_create_order_with_creator_id_auto_filled()
     {
         Event::fake();
         $products = $this->productVariationFactory->count(3)->withStatus('active')->create();
+        $branch = $this->branchFactory->create();
+        $branch->products()->attach($products);
 
         $user = $this->userFactory->create();
         $this->seed(RolesTableSeeder::class);
@@ -59,10 +70,10 @@ class StoreOrderTest extends TestCase
         $address = $this->addAddressTo($user);
         $response = $this->jsonAs($user, 'POST', route('api.orders.store'), [
             'address_id' => $address->id,
-            'branch_id' => $this->branchFactory->create()->id,
+            'branch_id' => $branch->id,
 
             'user_id' => $user->id,
-            'products' => $products->pluck('id')->toArray(),
+            'products' => $products->map(fn($product) => ['id' => $product->id, 'quantity' => 2])->toArray(),
 
         ]);
         $this->assertDatabaseHas('orders', [
@@ -72,14 +83,17 @@ class StoreOrderTest extends TestCase
         ]);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_create_order_with_discount_applied_and_discount_is_applied_to_subtotal()
     {
         Event::fake();
         $products = $this->productVariationFactory->count(3)->withStatus('active')->create();
         $branch = $this->branchFactory->create();
         $branch->products()->attach($products);
-        $discount = $this->discountFactory->doesntExpire()->create();
+        $discount = $this->discountFactory->doesntExpire()->withCategory()->create();
+        $discount->discountable->products()->attach($products);
         $user = $this->userFactory->create();
         $this->seed(RolesTableSeeder::class);
         $user->roles()->attach(Role::first());
@@ -90,21 +104,24 @@ class StoreOrderTest extends TestCase
             'user_id' => $user->id,
             'discount_id' => $discount->id,
             'branch_id' => $branch->id,
-
-            'products' => $products->pluck('id')->toArray(),
+            'products' => $products->map(fn($product) => ['id' => $product->id, 'quantity' => 2])->toArray(),
 
         ]);
         $subtotal = $products->reduce(function ($carry, $product) {
-            return $carry + $product->price->amount();
+            return $carry + ($product->price->amount() * 2);
         }, 0);
         $this->assertNotEquals((new Money($subtotal))->formatted(), $response->getData(true)['data']['subtotal']);
     }
 
-    /** @test */
-    public function it_should_store_order_and_fire_order_created_event()
+    /**
+     * @test
+     */
+    public function it_should_store_order_and_fire_notification_order_placed()
     {
-        Event::fake();
+        Notification::fake();
         $products = $this->productVariationFactory->count(3)->withStatus('active')->create();
+        $branch = $this->branchFactory->create();
+        $branch->products()->attach($products);
 
         $user = $this->userFactory->create();
         $this->seed(RolesTableSeeder::class);
@@ -113,17 +130,24 @@ class StoreOrderTest extends TestCase
         $response = $this->jsonAs($user, 'POST', route('api.orders.store'), [
             'address_id' => $address->id,
             'user_id' => $user->id,
-            'branch_id' => $this->branchFactory->create()->id,
+            'branch_id' => $branch->id,
 
-            'products' => $products->pluck('id')->toArray(),
+            'products' => $products->map(fn($product) => ['id' => $product->id, 'quantity' => 1])->toArray(),
 
         ]);
-        Event::assertDispatched(OrderCreated::class, function ($event) use ($response) {
-            return $event->order->id === json_decode($response->getContent())->data->id;
-        });
+        Notification::assertSentTo(
+            $user,
+            OrderPlaced::class,
+            function (OrderPlaced $notification) use ($response) {
+                return $notification->order->id === $response->getData(true)['data']['id'];
+            }
+        );
+
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_shouldnt_store_order_if_address_id_doesnt_belong_to_the_attached_user_id()
     {
         $user = $this->userFactory->create();
@@ -144,7 +168,9 @@ class StoreOrderTest extends TestCase
         ]);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_shouldnt_store_order_if_address_id_doesnt_exist()
     {
         $user = $this->userFactory->create();
@@ -164,7 +190,9 @@ class StoreOrderTest extends TestCase
         ]);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_shouldnt_store_order_if_discount_id_doesnt_exist()
     {
         $user = $this->userFactory->create();
@@ -185,7 +213,9 @@ class StoreOrderTest extends TestCase
         ]);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_shouldnt_store_order_if_unauthenticated()
     {
         $this->post(
@@ -194,7 +224,9 @@ class StoreOrderTest extends TestCase
         )->assertStatus(401);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_shouldnt_store_order_if_user_id_isnt_passed()
     {
         $user = $this->userFactory->create();

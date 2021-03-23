@@ -74,7 +74,8 @@
                                         @include("{$alias}::contract._partials._fields", [
                                             'action' => 'edit',
                                             'edit' => $edit,
-                                     
+                                            'categories' => $categories
+
                                         ])
                                     </div>
                                     <div class="col-md-4"></div>

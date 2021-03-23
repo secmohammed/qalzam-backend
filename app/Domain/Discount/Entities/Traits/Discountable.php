@@ -9,8 +9,8 @@ use App\Domain\Discount\Http\Exceptions\DiscountCanNotBePurchasedException;
 trait Discountable
 {
     /**
-     * @param Discount $discount
-     * @param UserInterface $user
+     * @param  Discount      $discount
+     * @param  UserInterface $user
      * @return mixed
      */
     public function attachToUser(User $user)
@@ -27,7 +27,7 @@ trait Discountable
     }
 
     /**
-     * @param Discount $discount
+     * @param  Discount $discount
      * @return mixed
      */
     public function validate()

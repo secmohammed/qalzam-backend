@@ -11,14 +11,18 @@ use App\Domain\Product\Entities\ProductVariationType;
 
 class ProductVariationTest extends TestCase
 {
-    /** @test */
+    /**
+     * @test
+     */
     public function it_belongs_to_a_product()
     {
         $variation = $this->productVariationFactory->create();
         $this->assertInstanceOf(Product::class, $variation->product);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_can_check_if_the_variation_price_is_different_to_the_product_price()
     {
         $product = $this->productFactory->create([
@@ -31,7 +35,9 @@ class ProductVariationTest extends TestCase
         $this->assertTrue($variation->priceVaries());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_can_get_the_minimum_stock_for_a_given_value()
     {
         $variation = $this->productVariationFactory->create();
@@ -43,7 +49,9 @@ class ProductVariationTest extends TestCase
         $this->assertEquals($variation->minStock(200), $quantity);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_checks_if_it_is_in_stock()
     {
         $variation = $this->productVariationFactory->create();
@@ -55,7 +63,9 @@ class ProductVariationTest extends TestCase
         $this->assertTrue($variation->in_stock);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_fetches_the_stock_count()
     {
         $variation = $this->productVariationFactory->create();
@@ -72,7 +82,9 @@ class ProductVariationTest extends TestCase
         $this->assertEquals($variation->stock_count, 10);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_has_in_stock_pivot_within_stock_information()
     {
         $variation = $this->productVariationFactory->create();
@@ -84,7 +96,9 @@ class ProductVariationTest extends TestCase
         $this->assertTrue(!!$variation->stock->first()->pivot->in_stock);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_has_many_stocks()
     {
         $variation = $this->productVariationFactory->create();
@@ -94,14 +108,18 @@ class ProductVariationTest extends TestCase
         $this->assertInstanceOf(Stock::class, $variation->stocks->first());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_has_one_variation()
     {
         $variation = $this->productVariationFactory->create();
         $this->assertInstanceOf(ProductVariationType::class, $variation->type);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_has_stock_count_pivot_within_stock_information()
     {
         $variation = $this->productVariationFactory->create();
@@ -113,7 +131,9 @@ class ProductVariationTest extends TestCase
         $this->assertEquals($variation->stock->first()->pivot->stock, $quantity);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_has_stock_information()
     {
         $variation = $this->productVariationFactory->create();
@@ -123,23 +143,29 @@ class ProductVariationTest extends TestCase
         $this->assertInstanceOf(ProductVariation::class, $variation->stock->first());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_retruns_a_money_instance_for_the_price()
     {
         $variation = $this->productVariationFactory->create();
         $this->assertInstanceOf(Money::class, $variation->price);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_returns_a_formatted_price()
     {
         $variation = $this->productVariationFactory->create([
             'price' => 1000,
         ]);
-        $this->assertEquals($variation->formattedPrice, '١٠٫٠٠ ر.س.‏');
+        $this->assertEquals($variation->formattedPrice, "١٬٠٠٠٫٠٠ ر.س.‏");
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_returns_the_product_price_if_price_is_null()
     {
         $product = $this->productFactory->create([

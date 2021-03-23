@@ -324,7 +324,7 @@ class IndexUserOrdersTest extends TestCase
             'data',
         ]);
         $this->assertEquals(
-            '١٫٠٠ ر.س.‏',
+            '١٠٠٫٠٠ ر.س.‏',
             $response->getData(true)['data'][0]['price']
         );
 
@@ -348,7 +348,7 @@ class IndexUserOrdersTest extends TestCase
             'data',
         ]);
         $this->assertEquals(
-            '٢٫٠٠ ر.س.‏',
+            '٢٠٠٫٠٠ ر.س.‏',
             $response->getData(true)['data'][0]['price']
         );
 

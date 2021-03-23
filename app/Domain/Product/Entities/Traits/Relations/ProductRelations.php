@@ -4,6 +4,7 @@ namespace App\Domain\Product\Entities\Traits\Relations;
 
 use App\Domain\User\Entities\User;
 use App\Domain\Category\Entities\Category;
+use App\Domain\Discount\Entities\Discount;
 use App\Domain\Product\Entities\ProductVariation;
 
 trait ProductRelations
@@ -14,6 +15,14 @@ trait ProductRelations
     public function categories()
     {
         return $this->morphToMany(Category::class, 'categorizable');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function discount()
+    {
+        return $this->morphMany(Discount::class, 'discountable');
     }
 
     /**

@@ -6,14 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 use Joovlly\DDD\Traits\Responder;
 use App\Domain\Order\Entities\Order;
-use App\Domain\Order\Pipelines\CreateOrderPipeline;
+use App\Domain\Order\Pipelines\CreateUserOrderPipeline;
 use App\Domain\Order\Http\Resources\Order\OrderResource;
 use App\Domain\Order\Pipelines\NotifyUserWithPlacedOrder;
 use App\Domain\Order\Repositories\Contracts\OrderRepository;
 use App\Domain\Order\Pipelines\ApplyDiscountToOrderIfPresent;
-use App\Domain\Order\Http\Requests\Order\OrderStoreFormRequest;
-use App\Domain\Order\Http\Requests\Order\OrderUpdateFormRequest;
 use App\Domain\Order\Http\Resources\Order\OrderResourceCollection;
+use App\Domain\Order\Http\Requests\UserOrder\UserOrderStoreFormRequest;
+use App\Domain\Order\Http\Requests\UserOrder\UserOrderUpdateFormRequest;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 
 class UserOrderController extends Controller
@@ -79,7 +79,7 @@ class UserOrderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int                         $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -102,7 +102,7 @@ class UserOrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int                         $id
      * @return \Illuminate\Http\Response
      */
     public function edit(Order $order)
@@ -147,7 +147,7 @@ class UserOrderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int                         $id
      * @return \Illuminate\Http\Response
      */
     public function show(Order $order)
@@ -179,16 +179,16 @@ class UserOrderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request    $request
      * @return \Illuminate\Http\Response
      */
-    public function store(OrderStoreFormRequest $request)
+    public function store(UserOrderStoreFormRequest $request)
     {
         $order = app(Pipeline::class)->send($request)->through([
             ApplyDiscountToOrderIfPresent::class,
-            CreateOrderPipeline::class,
+            CreateUserOrderPipeline::class,
             NotifyUserWithPlacedOrder::class,
-        ])->then(fn($request) => $request->order);
+        ])->then(fn($order) => $order);
 
         $this->setData('data', $order);
 
@@ -201,23 +201,19 @@ class UserOrderController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request    $request
+     * @param  int                         $id
      * @return \Illuminate\Http\Response
      */
-    public function update(OrderUpdateFormRequest $request, Order $order)
+    public function update(UserOrderUpdateFormRequest $request, Order $user_order)
     {
-        $udpate = auth()->user()->orders()->where('id', $order->id)->update($request->validated());
+        auth()->user()->orders()->where('id', $user_order->id)->update($request->validated());
 
-        if ($update) {
-            $this->redirectRoute("{$this->resourceRoute}.show", [$update->id]);
-            $this->setData('data', $update);
-            $this->useCollection(OrderResource::class, 'data');
-        } else {
-            $this->redirectBack();
-            $this->setApiResponse(fn() => response()->json(['updated' => false], 422));
-        }
+        $this->redirectRoute("{$this->resourceRoute}.show", [$user_order->id]);
+        $this->setData('data', $user_order);
+        $this->useCollection(OrderResource::class, 'data');
 
         return $this->response();
     }
+
 }

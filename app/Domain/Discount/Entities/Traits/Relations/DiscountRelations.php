@@ -3,16 +3,25 @@
 namespace App\Domain\Discount\Entities\Traits\Relations;
 
 use App\Domain\User\Entities\User;
+use App\Domain\Product\Entities\Product;
 use App\Domain\Category\Entities\Category;
+use App\Domain\Product\Entities\ProductVariation;
+use Illuminate\Database\Eloquent\Relations\Relation;
+
+Relation::morphMap([
+    'category' => Category::class,
+    'product' => Product::class,
+    'variation' => ProductVariation::class,
+]);
 
 trait DiscountRelations
 {
     /**
      * @return mixed
      */
-    public function category()
+    public function discountable()
     {
-        return $this->belongsTo(Category::class);
+        return $this->morphTo();
     }
 
     /**

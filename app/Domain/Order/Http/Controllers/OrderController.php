@@ -2,26 +2,24 @@
 
 namespace App\Domain\Order\Http\Controllers;
 
-use App\Domain\Branch\Repositories\Contracts\BranchRepository;
-use App\Domain\Discount\Repositories\Contracts\DiscountRepository;
-use App\Domain\Location\Repositories\Contracts\LocationRepository;
-use App\Domain\Order\Entities\Order;
-use App\Domain\Order\Http\Events\OrderDestroyed;
-use App\Domain\Order\Http\Requests\Order\OrderStoreFormRequest;
-use App\Domain\Order\Http\Requests\Order\OrderUpdateFormRequest;
-use App\Domain\Order\Http\Resources\Order\OrderResource;
-use App\Domain\Order\Http\Resources\Order\OrderResourceCollection;
-use App\Domain\Order\Pipelines\ApplyDiscountToOrderIfPresent;
-use App\Domain\Order\Pipelines\CreateOrderPipeline;
-use App\Domain\Order\Pipelines\NotifyUserWithOrderStatus;
-use App\Domain\Order\Pipelines\NotifyUserWithPlacedOrder;
-use App\Domain\Order\Repositories\Contracts\OrderRepository;
-use App\Domain\User\Repositories\Contracts\RoleRepository;
-use App\Domain\User\Repositories\Contracts\UserRepository;
-use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 use Joovlly\DDD\Traits\Responder;
+use App\Domain\Order\Entities\Order;
+use App\Domain\Order\Http\Events\OrderDestroyed;
+use App\Domain\Order\Pipelines\CreateOrderPipeline;
+use App\Domain\Order\Http\Resources\Order\OrderResource;
+use App\Domain\Order\Pipelines\NotifyUserWithOrderStatus;
+use App\Domain\Order\Pipelines\NotifyUserWithPlacedOrder;
+use App\Domain\User\Repositories\Contracts\UserRepository;
+use App\Domain\Order\Repositories\Contracts\OrderRepository;
+use App\Domain\Order\Pipelines\ApplyDiscountToOrderIfPresent;
+use App\Domain\Branch\Repositories\Contracts\BranchRepository;
+use App\Domain\Order\Http\Requests\Order\OrderStoreFormRequest;
+use App\Domain\Order\Http\Requests\Order\OrderUpdateFormRequest;
+use App\Domain\Discount\Repositories\Contracts\DiscountRepository;
+use App\Domain\Order\Http\Resources\Order\OrderResourceCollection;
+use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 
 class OrderController extends Controller
 {
@@ -182,13 +180,11 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        // dd();
         $this->setData('title', __('main.show') . ' ' . __('main.order') . ' : ' . $order->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
 
-        $this->setData('show', $order->where('id', $order->id)->deliverersWithFee()->first());
-        // dd($order->products->all());
+        $this->setData('show', $order);
         $this->setData('order_products', $order->products->all());
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.show");
@@ -210,8 +206,7 @@ class OrderController extends Controller
             ApplyDiscountToOrderIfPresent::class,
             CreateOrderPipeline::class,
             NotifyUserWithPlacedOrder::class,
-        ])->then(fn($rqeuest) => $request->order);
-        // dd(1);
+        ])->then(fn($order) => $order);
         $this->setData('data', $order);
 
         $this->redirectRoute("{$this->resourceRoute}.show", [$order->id]);
