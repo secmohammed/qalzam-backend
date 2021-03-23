@@ -16,7 +16,8 @@ use App\Domain\User\Repositories\Contracts\UserRepository;
 use App\Domain\User\Entities\Traits\Relations\UserRelations;
 use App\Domain\User\Entities\Traits\CustomAttributes\UserAttributes;
 
-class User extends Authenticatable implements JWTSubject, HasMedia {
+class User extends Authenticatable implements JWTSubject, HasMedia
+{
 	use Notifiable, UserRelations, UserAttributes, HasFactory, Authorizable, InteractsWithMedia, Translatable, LogsActivity;
 
 	/**
@@ -99,22 +100,26 @@ class User extends Authenticatable implements JWTSubject, HasMedia {
 	/**
 	 * @return mixed
 	 */
-	public function deviceTokens() {
+	public function deviceTokens()
+    {
 		return $this->hasMany(DeviceToken::class);
 	}
 
-	public function generateAuthToken() {
+	public function generateAuthToken()
+    {
 		return JWTAuth::fromUser($this);
 	}
 
-	public function getJWTCustomClaims() {
+	public function getJWTCustomClaims()
+    {
 		return [];
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public function getJWTIdentifier() {
+	public function getJWTIdentifier()
+    {
 		return $this->getKey();
 	}
 
@@ -126,7 +131,8 @@ class User extends Authenticatable implements JWTSubject, HasMedia {
 	 *
 	 * @return Illuminate\Database\Eloquent\Model|null
 	 */
-	public function hasToken(string $token = null) {
+	public function hasToken(string $token = null)
+    {
 		$remindable = $this->remindables()->where(['completed_at' => null, ['expires_at', '>=', now()->subHours(config("qalzam.remindable.expiration"))->format('Y-m-d H:i')]]);
 		if ($token) {
 			$remindable->whereToken($token);
@@ -135,7 +141,8 @@ class User extends Authenticatable implements JWTSubject, HasMedia {
 		return $remindable->firstOrFail();
 	}
 
-	public static function newFactory() {
+	public static function newFactory()
+    {
 		self::flushEventListeners();
 
 		return app(\App\Domain\User\Database\Factories\UserFactory::class)->new();
@@ -146,8 +153,8 @@ class User extends Authenticatable implements JWTSubject, HasMedia {
 	 *
 	 * @return string
 	 */
-	public function routeNotificationForFcm() {
-
+	public function routeNotificationForFcm()
+    {
 		return $this->deviceTokens()->pluck('token')->toArray();
 	}
 }
