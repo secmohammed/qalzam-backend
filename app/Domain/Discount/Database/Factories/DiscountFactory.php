@@ -9,6 +9,7 @@ use App\Domain\Category\Entities\Category;
 use App\Domain\Discount\Entities\Discount;
 use App\Domain\Product\Entities\ProductVariation;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class DiscountFactory extends Factory
 {

@@ -17,9 +17,9 @@
 
             </div>
         </div>
-        <div class="form-group row">
+        <div class="form-group row align-items-center">
             <label class="col-form-label text-right col-lg-2 col-sm-12">user</label>
-            <div class="col-lg-10 col-md-9 col-sm-12">
+            <div class="col-lg-8 col-md-7 col-sm-10">
                 <select class="form-control  " v-model="form.user_id" data-placeholder="select user">
                     <option label="Label"></option>
                     <option v-for="user in  users" :value="user.id">{{user.name}}</option>
@@ -29,8 +29,10 @@
                     <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["user_id"][0] }}</div>
                 </div>
             </div>
+            <p @click="goToStep(0)" class="col-lg-2 col-md-2 col-sm-2 text-primary " style="cursor: -webkit-grab; cursor: pointer;"> add new user > </p>
 
         </div>
+
         <div class="form-group row">
             <label class="col-form-label text-right col-lg-2 col-sm-12">address</label>
             <div class="col-lg-10 col-md-9 col-sm-12">
@@ -47,6 +49,16 @@
         </div>
 
     </template>
+
+    <template v-if="step == 0">
+        <CreateUserForm :roles="roles" @userCreated="userCreated($event)" :auth_token="auth_token" />
+
+    </template>
+    <template v-if="step == 0.5">
+        <CreateAddressForm :auth_token="newUserToken" @addressCreated="addressCreated($event)" :locations="locations" />
+
+    </template>
+
     <!-- step2 -->
     <template v-if="step == 2">
         <div v-for="(product, index) in form.products">
@@ -112,7 +124,7 @@
     </template>
 
     <div class="d-flex justify-content-between mt-5">
-        <button class="btn btn-primary " @click.prevent="previousStep" v-if="step != 1">
+        <button class="btn btn-primary " @click.prevent="previousStep" v-if="step != 1 && step!=0&& step!=0.5">
             Previous Step
         </button>
         <template v-if="step == 1">
@@ -121,7 +133,7 @@
             </button>
 
         </template>
-        <template v-else>
+        <template v-else-if="step == 2">
             <button class="btn btn-secondary" v-if="action === 'create'" @click.prevent="save" :disabled="!isCreateOrderButtonDisabled">
                 Create Order
             </button>
@@ -130,19 +142,33 @@
             </button>
 
         </template>
+        <template v-else>
+         
+
+        </template>
 
     </div>
 </form>
 </template>
 
 <script>
+import CreateAddressForm from './CreateAddressForm.vue';
+import CreateUserForm from './CreateUserForm.vue';
 export default {
+    components: {
+        CreateUserForm,
+        CreateAddressForm
+    },
     props: {
-        action: {
+        // CreateAddressFormction: {
+        //     required: true,
+        //     type: String,
+        // },
+        auth_token: {
             required: true,
             type: String,
         },
-        auth_token: {
+        action: {
             required: true,
             type: String,
         },
@@ -151,6 +177,14 @@ export default {
             type: Array,
         },
         users: {
+            required: true,
+            type: Array,
+        },
+        roles: {
+            required: true,
+            type: Array,
+        },
+        locations: {
             required: true,
             type: Array,
         },
@@ -167,6 +201,7 @@ export default {
             discounts: [],
             addresses: [],
             products: [],
+            newUserToken:"",
             form: {
                 products: [{
                     id: null,
@@ -192,14 +227,12 @@ export default {
             this.discounts = discounts;
         },
         "form.branch_id"(val) {
-            console.log("🚀 ~ file: OrderProduct.vue ~ line 198 ~ val", val)
             this.products = this.branches.find(branch => branch.id == val).products
         }
     },
     computed: {
         isCreateOrderButtonDisabled() {
-            // return this.form.products.length && this.form.discount_id
-            return this.form.products.length
+            return this.form.products.length 
         },
         isNextStepDisabled() {
             return this.form.user_id && this.form.branch_id && this.form.address_id
@@ -235,6 +268,15 @@ export default {
         previousStep() {
             this.step--;
         },
+        goToStep(step) {
+            if(step === 0 && !this.form.branch_id)
+            {
+                this.errors.branch_id=[ "you should choose branch"]
+                // console.log("🚀 ~ file: OrderProduct.vue ~ line 275 ~ goToStep ~ this.errors", this.errors,this.errors["branch_id"][0])
+                return
+            }
+            this.step = step
+        },
         removeProduct(index) {
             this.form.products.splice(index, 1)
         },
@@ -244,14 +286,29 @@ export default {
                 quantity: null
             })
         },
+        userCreated(user){
+            console.log("🚀 ~ file: OrderProduct.vue ~ line 269 ~ userCreated ~ id", user)
+            this.form.user_id =user.id; 
+            this.newUserToken =user.token; 
+            this.step = 0.5 
+        },
+        addressCreated(id){
+            console.log("🚀 ~ file: OrderProduct.vue ~ line 269 ~ addressCreated ~ id", id)
+            this.form.address_id =id; 
+            this.step = 2 
+        }
+        ,
         save() {
+console.log("🚀 ~ file: OrderProduct.vue ~ line 314 ~ save ~ this.form", this.form)
 
             axios.post("/api/orders", this.form, {
                 headers: {
                     Authorization: "Bearer " + this.auth_token,
                 },
             }).then((res) => {
-                window.location = "/orders"
+                console.log("🚀 ~ file: OrderProduct.vue ~ line 259 ~ save ~ res", res)
+
+                // window.location = "/orders"
             }).catch((err) => {
                 // console.log("🚀 ~ file: OrderProduct.vue ~ line 257 ~ save ~ err.response.data.errors", err.response.data.errors, err.response)
                 this.errors = err.response.data.errors;

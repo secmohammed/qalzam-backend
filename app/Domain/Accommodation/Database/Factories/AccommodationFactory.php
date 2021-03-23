@@ -2,12 +2,12 @@
 
 namespace App\Domain\Accommodation\Database\Factories;
 
-use Illuminate\Support\Str;
-use App\Domain\User\Entities\User;
-use App\Domain\Branch\Entities\Branch;
-use App\Domain\Accommodation\Entities\Contract;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Domain\Accommodation\Entities\Accommodation;
+use App\Domain\Accommodation\Entities\Contract;
+use App\Domain\Branch\Entities\Branch;
+use App\Domain\User\Entities\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class AccommodationFactory extends Factory
 {
@@ -25,7 +25,7 @@ class AccommodationFactory extends Factory
      */
     public function definition()
     {
-        $type = $this->faker->randomElement(['room', 'table']);
+        $type = $this->faker->randomElement(['room']);
 
         return [
             'name' => $this->faker->unique()->name,
@@ -35,6 +35,9 @@ class AccommodationFactory extends Factory
             },
             'user_id' => function () {
                 return User::factory()->create()->id;
+            },
+            'contract_id' => function () {
+                return Contract::factory()->create(["days" => ["monday"]])->id;
             },
             'capacity' => $this->faker->numberBetween(1, 100),
             'type' => $type,

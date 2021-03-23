@@ -82,13 +82,16 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(RoleRepository $roleRepository, LocationRepository $locationRepository)
     {
+        // dd($locationRepository->all());
 
         $this->setData('title', __('main.add') . ' ' . __('main.order'), 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('auth_token', auth()->user()->generateAuthToken());
+        $this->setData('roles', $roleRepository->all());
+        $this->setData('locations', $locationRepository->all());
         $this->setData('branches', $this->branchRepository->with(['products'])->all(), 'web');
         $this->setData('users', $this->userRepository->with(['addresses', 'discounts'])->get(), 'web');
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
@@ -233,4 +236,5 @@ class OrderController extends Controller
 
         return $this->response();
     }
+
 }

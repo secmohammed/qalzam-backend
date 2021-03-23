@@ -2,15 +2,15 @@
 
 namespace App\Domain\User\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Joovlly\DDD\Traits\Responder;
 use App\Domain\User\Entities\Address;
-use App\Domain\User\Http\Resources\Address\AddressResource;
-use App\Domain\User\Repositories\Contracts\AddressRepository;
 use App\Domain\User\Http\Requests\Address\AddressStoreFormRequest;
 use App\Domain\User\Http\Requests\Address\AddressUpdateFormRequest;
+use App\Domain\User\Http\Resources\Address\AddressResource;
 use App\Domain\User\Http\Resources\Address\AddressResourceCollection;
+use App\Domain\User\Repositories\Contracts\AddressRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use Illuminate\Http\Request;
+use Joovlly\DDD\Traits\Responder;
 
 class AddressController extends Controller
 {
@@ -161,6 +161,7 @@ class AddressController extends Controller
      */
     public function store(AddressStoreFormRequest $request)
     {
+        // dd($request->user());
         $address = $request->user()->addresses()->save(
             $this->addressRepository->make(
                 $request->validated()

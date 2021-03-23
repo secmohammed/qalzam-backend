@@ -17,6 +17,7 @@ use App\Domain\Accommodation\Http\Requests\Accommodation\AccommodationStoreFormR
 use App\Domain\Accommodation\Http\Requests\Accommodation\AccommodationUpdateFormRequest;
 use App\Domain\Accommodation\Http\Resources\Accommodation\AccommodationResourceCollection;
 
+
 class AccommodationController extends Controller
 {
     use Responder;
@@ -25,6 +26,7 @@ class AccommodationController extends Controller
      * @var AccommodationRepository
      */
     protected $accommodationRepository;
+    protected $categoryRepository;
 
     /**
      * Domain Alias.
@@ -106,15 +108,13 @@ class AccommodationController extends Controller
      */
     public function edit(Accommodation $accommodation, BranchRepository $branchRepository, ContractRepository $contractRepository)
     {
+        // dd($accommodation->categories);
         $this->setData('title', __('main.edit') . ' ' . __('main.accommodation') . ' : ' . $accommodation->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('branches', $branchRepository->all());
         $this->setData('edit', $accommodation);
         $this->setData('contracts', $contractRepository->all());
-        $this->setData('categories', $this->categoryRepository->where('status', 'active')->where('type', 'accommodation')->get());
-
-        $this->addView("{$this->domainAlias}::{$this->viewPath}.edit");
 
         $this->useCollection(AccommodationResource::class, 'edit');
 

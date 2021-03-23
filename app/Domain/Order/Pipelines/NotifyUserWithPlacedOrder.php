@@ -2,8 +2,8 @@
 
 namespace App\Domain\Order\Pipelines;
 
-use App\Infrastructure\Pipelines\Pipeline;
 use App\Domain\Order\Notifications\OrderPlaced;
+use App\Infrastructure\Pipelines\Pipeline;
 
 class NotifyUserWithPlacedOrder implements Pipeline
 {

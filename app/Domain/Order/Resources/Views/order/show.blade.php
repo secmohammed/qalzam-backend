@@ -192,8 +192,8 @@
                                 <a href="{{ route("products.show",$product->id) }}" class="text-dark-75 font-weight-bolder">{{ $product->name }}</a>
                             </h4>
                          <div class="d-flex justify-content-between">
-                            <div class="font-size-h6 text-muted font-weight-bolder">{{ $product->formatted_price }}</div> 
-                            <div class="font-size-h6 text-muted font-weight-bolder float-right">{{ $product->quantity }}</div> 
+                            <div class="font-size-h6 text-muted font-weight-bolder">{{ __("main.price") }}: {{ $product->formatted_price }}</div> 
+                            <div class="font-size-h6 text-muted font-weight-bolder float-right">{{ __("main.quantity") }}: {{ $product->quantity??0 }}</div> 
                         </div>
                         </div>
                     </div>

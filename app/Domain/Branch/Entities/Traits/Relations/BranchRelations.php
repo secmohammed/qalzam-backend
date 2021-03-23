@@ -2,12 +2,13 @@
 
 namespace App\Domain\Branch\Entities\Traits\Relations;
 
-use App\Domain\User\Entities\User;
-use App\Domain\Order\Entities\Order;
+use App\Domain\Accommodation\Entities\Accommodation;
 use App\Domain\Branch\Entities\Album;
-use App\Domain\Location\Entities\Location;
 use App\Domain\Branch\Entities\BranchShift;
+use App\Domain\Location\Entities\Location;
+use App\Domain\Order\Entities\Order;
 use App\Domain\Product\Entities\ProductVariation;
+use App\Domain\User\Entities\User;
 
 trait BranchRelations
 {
@@ -84,5 +85,12 @@ trait BranchRelations
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    /**
+     * @return mixed
+     */
+    public function accommodations()
+    {
+        return $this->hasMany(Accommodation::class);
     }
 }

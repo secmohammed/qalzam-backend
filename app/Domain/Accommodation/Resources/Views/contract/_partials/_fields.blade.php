@@ -6,6 +6,7 @@
 <x-forms.days   :action="$action"  :edit="$edit??null" :multiple="'multiple'" :name="'days[]'" label="'main.days'" />
 
 
+
 <div class="form-group row">
     <label class="col-form-label text-right col-lg-2 col-sm-12 ">{{ __("main.template") }} <span
             style="color: red"> * </span> </label>

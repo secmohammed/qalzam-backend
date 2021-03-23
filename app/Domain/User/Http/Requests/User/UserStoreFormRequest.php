@@ -42,6 +42,7 @@ class UserStoreFormRequest extends FormRequest
      */
     public function rules()
     {
+        // dd($this->request);
         $rules = [
             'name' => ['required', 'string', 'max:255'],
             'name_ar' => ['required', 'string', 'max:255'],

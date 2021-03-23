@@ -2,25 +2,26 @@
 
 namespace App\Domain\Reservation\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Pipeline\Pipeline;
-use Joovlly\DDD\Traits\Responder;
-use App\Domain\Reservation\Entities\Reservation;
-use App\Domain\Reservation\Pipelines\CreateReservation;
-use App\Domain\User\Repositories\Contracts\UserRepository;
+use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
+use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 use App\Domain\Order\Repositories\Contracts\OrderRepository;
+use App\Domain\Reservation\Entities\Reservation;
+use App\Domain\Reservation\Http\Requests\Reservation\ReservationStoreFormRequest;
+use App\Domain\Reservation\Http\Requests\Reservation\ReservationUpdateFormRequest;
+use App\Domain\Reservation\Http\Resources\Reservation\ReservationResource;
+use App\Domain\Reservation\Http\Resources\Reservation\ReservationResourceCollection;
 use App\Domain\Reservation\Notifications\ReservationCreated;
 use App\Domain\Reservation\Notifications\ReservationUpdated;
 use App\Domain\Reservation\Pipelines\CalculateReservationPrice;
-use App\Domain\Reservation\Repositories\Contracts\ReservationRepository;
-use App\Domain\Reservation\Http\Resources\Reservation\ReservationResource;
-use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
-use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
-use App\Domain\Reservation\Http\Requests\Reservation\ReservationStoreFormRequest;
-use App\Domain\Reservation\Http\Requests\Reservation\ReservationUpdateFormRequest;
-use App\Domain\Reservation\Http\Resources\Reservation\ReservationResourceCollection;
+use App\Domain\Reservation\Pipelines\CreateReservation;
 use App\Domain\Reservation\Pipelines\ValidateReservationStartDateAndEndDateIfAvailable;
 use App\Domain\Reservation\Pipelines\ValidateReservationStartDateAndEndDateIsWithinBranchAvailability;
+use App\Domain\Reservation\Repositories\Contracts\ReservationRepository;
+use App\Domain\User\Repositories\Contracts\UserRepository;
+use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use Illuminate\Http\Request;
+use Illuminate\Pipeline\Pipeline;
+use Joovlly\DDD\Traits\Responder;
 
 /*
  * When Creating a reservation, it must be during the working hour of the branch,
@@ -65,12 +66,13 @@ class ReservationController extends Controller
     /**
      * @param ReservationRepository $reservationRepository
      */
-    public function __construct(ReservationRepository $reservationRepository, AccommodationRepository $accommodationRepository, OrderRepository $orderRepository, UserRepository $userRepository)
+    public function __construct(ReservationRepository $reservationRepository, AccommodationRepository $accommodationRepository, BranchRepository $branchRepository, OrderRepository $orderRepository, UserRepository $userRepository)
     {
         $this->reservationRepository = $reservationRepository;
         $this->accommodationRepository = $accommodationRepository;
         $this->orderRepository = $orderRepository;
         $this->userRepository = $userRepository;
+        $this->branchRepository = $branchRepository;
     }
 
     /**
@@ -81,10 +83,12 @@ class ReservationController extends Controller
     public function create()
     {
         $this->setData('title', __('main.add') . ' ' . __('main.reservation'), 'web');
-        $this->setData('accommodations', $this->accommodationRepository->all());
+        // $this->setData('accommodations', $this->accommodationRepository->all());
+        $this->setData('branches', $this->branchRepository->with("accommodations")->all());
         $this->setData('orders', $this->orderRepository->all());
         $this->setData('users', $this->userRepository->all());
         $this->setData('alias', $this->domainAlias, 'web');
+        $this->setData('auth_token', auth()->user()->generateAuthToken());
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
 
@@ -197,13 +201,14 @@ class ReservationController extends Controller
      */
     public function store(ReservationStoreFormRequest $request)
     {
-
+        // dd(2);
         $reservation = app(Pipeline::class)->send($request)->through([
             ValidateReservationStartDateAndEndDateIsWithinBranchAvailability::class,
             ValidateReservationStartDateAndEndDateIfAvailable::class,
             CalculateReservationPrice::class,
             CreateReservation::class,
         ])->thenReturn();
+        dd(1, $reservation);
         $reservation->user->notify(new ReservationCreated($reservation));
 
         $this->setData('data', $reservation);

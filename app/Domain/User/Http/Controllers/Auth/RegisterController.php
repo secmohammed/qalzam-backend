@@ -2,12 +2,12 @@
 
 namespace App\Domain\User\Http\Controllers\Auth;
 
-use Joovlly\DDD\Traits\Responder;
 use App\Domain\User\Entities\Role;
+use App\Domain\User\Http\Requests\Auth\UserRegisterFormRequest;
 use App\Domain\User\Http\Resources\User\UserResource;
 use App\Domain\User\Repositories\Contracts\UserRepository;
-use App\Domain\User\Http\Requests\Auth\UserRegisterFormRequest;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use Joovlly\DDD\Traits\Responder;
 
 class RegisterController extends Controller
 {
@@ -46,13 +46,10 @@ class RegisterController extends Controller
      */
     public function store(UserRegisterFormRequest $request)
     {
+        // dd($request->expectsJson(), 1);
+
         $user = $this->userRepository->create($request->validated());
         $user->roles()->attach(Role::whereSlug('user')->first());
-        if ($request->expectsJson()) {
-            $this->setData('meta', [
-                'token' => $user->generateAuthToken(),
-            ]);
-        }
 
         $this->setData('data', $user);
 

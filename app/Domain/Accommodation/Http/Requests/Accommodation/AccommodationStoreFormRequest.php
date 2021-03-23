@@ -38,12 +38,13 @@ class AccommodationStoreFormRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name' => 'required|string|min:5|max:255|unique:accommodations,name',
+            'name' => 'required|string|min:5|max:255',
             'accommodation-gallery' => 'required|array',
             'type' => 'required|in:table,room',
             'accommodation-gallery.*' => ['required', 'image', 'mimes:png,jpeg,jpg', 'max:2048'],
             'branch_id' => 'required|exists:branches,id',
             'code' => 'required|unique:accommodations,code',
+            "category_ids" => 'required|array',
             'capacity' => 'required|integer|min:1|max:100',
         ];
         if ($this->request->get('type') === 'room') {
