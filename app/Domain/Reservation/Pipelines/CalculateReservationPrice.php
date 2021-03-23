@@ -2,10 +2,10 @@
 
 namespace App\Domain\Reservation\Pipelines;
 
+use Carbon\Carbon;
 use App\Infrastructure\Pipelines\Pipeline;
 use App\Domain\Reservation\Repositories\Contracts\ReservationRepository;
 use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
-use Carbon\Carbon;
 class CalculateReservationPrice implements Pipeline
 {
     /**

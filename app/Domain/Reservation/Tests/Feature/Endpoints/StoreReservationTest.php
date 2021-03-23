@@ -150,9 +150,8 @@ class StoreReservationTest extends TestCase
         $accommodation = $this->accommodationWithBranchAndFullWeekShift([
             'type' => 'room',
         ], [
-            'sunday', 'monday',
+            'sunday', 'monday', 'tuesday', 'thursday', 'wednesday'
         ]);
-
         $reservation = $this->reservationFactory->make([
             'accommodation_id' => $accommodation->id,
         ])->toArray();
@@ -172,7 +171,7 @@ class StoreReservationTest extends TestCase
         $user = $this->userFactory->create();
         $user->roles()->attach(Role::first());
         $accommodation = $this->accommodationWithBranchAndFullWeekShift([], [
-            'sunday', 'monday',
+            'sunday', 'monday', 'tuesday', 'thursday', 'wednesday'
         ]);
         $reservation = $this->reservationFactory->make([
             'start_date' => now()->addMinutes(60 * 8)->format('Y-m-d H:i:s'),
@@ -219,7 +218,7 @@ class StoreReservationTest extends TestCase
         $accommodation = $this->accommodationWithBranchAndFullWeekShift([
             'type' => 'room',
         ], [
-            'sunday', 'monday',
+            'sunday', 'monday', 'tuesday', 'thursday', 'wednesday'
         ]);
 
         $this->reservationFactory->create([
@@ -267,7 +266,7 @@ class StoreReservationTest extends TestCase
         $accommodation = $this->accommodationWithBranchAndFullWeekShift([
             'type' => 'room',
         ], [
-            'sunday', 'monday',
+            'sunday', 'monday', 'tuesday', 'thursday', 'wednesday'
         ]);
 
         $this->reservationFactory->create([
@@ -295,7 +294,7 @@ class StoreReservationTest extends TestCase
         $accommodation = $this->accommodationWithBranchAndFullWeekShift([
             'type' => 'room',
         ], [
-            'sunday', 'monday',
+            'sunday', 'monday', 'tuesday', 'thursday', 'wednesday'
         ]);
 
         $this->reservationFactory->create([

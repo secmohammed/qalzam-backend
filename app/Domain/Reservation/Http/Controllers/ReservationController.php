@@ -208,7 +208,6 @@ class ReservationController extends Controller
             CalculateReservationPrice::class,
             CreateReservation::class,
         ])->thenReturn();
-        dd(1, $reservation);
         $reservation->user->notify(new ReservationCreated($reservation));
 
         $this->setData('data', $reservation);

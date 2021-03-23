@@ -50,7 +50,11 @@ class RegisterController extends Controller
 
         $user = $this->userRepository->create($request->validated());
         $user->roles()->attach(Role::whereSlug('user')->first());
-
+        if ($request->expectsJson()) {
+            $this->setData('meta', [
+                'token' => $user->generateAuthToken(),
+            ]);
+        }
         $this->setData('data', $user);
 
         $this->useCollection(UserResource::class, 'data');

@@ -108,8 +108,8 @@ class AccommodationController extends Controller
      */
     public function edit(Accommodation $accommodation, BranchRepository $branchRepository, ContractRepository $contractRepository)
     {
-        // dd($accommodation->categories);
-        $this->setData('title', __('main.edit') . ' ' . __('main.accommodation') . ' : ' . $accommodation->id, 'web');
+        $this->setData('categories', $this->categoryRepository->where('status', 'active')->where('type', 'accommodation')->get());
+         $this->setData('title', __('main.edit') . ' ' . __('main.accommodation') . ' : ' . $accommodation->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('branches', $branchRepository->all());
@@ -156,7 +156,7 @@ class AccommodationController extends Controller
         $this->setData('title', __('main.show') . ' ' . __('main.accommodation') . ' : ' . $accommodation->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
-        $this->setData('categories', $this->categoryRepository->where('status', 'active')->where('type', 'product')->get());
+        $this->setData('categories', $this->categoryRepository->where('status', 'active')->where('type', 'accommodation')->get());
         $this->setData('accommodation', $accommodation);
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.show");

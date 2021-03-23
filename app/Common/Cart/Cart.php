@@ -3,10 +3,10 @@
 namespace App\Common\Cart;
 
 use App\Common\Transformers\Money;
+use App\Domain\User\Entities\User;
 use App\Domain\Branch\Entities\Branch;
 use App\Domain\Discount\Entities\Discount;
-use App\Domain\Discount\Entities\Traits\Discountable;
-use App\Domain\User\Entities\User;
+use App\Domain\Discount\Traits\PriceCalculator;
 
 class Cart
 {
@@ -78,7 +78,7 @@ class Cart
     {
         $products = $this->user->{$this->getType()}->where('pivot.branch_id', $this->branch->id);
         return new Money(
-            app(Discountable::class)->calculcateDiscountedPrice($this->discount, $products)
+            app(PriceCalculator::class)->calculcateDiscountedPrice($this->discount, $products)
         );
     }
 

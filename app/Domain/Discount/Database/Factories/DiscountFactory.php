@@ -2,14 +2,12 @@
 
 namespace App\Domain\Discount\Database\Factories;
 
-use Illuminate\Support\Str;
 use App\Domain\User\Entities\User;
 use App\Domain\Product\Entities\Product;
 use App\Domain\Category\Entities\Category;
 use App\Domain\Discount\Entities\Discount;
 use App\Domain\Product\Entities\ProductVariation;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 class DiscountFactory extends Factory
 {

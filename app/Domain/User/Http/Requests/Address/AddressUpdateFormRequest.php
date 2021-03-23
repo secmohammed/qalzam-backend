@@ -23,7 +23,7 @@ class AddressUpdateFormRequest extends AddressStoreFormRequest
     public function rules()
     {
         $rules = [
-        // 'email'    => ['required','unique:addresses,name,'.$this->route()->parameter('address').',id'],
+        'address_1'    => ['required','unique:addresses,address_1,'. $this->address->id],
         ];
 
         return array_merge(parent::rules(), $rules);

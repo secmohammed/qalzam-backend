@@ -34,8 +34,8 @@ class AccommodationUpdateFormRequest extends AccommodationStoreFormRequest
     public function rules()
     {
         $rules = [
-            'name' => 'required|string|max:255|unique:accommodations,name,' . $this->accommodation->id,
-
+            'name' => 'required|string|max:255',
+            'categories' => 'nullable|array',
             'code' => 'required|unique:accommodations,code,' . $this->accommodation->id,
         ];
 
