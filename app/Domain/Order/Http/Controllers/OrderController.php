@@ -23,6 +23,7 @@ use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 use Joovlly\DDD\Traits\Responder;
+use PDF;
 
 class OrderController extends Controller
 {
@@ -246,6 +247,14 @@ class OrderController extends Controller
         $this->useCollection(OrderResource::class, 'data');
 
         return $this->response();
+    }
+    public function generatePdf(Order $order)
+    {
+        $locations = $order->user->addresses()->activeAddress()->first()->location->prevNodes()->get();
+
+        $pdf = PDF::loadView('orders::order.invoice', ["order" => $order->load(["products", "user"]), "locations" => $locations]);
+        $pdf->stream($event->order->id . '.pdf');
+
     }
 
 }

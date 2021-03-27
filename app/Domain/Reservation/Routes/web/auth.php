@@ -11,11 +11,12 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
-
+ */
 
 Route::middleware(['auth'])->group(function () {
-    Route::resource('/reservations','ReservationController');
-    Route::get('/inout','ReservationController@inout')->name('inout');
-	###CRUD_PLACEHOLDER###
+    Route::resource('/reservations', 'ReservationController');
+    Route::get('reservations/{reservation}/pdf', 'ReservationController@generatePdf')->name('reservations.pdf');
+
+    Route::get('/inout', 'ReservationController@inout')->name('inout');
+    ###CRUD_PLACEHOLDER###
 });

@@ -73,15 +73,15 @@
           </tr>
           <tr>
             <th scope="col" >{{ __("main.zone") }}</th>
-            <td >{{ $order->user->zone }}</td>
+            <td >{{ $locations->where('type', 'zone')->first()->name }}</td>
             <th scope="col" class="font-weight-bold">{{ __("main.street") }}</th>
-            <td scope="col">{{ $order->user->addresses()->activeAddress()->first()->location->name }}</td>
+            <td scope="col">{{ $locations->where('type', 'district')->first()->name }}</td>
           </tr>
           <tr>
             <th scope="col" >{{ __("main.city") }}</th>
-            <td >First</td>
+            <td >{{ $locations->where('type', 'city')->first()->name }}</td>
             <th scope="col" class="font-weight-bold">{{ __("main.country") }}</th>
-            <td scope="col">Handle</td>
+            <td scope="col">{{ $locations->where('type', 'country')->first()->name }}</td>
           </tr>
         
            

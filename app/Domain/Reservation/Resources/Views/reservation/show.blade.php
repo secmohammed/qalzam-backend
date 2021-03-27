@@ -52,6 +52,10 @@
                                 {{ __('main.show') }} {{ __('main.reservation') }} : # {{ $reservation->id }}
                             </h3>
                             <div class="card-toolbar">
+                                <a title="{{ __('main.export') }} {{ __('main.order') }}"
+                                href="{{ route('reservations.pdf',$reservation->id) }}"
+                                class="btn btn-light-primary font-weight-bolder mr-2">
+                                <i class="fas fa-file-pdf "  style="color: #FFF"> {{ __("main.export") }} Pdf</i>
                                 <a title="{{ __('main.create') }} {{ __('main.reservation') }}"
                                    href="{{ route('reservations.create') }}"
                                    class="btn btn-light-primary font-weight-bolder mr-2">

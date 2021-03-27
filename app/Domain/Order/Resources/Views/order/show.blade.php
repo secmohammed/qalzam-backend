@@ -16,7 +16,7 @@
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
                     <!--begin::Page Title-->
                     <h5 class=" text-dark font-weight-bold my-1 mr-5 {{ GetLanguage() == 'ar' ? 'ml-2' : '' }}">
-                        {{ __('main.show') }} {{ __('main.reservation') }} </h5>
+                        {{ __('main.show') }} {{ __('main.order') }} </h5>
                     <!--end::Page Title-->
 
                     <!--begin::Breadcrumb-->
@@ -49,24 +49,29 @@
                     <div class="card card-custom">
                         <div class="card-header">
                             <h3 class="card-title">
-                                {{ __('main.show') }} {{ __('main.reservation') }} : # {{ $show->id }}
+                                {{ __('main.show') }} {{ __('main.order') }} : # {{ $show->id }}
                             </h3>
                             <div class="card-toolbar">
-                                <a title="{{ __('main.create') }} {{ __('main.reservation') }}"
+                                <a title="{{ __('main.export') }} {{ __('main.order') }}"
+                                   href="{{ route('orders.pdf',$show->id) }}"
+                                   class="btn btn-light-primary font-weight-bolder mr-2">
+                                   <i class="fas fa-file-pdf "  style="color: #FFF"> {{ __("main.export") }} Pdf</i>
+                                    
+                                <a title="{{ __('main.create') }} {{ __('main.order') }}"
                                    href="{{ route('orders.create') }}"
                                    class="btn btn-light-primary font-weight-bolder mr-2">
                                     <i class="flaticon2-plus"
-                                       style="color: #FFF"></i> {{ __("main.add") }} {{ __("main.reservation") }} </a>
-                                <a title="{{ __('main.delete') }} {{ __('main.reservation') }}"
+                                       style="color: #FFF"></i> {{ __("main.add") }} {{ __("main.order") }} </a>
+                                <a title="{{ __('main.delete') }} {{ __('main.order') }}"
                                    href="{{ route('orders.destroy', $show->id) }}"
                                    class="btn btn-light-danger font-weight-bolder mr-2" data-toggle="modal"
                                    data-target="#delete_{{$show->id}}">
-                                    <i class="flaticon2-trash"></i> {{ __("main.delete") }} {{ __("main.reservation") }}
+                                    <i class="flaticon2-trash"></i> {{ __("main.delete") }} {{ __("main.order") }}
                                 </a>
-                                <a title="{{ __('main.edit') }} {{ __('main.reservation') }}"
+                                <a title="{{ __('main.edit') }} {{ __('main.order') }}"
                                    href="{{ route('orders.edit', $show->id) }}"
                                    class="btn btn-light-warning font-weight-bolder mr-2">
-                                    <i class="flaticon2-edit"></i> {{ __("main.edit") }} {{ __("main.reservation") }} </a>
+                                    <i class="flaticon2-edit"></i> {{ __("main.edit") }} {{ __("main.order") }} </a>
                             </div>
 
                         </div>
@@ -225,7 +230,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ __('main.delete') }} {{ __('main.reservation') }}
+                    <h5 class="modal-title" id="exampleModalLabel">{{ __('main.delete') }} {{ __('main.order') }}
                         : {{ __('main.orders') }} #({{ $show->name }})</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     </button>

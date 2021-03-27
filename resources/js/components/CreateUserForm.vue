@@ -139,6 +139,9 @@
        </div> 
         <div class="d-flex justify-content-center">
 
+          <button class="btn btn-secondry" @click.prevent="$emit('prevClicked')" >
+                previous
+            </button>
           <button class="btn btn-primary" @click.prevent="createUser" >
                 Create User
             </button>

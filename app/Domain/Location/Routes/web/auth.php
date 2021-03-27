@@ -1,9 +1,6 @@
 <?php
 
-use App\Common\Transformers\Money;
-use App\Domain\Product\Entities\Template;
-use App\Domain\Reservation\Entities\Reservation;
-use Carbon\Carbon;
+use App\Domain\Order\Entities\Order;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,33 +26,34 @@ Route::middleware(['auth'])->group(function () {
         // out contract
 
         // return view("reservations::invoice", ["order" => Order::first()->load(["products", "user"])]);
-        // $order = Order::first()->load(["products", "user"]);
+        $order = Order::first()->load(["products", "user"]);
         // $order->branch->products()->attach($order->products);
         // dd($order->branch_id);
         // Money
         // session(["current_branch" => $order->branch_id]);
-        $reservation = Reservation::first();
+        // $reservation = Reservation::first();
+        // dd($reservation->accommodation->template->contracts);
+        // if ($reservation->accommodation->template->contracts()->ContainingDays(strtolower(Carbon::parse(Reservation::first()->start_date)->isoFormat("dddd")))->exists()) {
+        //     $products = $reservation->accommodation->template->products;
+        // } else {
+        //     $products = Template::whereName("free")->first()->products;
 
-        if ($reservation->accommodation->template->contracts()->ContainingDays(strtolower(Carbon::parse(Reservation::first()->start_date)->isoFormat("dddd")))->exists()) {
-            $products = $reservation->accommodation->template->products;
-        } else {
-            $products = Template::whereName("free")->first()->products;
+        // }
+        // $products = $products->map(function ($product) {
 
-        }
-        $products = $products->map(function ($product) {
+        //     $product->pivot->price = new Money($product->pivot->price);
+        //     return $product;
 
-            $product->pivot->price = new Money($product->pivot->price);
-            return $product;
-
-        });
+        // });
         // GenerateReservationPdfInvoice::dispatch($reservation);
         // dd($products->first()->pivot);
         // session()->forget("current_branch");
         // dd((new TransformersMoney($products->first()->pivot->price))->formatted());
         // dd($order->products->first()->price);
-
-        // return view("orders::order.invoice", ["order" => $order]);
-        return view("reservations::reservation.invoice", ["reservation" => $reservation, "products" => $products]);
+        $locations = $order->user->addresses()->activeAddress()->first()->location->prevNodes()->get();
+        // dd($locations);
+        return view("orders::order.invoice", ["order" => $order, "locations" => $locations]);
+        // return view("reservations::reservation.invoice", ["reservation" => $reservation, "products" => $products]);
 
     });
     ###CRUD_PLACEHOLDER###

@@ -81,7 +81,7 @@
     </form>
    </template>
     <template v-if="step == 0">
-        <CreateUserForm  :roles="roles" @userCreated="userCreated($event)" :auth_token="auth_token" />
+        <CreateUserForm  :roles="roles" @prevClicked="goToStep(1)" @userCreated="userCreated($event)" :auth_token="auth_token" />
 
     </template>
 </div>

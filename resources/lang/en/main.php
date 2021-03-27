@@ -44,6 +44,8 @@ return [
     'number_of_usage' => 'Number of Usage',
     'expires_at' => 'Expires At',
 
+    'export' => ' Export',
+
     'push_notification' => 'Push Notification',
     'location_id' => 'Location ID',
     'sms' => 'SMS',

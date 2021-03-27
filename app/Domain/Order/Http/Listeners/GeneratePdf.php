@@ -4,7 +4,6 @@ namespace App\Domain\Order\Http\Listeners;
 
 use App\Domain\Order\Entities\Order;
 use App\Domain\Order\Http\Events\GenerateOrderPdfInvoice;
-use Log;
 use PDF;
 
 class GeneratePdf
@@ -22,11 +21,10 @@ class GeneratePdf
     public function handle(GenerateOrderPdfInvoice $event)
     {
 
-        Log::info('hey something just happened');
+        $locations = $event->order->user->addresses()->activeAddress()->first()->location->prevNodes()->get();
 
-        $pdf = PDF::loadView('orders::order.invoice', $event->order->load(["products", "user"]));
+        $pdf = PDF::loadView('orders::order.invoice', ["order" => $event->order->load(["products", "user"]), "locations" => $locations]);
         $pdf->stream($event->order->id . '.pdf');
-        Log::info($pdf, $event->order);
 
     }
 }

@@ -2,9 +2,11 @@
 
 namespace App\Domain\Reservation\Http\Controllers;
 
+use App\Common\Transformers\Money;
 use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
 use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 use App\Domain\Order\Repositories\Contracts\OrderRepository;
+use App\Domain\Product\Entities\Template;
 use App\Domain\Reservation\Entities\Reservation;
 use App\Domain\Reservation\Http\Events\GenerateReservationPdfInvoice;
 use App\Domain\Reservation\Http\Requests\Reservation\ReservationStoreFormRequest;
@@ -21,9 +23,11 @@ use App\Domain\Reservation\Repositories\Contracts\ReservationRepository;
 use App\Domain\User\Repositories\Contracts\RoleRepository;
 use App\Domain\User\Repositories\Contracts\UserRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 use Joovlly\DDD\Traits\Responder;
+use PDF;
 
 /*
  * When Creating a reservation, it must be during the working hour of the branch,
@@ -251,6 +255,29 @@ class ReservationController extends Controller
         $this->useCollection(ReservationResource::class, 'data');
 
         return $this->response();
+    }
+
+    public function generatePdf(Reservation $reservation)
+    {
+        // dd($reservation->accommodation->template->contracts()->ContainingDays(strtolower(Carbon::parse($reservation->start_date)->isoFormat("dddd")))->exists());
+
+        if ($reservation->accommodation->template->contracts()->ContainingDays(strtolower(Carbon::parse($reservation->start_date)->isoFormat("dddd")))->exists()) {
+            $products = $reservation->accommodation->template->products;
+        } else {
+            $products = Template::whereName("free")->first()->products;
+
+        }
+        // dd(2);
+        $products = $products->map(function ($product) {
+
+            $product->pivot->price = new Money($product->pivot->price);
+            return $product;
+
+        });
+
+        // Log::info($products, $reservation);
+        $pdf = PDF::loadView('reservations::reservation.invoice', ["products" => $products, "reservation" => $reservation]);
+        $pdf->stream($reservation->id . '.pdf');
     }
 
     public function inout()
