@@ -11,6 +11,7 @@ use App\Domain\Order\Pipelines\CreateOrderPipeline;
 use App\Domain\Order\Http\Resources\Order\OrderResource;
 use App\Domain\Order\Pipelines\NotifyUserWithOrderStatus;
 use App\Domain\Order\Pipelines\NotifyUserWithPlacedOrder;
+use App\Domain\User\Repositories\Contracts\RoleRepository;
 use App\Domain\User\Repositories\Contracts\UserRepository;
 use App\Domain\Order\Repositories\Contracts\OrderRepository;
 use App\Domain\Order\Pipelines\ApplyDiscountToOrderIfPresent;
@@ -18,6 +19,7 @@ use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 use App\Domain\Order\Http\Requests\Order\OrderStoreFormRequest;
 use App\Domain\Order\Http\Requests\Order\OrderUpdateFormRequest;
 use App\Domain\Discount\Repositories\Contracts\DiscountRepository;
+use App\Domain\Location\Repositories\Contracts\LocationRepository;
 use App\Domain\Order\Http\Resources\Order\OrderResourceCollection;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 

@@ -11,7 +11,7 @@ trait AddressRelations
     /**
      * @return mixed
      */
-    public function loaction()
+    public function location()
     {
         return $this->belongsTo(Location::class);
     }

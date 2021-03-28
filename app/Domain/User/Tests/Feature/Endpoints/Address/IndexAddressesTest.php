@@ -5,6 +5,7 @@ namespace App\Domain\User\Tests\Feature\Endpoints\Address;
 use Tests\TestCase;
 use App\Domain\User\Entities\User;
 use App\Domain\User\Entities\Address;
+use App\Domain\Location\Entities\Location;
 
 class IndexAddressesTest extends TestCase
 {

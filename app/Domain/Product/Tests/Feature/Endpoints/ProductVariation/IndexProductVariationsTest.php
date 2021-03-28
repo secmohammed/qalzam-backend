@@ -7,6 +7,7 @@ use Faker\Factory;
 use Tests\TestCase;
 use App\Domain\User\Entities\User;
 use Joovlly\Authorizable\Models\Role;
+use App\Domain\Branch\Entities\Branch;
 use Database\Seeders\RolesTableSeeder;
 use App\Domain\Product\Entities\Product;
 use App\Domain\Product\Entities\ProductVariation;
@@ -52,6 +53,26 @@ class IndexProductVariationsTest extends TestCase
             'data',
         ]);
         $this->assertCount(5, $response->getData(true)['data']);
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_filter_product_variations_by_branch_id()
+    {
+        $this->productVariationFactory->withStatus('active')->count(5)->create([
+            'price' => $this->faker->numberBetween(150, 200),
+        ]);
+        $product = $this->productVariationFactory->withStatus('active')->create([
+            'price' => $this->faker->numberBetween(300, 400),
+        ]);
+        $product->branches()->attach($branch = Branch::factory()->create());
+        $response = $this->get(
+            route('api.product_variations.index') . '?filter[branches.id]='. $branch->id
+        )->assertJsonStructure([
+            'data',
+        ]);
+        $this->assertCount(1, $response->getData(true)['data']);
     }
 
     /**
