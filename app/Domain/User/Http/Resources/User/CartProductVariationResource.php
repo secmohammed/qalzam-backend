@@ -12,7 +12,7 @@ class CartProductVariationResource extends ProductVariationResource
     /**
      * @param Request $request
      */
-    public function data(Request $request): array
+    public function toArray($request): array
     {
         return array_merge(parent::toArray($request), [
             'product' => new ProductResource($this->whenLoaded('product')),
