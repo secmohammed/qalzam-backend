@@ -3,14 +3,14 @@
 namespace App\Domain\User\Http\Controllers;
 
 use App\Common\Cart\Cart;
-use Illuminate\Http\Request;
-use Joovlly\DDD\Traits\Responder;
 use App\Domain\Branch\Entities\Branch;
 use App\Domain\Product\Entities\ProductVariation;
-use App\Domain\User\Http\Resources\User\UserResource;
 use App\Domain\User\Http\Requests\Cart\CartStoreFormRequest;
 use App\Domain\User\Http\Requests\Cart\CartUpdateFormRequest;
+use App\Domain\User\Http\Resources\User\UserResource;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use Illuminate\Http\Request;
+use Joovlly\DDD\Traits\Responder;
 
 class CartController extends Controller
 {
@@ -93,6 +93,7 @@ class CartController extends Controller
      */
     public function store(CartStoreFormRequest $request, Cart $cart, Branch $branch)
     {
+        // dd($request->validated());
         $store = $cart->setCartType('cart')->withBranch($branch)->add($request->validated());
         if (count($store['attached']) || count($store['updated'])) {
             $this->setApiResponse(fn() => response()->json(['message' => 'added to cart successfully']));

@@ -3,12 +3,11 @@
 namespace App\Domain\User\Http\Resources\User;
 
 use App\Common\Cart\Cart;
-use Illuminate\Http\Request;
-use App\Domain\User\Entities\User;
-use App\Domain\User\Http\Resources\User\CartResource;
-use App\Domain\User\Http\Resources\User\WishlistResource;
 use App\Domain\Reservation\Http\Resources\Reservation\ReservationResource;
+use App\Domain\User\Entities\User;
+use App\Domain\User\Http\Resources\User\WishlistResource;
 use App\Infrastructure\Http\AbstractResources\BaseResource as JsonResource;
+use Illuminate\Http\Request;
 
 class UserResource extends JsonResource
 {
