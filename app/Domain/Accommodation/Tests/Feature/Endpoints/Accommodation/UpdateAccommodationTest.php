@@ -72,22 +72,6 @@ class UpdateAccommodationTest extends TestCase
         )->assertStatus(422)->assertJsonValidationErrors(['code']);
     }
 
-    /** @test */
-    public function it_shouldnt_update_accommodation_if_name_already_exists()
-    {
-        $accommodation = $this->accommodationFactory->create([
-            'type' => 'table',
-        ]);
-        $user = $this->userFactory->create();
-        config(['app.locale' => 'ar']);
-        $anotherAccommodation = $this->accommodationFactory->create([
-        ]);
-        $this->seed(RolesTableSeeder::class);
-        $user->roles()->attach(Role::first());
-        $response = $this->jsonAs($user, 'PUT',
-            route('api.accommodations.update', $anotherAccommodation->id), ['name' => $accommodation->name] + $anotherAccommodation->toArray()
-        )->assertStatus(422)->assertJsonValidationErrors(['name']);
-    }
 
     /** @test */
     public function it_shouldnt_update_accommodation_if_unauthenticated()

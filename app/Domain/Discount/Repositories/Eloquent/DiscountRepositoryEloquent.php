@@ -42,7 +42,8 @@ class DiscountRepositoryEloquent extends EloquentRepository implements DiscountR
         $this->allowedFilters = [
             'code',
             CustomAllowedFilter::scope('without_expired'),
-            AllowedFilter::scope('percentage_between'),
+            AllowedFilter::scope('value_between'),
+            AllowedFilter::exact('type'),
         ];
         $this->allowedSorts = ['created_at'];
     }

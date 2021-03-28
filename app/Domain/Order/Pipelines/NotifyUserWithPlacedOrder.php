@@ -9,14 +9,12 @@ class NotifyUserWithPlacedOrder implements Pipeline
 {
     /**
      * @param $request
-     * @param \Closure $next
+     * @param \Closure   $next
      */
-    public function handle($request, \Closure $next)
+    public function handle($order, \Closure $next)
     {
-        dd($request->order);
+        $order->user->notify(new OrderPlaced($order));
 
-        $request->order->user->notify(new OrderPlaced($request->order));
-
-        return $next($request);
+        return $next($order);
     }
 }

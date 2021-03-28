@@ -1,8 +1,8 @@
  ✔ Fix Failing Tests @done (21-03-07 05:12)
  ✔ Attach Delivery To Order @done (21-03-07 05:12)
  ✔ Reservation UI @done (21-02-04 06:42)
- ☐ Create Multistep Form Product UI
- ☐ Create Order UI
+ ✔ Create Multistep Form Product UI @done (3/18/2021, 5:32:36 PM)
+ ✔ Create Order UI @done (3/18/2021, 5:32:19 PM)
  ☐ Create Tab UI at branch for displaying products
  ☐ Make Dashboard page Dynamic.
  ✔ Add Album. @done (21-03-07 05:12)
@@ -12,7 +12,7 @@
  ✔ Reservation has subtotal according to the contract type in case of room only, and the subtotal is calculated by submission of products that are related to the template of the contract. @done (21-03-07 05:12)
  ✔ Accommodation with type of room can't have multiple contracts at same days. @done (21-03-07 05:11)
  ☐ Make discount applied in form of percentage or amount.
- ✔ Refactor Orders, cart, wishlist, products to be based on branch. @done (21-02-25 20:06)
+ ✔ Refactor Orders, cart, wishlist, products to be based on branch. @done (3/23/2021, 2:38:46 PM)
  ✔ branch_user contains the employees of the concerened branch. @done (21-02-25 20:06)
  ✔ Branch->users is to display all of the employees. @done (21-02-25 20:06)
  ✔ Branch->deliverers is to display all of the employees using the same table branch_user using the relationship whereHas to fetch the only employees where has role of delivery_guy @done (21-02-25 20:06)

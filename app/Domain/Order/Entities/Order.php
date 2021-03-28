@@ -56,6 +56,24 @@ class Order extends Model
     protected $routeRepoBinding = OrderRepository::class;
 
     /**
+
+     * Reolve Route Binding Using Repo
+     *
+     * @param string $value
+     * @param mix $field
+     * @return mix
+     */
+    public function resolveRouteBinding($value, $field = null)
+    {
+        if ($this->routeRepoBinding) {
+            $repo = app()->make($this->routeRepoBinding);
+
+            return $repo->spatie()->where([$this->getRouteKeyName() => $value])->deliverersWithFee()->firstOrFail();
+        }
+
+        return $this->where('id', $value)->firstOrFail();
+    }
+    /**
      * The table name.
      *
      * @var array

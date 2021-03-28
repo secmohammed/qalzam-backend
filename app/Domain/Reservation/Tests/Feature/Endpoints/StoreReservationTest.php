@@ -17,6 +17,30 @@ use App\Domain\Reservation\Notifications\ReservationCreated;
 class StoreReservationTest extends TestCase
 {
     /** @test */
+    public function it_should_save_a_reservation_if_contract_days_arent_within_accommodation_and_the_price_calculcation_of_reservation_is_free_as_its_not_within_contract_days()
+    {
+        $this->seed(RolesTableSeeder::class);
+        $user = $this->userFactory->create();
+        $user->roles()->attach(Role::first());
+        $accommodation = $this->accommodationWithBranchAndFullWeekShift([
+            'type' => 'room',
+        ], [
+            'thursday'
+        ]);
+        $response = $this->jsonAs($user, 'POST', route('api.reservations.store'), $this->reservationFactory->make([
+            'start_date' => $start_date = now()->addMinutes(35),
+            'accommodation_id' => $accommodation->id,
+            'end_date' => null,
+
+        ])->toArray());
+        $this->assertDatabaseHas('reservations', [
+            'id' => $response->getData(true)['data']['id'],
+            'start_date' => $start_date->format('Y-m-d H:i:s'),
+            'end_Date' => $start_date->addHour(4)->format('Y-m-d H:i:s'),
+        ]);
+
+    }
+    /** @test */
     public function it_should_auto_fill_the_end_date_if_not_supplied_and_create_a_reservation()
     {
         $this->seed(RolesTableSeeder::class);
@@ -25,7 +49,7 @@ class StoreReservationTest extends TestCase
         $accommodation = $this->accommodationWithBranchAndFullWeekShift([
             'type' => 'room',
         ], [
-            'sunday', 'monday',
+            'sunday', 'monday'
         ]);
         $response = $this->jsonAs($user, 'POST', route('api.reservations.store'), $this->reservationFactory->make([
             'start_date' => $start_date = now()->addMinutes(35),
@@ -126,9 +150,8 @@ class StoreReservationTest extends TestCase
         $accommodation = $this->accommodationWithBranchAndFullWeekShift([
             'type' => 'room',
         ], [
-            'sunday', 'monday',
+            'sunday', 'monday', 'tuesday', 'thursday', 'wednesday'
         ]);
-
         $reservation = $this->reservationFactory->make([
             'accommodation_id' => $accommodation->id,
         ])->toArray();
@@ -141,35 +164,6 @@ class StoreReservationTest extends TestCase
             'price' => $price,
         ]);
     }
-
-    /** @test */
-    public function it_shouldnt_let_user_store_reservation_if_accommodation_shift_isnt_available_or_its_a_holiday_for_the_room()
-    {
-        $this->seed(RolesTableSeeder::class);
-        $user = $this->userFactory->create();
-        $user->roles()->attach(Role::first());
-        $accommodation = $this->accommodationWithBranchAndFullWeekShift([
-            'type' => 'room',
-        ], [
-            'friday',
-        ]);
-        $reservation = $this->reservationFactory->make([
-            'start_date' => now()->addMinutes(60 * 8)->format('Y-m-d H:i:s'),
-            'end_date' => now()->addMinutes(60 * 8.5)->format('Y-m-d H:i:s'),
-            'accommodation_id' => $accommodation->id,
-        ])->toArray();
-        $this->jsonAs($user, 'POST', route('api.reservations.store'), $reservation)->assertStatus(422)->assertJsonValidationErrors([
-            'accommodation_id',
-        ])->assertJson([
-            'errors' => [
-                'accommodation_id' => [
-                    sprintf("The selected accommodation can not be selceted due to that the room %s is not available today to be reserved", $accommodation->name),
-                ],
-            ],
-        ]);
-
-    }
-
     /** @test */
     public function it_shouldnt_let_user_store_reservation_if_start_date_and_date_isnt_within_the_branch_shift_working_hours()
     {
@@ -177,7 +171,7 @@ class StoreReservationTest extends TestCase
         $user = $this->userFactory->create();
         $user->roles()->attach(Role::first());
         $accommodation = $this->accommodationWithBranchAndFullWeekShift([], [
-            'sunday', 'monday',
+            'sunday', 'monday', 'tuesday', 'thursday', 'wednesday'
         ]);
         $reservation = $this->reservationFactory->make([
             'start_date' => now()->addMinutes(60 * 8)->format('Y-m-d H:i:s'),
@@ -224,7 +218,7 @@ class StoreReservationTest extends TestCase
         $accommodation = $this->accommodationWithBranchAndFullWeekShift([
             'type' => 'room',
         ], [
-            'sunday', 'monday',
+            'sunday', 'monday', 'tuesday', 'thursday', 'wednesday'
         ]);
 
         $this->reservationFactory->create([
@@ -272,7 +266,7 @@ class StoreReservationTest extends TestCase
         $accommodation = $this->accommodationWithBranchAndFullWeekShift([
             'type' => 'room',
         ], [
-            'sunday', 'monday',
+            'sunday', 'monday', 'tuesday', 'thursday', 'wednesday'
         ]);
 
         $this->reservationFactory->create([
@@ -300,7 +294,7 @@ class StoreReservationTest extends TestCase
         $accommodation = $this->accommodationWithBranchAndFullWeekShift([
             'type' => 'room',
         ], [
-            'sunday', 'monday',
+            'sunday', 'monday', 'tuesday', 'thursday', 'wednesday'
         ]);
 
         $this->reservationFactory->create([

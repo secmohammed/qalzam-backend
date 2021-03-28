@@ -11,7 +11,9 @@ use App\Domain\Product\Entities\ProductVariation;
 
 class ProductTest extends TestCase
 {
-    /** @test */
+    /**
+     * @test
+     */
     public function it_can_check_if_its_in_stock()
     {
         $product = $this->productFactory->create();
@@ -24,7 +26,9 @@ class ProductTest extends TestCase
         $this->assertTrue($product->in_stock);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_gets_the_stock_count()
     {
         $product = $this->productFactory->create();
@@ -39,7 +43,9 @@ class ProductTest extends TestCase
         $this->assertEquals($product->stock_count, 5);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_has_many_categories()
     {
         $product = $this->productFactory->create();
@@ -49,7 +55,9 @@ class ProductTest extends TestCase
         $this->assertInstanceOf(Category::class, $product->categories->first());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_has_many_variations()
     {
         $product = $this->productFactory->create();
@@ -61,20 +69,24 @@ class ProductTest extends TestCase
         $this->assertInstanceOf(ProductVariation::class, $product->variations->first());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_retruns_a_money_instance_for_the_price()
     {
         $product = $this->productFactory->create();
         $this->assertInstanceOf(Money::class, $product->price);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_returns_a_formatted_price()
     {
         $product = $this->productFactory->create([
             'price' => 1000,
         ]);
-        $this->assertEquals($product->formattedPrice, '١٠٫٠٠ ر.س.‏');
+        $this->assertEquals($product->formattedPrice, '١٬٠٠٠٫٠٠ ر.س.‏');
     }
 
     public function setUp(): void

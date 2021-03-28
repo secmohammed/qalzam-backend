@@ -44,7 +44,8 @@ class AccommodationStoreFormRequest extends FormRequest
             'accommodation-gallery.*' => ['required', 'image', 'mimes:png,jpeg,jpg', 'max:2048'],
             'branch_id' => 'required|exists:branches,id',
             'code' => 'required|unique:accommodations,code',
-            "category_ids" => 'required|array',
+            'categories' => 'required|array',
+            'categories.*' => 'required|exists:categories,id',
             'capacity' => 'required|integer|min:1|max:100',
         ];
         if ($this->request->get('type') === 'room') {

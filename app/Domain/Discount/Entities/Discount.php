@@ -2,13 +2,13 @@
 
 namespace App\Domain\Discount\Entities;
 
-use App\Domain\Discount\Entities\Traits\CustomAttributes\DiscountAttributes;
-use App\Domain\Discount\Entities\Traits\Discountable;
-use App\Domain\Discount\Entities\Traits\Relations\DiscountRelations;
-use App\Domain\Discount\Repositories\Contracts\DiscountRepository;
-use App\Infrastructure\AbstractModels\BaseModel as Model;
 use Illuminate\Database\Eloquent\Builder;
+use App\Domain\Discount\Entities\Traits\Discountable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Infrastructure\AbstractModels\BaseModel as Model;
+use App\Domain\Discount\Repositories\Contracts\DiscountRepository;
+use App\Domain\Discount\Entities\Traits\Relations\DiscountRelations;
+use App\Domain\Discount\Entities\Traits\CustomAttributes\DiscountAttributes;
 
 class Discount extends Model
 {
@@ -32,10 +32,12 @@ class Discount extends Model
     protected $fillable = [
         'number_of_usage',
         'code',
-        'percentage',
+        'type',
+        'value',
         'status',
         'expires_at',
-        'category_id',
+        'discountable_id',
+        'discountable_type',
     ];
 
     /**
@@ -65,19 +67,19 @@ class Discount extends Model
     }
 
     /**
-     * @param Builder $builder
-     * @param int $start
-     * @param int $end
+     * @param  Builder $builder
+     * @param  int     $start
+     * @param  int     $end
      * @return mixed
      */
-    public function scopePercentageBetween(Builder $builder, int $start, int $end)
+    public function scopeValueBetween(Builder $builder, int $start, int $end)
     {
 
-        return $builder->whereBetween('percentage', [$start, $end]);
+        return $builder->whereBetween('value', [$start, $end]);
     }
 
     /**
-     * @param Builder $builder
+     * @param  Builder $builder
      * @return mixed
      */
     public function scopeWithoutExpired(Builder $builder): Builder

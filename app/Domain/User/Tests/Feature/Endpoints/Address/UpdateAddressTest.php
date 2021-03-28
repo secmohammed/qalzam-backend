@@ -24,7 +24,7 @@ class UpdateAddressTest extends TestCase
             'default' => true,
             'user_id' => $user->id,
         ]);
-        $this->jsonAs($user, 'PUT',
+        $response = $this->jsonAs($user, 'PUT',
             route('api.addresses.update', $address), $address->toArray()
         );
         $this->assertFalse(!!$oldAddress->fresh()->default);

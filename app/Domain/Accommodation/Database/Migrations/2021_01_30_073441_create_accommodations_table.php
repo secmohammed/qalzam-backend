@@ -26,7 +26,7 @@ class CreateAccommodationsTable extends Migration
         Schema::create('accommodations', function (Blueprint $table) {
 
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->foreignId('branch_id')->constrained()->onDelete('cascade');
             $table->enum('type', ['table', 'room']);
             $table->string('code')->unique();

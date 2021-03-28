@@ -23,6 +23,14 @@ trait ProductVariationRelations
     /**
      * @return mixed
      */
+    public function discount()
+    {
+        return $this->morphMany(Discount::class, 'discountable');
+    }
+
+    /**
+     * @return mixed
+     */
     public function product()
     {
         return $this->belongsTo(Product::class);

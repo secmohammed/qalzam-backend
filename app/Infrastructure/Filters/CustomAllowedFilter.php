@@ -16,7 +16,6 @@ class CustomAllowedFilter extends AllowedFilter
     {
         $valueToFilter = $this->resolveValueForFiltering($value);
         ($this->filterClass)($query->getEloquentBuilder(), $valueToFilter, $this->internalName);
-
     }
 
     /**

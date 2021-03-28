@@ -7,6 +7,7 @@ use Faker\Factory;
 use Tests\TestCase;
 use App\Domain\User\Entities\User;
 use Joovlly\Authorizable\Models\Role;
+use App\Domain\Branch\Entities\Branch;
 use Database\Seeders\RolesTableSeeder;
 use App\Domain\Product\Entities\Product;
 use App\Domain\Product\Entities\ProductVariation;
@@ -14,7 +15,9 @@ use App\Domain\Product\Entities\ProductVariationType;
 
 class IndexProductVariationsTest extends TestCase
 {
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_fetch_product_variations_with_user()
     {
         $user = $this->userFactory->create();
@@ -33,7 +36,9 @@ class IndexProductVariationsTest extends TestCase
         $this->assertTrue(array_key_exists('user', $response->getData(true)['data'][0]));
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_filter_product_variations_by_price_range()
     {
         $this->productVariationFactory->withStatus('active')->count(5)->create([
@@ -50,7 +55,29 @@ class IndexProductVariationsTest extends TestCase
         $this->assertCount(5, $response->getData(true)['data']);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
+    public function it_should_filter_product_variations_by_branch_id()
+    {
+        $this->productVariationFactory->withStatus('active')->count(5)->create([
+            'price' => $this->faker->numberBetween(150, 200),
+        ]);
+        $product = $this->productVariationFactory->withStatus('active')->create([
+            'price' => $this->faker->numberBetween(300, 400),
+        ]);
+        $product->branches()->attach($branch = Branch::factory()->create());
+        $response = $this->get(
+            route('api.product_variations.index') . '?filter[branches.id]='. $branch->id
+        )->assertJsonStructure([
+            'data',
+        ]);
+        $this->assertCount(1, $response->getData(true)['data']);
+    }
+
+    /**
+     * @test
+     */
     public function it_should_filter_product_variations_by_user_id()
     {
         $user = $this->userFactory->create();
@@ -67,7 +94,9 @@ class IndexProductVariationsTest extends TestCase
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_let_user_filter_product_variations_by_details_criteria()
     {
         $user = $this->userFactory->create();
@@ -95,7 +124,9 @@ class IndexProductVariationsTest extends TestCase
         $this->assertCount(1, $response->getData(true)['data']);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_let_user_filter_product_variations_by_name()
     {
         $user = $this->userFactory->create();
@@ -119,7 +150,9 @@ class IndexProductVariationsTest extends TestCase
         $this->assertCount(1, $response->getData(true)['data']);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_let_user_filter_product_variations_by_product_id()
     {
         $user = $this->userFactory->create();
@@ -146,7 +179,9 @@ class IndexProductVariationsTest extends TestCase
         $this->assertCount(2, $response->getData(true)['data']);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_let_user_filter_product_variations_by_product_variation_type_id()
     {
         $user = $this->userFactory->create();
@@ -176,7 +211,9 @@ class IndexProductVariationsTest extends TestCase
         $this->assertCount(2, $response->getData(true)['data']);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_let_user_filter_product_variations_by_status()
     {
         $user = $this->userFactory->create();
@@ -199,7 +236,9 @@ class IndexProductVariationsTest extends TestCase
         $this->assertCount(3, $response->getData(true)['data']);
     }
 
-    /**  @test */
+    /**
+     * @test
+     */
     public function it_should_list_all_of_active_product_variations_paginated_by_default()
     {
         $this->productVariationFactory->count(5)->withStatus('active')->create();
@@ -214,7 +253,9 @@ class IndexProductVariationsTest extends TestCase
         $this->assertCount(5, $response['data']);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_sort_product_variations_by_created_at_ascending()
     {
         $user = $this->userFactory->create();
@@ -249,7 +290,9 @@ class IndexProductVariationsTest extends TestCase
         );
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_sort_product_variations_by_created_at_descending()
     {
         $user = $this->userFactory->create();
@@ -285,7 +328,9 @@ class IndexProductVariationsTest extends TestCase
         );
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_sort_product_variations_by_prices_asc()
     {
         $this->productVariationFactory->withStatus('active')->create([
@@ -303,13 +348,15 @@ class IndexProductVariationsTest extends TestCase
             'data',
         ]);
         $this->assertEquals(
-            '١٫٠٠ ر.س.‏',
+            '١٠٠٫٠٠ ر.س.‏',
             $response->getData(true)['data'][0]['price']
         );
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_should_sort_product_variations_by_prices_desc()
     {
         $this->productVariationFactory->withStatus('active')->create([
@@ -327,7 +374,7 @@ class IndexProductVariationsTest extends TestCase
             'data',
         ]);
         $this->assertEquals(
-            '٢٫٠٠ ر.س.‏',
+            '٢٠٠٫٠٠ ر.س.‏',
             $response->getData(true)['data'][0]['price']
         );
 

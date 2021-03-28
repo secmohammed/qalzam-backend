@@ -122,7 +122,7 @@
     <label class="col-form-label text-right col-lg-2 col-sm-12">{{__("main.category") }}  <span
             style="color: red"> * </span></label>
     <div class="col-lg-10 col-md-9 col-sm-12">
-        <select class="form-control select2 {{$errors->has("category_ids") ? 'is-invalid':''}}" name="category_ids[]" multiple>
+        <select class="form-control select2 {{$errors->has("categories") ? 'is-invalid':''}}" name="categories[]" multiple>
             <option label="Label"></option>
             @foreach ( $categories as $category )
                 
@@ -134,9 +134,9 @@
         </select>
         <div class="row">
             <div class="col-md-12">
-                @if($errors->has("category_ids"))
+                @if($errors->has("categories"))
                     <div class="alert alert-danger w-100 m-0" role="alert">
-                        {{$errors->first("category_ids")}}
+                        {{$errors->first("categories")}}
                     </div>
                 @endif
             </div>

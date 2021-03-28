@@ -8,6 +8,7 @@ use App\Domain\User\Entities\Role;
 use App\Domain\User\Entities\User;
 use Database\Seeders\RolesTableSeeder;
 use App\Domain\Product\Entities\Template;
+use App\Domain\Category\Entities\Category;
 use App\Domain\Accommodation\Entities\Contract;
 use App\Domain\Accommodation\Entities\Accommodation;
 
@@ -26,9 +27,11 @@ class StoreAccommodationTest extends TestCase
             'type' => 'room',
             'contract_id' => $contract->id,
         ]);
+
         $response = $this->jsonAs($user, 'POST',
             route('api.accommodations.store'), $accommodation->toArray() + [
                 'accommodation-gallery' => [UploadedFile::fake()->image('file.png')],
+                'categories' => Category::factory()->count(2)->create()->pluck('id')
             ]
         );
         $this->assertEquals($contract->id, $response->getData(true)['data']['contract_id']);
@@ -50,6 +53,8 @@ class StoreAccommodationTest extends TestCase
         $response = $this->jsonAs($user, 'POST',
             route('api.accommodations.store'), $accommodation->toArray() + [
                 'accommodation-gallery' => [UploadedFile::fake()->image('file.png')],
+                'categories' => Category::factory()->count(2)->create()->pluck('id')
+
             ]
         );
         $this->assertNotNull($response->getData(true)['data']['media']);
@@ -70,23 +75,6 @@ class StoreAccommodationTest extends TestCase
         $response = $this->jsonAs($user, 'POST',
             route('api.accommodations.store'), $anotherAccommodation->toArray()
         )->assertStatus(422)->assertJsonValidationErrors(['code']);
-    }
-
-    /** @test */
-    public function it_shouldnt_create_accommodation_if_name_already_exists()
-    {
-        $accommodation = $this->accommodationFactory->create();
-        $user = $this->userFactory->create();
-        $anotherAccommodation = $this->accommodationFactory->make([
-
-            'type' => 'table',
-            'name' => $accommodation->name,
-        ]);
-        $this->seed(RolesTableSeeder::class);
-        $user->roles()->attach(Role::first());
-        $response = $this->jsonAs($user, 'POST',
-            route('api.accommodations.store'), $anotherAccommodation->toArray()
-        )->assertStatus(422)->assertJsonValidationErrors(['name']);
     }
 
     /** @test */
@@ -116,6 +104,7 @@ class StoreAccommodationTest extends TestCase
         $response = $this->jsonAs($user, 'POST',
             route('api.accommodations.store'), $accommodation->toArray() + [
                 'accommodation-gallery' => [UploadedFile::fake()->image('file.png')],
+                'categories' => Category::factory()->count(2)->create()->pluck('id')
             ]
         )->assertJsonValidationErrors(['contract_id']);
 
@@ -138,23 +127,9 @@ class StoreAccommodationTest extends TestCase
         $response = $this->jsonAs($user, 'POST',
             route('api.accommodations.store'), $accommodation->toArray() + [
                 'accommodation-gallery' => [UploadedFile::fake()->image('file.png')],
+                'categories' => Category::factory()->count(2)->create()->pluck('id')
             ]
         )->assertJsonValidationErrors(['contract_id']);
-    }
-
-    /** @test */
-    public function it_shouldnt_store_accommodation_if_name_of_accommodation_already_existing()
-    {
-        $accommodation = $this->accommodationFactory->create();
-        $user = $this->userFactory->create();
-        $this->seed(RolesTableSeeder::class);
-        $user->roles()->attach(Role::first());
-
-        $this->jsonAs($user, 'POST',
-            route('api.accommodations.store'), [
-                'name' => $accommodation->name,
-            ]
-        )->assertStatus(422)->assertJsonValidationErrors(['name']);
     }
 
     /** @test */
