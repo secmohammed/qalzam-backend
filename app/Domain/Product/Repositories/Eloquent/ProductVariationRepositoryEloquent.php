@@ -2,11 +2,11 @@
 
 namespace App\Domain\Product\Repositories\Eloquent;
 
-use Spatie\QueryBuilder\AllowedFilter;
 use App\Domain\Product\Entities\ProductVariation;
-use App\Infrastructure\Filters\CustomAllowedFilter;
-use App\Infrastructure\AbstractRepositories\EloquentRepository;
 use App\Domain\Product\Repositories\Contracts\ProductVariationRepository;
+use App\Infrastructure\AbstractRepositories\EloquentRepository;
+use App\Infrastructure\Filters\CustomAllowedFilter;
+use Spatie\QueryBuilder\AllowedFilter;
 
 /**
  * Class ProductVariationRepositoryEloquent.
@@ -56,6 +56,8 @@ class ProductVariationRepositoryEloquent extends EloquentRepository implements P
             AllowedFilter::exact('product.id'),
             AllowedFilter::exact('type.id'),
             'name',
+            AllowedFilter::exact('branches.id'),
+
             AllowedFilter::exact('status'),
             AllowedFilter::scope('price_between'),
             AllowedFilter::scope('sort_price'),

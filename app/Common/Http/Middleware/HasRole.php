@@ -3,8 +3,8 @@
 namespace App\Common\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Str;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Support\Str;
 
 class HasRole
 {
@@ -15,6 +15,7 @@ class HasRole
         'api.auth.me',
         // 'api.temlpates.products.store',
         'api.media.destroy',
+        'api.categories.index',
         'api.branch.products.store',
         'api.auth.logout',
         'api.auth.me.update',
