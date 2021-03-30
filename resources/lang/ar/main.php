@@ -336,5 +336,6 @@ return [
     "contract-number" => "رقم العقد",
     "reservation-number" => "رقم الحجز",
     "all-price-tax" => "جميع الاسعار اعلاه تشمل ضريبة القيمة المضافة",
+    "order-number" => "Order number",
 
 ];

@@ -58,8 +58,9 @@ class ProductVariationRepositoryEloquent extends EloquentRepository implements P
             AllowedFilter::exact('branches.id'),
             'name',
             AllowedFilter::exact('branches.id'),
-
+            AllowedFilter::scope('categories'),
             AllowedFilter::exact('status'),
+            AllowedFilter::exact('name'),
             AllowedFilter::scope('price_between'),
             AllowedFilter::scope('sort_price'),
             CustomAllowedFilter::scope('criteria', 'by_details'),

@@ -264,5 +264,5 @@ return [
     "reservation-number" => "Reservation number",
     "signature" => "signature",
     "all-price-tax" => "All prices above include Value added tax",
-
+    "order-number" => "Order number",
 ];

@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
         // $order->branch->products()->attach($order->products);
         // dd($order->branch_id);
         // Money
-        // session(["current_branch" => $order->branch_id]);
+        // session(["current_branch"     => $order->branch_id]);
         $reservation = Reservation::first();
         // dd($reservation->accommodation->template->contracts);
         if ($reservation->accommodation->template->contracts()->ContainingDays(strtolower(Carbon::parse(Reservation::first()->start_date)->isoFormat("dddd")))->exists()) {
@@ -53,6 +53,7 @@ Route::middleware(['auth'])->group(function () {
         // session()->forget("current_branch");
         // dd((new TransformersMoney($products->first()->pivot->price))->formatted());
         // dd($order->products->first()->price);
+        // dd($order->user->addresses);
         // $locations = $order->user->addresses()->activeAddress()->first()->location->prevNodes()->get();
         // dd($locations);
         // return view("orders::order.invoice", ["order" => $order, "locations" => $locations]);

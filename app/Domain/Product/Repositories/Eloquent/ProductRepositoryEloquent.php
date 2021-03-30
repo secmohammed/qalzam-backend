@@ -2,10 +2,10 @@
 
 namespace App\Domain\Product\Repositories\Eloquent;
 
-use Spatie\QueryBuilder\AllowedFilter;
 use App\Domain\Product\Entities\Product;
-use App\Infrastructure\AbstractRepositories\EloquentRepository;
 use App\Domain\Product\Repositories\Contracts\ProductRepository;
+use App\Infrastructure\AbstractRepositories\EloquentRepository;
+use Spatie\QueryBuilder\AllowedFilter;
 
 /**
  * Class ProductRepositoryEloquent.

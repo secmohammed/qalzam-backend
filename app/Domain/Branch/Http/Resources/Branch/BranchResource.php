@@ -2,6 +2,7 @@
 
 namespace App\Domain\Branch\Http\Resources\Branch;
 
+use App\Domain\Branch\Entities\Branch;
 use App\Domain\Branch\Http\Resources\Album\AlbumResource;
 use App\Domain\Branch\Http\Resources\BranchShift\BranchShiftResource;
 use App\Domain\Location\Http\Resources\Location\LocationResource;
@@ -29,6 +30,7 @@ class BranchResource extends JsonResource
             'user_id' => $this->user_id,
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
+            'isAvailable' => $this->isBranchAvailable(),
             'shifts' => BranchShiftResource::collection($this->whenLoaded('shifts')),
             'deliverers' => UserResource::collection($this->whenLoaded('deliverers')),
             'orders' => OrderResource::collection($this->whenLoaded('orders')),
@@ -41,5 +43,9 @@ class BranchResource extends JsonResource
             'media' => $this->getMediaCollectionUrl('branch-gallery'),
             'created_at_human' => $this->created_at->diffForHumans(),
         ];
+    }
+    public function isBranchAvailable()
+    {
+        return Branch::find($this->id)->isCurrentAvailable();
     }
 }
