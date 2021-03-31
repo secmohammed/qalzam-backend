@@ -2,13 +2,13 @@
 
 namespace App\Domain\Product\Entities\Traits\Relations;
 
-use App\Domain\User\Entities\User;
 use App\Domain\Branch\Entities\Branch;
-use App\Domain\Product\Entities\Stock;
 use App\Domain\Product\Entities\Product;
-use App\Domain\Product\Entities\Template;
 use App\Domain\Product\Entities\ProductVariation;
 use App\Domain\Product\Entities\ProductVariationType;
+use App\Domain\Product\Entities\Stock;
+use App\Domain\Product\Entities\Template;
+use App\Domain\User\Entities\User;
 
 trait ProductVariationRelations
 {

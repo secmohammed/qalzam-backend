@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth.api'], function () {
     Route::apiResource('/discounts', 'DiscountController')->except('index', 'show');
+    Route::get('/discount/check', 'DiscountController@checkDiscount')->name("discount.check");
     Route::post('/user_discounts', 'DiscountUserController@store')->name('discounts.purchase');
     ###CRUD_PLACEHOLDER###
 });

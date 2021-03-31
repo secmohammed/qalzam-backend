@@ -51,7 +51,7 @@
     </template>
 
     <template v-if="step == 0">
-        <CreateUserForm :roles="roles" @userCreated="userCreated($event)" :auth_token="auth_token" />
+        <CreateUserForm :roles="roles" @prevClicked="goToStep(1)" @userCreated="userCreated($event)" :auth_token="auth_token" />
 
     </template>
     <template v-if="step == 0.5">
@@ -288,7 +288,7 @@ export default {
         },
         userCreated(user){
             console.log("🚀 ~ file: OrderProduct.vue ~ line 269 ~ userCreated ~ id", user)
-            this.form.user_id =user.id; 
+          this.form.user_id =user.id; 
             this.newUserToken =user.token; 
             this.step = 0.5 
         },

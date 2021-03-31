@@ -19,6 +19,9 @@ class EventServiceProvider extends ServiceProvider
         \App\Domain\Order\Http\Events\OrderDestroyed::class => [
             \App\Domain\Order\Http\Listeners\RollbackStock::class,
         ],
+        \App\Domain\Order\Http\Events\GenerateOrderPdfInvoice::class => [
+            \App\Domain\Order\Http\Listeners\GeneratePdf::class,
+        ],
     ];
 
     /**

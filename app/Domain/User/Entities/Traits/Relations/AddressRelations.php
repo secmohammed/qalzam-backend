@@ -2,8 +2,8 @@
 
 namespace App\Domain\User\Entities\Traits\Relations;
 
-use App\Domain\User\Entities\User;
 use App\Domain\Location\Entities\Location;
+use App\Domain\User\Entities\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 trait AddressRelations

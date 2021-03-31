@@ -2,10 +2,10 @@
 
 namespace App\Domain\User\Http\Resources\User;
 
-use Illuminate\Http\Request;
 use App\Common\Transformers\Money;
-use App\Domain\Product\Http\Resources\Product\ProductResource;
 use App\Domain\Product\Http\Resources\ProductVariation\ProductVariationResource;
+use App\Domain\Product\Http\Resources\Product\ProductResource;
+use Illuminate\Http\Request;
 
 class CartProductVariationResource extends ProductVariationResource
 {

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 use Joovlly\DDD\Traits\Responder;
 use App\Domain\Order\Entities\Order;
+use App\Domain\Order\Http\Events\GenerateOrderPdfInvoice;
 use App\Domain\Order\Http\Events\OrderDestroyed;
 use App\Domain\Order\Pipelines\CreateOrderPipeline;
 use App\Domain\Order\Http\Resources\Order\OrderResource;
@@ -22,7 +23,7 @@ use App\Domain\Discount\Repositories\Contracts\DiscountRepository;
 use App\Domain\Location\Repositories\Contracts\LocationRepository;
 use App\Domain\Order\Http\Resources\Order\OrderResourceCollection;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
-
+use PDF;
 class OrderController extends Controller
 {
     use Responder;
@@ -208,7 +209,17 @@ class OrderController extends Controller
             ApplyDiscountToOrderIfPresent::class,
             CreateOrderPipeline::class,
             NotifyUserWithPlacedOrder::class,
+<<<<<<< HEAD
+        ])->then(fn($rqeuest) => $request->order);
+
+        GenerateOrderPdfInvoice::dispatch($order);
+
+        // return view("welcome", ["order" => Order::first()->load(["products", "user"])]);
+
+        // dd(1);
+=======
         ])->then(fn($order) => $order);
+>>>>>>> d9782329b8440eb471488494a4e9144852b8b895
         $this->setData('data', $order);
 
         $this->redirectRoute("{$this->resourceRoute}.show", [$order->id]);
@@ -237,6 +248,14 @@ class OrderController extends Controller
         $this->useCollection(OrderResource::class, 'data');
 
         return $this->response();
+    }
+    public function generatePdf(Order $order)
+    {
+        $locations = $order->user->addresses()->activeAddress()->first()->location->prevNodes()->get();
+
+        $pdf = PDF::loadView('orders::order.invoice', ["order" => $order->load(["products", "user"]), "locations" => $locations]);
+        $pdf->stream($event->order->id . '.pdf');
+
     }
 
 }

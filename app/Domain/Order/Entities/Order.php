@@ -2,11 +2,11 @@
 
 namespace App\Domain\Order\Entities;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Infrastructure\AbstractModels\BaseModel as Model;
-use App\Domain\Order\Repositories\Contracts\OrderRepository;
-use App\Domain\Order\Entities\Traits\Relations\OrderRelations;
 use App\Domain\Order\Entities\Traits\CustomAttributes\OrderAttributes;
+use App\Domain\Order\Entities\Traits\Relations\OrderRelations;
+use App\Domain\Order\Repositories\Contracts\OrderRepository;
+use App\Infrastructure\AbstractModels\BaseModel as Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
 {

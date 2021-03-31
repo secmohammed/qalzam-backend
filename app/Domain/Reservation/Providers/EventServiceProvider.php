@@ -2,6 +2,8 @@
 
 namespace App\Domain\Reservation\Providers;
 
+use App\Domain\Reservation\Http\Events\GenerateReservationPdfInvoice;
+use App\Domain\Reservation\Http\Listeners\GeneratePdf;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -12,7 +14,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        ###EVENTS###
+        GenerateReservationPdfInvoice::class => [
+            GeneratePdf::class,
+        ],
     ];
 
     /**

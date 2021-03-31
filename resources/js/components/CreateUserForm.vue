@@ -137,8 +137,11 @@
                 </div>
         </div>
        </div> 
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-between">
 
+          <button class="btn btn-secondary" @click.prevent="$emit('prevClicked')" >
+                previous
+            </button>
           <button class="btn btn-primary" @click.prevent="createUser" >
                 Create User
             </button>

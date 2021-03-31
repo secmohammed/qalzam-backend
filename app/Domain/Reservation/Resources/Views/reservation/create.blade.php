@@ -70,7 +70,7 @@
                                 <div class="row container-fluid mb-5">
                                     <div class="col-xl-0"></div>
                                     <div class="col-xl-10" id="app">
-                                       <reservation-form :users="{{ $users }}" :branches="{{ $branches }}"   action="create" auth_token="{{ $auth_token }}"    />
+                                       <reservation-form :propsUser="{{ $users }}" :branches="{{ $branches }}" :roles="{{ $roles }}"   action="create" auth_token="{{ $auth_token }}"    />
                                     </div>
                                  
                                 </div>

@@ -16,5 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth'])->group(function () {
     Route::resource('/orders', 'OrderController');
     Route::resource('/delivery_orders', 'DeliveryOrderController');
+    Route::get('orders/{order}/pdf', 'OrderController@generatePdf')->name('orders.pdf');
+
     ###CRUD_PLACEHOLDER###
 });

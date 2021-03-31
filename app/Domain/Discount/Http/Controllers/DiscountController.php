@@ -2,19 +2,19 @@
 
 namespace App\Domain\Discount\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Joovlly\DDD\Traits\Responder;
 use App\Domain\Category\Entities\Category;
-use App\Domain\Discount\Entities\Discount;
-use App\Domain\User\Repositories\Contracts\UserRepository;
-use App\Domain\Discount\Notifications\DiscountAttachedToUser;
-use App\Domain\Discount\Http\Resources\Discount\DiscountResource;
 use App\Domain\Category\Repositories\Contracts\CategoryRepository;
-use App\Domain\Discount\Repositories\Contracts\DiscountRepository;
+use App\Domain\Discount\Entities\Discount;
 use App\Domain\Discount\Http\Requests\Discount\DiscountStoreFormRequest;
 use App\Domain\Discount\Http\Requests\Discount\DiscountUpdateFormRequest;
+use App\Domain\Discount\Http\Resources\Discount\DiscountResource;
 use App\Domain\Discount\Http\Resources\Discount\DiscountResourceCollection;
+use App\Domain\Discount\Notifications\DiscountAttachedToUser;
+use App\Domain\Discount\Repositories\Contracts\DiscountRepository;
+use App\Domain\User\Repositories\Contracts\UserRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use Illuminate\Http\Request;
+use Joovlly\DDD\Traits\Responder;
 
 class DiscountController extends Controller
 {
@@ -208,6 +208,23 @@ class DiscountController extends Controller
         $this->setData('data', $discount);
         $this->useCollection(DiscountResource::class, 'data');
 
+        return $this->response();
+    }
+    public function checkDiscount(Request $request, Discount $discount)
+    {
+        // dd(auth()->user()->id);
+        $discount = $discount->where([["code", $request->code], ['status', "active"]])->first();
+        // $isDiscountExists = optional($discount->where([["code", $request->code], ['status', "active"]])->first())->owner()->where("id", auth()->id())->exists();
+        if ($discount) {
+            if (auth()->user()->discounts()->where("id", $discount->id)->exists()) {
+
+                $this->setApiResponse(fn() => response()->json(["data" => $discount, 'isAvailable' => true, 'message' => 'added to cart successfully']));
+                $this->redirectBack();
+            }
+        }
+        // dd(1);
+        $this->setApiResponse(fn() => response()->json(['message' => "discount not available"]));
+        $this->redirectBack();
         return $this->response();
     }
 

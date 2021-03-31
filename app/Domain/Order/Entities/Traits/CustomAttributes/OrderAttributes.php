@@ -11,7 +11,7 @@ trait OrderAttributes
      */
     public function getSubtotalAttribute($subtotal)
     {
-        return new Money(round($subtotal));
+        return new Money($subtotal * 100);
     }
 
     /**
@@ -20,5 +20,10 @@ trait OrderAttributes
     public function total()
     {
         return $this->subtotal;
+    }
+    public function amount()
+    {
+        // dd($this->total()->amount());
+        return (int) $this->total()->amount();
     }
 }

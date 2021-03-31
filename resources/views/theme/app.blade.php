@@ -8,6 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <!--begin::Fonts-->
         <link rel="preconnect" href="https://fonts.gstatic.com">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         {{-- <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400&display=swap" rel="stylesheet"> --}}
         <!--end::Fonts-->
         <!--begin::Page Vendors Styles(used by this page)-->

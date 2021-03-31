@@ -42,10 +42,10 @@ class EnsureOrderIsAvailableTodayForReservationAtBranch implements Rule
     {
         $branch = $this->branchRepository->whereId(request()->branch_id)->first();
         $shift = $branch->shifts->where("day", strtolower(Carbon::now()->isoFormat("dddd")))->first();
-
+        // dd($branch->shifts);
         // dd(Carbon::now()->greaterThanOrEqualTo(Carbon::parse($branch->start_time)) && Carbon::now()->lessThanOrEqualTo(Carbon::parse($branch->end_time)), $branch->start_time, $branch->end_time, $branch);
         if (!$shift) {
-            $this->message = sprintf('could not find an branch with id of %d', $branch->name);
+            $this->message = sprintf('could not find a shift this branch', $branch->name);
 
             return false;
         }

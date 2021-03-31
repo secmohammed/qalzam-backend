@@ -2,12 +2,12 @@
 
 namespace App\Domain\Product\Http\Resources\ProductVariation;
 
-use Illuminate\Support\Arr;
-use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
-use Illuminate\Http\Resources\Json\JsonResource;
-use App\Domain\User\Http\Resources\User\UserResource;
 use App\Domain\Product\Http\Resources\ProductVariationType\ProductVariationTypeResource;
+use App\Domain\User\Http\Resources\User\UserResource;
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 
 class ProductVariationResource extends JsonResource
 {

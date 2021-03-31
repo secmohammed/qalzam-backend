@@ -126,6 +126,7 @@ class ProductVariationController extends Controller
      */
     public function index(Request $request)
     {
+
         $index = $this->productvariationRepository->spatie()->paginate(
             $request->per_page ?? config('qalzam.pagination')
         );
