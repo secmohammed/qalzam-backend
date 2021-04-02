@@ -60,6 +60,16 @@ class Address extends Model
 
         return app(\App\Domain\User\Database\Factories\AddressFactory::class)->new();
     }
+    public function getFullNameAddress()
+    {
+        // dd($this->address_1 . $this->location->prevNodes()->get()->push($this->location)->reverse()->implode('name', ','));
+
+        return [
+            "id" => $this->id,
+            "address" => $this->address_1 . $this->location->prevNodes()->get()->push($this->location)->reverse()->implode('name', ','),
+            'default' => $this->default,
+        ];
+    }
     public function scopeActiveAddress(Builder $builder)
     {
         // dd($builder->where("default", true);

@@ -40,5 +40,6 @@ Route::group(['middleware' => 'auth.api'], function () {
     ]);
     ###CRUD_PLACEHOLDER###
 });
+Route::get('user/address', 'AddressController@userAddresses')->name('user.addresses');
 
 Route::put('auth/refresh', 'Auth\RefreshJWTTokenController@update')->name('auth.token.refresh');

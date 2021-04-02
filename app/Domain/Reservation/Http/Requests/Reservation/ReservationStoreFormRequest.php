@@ -2,10 +2,10 @@
 
 namespace App\Domain\Reservation\Http\Requests\Reservation;
 
-use Carbon\Carbon;
-use Illuminate\Validation\Rule;
 use App\Domain\Reservation\Http\Rules\EnsureEndDateIsSameDayAsStartDate;
 use App\Infrastructure\Http\AbstractRequests\BaseRequest as FormRequest;
+use Carbon\Carbon;
+use Illuminate\Validation\Rule;
 
 class ReservationStoreFormRequest extends FormRequest
 {
@@ -48,6 +48,7 @@ class ReservationStoreFormRequest extends FormRequest
                 // new EnsureAccommodationIsAvailableTodayForReservationAtContractDays,
             ],
             'user_id' => 'required|exists:users,id',
+            "notes" => "nullable",
 
         ];
 

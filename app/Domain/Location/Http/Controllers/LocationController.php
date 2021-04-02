@@ -2,15 +2,15 @@
 
 namespace App\Domain\Location\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Joovlly\DDD\Traits\Responder;
 use App\Domain\Location\Entities\Location;
-use App\Domain\Location\Http\Resources\Location\LocationResource;
-use App\Domain\Location\Repositories\Contracts\LocationRepository;
 use App\Domain\Location\Http\Requests\Location\LocationStoreFormRequest;
 use App\Domain\Location\Http\Requests\Location\LocationUpdateFormRequest;
+use App\Domain\Location\Http\Resources\Location\LocationResource;
 use App\Domain\Location\Http\Resources\Location\LocationResourceCollection;
+use App\Domain\Location\Repositories\Contracts\LocationRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use Illuminate\Http\Request;
+use Joovlly\DDD\Traits\Responder;
 
 class LocationController extends Controller
 {
@@ -125,6 +125,27 @@ class LocationController extends Controller
         $index = $this->locationRepository->spatie()->paginate(
             $request->per_page ?? config('qalzam.pagination')
         );
+
+        $this->setData('title', __('main.show-all') . ' ' . __('main.locations'));
+
+        $this->setData('alias', $this->domainAlias);
+
+        $this->setData('data', $index);
+
+        $this->addView("{$this->domainAlias}::{$this->viewPath}.index");
+
+        $this->useCollection(LocationResourceCollection::class, 'data');
+
+        return $this->response();
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexCityDistricts(Request $request)
+    {
+        $index = $this->locationRepository->descendantsOf($request->id)->where('type', "zone")->where('status', "active");
 
         $this->setData('title', __('main.show-all') . ' ' . __('main.locations'));
 
