@@ -2,9 +2,9 @@
 
 namespace App\Domain\Reservation\Pipelines;
 
-use App\Infrastructure\Pipelines\Pipeline;
-use App\Domain\Reservation\Repositories\Contracts\ReservationRepository;
 use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
+use App\Domain\Reservation\Repositories\Contracts\ReservationRepository;
+use App\Infrastructure\Pipelines\Pipeline;
 
 class CreateReservation implements Pipeline
 {
@@ -28,6 +28,7 @@ class CreateReservation implements Pipeline
      */
     public function handle($request, \Closure $next)
     {
+
         return $next(
             $this->reservationRepository->create($request->validated() + [
                 'price' => $request->price,

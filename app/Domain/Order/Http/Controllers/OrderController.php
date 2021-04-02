@@ -245,10 +245,12 @@ class OrderController extends Controller
     }
     public function generatePdf(Order $order)
     {
+        // dd($order->user->addresses()->activeAddress()->first());
         $locations = $order->user->addresses()->activeAddress()->first()->location->prevNodes()->get();
-
-        $pdf = PDF::loadView('orders::order.invoice', ["order" => $order->load(["products", "user"]), "locations" => $locations]);
-        $pdf->stream($event->order->id . '.pdf');
+        $data = ["order" => $order->load(["products", "user"]), "locations" => $locations];
+        $pdf = PDF::loadView('orders::order.invoice', $data);
+        $pdf->download($order->id . '.pdf');
+        return redirect()->back();
 
     }
 

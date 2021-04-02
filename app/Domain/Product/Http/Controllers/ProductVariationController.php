@@ -156,7 +156,7 @@ class ProductVariationController extends Controller
 
         $this->setData('alias', $this->domainAlias, 'web');
 
-        $this->setData('show', $productVariation);
+        $this->setData('show', $productVariation->load('product'));
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.show");
 

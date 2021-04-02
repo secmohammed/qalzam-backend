@@ -199,6 +199,7 @@ export default {
             this.step = step
         },
           userCreated(user){
+            console.log("🚀 ~ file: ReservationProduct.vue ~ line 202 ~ userCreated ~ user", user)
             this.users.push(user);
          
          this.form.user_id =user.id; 

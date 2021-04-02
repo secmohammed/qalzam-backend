@@ -1,256 +1,195 @@
-<?php return array (
-  'carlos-meneses/laravel-mpdf' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Meneses\\LaravelMpdf\\LaravelMpdfServiceProvider',
+<?php return array(
+    'barryvdh/laravel-dompdf' => array(
+        'providers' => array(
+            0 => 'Barryvdh\\DomPDF\\ServiceProvider',
+        ),
+        'aliases' => array(
+            'PDF' => 'Barryvdh\\DomPDF\\Facade',
+        ),
     ),
-    'aliases' => 
-    array (
-      'PDF' => 'Meneses\\LaravelMpdf\\Facades\\LaravelMpdf',
+    'carlos-meneses/laravel-mpdf' => array(
+        'providers' => array(
+            0 => 'Meneses\\LaravelMpdf\\LaravelMpdfServiceProvider',
+        ),
+        'aliases' => array(
+            'PDF' => 'Meneses\\LaravelMpdf\\Facades\\LaravelMpdf',
+        ),
     ),
-  ),
-  'facade/ignition' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Facade\\Ignition\\IgnitionServiceProvider',
+    'facade/ignition' => array(
+        'providers' => array(
+            0 => 'Facade\\Ignition\\IgnitionServiceProvider',
+        ),
+        'aliases' => array(
+            'Flare' => 'Facade\\Ignition\\Facades\\Flare',
+        ),
     ),
-    'aliases' => 
-    array (
-      'Flare' => 'Facade\\Ignition\\Facades\\Flare',
+    'fideloper/proxy' => array(
+        'providers' => array(
+            0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
+        ),
     ),
-  ),
-  'fideloper/proxy' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
+    'fruitcake/laravel-cors' => array(
+        'providers' => array(
+            0 => 'Fruitcake\\Cors\\CorsServiceProvider',
+        ),
     ),
-  ),
-  'fruitcake/laravel-cors' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Fruitcake\\Cors\\CorsServiceProvider',
+    'intervention/image' => array(
+        'providers' => array(
+            0 => 'Intervention\\Image\\ImageServiceProvider',
+        ),
+        'aliases' => array(
+            'Image' => 'Intervention\\Image\\Facades\\Image',
+        ),
     ),
-  ),
-  'intervention/image' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Intervention\\Image\\ImageServiceProvider',
+    'joovlly/authorizable' => array(
+        'providers' => array(
+            0 => 'Joovlly\\Authorizable\\Providers\\AuthorizableServiceProvider',
+        ),
     ),
-    'aliases' => 
-    array (
-      'Image' => 'Intervention\\Image\\Facades\\Image',
+    'joovlly/commentable' => array(
+        'providers' => array(
+            0 => 'Joovlly\\Commentable\\CommentableServiceProvider',
+        ),
     ),
-  ),
-  'joovlly/authorizable' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Joovlly\\Authorizable\\Providers\\AuthorizableServiceProvider',
+    'joovlly/ddd' => array(
+        'providers' => array(
+            0 => 'Joovlly\\DDD\\DomainDriverDesignServiceProvider',
+        ),
     ),
-  ),
-  'joovlly/commentable' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Joovlly\\Commentable\\CommentableServiceProvider',
+    'joovlly/reviewable' => array(
+        'providers' => array(
+            0 => 'Joovlly\\Reviewable\\ReviewableServiceProvider',
+        ),
     ),
-  ),
-  'joovlly/ddd' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Joovlly\\DDD\\DomainDriverDesignServiceProvider',
+    'joovlly/sms' => array(
+        'providers' => array(
+            0 => 'Joovlly\\SMS\\SMSServiceProvider',
+        ),
     ),
-  ),
-  'joovlly/reviewable' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Joovlly\\Reviewable\\ReviewableServiceProvider',
+    'joovlly/toaster' => array(
+        'providers' => array(
+            0 => 'Joovlly\\Toaster\\ToasterServiceProvider',
+        ),
     ),
-  ),
-  'joovlly/sms' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Joovlly\\SMS\\SMSServiceProvider',
+    'joovlly/translatable' => array(
+        'providers' => array(
+            0 => 'Joovlly\\Translatable\\TranslatableServiceProvider',
+        ),
     ),
-  ),
-  'joovlly/toaster' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Joovlly\\Toaster\\ToasterServiceProvider',
+    'kalnoy/nestedset' => array(
+        'providers' => array(
+            0 => 'Kalnoy\\Nestedset\\NestedSetServiceProvider',
+        ),
     ),
-  ),
-  'joovlly/translatable' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Joovlly\\Translatable\\TranslatableServiceProvider',
+    'kreait/laravel-firebase' => array(
+        'providers' => array(
+            0 => 'Kreait\\Laravel\\Firebase\\ServiceProvider',
+        ),
+        'aliases' => array(
+            'Firebase' => 'Kreait\\Laravel\\Firebase\\Facades\\Firebase',
+            'FirebaseAuth' => 'Kreait\\Laravel\\Firebase\\Facades\\FirebaseAuth',
+            'FirebaseDatabase' => 'Kreait\\Laravel\\Firebase\\Facades\\FirebaseDatabase',
+            'FirebaseDynamicLinks' => 'Kreait\\Laravel\\Firebase\\Facades\\FirebaseDynamicLinks',
+            'FirebaseFirestore' => 'Kreait\\Laravel\\Firebase\\Facades\\FirebaseFirestore',
+            'FirebaseMessaging' => 'Kreait\\Laravel\\Firebase\\Facades\\FirebaseMessaging',
+            'FirebaseRemoteConfig' => 'Kreait\\Laravel\\Firebase\\Facades\\FirebaseRemoteConfig',
+            'FirebaseStorage' => 'Kreait\\Laravel\\Firebase\\Facades\\FirebaseStorage',
+        ),
     ),
-  ),
-  'kalnoy/nestedset' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Kalnoy\\Nestedset\\NestedSetServiceProvider',
+    'laravel-notification-channels/fcm' => array(
+        'providers' => array(
+            0 => 'NotificationChannels\\Fcm\\FcmServiceProvider',
+        ),
     ),
-  ),
-  'kreait/laravel-firebase' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Kreait\\Laravel\\Firebase\\ServiceProvider',
+    'laravel/sail' => array(
+        'providers' => array(
+            0 => 'Laravel\\Sail\\SailServiceProvider',
+        ),
     ),
-    'aliases' => 
-    array (
-      'Firebase' => 'Kreait\\Laravel\\Firebase\\Facades\\Firebase',
-      'FirebaseAuth' => 'Kreait\\Laravel\\Firebase\\Facades\\FirebaseAuth',
-      'FirebaseDatabase' => 'Kreait\\Laravel\\Firebase\\Facades\\FirebaseDatabase',
-      'FirebaseDynamicLinks' => 'Kreait\\Laravel\\Firebase\\Facades\\FirebaseDynamicLinks',
-      'FirebaseFirestore' => 'Kreait\\Laravel\\Firebase\\Facades\\FirebaseFirestore',
-      'FirebaseMessaging' => 'Kreait\\Laravel\\Firebase\\Facades\\FirebaseMessaging',
-      'FirebaseRemoteConfig' => 'Kreait\\Laravel\\Firebase\\Facades\\FirebaseRemoteConfig',
-      'FirebaseStorage' => 'Kreait\\Laravel\\Firebase\\Facades\\FirebaseStorage',
+    'laravel/tinker' => array(
+        'providers' => array(
+            0 => 'Laravel\\Tinker\\TinkerServiceProvider',
+        ),
     ),
-  ),
-  'laravel-notification-channels/fcm' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'NotificationChannels\\Fcm\\FcmServiceProvider',
+    'laravel/ui' => array(
+        'providers' => array(
+            0 => 'Laravel\\Ui\\UiServiceProvider',
+        ),
     ),
-  ),
-  'laravel/sail' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Laravel\\Sail\\SailServiceProvider',
+    'livewire/livewire' => array(
+        'providers' => array(
+            0 => 'Livewire\\LivewireServiceProvider',
+        ),
+        'aliases' => array(
+            'Livewire' => 'Livewire\\Livewire',
+        ),
     ),
-  ),
-  'laravel/tinker' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Laravel\\Tinker\\TinkerServiceProvider',
+    'maatwebsite/excel' => array(
+        'providers' => array(
+            0 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
+        ),
+        'aliases' => array(
+            'Excel' => 'Maatwebsite\\Excel\\Facades\\Excel',
+        ),
     ),
-  ),
-  'laravel/ui' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Laravel\\Ui\\UiServiceProvider',
+    'mediconesystems/livewire-datatables' => array(
+        'providers' => array(
+            0 => 'Mediconesystems\\LivewireDatatables\\LivewireDatatablesServiceProvider',
+        ),
+        'aliases' => array(
+            'LivewireDatatables' => 'Mediconesystems\\LivewireDatatables\\LivewireDatatablesFacade',
+        ),
     ),
-  ),
-  'livewire/livewire' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Livewire\\LivewireServiceProvider',
+    'nesbot/carbon' => array(
+        'providers' => array(
+            0 => 'Carbon\\Laravel\\ServiceProvider',
+        ),
     ),
-    'aliases' => 
-    array (
-      'Livewire' => 'Livewire\\Livewire',
+    'nunomaduro/collision' => array(
+        'providers' => array(
+            0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+        ),
     ),
-  ),
-  'maatwebsite/excel' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
+    'prettus/l5-repository' => array(
+        'providers' => array(
+            0 => 'Prettus\\Repository\\Providers\\RepositoryServiceProvider',
+        ),
     ),
-    'aliases' => 
-    array (
-      'Excel' => 'Maatwebsite\\Excel\\Facades\\Excel',
+    'spatie/laravel-activitylog' => array(
+        'providers' => array(
+            0 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
+        ),
     ),
-  ),
-  'mediconesystems/livewire-datatables' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Mediconesystems\\LivewireDatatables\\LivewireDatatablesServiceProvider',
+    'spatie/laravel-image-optimizer' => array(
+        'providers' => array(
+            0 => 'Spatie\\LaravelImageOptimizer\\ImageOptimizerServiceProvider',
+        ),
+        'aliases' => array(
+            'ImageOptimizer' => 'Spatie\\LaravelImageOptimizer\\Facades\\ImageOptimizer',
+        ),
     ),
-    'aliases' => 
-    array (
-      'LivewireDatatables' => 'Mediconesystems\\LivewireDatatables\\LivewireDatatablesFacade',
+    'spatie/laravel-medialibrary' => array(
+        'providers' => array(
+            0 => 'Spatie\\MediaLibrary\\MediaLibraryServiceProvider',
+        ),
     ),
-  ),
-  'nesbot/carbon' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Carbon\\Laravel\\ServiceProvider',
+    'spatie/laravel-query-builder' => array(
+        'providers' => array(
+            0 => 'Spatie\\QueryBuilder\\QueryBuilderServiceProvider',
+        ),
     ),
-  ),
-  'nunomaduro/collision' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    'styde/enlighten' => array(
+        'providers' => array(
+            0 => 'Styde\\Enlighten\\Providers\\EnlightenServiceProvider',
+        ),
     ),
-  ),
-  'prettus/l5-repository' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Prettus\\Repository\\Providers\\RepositoryServiceProvider',
+    'tymon/jwt-auth' => array(
+        'aliases' => array(
+            'JWTAuth' => 'Tymon\\JWTAuth\\Facades\\JWTAuth',
+            'JWTFactory' => 'Tymon\\JWTAuth\\Facades\\JWTFactory',
+        ),
+        'providers' => array(
+            0 => 'Tymon\\JWTAuth\\Providers\\LaravelServiceProvider',
+        ),
     ),
-  ),
-  'spatie/laravel-activitylog' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
-    ),
-  ),
-  'spatie/laravel-image-optimizer' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Spatie\\LaravelImageOptimizer\\ImageOptimizerServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'ImageOptimizer' => 'Spatie\\LaravelImageOptimizer\\Facades\\ImageOptimizer',
-    ),
-  ),
-  'spatie/laravel-medialibrary' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Spatie\\MediaLibrary\\MediaLibraryServiceProvider',
-    ),
-  ),
-  'spatie/laravel-query-builder' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Spatie\\QueryBuilder\\QueryBuilderServiceProvider',
-    ),
-  ),
-  'styde/enlighten' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Styde\\Enlighten\\Providers\\EnlightenServiceProvider',
-    ),
-  ),
-  'tymon/jwt-auth' => 
-  array (
-    'aliases' => 
-    array (
-      'JWTAuth' => 'Tymon\\JWTAuth\\Facades\\JWTAuth',
-      'JWTFactory' => 'Tymon\\JWTAuth\\Facades\\JWTFactory',
-    ),
-    'providers' => 
-    array (
-      0 => 'Tymon\\JWTAuth\\Providers\\LaravelServiceProvider',
-    ),
-  ),
 );

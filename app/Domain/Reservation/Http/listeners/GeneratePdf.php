@@ -43,7 +43,7 @@ class GeneratePdf
 
         // Log::info($products, $reservation);
         $pdf = PDF::loadView('reservations::reservation.invoice', ["products" => $products, "reservation" => $reservation]);
-        $pdf->stream($reservation->id . '.pdf');
+        $pdf->download($reservation->id . '.pdf');
 
     }
 }

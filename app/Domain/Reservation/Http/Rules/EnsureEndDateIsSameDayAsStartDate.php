@@ -39,6 +39,7 @@ class EnsureEndDateIsSameDayAsStartDate implements Rule
      */
     public function passes($attribute, $value)
     {
+
         return Carbon::parse($value)->dayName === Carbon::parse($this->start_date)->dayName;
     }
 }

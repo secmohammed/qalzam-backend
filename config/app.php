@@ -142,7 +142,6 @@ return [
          * Laravel Framework Service Providers...
          */
         Illuminate\Auth\AuthServiceProvider::class,
-        Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
         Illuminate\Cache\CacheServiceProvider::class,
@@ -169,11 +168,12 @@ return [
          * Package Service Providers...
          */
         Joovlly\DDD\DomainDriverDesignServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
         App\Common\Providers\DomainServiceProvider::class,
-
         \App\Domain\User\Providers\DomainServiceProvider::class,
         \App\Domain\Category\Providers\DomainServiceProvider::class,
         \App\Domain\Post\Providers\DomainServiceProvider::class,
@@ -240,6 +240,7 @@ return [
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'Sms' => \Joovlly\SMS\Facades\SMS::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
         'Toaster' => \Joovlly\Toaster\Facades\Toaster::class,
     ],
 ];

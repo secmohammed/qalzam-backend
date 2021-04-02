@@ -153,7 +153,7 @@ class BranchController extends Controller
 
         $this->setData('alias', $this->domainAlias);
 
-        $this->setData('data', $index);
+        $this->setData('data', $index->load("accommodations"));
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.index");
 

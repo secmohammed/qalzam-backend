@@ -2,6 +2,7 @@
 
 namespace App\Domain\Branch\Http\Resources\Branch;
 
+use App\Domain\Accommodation\Http\Resources\Accommodation\AccommodationResourceCollection;
 use App\Domain\Branch\Entities\Branch;
 use App\Domain\Branch\Http\Resources\Album\AlbumResource;
 use App\Domain\Branch\Http\Resources\BranchShift\BranchShiftResource;
@@ -39,6 +40,7 @@ class BranchResource extends JsonResource
             'products' => ProductVariationResource::collection($this->whenLoaded('products')),
             'user' => new UserResource($this->whenLoaded('user')),
             'creator' => new UserResource($this->whenLoaded('creator')),
+            'accommodations' => new AccommodationResourceCollection($this->whenLoaded('accommodations')),
             'location' => new LocationResource($this->whenLoaded('location')),
             'media' => $this->getMediaCollectionUrl('branch-gallery'),
             'created_at_human' => $this->created_at->diffForHumans(),
