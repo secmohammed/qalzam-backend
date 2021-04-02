@@ -2,10 +2,10 @@
 
 namespace App\Domain\Location\Repositories\Eloquent;
 
-use Spatie\QueryBuilder\AllowedFilter;
 use App\Domain\Location\Entities\Location;
-use App\Infrastructure\AbstractRepositories\EloquentRepository;
 use App\Domain\Location\Repositories\Contracts\LocationRepository;
+use App\Infrastructure\AbstractRepositories\EloquentRepository;
+use Spatie\QueryBuilder\AllowedFilter;
 
 /**
  * Class LocationRepositoryEloquent.
@@ -54,7 +54,9 @@ class LocationRepositoryEloquent extends EloquentRepository implements LocationR
         parent::__construct(app());
         $this->allowedFilters = [
             AllowedFilter::exact('location.id'),
+            AllowedFilter::scope('cityZones'),
             'name',
+            'type',
             'latitude',
             'longtiude',
             'location.name',

@@ -24,6 +24,9 @@ class HasRole
         'api.discounts.purchase',
         'api.auth.change-password',
         'api.auth.token.refresh',
+        'api.user.addresses',
+
+        'api.city.districts',
         'api.meetings.products.store',
         'api.addresses.index',
         'api.auth.cart.destroy',

@@ -131,6 +131,18 @@ class AddressController extends Controller
 
         return $this->response();
     }
+    public function userAddresses(Request $request)
+    {
+
+        $addresses = auth()->user()->addresses->map(function ($address) {
+            return $address->getFullNameAddress();
+        });
+        // dd($addresses);
+        $this->setApiResponse(fn() => response()->json(["data" => $addresses]));
+
+        return $this->response();
+
+    }
 
     /**
      * Display the specified resource.

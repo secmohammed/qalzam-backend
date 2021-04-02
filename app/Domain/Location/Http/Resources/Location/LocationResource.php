@@ -2,9 +2,9 @@
 
 namespace App\Domain\Location\Http\Resources\Location;
 
-use Illuminate\Http\Request;
 use App\Domain\User\Http\Resources\User\UserResource;
 use App\Infrastructure\Http\AbstractResources\BaseResource as JsonResource;
+use Illuminate\Http\Request;
 
 class LocationResource extends JsonResource
 {
@@ -19,6 +19,7 @@ class LocationResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'city' => $this->name,
             'user' => new UserResource($this->whenLoaded('user')),
             'parent' => new self($this->whenLoaded('parent')),
             'children' => self::collection($this->whenLoaded('children')),

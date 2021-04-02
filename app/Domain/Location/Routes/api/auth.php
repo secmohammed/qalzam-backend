@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth.api'], function () {
     Route::apiResource('/locations', 'LocationController');
+    Route::get('/location/city-districts', 'LocationController@indexCityDistricts')->name('city.districts');
 
     ###CRUD_PLACEHOLDER###
 });

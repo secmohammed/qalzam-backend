@@ -2,28 +2,29 @@
 
 namespace App\Domain\Order\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Pipeline\Pipeline;
-use Joovlly\DDD\Traits\Responder;
+use App\Domain\Branch\Repositories\Contracts\BranchRepository;
+use App\Domain\Discount\Repositories\Contracts\DiscountRepository;
+use App\Domain\Location\Repositories\Contracts\LocationRepository;
 use App\Domain\Order\Entities\Order;
 use App\Domain\Order\Http\Events\GenerateOrderPdfInvoice;
 use App\Domain\Order\Http\Events\OrderDestroyed;
-use App\Domain\Order\Pipelines\CreateOrderPipeline;
-use App\Domain\Order\Http\Resources\Order\OrderResource;
-use App\Domain\Order\Pipelines\NotifyUserWithOrderStatus;
-use App\Domain\Order\Pipelines\NotifyUserWithPlacedOrder;
-use App\Domain\User\Repositories\Contracts\RoleRepository;
-use App\Domain\User\Repositories\Contracts\UserRepository;
-use App\Domain\Order\Repositories\Contracts\OrderRepository;
-use App\Domain\Order\Pipelines\ApplyDiscountToOrderIfPresent;
-use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 use App\Domain\Order\Http\Requests\Order\OrderStoreFormRequest;
 use App\Domain\Order\Http\Requests\Order\OrderUpdateFormRequest;
-use App\Domain\Discount\Repositories\Contracts\DiscountRepository;
-use App\Domain\Location\Repositories\Contracts\LocationRepository;
+use App\Domain\Order\Http\Resources\Order\OrderResource;
 use App\Domain\Order\Http\Resources\Order\OrderResourceCollection;
+use App\Domain\Order\Pipelines\ApplyDiscountToOrderIfPresent;
+use App\Domain\Order\Pipelines\CreateOrderPipeline;
+use App\Domain\Order\Pipelines\NotifyUserWithOrderStatus;
+use App\Domain\Order\Pipelines\NotifyUserWithPlacedOrder;
+use App\Domain\Order\Repositories\Contracts\OrderRepository;
+use App\Domain\User\Repositories\Contracts\RoleRepository;
+use App\Domain\User\Repositories\Contracts\UserRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use Illuminate\Http\Request;
+use Illuminate\Pipeline\Pipeline;
+use Joovlly\DDD\Traits\Responder;
 use PDF;
+
 class OrderController extends Controller
 {
     use Responder;
@@ -209,17 +210,10 @@ class OrderController extends Controller
             ApplyDiscountToOrderIfPresent::class,
             CreateOrderPipeline::class,
             NotifyUserWithPlacedOrder::class,
-<<<<<<< HEAD
         ])->then(fn($rqeuest) => $request->order);
-
+        // dump($order);
         GenerateOrderPdfInvoice::dispatch($order);
 
-        // return view("welcome", ["order" => Order::first()->load(["products", "user"])]);
-
-        // dd(1);
-=======
-        ])->then(fn($order) => $order);
->>>>>>> d9782329b8440eb471488494a4e9144852b8b895
         $this->setData('data', $order);
 
         $this->redirectRoute("{$this->resourceRoute}.show", [$order->id]);
