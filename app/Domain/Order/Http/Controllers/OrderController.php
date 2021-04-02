@@ -210,7 +210,7 @@ class OrderController extends Controller
             ApplyDiscountToOrderIfPresent::class,
             CreateOrderPipeline::class,
             NotifyUserWithPlacedOrder::class,
-        ])->then(fn($rqeuest) => $request->order);
+        ])->then(fn($order) => $order);
         // dump($order);
         GenerateOrderPdfInvoice::dispatch($order);
 

@@ -269,15 +269,15 @@
           </tr>
           <tr> 
             <td class="bold"> {{ __("main.zone") }}</td>
-            <td>{{ $locations->where('type', 'zone')->first()->name }}</td>
+            <td>{{ optional($locations->where('type', 'zone')->first())->name }}</td>
             <td class="bold">{{ __("main.street") }}</td>
-            <td> {{ $locations->where('type', 'district')->first()->name }}       </td>
+            <td> {{ optional($locations->where('type', 'district')->first())->name }}       </td>
           </tr>
           <tr> 
             <td class="bold"> {{ __("main.city") }}</td>
-            <td>{{ $locations->where('type', 'city')->first()->name }}</td>
+            <td>{{ optional($locations->where('type', 'city')->first())->name }}</td>
             <td class="bold">{{ __("main.country") }}</td>
-            <td>{{ $locations->where('type', 'country')->first()->name }} </td>
+            <td>{{ optional($locations->where('type', 'country')->first())->name }} </td>
           </tr>
         </table>
       </div>

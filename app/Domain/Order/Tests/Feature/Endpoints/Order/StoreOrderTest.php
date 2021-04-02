@@ -124,6 +124,9 @@ class StoreOrderTest extends TestCase
         $branch->products()->attach($products);
 
         $user = $this->userFactory->create();
+        Address::factory()->create([
+            'user_id' => $user->id,
+        ]);
         $this->seed(RolesTableSeeder::class);
         $user->roles()->attach(Role::first());
         $address = $this->addAddressTo($user);
@@ -135,6 +138,7 @@ class StoreOrderTest extends TestCase
             'products' => $products->map(fn($product) => ['id' => $product->id, 'quantity' => 1])->toArray(),
 
         ]);
+        dd($response);
         Notification::assertSentTo(
             $user,
             OrderPlaced::class,
