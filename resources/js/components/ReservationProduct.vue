@@ -114,7 +114,7 @@ export default {
             required: true,
             type: Array,
         },
-        propsUser: {
+        allUsers: {
             required: true,
             type: Array,
         },
@@ -153,15 +153,15 @@ export default {
             this.accommodations = branch.accommodations
 
         },
-        "form.start_date"(val) {
-            console.log("🚀 ~ file: ReservationProduct.vue ~ line 166 ~ val", val)
-
+        "form.start_date"() {
+            this.form.end_date = moment(this.form.start_date).add(4, "hours").format("MM/DD/YYYY HH:MM");
         }
+
 
     },
     computed: {
         // isCreateOrderButtonDisabled() {
-        //     return this.form.products.length 
+        //     return this.form.products.length
         // },
         // isNextStepDisabled() {
         //     return this.form.user_id && this.form.branch_id && this.form.address_id
@@ -172,9 +172,7 @@ export default {
 
     },
     mounted() {
-        // this.edit
-        // console.log(",smlddk")
-        this.users = this.propsUser
+        this.users = this.allUsers
         if (this.action === 'edit') {
             this.form.branch_id = this.edit.branch_id
             this.form.user_id = this.edit.user_id
@@ -188,40 +186,28 @@ export default {
             this.form.end_date = moment(this.form.start_date).add(4, "hours").format("MM/DD/YYYY HH:MM");
 
         }
-        // const  = moment();
-        //   console.log("🚀 ~ file: ReservationProduct.vue ~ line 195 ~ mounted ~ this.form.start_date", this.form.start_date)
-        //     console.log("🚀 ~ file: OrderProduct.vue ~ line 194 ~ mounted ~ this.edit",  this.form.end_date,this.branches)
     },
-    // ,
     methods: {
         goToStep(step) {
-
             this.step = step
         },
-          userCreated(user){
-            console.log("🚀 ~ file: ReservationProduct.vue ~ line 202 ~ userCreated ~ user", user)
+        userCreated(user){
             this.users.push(user);
-         
-         this.form.user_id =user.id; 
-            this.newUserToken =user.token; 
-            this.step = 1 
+            this.form.user_id =user.id;
+            this.newUserToken =user.token;
+            this.step = 1
         },
 
         save() {
 
-            // this.form
-            console.log("🚀 ~ file: ReservationProduct.vue ~ line 228 ~ save ~ this.form", this.form)
 
             axios.post("/api/reservations", this.form, {
                 headers: {
                     Authorization: "Bearer " + this.auth_token,
                 },
             }).then((res) => {
-                console.log("🚀 ~ file: OrderProduct.vue ~ line 259 ~ save ~ res", res)
-
-                // window.location = "/reservations"
+                window.location = "/reservations"
             }).catch((err) => {
-                // console.log("🚀 ~ file: OrderProduct.vue ~ line 257 ~ save ~ err.response.data.errors", err.response.data.errors, err.response)
                 this.errors = err.response.data.errors;
                 if ("user_id" in this.errors || "address_id" in this.errors || "branch_id" in this.errors) {
                     this.step = 1
@@ -231,17 +217,15 @@ export default {
         },
 
         editOrder() {
-            axios.put(`/api/reservations/${this.edit.id }`, this.form, {
+            axios.put(`/api/reservations/${this.edit.id}`, this.form, {
                 headers: {
                     Authorization: "Bearer " + this.auth_token,
                 },
             }).then((res) => {
-                console.log(res);
-                // window.location = `/orders/${this.edit.id }`
+                window.location = `/reservations/${this.edit.id }`
             }).catch((err) => {
                 this.errors = err.response.data.errors;
 
-                // check if err contains the array of validation errors and then set errors property
             });
         },
     },

@@ -2,31 +2,31 @@
 
 namespace App\Domain\Reservation\Http\Controllers;
 
-use App\Common\Transformers\Money;
-use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
-use App\Domain\Branch\Repositories\Contracts\BranchRepository;
-use App\Domain\Order\Repositories\Contracts\OrderRepository;
-use App\Domain\Product\Entities\Template;
-use App\Domain\Reservation\Entities\Reservation;
-use App\Domain\Reservation\Http\Requests\Reservation\ReservationStoreFormRequest;
-use App\Domain\Reservation\Http\Requests\Reservation\ReservationUpdateFormRequest;
-use App\Domain\Reservation\Http\Resources\Reservation\ReservationResource;
-use App\Domain\Reservation\Http\Resources\Reservation\ReservationResourceCollection;
-use App\Domain\Reservation\Notifications\ReservationCreated;
-use App\Domain\Reservation\Notifications\ReservationUpdated;
-use App\Domain\Reservation\Pipelines\CalculateReservationPrice;
-use App\Domain\Reservation\Pipelines\CreateReservation;
-use App\Domain\Reservation\Pipelines\ValidateReservationStartDateAndEndDateIfAvailable;
-use App\Domain\Reservation\Pipelines\ValidateReservationStartDateAndEndDateIsWithinBranchAvailability;
-use App\Domain\Reservation\Repositories\Contracts\ReservationRepository;
-use App\Domain\User\Repositories\Contracts\RoleRepository;
-use App\Domain\User\Repositories\Contracts\UserRepository;
-use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 use Joovlly\DDD\Traits\Responder;
-use PDF;
+use App\Common\Transformers\Money;
+use App\Domain\Product\Entities\Template;
+use App\Domain\Reservation\Entities\Reservation;
+use App\Domain\Reservation\Pipelines\CreateReservation;
+use App\Domain\User\Repositories\Contracts\RoleRepository;
+use App\Domain\User\Repositories\Contracts\UserRepository;
+use App\Domain\Order\Repositories\Contracts\OrderRepository;
+use App\Domain\Reservation\Notifications\ReservationCreated;
+use App\Domain\Reservation\Notifications\ReservationUpdated;
+use App\Domain\Branch\Repositories\Contracts\BranchRepository;
+use App\Domain\Reservation\Pipelines\CalculateReservationPrice;
+use App\Domain\Reservation\Repositories\Contracts\ReservationRepository;
+use App\Domain\Reservation\Http\Resources\Reservation\ReservationResource;
+use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
+use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use App\Domain\Reservation\Http\Requests\Reservation\ReservationStoreFormRequest;
+use App\Domain\Reservation\Http\Requests\Reservation\ReservationUpdateFormRequest;
+use App\Domain\Reservation\Http\Resources\Reservation\ReservationResourceCollection;
+use App\Domain\Reservation\Pipelines\ValidateReservationStartDateAndEndDateIfAvailable;
+use App\Domain\Reservation\Pipelines\ValidateReservationStartDateAndEndDateIsWithinBranchAvailability;
 
 /*
  * When Creating a reservation, it must be during the working hour of the branch,
@@ -257,12 +257,12 @@ class ReservationController extends Controller
 
     public function generatePdf(Reservation $reservation)
     {
-        // dd($reservation->accommodation->template->contracts()->ContainingDays(strtolower(Carbon::parse($reservation->start_date)->isoFormat("dddd")))->exists());
+
 
         if ($reservation->accommodation->template->contracts()->ContainingDays(strtolower(Carbon::parse($reservation->start_date)->isoFormat("dddd")))->exists()) {
             $products = $reservation->accommodation->template->products;
         } else {
-            $products = Template::whereName("free")->first()->products;
+            $products = Template::whereName("free")->first()->products ?? collect();
 
         }
         // dd(2);
@@ -273,7 +273,6 @@ class ReservationController extends Controller
 
         });
 
-        // Log::info($products, $reservation);
         $pdf = PDF::loadView('reservations::reservation.invoice', ["products" => $products, "reservation" => $reservation]);
         $pdf->download($reservation->id . '.pdf');
         return redirect()->back();
