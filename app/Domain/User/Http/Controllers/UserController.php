@@ -227,6 +227,7 @@ class UserController extends Controller
     public function update(UserUpdateFormRequest $request, User $user)
     {
         $user->update($request->validated());
+
         if ($request->role_id) {
             $user->roles()->sync($request->role_id);
         }
@@ -237,10 +238,11 @@ class UserController extends Controller
         ])->through([
             HandleFileUpload::class,
         ])->thenReturn();
-
-        $user->setTranslation([
-            'name' => $request->name_ar,
-        ], 'ar', true);
+        if ($request->name_ar) {
+            $user->setTranslation([
+                'name' => $request->name_ar,
+            ], 'ar', true);
+        }
 
         $this->redirectRoute("{$this->resourceRoute}.show", [$user->id]);
         $this->setData('data', $user);

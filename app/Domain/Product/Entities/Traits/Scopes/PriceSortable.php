@@ -13,7 +13,7 @@ trait PriceSortable
      */
     public function scopePriceBetween(Builder $query, int $start, int $end): Builder
     {
-
+        // dd($start, $end);
         return $query->whereBetween('price', [$start, $end]);
     }
 }

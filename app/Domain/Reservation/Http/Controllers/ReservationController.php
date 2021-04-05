@@ -8,6 +8,7 @@ use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 use App\Domain\Order\Repositories\Contracts\OrderRepository;
 use App\Domain\Product\Entities\Template;
 use App\Domain\Reservation\Entities\Reservation;
+use App\Domain\Reservation\Http\Events\GenerateReservationPdfInvoice;
 use App\Domain\Reservation\Http\Requests\Reservation\ReservationStoreFormRequest;
 use App\Domain\Reservation\Http\Requests\Reservation\ReservationUpdateFormRequest;
 use App\Domain\Reservation\Http\Resources\Reservation\ReservationResource;
@@ -219,7 +220,7 @@ class ReservationController extends Controller
             CreateReservation::class,
         ])->thenReturn();
         $reservation->user->notify(new ReservationCreated($reservation));
-        // GenerateReservationPdfInvoice::dispatch($reservation);
+        GenerateReservationPdfInvoice::dispatch($reservation);
 
         $this->setData('data', $reservation);
 

@@ -22,7 +22,7 @@ Route::group(['middleware' => 'auth.api'], function () {
     Route::get('/branches/{branch}/wishlist', 'WishlistController@index')->name('auth.wishlist.index');
     Route::put('branches/{branch}/wishlist/{productVariation}', 'WishlistController@update')->name('auth.wishlist.update');
     Route::delete('branches/{branch}/wishlist/{productVariation}', 'WishlistController@destroy')->name('auth.wishlist.destroy');
-    Route::resource('/users', 'UserController')->only(['store', 'update', 'destroy']);
+    Route::resource('/users', 'UserController')->only(['store', 'show', 'update', 'destroy']);
     Route::get('notifications', 'NotificationController@index')->name('notifications.index');
     Route::put('notifications/{notification?}', 'NotificationController@update')->name('notifications.update');
 
