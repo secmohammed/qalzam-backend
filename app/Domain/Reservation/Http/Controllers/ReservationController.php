@@ -8,7 +8,6 @@ use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 use App\Domain\Order\Repositories\Contracts\OrderRepository;
 use App\Domain\Product\Entities\Template;
 use App\Domain\Reservation\Entities\Reservation;
-use App\Domain\Reservation\Http\Events\GenerateReservationPdfInvoice;
 use App\Domain\Reservation\Http\Requests\Reservation\ReservationStoreFormRequest;
 use App\Domain\Reservation\Http\Requests\Reservation\ReservationUpdateFormRequest;
 use App\Domain\Reservation\Http\Resources\Reservation\ReservationResource;
@@ -258,12 +257,11 @@ class ReservationController extends Controller
 
     public function generatePdf(Reservation $reservation)
     {
-        // dd($reservation->accommodation->template->contracts()->ContainingDays(strtolower(Carbon::parse($reservation->start_date)->isoFormat("dddd")))->exists());
 
         if ($reservation->accommodation->template->contracts()->ContainingDays(strtolower(Carbon::parse($reservation->start_date)->isoFormat("dddd")))->exists()) {
             $products = $reservation->accommodation->template->products;
         } else {
-            $products = Template::whereName("free")->first()->products;
+            $products = Template::whereName("free")->first()->products ?? collect();
 
         }
         // dd(2);
@@ -274,7 +272,6 @@ class ReservationController extends Controller
 
         });
 
-        // Log::info($products, $reservation);
         $pdf = PDF::loadView('reservations::reservation.invoice', ["products" => $products, "reservation" => $reservation]);
         $pdf->download($reservation->id . '.pdf');
         return redirect()->back();
