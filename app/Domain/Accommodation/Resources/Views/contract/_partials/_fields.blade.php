@@ -3,7 +3,7 @@
 
 
 <x-forms.status :action="$action" :edit="$edit??null"/>
-<x-forms.days   :action="$action"  :edit="$edit??null" :multiple="'multiple'" :name="'days[]'" label="'main.days'" />
+<x-forms.days   :action="$action"  :edit="$edit??null" :multiple="'multiple'" :name="'days[]'" label="main.days" />
 
 
 

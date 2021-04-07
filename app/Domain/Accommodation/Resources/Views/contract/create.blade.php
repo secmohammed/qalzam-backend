@@ -72,7 +72,6 @@
                                     <div class="col-xl-10">
                                         @include("{$alias}::contract._partials._fields", [
                                             'action' => 'create',
-                                            'categories' => $categories
 
                                         ])
                                     </div>
