@@ -88,6 +88,7 @@ return [
     'title_ar' => 'Ar Title',
     'name_en' => 'En Name',
     'name_ar' => 'Ar Name',
+    'invalid-credentials' => 'invalid credentials',
     'description' => 'Description',
     'description_ar' => 'Ar Description',
     'start_date' => 'Start Date',

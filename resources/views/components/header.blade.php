@@ -3,7 +3,7 @@
     <div class="container d-flex align-items-stretch justify-content-between">
         <!--begin::Left-->
         <div class="d-none d-lg-flex align-items-center mr-3">
-            A
+            
             <button class="btn btn-icon aside-toggle ml-n3 mr-10" id="kt_aside_desktop_toggle">
             <span class="svg-icon svg-icon-xxl svg-icon-dark-75">
                 <!--begin::Svg Icon | path:assets/media/svg/icons/Text/Align-left.svg-->
@@ -127,11 +127,34 @@
             <!--begin::Create-->
             <!--end::Create-->
             <!--begin::Quick Actions-->
+           
+
             <div class="topbar-item mr-4">
-                <div class="btn btn-icon btn-sm btn-clean btn-text-dark-75" id="kt_quick_actions_toggle">
-                    <span class="svg-icon svg-icon-lg">
-                        <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                <div class="dropdown mr-4">
+                
+                    <button class="btn font-weight-bolder btn-sm btn-light-success d-flex  justify-content-between align-items-center dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @if (Lang::locale()==="ar")
+                    <img src="assets/images/saudi-arabia.png"  style="width: 20px ;height: 20px ; " alt="">
+                     
+                 @else
+                    <img src="assets/images/united-states.png" style="width: 20px ;height: 20px ; " alt="">
+                     
+                 @endif
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item px-5" href="?lang=ar">
+                        <img src="assets/images/saudi-arabia.png"  style="width: 30px ;height: 30px ; " alt="">
+                    </a>
+                    <a class="dropdown-item" href="?lang=en">
+                        
+                        <img src="assets/images/united-states.png" style="width: 30px ;height: 30px ; " alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="btn btn-icon btn-sm btn-clean btn-text-dark-75" id="kt_quick_actions_toggle">
+                <span class="svg-icon svg-icon-lg">
+                    <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                 <rect x="0" y="0" width="24" height="24" />
                                 <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5" />
