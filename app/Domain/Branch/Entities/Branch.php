@@ -31,6 +31,7 @@ class Branch extends Model implements HasMedia
         'user_id',
         'delivery_fee',
         'creator_id',
+        'address_1',
         'latitude',
         'longitude',
 

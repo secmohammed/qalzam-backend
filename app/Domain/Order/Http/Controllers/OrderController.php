@@ -189,7 +189,6 @@ class OrderController extends Controller
         $this->setData('alias', $this->domainAlias, 'web');
 
         $this->setData('show', $order);
-        $this->setData('order_products', $order->products->all());
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.show");
 

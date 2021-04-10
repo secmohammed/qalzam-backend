@@ -40,6 +40,7 @@ class BranchStoreFormRequest extends FormRequest
         $rules = [
             'name' => 'required|unique:branches,name|min:8|max:255',
             'location_id' => 'required|exists:locations,id',
+            'address_1' => 'required|min:8',
             'latitude' => ['nullable', 'regex:/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/', 'unique:branches,latitude'],
             'longitude' => ['nullable', 'regex:/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/', 'unique:branches,longitude'],
             'branch-gallery' => ['required', 'array'],
