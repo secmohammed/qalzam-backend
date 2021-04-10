@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::group(['middleware' => 'auth.api'], function () {
-    Route::apiResource('/branches', 'BranchController');
+    Route::apiResource('/branches', 'BranchController')->except(['index', 'show']);
     Route::post('branch_products/{branch}', 'BranchProductController@store')->name('branch.products.store');
-    Route::apiResource('/albums', 'AlbumController');
+    Route::apiResource('/albums', 'AlbumController')->except(['index', 'show']);
     Route::resource('/branch_shifts', 'BranchShiftController');
     ###CRUD_PLACEHOLDER###
 });

@@ -64,6 +64,7 @@ return [
     'parent' => 'الاب',
     'actions' => 'روابط سريعة',
     'created_at' => 'تاريخ الانشاء',
+    'invalid-credentials' => 'خطأ فى الايميل او كلمة السر',
     'assign_to' => 'إسناد ل',
     'assigned_to' => 'إسناد ل',
     'status' => 'الحاله',
