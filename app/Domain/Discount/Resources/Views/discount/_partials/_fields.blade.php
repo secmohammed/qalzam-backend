@@ -79,7 +79,7 @@
     <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.users") }} <span
             style="color: red"> * </span> </label>
     <div class="col-lg-10 col-md-9 col-sm-12">
-        <select class="form-control select2 {{$errors->has('users') ? 'is-invalid':''}}" name="users" multiple>
+        <select class="form-control select2 {{$errors->has('users') ? 'is-invalid':''}}" name="users[]" multiple>
             <option label="Label"></option>
             @foreach($users as $user)
                 <option

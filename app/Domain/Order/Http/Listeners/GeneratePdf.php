@@ -21,7 +21,7 @@ class GeneratePdf
     public function handle(GenerateOrderPdfInvoice $event)
     {
         $locations = $event->order->user->addresses()->activeAddress()->first()->location->prevNodes()->get();
-
+        // dd($locations);
         $pdf = PDF::loadView('orders::order.invoice', ["order" => $event->order->load(["products", "user"]), "locations" => $locations]);
         return $pdf->download($event->order->id . '.pdf');
     }

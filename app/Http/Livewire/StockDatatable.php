@@ -25,6 +25,15 @@ class StockDatatable extends MainLivewire
             Column::name('stocks.quantity')
                 ->label(__('main.quantity'))
                 ->filterable('name'),
+            Column::name('variation.name')
+                ->label(__('main.product_variations'))
+                ->filterable('name'),
+            Column::name('variation.product.name')
+                ->label(__('main.products'))
+                ->filterable('name'),
+            // Column::name('stocks.quantity')
+            //     ->label(__('main.quantity'))
+            //     ->filterable('name'),
 
             DateColumn::name('stocks.created_at')
                 ->label(__('main.created_at'))

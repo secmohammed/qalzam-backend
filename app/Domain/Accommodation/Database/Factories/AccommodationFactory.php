@@ -25,7 +25,7 @@ class AccommodationFactory extends Factory
      */
     public function definition()
     {
-        $type = $this->faker->randomElement(['room']);
+        $type = $this->faker->randomElement(['room', 'table', 'hall']);
 
         return [
             'name' => $this->faker->unique()->name,

@@ -2,8 +2,8 @@
 
 namespace App\Domain\Order\Http\Requests\Order;
 
-use Illuminate\Validation\Rule;
 use App\Infrastructure\Http\AbstractRequests\BaseRequest as FormRequest;
+use Illuminate\Validation\Rule;
 
 class OrderStoreFormRequest extends FormRequest
 {

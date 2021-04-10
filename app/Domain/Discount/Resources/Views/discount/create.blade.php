@@ -69,18 +69,14 @@
                                 @csrf
                                 <div class="row container-fluid mb-5">
                                     <div class="col-xl-0"></div>
-                                    <div class="col-xl-10">
-                                        @include("{$alias}::discount._partials._fields", [
-                                            'action' => 'create',
-                                        ])
+                                    <div class="col-xl-10"  id="app">
+                                        <discount
+                                        :all-users="{{ $users }}"
+                                        action="create"
+                                        auth_token="{{ $auth_token }}"
+                                    />
                                     </div>
-                                    <div class="col-md-4"></div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-lg-2">
-                                        <button type="submit"
-                                                class="btn btn-block btn-sm btn-light-primary font-weight-bolder text-uppercase py-4">{{ __("main.create") }}
-                                            &nbsp; {{ __("main.discount") }}</button>
-                                    </div>
+                                  
                                 </div>
                             </form>
                         </div>
@@ -94,9 +90,18 @@
 @endsection
 
 @push('scripts')
+<script src="{{ asset('assets/js/pages/crud/forms/widgets/select2.js?v=7.1.5') }}"></script>
+<script src="{{ asset('js/app.js')}}"></script>
+
+<script>
+    $('.select2').select2({
+        placeholder: '{{ __('main.select_option') }}'
+    });
+
+</script>
     <script src="{{ asset('assets/js/pages/crud/forms/widgets/select2.js?v=7.1.5') }}"></script>
     <script src="{{ asset('assets/js/pages/crud/forms/widgets/bootstrap-datepicker.js?v=7.0.5') }}"></script>
-    <script>
+    {{-- <script>
         $('#kt_datepicker_3').datepicker({
             autoclose: true,
             format: 'yyyy-mm-dd',
@@ -108,6 +113,6 @@
         $('.select2').select2({
             placeholder: '{{ __('main.select_option') }}'
         });
-    </script>
+    </script> --}}
 
 @endpush

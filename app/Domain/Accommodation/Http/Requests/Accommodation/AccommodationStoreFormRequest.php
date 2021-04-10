@@ -40,7 +40,7 @@ class AccommodationStoreFormRequest extends FormRequest
         $rules = [
             'name' => 'required|string|min:5|max:255',
             'accommodation-gallery' => 'required|array',
-            'type' => 'required|in:table,room',
+            'type' => 'required|in:table,room,hall',
             'accommodation-gallery.*' => ['required', 'image', 'mimes:png,jpeg,jpg', 'max:2048'],
             'branch_id' => 'required|exists:branches,id',
             'code' => 'required|unique:accommodations,code',

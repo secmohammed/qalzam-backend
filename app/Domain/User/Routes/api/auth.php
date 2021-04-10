@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth.api'], function () {
     Route::post('/branches/{branch}/cart', 'CartController@store')->name('auth.cart.store');
+    Route::get('/branches/cart', 'CartController@AllCart')->name('auth.cart.branches.index');
     Route::get('/branches/{branch}/cart', 'CartController@index')->name('auth.cart.index');
     Route::put('/branches/{branch}/cart/{productVariation}', 'CartController@update')->name('auth.cart.update');
     Route::delete('/branches/{branch}/cart/{productVariation}', 'CartController@destroy')->name('auth.cart.destroy');

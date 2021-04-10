@@ -69,6 +69,7 @@ class DiscountController extends Controller
         $this->setData('users', $this->userRepository->whereHas('roles', function ($query) {
             $query->where('slug', '!=', 'admin');
         })->get());
+        $this->setData('auth_token', auth()->user()->generateAuthToken());
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
 
@@ -179,6 +180,7 @@ class DiscountController extends Controller
      */
     public function store(DiscountStoreFormRequest $request)
     {
+        // dd($request->all());
         $discount = $this->discountRepository->make($request->validated());
         $discount->owner()->associate(auth()->user());
         $discount->save();

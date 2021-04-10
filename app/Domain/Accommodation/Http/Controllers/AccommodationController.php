@@ -2,21 +2,20 @@
 
 namespace App\Domain\Accommodation\Http\Controllers;
 
+use App\Common\Pipeline\HandleFileUpload;
+use App\Domain\Accommodation\Entities\Accommodation;
+use App\Domain\Accommodation\Http\Requests\Accommodation\AccommodationStoreFormRequest;
+use App\Domain\Accommodation\Http\Requests\Accommodation\AccommodationUpdateFormRequest;
+use App\Domain\Accommodation\Http\Resources\Accommodation\AccommodationResource;
+use App\Domain\Accommodation\Http\Resources\Accommodation\AccommodationResourceCollection;
+use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
+use App\Domain\Accommodation\Repositories\Contracts\ContractRepository;
+use App\Domain\Branch\Repositories\Contracts\BranchRepository;
+use App\Domain\Category\Repositories\Contracts\CategoryRepository;
+use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 use Joovlly\DDD\Traits\Responder;
-use App\Common\Pipeline\HandleFileUpload;
-use App\Domain\Accommodation\Entities\Accommodation;
-use App\Domain\Branch\Repositories\Contracts\BranchRepository;
-use App\Domain\Category\Repositories\Contracts\CategoryRepository;
-use App\Domain\Accommodation\Repositories\Contracts\ContractRepository;
-use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
-use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
-use App\Domain\Accommodation\Http\Resources\Accommodation\AccommodationResource;
-use App\Domain\Accommodation\Http\Requests\Accommodation\AccommodationStoreFormRequest;
-use App\Domain\Accommodation\Http\Requests\Accommodation\AccommodationUpdateFormRequest;
-use App\Domain\Accommodation\Http\Resources\Accommodation\AccommodationResourceCollection;
-
 
 class AccommodationController extends Controller
 {
@@ -109,12 +108,13 @@ class AccommodationController extends Controller
     public function edit(Accommodation $accommodation, BranchRepository $branchRepository, ContractRepository $contractRepository)
     {
         $this->setData('categories', $this->categoryRepository->where('status', 'active')->where('type', 'accommodation')->get());
-         $this->setData('title', __('main.edit') . ' ' . __('main.accommodation') . ' : ' . $accommodation->id, 'web');
+        $this->setData('title', __('main.edit') . ' ' . __('main.accommodation') . ' : ' . $accommodation->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('branches', $branchRepository->all());
         $this->setData('edit', $accommodation);
         $this->setData('contracts', $contractRepository->all());
+        $this->addView("{$this->domainAlias}::{$this->viewPath}.edit");
 
         $this->useCollection(AccommodationResource::class, 'edit');
 

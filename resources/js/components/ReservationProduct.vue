@@ -6,10 +6,13 @@
         <div class="form-group row">
             <label class="col-form-label text-right col-lg-2 col-sm-12">branch</label>
             <div class="col-lg-10 col-md-9 col-sm-12">
-                <select class="form-control  " v-model="branch_id" data-placeholder=" select branch">
+                <!-- <select class="form-control  " v-model="branch_id" data-placeholder=" select branch">
                     <option label="Label"></option>
                     <option v-for="branch in  branches " :value="branch.id">{{branch.name}}</option>
-                </select>
+                </select> -->
+
+                <multiselect :searchable="true" v-model="branchesValue" track-by="id" label="name" :options="branches"></multiselect>
+
                 <div v-if="errors['branch_id'] " class="fv-plugins-message-container">
 
                     <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["branch_id"][0] }}</div>
@@ -18,28 +21,32 @@
             </div>
         </div>
       </form>  <div class="form-group row align-items-center">
-            <label class="col-form-label text-right col-lg-2 col-sm-12">user</label>
+            <label class="col-form-label text-right col-lg-2 col-sm-12">customer</label>
             <div class="col-lg-8 col-md-7 col-sm-10">
-                <select class="form-control  " v-model="form.user_id" data-placeholder="select user">
+                <!-- <select class="form-control  " v-model="form.user_id" data-placeholder="select user">
                     <option label="Label"></option>
                     <option v-for="user in  users" :value="user.id">{{user.name}}</option>
-                </select>
+                </select> -->
+                <multiselect :searchable="true" v-model="usersValue" track-by="id" label="name" :options="users"></multiselect>
+
                 <div v-if="errors['user_id'] " class="fv-plugins-message-container">
 
                     <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["user_id"][0] }}</div>
                 </div>
             </div>
-            <p @click="goToStep(0)" class="col-lg-2 col-md-2 col-sm-2 text-primary " style="cursor: -webkit-grab; cursor: pointer;"> add new user > </p>
+            <p @click="goToStep(0)" class="col-lg-2 col-md-2 col-sm-2 text-primary " style="cursor: -webkit-grab; cursor: pointer;"> add new customer > </p>
 
         </div>
 
         <div class="form-group row">
             <label class="col-form-label text-right col-lg-2 col-sm-12">accommodation</label>
             <div class="col-lg-10 col-md-9 col-sm-12">
-                <select class=" form-control " v-model="form.accommodation_id" data-placeholder="select accommodation">
+                <!-- <select class=" form-control " v-model="form.accommodation_id" data-placeholder="select accommodation">
                     <option label="Label"></option>
                     <option v-for="accommodation in accommodations" :value="accommodation.id">{{accommodation.name}}</option>
-                </select>
+                </select> -->
+                <multiselect :searchable="true" v-model="accommodationsValue" track-by="id" label="name" :options="accommodations"></multiselect>
+
                 <div v-if="errors['accommodation_id'] " class="fv-plugins-message-container">
 
                     <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["accommodation_id"][0] }}</div>
@@ -68,7 +75,7 @@
             </div>
         </div>
 
-        <div class="d-flex justify-content-between mt-5">
+        <div class="d-flex justify-content-center mt-5">
 
             <button class="btn btn-secondary" v-if="action === 'create'" @click.prevent="save">
                 Create Order
@@ -90,8 +97,13 @@
 <script>
 import moment from 'moment'
 import CreateUserForm from './CreateUserForm.vue';
+ import Multiselect from 'vue-multiselect'
+
 export default {
-  components: { CreateUserForm },
+  components: { CreateUserForm ,
+        Multiselect
+  
+  },
 
     props: {
         // CreateAddressFormction: {
@@ -131,6 +143,9 @@ export default {
     },
     data() {
         return {
+            branchesValue: {},
+            accommodationsValue: {},
+            usersValue: {},
             errors: [],
             step: 1,
             discounts: [],
@@ -148,11 +163,20 @@ export default {
         };
     },
     watch: {
-        "branch_id"(val) {
-            const branch = this.branches.find(branch => branch.id == val);
-            this.accommodations = branch.accommodations
-
+           "usersValue"(val) {
+            this.form.user_id= val.id    
         },
+          "branchesValue"(val) {
+        //   console.log("🚀 ~ file: ReservationProduct.vue ~ line 170 ~ val", val)
+        //       const branch = this.branches.find(branch => branch.id == val.id);
+        //       console.log("🚀 ~ file: ReservationProduct.vue ~ line 228 ~ this.branches", this.branches)
+          
+          this.accommodations = val.accommodations
+        },
+          "accommodationsValue"(val) {
+            this.form.accommodation_id = val.id
+        },
+       
         "form.start_date"() {
             this.form.end_date = moment(this.form.start_date).add(4, "hours").format("MM/DD/YYYY HH:MM");
         }

@@ -2,11 +2,11 @@
 
 namespace App\Domain\Category\Database\Factories;
 
-use Illuminate\Support\Str;
+use App\Domain\Category\Entities\Category;
 use App\Domain\Post\Entities\Post;
 use App\Domain\User\Entities\User;
-use App\Domain\Category\Entities\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class CategoryFactory extends Factory
 {
@@ -26,7 +26,7 @@ class CategoryFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->name,
-            'type' => $this->faker->randomElement(['product', 'post']),
+            'type' => $this->faker->randomElement(['product', 'post', 'accommodation']),
             'user_id' => function () {
                 return User::factory()->create()->id;
             },
@@ -43,8 +43,6 @@ class CategoryFactory extends Factory
     {
         return $this->hasChildren($count);
     }
-
-  
 
     /**
      * @return mixed
