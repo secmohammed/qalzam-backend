@@ -3,7 +3,7 @@
     <div class="container d-flex align-items-stretch justify-content-between">
         <!--begin::Left-->
         <div class="d-none d-lg-flex align-items-center mr-3">
-            A
+
             <button class="btn btn-icon aside-toggle ml-n3 mr-10" id="kt_aside_desktop_toggle">
             <span class="svg-icon svg-icon-xxl svg-icon-dark-75">
                 <!--begin::Svg Icon | path:assets/media/svg/icons/Text/Align-left.svg-->
@@ -18,10 +18,8 @@
                 <!--end::Svg Icon-->
             </span>
             </button>
-            <!--end::Aside Toggle-->
-            <!--begin::Logo-->
             <a href="{{ route('dashboard') }}">
-                <img alt="Logo" src="{{ asset('assets/images/qalzam-logo.svg') }}" class="logo-sticky max-h-45px" />
+                <img alt="Logo" src="{{ asset('assets/images/qalzam-logo.svg') }}" class="logo-sticky max-h-45px"/>
             </a>
             <!--end::Logo-->
             <!--begin::Desktop Search-->
