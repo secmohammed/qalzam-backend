@@ -46,17 +46,12 @@
             <!--begin::Todo-->
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card card-custom">
-                        <div class="card-header">
+                    <div class="card card-custom gutter-b">
+                           <div class="card-header">
                             <h3 class="card-title">
                                 {{ __('main.show') }} {{ __('main.order') }} : # {{ $show->id }}
                             </h3>
                             <div class="card-toolbar">
-                                <a title="{{ __('main.export') }} {{ __('main.order') }}"
-                                   href="{{ route('orders.pdf',$show->id) }}"
-                                   class="btn btn-light-primary font-weight-bolder mr-2">
-                                   <i class="fas fa-file-pdf "  style="color: #FFF"> {{ __("main.export") }} Pdf</i>
-                                    
                                 <a title="{{ __('main.create') }} {{ __('main.order') }}"
                                    href="{{ route('orders.create') }}"
                                    class="btn btn-light-primary font-weight-bolder mr-2">
@@ -66,8 +61,7 @@
                                    href="{{ route('orders.destroy', $show->id) }}"
                                    class="btn btn-light-danger font-weight-bolder mr-2" data-toggle="modal"
                                    data-target="#delete_{{$show->id}}">
-                                    <i class="flaticon2-trash"></i> {{ __("main.delete") }} {{ __("main.order") }}
-                                </a>
+                                    <i class="flaticon2-trash"></i> {{ __("main.delete") }} {{ __("main.order") }} </a>
                                 <a title="{{ __('main.edit') }} {{ __('main.order') }}"
                                    href="{{ route('orders.edit', $show->id) }}"
                                    class="btn btn-light-warning font-weight-bolder mr-2">
@@ -75,147 +69,123 @@
                             </div>
 
                         </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6 mb-5">
-                                    <div class="row mb-2">
-                                        <strong class="ml-3"><span>{{ __("main.user") }} : </span></strong>
-                                        <span>{{ $show->user->name  }} </span>
-                                    </div>
-                                    <hr>
-                                </div>
-                                <div class="col-md-6 mb-5">
-                                    <div class="row mb-2">
-                                        <strong class="ml-3"><span>{{ __("main.creator") }} : </span></strong>
-                                        <span>{{ $show->creator->name }} </span>
-                                    </div>
-                                    <hr>
-                                </div>
-                                <div class="col-md-6 mb-5">
-                                    <div class="row mb-2">
-                                        <strong class="ml-3"><span>{{ __("main.branch") }} : </span></strong>
-                                        <span>{{ $show->branch->name }}  </span>
-                                    </div>
-                                    <hr>
-                                    </div>
-                                <div class="col-md-6 mb-5">
-                                    <div class="row mb-2">
-                                        <strong class="ml-3"><span>{{ __("main.delivery_guy") }} : </span></strong>
-                                        {{-- @dd($show,$show->deliverersWithFee()->first()) --}}
-                                        <span>{{ $show->deliverers->first()->name  ?? 'N/A'}} with Fee {{ $show->delivery_fee }} </span>
-                                    </div>
-                                    <hr>
-                                    </div>
+                                            <div class="card-body p-0">
+                                                <!-- begin: Invoice-->
+                                                <!-- begin: Invoice header-->
+                                                <div class="row justify-content-center py-8 px-8 py-md-27 px-md-0">
+                                                    <div class="col-md-10">
+                                                        <div class="d-flex justify-content-between pb-10 pb-md-20 flex-column flex-md-row">
+                                                            <h1 class="display-4 font-weight-boldest mb-10">ORDER DETAILS</h1>
+                                                            <div class="d-flex flex-column align-items-md-end px-0">
+                                                                <!--begin::Logo-->
+                                                                <a href="#" class="mb-5">
+                                                                    <img src="{{ asset('assets/images/qalzam-logo.svg') }}" alt="">
+                                                                </a>
+                                                                <!--end::Logo-->
+                                                                <span class="d-flex flex-column align-items-md-end opacity-70">
+                                                                    <span>{{ $show->branch->name }} </span>
+                                                                    <span> {{ $show->branch->address_1 . ' ' .$show->branch->location->prevNodes()->get()->push($show->branch->location)->reverse()->implode('name', ',') }} </span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="border-bottom w-100"></div>
+                                                        <div class="d-flex justify-content-between pt-6">
+                                                            <div class="d-flex flex-column flex-root">
+                                                                <span class="font-weight-bolder mb-2">ORDER DATE</span>
+                                                                <span class="opacity-70">{{ $show->created_at->toDateTimeString() }}</span>
+                                                            </div>
+                                                            <div class="d-flex flex-column flex-root">
+                                                                <span class="font-weight-bolder mb-2">ORDER NO.</span>
+                                                                <span class="opacity-70">{{ $show->id}}</span>
+                                                            </div>
+                                                            <div class="d-flex flex-column flex-root">
+                                                                <span class="font-weight-bolder mb-2">DELIVERED TO.</span>
+                                                                <span class="opacity-70">{{ $show->user->full_address }}
+                                                                <br> By {{ optional($show->deliverers->first())->name ?? 'N/A'}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- end: Invoice header-->
+                                                <!-- begin: Invoice body-->
+                                                <div class="row justify-content-center py-8 px-8 py-md-10 px-md-0">
+                                                    <div class="col-md-10">
+                                                        <div class="table-responsive">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th class="pl-0 font-weight-bold text-muted text-uppercase">Ordered Items</th>
+                                                                        <th class="text-right font-weight-bold text-muted text-uppercase">Qty</th>
+                                                                        <th class="text-right font-weight-bold text-muted text-uppercase">Unit Price</th>
+                                                                        <th class="text-right pr-0 font-weight-bold text-muted text-uppercase">Amount</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach($show->products as $product)
+                                                                        <tr class="font-weight-boldest border-bottom-0">
+                                                                            <td class="border-top-0 pl-0 py-4 d-flex align-items-center">
+                                                                            <!--begin::Symbol-->
+                                                                            <div class="symbol symbol-40 flex-shrink-0 mr-4 bg-light">
+                                                                                <div class="symbol-label" style="background-image: url({{ $product->getFirstMediaUrl('product-variation-images') }})"></div>
+                                                                            </div>
+                                                                            <!--end::Symbol-->
+                                                                            {{ $product->name }} </td>
+                                                                            <td class="border-top-0 text-right py-4 align-middle">{{ $product->pivot->quantity }} </td>
+                                                                            <td class="border-top-0 text-right py-4 align-middle">{{ $product->price->formatted() }}</td>
+                                                                            <td class="text-primary border-top-0 pr-0 py-4 text-right align-middle">{{ $product->pivot->quantity * $product->price->amount() }} </td>
+                                                                        </tr>
 
-                                     
-
-
-
-                                <div class="col-md-6 mb-5">
-                                    <div class="row mb-2">
-                                        <strong class="ml-3"><span>{{ __("main.status") }} : </span></strong>
-                                        <span>{{ $show->status  }} </span>
-                                    </div>
-                                    <hr>
-                                </div>
-                                @if($show->order)
-                                  <div class="col-md-6 mb-5">
-                                    <div class="row mb-2">
-                                        <strong class='ml-3'><span>{{ __("main.products") }} : </span></strong>
-                                        @if ($show->order->products->count())
-                                        <ul>
-                                            @foreach($show->order->products as $product)
-                                                <li>{{ $product->name }} </li>
-                                            @endforeach
-                                        </ul>
-                                        @else
-                                         N/A
-                                        @endif
-                                    </div>
-                                    <hr>
-                                </div>
-                                @endif
-
-                                <div class="col-md-6 mb-5">
-                                    <div class="row mb-2">
-                                        <strong class='ml-3'><span>{{ __("main.start_date") }} : </span></strong>
-                                        <span>{{$show->start_date ?? 'N/A'}}</span>
-                                    </div>
-                                    <hr>
-                                </div>
-                                <div class="col-md-6 mb-5">
-                                    <div class="row mb-2">
-                                        <strong class='ml-3'><span>{{ __("main.end_date") }} : </span></strong>
-                                        <span>{{$show->end_date ?? 'N/A'}}</span>
-                                    </div>
-                                    <hr>
-                                </div>
-
-                                <div class="col-md-6 mb-5">
-                                    <div class="row mb-2">
-                                        <strong class='ml-3'><span>{{ __("main.total_price") }} : </span></strong>
-                                        <span>{{$show->formatted_total_price }}</span>
-                                    </div>
-                                    <hr>
-                                </div>
-
-                                <div class="col-md-6 mb-5">
-                                    <div class="row mb-2">
-                                        <strong class='ml-3'><span>{{ __("main.created_at") }} : </span></strong>
-                                        <span>{{$show->created_at}}</span>
-                                    </div>
-                                    <hr>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                                                    @endforeach
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- end: Invoice body-->
+                                                <!-- begin: Invoice footer-->
+                                                <div class="row justify-content-center bg-gray-100 py-8 px-8 py-md-10 px-md-0 mx-0">
+                                                    <div class="col-md-10">
+                                                        <div class="table-responsive">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th class="font-weight-bold text-muted text-uppercase">PAYMENT TYPE</th>
+                                                                        <th class="font-weight-bold text-muted text-uppercase">PAYMENT STATUS</th>
+                                                                        <th class="font-weight-bold text-muted text-uppercase">PAYMENT DATE</th>
+                                                                        <th class="font-weight-bold text-muted text-uppercase text-right">TOTAL PAID</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr class="font-weight-bolder">
+                                                                        <td>Cash On Delivery</td>
+                                                                        <td>{{ $show->status }} </td>
+                                                                        <td>{{ $show->created_at->toDateTimeString() }} </td>
+                                                                        <td class="text-primary font-size-h3 font-weight-boldest text-right">{{ $show->total()->formatted() }}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- end: Invoice footer-->
+                                                <!-- begin: Invoice action-->
+                                                <div class="row justify-content-center py-8 px-8 py-md-10 px-md-0">
+                                                    <div class="col-md-10">
+                                                        <div class="d-flex justify-content-between">
+                                                            <a href="{{ route('orders.pdf',$show->id) }}" title="{{ __('main.export') }} {{ __('main.order') }}" class="btn btn-light-primary font-weight-bold">Download Order Details</a>
+                                                            <button type="button" class="btn btn-primary font-weight-bold" onclick="window.print();">Print Order Details</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- end: Invoice action-->
+                                                <!-- end: Invoice-->
+                                            </div>
+                                        </div>
+                                        <!--end::Card-->
                 </div>
             </div>
         </div>
     </div>
-
-
-
-  
-    {{-- // products grid --}}
-    <div class="flex-row-fluid container-fluid  py-2 py-lg-6    mt-5">
-        <div class="card card-custom card-stretch gutter-b">
-            <div class="card-body">
-        <div class="row ">
-            <!--begin::Product-->
-    
-            @foreach ($order_products as $product)
-            {{-- @dd($product); --}}
-            <div class="col-md-4 col-lg-12 col-xxl-4">
-                <div class="card card-custom gutter-b card-stretch">
-                    <div class="card-body d-flex flex-column rounded bg-light justify-content-between">
-                        <div class="text-center rounded mb-7">
-                            {{-- <img src="{{ $product->image }}" class="mw-100 w-200px"> --}}
-                        </div>
-                        <div>
-                            <h4 class="font-size-h5">
-                                <a href="{{ route("products.show",$product->id) }}" class="text-dark-75 font-weight-bolder">{{ $product->name }}</a>
-                            </h4>
-                         <div class="d-flex justify-content-between">
-                            <div class="font-size-h6 text-muted font-weight-bolder">{{ __("main.price") }}: {{ $product->formatted_price }}</div> 
-                            <div class="font-size-h6 text-muted font-weight-bolder float-right">{{ __("main.quantity") }}: {{ $product->quantity??0 }}</div> 
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-            
-            <!--end::Product-->
-           
-        </div>
-    </div>
-    </div>
-    </div>  
-
-
-
-
 
 
 

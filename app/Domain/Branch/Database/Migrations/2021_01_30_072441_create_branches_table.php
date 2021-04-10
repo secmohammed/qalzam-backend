@@ -29,6 +29,7 @@ class CreateBranchesTable extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->foreignId('location_id')->constrained()->onDelete('cascade');
+            $table->text('address_1');
             $table->string('latitude');
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->string('longitude');

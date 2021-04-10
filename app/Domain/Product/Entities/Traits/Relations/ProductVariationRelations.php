@@ -2,13 +2,16 @@
 
 namespace App\Domain\Product\Entities\Traits\Relations;
 
+use App\Domain\User\Entities\User;
+use App\Domain\Order\Entities\Order;
 use App\Domain\Branch\Entities\Branch;
+use App\Domain\Product\Entities\Stock;
 use App\Domain\Product\Entities\Product;
+use App\Domain\Product\Entities\Template;
+use Illuminate\Database\Eloquent\Builder;
 use App\Domain\Product\Entities\ProductVariation;
 use App\Domain\Product\Entities\ProductVariationType;
-use App\Domain\Product\Entities\Stock;
-use App\Domain\Product\Entities\Template;
-use App\Domain\User\Entities\User;
+use App\Domain\Product\Entities\ProductVariationOrder;
 
 trait ProductVariationRelations
 {
@@ -54,6 +57,10 @@ trait ProductVariationRelations
     public function stocks()
     {
         return $this->hasMany(Stock::class);
+    }
+    public function orders()
+    {
+        return $this->hasMany(ProductVariationOrder::class);
     }
 
     /**

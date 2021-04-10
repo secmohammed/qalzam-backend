@@ -5,12 +5,13 @@ namespace App\Domain\User\Entities;
 use App\Domain\User\Entities\Traits\CustomAttributes\UserAttributes;
 use App\Domain\User\Entities\Traits\Relations\UserRelations;
 use App\Domain\User\Repositories\Contracts\UserRepository;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
+use JWTAuth;
 use Joovlly\Authorizable\Models\User as Authenticatable;
 use Joovlly\Authorizable\Traits\Authorizable;
 use Joovlly\Translatable\Traits\Translatable;
-use JWTAuth;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -140,14 +141,18 @@ class User extends Authenticatable implements JWTSubject, HasMedia
 
         return $remindable->firstOrFail();
     }
-
+    public function scopeDefaultAddress(Builder $builder)
+    {
+        return $builder->with(['addresses' => function ($query) {
+            $query->where('default', true)->limit(1);
+        }]);
+    }
     public static function newFactory()
     {
         self::flushEventListeners();
 
         return app(\App\Domain\User\Database\Factories\UserFactory::class)->new();
     }
-
     /**
      * Specifies the user's FCM token
      *
