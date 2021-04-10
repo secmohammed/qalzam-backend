@@ -87,7 +87,7 @@ class CartController extends Controller
     public function AllCart(Request $request, Cart $cart)
     {
         // dd(2);
-        dd($request->user()->cart);
+//         dd($request->user()->cart);
         // $cart->setCartType('cart')->sync();
         $request->user()->load(['cart.product', 'cart.product.variations.stock', 'cart.stock', 'cart.type']);
         $this->setData('title', __('main.show-all') . ' ' . __('main.address'));
