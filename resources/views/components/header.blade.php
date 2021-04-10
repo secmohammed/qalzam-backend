@@ -131,20 +131,22 @@
 
                     <button class="btn font-weight-bolder btn-sm btn-light-success d-flex  justify-content-between align-items-center dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         @if (Lang::locale()==="ar")
-                    <img src="assets/images/saudi-arabia.png"  style="width: 20px ;height: 20px ; " alt="">
-
+                        
+                    <img src={{ asset("assets/images/saudi-arabia.png") }}  style="width: 20px ;height: 20px ; " alt="">
+                     
                  @else
-                    <img src="assets/images/united-states.png" style="width: 20px ;height: 20px ; " alt="">
-
+                 
+                    <img src={{ asset("assets/images/united-states.png") }}style="width: 20px ;height: 20px ; " alt="">
+                     
                  @endif
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item px-5" href="?lang=ar">
-                        <img src="assets/images/saudi-arabia.png"  style="width: 30px ;height: 30px ; " alt="">
+                        <img src={{ asset("assets/images/saudi-arabia.png") }}   style="width: 30px ;height: 30px ; " alt="">
                     </a>
                     <a class="dropdown-item" href="?lang=en">
-
-                        <img src="assets/images/united-states.png" style="width: 30px ;height: 30px ; " alt="">
+                        
+                        <img src={{ asset("assets/images/united-states.png") }} style="width: 30px ;height: 30px ; " alt="">
                     </a>
                 </div>
             </div>

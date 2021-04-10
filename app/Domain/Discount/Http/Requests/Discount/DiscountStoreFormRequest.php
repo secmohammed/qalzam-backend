@@ -37,6 +37,7 @@ class DiscountStoreFormRequest extends FormRequest
      */
     public function rules()
     {
+        // dd($this->request);
         return [
             'code' => 'required|max:32|unique:discounts,code',
             'value' => 'required|integer|min:1|max:99',
@@ -46,6 +47,7 @@ class DiscountStoreFormRequest extends FormRequest
             'users' => ['nullable', 'array'],
             'users.*' => ['required', 'exists:users,id'],
             'broadcast' => 'required_if:users,==,null|boolean',
+            'status' => 'nullable|in:active,inactive',
             'discountable_id' => 'required', // TODO : validate discountable_id based on its type at the database that it exists.
             'discountable_type' => 'required|in:category,product,variation',
         ];

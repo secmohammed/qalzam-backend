@@ -32,6 +32,8 @@
             value="room" {{ ($action == 'edit') && $edit->type == 'room' ? 'selected' : '' }}>Room</option>
             <option
             value="table" {{ ($action == 'edit') && $edit->type == 'table' ? 'selected' : '' }}>Table</option>
+            <option
+            value="hall" {{ ($action == 'edit') && $edit->type == 'hall' ? 'selected' : '' }}>Hall</option>
         </select>
         <div class="row">
             <div class="col-md-12">

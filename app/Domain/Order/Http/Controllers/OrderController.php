@@ -205,12 +205,12 @@ class OrderController extends Controller
      */
     public function store(OrderStoreFormRequest $request)
     {
+
         $order = app(Pipeline::class)->send($request)->through([
             ApplyDiscountToOrderIfPresent::class,
             CreateOrderPipeline::class,
             NotifyUserWithPlacedOrder::class,
         ])->then(fn($order) => $order);
-        // dump($order);
         GenerateOrderPdfInvoice::dispatch($order);
 
         $this->setData('data', $order);

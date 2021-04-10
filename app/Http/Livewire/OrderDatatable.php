@@ -10,6 +10,7 @@ use Mediconesystems\LivewireDatatables\NumberColumn;
 
 class OrderDatatable extends MainLivewire
 {
+    public $exportable = true;
     public function builder()
     {
         return Order::query()->with(['branch', 'address']);
@@ -28,10 +29,17 @@ class OrderDatatable extends MainLivewire
                 ->label(__('main.address'))
                 ->filterable($this->builder()->get()->pluck('address.name')->unique()),
             Column::name('user.name')
-                ->label(__('main.user'))
+                ->label(__('main.customer'))
                 ->filterable($this->builder()->get()->pluck('user.name')->unique()),
-            // tera ble($this->builder()->get()->pluck('creator.name')->unique()),
+            Column::name('orders.status')
+                ->label(__('main.status'))
+                ->filterable([
+                    'pending' => __('main.pending'),
+                    'processing' => __('main.processing'),
+                    'picked' => __('main.picked'),
+                    'delivered' => __('main.delivered'),
 
+                ]),
             Column::name('branch.name')
                 ->label(__('main.branch'))
                 ->filterable($this->builder()->get()->pluck('branch.name')->unique()),
