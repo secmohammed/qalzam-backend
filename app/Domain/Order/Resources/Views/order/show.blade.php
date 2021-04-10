@@ -172,7 +172,7 @@
                                                 <div class="row justify-content-center py-8 px-8 py-md-10 px-md-0">
                                                     <div class="col-md-10">
                                                         <div class="d-flex justify-content-between">
-                                                            <button type="button" class="btn btn-light-primary font-weight-bold" onclick="window.print();">Download Order Details</button>
+                                                            <a href="{{ route('orders.pdf',$show->id) }}" title="{{ __('main.export') }} {{ __('main.order') }}" class="btn btn-light-primary font-weight-bold">Download Order Details</a>
                                                             <button type="button" class="btn btn-primary font-weight-bold" onclick="window.print();">Print Order Details</button>
                                                         </div>
                                                     </div>
