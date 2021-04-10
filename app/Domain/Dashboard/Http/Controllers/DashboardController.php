@@ -51,7 +51,7 @@ class DashboardController extends Controller
         $topSellingProducts = $productVariationRepository->withCount('orders')->withCount(['orders AS total_quantity' => function ($query) {
             $query->select(\DB::raw('SUM(product_variation_order.quantity) as total_quantity'));
 
-        }])->orderBy('orders_count', 'desc')->limit(6)->get();
+        }])->orderByRaw('total_quantity + orders_count DESC')->limit(6)->get();
         $recentReservations =  $reservationRepository->latest()->limit(5)->get()->load(['branch']);
         $recentOrders = $orderRepository->latest()->limit(5)->where('status', 'pending')->get()->load(['branch', 'products', 'user', 'deliverers']);
         return view("{$this->domainAlias}::{$this->viewPath}.index")->with(compact('recentReservations', 'recentOrders', 'pendingOrdersCount', 'topSellingProducts'));
