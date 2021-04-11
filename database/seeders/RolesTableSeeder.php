@@ -686,6 +686,8 @@ class RolesTableSeeder extends Seeder
                 'index-ingredient' => true,
                 'update-ingredient' => false,
 
+                'fastAddress-store' => true,
+
                 'store-stock' => false,
                 'create-stock' => false,
                 'edit-stock' => false,

@@ -25,7 +25,7 @@ class OrderDatatable extends MainLivewire
             NumberColumn::name('orders.id')
                 ->label(__('main.id')),
 
-            Column::name('address.name')
+            Column::name('address.address_1')
                 ->label(__('main.address'))
                 ->filterable($this->builder()->get()->pluck('address.name')->unique()),
             Column::name('user.name')
