@@ -111,7 +111,7 @@ export default {
                 // {}
                         console.log("🚀 ~ file: CreateUserForm.vue ~ line 204 ~ createUser ~ token", token)
                         console.log("🚀 ~ file: CreateUserForm.vue ~ line 204 ~ createUser ~ data", user)
-                        this.$emit("userCreated",{id:user.id,token});
+                        this.$emit("userCreated",{user,token});
             }).catch((err) => {
                 // console.log("🚀 ~ file: OrderProduct.vue ~ line 257 ~ save ~ err.response.data.errors", err.response.data.errors, err.response)
                 console.log("🚀 ~ file: CreateUserForm.vue ~ line 198 ~ createUser ~ err", err)

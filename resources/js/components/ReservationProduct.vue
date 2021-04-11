@@ -164,6 +164,7 @@ export default {
     },
     watch: {
            "usersValue"(val) {
+           console.log("🚀 ~ file: ReservationProduct.vue ~ line 167 ~ val", val)
             this.form.user_id= val.id    
         },
           "branchesValue"(val) {
@@ -217,8 +218,8 @@ export default {
             this.step = step
         },
         userCreated(user){
-            this.users.push(user);
-            this.form.user_id =user.id;
+            this.users.push(user.user);
+            this.usersValue =user.user;
             this.newUserToken =user.token;
             this.step = 1
         },

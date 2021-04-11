@@ -238,7 +238,7 @@ class UserController extends Controller
         }
 
         if ($store) {
-            Mail::to($store->email)->send(new SendPassword($store, $password));
+            Mail::to($store->email)->queue(new SendPassword($store, $password));
             $this->setData('data', $store);
 
             $this->redirectRoute("{$this->resourceRoute}.show", [$store->id]);

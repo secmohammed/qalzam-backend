@@ -198,7 +198,7 @@ export default {
             discountsValue: {},
             productsValue: [],
             errors: [],
-            step: .5,
+            step: 1,
             discounts: [],
             addresses: [],
             users:[],
@@ -290,6 +290,7 @@ export default {
             if(step === 0 && !this.form.branch_id)
             {
                 this.errors.branch_id=[ "you should choose branch"]
+                this.$forceUpdate();
                 // console.log("🚀 ~ file: OrderProduct.vue ~ line 275 ~ goToStep ~ this.errors", this.errors,this.errors["branch_id"][0])
                 return
             }
