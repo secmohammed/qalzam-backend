@@ -23,7 +23,6 @@
             <!--end::Page Vendors Styles-->
             <!--begin::Global Theme Styles(used by all pages)-->
             <link href="{{ asset('assets/plugins/global/plugins.bundle'.addRtl().'.css') }}" rel="stylesheet" type="text/css"/>
-            <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 
             <link href="{{ asset('assets/plugins/custom/prismjs/prismjs.bundle'.addRtl().'.css') }}" rel="stylesheet"
                 type="text/css"/>

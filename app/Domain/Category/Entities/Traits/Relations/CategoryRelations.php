@@ -2,9 +2,10 @@
 
 namespace App\Domain\Category\Entities\Traits\Relations;
 
+use App\Domain\Accommodation\Entities\Accommodation;
 use App\Domain\Post\Entities\Post;
-use App\Domain\User\Entities\User;
 use App\Domain\Product\Entities\Product;
+use App\Domain\User\Entities\User;
 
 trait CategoryRelations
 {
@@ -31,6 +32,11 @@ trait CategoryRelations
     public function products()
     {
         return $this->morphedByMany(Product::class, 'categorizable');
+
+    }
+    public function accommodations()
+    {
+        return $this->morphedByMany(Accommodation::class, 'categorizable');
 
     }
 
