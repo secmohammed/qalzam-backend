@@ -27,7 +27,9 @@ class CategoryStoreFormRequest extends FormRequest
         $rules = [
             'name' => 'required|unique:categories,name',
             'name_ar' => 'required|unique:categories,name',
-            'type' => 'required|in:post,product,accommodation',
+            'type' => 'required|in:posts,products,accommodations',
+            'categorizable_type' => 'required|in:posts,products,accommodations',
+            'categorizable_id' => 'required',
             'parent_id' => 'nullable|exists:categories,id',
             'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 

@@ -56,6 +56,7 @@ class HasRole
         $routeName = explode('.', request()->route()->getName());
         $module = $routeName[count($routeName) - 2];
         $permission = sprintf('%s-%s', $action = end($routeName), Str::singular($module));
+        // dd($permission);
         if (auth()->check() && !auth()->user()->hasRole($permission)) {
             throw new AuthorizationException(sprintf('You do not have the permission to %s %s', $action, $module), 401);
 

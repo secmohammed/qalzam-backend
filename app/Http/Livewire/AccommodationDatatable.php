@@ -41,9 +41,9 @@ class AccommodationDatatable extends MainLivewire
             Column::name('branch.name')
                 ->label(__('main.branch'))
                 ->filterable('branch.name'),
-            Column::name('categories.name')
-                ->label(__('main.branch'))
-                ->filterable('branch.name'),
+            // Column::name('categories.name')
+            //     ->label(__('main.branch'))
+            //     ->filterable('branch.name'),
 
             DateColumn::name('accommodations.created_at')
                 ->label(__('main.created_at'))

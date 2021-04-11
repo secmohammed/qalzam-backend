@@ -127,7 +127,7 @@ class DeliveryOrderController extends Controller
      */
     public function store(DeliveryorderStoreFormRequest $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $store = $this->orderRepository->create($request->validated());
         //find (user,order)
         // $user->deliverables->attach($order)

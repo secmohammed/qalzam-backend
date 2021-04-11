@@ -67,7 +67,7 @@
                     <div class="row">
                         <div class="col-md">
                            
-                <multiselect :searchable="true" v-model="productsValue" @select="(data)=> { productSelected(data,index)}" track-by="id" label="name" :options="products"></multiselect>
+                <multiselect :searchable="true" v-model="productsValue[index]" @select="(data)=> { productSelected(data,index)}" track-by="id" label="name" :options="products"></multiselect>
 
                             
                             <div v-if="errors[`products.${index}.id`] " class="fv-plugins-message-container">
@@ -171,7 +171,7 @@ export default {
             required: true,
             type: Array,
         },
-        users: {
+       allUsers: {
             required: true,
             type: Array,
         },
@@ -196,11 +196,13 @@ export default {
             addressesValue: {},
             usersValue: {},
             discountsValue: {},
-            productsValue: {},
+            productsValue: [],
             errors: [],
-            step: 1,
+            step: .5,
             discounts: [],
             addresses: [],
+            users:[],
+
             products: [],
             newUserToken:"",
             form: {
@@ -254,16 +256,20 @@ export default {
         },
 
     },
-    mounted() {
-        // this.edit
-        // console.log(",smlddk")
+  async  mounted() {
+        this.users = this.allUsers
+        
         if (this.action === 'edit') {
-            this.form.branch_id = this.edit.branch_id
-            this.form.user_id = this.edit.user_id
-            this.form.address_id = this.edit.address_id
-            this.edit.products.forEach((product, index) => {
+            const branch = this.branches.find(branch=>branch.id === this.edit.branch_id)
+            this.branchesValue = branch;
+ 
+            this.usersValue = this.edit.user;
+            this.addressesValue = this.edit.address;
 
-                this.form.products[index].id = product.id
+            this.edit.products.forEach((product, index) => {
+            console.log("🚀 ~ file: OrderProduct.vue ~ line 267 ~ this.edit.products.forEach ~ product", product)
+
+                this.productsValue[index] = product
                 this.form.products[index].quantity = product.pivot.quantity
 
             });
@@ -306,6 +312,8 @@ export default {
         },
         userCreated(user){
             console.log("🚀 ~ file: OrderProduct.vue ~ line 269 ~ userCreated ~ id", user)
+            this.users.push(user);
+          
           this.form.user_id =user.id; 
             this.newUserToken =user.token; 
             this.step = 0.5 
@@ -326,7 +334,7 @@ console.log("🚀 ~ file: OrderProduct.vue ~ line 314 ~ save ~ this.form", this.
             }).then((res) => {
                 console.log("🚀 ~ file: OrderProduct.vue ~ line 259 ~ save ~ res", res)
 
-                // window.location = "/orders"
+                window.location = "/orders"
             }).catch((err) => {
                 // console.log("🚀 ~ file: OrderProduct.vue ~ line 257 ~ save ~ err.response.data.errors", err.response.data.errors, err.response)
                 this.errors = err.response.data.errors;
@@ -343,7 +351,7 @@ console.log("🚀 ~ file: OrderProduct.vue ~ line 314 ~ save ~ this.form", this.
                     Authorization: "Bearer " + this.auth_token,
                 },
             }).then((res) => {
-                console.log(res);
+                // console.log(res);
                 window.location = `/orders/${this.edit.id }`
             }).catch((err) => {
                 this.errors = err.response.data.errors;

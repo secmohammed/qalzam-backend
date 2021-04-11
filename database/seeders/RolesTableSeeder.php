@@ -180,6 +180,8 @@ class RolesTableSeeder extends Seeder
                 'destroy-comment' => true,
 
                 'store-user' => true,
+                'fastUser-store' => true,
+                'fastAddress-store' => true,
                 'create-user' => true,
                 'edit-user' => true,
                 'show-user' => true,

@@ -18,6 +18,7 @@ Vue.component(
     require("./components/TemplateProducts.vue").default
 );
 Vue.component("discount", require("./components/Discount.vue").default);
+Vue.component("category", require("./components/Category.vue").default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -76,8 +76,8 @@
                                         auth_token="{{ $auth_token }}"
                                     />
                                     </div>
-                                  
                                 </div>
+                                  
                             </form>
                         </div>
                     </div>

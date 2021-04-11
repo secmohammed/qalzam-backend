@@ -2,15 +2,15 @@
 
 namespace App\Domain\Category\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Joovlly\DDD\Traits\Responder;
 use App\Domain\Category\Entities\Category;
-use App\Domain\Category\Http\Resources\Category\CategoryResource;
-use App\Domain\Category\Repositories\Contracts\CategoryRepository;
 use App\Domain\Category\Http\Requests\Category\CategoryStoreFormRequest;
 use App\Domain\Category\Http\Requests\Category\CategoryUpdateFormRequest;
+use App\Domain\Category\Http\Resources\Category\CategoryResource;
 use App\Domain\Category\Http\Resources\Category\CategoryResourceCollection;
+use App\Domain\Category\Repositories\Contracts\CategoryRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use Illuminate\Http\Request;
+use Joovlly\DDD\Traits\Responder;
 
 class CategoryController extends Controller
 {
@@ -62,6 +62,7 @@ class CategoryController extends Controller
         $this->setData('alias', $this->domainAlias, 'web');
 
         $categories = Category::all();
+        $this->setData('auth_token', auth()->user()->generateAuthToken());
 
         $this->setData('categories', $categories);
 
@@ -173,6 +174,8 @@ class CategoryController extends Controller
         $category = $this->categoryRepository->make($request->validated());
         $category->user()->associate(auth()->user());
         $category->save();
+        $category->{$request->type}()->attach($request->categorizable_id);
+        // dd($category->categorizable(), 23);
 
         $category->setTranslation([
             'name' => $request->name_ar,
