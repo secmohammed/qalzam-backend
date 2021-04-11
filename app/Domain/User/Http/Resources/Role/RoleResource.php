@@ -2,8 +2,8 @@
 
 namespace App\Domain\User\Http\Resources\Role;
 
-use Illuminate\Http\Request;
 use App\Infrastructure\Http\AbstractResources\BaseResource as JsonResource;
+use Illuminate\Http\Request;
 
 class RoleResource extends JsonResource
 {
@@ -13,13 +13,13 @@ class RoleResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function data(Request $request):array
+    public function data(Request $request): array
     {
-        dd($this->permissions);
+        // dd($this->permissions);
         return [
-            'id'               => $this->id,
-            'name'             => $this->name,
-            'permissions'      => $this->permissions,
+            'id' => $this->id,
+            'name' => $this->name,
+            'permissions' => $this->permissions,
         ];
     }
 }

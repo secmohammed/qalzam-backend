@@ -109,6 +109,7 @@ class DiscountController extends Controller
      */
     public function edit(Discount $discount)
     {
+        // dd($discount);
         $this->setData('title', __('main.edit') . ' ' . __('main.discount') . ' : ' . $discount->id, 'web');
         $this->setData('categories', $this->categoryRepository->where('type', 'product')->get());
 

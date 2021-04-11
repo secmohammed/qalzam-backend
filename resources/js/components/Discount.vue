@@ -142,10 +142,10 @@
         <div class="d-flex justify-content-center mt-5">
 
             <button class="btn btn-secondary" v-if="action === 'create'" @click.prevent="save">
-                Create Order
+                Create Discount
             </button>
-            <button class="btn btn-secondary" v-if="action === 'edit'" @click.prevent="editOrder">
-                Edit Order
+            <button class="btn btn-secondary" v-if="action === 'edit'" @click.prevent="editDiscount">
+                Edit Discount
             </button>
 
         </div>
@@ -337,13 +337,13 @@ export default {
             });
         },
 
-        editOrder() {
+        editDiscount() {
             axios.put(`/api/discounts/${this.edit.id}`, this.form, {
                 headers: {
                     Authorization: "Bearer " + this.auth_token,
                 },
             }).then((res) => {
-                window.location = `/reservations/${this.edit.id }`
+                window.location = `/discounts/${this.edit.id }`
             }).catch((err) => {
                 this.errors = err.response.data.errors;
 

@@ -17,6 +17,7 @@ use App\Domain\Order\Pipelines\CreateOrderPipeline;
 use App\Domain\Order\Pipelines\NotifyUserWithOrderStatus;
 use App\Domain\Order\Pipelines\NotifyUserWithPlacedOrder;
 use App\Domain\Order\Repositories\Contracts\OrderRepository;
+use App\Domain\User\Entities\Address;
 use App\Domain\User\Repositories\Contracts\RoleRepository;
 use App\Domain\User\Repositories\Contracts\UserRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
@@ -73,12 +74,14 @@ class OrderController extends Controller
     /**
      * @param OrderRepository $orderRepository
      */
-    public function __construct(OrderRepository $orderRepository, BranchRepository $branchRepository, UserRepository $userRepository, DiscountRepository $discountRepository)
+    public function __construct(OrderRepository $orderRepository, RoleRepository $roleRepository, LocationRepository $locationRepository, BranchRepository $branchRepository, UserRepository $userRepository, DiscountRepository $discountRepository)
     {
         $this->orderRepository = $orderRepository;
         $this->branchRepository = $branchRepository;
         $this->userRepository = $userRepository;
         $this->discountRepository = $discountRepository;
+        $this->roleRepository = $roleRepository;
+        $this->locationRepository = $locationRepository;
     }
 
     /**
@@ -86,7 +89,7 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(RoleRepository $roleRepository, LocationRepository $locationRepository)
+    public function create()
     {
         // dd($locationRepository->all());
 
@@ -94,8 +97,8 @@ class OrderController extends Controller
 
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('auth_token', auth()->user()->generateAuthToken());
-        $this->setData('roles', $roleRepository->all());
-        $this->setData('locations', $locationRepository->all());
+        $this->setData('roles', $this->roleRepository->all());
+        $this->setData('locations', $this->locationRepository->all());
         $this->setData('branches', $this->branchRepository->with(['products'])->all(), 'web');
         $this->setData('users', $this->userRepository->with(['addresses', 'discounts'])->get(), 'web');
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
@@ -138,6 +141,14 @@ class OrderController extends Controller
     public function edit(Order $order)
     {
         $this->setData('title', __('main.edit') . ' ' . __('main.order') . ' : ' . $order->id, 'web');
+        $user = $this->userRepository->find($order->user_id);
+        $address = Address::find($order->address_id);
+        $order->user = $user;
+        $order->address = $address;
+        // $order->append'user' => $user, 'address' => $address]);
+        // dd($order);
+        $this->setData('roles', $this->roleRepository->all());
+        $this->setData('locations', $this->locationRepository->get());
 
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('edit', $order->load("products"));

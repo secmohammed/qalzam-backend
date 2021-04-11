@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Http\Livewire\MainLivewire;
 use App\Domain\Discount\Entities\Discount;
+use App\Http\Livewire\MainLivewire;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\DateColumn;
 use Mediconesystems\LivewireDatatables\NumberColumn;
@@ -26,10 +26,10 @@ class DiscountDatatable extends MainLivewire
             Column::name('discounts.code')
                 ->defaultSort('asc')
                 ->filterable(),
-            Column::name('category.name')
-                ->label(__('main.category'))
-                ->defaultSort('asc')
-                ->filterable('cateogry.name'),
+            // Column::name('category.name')
+            //     ->label(__('main.category'))
+            //     ->defaultSort('asc')
+            //     ->filterable('cateogry.name'),
 
             DateColumn::name('discounts.created_at')
                 ->label('created at')

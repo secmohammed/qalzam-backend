@@ -3,6 +3,7 @@
 namespace App\Domain\User\Http\Controllers;
 
 use App\Domain\User\Entities\Address;
+use App\Domain\User\Http\Requests\Address\AddressFastStoreFormRequest;
 use App\Domain\User\Http\Requests\Address\AddressStoreFormRequest;
 use App\Domain\User\Http\Requests\Address\AddressUpdateFormRequest;
 use App\Domain\User\Http\Resources\Address\AddressResource;
@@ -172,6 +173,21 @@ class AddressController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(AddressStoreFormRequest $request)
+    {
+        // dd($request->user());
+        $address = $request->user()->addresses()->save(
+            $this->addressRepository->make(
+                $request->validated()
+            )
+        );
+        $this->setData('data', $address);
+
+        $this->redirectRoute("{$this->resourceRoute}.show", [$address->id]);
+        $this->useCollection(AddressResource::class, 'data');
+
+        return $this->response();
+    }
+    public function storeFastAddress(AddressFastStoreFormRequest $request)
     {
         // dd($request->user());
         $address = $request->user()->addresses()->save(

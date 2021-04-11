@@ -78,10 +78,10 @@
         <div class="d-flex justify-content-center mt-5">
 
             <button class="btn btn-secondary" v-if="action === 'create'" @click.prevent="save">
-                Create Order
+                Create Reservation
             </button>
-            <button class="btn btn-secondary" v-if="action === 'edit'" @click.prevent="editOrder">
-                Edit Order
+            <button class="btn btn-secondary" v-if="action === 'edit'" @click.prevent="editReseravation">
+                Edit Reservation
             </button>
 
         </div>
@@ -167,7 +167,6 @@ export default {
             this.form.user_id= val.id    
         },
           "branchesValue"(val) {
-        //   console.log("🚀 ~ file: ReservationProduct.vue ~ line 170 ~ val", val)
         //       const branch = this.branches.find(branch => branch.id == val.id);
         //       console.log("🚀 ~ file: ReservationProduct.vue ~ line 228 ~ this.branches", this.branches)
           
@@ -178,7 +177,7 @@ export default {
         },
        
         "form.start_date"() {
-            this.form.end_date = moment(this.form.start_date).add(4, "hours").format("MM/DD/YYYY HH:MM");
+            // this.form.end_date = moment(this.form.start_date).add(4, "hours").format("MM/DD/YYYY HH:MM");
         }
 
 
@@ -198,10 +197,11 @@ export default {
     mounted() {
         this.users = this.allUsers
         if (this.action === 'edit') {
-            this.form.branch_id = this.edit.branch_id
-            this.form.user_id = this.edit.user_id
-            this.form.accommodation_id = this.accommodation.id
-            this.branch_id = this.accommodation.branch.id
+            this.usersValue = this.edit.user;
+
+            // this.form.branch_id = this.edit.branch_id
+            this.branchesValue =  this.edit.accommodation.branch
+            this.accommodationsValue = this.edit.accommodation
             this.form.start_date = this.edit.start_date
             this.form.end_date = this.edit.end_date
 
@@ -210,6 +210,7 @@ export default {
             this.form.end_date = moment(this.form.start_date).add(4, "hours").format("MM/DD/YYYY HH:MM");
 
         }
+        console.log(this.edit,'edit')
     },
     methods: {
         goToStep(step) {
@@ -240,7 +241,7 @@ export default {
             });
         },
 
-        editOrder() {
+        editReseravation() {
             axios.put(`/api/reservations/${this.edit.id}`, this.form, {
                 headers: {
                     Authorization: "Bearer " + this.auth_token,

@@ -5,14 +5,19 @@ namespace App\Domain\User\Http\Controllers;
 use App\Common\Pipeline\HandleFileUpload;
 use App\Domain\User\Entities\Role;
 use App\Domain\User\Entities\User;
+use App\Domain\User\Http\Requests\User\UserFastStoreFormRequest;
 use App\Domain\User\Http\Requests\User\UserStoreFormRequest;
 use App\Domain\User\Http\Requests\User\UserUpdateFormRequest;
 use App\Domain\User\Http\Resources\User\UserResource;
 use App\Domain\User\Http\Resources\User\UserResourceCollection;
+use App\Domain\User\Repositories\Contracts\RoleRepository;
 use App\Domain\User\Repositories\Contracts\UserRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use App\Mail\SendPassword;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Joovlly\DDD\Traits\Responder;
 
 class UserController extends Controller
@@ -205,6 +210,35 @@ class UserController extends Controller
         ], 'ar');
 
         if ($store) {
+            $this->setData('data', $store);
+
+            $this->redirectRoute("{$this->resourceRoute}.show", [$store->id]);
+            $this->useCollection(UserResource::class, 'data');
+        } else {
+            $this->redirectBack();
+            $this->setApiResponse(fn() => response()->json(['created' => false]));
+        }
+
+        return $this->response();
+    }
+    public function storeFastUser(UserFastStoreFormRequest $request, RoleRepository $roleRepository)
+    {
+        // dd($request);
+        $password = Str::random(8);
+        $request->merge(['password' => bcrypt($password)]);
+        // dd($request->all(), $request->password, $password, $roleRepository->where('slug', 'user')->first()->id);
+
+        $store = $this->userRepository->create($request->validated());
+        $role_id = $roleRepository->where('slug', 'user')->first()->id;
+        $store->roles()->attach($role_id);
+        if ($request->expectsJson()) {
+            $this->setData('meta', [
+                'token' => $store->generateAuthToken(),
+            ]);
+        }
+
+        if ($store) {
+            Mail::to($store->email)->send(new SendPassword($store, $password));
             $this->setData('data', $store);
 
             $this->redirectRoute("{$this->resourceRoute}.show", [$store->id]);

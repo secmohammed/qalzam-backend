@@ -24,6 +24,7 @@ Route::group(['middleware' => 'auth.api'], function () {
     Route::put('branches/{branch}/wishlist/{productVariation}', 'WishlistController@update')->name('auth.wishlist.update');
     Route::delete('branches/{branch}/wishlist/{productVariation}', 'WishlistController@destroy')->name('auth.wishlist.destroy');
     Route::resource('/users', 'UserController')->only(['store', 'show', 'update', 'destroy']);
+    Route::post('/store-fast-user', 'UserController@storeFastUser')->name('store.fastUser');
     Route::get('notifications', 'NotificationController@index')->name('notifications.index');
     Route::put('notifications/{notification?}', 'NotificationController@update')->name('notifications.update');
 
@@ -39,6 +40,7 @@ Route::group(['middleware' => 'auth.api'], function () {
     Route::apiResource('/addresses', 'AddressController')->only([
         'store', 'update', 'index', 'destroy',
     ]);
+    Route::post('/store-fast-address', 'AddressController@storeFastAddress')->name('store.fastAddress');
     ###CRUD_PLACEHOLDER###
 });
 Route::get('user/address', 'AddressController@userAddresses')->name('user.addresses');
