@@ -1,10 +1,10 @@
 <?php
 namespace App\Domain\Discount\Traits;
 
-use Illuminate\Support\Collection;
 use App\Domain\Discount\Entities\Discount;
 use App\Domain\Product\Entities\ProductVariation;
 use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Support\Collection;
 
 class PriceCalculator
 {
@@ -14,7 +14,6 @@ class PriceCalculator
      */
     public function calculcateDiscountedPrice(Discount $discount, Collection $products)
     {
-
         switch ($discount->discountable_type) {
             case 'category':
                 return $this->calculcateDiscountedPriceBasedOnCategory($discount, $products);
@@ -82,9 +81,7 @@ class PriceCalculator
         $filteredProducts = $products->filter(function ($product) use ($matchedProducts) {
             return !$matchedProducts->contains('id', $product->id);
         });
-
         return $filteredProducts->reduce(function ($carry, $product) {
-
             return $carry + ($product->price->amount() * $product->pivot->quantity);
         }, $discountedPrice);
     }

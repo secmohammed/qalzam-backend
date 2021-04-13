@@ -41,6 +41,10 @@ return [
     'Meeting has been Updated' => 'تم تعديل اجتماع',
     'notifications' => 'الإشعارات',
     'notification' => 'إشعارا',
+    'branch_products' => 'مننجات الفرع ',
+    'add_branch_products' => 'اضافة منتاجات للفرع',
+
+    'branch_product' => 'مننج الفرع ',
 
     'active' => 'فعال',
     'inactive' => 'غير فعال',
