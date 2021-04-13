@@ -4,6 +4,7 @@ namespace App\Domain\User\Http\Controllers;
 
 use App\Common\Cart\Cart;
 use App\Domain\Branch\Entities\Branch;
+use App\Domain\Branch\Http\Resources\Branch\BranchResourceCollection;
 use App\Domain\Product\Entities\ProductVariation;
 use App\Domain\User\Http\Requests\Cart\CartStoreFormRequest;
 use App\Domain\User\Http\Requests\Cart\CartUpdateFormRequest;
@@ -73,13 +74,13 @@ class CartController extends Controller
         $cart->setCartType('cart')->withBranch($branch)->sync();
         $request->user()->load(['cart.product', 'cart.product.variations.stock', 'cart.stock', 'cart.type']);
         $this->setData('title', __('main.show-all') . ' ' . __('main.address'));
+        // dd($request->user());
 
         $this->setData('alias', $this->domainAlias);
 
         $this->setData('data', $request->user());
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.index");
-
         $this->useCollection(UserResource::class, 'data');
 
         return $this->response();
@@ -87,18 +88,20 @@ class CartController extends Controller
     public function AllCart(Request $request, Cart $cart)
     {
         // dd(2);
-//         dd($request->user()->cart);
+        $branchesId = $request->user()->cart->map(function ($product) {
+            return $product->pivot->branch_id;
+
+        });
+        $branches = Branch::whereIn('id', $branchesId)->get();
         // $cart->setCartType('cart')->sync();
-        $request->user()->load(['cart.product', 'cart.product.variations.stock', 'cart.stock', 'cart.type']);
-        $this->setData('title', __('main.show-all') . ' ' . __('main.address'));
 
         $this->setData('alias', $this->domainAlias);
 
-        $this->setData('data', $request->user());
+        $this->setData('data', $branches);
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.index");
 
-        $this->useCollection(UserResource::class, 'data');
+        $this->useCollection(BranchResourceCollection::class, 'data');
 
         return $this->response();
     }

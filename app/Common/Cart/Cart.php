@@ -3,17 +3,17 @@
 namespace App\Common\Cart;
 
 use App\Common\Transformers\Money;
-use App\Domain\User\Entities\User;
 use App\Domain\Branch\Entities\Branch;
 use App\Domain\Discount\Entities\Discount;
 use App\Domain\Discount\Traits\PriceCalculator;
+use App\Domain\User\Entities\User;
 
 class Cart
 {
     public $user;
 
     protected $changed = false;
-    protected string $type;
+    protected $type;
     protected $branch;
     protected $discount;
     public function __construct(User $user = null)
@@ -33,8 +33,8 @@ class Cart
     }
     public function setCartType(string $type)
     {
-        if(!in_array($type, $types = ['cart', 'wishlist'])) {
-            throw new \Exception('Invalid cart type, it must be type of '. implode(',', $types));
+        if (!in_array($type, $types = ['cart', 'wishlist'])) {
+            throw new \Exception('Invalid cart type, it must be type of ' . implode(',', $types));
         }
         $this->type = $type;
         return $this;
@@ -50,18 +50,17 @@ class Cart
     {
         return !!$this->branch;
     }
-    public function update($productId , $quantity)
+    public function update($productId, $quantity)
     {
-        return $this->user->{$this->getType()}()->wherePivot('branch_id', $this->branch->id)->wherePivot('type', $this->getType())->updateExistingPivot($productId , [
+        return $this->user->{$this->getType()}()->wherePivot('branch_id', $this->branch->id)->wherePivot('type', $this->getType())->updateExistingPivot($productId, [
             'quantity' => $quantity,
         ]);
     }
     public function delete($productId)
     {
-      return  $this->user->{$this->getType()}()->wherePivot('branch_id', $this->branch->id)->wherePivot('type', $this->getType())->detach($productId);
+        return $this->user->{$this->getType()}()->wherePivot('branch_id', $this->branch->id)->wherePivot('type', $this->getType())->detach($productId);
     }
-    public function empty()
-    {
+    function empty() {
         $this->user->{$this->getType()}()->wherePivot('branch_id', $this->branch->id)->wherePivot('type', $this->getType())->detach();
         $this->branch = null;
     }
@@ -72,6 +71,7 @@ class Cart
     }
     public function isEmpty()
     {
+        // dd($this->user->{$this->getType()}->where('pivot.branch_id', $this->branch->id));
         return $this->user->{$this->getType()}->where('pivot.branch_id', $this->branch->id)->sum('pivot.quantity') <= 0;
     }
     public function subtotal()
@@ -91,7 +91,7 @@ class Cart
                 $this->changed = true;
             }
             $product->pivot->update([
-                'quantity' => $quantity
+                'quantity' => $quantity,
             ]);
         });
     }
@@ -101,7 +101,7 @@ class Cart
     }
     public function total()
     {
-        if  ($this->subtotal()->amount()) {
+        if ($this->subtotal()->amount()) {
             return $this->subtotal()->add(new Money($this->branch->delivery_fee));
 
         }
@@ -113,7 +113,7 @@ class Cart
     }
     protected function getCurrentQuantity($productId)
     {
-        if ($product = $this->user->{$this->getType()}->where('pivot.branch_id', $this->branch->id)->where('id',$productId)->first()) {
+        if ($product = $this->user->{$this->getType()}->where('pivot.branch_id', $this->branch->id)->where('id', $productId)->first()) {
             return $product->pivot->quantity;
         }
         return 0;
@@ -121,10 +121,10 @@ class Cart
     protected function getStorePayload($products)
     {
         return collect($products)->collapse()->keyBy('id')->map(function ($product) {
-            return  [
+            return [
                 'quantity' => $this->getType() == 'cart' ? $product['quantity'] + $this->getCurrentQuantity($product['id']) : 1,
                 'type' => $this->type,
-                'branch_id' => $this->branch->id
+                'branch_id' => $this->branch->id,
             ];
         })->toArray();
     }

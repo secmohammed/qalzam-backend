@@ -9,6 +9,10 @@ return [
     'quantity' => 'Quantity',
     'stock' => 'Stock',
     'previous' => 'previous',
+    'branch_products' => 'branch products',
+    'add_branch_products' => 'add branch products',
+    'branch_product' => 'branch product',
+
     'template' => 'Template',
     'product-to-template' => 'product to template',
     'add-template' => 'Add template',

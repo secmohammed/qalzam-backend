@@ -2,12 +2,13 @@
 
 namespace App\Domain\Branch\Http\Controllers;
 
-use Joovlly\DDD\Traits\Responder;
 use App\Domain\Branch\Entities\Branch;
+use App\Domain\Branch\Http\Requests\BranchProduct\BranchProductStoreFormRequest;
 use App\Domain\Branch\Http\Resources\Branch\BranchResource;
 use App\Domain\Branch\Repositories\Contracts\BranchRepository;
+use App\Domain\Product\Repositories\Contracts\ProductVariationRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
-use App\Domain\Branch\Http\Requests\BranchProduct\BranchProductStoreFormRequest;
+use Joovlly\DDD\Traits\Responder;
 
 class BranchProductController extends Controller
 {
@@ -37,24 +38,48 @@ class BranchProductController extends Controller
      *
      * @var string
      */
-    protected $viewPath = 'branch';
+    protected $viewPath = 'branch_product';
 
     /**
      * @param BranchRepository $branchRepository
      */
-    public function __construct(BranchRepository $branchRepository)
+    public function __construct(BranchRepository $branchRepository, ProductVariationRepository $productVariationRepository)
     {
         $this->branchRepository = $branchRepository;
+        $this->productVariationRepository = $productVariationRepository;
     }
+    public function index()
+    {
 
+    }
     public function create()
     {
+        $this->setData('title', __('main.add') . ' ' . __('main.branch_product'), 'web');
+        $this->setData('alias', $this->domainAlias, 'web');
+        $this->setData('auth_token', auth()->user()->generateAuthToken());
+        $this->setData('products', $this->productVariationRepository->all());
+        $this->setData('branches', $this->branchRepository->all(), 'web');
+        $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
+
+        $this->setApiResponse(fn() => response()->json(['create_your_own_form' => true]));
+
+        return $this->response();
 
     }
 
-    public function edit()
+    public function edit(Branch $branch)
     {
+        $this->setData('title', __('main.edit') . ' ' . __('main.branch_product'), 'web');
+        $this->setData('alias', $this->domainAlias, 'web');
+        $this->setData('auth_token', auth()->user()->generateAuthToken());
+        $this->setData('products', $this->productVariationRepository->all());
+        $this->setData('branch', $branch->load('products'));
+        $this->setData('branches', Branch::where('status', 'active')->get(), 'web');
+        $this->addView("{$this->domainAlias}::{$this->viewPath}.edit");
 
+        $this->setApiResponse(fn() => response()->json(['create_your_own_form' => true]));
+
+        return $this->response();
     }
 
     /**

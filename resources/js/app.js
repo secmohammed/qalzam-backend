@@ -14,6 +14,10 @@ Vue.component(
 );
 Vue.component("order-form", require("./components/OrderProduct.vue").default);
 Vue.component(
+    "branch-product",
+    require("./components/BranchProduct.vue").default
+);
+Vue.component(
     "template-products",
     require("./components/TemplateProducts.vue").default
 );
