@@ -70,25 +70,33 @@ class ProductVariation extends Model implements HasMedia
     /**
      * @param array $models
      */
-    public function newCollection(array $models = [])
+    function newCollection(array $models = [])
     {
         return new CustomProductVariationResourceCollection($models);
     }
 
-    public static function newFactory()
+    function newFactory()
     {
         return app(\App\Domain\Product\Database\Factories\ProductVariationFactory::class)->new();
 
     }
-    public function scopeByDetails(Builder $builder, $criteria)
+    function scopeByDetails(Builder $builder, $criteria)
     {
         $builder->whereJsonContains('details', $criteria);
     }
-    public function scopeCategories(Builder $builder, $category_id)
+    function scopeCategories(Builder $builder, $category_id)
     {
         // dd($category_id);
         $builder->whereHas('product.categories', function ($query) use ($category_id) {
             return $query->where('id', $category_id);
+        });
+    }
+    function scopeAccommodations(Builder $builder, $accommodation_type, $branch_id)
+    {
+        // dd($builder->with("branches")->get());
+        $builder->with("branches")->where('id', $branch_id)->whereHas('accommodations', function ($query) use ($accommodation_type) {
+            dd($query->where('type', $accommodation_type));
+            // return $query->where('id', $accommodation_type);
         });
     }
 }

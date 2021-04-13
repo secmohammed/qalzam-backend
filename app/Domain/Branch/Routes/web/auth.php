@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('/branches', 'BranchController');
+    Route::get('branch_products/create', 'BranchProductController@create')->name('branch_products.create');
+    Route::get('branch_products/{branch}/edit', 'BranchProductController@edit');
+
     Route::resource('/albums', 'AlbumController');
     Route::resource('/branch_shifts', 'BranchShiftController');
     ###CRUD_PLACEHOLDER###
