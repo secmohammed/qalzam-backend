@@ -5,6 +5,7 @@ namespace App\Domain\User\Tests\Feature\Endpoints\Cart;
 use Tests\TestCase;
 use App\Domain\User\Entities\User;
 use App\Domain\Branch\Entities\Branch;
+use App\Domain\Product\Entities\Stock;
 use App\Domain\Product\Entities\ProductVariation;
 
 class IndexCartTest extends TestCase
@@ -19,7 +20,21 @@ class IndexCartTest extends TestCase
     public function it_shows_a_formatted_subtotal()
     {
         $user = User::factory()->create();
-        $this->assertEquals('٠٫٠٠ ر.س.‏', $this->jsonAs($user, 'GET', route('api.auth.cart.index', $this->branch->id))->getData(true)['data']['meta']['cart']['subtotal']);
+        $products = ProductVariation::factory()->count(3)->create();
+        $products->each(function ($product) {
+            Stock::factory()->create([
+                'product_variation_id' => $product->id,
+                'quantity' => 100
+            ]);
+        });
+        $mappedProducts = $products->keyBy('id')->map(fn () => [
+            'quantity' => 1,
+            'type' => 'cart',
+            'branch_id' => $this->branch->id
+        ]);
+        $this->branch->products()->attach($products);
+        $user->cart()->attach($mappedProducts);
+        $this->assertNotEquals('٠٫٠٠ ر.س.‏', $this->jsonAs($user, 'GET', route('api.auth.cart.index', $this->branch->id))->getData(true)['data']['meta']['cart']['subtotal']);
     }
 
     /** @test */

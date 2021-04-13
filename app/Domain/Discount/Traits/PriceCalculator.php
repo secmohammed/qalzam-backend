@@ -56,7 +56,6 @@ class PriceCalculator
     private function calculateDiscountedPriceBasedOnVariation(Discount $discount, Collection $products): float
     {
         $products->load('discount');
-
         return $products->sum(function ($product) use ($discount) {
 
             if ($product->discount && $product->discount->id === $discount->discountable_id) {
@@ -84,7 +83,6 @@ class PriceCalculator
         });
 
         return $filteredProducts->reduce(function ($carry, $product) {
-
             return $carry + ($product->price->amount() * $product->pivot->quantity);
         }, $discountedPrice);
     }
