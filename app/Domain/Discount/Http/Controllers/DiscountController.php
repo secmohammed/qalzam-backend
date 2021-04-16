@@ -111,7 +111,7 @@ class DiscountController extends Controller
     {
         // dd($discount);
         $this->setData('title', __('main.edit') . ' ' . __('main.discount') . ' : ' . $discount->id, 'web');
-        $this->setData('categories', $this->categoryRepository->where('type', 'product')->get());
+        $this->setData('categories', $this->categoryRepository->where('type', 'products')->get());
 
         $this->setData('alias', $this->domainAlias, 'web');
         $discount->load('users');
@@ -134,7 +134,7 @@ class DiscountController extends Controller
     public function index(Request $request)
     {
         $index = $this->discountRepository->spatie()->paginate(
-            $request->per_page ?? config('clinic9.pagination')
+            $request->per_page ?? config('qalzam.pagination')
         );
 
         $this->setData('title', __('main.show-all') . ' ' . __('main.discount'));
@@ -215,9 +215,7 @@ class DiscountController extends Controller
     }
     public function checkDiscount(Request $request, Discount $discount)
     {
-        // dd(auth()->user()->id);
         $discount = $discount->where([["code", $request->code], ['status', "active"]])->first();
-        // $isDiscountExists = optional($discount->where([["code", $request->code], ['status', "active"]])->first())->owner()->where("id", auth()->id())->exists();
         if ($discount) {
             if (auth()->user()->discounts()->where("id", $discount->id)->exists()) {
 

@@ -29,6 +29,7 @@
     "dependencies": {
         "axios": "^0.21.1",
         "moment": "^2.29.1",
+        "toastr": "^2.1.4",
         "vue-multiselect": "^2.1.6",
         "vue-select2": "^0.2.6",
         "webpack": "^5.25.0"

@@ -71,20 +71,15 @@
                                 @method('PATCH')
                                 <div class="row container-fluid mb-5">
                                     <div class="col-xl-0"></div>
-                                    <div class="col-xl-10">
-                                        @include("{$alias}::category._partials._fields", [
-                                            'action' => 'edit',
-                                            'edit' => $edit,
-                                            'categories'=>$categories
-                                        ])
-                                    </div>
-                                    <div class="col-md-4"></div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-lg-2">
-                                        <button type="submit"
-                                                class="btn btn-block btn-sm btn-light-primary font-weight-bolder text-uppercase py-4">{{ __("main.update") }}
-                                            &nbsp; {{ __("main.category") }}</button>
-                                    </div>
+                                    <div class="col-xl-10" id="app">
+                                       
+                                  <category
+                                  action="edit"
+                                  :categories="{{$categories  }}"
+                                  auth_token="{{ $auth_token }}"
+                                  :edit="{{ $edit }}"
+                                  :type-data="{{ $type_data }}"
+                              />
                                 </div>
                             </form>
                         </div>
@@ -107,5 +102,7 @@
         });
 
     </script>
+<script src="{{ asset('js/app.js')}}"></script>
+
 
 @endpush

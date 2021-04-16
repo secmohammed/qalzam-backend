@@ -2,7 +2,9 @@
 
 namespace App\Domain\Reservation\Http\Requests\Reservation;
 
+use App\Domain\Reservation\Http\Rules\EnsureAccommodationIsAvailableTodayForReservationAtContractDays;
 use App\Domain\Reservation\Http\Rules\EnsureEndDateIsSameDayAsStartDate;
+use App\Domain\Reservation\Http\Rules\EnsureStartDateOfReservationInSameBranchDay;
 use App\Infrastructure\Http\AbstractRequests\BaseRequest as FormRequest;
 use Carbon\Carbon;
 use Illuminate\Validation\Rule;
@@ -39,11 +41,11 @@ class ReservationStoreFormRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'start_date' => 'required|after_or_equal:' . now()->format('Y-m-d H:i:s'),
+            'start_date' => ['required','after_or_equal:' . now()->format('Y-m-d H:i:s')],
             'end_date' => ['nullable', 'after_or_equal:' . $this->request->get('start_date'), new EnsureEndDateIsSameDayAsStartDate($this->request->get('start_date'))],
             'accommodation_id' => [
                 'required',
-                'exists:accommodations,id',
+                'exists:accommodations,id',new EnsureStartDateOfReservationInSameBranchDay()
                 // new EnsureAccommodationIsAvailableTodayForReservationAtContractDays,
             ],
             'user_id' => 'required|exists:users,id',

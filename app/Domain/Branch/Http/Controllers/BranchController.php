@@ -192,6 +192,7 @@ class BranchController extends Controller
     public function store(BranchStoreFormRequest $request)
     {
         $validatedRequest = $request->validated();
+        // dd($validatedRequest);
         // dd(array_merge($request->get('users'), $request->get('deliverers', [])), $request->get('users'), $request->get('deliverers', []));
         $branch = $this->branchRepository->create($validatedRequest);
         $branch->employees()->attach($validatedRequest['users']);

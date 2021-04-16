@@ -103,6 +103,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
+        // dd($category);
         $this->setData('title', __('main.edit') . ' ' . __('main.category') . ' : ' . $category->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
@@ -110,8 +111,10 @@ class CategoryController extends Controller
         $categories = Category::all();
 
         $this->setData('categories', $categories);
+        $this->setData('auth_token', auth()->user()->generateAuthToken());
 
-        $this->setData('edit', $category);
+        $this->setData('edit', $category->load($category->type));
+        $this->setData('type_data', $category->{$category->type});
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.edit");
 
@@ -171,6 +174,7 @@ class CategoryController extends Controller
      */
     public function store(CategoryStoreFormRequest $request)
     {
+        // dd($request->validated());
         $category = $this->categoryRepository->make($request->validated());
         $category->user()->associate(auth()->user());
         $category->save();
@@ -206,6 +210,7 @@ class CategoryController extends Controller
     public function update(CategoryUpdateFormRequest $request, Category $category)
     {
         $category->update($request->validated());
+        $category->{$request->type.'s'}()->attach($request->categorizable_id);
 
         $category->setTranslation([
             'name' => $request->name_ar,

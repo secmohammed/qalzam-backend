@@ -131,7 +131,7 @@
         <div class="form-group row">
             <label class="col-form-label text-right col-lg-2 col-sm-12">Expires at <span style="color: red"> * </span></label>
             <div class="col-lg-10 col-md-9 col-sm-12">
-                <input type="text" class="form-control datetimepicker-input kt_datetimepicker_5" placeholder="end date" v-model="form.expires_at" name="expires_at" id="expires_at" data-toggle="datetimepicker" data-target="#expires_at">
+                <input type="datetime-local" class="form-control " placeholder="end date" v-model="form.expires_at" name="expires_at" id="expires_at" data-toggle="datetimepicker" data-target="#expires_at">
                 <div v-if="errors['expires_at'] " class="fv-plugins-message-container">
 
                     <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["expires_at"][0] }}</div>
@@ -242,13 +242,13 @@ export default {
             let discountIds = [];
             switch (val) {
                 case 'product':
-                    discountIds = await axios.get("/api/products")
+                    discountIds = await axios.get("/api/products?per_page=10000000000")
                     break;
                 case 'variation':
-                    discountIds = await axios.get("/api/product_variations")
+                    discountIds = await axios.get("/api/product_variations?per_page=10000000000")
                     break;
                 case 'category':
-                    discountIds = await axios.get("/api/categories")
+                    discountIds = await axios.get("/api/categories?per_page=10000000000")
                     break;
 
                 default:
