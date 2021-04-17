@@ -215,12 +215,19 @@ class ReservationController extends Controller
      */
     public function store(ReservationStoreFormRequest $request)
     {
-        $reservation = app(Pipeline::class)->send($request)->through([
-            ValidateReservationStartDateAndEndDateIsWithinBranchAvailability::class,
-            ValidateReservationStartDateAndEndDateIfAvailable::class,
-            CalculateReservationPrice::class,
-            CreateReservation::class,
-        ])->thenReturn();
+        try {
+            $reservation = app(Pipeline::class)->send($request)->through([
+                ValidateReservationStartDateAndEndDateIsWithinBranchAvailability::class,
+                ValidateReservationStartDateAndEndDateIfAvailable::class,
+                CalculateReservationPrice::class,
+                CreateReservation::class,
+            ])->thenReturn();
+        } catch (\Throwable $th) {
+            // dd($th);
+            return response(['message'=>$th->getMessage()],422);
+            //throw $th;
+        }
+      
         $reservation->user->notify(new ReservationCreated($reservation));
         GenerateReservationPdfInvoice::dispatch($reservation);
 

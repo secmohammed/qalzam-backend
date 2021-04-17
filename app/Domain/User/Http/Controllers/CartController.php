@@ -72,7 +72,9 @@ class CartController extends Controller
     public function index(Request $request, Cart $cart, Branch $branch)
     {
         $cart->setCartType('cart')->withBranch($branch)->sync();
-        $request->user()->load(['cart.product', 'cart.product.variations.stock', 'cart.stock', 'cart.type']);
+        $request->user()->load(['cart' => function ($query) use ($branch) {
+            $query->where('branch_id', $branch->id);
+        }, 'cart.product', 'cart.product.variations.stock', 'cart.stock', 'cart.type']);
         $this->setData('title', __('main.show-all') . ' ' . __('main.address'));
         // dd($request->user());
 

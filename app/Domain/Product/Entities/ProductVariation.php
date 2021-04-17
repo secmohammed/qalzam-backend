@@ -75,7 +75,7 @@ class ProductVariation extends Model implements HasMedia
         return new CustomProductVariationResourceCollection($models);
     }
 
-    function newFactory()
+    public static function newFactory()
     {
         return app(\App\Domain\Product\Database\Factories\ProductVariationFactory::class)->new();
 
@@ -84,19 +84,15 @@ class ProductVariation extends Model implements HasMedia
     {
         $builder->whereJsonContains('details', $criteria);
     }
+    function scopeSortDate(Builder $builder, $direction = 'DESC')
+    {
+        $builder->orderBy('created_at', $direction);
+    }
     function scopeCategories(Builder $builder, $category_id)
     {
-        // dd($category_id);
         $builder->whereHas('product.categories', function ($query) use ($category_id) {
             return $query->where('id', $category_id);
         });
     }
-    function scopeAccommodations(Builder $builder, $accommodation_type, $branch_id)
-    {
-        // dd($builder->with("branches")->get());
-        $builder->with("branches")->where('id', $branch_id)->whereHas('accommodations', function ($query) use ($accommodation_type) {
-            dd($query->where('type', $accommodation_type));
-            // return $query->where('id', $accommodation_type);
-        });
-    }
+
 }

@@ -31,7 +31,6 @@ class ValidateReservationStartDateAndEndDateIfAvailable implements Pipeline
             $this->reservationRepository->whereBetween('start_date', [$request->start_date, $request->end_date])->orWhereBetween('end_date', [$request->start_date, $request->end_date])->exists(),
             DateRangeIsntAvailableException::class
         );
-
         return $next($request);
     }
 }

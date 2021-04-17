@@ -65,7 +65,7 @@ class ProductController extends Controller
         $this->setData('title', __('main.add') . ' ' . __('main.product'), 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
-        $this->setData('categories', $this->categoryRepository->where('status', 'active')->where('type', 'product')->get());
+        $this->setData('categories', $this->categoryRepository->where('status', 'active')->where('type', 'products')->get());
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
 
         $this->setApiResponse(fn() => response()->json(['create_your_own_form' => true]));
@@ -107,7 +107,7 @@ class ProductController extends Controller
         $this->setData('title', __('main.edit') . ' ' . __('main.product') . ' : ' . $product->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
-        $this->setData('categories', $this->categoryRepository->where('status', 'active')->where('type', 'product')->get());
+        $this->setData('categories', $this->categoryRepository->where('status', 'active')->where('type', 'products  ')->get());
 
         $this->setData('edit', $product);
 

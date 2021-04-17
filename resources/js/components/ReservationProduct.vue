@@ -57,7 +57,7 @@
         <div class="form-group row">
             <label class="col-form-label text-right col-lg-2 col-sm-12">Start date <span style="color: red"> * </span></label>
             <div class="col-lg-10 col-md-9 col-sm-12">
-                <input type="text" v-model="form.start_date" class="form-control datetimepicker-input kt_datetimepicker_5" placeholder="start date" name="start_date" id="start_date" data-toggle="datetimepicker" data-target="#start_date">
+                <input type="datetime-local"  v-model="form.start_date" class="form-control " placeholder="start date" name="start_date" id="start_date" data-toggle="datetimepicker" data-target="#start_date">
                 <div v-if="errors['start_date'] " class="fv-plugins-message-container">
 
                     <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["start_date"][0] }}</div>
@@ -67,7 +67,7 @@
         <div class="form-group row">
             <label class="col-form-label text-right col-lg-2 col-sm-12">End date <span style="color: red"> * </span></label>
             <div class="col-lg-10 col-md-9 col-sm-12">
-                <input type="text" class="form-control datetimepicker-input kt_datetimepicker_5" placeholder="end date" v-model="form.end_date" name="end_date" id="end_date" data-toggle="datetimepicker" data-target="#end_date">
+                <input type="datetime-local" class="form-control" placeholder="end date" v-model="form.end_date" name="end_date" id="end_date" data-toggle="datetimepicker" data-target="#end_date">
                 <div v-if="errors['end_date'] " class="fv-plugins-message-container">
 
                     <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["end_date"][0] }}</div>
@@ -168,7 +168,7 @@ export default {
             this.form.user_id= val.id    
         },
           "branchesValue"(val) {
-        //       const branch = this.branches.find(branch => branch.id == val.id);
+        //       const branch = this.branches.find  (branch => branch.id == val.id);
         //       console.log("🚀 ~ file: ReservationProduct.vue ~ line 228 ~ this.branches", this.branches)
           
           this.accommodations = val.accommodations
@@ -176,6 +176,8 @@ export default {
           "accommodationsValue"(val) {
             this.form.accommodation_id = val.id
         },
+         
+       
        
         "form.start_date"() {
             // this.form.end_date = moment(this.form.start_date).add(4, "hours").format("MM/DD/YYYY HH:MM");
@@ -234,10 +236,12 @@ export default {
             }).then((res) => {
                 window.location = "/reservations"
             }).catch((err) => {
-                this.errors = err.response.data.errors;
-                if ("user_id" in this.errors || "address_id" in this.errors || "branch_id" in this.errors) {
-                    this.step = 1
-                }
+              
+              this.errors = err.response.data.errors;
+              const toastMessage = err.response.data.message
+              if(toastMessage)toastr.error(toastMessage);
+                
+               
                 // check if err contains the array of validation errors and then set errors property
             });
         },
@@ -251,6 +255,7 @@ export default {
                 window.location = `/reservations/${this.edit.id }`
             }).catch((err) => {
                 this.errors = err.response.data.errors;
+                
 
             });
         },
