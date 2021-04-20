@@ -11,7 +11,7 @@
             <option label="Label"></option>
             @foreach($products as $product)
                 <option
-                    value="{{ $product->id }}" {{ ($action == 'edit') && $edit->product_id == $product->id ? 'selected' : '' }}>{{ $product->slug }}</option>
+                    value="{{ $product->id }}" {{ ($action == 'edit') && $edit->product_id == $product->id ? 'selected' : '' }}>{{ $product->name }}</option>
             @endforeach
         </select>
         <div class="row">

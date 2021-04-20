@@ -16,6 +16,7 @@ class Lang
      */
     public function handle($request, Closure $next)
     {
+        // dd($request->query('lang'),1,session('lang'));
         if ($request->query('lang')) {
             if (in_array($request->query('lang'), config('app.available_locales'))) {
                 config(['app.locale' => $request->query('lang')]);

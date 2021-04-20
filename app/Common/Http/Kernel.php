@@ -46,6 +46,8 @@ class Kernel extends HttpKernel
         'api' => [
             \App\Common\Http\Middleware\JsonifyResponse::class,
             \App\Common\Http\Middleware\ParseJWTToken::class,
+            \App\Common\Http\Middleware\Lang::class,
+
             \Fruitcake\Cors\HandleCors::class,
             \App\Common\Http\Middleware\HasRole::class,
             \App\Common\Http\Middleware\OptimizeImages::class,

@@ -31,7 +31,7 @@ class HasRole
         'api.meetings.products.store',
         'api.addresses.index',
         'api.auth.cart.destroy',
-        'api.discount.check',
+        'api.discount.validate',
         'api.auth.cart.update',
         'api.auth.cart.index',
         'api.auth.cart.store',

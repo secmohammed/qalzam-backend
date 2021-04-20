@@ -17,7 +17,7 @@
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
                     <!--begin::Page Title-->
                     <h5 class=" text-dark font-weight-bold my-1 mr-5 {{ GetLanguage() == 'ar' ? 'ml-2' : '' }}">
-                        {{ __('main.add') }} {{ __('main.discount') }} </h5>
+                        {{ __('main.edit') }} {{ __('main.discount') }} </h5>
                     <!--end::Page Title-->
 
                     <!--begin::Breadcrumb-->
@@ -70,18 +70,15 @@
                                 @method('PUT')
                                 <div class="row container-fluid mb-5">
                                     <div class="col-xl-0"></div>
-                                    <div class="col-xl-10">
-                                        @include("{$alias}::discount._partials._fields", [
-                                            'action' => 'create',
-                                        ])
-                                    </div>
-                                    <div class="col-md-4"></div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-lg-2">
-                                        <button type="submit"
-                                                class="btn btn-block btn-sm btn-light-primary font-weight-bolder text-uppercase py-4">{{ __("main.create") }}
-                                            &nbsp; {{ __("main.discount") }}</button>
-                                    </div>
+                                    <div class="col-xl-10"  id="app">
+                                        <discount
+                                        :all-users="{{ $users }}"
+                                        :edit="{{ $edit }}"
+                                        action="edit"
+                                        :discountable="{{ $discountable }}"
+                                        auth_token="{{ $auth_token }}"
+                                    />  
+                                </div>
                                 </div>
                             </form>
                         </div>
@@ -95,6 +92,8 @@
 @endsection
 
 @push('scripts')
+<script src="{{ asset('js/app.js')}}"></script>
+
     <script src="{{ asset('assets/js/pages/crud/forms/widgets/select2.js?v=7.1.5') }}"></script>
     <script src="{{ asset('assets/js/pages/crud/forms/widgets/bootstrap-datepicker.js?v=7.0.5') }}"></script>
     <script>

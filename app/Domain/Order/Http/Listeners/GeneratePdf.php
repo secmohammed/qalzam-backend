@@ -22,7 +22,10 @@ class GeneratePdf
     {
         $locations = $event->order->user->addresses()->activeAddress()->first()->location->prevNodes()->get();
         // dd($locations);
-        $pdf = PDF::loadView('orders::order.invoice', ["order" => $event->order->load(["products", "user"]), "locations" => $locations]);
-        return $pdf->download($event->order->id . '.pdf');
+        $data = ["order" => $event->order->load(["products", "user"]), "locations" => $locations];
+        $pdf = mb_convert_encoding(\View::make('orders::order.invoice', $data), 'HTML-ENTITIES', 'UTF-8');
+        return PDF::loadHtml($pdf)->download($event->order->id . '.pdf');
+
+        // $pdf = PDF::loadView('orders::order.invoice', );
     }
 }

@@ -5,6 +5,7 @@ namespace App\Domain\Product\Entities\Traits\Relations;
 use App\Domain\User\Entities\User;
 use App\Domain\Order\Entities\Order;
 use App\Domain\Branch\Entities\Branch;
+use App\Domain\Discount\Entities\Discount;
 use App\Domain\Product\Entities\Stock;
 use App\Domain\Product\Entities\Product;
 use App\Domain\Product\Entities\Template;

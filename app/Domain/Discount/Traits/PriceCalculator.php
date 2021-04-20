@@ -54,14 +54,17 @@ class PriceCalculator
      */
     private function calculateDiscountedPriceBasedOnVariation(Discount $discount, Collection $products): float
     {
-        $products->load('discount');
-        return $products->sum(function ($product) use ($discount) {
-
-            if ($product->discount && $product->discount->id === $discount->discountable_id) {
+        $products->load(['discount' => function ($query) use ($discount) {
+            $query->whereId($discount->id);
+        }]);
+        return $products->sum(function ($product) {
+            // dd($product->discount->contains('id',$discount->id),$product->discount->find($discount->id),$discount);
+            if ($discount = $product->discount->first()) {
                 return $this->calculatePriceBasedOnDiscountType($discount, $product->price->amount() * $product->pivot->quantity);
-            }
 
+            }
             return $product->price->amount() * $product->pivot->quantity;
+        
         });
     }
 
