@@ -37,7 +37,6 @@ class DiscountStoreFormRequest extends FormRequest
      */
     public function rules()
     {
-        // dd($this->request);
         return [
             'code' => 'required|max:32|unique:discounts,code',
             'value' => 'required|integer|min:1|max:99',
@@ -64,8 +63,12 @@ class DiscountStoreFormRequest extends FormRequest
                 })->pluck('id')->toArray(),
             ]);
         }
+       return array_merge(parent::validated(), [
+            'users' =>collect($this->request->get('users'))->pluck('id')
 
-        return parent::validated();
+        ]);
+
+
     }
 
 }

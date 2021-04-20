@@ -109,13 +109,14 @@ class DiscountController extends Controller
      */
     public function edit(Discount $discount)
     {
-        // dd($discount);
         $this->setData('title', __('main.edit') . ' ' . __('main.discount') . ' : ' . $discount->id, 'web');
         $this->setData('categories', $this->categoryRepository->where('type', 'products')->get());
+        $this->setData('auth_token', auth()->user()->generateAuthToken());
 
         $this->setData('alias', $this->domainAlias, 'web');
         $discount->load('users');
         $this->setData('edit', $discount);
+        $this->setData('discountable', $discount->discountable);
         $this->setData('users', $this->userRepository->whereHas('roles', function ($query) {
             $query->where('slug', '!=', 'admin');
         })->get());
@@ -181,7 +182,6 @@ class DiscountController extends Controller
      */
     public function store(DiscountStoreFormRequest $request)
     {
-        // dd($request->all());
         $discount = $this->discountRepository->make($request->validated());
         $discount->owner()->associate(auth()->user());
         $discount->save();
@@ -205,8 +205,9 @@ class DiscountController extends Controller
      */
     public function update(DiscountUpdateFormRequest $request, Discount $discount)
     {
+        // dd();
         $discount->update($request->validated());
-        $discount->users()->sync($request->users);
+        $discount->users()->sync($request->validated()['users']);
         $this->redirectRoute("{$this->resourceRoute}.show", [$discount->id]);
         $this->setData('data', $discount);
         $this->useCollection(DiscountResource::class, 'data');

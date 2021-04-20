@@ -29,8 +29,9 @@ class CategoryDatatable extends MainLivewire
             Column::name('categories.type')
                 ->label(__('main.type'))
                 ->filterable([
-                    'product' => __('main.product'),
-                    'post' => __('main.post'),
+                    'products' => __('main.product'),
+                    'posts' => __('main.post'),
+                    'accommodations' => __('main.accommodation'),
                 ]),
 
             DateColumn::name('categories.created_at')
