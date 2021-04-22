@@ -1,95 +1,93 @@
 <template>
-        <form action="">
-            <div class="form-group row">
-                <label class="col-form-label text-right col-lg-2 col-sm-12">name <span style="color: red"> * </span></label>
-                <div class="col-lg-10 col-md-9 col-sm-12">
-                    <input type="text" class="form-control " placeholder="name" v-model="form.name" name="name">
-                    <div v-if="errors['name'] " class="fv-plugins-message-container">
+<form action="">
+    <div class="form-group row">
+        <label class="col-form-label text-right col-lg-2 col-sm-12">name <span style="color: red"> * </span></label>
+        <div class="col-lg-10 col-md-9 col-sm-12">
+            <input type="text" class="form-control " placeholder="name" v-model="form.name" name="name">
+            <div v-if="errors['name'] " class="fv-plugins-message-container">
 
-                        <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["name"][0] }}</div>
-                    </div>
-                </div>
+                <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["name"][0] }}</div>
             </div>
-            <div class="form-group row">
-                <label class="col-form-label text-right col-lg-2 col-sm-12">name ar <span style="color: red"> * </span></label>
-                <div class="col-lg-10 col-md-9 col-sm-12">
-                    <input type="text" class="form-control " placeholder="name_ar" v-model="form.name_ar" name="name_ar">
-                    <div v-if="errors['name_ar'] " class="fv-plugins-message-container">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-form-label text-right col-lg-2 col-sm-12">name ar <span style="color: red"> * </span></label>
+        <div class="col-lg-10 col-md-9 col-sm-12">
+            <input type="text" class="form-control " placeholder="name_ar" v-model="form.name_ar" name="name_ar">
+            <div v-if="errors['name_ar'] " class="fv-plugins-message-container">
 
-                        <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["name_ar"][0] }}</div>
-                    </div>
-                </div>
+                <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["name_ar"][0] }}</div>
             </div>
+        </div>
+    </div>
 
-            <div class="form-group row">
-                <label class="col-form-label text-right col-lg-2 col-sm-12">category type</label>
-                <div class="col-lg-10 col-md-9 col-sm-12">
+    <div class="form-group row">
+        <label class="col-form-label text-right col-lg-2 col-sm-12">category type</label>
+        <div class="col-lg-10 col-md-9 col-sm-12">
 
-                    <multiselect :searchable="true" v-model="form.categorizable_type" :options="categoriesTypes"></multiselect>
+            <multiselect :searchable="true" v-model="form.categorizable_type" :options="categoriesTypes"></multiselect>
 
-                    <div v-if="errors['categorizable_type'] " class="fv-plugins-message-container">
+            <div v-if="errors['categorizable_type'] " class="fv-plugins-message-container">
 
-                        <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["categorizable_type"][0] }}</div>
-                    </div>
-
-                </div>
+                <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["categorizable_type"][0] }}</div>
             </div>
 
+        </div>
+    </div>
 
-        <div v-if="form.categorizable_type" class="form-group row">
-            <label class="col-form-label text-right col-lg-2 col-sm-12">{{ form.categorizable_type }}</label>
-            <div class="col-lg-10 col-md-9 col-sm-12">
-                <!-- <select class=" form-control " v-model="form.accommodation_id" data-placeholder="select accommodation">
+    <div v-if="form.categorizable_type" class="form-group row">
+        <label class="col-form-label text-right col-lg-2 col-sm-12">{{ form.categorizable_type }}</label>
+        <div class="col-lg-10 col-md-9 col-sm-12">
+            <!-- <select class=" form-control " v-model="form.accommodation_id" data-placeholder="select accommodation">
                     <option label="Label"></option>
                     <option v-for="accommodation in accommodations" :value="accommodation.id">{{accommodation.name}}</option>
                 </select> -->
-                <multiselect :searchable="true" v-model="categoryIdValue" track-by="id" label="name" :options="categoryIds"></multiselect>
+            <multiselect :searchable="true" v-model="categoryIdValue" track-by="id" label="name" :options="categoryIds"></multiselect>
 
-                <div v-if="errors['discountable_id'] " class="fv-plugins-message-container">
+            <div v-if="errors['discountable_id'] " class="fv-plugins-message-container">
 
-                    <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["discountable_id"][0] }}</div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="form-group row">
-            <label class="col-form-label text-right col-lg-2 col-sm-12">image</label>
-            <div class="col-lg-10 col-md-9 col-sm-12">
-                <input type="file" @change="selectFile" class="form-control">
-
-                <div v-if="errors['image'] " class="fv-plugins-message-container">
-
-                    <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["image"][0] }}</div>
-                </div>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-form-label text-right col-lg-2 col-sm-12">parents</label>
-            <div class="col-lg-10 col-md-9 col-sm-12">
-
-                <multiselect :searchable="true" v-model="parentsValue" track-by="id" label="name" :options="categories"></multiselect>
-
-                <div v-if="errors['broadcast'] " class="fv-plugins-message-container">
-
-                    <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["broadcast"][0] }}</div>
-                </div>
-
+                <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["discountable_id"][0] }}</div>
             </div>
         </div>
 
-        <div class="d-flex justify-content-center mt-5">
+    </div>
 
-            <button class="btn btn-secondary" v-if="action === 'create'" @click.prevent="save">
-                Create Category
-            </button>
-            <button class="btn btn-secondary" v-if="action === 'edit'" @click.prevent="editCategory">
-                Edit Category
-            </button>
+    <div class="form-group row">
+        <label class="col-form-label text-right col-lg-2 col-sm-12">image</label>
+        <div class="col-lg-10 col-md-9 col-sm-12">
+            <input type="file" @change="selectFile" class="form-control">
+
+            <div v-if="errors['image'] " class="fv-plugins-message-container">
+
+                <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["image"][0] }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-form-label text-right col-lg-2 col-sm-12">parents</label>
+        <div class="col-lg-10 col-md-9 col-sm-12">
+
+            <multiselect :searchable="true" v-model="parentsValue" track-by="id" label="name" :options="categories"></multiselect>
+
+            <div v-if="errors['broadcast'] " class="fv-plugins-message-container">
+
+                <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["broadcast"][0] }}</div>
+            </div>
 
         </div>
-        </form>
-  
+    </div>
+
+    <div class="d-flex justify-content-center mt-5">
+
+        <button class="btn btn-secondary" v-if="action === 'create'" @click.prevent="save">
+            Create Category
+        </button>
+        <button class="btn btn-secondary" v-if="action === 'edit'" @click.prevent="editCategory">
+            Edit Category
+        </button>
+
+    </div>
+</form>
 </template>
 
 <script>
@@ -119,6 +117,10 @@ export default {
         action: {
             required: true,
             type: String,
+        },
+        typeData: {
+            required: false,
+            type: Array,
         },
 
         edit: {
@@ -150,11 +152,11 @@ export default {
             users: [],
             newUserToken: "",
             form: {
-                users: [],
                 type: "",
                 categorizable_id: null,
                 categorizable_type: null,
                 image: "",
+                name: "",
                 parent_id: ""
             },
         };
@@ -165,13 +167,13 @@ export default {
             let categoryIds = [];
             switch (val) {
                 case 'products':
-                    categoryIds = await axios.get("/api/products")
+                    categoryIds = await axios.get("/api/products?per_page=10000000000")
                     break;
                 case 'posts':
-                    categoryIds = await axios.get("/api/product_variations")
+                    categoryIds = await axios.get("/api/product_variations?per_page=10000000000")
                     break;
                 case 'accommodations':
-                    categoryIds = await axios.get("/api/accommodations")
+                    categoryIds = await axios.get("/api/accommodations?per_page=10000000000")
                     break;
 
                 default:
@@ -193,8 +195,6 @@ export default {
         "parentsValue"(val) {
             this.form.parent_id = val.id
         }
-        
-        
 
     },
     computed: {
@@ -211,13 +211,24 @@ export default {
 
     },
     mounted() {
+        // toastr.error('')
         if (this.action === 'edit') {
-            this.form.branch_id = this.edit.branch_id
-            this.form.user_id = this.edit.user_id
-            this.form.accommodation_id = this.accommodation.id
-            this.branch_id = this.accommodation.branch.id
-            this.form.start_date = this.edit.start_date
-            this.form.end_date = this.edit.end_date
+            console.log(this.edit)
+            this.form.parent_id = this.edit.parent_id
+            const parent = this.categories.find(category => category.parent_id === this.edit.parent_id)
+            console.log("🚀 ~ file: Category.vue ~ line 219 ~ mounted ~ parent", parent)
+            this.parentsValue = parent
+            this.form.categorizable_type = this.edit.type;
+            this.categoryIdValue = this.typeData[0];
+            // this.categoryIdValue = this.edit.category.[this.type]
+            console.log("🚀 ~ file: Category.vue ~ line 219 ~ mounted ~ this.edit.category.[this.type]", this.edit[this.type + "s"])
+            console.log("🚀 ~ file: Category.vue ~ line 254 ~ mounted ~ this.edit", )
+
+            this.form.name = this.edit.name
+            // this.form.accommodation_id = this.accommodation.id
+            // this.branch_id = this.accommodation.branch.id
+            // this.form.start_date = this.edit.start_date
+            // this.form.end_date = this.edit.end_date
 
         }
     },
@@ -225,8 +236,8 @@ export default {
         goToStep(step) {
             this.step = step
         },
-          
-               selectFile(event) {
+
+        selectFile(event) {
             this.form.image = event.target.files[0];
         },
         userCreated(user) {
@@ -250,7 +261,7 @@ export default {
                 data.append(key, this.form[key]);
 
             }
-                console.log("🚀 ~ file: Category.vue ~ line 245 ~ save ~ data", data)
+            console.log("🚀 ~ file: Category.vue ~ line 245 ~ save ~ data", data)
             axios.post("/api/categories", data, {
                 headers: {
                     Authorization: "Bearer " + this.auth_token,

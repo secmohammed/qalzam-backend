@@ -101,7 +101,7 @@
                 discount
             </div>
             <div class="col-lg-10 col-md-9 col-sm-12">
-                <multiselect :searchable="true" v-model="discountsValue" track-by="id" label="name" :options="discounts"></multiselect>
+                <multiselect :searchable="true" v-model="discountsValue" track-by="id" label="code" :options="discounts"></multiselect>
 
 
             </div>
@@ -127,7 +127,7 @@
 
         </template>
         <template v-else-if="step == 2">
-            <button class="btn btn-secondary" v-if="action === 'create'" @click.prevent="save" :disabled="!isCreateOrderButtonDisabled">
+            <button class="btn btn-secondary" v-if="action === 'create'" @click.prevent="save" >
                 Create Order
             </button>
             <button class="btn btn-secondary" v-if="action === 'edit'" @click.prevent="editOrder" :disabled="!isCreateOrderButtonDisabled">
@@ -226,6 +226,7 @@ export default {
             } = this.users.find(
                 (user) => user.id == val.id
             );
+                console.log("🚀 ~ file: OrderProduct.vue ~ line 227 ~ discounts", discounts)
             
             this.addresses = addresses;
             this.discounts = discounts;
@@ -315,7 +316,7 @@ export default {
             console.log("🚀 ~ file: OrderProduct.vue ~ line 269 ~ userCreated ~ id", user)
             this.users.push(user);
           
-          this.form.user_id =user.id; 
+          this.form.user_id =user.user.id; 
             this.newUserToken =user.token; 
             this.step = 0.5 
         },

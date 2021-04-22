@@ -109,13 +109,14 @@ class DiscountController extends Controller
      */
     public function edit(Discount $discount)
     {
-        // dd($discount);
         $this->setData('title', __('main.edit') . ' ' . __('main.discount') . ' : ' . $discount->id, 'web');
-        $this->setData('categories', $this->categoryRepository->where('type', 'product')->get());
+        $this->setData('categories', $this->categoryRepository->where('type', 'products')->get());
+        $this->setData('auth_token', auth()->user()->generateAuthToken());
 
         $this->setData('alias', $this->domainAlias, 'web');
         $discount->load('users');
         $this->setData('edit', $discount);
+        $this->setData('discountable', $discount->discountable);
         $this->setData('users', $this->userRepository->whereHas('roles', function ($query) {
             $query->where('slug', '!=', 'admin');
         })->get());
@@ -134,7 +135,7 @@ class DiscountController extends Controller
     public function index(Request $request)
     {
         $index = $this->discountRepository->spatie()->paginate(
-            $request->per_page ?? config('clinic9.pagination')
+            $request->per_page ?? config('qalzam.pagination')
         );
 
         $this->setData('title', __('main.show-all') . ' ' . __('main.discount'));
@@ -181,7 +182,6 @@ class DiscountController extends Controller
      */
     public function store(DiscountStoreFormRequest $request)
     {
-        // dd($request->all());
         $discount = $this->discountRepository->make($request->validated());
         $discount->owner()->associate(auth()->user());
         $discount->save();
@@ -205,8 +205,9 @@ class DiscountController extends Controller
      */
     public function update(DiscountUpdateFormRequest $request, Discount $discount)
     {
+        // dd();
         $discount->update($request->validated());
-        $discount->users()->sync($request->users);
+        $discount->users()->sync($request->validated()['users']);
         $this->redirectRoute("{$this->resourceRoute}.show", [$discount->id]);
         $this->setData('data', $discount);
         $this->useCollection(DiscountResource::class, 'data');
@@ -215,9 +216,7 @@ class DiscountController extends Controller
     }
     public function checkDiscount(Request $request, Discount $discount)
     {
-        // dd(auth()->user()->id);
         $discount = $discount->where([["code", $request->code], ['status', "active"]])->first();
-        // $isDiscountExists = optional($discount->where([["code", $request->code], ['status', "active"]])->first())->owner()->where("id", auth()->id())->exists();
         if ($discount) {
             if (auth()->user()->discounts()->where("id", $discount->id)->exists()) {
 

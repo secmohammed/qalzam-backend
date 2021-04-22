@@ -78,18 +78,19 @@ class ProductVariation extends Model implements HasMedia
     public static function newFactory()
     {
         return app(\App\Domain\Product\Database\Factories\ProductVariationFactory::class)->new();
-
     }
     public function scopeByDetails(Builder $builder, $criteria)
     {
         $builder->whereJsonContains('details', $criteria);
     }
+    public function scopeSortDate(Builder $builder, $direction = 'DESC')
+    {
+        $builder->orderBy('created_at', $direction);
+    }
     public function scopeCategories(Builder $builder, $category_id)
     {
-        // dd($category_id);
         $builder->whereHas('product.categories', function ($query) use ($category_id) {
             return $query->where('id', $category_id);
         });
     }
-
 }

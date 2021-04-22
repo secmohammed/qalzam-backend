@@ -114,7 +114,7 @@
             <p @click="goToStep(0)" class="col-lg-2 col-md-2 col-sm-2 text-primary " style="cursor: -webkit-grab; cursor: pointer;"> add new customer > </p>
 
         </div>
-          <div v-if="form.users.length ===0" class="form-group row">
+          <div  class="form-group row">
                 <label class="col-form-label text-right col-lg-2 col-sm-12">broadcast</label>
                 <div class="col-lg-10 col-md-9 col-sm-12">
 
@@ -131,7 +131,7 @@
         <div class="form-group row">
             <label class="col-form-label text-right col-lg-2 col-sm-12">Expires at <span style="color: red"> * </span></label>
             <div class="col-lg-10 col-md-9 col-sm-12">
-                <input type="text" class="form-control datetimepicker-input kt_datetimepicker_5" placeholder="end date" v-model="form.expires_at" name="expires_at" id="expires_at" data-toggle="datetimepicker" data-target="#expires_at">
+                <input type="datetime-local" class="form-control " placeholder="end date" v-model="form.expires_at" name="expires_at" id="expires_at" data-toggle="datetimepicker" data-target="#expires_at">
                 <div v-if="errors['expires_at'] " class="fv-plugins-message-container">
 
                     <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["expires_at"][0] }}</div>
@@ -179,7 +179,7 @@ export default {
             required: true,
             type: String,
         },
-        accommodation: {
+        discountable: {
             required: false,
             type: Object,
         },
@@ -242,20 +242,19 @@ export default {
             let discountIds = [];
             switch (val) {
                 case 'product':
-                    discountIds = await axios.get("/api/products")
+                    discountIds = await axios.get("/api/products?per_page=10000000000")
                     break;
                 case 'variation':
-                    discountIds = await axios.get("/api/product_variations")
+                    discountIds = await axios.get("/api/product_variations?per_page=10000000000")
                     break;
                 case 'category':
-                    discountIds = await axios.get("/api/categories")
+                    discountIds = await axios.get("/api/categories?per_page=10000000000")
                     break;
 
                 default:
                     break;
             }
-            console.log("🚀 ~ file: Discount.vue ~ line 223 ~ discountIds.data", discountIds.data)
-            this.discountIds = discountIds.data.data
+            this.discountIds = await discountIds.data.data
             this.discountIdValue = {}
             //   console.log("🚀 ~ file: ReservationProduct.vue ~ line 170 ~ val", val)
             //       const branch = this.branches.find(branch => branch.id == val.id);
@@ -288,18 +287,20 @@ export default {
     mounted() {
         this.users = this.allUsers
         if (this.action === 'edit') {
-            this.form.branch_id = this.edit.branch_id
-            this.form.user_id = this.edit.user_id
-            this.form.accommodation_id = this.accommodation.id
-            this.branch_id = this.accommodation.branch.id
-            this.form.start_date = this.edit.start_date
-            this.form.end_date = this.edit.end_date
+            
+            console.log("🚀 ~ file: Discount.vue ~ line 293 ~ mounted ~ this.edit", this.edit)
+            console.log("🚀 ~ file: Discount.vue ~ line 296 ~ mounted ~ this.discountable", this.discountable)
+            this.form.code = this.edit.code
+            this.form.value = this.edit.value
+            this.form.type = this.edit.type
+            this.usersValue = this.edit.users
+            this.form.expires_at = moment(this.edit.expires_at ).format("YYYY-MM-DDTHH:MM") 
+            this.form.number_of_usage = this.edit.number_of_usage
+            this.form.discountable_type = this.edit.discountable_type
+            this.form.status = this.edit.status
+            this.discountIdValue = this.discountable
 
-        } else {
-            this.form.start_date = moment().format("MM/DD/YYYY HH:MM");
-            this.form.end_date = moment(this.form.start_date).add(4, "hours").format("MM/DD/YYYY HH:MM");
-
-        }
+        } 
     },
     methods: {
         goToStep(step) {

@@ -26,14 +26,12 @@ class GeneratePdf
         // Log::info("hello ", $event->reservation);
         $reservation = $event->reservation;
         // dd($reservation->accommodation->template->contracts()->ContainingDays(strtolower(Carbon::parse($reservation->start_date)->isoFormat("dddd")))->exists());
-
         if ($reservation->accommodation->template->contracts()->ContainingDays(strtolower(Carbon::parse($reservation->start_date)->isoFormat("dddd")))->exists()) {
             $products = $reservation->accommodation->template->products;
         } else {
             $products = Template::whereName("free")->first()->products;
 
         }
-        // dd(2);
         $products = $products->map(function ($product) {
 
             $product->pivot->price = new Money($product->pivot->price);

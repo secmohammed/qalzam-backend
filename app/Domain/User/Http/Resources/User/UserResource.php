@@ -3,6 +3,7 @@
 namespace App\Domain\User\Http\Resources\User;
 
 use App\Common\Cart\Cart;
+use App\Domain\Reservation\Http\Resources\Reservation\ReservationResource;
 use App\Domain\User\Entities\User;
 use App\Infrastructure\Http\AbstractResources\BaseResource as JsonResource;
 use Illuminate\Http\Request;
@@ -23,10 +24,10 @@ class UserResource extends JsonResource
             $meta = [
                 'meta' => [
                     'cart' => [
-                        // 'empty' => $cart->isEmpty(),
+                        'empty' => $cart->isEmpty(),
                         'subtotal' => $cart->subtotal()->formatted(),
-                        // 'total' => $cart->total()->formatted(),
-                        // 'changed' => $cart->hasChanged(),
+                        'total' => $cart->total()->formatted(),
+                        'changed' => $cart->hasChanged(),
                     ],
 
                 ],
@@ -40,14 +41,14 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'name_ar' => $this->name,
             'mobile' => $this->mobile,
-            // 'avatar' => $this->getFirstMediaUrl('avatar'),
-            // 'created_at_human' => $this->created_at->diffForHumans(),
-            // 'wishlist' => new WishlistResource($this->whenLoaded('wishlist')),
-            // $this->mergeWhen(array_key_exists('roles', $this->getRelations()), [
-            //     'permissions' => array_merge($this->roles->sortByDesc('created_at')->pluck('permissions')->collapse()->toArray(), $this->permissions ?? []),
-            // ]),
-            // 'reservations' => ReservationResource::collection($this->whenLoaded('reservations')),
-            // 'cart' => (new CartResource($this->whenLoaded('cart')))->additional($meta ?? []),
+            'avatar' => $this->getFirstMediaUrl('avatar'),
+            'created_at_human' => $this->created_at->diffForHumans(),
+            'wishlist' => new WishlistResource($this->whenLoaded('wishlist')),
+            $this->mergeWhen(array_key_exists('roles', $this->getRelations()), [
+                'permissions' => array_merge($this->roles->sortByDesc('created_at')->pluck('permissions')->collapse()->toArray(), $this->permissions ?? []),
+            ]),
+            'reservations' => ReservationResource::collection($this->whenLoaded('reservations')),
+            'cart' => (new CartResource($this->whenLoaded('cart')))->additional($meta ?? []),
         ] + $meta;
     }
 }

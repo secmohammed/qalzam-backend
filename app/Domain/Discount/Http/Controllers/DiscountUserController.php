@@ -2,6 +2,7 @@
 
 namespace App\Domain\Discount\Http\Controllers;
 
+use App\Common\Cart\Cart;
 use Illuminate\Http\Request;
 use Joovlly\DDD\Traits\Responder;
 use App\Domain\Discount\Entities\Discount;
@@ -68,5 +69,27 @@ class DiscountUserController extends Controller
         }
 
         return $this->response();
+    }
+    public function validateCoupon(Request $request, Cart $cart)
+    {
+        $discount = auth()->user()->discounts()->where('code', $request->code)->first();
+        // dd($discount);
+        if(!$discount)
+        {
+            $this->setApiResponse(fn() => response()->json(['valid' => false, 'message' =>'invalid Coupon'], 400));
+            return $this->response();
+    
+        }
+        if($discount->validate()) {
+            $cart->withDiscount($discount);
+            // dd($discount->validate());
+
+            $this->setApiResponse(fn() => response()->json(['valid' => true, 'message' =>'Valid Coupon','discount'=>$discount], 200));
+
+            return $this->response();
+        }
+        $this->setApiResponse(fn() => response()->json(['valid' => false, 'message' =>'invalid'], 400));
+        return $this->response();
+
     }
 }
