@@ -32,8 +32,22 @@ class IndexCartTest extends TestCase
             'type' => 'cart',
             'branch_id' => $this->branch->id
         ]);
+        $otherProducts = ProductVariation::factory()->count(3)->create();
+        $otherProducts->each(function ($product) {
+            Stock::factory()->create([
+                'product_variation_id' => $product->id,
+                'quantity' => 100
+            ]);
+        });
+        $branch = Branch::factory()->create();
+        $otherMappedProducts = $otherProducts->keyBy('id')->map(fn () => [
+            'quantity' => 1,
+            'type' => 'cart',
+            'branch_id' => $branch->id
+        ]);
         $this->branch->products()->attach($products);
         $user->cart()->attach($mappedProducts);
+        $user->cart()->attach($otherMappedProducts);
         $this->assertNotEquals('٠٫٠٠ ر.س.‏', $this->jsonAs($user, 'GET', route('api.auth.cart.index', $this->branch->id))->getData(true)['data']['meta']['cart']['subtotal']);
     }
 

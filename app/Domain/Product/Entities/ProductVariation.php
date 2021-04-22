@@ -2,19 +2,19 @@
 
 namespace App\Domain\Product\Entities;
 
-use App\Common\Traits\FetchesMediaCollection;
 use App\Common\Traits\HasPrice;
+use Spatie\MediaLibrary\HasMedia;
+use Illuminate\Database\Eloquent\Builder;
+use App\Common\Traits\FetchesMediaCollection;
+use Joovlly\Translatable\Traits\Translatable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Infrastructure\AbstractModels\BaseModel as Model;
+use App\Domain\Product\Entities\Traits\Scopes\PriceSortable;
+use App\Domain\Product\Entities\Traits\Scopes\PriceOrderable;
+use App\Domain\Product\Repositories\Contracts\ProductVariationRepository;
+use App\Domain\Product\Entities\Traits\Relations\ProductVariationRelations;
 use App\Domain\Product\Collections\CustomProductVariationResourceCollection;
 use App\Domain\Product\Entities\Traits\CustomAttributes\ProductVariationAttributes;
-use App\Domain\Product\Entities\Traits\Relations\ProductVariationRelations;
-use App\Domain\Product\Entities\Traits\Scopes\PriceOrderable;
-use App\Domain\Product\Entities\Traits\Scopes\PriceSortable;
-use App\Domain\Product\Repositories\Contracts\ProductVariationRepository;
-use App\Infrastructure\AbstractModels\BaseModel as Model;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Joovlly\Translatable\Traits\Translatable;
-use Spatie\MediaLibrary\HasMedia;
 
 class ProductVariation extends Model implements HasMedia
 {
@@ -70,33 +70,26 @@ class ProductVariation extends Model implements HasMedia
     /**
      * @param array $models
      */
-    function newCollection(array $models = [])
+    public function newCollection(array $models = [])
     {
         return new CustomProductVariationResourceCollection($models);
     }
 
-    function newFactory()
+    public static function newFactory()
     {
         return app(\App\Domain\Product\Database\Factories\ProductVariationFactory::class)->new();
 
     }
-    function scopeByDetails(Builder $builder, $criteria)
+    public function scopeByDetails(Builder $builder, $criteria)
     {
         $builder->whereJsonContains('details', $criteria);
     }
-    function scopeCategories(Builder $builder, $category_id)
+    public function scopeCategories(Builder $builder, $category_id)
     {
         // dd($category_id);
         $builder->whereHas('product.categories', function ($query) use ($category_id) {
             return $query->where('id', $category_id);
         });
     }
-    function scopeAccommodations(Builder $builder, $accommodation_type, $branch_id)
-    {
-        // dd($builder->with("branches")->get());
-        $builder->with("branches")->where('id', $branch_id)->whereHas('accommodations', function ($query) use ($accommodation_type) {
-            dd($query->where('type', $accommodation_type));
-            // return $query->where('id', $accommodation_type);
-        });
-    }
+
 }
