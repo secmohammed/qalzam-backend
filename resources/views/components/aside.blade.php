@@ -17,17 +17,17 @@
                                         <path d="M11.0563554,18.6706981 L5.33593024,14.122919 C4.94553994,13.8125559 4.37746707,13.8774308 4.06710397,14.2678211 C4.06471678,14.2708238 4.06234874,14.2738418 4.06,14.2768747 L4.06,14.2768747 C3.75257288,14.6738539 3.82516916,15.244888 4.22214834,15.5523151 C4.22358765,15.5534297 4.2250303,15.55454 4.22647627,15.555646 L11.0872776,20.8031356 C11.6250734,21.2144692 12.371757,21.2145375 12.909628,20.8033023 L19.7677785,15.559828 C20.1693192,15.2528257 20.2459576,14.6784381 19.9389553,14.2768974 C19.9376429,14.2751809 19.9363245,14.2734691 19.935,14.2717619 L19.935,14.2717619 C19.6266937,13.8743807 19.0546209,13.8021712 18.6572397,14.1104775 C18.654352,14.112718 18.6514778,14.1149757 18.6486172,14.1172508 L12.9235044,18.6705218 C12.377022,19.1051477 11.6029199,19.1052208 11.0563554,18.6706981 Z" fill="#000000" opacity="0.3" />
                                     </g>
                                 </svg>
-                                <!--end::Svg Icon-->
+                            <!--end::Svg Icon-->
                             </span>
-                            <span class="menu-text">{{ __('main.dashboard') }}</span>
-                        </a>
-                    </li>
-                    <li class="menu-section">
-                        <h4 class="menu-text">{{ __('main.products') }}</h4>
-                        <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
-                    </li>
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
+                        <span class="menu-text">{{ __('main.dashboard') }}</span>
+                    </a>
+                </li>
+                <li class="menu-section">
+                    <h4 class="menu-text">{{ __('main.products') }}</h4>
+                    <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+                </li>
+                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
                             <span class="svg-icon menu-icon">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -39,38 +39,38 @@
                                 </svg>
                                 <!--end::Svg Icon-->
                             </span>
-                            <span class="menu-text">{{ __('main.products') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item menu-item-parent" aria-haspopup="true">
+                        <span class="menu-text">{{ __('main.products') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="menu-submenu">
+                        <i class="menu-arrow"></i>
+                        <ul class="menu-subnav">
+                            <li class="menu-item menu-item-parent" aria-haspopup="true">
                                     <span class="menu-link">
                                         <span class="menu-text">{{ __('main.products') }}</span>
                                     </span>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('products.create') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-line">
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('products.create') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-line">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.add-product') }}</span>
-                                    </a>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('products.index') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-line">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.add-product') }}</span>
+                                </a>
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('products.index') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-line">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.show-all'). ' ' .__('main.products') }}</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.show-all'). ' ' .__('main.products') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
                             <span class="svg-icon menu-icon">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Barcode-read.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -82,38 +82,38 @@
                                 </svg>
                                 <!--end::Svg Icon-->
                             </span>
-                            <span class="menu-text">{{ __('main.product_variation') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item menu-item-parent" aria-haspopup="true">
+                        <span class="menu-text">{{ __('main.product_variation') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="menu-submenu">
+                        <i class="menu-arrow"></i>
+                        <ul class="menu-subnav">
+                            <li class="menu-item menu-item-parent" aria-haspopup="true">
                                     <span class="menu-link">
                                         <span class="menu-text">{{ __('main.product_variations') }}</span>
                                     </span>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('product_variations.create') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-dot">
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('product_variations.create') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.add').' '.__('main.product_variation') }}</span>
-                                    </a>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('product_variations.index') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-dot">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.add').' '.__('main.product_variation') }}</span>
+                                </a>
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('product_variations.index') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.show-all'). ' ' .__('main.product_variation') }}</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.show-all'). ' ' .__('main.product_variation') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
                             <span class="svg-icon menu-icon">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Barcode-read.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -125,38 +125,38 @@
                                 </svg>
                                 <!--end::Svg Icon-->
                             </span>
-                            <span class="menu-text">{{ __('main.product_variation_type') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item menu-item-parent" aria-haspopup="true">
+                        <span class="menu-text">{{ __('main.product_variation_type') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="menu-submenu">
+                        <i class="menu-arrow"></i>
+                        <ul class="menu-subnav">
+                            <li class="menu-item menu-item-parent" aria-haspopup="true">
                                     <span class="menu-link">
                                         <span class="menu-text">{{ __('main.product_variation_types') }}</span>
                                     </span>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('product_variation_types.create') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-dot">
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('product_variation_types.create') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.add').' '.__('main.product_variation_types') }}</span>
-                                    </a>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('product_variation_types.index') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-dot">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.add').' '.__('main.product_variation_types') }}</span>
+                                </a>
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('product_variation_types.index') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.show-all'). ' ' .__('main.product_variation_types') }}</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.show-all'). ' ' .__('main.product_variation_types') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
                             <span class="svg-icon menu-icon">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Barcode-read.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -168,38 +168,38 @@
                                 </svg>
                                 <!--end::Svg Icon-->
                               </span>
-                            <span class="menu-text">{{ __('main.branch_products') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item menu-item-parent" aria-haspopup="true">
+                        <span class="menu-text">{{ __('main.branch_products') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="menu-submenu">
+                        <i class="menu-arrow"></i>
+                        <ul class="menu-subnav">
+                            <li class="menu-item menu-item-parent" aria-haspopup="true">
                                     <span class="menu-link">
                                         <span class="menu-text">{{ __('main.branch_products') }}</span>
                                     </span>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('branch_products.create') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-line">
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('branch_products.create') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-line">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.add_branch_products') }}</span>
-                                    </a>
-                                </li>
-                                {{-- <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('branch_shifts.index') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-line">
-                                        <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.show-all'). ' '. __('main.branch-shifts') }}</span>
-                                    </a>
-                                </li> --}}
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.add_branch_products') }}</span>
+                                </a>
+                            </li>
+                            {{-- <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('branch_shifts.index') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-line">
+                                    <span></span>
+                                    </i>
+                                    <span class="menu-text">{{ __('main.show-all'). ' '. __('main.branch-shifts') }}</span>
+                                </a>
+                            </li> --}}
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
                             <span class="svg-icon menu-icon">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -210,38 +210,38 @@
                                     </g>
                                 </svg>
                                 <!--end::Svg Icon-->                            </span>
-                            <span class="menu-text">{{ __('main.stock') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item menu-item-parent" aria-haspopup="true">
+                        <span class="menu-text">{{ __('main.stock') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="menu-submenu">
+                        <i class="menu-arrow"></i>
+                        <ul class="menu-subnav">
+                            <li class="menu-item menu-item-parent" aria-haspopup="true">
                                     <span class="menu-link">
                                         <span class="menu-text">{{ __('main.stocks') }}</span>
                                     </span>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('stocks.create') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-dot">
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('stocks.create') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.add').' '.__('main.stocks') }}</span>
-                                    </a>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('stocks.index') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-dot">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.add').' '.__('main.stocks') }}</span>
+                                </a>
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('stocks.index') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.show-all'). ' '.__('main.stocks') }}</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.show-all'). ' '.__('main.stocks') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
                             <span class="svg-icon menu-icon">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -253,38 +253,38 @@
                                 </svg>
                                 <!--end::Svg Icon-->
                              </span>
-                            <span class="menu-text">{{ __('main.ingredients') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item menu-item-parent" aria-haspopup="true">
+                        <span class="menu-text">{{ __('main.ingredients') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="menu-submenu">
+                        <i class="menu-arrow"></i>
+                        <ul class="menu-subnav">
+                            <li class="menu-item menu-item-parent" aria-haspopup="true">
                                     <span class="menu-link">
                                         <span class="menu-text">{{ __('main.ingredients') }}</span>
                                     </span>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('ingredients.create') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-line">
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('ingredients.create') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-line">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.add-ingredients') }}</span>
-                                    </a>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('ingredients.index') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-line">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.add-ingredients') }}</span>
+                                </a>
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('ingredients.index') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-line">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.show-all'). ' '. __('main.ingredients') }}</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                     <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.show-all'). ' '. __('main.ingredients') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
                             <span class="svg-icon menu-icon">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -297,42 +297,42 @@
                                 <!--end::Svg Icon-->
                                 </span>
 
-                            <span class="menu-text">{{ __('main.categories') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item menu-item-parent" aria-haspopup="true">
+                        <span class="menu-text">{{ __('main.categories') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="menu-submenu">
+                        <i class="menu-arrow"></i>
+                        <ul class="menu-subnav">
+                            <li class="menu-item menu-item-parent" aria-haspopup="true">
                                     <span class="menu-link">
                                         <span class="menu-text">{{ __('main.categories') }}</span>
                                     </span>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('categories.create') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-dot">
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('categories.create') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.add').' '.__('main.categories') }}</span>
-                                    </a>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('categories.index') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-dot">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.add').' '.__('main.categories') }}</span>
+                                </a>
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('categories.index') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.show-all'). ' ' . __('main.categories') }}</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="menu-section">
-                        <h4 class="menu-text">{{ __('main.crmsection') }}</h4>
-                        <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
-                    </li>
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.show-all'). ' ' . __('main.categories') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-section">
+                    <h4 class="menu-text">{{ __('main.crmsection') }}</h4>
+                    <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+                </li>
+                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
                             <span class="svg-icon menu-icon">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -344,11 +344,11 @@
                                 </svg>
                                 <!--end::Svg Icon-->
                             </span>
-                            <span class="menu-text">{{ __('main.clients') }}</span>
-                        </a>
-                    </li>
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
+                        <span class="menu-text">{{ __('main.clients') }}</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
                             <span class="svg-icon menu-icon">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Barcode-read.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -360,38 +360,38 @@
                                 </svg>
                                 <!--end::Svg Icon-->
                             </span>
-                            <span class="menu-text">{{ __('main.order') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item menu-item-parent" aria-haspopup="true">
+                        <span class="menu-text">{{ __('main.order') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="menu-submenu">
+                        <i class="menu-arrow"></i>
+                        <ul class="menu-subnav">
+                            <li class="menu-item menu-item-parent" aria-haspopup="true">
                                     <span class="menu-link">
                                         <span class="menu-text">{{ __('main.orders') }}</span>
                                     </span>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('orders.create') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-dot">
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('orders.create') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.add').' '.__('main.orders') }}</span>
-                                    </a>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('orders.index') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-dot">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.add').' '.__('main.orders') }}</span>
+                                </a>
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('orders.index') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.show-all'). ' ' .__('main.orders') }}</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.show-all'). ' ' .__('main.orders') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
                             <span class="svg-icon menu-icon">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Files/Upload.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -404,45 +404,45 @@
                                 </svg>
                                 <!--end::Svg Icon-->
                             </span>
-                            <span class="menu-text">{{ __('main.reservations') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item" aria-haspopup="true">
-                                    <a href="{{ route('inout') }}" class="menu-link">
-                                        <i class="menu-bullet menu-bullet-dot">
-                                            <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.checkin') }}</span>
-                                    </a>
-                                </li>
-                                <li class="menu-item" aria-haspopup="true">
-                                    <a href="{{ route('reservations.index') }}" class="menu-link">
-                                        <i class="menu-bullet menu-bullet-dot">
+                        <span class="menu-text">{{ __('main.reservations') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="menu-submenu">
+                        <i class="menu-arrow"></i>
+                        <ul class="menu-subnav">
+                            <li class="menu-item" aria-haspopup="true">
+                                <a href="{{ route('inout') }}" class="menu-link">
+                                    <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.reservations') }}</span>
-                                    </a>
-                                </li>
-                                <li class="menu-item" aria-haspopup="true">
-                                    <a href="{{ route('reservations.create')}}" class="menu-link">
-                                        <i class="menu-bullet menu-bullet-dot">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.checkin') }}</span>
+                                </a>
+                            </li>
+                            <li class="menu-item" aria-haspopup="true">
+                                <a href="{{ route('reservations.index') }}" class="menu-link">
+                                    <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.add')}} {{ __('main.reservation') }}</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                            <li class="menu-section">
-                        <h4 class="menu-text">{{ __('main.settings') }}</h4>
-                        <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
-                    </li>
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.reservations') }}</span>
+                                </a>
+                            </li>
+                            <li class="menu-item" aria-haspopup="true">
+                                <a href="{{ route('reservations.create')}}" class="menu-link">
+                                    <i class="menu-bullet menu-bullet-dot">
+                                        <span></span>
+                                    </i>
+                                    <span class="menu-text">{{ __('main.add')}} {{ __('main.reservation') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-section">
+                    <h4 class="menu-text">{{ __('main.settings') }}</h4>
+                    <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+                </li>
+                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
                             <span class="svg-icon menu-icon">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -455,38 +455,38 @@
                                 <!--end::Svg Icon-->
                             </span>
 
-                             <span class="menu-text">{{ __('main.template') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item menu-item-parent" aria-haspopup="true">
+                        <span class="menu-text">{{ __('main.template') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="menu-submenu">
+                        <i class="menu-arrow"></i>
+                        <ul class="menu-subnav">
+                            <li class="menu-item menu-item-parent" aria-haspopup="true">
                                     <span class="menu-link">
                                         <span class="menu-text">{{ __('main.template') }}</span>
                                     </span>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('templates.create') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-line">
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('templates.create') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-line">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.add-template') }}</span>
-                                    </a>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('templates.index') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-line">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.add-template') }}</span>
+                                </a>
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('templates.index') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-line">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.show-all'). ' ' .__('main.templates') }}</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.show-all'). ' ' .__('main.templates') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
                             <span class="svg-icon menu-icon">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -499,38 +499,38 @@
                                 <!--end::Svg Icon-->
                                 </span>
 
-                                <span class="menu-text">{{ __('main.contracts') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item menu-item-parent" aria-haspopup="true">
+                        <span class="menu-text">{{ __('main.contracts') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="menu-submenu">
+                        <i class="menu-arrow"></i>
+                        <ul class="menu-subnav">
+                            <li class="menu-item menu-item-parent" aria-haspopup="true">
                                     <span class="menu-link">
                                         <span class="menu-text">{{ __('main.contracts') }}</span>
                                     </span>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('contracts.create') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-dot">
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('contracts.create') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.add').' '.__('main.contracts') }}</span>
-                                    </a>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('contracts.index') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-dot">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.add').' '.__('main.contracts') }}</span>
+                                </a>
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('contracts.index') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.show-all'). ' ' .__('main.contracts') }}</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.show-all'). ' ' .__('main.contracts') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
                             <span class="svg-icon menu-icon">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Barcode-read.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -543,38 +543,38 @@
                                 <!--end::Svg Icon-->
                                 </span>
 
-                                <span class="menu-text">{{ __('main.branches') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item menu-item-parent" aria-haspopup="true">
+                        <span class="menu-text">{{ __('main.branches') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="menu-submenu">
+                        <i class="menu-arrow"></i>
+                        <ul class="menu-subnav">
+                            <li class="menu-item menu-item-parent" aria-haspopup="true">
                                     <span class="menu-link">
                                         <span class="menu-text">{{ __('main.branches') }}</span>
                                     </span>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('branches.create') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-line">
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('branches.create') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-line">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.add-branch') }}</span>
-                                    </a>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('branches.index') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-line">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.add-branch') }}</span>
+                                </a>
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('branches.index') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-line">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.show-all'). ' '. __('main.branches') }}</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.show-all'). ' '. __('main.branches') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
                             <span class="svg-icon menu-icon">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -587,38 +587,38 @@
                                 <!--end::Svg Icon-->
                                 </span>
 
-                                <span class="menu-text">{{ __('main.branch-shifts') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item menu-item-parent" aria-haspopup="true">
+                        <span class="menu-text">{{ __('main.branch-shifts') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="menu-submenu">
+                        <i class="menu-arrow"></i>
+                        <ul class="menu-subnav">
+                            <li class="menu-item menu-item-parent" aria-haspopup="true">
                                     <span class="menu-link">
                                         <span class="menu-text">{{ __('main.branch-shifts') }}</span>
                                     </span>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('branch_shifts.create') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-line">
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('branch_shifts.create') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-line">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.add-branch') }}</span>
-                                    </a>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('branch_shifts.index') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-line">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.add-branch') }}</span>
+                                </a>
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('branch_shifts.index') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-line">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.show-all'). ' '. __('main.branch-shifts') }}</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.show-all'). ' '. __('main.branch-shifts') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
                             <span class="svg-icon menu-icon">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -631,38 +631,38 @@
                                 <!--end::Svg Icon-->
                                 </span>
 
-                                <span class="menu-text">{{ __('main.accommodations') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item menu-item-parent" aria-haspopup="true">
+                        <span class="menu-text">{{ __('main.accommodations') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="menu-submenu">
+                        <i class="menu-arrow"></i>
+                        <ul class="menu-subnav">
+                            <li class="menu-item menu-item-parent" aria-haspopup="true">
                                     <span class="menu-link">
                                         <span class="menu-text">{{ __('main.accommodations') }}</span>
                                     </span>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('accommodations.create') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-line">
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('accommodations.create') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-line">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.add-accommodation') }}</span>
-                                    </a>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('accommodations.index') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-line">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.add-accommodation') }}</span>
+                                </a>
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('accommodations.index') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-line">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.show-all'). ' ' . __('main.accommodations') }}</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.show-all'). ' ' . __('main.accommodations') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
                             <span class="svg-icon menu-icon">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -675,38 +675,38 @@
                                 <!--end::Svg Icon-->
                             </span>
 
-                            <span class="menu-text">{{ __('main.discounts') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item menu-item-parent" aria-haspopup="true">
+                        <span class="menu-text">{{ __('main.discounts') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="menu-submenu">
+                        <i class="menu-arrow"></i>
+                        <ul class="menu-subnav">
+                            <li class="menu-item menu-item-parent" aria-haspopup="true">
                                     <span class="menu-link">
                                         <span class="menu-text">{{ __('main.discounts') }}</span>
                                     </span>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('discounts.create') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-line">
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('discounts.create') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-line">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.add-discount') }}</span>
-                                    </a>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('discounts.index') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-line">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.add-discount') }}</span>
+                                </a>
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('discounts.index') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-line">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.show-all'). ' ' . __('main.discounts') }}</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.show-all'). ' ' . __('main.discounts') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
                             <span class="svg-icon menu-icon">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Barcode-read.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -719,39 +719,39 @@
                                 <!--end::Svg Icon-->
                             </span>
 
-                             <span class="menu-text">{{ __('main.albums') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item menu-item-parent" aria-haspopup="true">
+                        <span class="menu-text">{{ __('main.albums') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="menu-submenu">
+                        <i class="menu-arrow"></i>
+                        <ul class="menu-subnav">
+                            <li class="menu-item menu-item-parent" aria-haspopup="true">
                                     <span class="menu-link">
                                         <span class="menu-text">{{ __('main.albums') }}</span>
                                     </span>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('albums.create') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-line">
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('albums.create') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-line">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.add-album') }}</span>
-                                    </a>
-                                </li>
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{ route('albums.index') }}" class="menu-link menu-toggle">
-                                        <i class="menu-bullet menu-bullet-line">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.add-album') }}</span>
+                                </a>
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{ route('albums.index') }}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-line">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.show-all') . ' '.  __('main.albums') }}</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    </li>
-                         <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.show-all') . ' '.  __('main.albums') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                </li>
+                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
                             <span class="svg-icon menu-icon">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -764,33 +764,33 @@
                                 <!--end::Svg Icon-->
                             </span>
 
-                            <span class="menu-text">{{ __('main.users') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item" aria-haspopup="true">
-                                    <a href="{{ route('users.create') }}" class="menu-link">
-                                        <i class="menu-bullet menu-bullet-dot">
+                        <span class="menu-text">{{ __('main.users') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="menu-submenu">
+                        <i class="menu-arrow"></i>
+                        <ul class="menu-subnav">
+                            <li class="menu-item" aria-haspopup="true">
+                                <a href="{{ route('users.create') }}" class="menu-link">
+                                    <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.add').' '.__('main.user') }}</span>
-                                    </a>
-                                </li>
-                                <li class="menu-item" aria-haspopup="true">
-                                    <a href="{{ route('users.index') }}" class="menu-link">
-                                        <i class="menu-bullet menu-bullet-dot">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.add').' '.__('main.user') }}</span>
+                                </a>
+                            </li>
+                            <li class="menu-item" aria-haspopup="true">
+                                <a href="{{ route('users.index') }}" class="menu-link">
+                                    <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.show-all'). ' ' . __('main.users') }}</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.show-all'). ' ' . __('main.users') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
                             <span class="svg-icon menu-icon">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Files/Upload.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -806,33 +806,33 @@
 
 
 
-                            <span class="menu-text">{{ __('main.roles') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item" aria-haspopup="true">
-                                    <a href="{{ route('roles.create') }}" class="menu-link">
-                                        <i class="menu-bullet menu-bullet-dot">
+                        <span class="menu-text">{{ __('main.roles') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="menu-submenu">
+                        <i class="menu-arrow"></i>
+                        <ul class="menu-subnav">
+                            <li class="menu-item" aria-haspopup="true">
+                                <a href="{{ route('roles.create') }}" class="menu-link">
+                                    <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.add').' '.__('main.role') }}</span>
-                                    </a>
-                                </li>
-                                <li class="menu-item" aria-haspopup="true">
-                                    <a href="{{ route('roles.index') }}" class="menu-link">
-                                        <i class="menu-bullet menu-bullet-dot">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.add').' '.__('main.role') }}</span>
+                                </a>
+                            </li>
+                            <li class="menu-item" aria-haspopup="true">
+                                <a href="{{ route('roles.index') }}" class="menu-link">
+                                    <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.show-all'). ' ' .__('main.roles') }}</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.show-all'). ' ' .__('main.roles') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
                             <span class="svg-icon menu-icon">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Files/Upload.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -847,36 +847,36 @@
                             </span>
 
 
-                            <span class="menu-text">{{ __('main.locations') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item" aria-haspopup="true">
-                                    <a href="{{ route('locations.create') }}" class="menu-link">
-                                        <i class="menu-bullet menu-bullet-dot">
+                        <span class="menu-text">{{ __('main.locations') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="menu-submenu">
+                        <i class="menu-arrow"></i>
+                        <ul class="menu-subnav">
+                            <li class="menu-item" aria-haspopup="true">
+                                <a href="{{ route('locations.create') }}" class="menu-link">
+                                    <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.add').' '.__('main.location') }}</span>
-                                    </a>
-                                </li>
-                                <li class="menu-item" aria-haspopup="true">
-                                    <a href="{{ route('locations.index') }}" class="menu-link">
-                                        <i class="menu-bullet menu-bullet-dot">
+                                    </i>
+                                    <span class="menu-text">{{ __('main.add').' '.__('main.location') }}</span>
+                                </a>
+                            </li>
+                            <li class="menu-item" aria-haspopup="true">
+                                <a href="{{ route('locations.index') }}" class="menu-link">
+                                    <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
-                                        </i>
-                                        <span class="menu-text">{{ __('main.show-all'). ' ' .__('main.locations') }}</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
+                                    </i>
+                                    <span class="menu-text">{{ __('main.show-all'). ' ' .__('main.locations') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
 
-                </ul>
-                <!--end::Menu Nav-->
-            </div>
-            <!--end::Menu Container-->
+            </ul>
+            <!--end::Menu Nav-->
         </div>
-        <!--end::Aside Menu-->
+        <!--end::Menu Container-->
     </div>
+    <!--end::Aside Menu-->
+</div>
