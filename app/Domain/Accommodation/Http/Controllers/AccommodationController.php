@@ -3,6 +3,7 @@
 namespace App\Domain\Accommodation\Http\Controllers;
 
 use App\Common\Pipeline\HandleFileUpload;
+use App\Domain\Accommodation\Datatables\AccommodationDataTable;
 use App\Domain\Accommodation\Entities\Accommodation;
 use App\Domain\Accommodation\Http\Requests\Accommodation\AccommodationStoreFormRequest;
 use App\Domain\Accommodation\Http\Requests\Accommodation\AccommodationUpdateFormRequest;
@@ -143,6 +144,15 @@ class AccommodationController extends Controller
         $this->useCollection(AccommodationResourceCollection::class, 'data');
 
         return $this->response();
+    }
+
+    /**
+     * @param AccommodationDataTable $datatable
+     * @return mixed
+     */
+    public function dataTable(AccommodationDataTable  $datatable)
+    {
+        return $datatable->render("{$this->domainAlias}::{$this->viewPath}.index");
     }
 
     /**

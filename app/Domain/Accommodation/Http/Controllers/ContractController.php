@@ -2,6 +2,7 @@
 
 namespace App\Domain\Accommodation\Http\Controllers;
 
+use App\Domain\Accommodation\Datatables\ContractDataTable;
 use App\Domain\Accommodation\Entities\Contract;
 use App\Domain\Accommodation\Http\Requests\Contract\ContractStoreFormRequest;
 use App\Domain\Accommodation\Http\Requests\Contract\ContractUpdateFormRequest;
@@ -141,6 +142,10 @@ class ContractController extends Controller
         return $this->response();
     }
 
+    public function DataTable(ContractDataTable $dataTable)
+    {
+        return $dataTable->render("{$this->domainAlias}::{$this->viewPath}.index");
+    }
     /**
      * Display the specified resource.
      *
