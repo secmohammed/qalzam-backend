@@ -27,7 +27,23 @@ class BranchDataTable extends DataTable
 
                 return $btn;
             })
-            ->rawColumns(['actions']);
+            ->editColumn('user.name', function ($model){
+                $user = $model->user ? $model->user->name: '' ;
+                return "<span>$user</span>";
+            })
+            ->editColumn('location.name', function ($model){
+                $location = $model->location ? $model->location->name: '' ;
+                return "<span>$location</span>";
+            })
+            ->editColumn('creator.name', function ($model){
+                $creator = $model->creator ? $model->creator->name: '' ;
+                return "<span>$creator</span>";
+            })
+            ->editColumn('status', function ($model){
+                $color = $model->status == 'active' ? 'primary' : 'warning';
+                return "<span class='badge badge-$color'>$model->status</span>";
+            })
+            ->rawColumns(['actions', 'location.name','creator.name','user.name','status']);
     }
 
     /**
@@ -55,7 +71,7 @@ class BranchDataTable extends DataTable
      */
     public function query(Branch $model)
     {
-        return $model->newQuery()->select('branches.*');
+        return $model->newQuery()->with(['location', 'user', 'creator'])->select('branches.*');
     }
 
     /**
@@ -78,6 +94,12 @@ class BranchDataTable extends DataTable
         return [
             Column::make('id')->title(__('main.id')),
             Column::make('name')->title(__('main.name')),
+            Column::make('address_1')->title(__('main.address')),
+            Column::make('creator.name')->title(__('main.creator')),
+            Column::make('location.name')->title(__('main.location')),
+            Column::make('user.name')->title(__('main.user')),
+            Column::make('delivery_fee')->title(__('main.name')),
+            Column::make('status')->title(__('main.status')),
             Column::make('created_at')->title(__('main.created_at')),
             Column::computed('actions')->title(__('main.actions')),
         ];

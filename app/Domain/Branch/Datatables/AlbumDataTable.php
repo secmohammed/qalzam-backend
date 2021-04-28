@@ -27,7 +27,19 @@ class AlbumDataTable extends DataTable
 
                 return $btn;
             })
-            ->rawColumns(['actions']);
+            ->editColumn('user.name', function ($model){
+                $user = $model->user ? $model->user->name: '' ;
+                return "<span>$user</span>";
+            })
+            ->editColumn('branch.name', function ($model){
+                $branch = $model->branch ? $model->branch->name: '' ;
+                return "<span>$branch</span>";
+            })
+            ->editColumn('status', function ($model){
+                $color = $model->status == 'active' ? 'primary' : 'warning';
+                return "<span class='badge badge-$color'>$model->status</span>";
+            })
+            ->rawColumns(['actions', 'branch.name', 'user.name','status']);
     }
 
     /**
@@ -55,7 +67,7 @@ class AlbumDataTable extends DataTable
      */
     public function query(Album $model)
     {
-        return $model->newQuery()->select('albums.*');
+        return $model->newQuery()->with(['branch', 'user'])->select('albums.*');
     }
 
     /**
@@ -78,6 +90,9 @@ class AlbumDataTable extends DataTable
         return [
             Column::make('id')->title(__('main.id')),
             Column::make('name')->title(__('main.name')),
+            Column::make('user.name')->title(__('main.user')),
+            Column::make('branch.name')->title(__('main.branch')),
+            Column::make('status')->title(__('main.status')),
             Column::make('created_at')->title(__('main.created_at')),
             Column::computed('actions')->title(__('main.actions')),
         ];

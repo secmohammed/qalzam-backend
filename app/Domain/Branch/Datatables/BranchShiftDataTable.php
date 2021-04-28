@@ -26,13 +26,25 @@ class BranchShiftDataTable extends DataTable
                 $created_at     = (new Carbon($model->created_at))->format('Y-m-d H:i');
                 return "<span>$created_at</span>";
             })
+            ->editColumn('user.name', function ($model){
+                $user = $model->user ? $model->user->name: '' ;
+                return "<span>$user</span>";
+            })
+            ->editColumn('branch.name', function ($model){
+                $branch = $model->branch ? $model->branch->name: '' ;
+                return "<span>$branch</span>";
+            })
+            ->editColumn('status', function ($model){
+                $color = $model->status == 'active' ? 'primary' : 'warning';
+                return "<span class='badge badge-$color'>$model->status</span>";
+            })
             ->addColumn('actions', function ($model) {
                 $btn = "<a href=" . route('branch_shifts.show', ['branch_shift' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
                 $btn = $btn . "<a href=" . route('branch_shifts.edit', ['branch_shift' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
 
                 return $btn;
             })
-            ->rawColumns(['created_at','actions']);
+            ->rawColumns(['created_at', 'user.name', 'branch.name', 'status','actions']);
     }
 
     /**
@@ -60,7 +72,7 @@ class BranchShiftDataTable extends DataTable
      */
     public function query(BranchShift $model)
     {
-        return $model->newQuery()->select('branch_shifts.*');
+        return $model->newQuery()->with(['branch', 'user'])->select('branch_shifts.*');
     }
 
     /**
@@ -82,9 +94,12 @@ class BranchShiftDataTable extends DataTable
     {
         return [
             Column::make('id')->title(__('main.id')),
+            Column::make('branch.name')->title(__('main.branch')),
+            Column::make('user.name')->title(__('main.user')),
             Column::make('day')->title(__('main.day')),
             Column::make('start_time')->title(__('main.start_time')),
             Column::make('end_time')->title(__('main.end_time')),
+            Column::make('status')->title(__('main.status')),
             Column::make('created_at')->title(__('main.created_at')),
             Column::computed('actions')->title(__('main.actions')),
         ];
