@@ -31,7 +31,8 @@
         "spatie/laravel-activitylog": "^3.16",
         "spatie/laravel-image-optimizer": "^1.6",
         "spatie/laravel-medialibrary": "^8.10",
-        "tymon/jwt-auth": "dev-develop"
+        "tymon/jwt-auth": "dev-develop",
+        "yajra/laravel-datatables":"^1.5"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -68,12 +69,12 @@
             "name": "joovlly/translatable",
             "type": "vcs",
             "url": "https://github.com/Joovlly/translatable.git"
-        }, 
+        },
         {
             "name": "joovlly/commentable",
             "type": "vcs",
             "url": "https://github.com/Joovlly/commentable.git"
-        }, 
+        },
         {
             "name": "joovlly/sms",
             "type": "vcs",

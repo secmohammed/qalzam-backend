@@ -2,6 +2,7 @@
 
 namespace App\Domain\Branch\Http\Controllers;
 
+use App\Domain\Branch\Datatables\AlbumDataTable;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 use Joovlly\DDD\Traits\Responder;
@@ -138,6 +139,15 @@ class AlbumController extends Controller
         $this->useCollection(AlbumResourceCollection::class, 'data');
 
         return $this->response();
+    }
+
+    /**
+     * @param AlbumDataTable $datatable
+     * @return mixed
+     */
+    public function dataTable(AlbumDataTable  $datatable)
+    {
+        return $datatable->render("{$this->domainAlias}::{$this->viewPath}.index");
     }
 
     /**

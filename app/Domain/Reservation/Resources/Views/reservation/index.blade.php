@@ -1,5 +1,10 @@
 @extends('theme.app')
 
+@push('styles')
+    <!--begin::Page Vendors Styles(used by this page)-->
+    <link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
+    <!--end::Page Vendors Styles-->
+@endpush
 @section('content')
 
     <div class="subheader subheader-transparent " id="kt_subheader">
@@ -40,10 +45,20 @@
         </div>
     </div>
 
-    <livewire:reservation-datatable
-        model="App\Domain\Reservation\Entities\Reservation"
-        exclude="updated_at"
-        hideable="select"
-        params="reservations"
-    />
+    <div class="card card-custom gutter-b">
+        <div class="card-body">
+            {!! $dataTable->table(['class' => 'table table-separate table-head-custom table-checkable'])  !!}
+        </div>
+    </div>
 @endsection
+
+@push('scripts')
+
+    <!--begin::Page Vendors(used by this page)-->
+    <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+    <!--end::Page Vendors-->
+    <!--begin::Page Scripts(used by this page)-->
+    <script src="{{asset('assets/js/pages/crud/datatables/basic/basic.js')}}"></script>
+    <!--end::Page Scripts-->
+    {!! $dataTable->scripts() !!}
+@endpush

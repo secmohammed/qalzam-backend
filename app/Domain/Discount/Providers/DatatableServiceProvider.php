@@ -14,6 +14,7 @@ class DatatableServiceProvider extends ServiceProvider
      */
     private $datatables = [
         'discount' => \App\Domain\Discount\Datatables\DiscountDatatable::class,
+			'discount' => \App\Domain\Discount\Datatables\DiscountDatatable::class,
 			###DATATABLES_PLACEHOLDER###
 		// Your datatables Here "key => class"
     ];

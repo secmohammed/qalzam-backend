@@ -2,6 +2,7 @@
 
 namespace App\Domain\Product\Http\Controllers;
 
+use App\Domain\Product\Datatables\StockDataTable;
 use Illuminate\Http\Request;
 use Joovlly\DDD\Traits\Responder;
 use App\Domain\Product\Entities\Stock;
@@ -137,6 +138,15 @@ class StockController extends Controller
         $this->useCollection(StockResourceCollection::class, 'data');
 
         return $this->response();
+    }
+
+    /**
+     * @param StockDataTable $dataTable
+     * @return mixed
+     */
+    public function dataTable(StockDataTable $dataTable)
+    {
+        return $dataTable->render("{$this->domainAlias}::{$this->viewPath}.index");
     }
 
     /**

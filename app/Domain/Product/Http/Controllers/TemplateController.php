@@ -2,6 +2,7 @@
 
 namespace App\Domain\Product\Http\Controllers;
 
+use App\Domain\Product\Datatables\TemplateDataTable;
 use App\Domain\Product\Entities\Template;
 use App\Domain\Product\Http\Requests\Template\TemplateStoreFormRequest;
 use App\Domain\Product\Http\Requests\Template\TemplateUpdateFormRequest;
@@ -136,6 +137,14 @@ class TemplateController extends Controller
         return $this->response();
     }
 
+    /**
+     * @param TemplateDataTable $dataTable
+     * @return mixed
+     */
+    public function dataTable(TemplateDataTable $dataTable)
+    {
+        return $dataTable->render("{$this->domainAlias}::{$this->viewPath}.index");
+    }
     /**
      * Display the specified resource.
      *

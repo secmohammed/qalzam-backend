@@ -2,6 +2,7 @@
 
 namespace App\Domain\Post\Http\Controllers;
 
+use App\Domain\Post\Datatables\PostDataTable;
 use Illuminate\Http\Request;
 use Joovlly\DDD\Traits\Responder;
 use App\Domain\Post\Entities\Post;
@@ -146,6 +147,14 @@ class PostController extends Controller
         return $this->response();
     }
 
+    /**
+     * @param PostDataTable $dataTable
+     * @return mixed
+     */
+    public function dataTable(PostDataTable $dataTable)
+    {
+        return $dataTable->render("{$this->domainAlias}::{$this->viewPath}.index");
+    }
     /**
      * Display the specified resource.
      *

@@ -3,6 +3,7 @@
 namespace App\Domain\Branch\Http\Controllers;
 
 use App\Common\Pipeline\HandleFileUpload;
+use App\Domain\Branch\Datatables\BranchDataTable;
 use App\Domain\Branch\Entities\Branch;
 use App\Domain\Branch\Http\Requests\Branch\BranchStoreFormRequest;
 use App\Domain\Branch\Http\Requests\Branch\BranchUpdateFormRequest;
@@ -161,6 +162,16 @@ class BranchController extends Controller
 
         return $this->response();
     }
+
+    /**
+     * @param BranchDataTable $datatable
+     * @return mixed
+     */
+    public function dataTable(BranchDataTable  $datatable)
+    {
+        return $datatable->render("{$this->domainAlias}::{$this->viewPath}.index");
+    }
+
 
     /**
      * Display the specified resource.

@@ -2,6 +2,7 @@
 
 namespace App\Domain\User\Http\Controllers;
 
+use App\Domain\User\Datatables\AddressDataTable;
 use App\Domain\User\Entities\Address;
 use App\Domain\User\Http\Requests\Address\AddressFastStoreFormRequest;
 use App\Domain\User\Http\Requests\Address\AddressStoreFormRequest;
@@ -131,6 +132,16 @@ class AddressController extends Controller
         $this->useCollection(AddressResourceCollection::class, 'data');
 
         return $this->response();
+    }
+
+
+    /**
+     * @param AddressDataTable $dataTable
+     * @return mixed
+     */
+    public function datTable(AddressDataTable $dataTable)
+    {
+        return $dataTable->render("{$this->domainAlias}::{$this->viewPath}.index");
     }
     public function userAddresses(Request $request)
     {

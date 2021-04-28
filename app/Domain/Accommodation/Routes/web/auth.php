@@ -15,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::resource('/accommodations','AccommodationController');
-	Route::resource('/contracts','ContractController');
+    Route::resource('/accommodations','AccommodationController')->except('index');
+    Route::get('/accommodations','AccommodationController@dataTable')->name('accommodations.index');
+	Route::resource('/contracts','ContractController')->except('index');
+	Route::get('/contracts','ContractController@dataTable')->name('contracts.index');
 	###CRUD_PLACEHOLDER###
 });

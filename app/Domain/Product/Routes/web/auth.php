@@ -14,11 +14,16 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::middleware(['auth'])->group(function () {
-    Route::resource('/products', 'ProductController');
-    Route::resource('/product_variations', 'ProductVariationController');
-    Route::resource('/product_variation_types', 'ProductVariationTypeController');
-    Route::resource('/stocks', 'StockController');
-    Route::resource('/templates', 'TemplateController');
+    Route::resource('/products', 'ProductController')->except('index');
+    Route::get('/products', 'ProductController@datatable')->name('products.index');
+    Route::resource('/product_variations', 'ProductVariationController')->except('index');
+    Route::get('/product_variations', 'ProductVariationController@datatable')->name('product_variations.index');
+    Route::resource('/product_variation_types', 'ProductVariationTypeController')->except('index');
+    Route::get('/product_variation_types', 'ProductVariationTypeController@datatable')->name('product_variation_types.index');
+    Route::resource('/stocks', 'StockController')->except('index');
+    Route::get('/stocks', 'StockController@datatable')->name('stocks.index');
+    Route::resource('/templates', 'TemplateController')->except('index');
+    Route::get('/templates', 'TemplateController@datatable')->name('templates.index');
     Route::get('/templates/{template}/products', 'TemplateProductController@create')->name("template_product.create");
     ###CRUD_PLACEHOLDER###
 });

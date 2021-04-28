@@ -2,6 +2,7 @@
 
 namespace App\Domain\Location\Http\Controllers;
 
+use App\Domain\Location\Datatables\LocationDataTable;
 use App\Domain\Location\Entities\Location;
 use App\Domain\Location\Http\Requests\Location\LocationStoreFormRequest;
 use App\Domain\Location\Http\Requests\Location\LocationUpdateFormRequest;
@@ -137,6 +138,15 @@ class LocationController extends Controller
         $this->useCollection(LocationResourceCollection::class, 'data');
 
         return $this->response();
+    }
+
+    /**
+     * @param LocationDataTable $dataTable
+     * @return mixed
+     */
+    public function dataTable(LocationDataTable $dataTable)
+    {
+        return $dataTable->render("{$this->domainAlias}::{$this->viewPath}.index");
     }
     /**
      * Display a listing of the resource.
