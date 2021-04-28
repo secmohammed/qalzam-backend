@@ -270,7 +270,7 @@ return [
     "subtotal-inclusive-tax " => "The subtotal is inclusive of (VAT)",
 
     "delivery" => "Delivery",
-
+    "value" => "value",
     "pay-on-delivery" => "Pay On Delivery",
     "subtotal" => "subtotal",
     "client-name" => "Client name",

@@ -21,13 +21,21 @@ class TemplateDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->editColumn('user.name', function ($model){
+                $user = $model->user ? $model->user->name: '' ;
+                return "<span>$user</span>";
+            })
+            ->editColumn('status', function ($model){
+                $color = $model->status == 'active' ? 'primary' : 'warning';
+                return "<span class='badge badge-$color'>$model->status</span>";
+            })
             ->addColumn('actions', function ($model) {
                 $btn = "<a href=" . route('templates.show', ['template' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
                 $btn = $btn . "<a href=" . route('templates.edit', ['template' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
 
                 return $btn;
             })
-            ->rawColumns(['actions']);
+            ->rawColumns(['actions','user.name','status']);
     }
 
     /**
@@ -55,7 +63,7 @@ class TemplateDataTable extends DataTable
      */
     public function query(Template $model)
     {
-        return $model->newQuery()->select('templates.*');
+        return $model->newQuery()->with(['user'])->select('templates.*');
     }
 
     /**
@@ -78,7 +86,9 @@ class TemplateDataTable extends DataTable
         return [
             Column::make('id')->title(__('main.id')),
             Column::make('name')->title(__('main.name')),
+            Column::make('user.name')->title(__('main.user')),
             Column::make('created_at')->title(__('main.created_at')),
+            Column::make('status')->title(__('main.status')),
             Column::computed('actions')->title(__('main.actions')),
         ];
     }

@@ -21,13 +21,21 @@ class ProductVariationTypeDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->editColumn('user.name', function ($model){
+                $user = $model->user ? $model->user->name: '' ;
+                return "<span>$user</span>";
+            })
+            ->editColumn('status', function ($model){
+                $color = $model->status == 'active' ? 'primary' : 'warning';
+                return "<span class='badge badge-$color'>$model->status</span>";
+            })
             ->addColumn('actions', function ($model) {
                 $btn = "<a href=" . route('product_variation_types.show', ['product_variation_type' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
                 $btn = $btn . "<a href=" . route('product_variation_types.edit', ['product_variation_type' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
 
                 return $btn;
             })
-            ->rawColumns(['actions']);
+            ->rawColumns(['actions','status', 'user.name']);
     }
 
     /**
@@ -55,7 +63,7 @@ class ProductVariationTypeDataTable extends DataTable
      */
     public function query(ProductVariationType $model)
     {
-        return $model->newQuery()->select('product_variation_types.*');
+        return $model->newQuery()->with(['user'])->select('product_variation_types.*');
     }
 
     /**
@@ -78,6 +86,8 @@ class ProductVariationTypeDataTable extends DataTable
         return [
             Column::make('id')->title(__('main.id')),
             Column::make('name')->title(__('main.name')),
+            Column::make('user.name')->title(__('main.user')),
+            Column::make('status')->title(__('main.status')),
             Column::make('created_at')->title(__('main.created_at')),
             Column::computed('actions')->title(__('main.actions')),
         ];

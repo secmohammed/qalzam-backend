@@ -21,13 +21,29 @@ class LocationDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->editColumn('user.name', function ($model){
+                $user = $model->user ? $model->user->name: '' ;
+                return "<span>$user</span>";
+            })
+            ->editColumn('parent.name', function ($model){
+                $parent = $model->parent ? $model->parent->name: '' ;
+                return "<span>$parent</span>";
+            })
+            ->editColumn('status', function ($model){
+                $color = $model->status == 'active' ? 'primary' : 'warning';
+                return "<span class='badge badge-$color'>$model->status</span>";
+            })
+            ->editColumn('type', function ($model){
+                $color = $model->type == 'zone' ? 'primary' : ($model->type == 'district' ? 'info' : ($model->tpye ? 'warning':'secondary'));
+                return "<span class='badge badge-$color'>$model->type</span>";
+            })
             ->addColumn('actions', function ($model) {
                 $btn = "<a href=" . route('locations.show', ['location' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
                 $btn = $btn . "<a href=" . route('locations.edit', ['location' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
 
                 return $btn;
             })
-            ->rawColumns(['actions']);
+            ->rawColumns(['user.name','status','parent.name','type','actions']);
     }
 
     /**
@@ -55,7 +71,7 @@ class LocationDataTable extends DataTable
      */
     public function query(location $model)
     {
-        return $model->newQuery()->select('locations.*');
+        return $model->newQuery()->with(['user', 'parent'])->select('locations.*');
     }
 
     /**
@@ -78,6 +94,10 @@ class LocationDataTable extends DataTable
         return [
             Column::make('id')->title(__('main.id')),
             Column::make('name')->title(__('main.name')),
+            Column::make('user.name')->title(__('main.user')),
+            Column::computed('parent.name')->title(__('main.parent')),
+            Column::make('type')->title(__('main.type')),
+            Column::make('status')->title(__('main.status')),
             Column::make('created_at')->title(__('main.created_at')),
             Column::computed('actions')->title(__('main.actions')),
         ];

@@ -21,13 +21,21 @@ class IngredientDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->editColumn('status', function ($model){
+                $color = $model->status == 'active' ? 'primary' : 'warning';
+                return "<span class='badge badge-$color'>$model->status</span>";
+            })
+            ->editColumn('user.name', function ($model){
+                $user = $model->user ? $model->user->name: '' ;
+                return "<span>$user</span>";
+            })
             ->addColumn('actions', function ($model) {
                 $btn = "<a href=" . route('ingredients.show', ['ingredient' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
                 $btn = $btn . "<a href=" . route('ingredients.edit', ['ingredient' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
 
                 return $btn;
             })
-            ->rawColumns(['actions']);
+            ->rawColumns(['actions','user.name','status']);
     }
 
     /**
@@ -54,7 +62,7 @@ class IngredientDataTable extends DataTable
      */
     public function query(ingredient $model)
     {
-        return $model->newQuery()->select('ingredients.*');
+        return $model->newQuery()->with(['user'])->select('ingredients.*');
     }
 
     /**
@@ -77,6 +85,9 @@ class IngredientDataTable extends DataTable
         return [
             Column::make('id')->title(__('main.id')),
             Column::make('name')->title(__('main.name')),
+            Column::make('description')->title(__('main.description')),
+            Column::make('user.name')->title(__('main.user')),
+            Column::make('status')->title(__('main.status')),
             Column::make('created_at')->title(__('main.created_at')),
             Column::computed('actions')->title(__('main.actions')),
         ];

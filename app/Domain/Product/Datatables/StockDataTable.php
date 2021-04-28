@@ -21,13 +21,25 @@ class StockDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->editColumn('user.name', function ($model){
+                $user = $model->user ? $model->user->name: '' ;
+                return "<span>$user</span>";
+            })
+            ->editColumn('variation.name', function ($model){
+                $variation = $model->variation ? $model->variation->name: '' ;
+                return "<span>$variation</span>";
+            })
+            ->editColumn('status', function ($model){
+                $color = $model->status == 'active' ? 'primary' : 'warning';
+                return "<span class='badge badge-$color'>$model->status</span>";
+            })
             ->addColumn('actions', function ($model) {
                 $btn = "<a href=" . route('stocks.show', ['stock' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
                 $btn = $btn . "<a href=" . route('stocks.edit', ['stock' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
 
                 return $btn;
             })
-            ->rawColumns(['actions']);
+            ->rawColumns(['actions','user.name','variation.name', 'status']);
     }
 
     /**
@@ -55,7 +67,7 @@ class StockDataTable extends DataTable
      */
     public function query(Stock $model)
     {
-        return $model->newQuery()->select('stocks.*');
+        return $model->newQuery()->with(['user', 'variation'])->select('stocks.*');
     }
 
     /**
@@ -78,6 +90,9 @@ class StockDataTable extends DataTable
         return [
             Column::make('id')->title(__('main.id')),
             Column::make('name')->title(__('main.name')),
+            Column::make('user.name')->title(__('main.user')),
+            Column::make('variation.name')->title(__('main.variation')),
+            Column::make('status')->title(__('main.status')),
             Column::make('created_at')->title(__('main.created_at')),
             Column::computed('actions')->title(__('main.actions')),
         ];

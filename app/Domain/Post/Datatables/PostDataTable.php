@@ -21,13 +21,25 @@ class PostDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->editColumn('user.name', function ($model){
+                $user = $model->user ? $model->user->name: '' ;
+                return "<span>$user</span>";
+            })
+            ->editColumn('type', function ($model){
+                $color = $model->type == 'normal' ? 'primary' : 'warning';
+                return "<span class='badge badge-$color'>$model->type</span>";
+            })
+            ->editColumn('status', function ($model){
+                $color = $model->status == 'approved' ? 'primary' : 'danger';
+                return "<span class='badge badge-$color'>$model->status</span>";
+            })
             ->addColumn('actions', function ($model) {
                 $btn = "<a href=" . route('posts.show', ['post' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
                 $btn = $btn . "<a href=" . route('posts.edit', ['post' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
 
                 return $btn;
             })
-            ->rawColumns(['actions']);
+            ->rawColumns(['actions', 'status','type','user.name']);
     }
 
     /**
@@ -55,7 +67,7 @@ class PostDataTable extends DataTable
      */
     public function query(Post $model)
     {
-        return $model->newQuery()->select('posts.*');
+        return $model->newQuery()->with(['user'])->select('posts.*');
     }
 
     /**
@@ -77,7 +89,12 @@ class PostDataTable extends DataTable
     {
         return [
             Column::make('id')->title(__('main.id')),
-            Column::make('name')->title(__('main.name')),
+            Column::make('title')->title(__('main.title')),
+            Column::make('slug')->title(__('main.slug')),
+            Column::make('user.name')->title(__('main.user')),
+            Column::make('description')->title(__('main.description')),
+            Column::make('status')->title(__('main.status')),
+            Column::make('type')->title(__('main.type')),
             Column::make('created_at')->title(__('main.created_at')),
             Column::computed('actions')->title(__('main.actions')),
         ];

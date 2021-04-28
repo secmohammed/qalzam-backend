@@ -21,13 +21,35 @@ class AddressDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->editColumn('user.name', function ($model){
+                $user = $model->user ? $model->user->name: '' ;
+                return "<span>$user</span>";
+            })
+            ->editColumn('location.name', function ($model){
+                $location = $model->location ? $model->location->name: '' ;
+                return "<span>$location</span>";
+            })
+            ->editColumn('status', function ($model){
+                $color = $model->status == 'active' ? 'primary' : 'warning';
+                return "<span class='badge badge-$color'>$model->status</span>";
+            })
+            ->editColumn('default', function ($model){
+                $color = 'warning';
+                $default = 'false';
+                if($model->default)
+                {
+                    $color = 'primary';
+                    $default = 'true';
+                }
+                return "<span class='badge badge-$color'>$default</span>";
+            })
             ->addColumn('actions', function ($model) {
                 $btn = "<a href=" . route('addresss.show', ['address' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
                 $btn = $btn . "<a href=" . route('addresss.edit', ['address' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
 
                 return $btn;
             })
-            ->rawColumns(['actions']);
+            ->rawColumns(['actions','default','status','user.name', 'location.name']);
     }
 
     /**
@@ -55,7 +77,7 @@ class AddressDataTable extends DataTable
      */
     public function query(address $model)
     {
-        return $model->newQuery()->select('addresss.*');
+        return $model->newQuery()->with(['user','location'])->select('addresss.*');
     }
 
     /**
@@ -78,6 +100,12 @@ class AddressDataTable extends DataTable
         return [
             Column::make('id')->title(__('main.id')),
             Column::make('name')->title(__('main.name')),
+            Column::make('address_1')->title(__('main.address')),
+            Column::make('landmark')->title(__('main.landmark')),
+            Column::make('location.name')->title(__('main.location')),
+            Column::make('postal_code')->title(__('main.postal_code')),
+            Column::make('status')->title(__('main.status')),
+            Column::make('user.name')->title(__('main.user')),
             Column::make('created_at')->title(__('main.created_at')),
             Column::computed('actions')->title(__('main.actions')),
         ];
