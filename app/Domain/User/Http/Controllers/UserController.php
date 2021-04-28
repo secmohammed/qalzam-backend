@@ -3,6 +3,7 @@
 namespace App\Domain\User\Http\Controllers;
 
 use App\Common\Pipeline\HandleFileUpload;
+use App\Domain\User\Datatables\UserDataTable;
 use App\Domain\User\Entities\Role;
 use App\Domain\User\Entities\User;
 use App\Domain\User\Http\Requests\User\UserFastStoreFormRequest;
@@ -149,6 +150,14 @@ class UserController extends Controller
         return $this->response();
     }
 
+    /**
+     * @param UserDataTable $dataTable
+     * @return mixed
+     */
+    public function dataTable(UserDataTable $dataTable)
+    {
+        return $dataTable->render("{$this->domainAlias}::{$this->viewPath}.index");
+    }
     /**
      * Display the specified resource.
      *
