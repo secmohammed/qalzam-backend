@@ -2,6 +2,7 @@
 
 namespace App\Domain\Branch\Http\Controllers;
 
+use App\Domain\Branch\Datatables\BranchShiftDataTable;
 use App\Domain\Branch\Entities\BranchShift;
 use App\Domain\Branch\Http\Requests\BranchShift\BranchShiftStoreFormRequest;
 use App\Domain\Branch\Http\Requests\BranchShift\BranchShiftUpdateFormRequest;
@@ -142,6 +143,14 @@ class BranchShiftController extends Controller
 
     }
 
+    /**
+     * @param BranchShiftDataTable $datatable
+     * @return mixed
+     */
+    public function dataTable(BranchShiftDataTable  $datatable)
+    {
+        return $datatable->render("{$this->domainAlias}::{$this->viewPath}.index");
+    }
     /**
      * Display the specified resource.
      *

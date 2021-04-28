@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Domain\Accommodation\Datatables;
+namespace App\Domain\Branch\Datatables;
 
-use App\Domain\Accommodation\Entities\Contract;
+use App\Domain\Branch\Entities\Branch;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class ContractDataTable extends DataTable
+class BranchDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -22,8 +22,8 @@ class ContractDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('actions', function ($model) {
-                $btn = "<a href=" . route('contracts.show', ['contract' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
-                $btn = $btn . "<a href=" . route('contracts.edit', ['contract' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
+                $btn = "<a href=" . route('branches.show', ['branch' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
+                $btn = $btn . "<a href=" . route('branches.edit', ['branch' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
 
                 return $btn;
             })
@@ -38,7 +38,7 @@ class ContractDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('contract-table')
+            ->setTableId('branch-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom("<'row'<'col-3' l><'col-6 text-right' B><'col-3' f>>
@@ -50,12 +50,12 @@ class ContractDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param Contract $model
+     * @param Branch $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Contract $model)
+    public function query(Branch $model)
     {
-        return $model->newQuery()->select('contracts.*');
+        return $model->newQuery()->select('branches.*');
     }
 
     /**
@@ -65,7 +65,7 @@ class ContractDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Contract_' . date('YmdHis');
+        return 'Branch_' . date('YmdHis');
     }
 
     /**

@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Domain\Accommodation\Datatables;
+namespace App\Domain\Branch\Datatables;
 
-use App\Domain\Accommodation\Entities\Contract;
+use App\Domain\Branch\Entities\BranchShift;
+use Carbon\Carbon;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class ContractDataTable extends DataTable
+class BranchShiftDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -21,13 +22,17 @@ class ContractDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->editColumn('created_at' ,function ($model) {
+                $created_at     = (new Carbon($model->created_at))->format('Y-m-d H:i');
+                return "<span>$created_at</span>";
+            })
             ->addColumn('actions', function ($model) {
-                $btn = "<a href=" . route('contracts.show', ['contract' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
-                $btn = $btn . "<a href=" . route('contracts.edit', ['contract' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
+                $btn = "<a href=" . route('branch_shifts.show', ['branch_shift' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
+                $btn = $btn . "<a href=" . route('branch_shifts.edit', ['branch_shift' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
 
                 return $btn;
             })
-            ->rawColumns(['actions']);
+            ->rawColumns(['created_at','actions']);
     }
 
     /**
@@ -38,7 +43,7 @@ class ContractDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('contract-table')
+            ->setTableId('branch-shift-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom("<'row'<'col-3' l><'col-6 text-right' B><'col-3' f>>
@@ -50,12 +55,12 @@ class ContractDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param Contract $model
+     * @param BranchShift $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Contract $model)
+    public function query(BranchShift $model)
     {
-        return $model->newQuery()->select('contracts.*');
+        return $model->newQuery()->select('branch_shifts.*');
     }
 
     /**
@@ -65,7 +70,7 @@ class ContractDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Contract_' . date('YmdHis');
+        return 'BranchShift_' . date('YmdHis');
     }
 
     /**
@@ -77,7 +82,9 @@ class ContractDataTable extends DataTable
     {
         return [
             Column::make('id')->title(__('main.id')),
-            Column::make('name')->title(__('main.name')),
+            Column::make('day')->title(__('main.day')),
+            Column::make('start_time')->title(__('main.start_time')),
+            Column::make('end_time')->title(__('main.end_time')),
             Column::make('created_at')->title(__('main.created_at')),
             Column::computed('actions')->title(__('main.actions')),
         ];

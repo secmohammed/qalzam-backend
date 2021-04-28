@@ -105,6 +105,8 @@ return [
     'images' => 'Images',
     'room_table' => 'rooms / table',
 
+    'start_time' => 'start time',
+    'end_time' => 'end time',
     'album' => 'album',
     'product_images' => 'Product Images',
     'icon' => 'icon',

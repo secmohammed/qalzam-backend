@@ -16,11 +16,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth'])->group(function () {
     Route::post('branch_products/{branch}', 'BranchProductController@store')->name('branch.products.store');
     Route::get('branch_products/{branch}/create', 'BranchProductController@create')->name('branch.products.create');
-    Route::resource('/branches', 'BranchController');
+    Route::resource('/branches', 'BranchController')->except('index');
+    Route::get('/branches', 'BranchController@dataTable')->name('branches.index');
     Route::get('branch_products/create', 'BranchProductController@create')->name('branch_products.create');
     Route::get('branch_products/{branch}/edit', 'BranchProductController@edit');
 
-    Route::resource('/albums', 'AlbumController');
-    Route::resource('/branch_shifts', 'BranchShiftController');
+    Route::resource('/albums', 'AlbumController')->except('index');
+    Route::get('/albums', 'AlbumController@dataTable')->name('albums.index');
+    Route::resource('/branch_shifts', 'BranchShiftController')->except('index');
+    Route::get('/branch_shifts', 'BranchShiftController@dataTable')->name('branch_shifts.index');
     ###CRUD_PLACEHOLDER###
 });

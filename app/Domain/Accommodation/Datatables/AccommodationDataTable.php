@@ -21,30 +21,13 @@ class AccommodationDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->editColumn('status', function ($model) {
-                $color = $model->status === 'active' ? 'primary' : 'danger';
-
-                return "<span class='font-weight-bold text-$color'>$model->status</span>";
-            })
-            ->editColumn('type', function ($model) {
-                $color = 'primary';
-                $type = $model->type;
-                switch ($type) {
-                    case 'city':$color = 'info';break;
-                    case 'district':$color = 'warning';break;
-                    case 'zone':$color = 'danger';break;
-                    default:$color = 'primary';
-                }
-
-                return "<span class='badge badge-$color'>$type</span>";
-            })
             ->addColumn('actions', function ($model) {
                 $btn = "<a href=" . route('accommodations.show', ['accommodation' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
                 $btn = $btn . "<a href=" . route('accommodations.edit', ['accommodation' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
 
                 return $btn;
             })
-            ->rawColumns(['type','status', 'actions']);
+            ->rawColumns(['actions']);
     }
 
     /**
@@ -82,7 +65,7 @@ class AccommodationDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Accommodation' . date('YmdHis');
+        return 'Accommodation_' . date('YmdHis');
     }
 
     /**
