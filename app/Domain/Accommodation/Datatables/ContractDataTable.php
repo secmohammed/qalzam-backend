@@ -27,7 +27,23 @@ class ContractDataTable extends DataTable
 
                 return $btn;
             })
-            ->rawColumns(['actions']);
+            ->editColumn('template.name', function ($model){
+                $template = $model->template ? $model->template->name: '' ;
+                return "<span>$template</span>";
+            })
+            ->editColumn('user.name', function ($model){
+                $user = $model->user ? $model->user->name: '' ;
+                return "<span>$user</span>";
+            })
+            ->editColumn('status', function ($model){
+                $color = $model->status == 'active' ? 'primary' : 'warning';
+                return "<span class='badge badge-$color'>$model->status</span>";
+            })
+            ->editColumn('days', function ($model) {
+                $days = implode(', ', $model->days);
+                return "<span>$days</span>";
+            })
+            ->rawColumns(['actions','template.name','user.name', 'status', 'days']);
     }
 
     /**
@@ -55,7 +71,7 @@ class ContractDataTable extends DataTable
      */
     public function query(Contract $model)
     {
-        return $model->newQuery()->select('contracts.*');
+        return $model->newQuery()->with(['user', 'template'])->select('contracts.*');
     }
 
     /**
@@ -78,6 +94,10 @@ class ContractDataTable extends DataTable
         return [
             Column::make('id')->title(__('main.id')),
             Column::make('name')->title(__('main.name')),
+            Column::make('template.name')->title(__('main.template')),
+            Column::make('user.name')->title(__('main.user')),
+            Column::make('days')->title(__('main.days')),
+            Column::make('status')->title(__('main.status')),
             Column::make('created_at')->title(__('main.created_at')),
             Column::computed('actions')->title(__('main.actions')),
         ];

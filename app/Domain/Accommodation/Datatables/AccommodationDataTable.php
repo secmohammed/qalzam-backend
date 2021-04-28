@@ -21,13 +21,25 @@ class AccommodationDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->editColumn('user.name', function ($model){
+                $user = $model->user ? $model->user->name: '' ;
+                return "<span>$user</span>";
+            })
+            ->editColumn('branch.name', function ($model){
+                $branch = $model->branch ? $model->branch->name: '' ;
+                return "<span>$branch</span>";
+            })
+            ->editColumn('type', function ($model){
+                $color = $model->type == 'table' ? 'primary' : ($model->type == 'room' ? 'info' : 'secondary');
+                return "<span class='badge badge-$color'>$model->type</span>";
+            })
             ->addColumn('actions', function ($model) {
                 $btn = "<a href=" . route('accommodations.show', ['accommodation' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
                 $btn = $btn . "<a href=" . route('accommodations.edit', ['accommodation' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
 
                 return $btn;
             })
-            ->rawColumns(['actions']);
+            ->rawColumns(['actions','type','user.name','branch.name']);
     }
 
     /**
@@ -55,7 +67,7 @@ class AccommodationDataTable extends DataTable
      */
     public function query(Accommodation $model)
     {
-        return $model->newQuery()->select('accommodations.*');
+        return $model->newQuery()->with(['branch', 'user'])->select('accommodations.*');
     }
 
     /**
@@ -77,7 +89,12 @@ class AccommodationDataTable extends DataTable
     {
         return [
             Column::make('id')->title(__('main.id')),
+            Column::make('code')->title(__('main.code')),
             Column::make('name')->title(__('main.name')),
+            Column::make('user.name')->title(__('main.user')),
+            Column::make('branch.name')->title(__('main.branch')),
+            Column::make('capacity')->title(__('main.capacity')),
+            Column::make('type')->title(__('main.type')),
             Column::make('created_at')->title(__('main.created_at')),
             Column::computed('actions')->title(__('main.actions')),
         ];
