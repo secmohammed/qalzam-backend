@@ -3,6 +3,7 @@
 namespace App\Domain\Product\Http\Controllers;
 
 use App\Common\Pipeline\HandleFileUpload;
+use App\Domain\Product\Datatables\ProductVariationDataTable;
 use App\Domain\Product\Entities\ProductVariation;
 use App\Domain\Product\Http\Requests\ProductVariation\ProductVariationStoreFormRequest;
 use App\Domain\Product\Http\Requests\ProductVariation\ProductVariationUpdateFormRequest;
@@ -142,6 +143,15 @@ class ProductVariationController extends Controller
         $this->useCollection(ProductVariationResourceCollection::class, 'data');
 
         return $this->response();
+    }
+
+    /**
+     * @param ProductVariationDataTable $dataTable
+     * @return mixed
+     */
+    public function dataTable(ProductVariationDataTable $dataTable)
+    {
+        return $dataTable->render("{$this->domainAlias}::{$this->viewPath}.index");
     }
 
     /**

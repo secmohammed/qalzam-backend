@@ -4,6 +4,7 @@ namespace App\Domain\Product\Http\Controllers;
 
 use App\Common\Pipeline\HandleFileUpload;
 use App\Domain\Category\Repositories\Contracts\CategoryRepository;
+use App\Domain\Product\Datatables\ProductDataTable;
 use App\Domain\Product\Entities\Product;
 use App\Domain\Product\Http\Requests\Product\ProductStoreFormRequest;
 use App\Domain\Product\Http\Requests\Product\ProductUpdateFormRequest;
@@ -142,6 +143,14 @@ class ProductController extends Controller
         return $this->response();
     }
 
+    /**
+     * @param ProductDataTable $dataTable
+     * @return mixed
+     */
+    public function dataTable(ProductDataTable $dataTable)
+    {
+        return $dataTable->render("{$this->domainAlias}::{$this->viewPath}.index");
+    }
     /**
      * Display the specified resource.
      *
