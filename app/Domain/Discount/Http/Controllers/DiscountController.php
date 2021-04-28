@@ -4,6 +4,7 @@ namespace App\Domain\Discount\Http\Controllers;
 
 use App\Domain\Category\Entities\Category;
 use App\Domain\Category\Repositories\Contracts\CategoryRepository;
+use App\Domain\Discount\Datatables\DiscountDataTable;
 use App\Domain\Discount\Entities\Discount;
 use App\Domain\Discount\Http\Requests\Discount\DiscountStoreFormRequest;
 use App\Domain\Discount\Http\Requests\Discount\DiscountUpdateFormRequest;
@@ -149,6 +150,15 @@ class DiscountController extends Controller
         $this->useCollection(DiscountResourceCollection::class, 'data');
 
         return $this->response();
+    }
+
+    /**
+     * @param DiscountDataTable $dataTable
+     * @return mixed
+     */
+    public function dataTable(DiscountDataTable $dataTable)
+    {
+        return $dataTable->render("{$this->domainAlias}::{$this->viewPath}.index");
     }
 
     /**

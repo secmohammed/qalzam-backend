@@ -2,6 +2,7 @@
 
 namespace App\Domain\Ingredient\Http\Controllers;
 
+use App\Domain\Ingredient\Datatables\IngredientDataTable;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 use Joovlly\DDD\Traits\Responder;
@@ -134,6 +135,15 @@ class IngredientController extends Controller
         $this->useCollection(IngredientResourceCollection::class, 'data');
 
         return $this->response();
+    }
+
+    /**
+     * @param IngredientDataTable $dataTable
+     * @return mixed
+     */
+    public function dataTable(IngredientDataTable $dataTable)
+    {
+        return $dataTable->render("{$this->domainAlias}::{$this->viewPath}.index");
     }
 
     /**

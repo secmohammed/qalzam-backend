@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::middleware(['auth'])->group(function () {
-    Route::resource('/ingredients', 'IngredientController');
+    Route::resource('/ingredients', 'IngredientController')->except('index');
+    Route::get('/ingredients', 'IngredientController@dataTable')->name('ingredients.index');
     Route::post('/ingredients/{ingredient}/products', 'IngredientProductController@store')->name('ingredients.products.store');
     Route::get('/ingredients/{ingredient}/products', 'IngredientProductController@create')->name('ingredients.products.create');
     ###CRUD_PLACEHOLDER###
