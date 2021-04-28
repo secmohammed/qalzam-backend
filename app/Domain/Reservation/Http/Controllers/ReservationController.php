@@ -7,6 +7,7 @@ use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
 use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 use App\Domain\Order\Repositories\Contracts\OrderRepository;
 use App\Domain\Product\Entities\Template;
+use App\Domain\Reservation\Datatables\ReservationDataTable;
 use App\Domain\Reservation\Entities\Reservation;
 use App\Domain\Reservation\Http\Events\GenerateReservationPdfInvoice;
 use App\Domain\Reservation\Http\Requests\Reservation\ReservationStoreFormRequest;
@@ -182,6 +183,14 @@ class ReservationController extends Controller
     }
 
     /**
+     * @param ReservationDataTable $dataTable
+     * @return mixed
+     */
+    public function dataTable(ReservationDataTable $dataTable)
+    {
+        return $dataTable->render("{$this->domainAlias}::{$this->viewPath}.index");
+    }
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -227,7 +236,7 @@ class ReservationController extends Controller
             return response(['message'=>$th->getMessage()],422);
             //throw $th;
         }
-      
+
         $reservation->user->notify(new ReservationCreated($reservation));
         GenerateReservationPdfInvoice::dispatch($reservation);
 
