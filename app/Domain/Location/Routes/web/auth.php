@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::middleware(['auth'])->group(function () {
-    Route::resource('/locations', 'LocationController');
+    Route::resource('/locations', 'LocationController')->except('index');
+    Route::get('/locations', 'LocationController@dataTable')->name('locations.index');
     Route::get('/welcome', function () {
         // GenerateOrderPdfInvoice::dispatch(Order::all()->first());
         // Carbon::parse(Reservation::first()->start_date)->isoFormat("dddd");
