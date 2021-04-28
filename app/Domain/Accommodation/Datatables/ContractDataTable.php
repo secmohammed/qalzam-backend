@@ -3,6 +3,8 @@
 namespace App\Domain\Accommodation\Datatables;
 
 use App\Domain\Accommodation\Entities\Contract;
+use Carbon\Carbon;
+use Carbon\Traits\Creator;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -43,7 +45,11 @@ class ContractDataTable extends DataTable
                 $days = implode(', ', $model->days);
                 return "<span>$days</span>";
             })
-            ->rawColumns(['actions','template.name','user.name', 'status', 'days']);
+            ->editColumn('created_at' ,function ($model) {
+                $created_at     = (new Carbon($model->created_at))->format('Y-m-d H:i');
+                return "<span>$created_at</span>";
+            })
+            ->rawColumns(['actions','template.name','user.name','created_at', 'status', 'days']);
     }
 
     /**

@@ -3,6 +3,8 @@
 namespace App\Domain\Order\Datatables;
 
 use App\Domain\Order\Entities\Order;
+use Carbon\Carbon;
+use Carbon\Traits\Creator;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -41,13 +43,17 @@ class OrderDataTable extends DataTable
                 $color =  $model->status == 'pending' ? 'primary' : ($model->status == 'processing' ? 'warning' : ($model->status == 'picked'? 'secondary' : 'success'));
                 return "<span class='badge badge-$color'>$model->status</span>";
             })
+            ->editColumn('created_at' ,function ($model) {
+                $created_at     = (new Carbon($model->created_at))->format('Y-m-d H:i');
+                return "<span>$created_at</span>";
+            })
             ->addColumn('actions', function ($model) {
                 $btn = "<a href=" . route('orders.show', ['order' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
                 $btn = $btn . "<a href=" . route('orders.edit', ['order' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
 
                 return $btn;
             })
-            ->rawColumns(['actions','status','address.name','branch.name', 'user.name', 'creator.name']);
+            ->rawColumns(['actions','status','address.name','branch.name', 'user.name', 'creator.name','created_at']);
     }
 
     /**

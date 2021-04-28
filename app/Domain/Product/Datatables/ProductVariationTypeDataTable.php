@@ -3,6 +3,8 @@
 namespace App\Domain\Product\Datatables;
 
 use App\Domain\Product\Entities\ProductVariationType;
+use Carbon\Carbon;
+use Carbon\Traits\Creator;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -25,6 +27,10 @@ class ProductVariationTypeDataTable extends DataTable
                 $user = $model->user ? $model->user->name: '' ;
                 return "<span>$user</span>";
             })
+            ->editColumn('created_at' ,function ($model) {
+                $created_at     = (new Carbon($model->created_at))->format('Y-m-d H:i');
+                return "<span>$created_at</span>";
+            })
             ->editColumn('status', function ($model){
                 $color = $model->status == 'active' ? 'primary' : 'warning';
                 return "<span class='badge badge-$color'>$model->status</span>";
@@ -35,7 +41,7 @@ class ProductVariationTypeDataTable extends DataTable
 
                 return $btn;
             })
-            ->rawColumns(['actions','status', 'user.name']);
+            ->rawColumns(['actions','status', 'user.name' , 'created_at']);
     }
 
     /**

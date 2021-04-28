@@ -3,6 +3,8 @@
 namespace App\Domain\Discount\Datatables;
 
 use App\Domain\Discount\Entities\discount;
+use Carbon\Carbon;
+use Carbon\Traits\Creator;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -29,13 +31,17 @@ class DiscountDataTable extends DataTable
                 $color = $model->type == 'amount' ? 'primary' : 'warning';
                 return "<span class='badge badge-$color'>$model->type</span>";
             })
+            ->editColumn('created_at' ,function ($model) {
+                $created_at     = (new Carbon($model->created_at))->format('Y-m-d H:i');
+                return "<span>$created_at</span>";
+            })
             ->addColumn('actions', function ($model) {
                 $btn = "<a href=" . route('discounts.show', ['discount' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
                 $btn = $btn . "<a href=" . route('discounts.edit', ['discount' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
 
                 return $btn;
             })
-            ->rawColumns(['status','type','actions']);
+            ->rawColumns(['status','type','created_at','actions']);
     }
 
     /**

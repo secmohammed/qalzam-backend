@@ -3,6 +3,8 @@
 namespace App\Domain\Ingredient\Datatables;
 
 use App\Domain\Ingredient\Entities\Ingredient;
+use Carbon\Carbon;
+use Carbon\Traits\Creator;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -29,13 +31,17 @@ class IngredientDataTable extends DataTable
                 $user = $model->user ? $model->user->name: '' ;
                 return "<span>$user</span>";
             })
+            ->editColumn('created_at' ,function ($model) {
+                $created_at     = (new Carbon($model->created_at))->format('Y-m-d H:i');
+                return "<span>$created_at</span>";
+            })
             ->addColumn('actions', function ($model) {
                 $btn = "<a href=" . route('ingredients.show', ['ingredient' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
                 $btn = $btn . "<a href=" . route('ingredients.edit', ['ingredient' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
 
                 return $btn;
             })
-            ->rawColumns(['actions','user.name','status']);
+            ->rawColumns(['actions','user.name','status','created_at']);
     }
 
     /**
