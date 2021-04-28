@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::middleware(['auth'])->group(function () {
-    Route::resource('/orders', 'OrderController');
+    Route::resource('/orders', 'OrderController')->except('index');
+    Route::get('/orders', 'OrderController@dataTable')->name('orders.index');
     Route::resource('/delivery_orders', 'DeliveryOrderController');
     Route::get('orders/{order}/pdf', 'OrderController@generatePdf')->name('orders.pdf');
 

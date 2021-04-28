@@ -5,6 +5,7 @@ namespace App\Domain\Order\Http\Controllers;
 use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 use App\Domain\Discount\Repositories\Contracts\DiscountRepository;
 use App\Domain\Location\Repositories\Contracts\LocationRepository;
+use App\Domain\Order\Datatables\OrderDataTable;
 use App\Domain\Order\Entities\Order;
 use App\Domain\Order\Http\Events\GenerateOrderPdfInvoice;
 use App\Domain\Order\Http\Events\OrderDestroyed;
@@ -188,6 +189,14 @@ class OrderController extends Controller
     }
 
     /**
+     * @param OrderDataTable $dataTable
+     * @return mixed
+     */
+    public function dataTable(OrderDataTable $dataTable)
+    {
+        return $dataTable->render("{$this->domainAlias}::{$this->viewPath}.index");
+    }
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -216,7 +225,7 @@ class OrderController extends Controller
      */
     public function store(OrderStoreFormRequest $request)
     {
-        
+
 
         $order = app(Pipeline::class)->send($request)->through([
             ApplyDiscountToOrderIfPresent::class,
