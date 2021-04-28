@@ -1,13 +1,16 @@
 @extends('theme.app')
 
-@section('styles')
+@push('styles')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.9.2/tailwind.min.css"
           integrity="sha512-l7qZAq1JcXdHei6h2z8h8sMe3NbMrmowhOl+QkP3UhifPpCW2MC4M0i26Y8wYpbz1xD9t61MLT9L1N773dzlOA=="
           crossorigin="anonymous"/>
+    <!--begin::Page Vendors Styles(used by this page)-->
+    <link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
+    <!--end::Page Vendors Styles-->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.min.js" defer></script>
 
-@endsection
+@endpush
 
 @section('content')
 
@@ -49,10 +52,19 @@
         </div>
     </div>
 
-    <livewire:category-datatable
-        model="App\Domain\Category\Entities\Category"
-        exclude="updated_at"
-        hideable="select"
-        params="categories"
-    />
+    <div class="card card-custom gutter-b">
+        <div class="card-body">
+            {!! $dataTable->table(['class' => 'table table-separate table-head-custom table-checkable'])  !!}
+        </div>
+    </div>
 @endsection
+
+@push('scripts')
+    <!--begin::Page Vendors(used by this page)-->
+    <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+    <!--end::Page Vendors-->
+    <!--begin::Page Scripts(used by this page)-->
+    <script src="{{asset('assets/js/pages/crud/datatables/basic/basic.js')}}"></script>
+    <!--end::Page Scripts-->
+    {!! $dataTable->scripts() !!}
+@endpush

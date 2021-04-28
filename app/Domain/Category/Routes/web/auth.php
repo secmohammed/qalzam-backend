@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::resource('/categories','CategoryController');
+    Route::resource('/categories','CategoryController')->except('index');
+    Route::get('/categories','CategoryController@dataTable')->name('categories.index');
 	###CRUD_PLACEHOLDER###
 });

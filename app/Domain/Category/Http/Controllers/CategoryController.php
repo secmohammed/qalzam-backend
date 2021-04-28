@@ -2,6 +2,7 @@
 
 namespace App\Domain\Category\Http\Controllers;
 
+use App\Domain\Category\Datatables\CategoryDataTable;
 use App\Domain\Category\Entities\Category;
 use App\Domain\Category\Http\Requests\Category\CategoryStoreFormRequest;
 use App\Domain\Category\Http\Requests\Category\CategoryUpdateFormRequest;
@@ -144,6 +145,15 @@ class CategoryController extends Controller
         $this->useCollection(CategoryResourceCollection::class, 'data');
 
         return $this->response();
+    }
+
+    /**
+     * @param CategoryDataTable $dataTable
+     * @return mixed
+     */
+    public function dataTable(CategoryDataTable $dataTable)
+    {
+        return $dataTable->render("{$this->domainAlias}::{$this->viewPath}.index");
     }
 
     /**
