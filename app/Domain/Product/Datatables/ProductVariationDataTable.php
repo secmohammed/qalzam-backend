@@ -31,6 +31,10 @@ class ProductVariationDataTable extends DataTable
                 $user = $model->user ? $model->user->name: '' ;
                 return "<span>$user</span>";
             })
+            ->editColumn('price', function ($model){
+                $price = $model->price->amount();
+                return "<span>$price</span>";
+            })
             ->editColumn('created_at' ,function ($model) {
                 $created_at     = (new Carbon($model->created_at))->format('Y-m-d H:i');
                 return "<span>$created_at</span>";
@@ -45,7 +49,7 @@ class ProductVariationDataTable extends DataTable
 
                 return $btn;
             })
-            ->rawColumns(['actions', 'status','product.name', 'created_at','user.name']);
+            ->rawColumns(['actions','price', 'status','product.name', 'created_at','user.name']);
     }
 
     /**
@@ -96,6 +100,7 @@ class ProductVariationDataTable extends DataTable
         return [
             Column::make('id')->title(__('main.id')),
             Column::make('name')->title(__('main.name')),
+            Column::make('price')->title(__('main.price')),
             Column::make('user.name')->title(__('main.user')),
             Column::make('product.name')->title(__('main.product')),
             Column::make('status')->title(__('main.status')),

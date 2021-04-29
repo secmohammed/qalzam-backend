@@ -95,7 +95,7 @@ class StockDataTable extends DataTable
     {
         return [
             Column::make('id')->title(__('main.id')),
-            Column::make('name')->title(__('main.name')),
+            Column::make('quantity')->title(__('main.quantity')),
             Column::make('user.name')->title(__('main.user')),
             Column::make('variation.name')->title(__('main.variation')),
             Column::make('status')->title(__('main.status')),
