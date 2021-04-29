@@ -35,13 +35,17 @@ class ProductDataTable extends DataTable
                 $color = $model->status == 'active' ? 'primary' : 'warning';
                 return "<span class='badge badge-$color'>$model->status</span>";
             })
+            ->editColumn('price', function ($model) {
+                $price = $model->price->amount();
+                return "<span>$price</span>";
+            })
             ->addColumn('actions', function ($model) {
                 $btn = "<a href=" . route('products.show', ['product' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
                 $btn = $btn . "<a href=" . route('products.edit', ['product' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
 
                 return $btn;
             })
-            ->rawColumns(['actions', 'user.name','status', 'created_at']);
+            ->rawColumns(['actions','price','user.name','status', 'created_at']);
     }
 
     /**
@@ -92,10 +96,10 @@ class ProductDataTable extends DataTable
         return [
             Column::make('id')->title(__('main.id')),
             Column::make('name')->title(__('main.name')),
+            Column::make('price')->title(__('main.price')),
             Column::make('user.name')->title(__('main.user')),
             Column::make('slug')->title(__('main.slug')),
             Column::make('description')->title(__('main.description')),
-            Column::make('price')->title(__('main.price')),
             Column::make('status')->title(__('main.status')),
             Column::make('created_at')->title(__('main.created_at')),
             Column::computed('actions')->title(__('main.actions')),
