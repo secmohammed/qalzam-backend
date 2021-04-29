@@ -25,7 +25,7 @@
 
                 </div>
             </div>
-          
+
             <div class="form-group row">
                 <label class="col-form-label text-right col-lg-2 col-sm-12">type</label>
                 <div class="col-lg-10 col-md-9 col-sm-12">
@@ -104,7 +104,7 @@
                     <option label="Label"></option>
                     <option v-for="user in  users" :value="user.id">{{user.name}}</option>
                 </select> -->
-                <multiselect :searchable="true" :taggable="true" @tag="addTagToUser" v-model="usersValue" track-by="id" :multiple="true" label="name" :options="users"></multiselect>
+                <multiselect :searchable="true" :taggable="true" @tag="addTagToUser" v-model="usersValue" track-by="id" :multiple="true" label="mobile" :options="users"></multiselect>
 
                 <div v-if="errors['user_id'] " class="fv-plugins-message-container">
 
@@ -287,20 +287,20 @@ export default {
     mounted() {
         this.users = this.allUsers
         if (this.action === 'edit') {
-            
+
             console.log("🚀 ~ file: Discount.vue ~ line 293 ~ mounted ~ this.edit", this.edit)
             console.log("🚀 ~ file: Discount.vue ~ line 296 ~ mounted ~ this.discountable", this.discountable)
             this.form.code = this.edit.code
             this.form.value = this.edit.value
             this.form.type = this.edit.type
             this.usersValue = this.edit.users
-            this.form.expires_at = moment(this.edit.expires_at ).format("YYYY-MM-DDTHH:MM") 
+            this.form.expires_at = moment(this.edit.expires_at ).format("YYYY-MM-DDTHH:MM")
             this.form.number_of_usage = this.edit.number_of_usage
             this.form.discountable_type = this.edit.discountable_type
             this.form.status = this.edit.status
             this.discountIdValue = this.discountable
 
-        } 
+        }
     },
     methods: {
         goToStep(step) {
