@@ -39,6 +39,10 @@ class OrderDataTable extends DataTable
                 $address = $model->address ? $model->address->name: '' ;
                 return "<span>$address</span>";
             })
+            ->editColumn('subtotal', function ($model){
+                $subtotal = $model->subtotal->amount();
+                return "<span>$subtotal</span>";
+            })
             ->editColumn('status', function ($model){
                 $color =  $model->status == 'pending' ? 'primary' : ($model->status == 'processing' ? 'warning' : ($model->status == 'picked'? 'secondary' : 'success'));
                 return "<span class='badge badge-$color'>$model->status</span>";
@@ -53,7 +57,7 @@ class OrderDataTable extends DataTable
 
                 return $btn;
             })
-            ->rawColumns(['actions','status','address.name','branch.name', 'user.name', 'creator.name','created_at']);
+            ->rawColumns(['actions','subtotal','status','address.name','branch.name', 'user.name', 'creator.name','created_at']);
     }
 
     /**
@@ -103,6 +107,7 @@ class OrderDataTable extends DataTable
     {
         return [
             Column::make('id')->title(__('main.id')),
+            Column::make('subtotal')->title(__('main.subtotal')),
             Column::make('status')->title(__('main.status')),
             Column::make('user.name')->title(__('main.user')),
             Column::make('creator.name')->title(__('main.creator')),
