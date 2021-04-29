@@ -38,7 +38,7 @@ class ProductStoreFormRequest extends FormRequest
         $rules = [
             'slug' => ['required', 'string', 'max:255', 'unique:products,slug'],
             'description' => ['required', 'string', 'max:255'],
-            'price' => ['required', 'numeric', 'min:1', 'max:10000'],
+            'price' => ['required', 'numeric', 'min:0', 'max:10000'],
             'product-images' => 'required|array',
             'product-images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'name' => 'required|string|max:255',
