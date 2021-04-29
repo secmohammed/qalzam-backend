@@ -88,7 +88,7 @@
                     <option label="Label"></option>
                     <option v-for="accommodation in accommodations" :value="accommodation.id">{{accommodation.name}}</option>
                 </select> -->
-                <multiselect :searchable="true" v-model="discountIdValue" track-by="id" label="name" :options="discountIds"></multiselect>
+                <multiselect :searchable="true" v-model="discountIdValue" :multiple="true" track-by="id" label="name" :options="discountIds"></multiselect>
 
                 <div v-if="errors['discountable_id'] " class="fv-plugins-message-container">
 

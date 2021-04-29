@@ -39,7 +39,7 @@ class TemplateProductStoreFormRequest extends FormRequest
         $rules = [
             'products' => 'required|array',
             'products.*.id' => 'required|exists:product_variations,id',
-            'products.*.price' => ['required', 'numeric', 'min:1', 'max:10000'],
+            'products.*.price' => ['required', 'numeric', 'min:0', 'max:10000'],
             'products.*.quantity' => ['required', 'numeric', 'min:1', 'max:100'],
 
         ];
