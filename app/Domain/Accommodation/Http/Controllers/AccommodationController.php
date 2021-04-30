@@ -66,7 +66,7 @@ class AccommodationController extends Controller
     public function create(BranchRepository $branchRepository, Accommodation $accommodation, ContractRepository $contractRepository)
     {
         $this->setData('title', __('main.add') . ' ' . __('main.accommodation'), 'web');
-        $this->setData('categories', $this->categoryRepository->where('status', 'active')->where('type', 'accommodation')->get());
+        $this->setData('categories', $this->categoryRepository->where('status', 'active')->where('type', 'accommodations')->get());
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('branches', $branchRepository->all());
         $this->setData('contracts', $contractRepository->all());
