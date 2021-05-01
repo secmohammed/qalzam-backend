@@ -126,7 +126,7 @@
                                 <div class="col-md-6 mb-5">
                                     <div class="row mb-2">
                                         <strong class='ml-3'><span>{{ __("main.role") }} : </span></strong>
-                                        <span>{{ $show->roles ? $show->roles->first()->name : 'N/A' }} </span>
+                                        <span>{{ count($show->roles) > 0 ? $show->roles->first()->name : 'N/A' }} </span>
                                     </div>
                                     <hr>
                                 </div>

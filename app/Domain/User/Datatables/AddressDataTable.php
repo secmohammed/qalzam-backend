@@ -3,6 +3,7 @@
 namespace App\Domain\User\Datatables;
 
 use App\Domain\User\Entities\Address;
+use Carbon\Carbon;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -43,13 +44,17 @@ class AddressDataTable extends DataTable
                 }
                 return "<span class='badge badge-$color'>$default</span>";
             })
+            ->editColumn('created_at', function ($model){
+                $created_at = (new Carbon($model->created_at))->format('Y-m-d H:m');
+                return "<span>$created_at</span>";
+            })
             ->addColumn('actions', function ($model) {
-                $btn = "<a href=" . route('addresss.show', ['address' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
-                $btn = $btn . "<a href=" . route('addresss.edit', ['address' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
+                $btn = "<a href=" . route('addresses.show', ['address' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
+                $btn = $btn . "<a href=" . route('addresses.edit', ['address' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
 
                 return $btn;
             })
-            ->rawColumns(['actions','default','status','user.name', 'location.name']);
+            ->rawColumns(['actions','created_at','default','status','user.name', 'location.name']);
     }
 
     /**
@@ -77,7 +82,7 @@ class AddressDataTable extends DataTable
      */
     public function query(address $model)
     {
-        return $model->newQuery()->with(['user','location'])->select('addresss.*');
+        return $model->newQuery()->with(['user','location'])->select('addresses.*');
     }
 
     /**

@@ -46,9 +46,23 @@ class OrderUpdateFormRequest extends OrderStoreFormRequest
                 }),
             ],
             'user_id' => 'required|exists:users,id',
-
+            'status' => 'in:pending,delivered,picked,processing'
         ];
 
         return array_merge(parent::rules(), $rules);
+    }
+
+
+    public function validated()
+    {
+        return array_merge(parent::validated(), [
+            'creator_id' => auth()->id(),
+            'products' => collect($this->request->get('products'))->keyBy('id')->map(function ($product) {
+                return [
+                    'quantity' => $product['quantity'],
+                ];
+            })->toArray(),
+            'status' => $this->status,
+        ]);
     }
 }

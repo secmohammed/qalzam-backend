@@ -44,6 +44,19 @@
 
         </div>
 
+        <div v-if="action === 'edit'"  class="form-group row">
+            <label class="col-form-label text-right col-lg-2 col-sm-12">Status</label>
+            <div class="col-lg-10 col-md-9 col-sm-12">
+
+                <multiselect :searchable="true" v-model="statusValue" :options="statuses"></multiselect>
+
+                <div v-if="errors['address_id'] " class="fv-plugins-message-container">
+
+                    <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["address_id"][0] }}</div>
+                </div>
+            </div>
+
+        </div>
     </template>
 
     <template v-if="step == 0">
@@ -202,7 +215,10 @@ export default {
             discounts: [],
             addresses: [],
             users:[],
-
+            statuses: [
+                'pending','picked','processing','delivered'
+            ],
+            statusValue:{},
             products: [],
             newUserToken:"",
             form: {
@@ -214,6 +230,7 @@ export default {
                 branch_id: null,
                 address_id: null,
                 discount_id: null,
+                status:'',
             },
 
         };
@@ -243,7 +260,10 @@ export default {
         "discountsValue"(val) {
             this.form.discount_id= val.id
         },
-
+        "statusValue"(val) {
+            console.log(val)
+            this.form.status = val
+        }
     },
     computed: {
         isCreateOrderButtonDisabled() {
@@ -266,6 +286,7 @@ export default {
 
             this.usersValue = this.edit.user;
             this.addressesValue = this.edit.address;
+            this.statusValue = this.edit.status;
 
             this.edit.products.forEach((product, index) => {
             console.log("🚀 ~ file: OrderProduct.vue ~ line 267 ~ this.edit.products.forEach ~ product", product)
