@@ -6,7 +6,7 @@
         <div class="form-group row">
             <label class="col-form-label text-right col-lg-2 col-sm-12">branch</label>
             <div class="col-lg-10 col-md-9 col-sm-12">
-                
+
                 <multiselect :searchable="true" v-model="branchesValue" track-by="id" label="name" :options="branches"></multiselect>
                 <div v-if="errors['branch_id'] " class="fv-plugins-message-container">
 
@@ -18,8 +18,8 @@
         <div class="form-group row align-items-center">
             <label class="col-form-label text-right col-lg-2 col-sm-12">customer</label>
             <div class="col-lg-8 col-md-7 col-sm-10">
-               
-                <multiselect :searchable="true" v-model="usersValue" track-by="id" label="name" :options="users"></multiselect>
+
+                <multiselect :searchable="true" v-model="usersValue" track-by="id" label="mobile" :options="users"></multiselect>
 
                 <div v-if="errors['user_id'] " class="fv-plugins-message-container">
 
@@ -33,7 +33,7 @@
         <div class="form-group row">
             <label class="col-form-label text-right col-lg-2 col-sm-12">address</label>
             <div class="col-lg-10 col-md-9 col-sm-12">
-  
+
                 <multiselect :searchable="true" v-model="addressesValue" track-by="id" label="name" :options="addresses"></multiselect>
 
                 <div v-if="errors['address_id'] " class="fv-plugins-message-container">
@@ -44,6 +44,19 @@
 
         </div>
 
+        <div v-if="action === 'edit'"  class="form-group row">
+            <label class="col-form-label text-right col-lg-2 col-sm-12">Status</label>
+            <div class="col-lg-10 col-md-9 col-sm-12">
+
+                <multiselect :searchable="true" v-model="statusValue" :options="statuses"></multiselect>
+
+                <div v-if="errors['address_id'] " class="fv-plugins-message-container">
+
+                    <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["address_id"][0] }}</div>
+                </div>
+            </div>
+
+        </div>
     </template>
 
     <template v-if="step == 0">
@@ -66,10 +79,10 @@
                 <div class="col-md">
                     <div class="row">
                         <div class="col-md">
-                           
+
                 <multiselect :searchable="true" v-model="productsValue[index]" @select="(data)=> { productSelected(data,index)}" track-by="id" label="name" :options="products"></multiselect>
 
-                            
+
                             <div v-if="errors[`products.${index}.id`] " class="fv-plugins-message-container">
 
                                 <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors[`products.${index}.id`][0] }}</div>
@@ -136,7 +149,7 @@
 
         </template>
         <template v-else>
-         
+
 
         </template>
 
@@ -191,7 +204,7 @@ export default {
     },
     data() {
         return {
-            
+
             branchesValue: {},
             addressesValue: {},
             usersValue: {},
@@ -202,7 +215,10 @@ export default {
             discounts: [],
             addresses: [],
             users:[],
-
+            statuses: [
+                'pending','picked','processing','delivered'
+            ],
+            statusValue:{},
             products: [],
             newUserToken:"",
             form: {
@@ -214,8 +230,9 @@ export default {
                 branch_id: null,
                 address_id: null,
                 discount_id: null,
+                status:'',
             },
-            
+
         };
     },
     watch: {
@@ -227,11 +244,11 @@ export default {
                 (user) => user.id == val.id
             );
                 console.log("🚀 ~ file: OrderProduct.vue ~ line 227 ~ discounts", discounts)
-            
+
             this.addresses = addresses;
             this.discounts = discounts;
             this.form.user_id= val.id
-            
+
         },
         "branchesValue"(val) {
             this.products = this.branches.find(branch => branch.id == val.id).products
@@ -243,11 +260,14 @@ export default {
         "discountsValue"(val) {
             this.form.discount_id= val.id
         },
-    
+        "statusValue"(val) {
+            console.log(val)
+            this.form.status = val
+        }
     },
     computed: {
         isCreateOrderButtonDisabled() {
-            return this.form.products.length 
+            return this.form.products.length
         },
         isNextStepDisabled() {
             return this.form.user_id && this.form.branch_id && this.form.address_id
@@ -259,13 +279,14 @@ export default {
     },
   async  mounted() {
         this.users = this.allUsers
-        
+
         if (this.action === 'edit') {
             const branch = this.branches.find(branch=>branch.id === this.edit.branch_id)
             this.branchesValue = branch;
- 
+
             this.usersValue = this.edit.user;
             this.addressesValue = this.edit.address;
+            this.statusValue = this.edit.status;
 
             this.edit.products.forEach((product, index) => {
             console.log("🚀 ~ file: OrderProduct.vue ~ line 267 ~ this.edit.products.forEach ~ product", product)
@@ -315,15 +336,15 @@ export default {
         userCreated(user){
             console.log("🚀 ~ file: OrderProduct.vue ~ line 269 ~ userCreated ~ id", user)
             this.users.push(user);
-          
-          this.form.user_id =user.user.id; 
-            this.newUserToken =user.token; 
-            this.step = 0.5 
+
+          this.form.user_id =user.user.id;
+            this.newUserToken =user.token;
+            this.step = 0.5
         },
         addressCreated(id){
             console.log("🚀 ~ file: OrderProduct.vue ~ line 269 ~ addressCreated ~ id", id)
-            this.form.address_id =id; 
-            this.step = 2 
+            this.form.address_id =id;
+            this.step = 2
         }
         ,
         save() {

@@ -27,7 +27,7 @@
                     <option label="Label"></option>
                     <option v-for="user in  users" :value="user.id">{{user.name}}</option>
                 </select> -->
-                <multiselect :searchable="true" v-model="usersValue" track-by="id" label="name" :options="users"></multiselect>
+                <multiselect :searchable="true" v-model="usersValue" track-by="id" label="mobile" :options="users"></multiselect>
 
                 <div v-if="errors['user_id'] " class="fv-plugins-message-container">
 
@@ -102,7 +102,7 @@ import CreateUserForm from './CreateUserForm.vue';
 export default {
   components: { CreateUserForm ,
         Multiselect
-  
+
   },
 
     props: {
@@ -165,20 +165,20 @@ export default {
     watch: {
            "usersValue"(val) {
            console.log("🚀 ~ file: ReservationProduct.vue ~ line 167 ~ val", val)
-            this.form.user_id= val.id    
+            this.form.user_id= val.id
         },
           "branchesValue"(val) {
         //       const branch = this.branches.find  (branch => branch.id == val.id);
         //       console.log("🚀 ~ file: ReservationProduct.vue ~ line 228 ~ this.branches", this.branches)
-          
+
           this.accommodations = val.accommodations
         },
           "accommodationsValue"(val) {
             this.form.accommodation_id = val.id
         },
-         
-       
-       
+
+
+
         "form.start_date"() {
             // this.form.end_date = moment(this.form.start_date).add(4, "hours").format("MM/DD/YYYY HH:MM");
         }
@@ -236,12 +236,12 @@ export default {
             }).then((res) => {
                 window.location = "/reservations"
             }).catch((err) => {
-              
+
               this.errors = err.response.data.errors;
               const toastMessage = err.response.data.message
               if(toastMessage)toastr.error(toastMessage);
-                
-               
+
+
                 // check if err contains the array of validation errors and then set errors property
             });
         },
@@ -255,7 +255,7 @@ export default {
                 window.location = `/reservations/${this.edit.id }`
             }).catch((err) => {
                 this.errors = err.response.data.errors;
-                
+
 
             });
         },

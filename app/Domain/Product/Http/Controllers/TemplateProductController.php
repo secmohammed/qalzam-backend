@@ -80,7 +80,7 @@ class TemplateProductController extends Controller
     public function store(Template $template, TemplateProductStoreFormRequest $request)
     {
 
-        $template->products()->sync(
+        $template->products()->syncWithoutDetaching(
             $request->validated()
         );
 

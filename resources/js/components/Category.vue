@@ -25,7 +25,7 @@
         <label class="col-form-label text-right col-lg-2 col-sm-12">category type</label>
         <div class="col-lg-10 col-md-9 col-sm-12">
 
-            <multiselect :searchable="true" v-model="form.categorizable_type" :options="categoriesTypes"></multiselect>
+            <multiselect :searchable="true"  v-model="form.categorizable_type" :options="categoriesTypes"></multiselect>
 
             <div v-if="errors['categorizable_type'] " class="fv-plugins-message-container">
 
@@ -173,7 +173,11 @@ export default {
                     categoryIds = await axios.get("/api/product_variations?per_page=10000000000")
                     break;
                 case 'accommodations':
-                    categoryIds = await axios.get("/api/accommodations?per_page=10000000000")
+                    categoryIds = await axios.get("/api/accommodations?per_page=10000000000", {
+                        headers: {
+                            Authorization: "Bearer " + this.auth_token,
+                        }
+                    })
                     break;
 
                 default:

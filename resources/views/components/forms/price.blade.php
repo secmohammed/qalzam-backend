@@ -4,8 +4,8 @@
             style="color: red"> * </span> </label>
     <div class="col-lg-10 col-md-9 col-sm-12">
         {{-- {{ dd($edit->price  ) }} --}}
-        <input type="number"    step="any" name="price" min="10" max="10000" class="form-control {{$errors->has('price') ? 'is-invalid':''}}"
-               placeholder="{{ __("main.price") }}" 
+        <input type="number"    step="any" name="price" min="0" max="10000" class="form-control {{$errors->has('price') ? 'is-invalid':''}}"
+               placeholder="{{ __("main.price") }}"
                value="{{ ($action == 'edit') ? $edit->price->amount()/100 : old('price') }}"
                />
         <div class="row">

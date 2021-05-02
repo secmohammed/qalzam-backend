@@ -105,9 +105,9 @@
                                     </div>
                                     <hr>
                                 </div>
-                              
-                             
-                            
+
+
+
 
                                 <div class="col-md-6 mb-5">
                                     <div class="row mb-2">
@@ -165,22 +165,22 @@
                             <a href="{{ route("products.show",$product["id"]) }}" class="text-dark-75 font-weight-bolder">{{ $product["name"] }}</a>
                         </h4>
                         <div class="d-flex justify-content-between">
-                            <div class="font-size-h6 text-muted font-weight-bolder">{{ __("main.price") }}: {{ $product["price"] }}</div> 
-                            <div class="font-size-h6 text-muted font-weight-bolder float-right">{{ __("main.quantity") }}: {{ $product["quantity"]??0 }}</div> 
+                            <div class="font-size-h6 text-muted font-weight-bolder">{{ __("main.price") }}: {{ $product["price"] }}</div>
+                            <div class="font-size-h6 text-muted font-weight-bolder float-right">{{ __("main.quantity") }}: {{ $product["quantity"]??0 }}</div>
                         </div>
-                
+
                     </div>
                 </div>
             </div>
         </div>
         @endforeach
-        
+
         <!--end::Product-->
-       
+
     </div>
 </div>
 </div>
-</div>  
+</div>
 {{-- {{ dd(1) }} --}}
 
 

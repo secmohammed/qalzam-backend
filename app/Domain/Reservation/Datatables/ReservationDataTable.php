@@ -51,13 +51,17 @@ class ReservationDataTable extends DataTable
                 $end_date     = (new Carbon($model->end_date))->format('Y-m-d H:i');
                 return "<span>$end_date</span>";
             })
+            ->editColumn('price', function ($model) {
+                $price = $model->price->amount();
+                return "<span>$price</span>";
+            })
             ->addColumn('actions', function ($model) {
                 $btn = "<a href=" . route('reservations.show', ['reservation' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
                 $btn = $btn . "<a href=" . route('reservations.edit', ['reservation' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
 
                 return $btn;
             })
-            ->rawColumns(['actions','status','user.name','creator.name','accommodation.name','start_date','end_date','created_at']);
+            ->rawColumns(['actions','price','status','user.name','creator.name','accommodation.name','start_date','end_date','created_at']);
     }
 
     /**
