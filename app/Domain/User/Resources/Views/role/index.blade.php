@@ -56,10 +56,10 @@
     <div class="card card-custom gutter-b">
         <div class="card-header">
             <h3 class="card-title">
-                {{ __('main.user') }}
+                {{ __('main.roles') }}
             </h3>
             <div class="card-toolbar">
-                <a href="{{ route('users.create') }}"
+                <a href="{{ route('roles.create') }}"
                    class="btn btn-light-primary font-weight-bolder mr-2">
                     <i class="ki ki-plus icon-sm"
                        style="color: #fff"></i> {{ __('main.create') }} </a>

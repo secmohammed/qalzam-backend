@@ -29,7 +29,7 @@ class RoleDataTable extends DataTable
             })
             ->editColumn('permissions', function ($model){
                 $permissions = collect($model->permissions)->filter(function ($value, $key){
-                    return $value === true ;
+                    return $value == true ;
                 })->keys()->toArray();
                 $permissions = implode('  ||  ', $permissions);
                 return "<span class='font-weight-bold text-info font-size-h3'>$permissions</span>";
