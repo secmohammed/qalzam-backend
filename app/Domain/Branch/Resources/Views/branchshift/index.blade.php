@@ -62,6 +62,18 @@ crossorigin="anonymous"/>
 </div>
 
 <div class="card card-custom gutter-b">
+    <div class="card-header">
+        <h3 class="card-title">
+            {{ __('main.branch_shifts') }}
+        </h3>
+        <div class="card-toolbar">
+            <a href="{{ route('branch_shifts.create') }}"
+               class="btn btn-light-primary font-weight-bolder mr-2">
+                <i class="ki ki-plus icon-sm"
+                   style="color: #fff"></i> {{ __('main.create') }} </a>
+        </div>
+
+    </div>
     <div class="card-body">
         {!! $dataTable->table(['class' => 'table table-separate table-head-custom table-checkable'])  !!}
     </div>

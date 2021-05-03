@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth'])->group(function () {
     Route::resource('/users', 'UserController')->except('index');
     Route::get('/users', 'UserController@dataTable')->name('users.index');
-    Route::resource('/roles', 'RoleController');
+    Route::resource('/roles', 'RoleController')->except('index');
+    Route::get('/roles', 'RoleController@dataTable')->name('roles.index');
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');
     Route::get('notifications', 'NotificationController@index')->name('notifications.index');
 
