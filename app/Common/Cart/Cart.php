@@ -51,6 +51,14 @@ class Cart
     {
         return !!$this->branch;
     }
+    public function hasType()
+    {
+        return !!$this->type;
+    }
+    public function hasDiscount()
+    {
+        return !!$this->discount;
+    }
     public function update($productId, $quantity)
     {
         return $this->user->{$this->getType()}()->wherePivot('branch_id', $this->branch->id)->wherePivot('type', $this->getType())->updateExistingPivot($productId, [
@@ -60,6 +68,21 @@ class Cart
     public function delete($productId)
     {
         return $this->user->{$this->getType()}()->wherePivot('branch_id', $this->branch->id)->wherePivot('type', $this->getType())->detach($productId);
+    }
+    public function subtotalWithoutDiscount()
+    {
+        $products = $this->user->{$this->getType()}->where('pivot.branch_id', $this->branch->id);
+        return new Money(
+            app(PriceCalculator::class)->calculcateDiscountedPrice(new Discount, $products)
+        );
+    }
+    public function discountValue()
+    {
+        return new Money(
+            $this->hasDiscount() ?   $this->subtotalWithoutDiscount()->amount() - $this->subtotal()->amount():0
+        );
+
+         
     }
     function empty() {
         $this->user->{$this->getType()}()->wherePivot('branch_id', $this->branch->id)->wherePivot('type', $this->getType())->detach();
@@ -77,6 +100,7 @@ class Cart
     }
     public function subtotal()
     {
+
         $products = $this->user->{$this->getType()}->where('pivot.branch_id', $this->branch->id);
         return new Money(
             app(PriceCalculator::class)->calculcateDiscountedPrice($this->discount, $products)
@@ -118,6 +142,11 @@ class Cart
             return new Money($this->branch->delivery_fee);
 
     }
+    // public function discountValue()
+    // {
+    //         if($this->discount)
+    //         return   $this->subtotal() -   
+    // }
 
     public function products()
     {

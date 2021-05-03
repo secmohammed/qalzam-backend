@@ -30,6 +30,7 @@ class UserResource extends JsonResource
                         'delivery_fee' => $cart->deliveryFee()->formatted(),
                         'total' => $cart->total()->formatted(),
                         'changed' => $cart->hasChanged(),
+                        'discount' => $cart->discountValue()->formatted(),
                     ],
 
                 ],
@@ -50,7 +51,8 @@ class UserResource extends JsonResource
                 'permissions' => array_merge($this->roles->sortByDesc('created_at')->pluck('permissions')->collapse()->toArray(), $this->permissions ?? []),
             ]),
             'reservations' => ReservationResource::collection($this->whenLoaded('reservations')),
-            'cart' => (new CartResource($this->whenLoaded('cart')))->additional($meta ?? []),
+            'cart' => (new CartResource($cart->hasType()?$cart->products() : $this->whenLoaded('cart')))->additional($meta ?? []),
+            // 'cart' => (new CartResource($this->whenLoaded('cart')))->additional($meta ?? []),
         ] + $meta;
     }
 }
