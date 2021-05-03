@@ -48,13 +48,7 @@ class AddressDataTable extends DataTable
                 $created_at = (new Carbon($model->created_at))->format('Y-m-d H:m');
                 return "<span>$created_at</span>";
             })
-            ->addColumn('actions', function ($model) {
-                $btn = "<a href=" . route('addresses.show', ['address' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
-                $btn = $btn . "<a href=" . route('addresses.edit', ['address' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
-
-                return $btn;
-            })
-            ->rawColumns(['actions','created_at','default','status','user.name', 'location.name']);
+            ->rawColumns(['created_at','default','status','user.name', 'location.name']);
     }
 
     /**
@@ -112,7 +106,6 @@ class AddressDataTable extends DataTable
             Column::make('status')->title(__('main.status')),
             Column::make('user.name')->title(__('main.user')),
             Column::make('created_at')->title(__('main.created_at')),
-            Column::computed('actions')->title(__('main.actions')),
         ];
     }
 }
