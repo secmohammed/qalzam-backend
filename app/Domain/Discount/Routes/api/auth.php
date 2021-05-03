@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth.api'], function () {
     Route::apiResource('/discounts', 'DiscountController')->except('index', 'show');
-    Route::get('/discount/validate', 'DiscountUserController@validateCoupon')->name("discount.validate");
+    Route::get('/branches/{branch}/discount/validate', 'DiscountUserController@validateCoupon')->name("discount.validate");
     Route::post('/user_discounts', 'DiscountUserController@store')->name('discounts.purchase');
     ###CRUD_PLACEHOLDER###
 });

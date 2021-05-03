@@ -3,6 +3,7 @@
 namespace App\Domain\Discount\Http\Controllers;
 
 use App\Common\Cart\Cart;
+use App\Domain\Branch\Entities\Branch;
 use Illuminate\Http\Request;
 use Joovlly\DDD\Traits\Responder;
 use App\Domain\Discount\Entities\Discount;
@@ -10,6 +11,7 @@ use App\Domain\Discount\Http\Resources\Discount\DiscountResource;
 use App\Domain\Discount\Repositories\Contracts\DiscountRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 use App\Domain\Discount\Http\Requests\DiscountUser\DiscountUserStoreFormRequest;
+use App\Domain\User\Http\Resources\User\UserResource;
 
 class DiscountUserController extends Controller
 {
@@ -70,7 +72,7 @@ class DiscountUserController extends Controller
 
         return $this->response();
     }
-    public function validateCoupon(Request $request, Cart $cart)
+    public function validateCoupon(Request $request,Branch $branch, Cart $cart)
     {
         $discount = auth()->user()->discounts()->where('code', $request->code)->first();
         // dd($discount);
@@ -81,10 +83,12 @@ class DiscountUserController extends Controller
     
         }
         if($discount->validate()) {
-            $cart->withDiscount($discount);
-            // dd($discount->validate());
+            $cart->setCartType('cart')->withBranch($branch)->withDiscount($discount);
+            // dd();
+            // dd($cart);
+// dd($cart->hasBranch(),$cart->branch,$cart->getType());
 
-            $this->setApiResponse(fn() => response()->json(['valid' => true, 'message' =>'Valid Coupon','discount'=>$discount], 200));
+            $this->setApiResponse(fn() => response()->json(['valid' => true, 'message' =>'Valid Coupon','discount'=>$discount , new UserResource(auth()->user())], 200));
 
             return $this->response();
         }

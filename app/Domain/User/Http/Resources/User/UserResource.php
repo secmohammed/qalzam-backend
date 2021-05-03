@@ -26,6 +26,8 @@ class UserResource extends JsonResource
                     'cart' => [
                         'empty' => $cart->isEmpty(),
                         'subtotal' => $cart->subtotal()->formatted(),
+                        'vat' => $cart->vat()->formatted(),
+                        'delivery_fee' => $cart->deliveryFee()->formatted(),
                         'total' => $cart->total()->formatted(),
                         'changed' => $cart->hasChanged(),
                     ],
