@@ -59,6 +59,10 @@ class Cart
     {
         return !!$this->discount;
     }
+    public function getDiscountId()
+    {
+        return optional($this->discount)->id;
+    }    
     public function update($productId, $quantity)
     {
         return $this->user->{$this->getType()}()->wherePivot('branch_id', $this->branch->id)->wherePivot('type', $this->getType())->updateExistingPivot($productId, [

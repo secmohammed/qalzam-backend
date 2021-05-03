@@ -31,6 +31,7 @@ class UserResource extends JsonResource
                         'total' => $cart->total()->formatted(),
                         'changed' => $cart->hasChanged(),
                         'discount' => $cart->discountValue()->formatted(),
+                        'discount_id' => $cart->getDiscountId(),
                     ],
 
                 ],
