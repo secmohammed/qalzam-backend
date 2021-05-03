@@ -14,7 +14,6 @@
             <div class="col-6">
                 <a href="{{ route('categories.create') }}" class="btn btn-block btn-light btn-hover-primary text-dark-50 text-center py-10 px-5">
 						 <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
-						 <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
