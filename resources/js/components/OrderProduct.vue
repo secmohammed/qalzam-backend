@@ -19,7 +19,7 @@
             <label class="col-form-label text-right col-lg-2 col-sm-12">customer</label>
             <div class="col-lg-8 col-md-7 col-sm-10">
 
-                <multiselect :searchable="true" v-model="usersValue" track-by="id" label="mobile" :options="users"></multiselect>
+                <multiselect :searchable="true" v-model="usersValue" track-by="id" label="nameMobile" :options="users"></multiselect>
 
                 <div v-if="errors['user_id'] " class="fv-plugins-message-container">
 
@@ -279,7 +279,10 @@ export default {
     },
   async  mounted() {
         this.users = this.allUsers
-
+        this.users.forEach(function(user){
+            user.nameMobile = user.name + ' | ' + user.mobile
+            console.log(user.nameMobile)
+        })
         if (this.action === 'edit') {
             const branch = this.branches.find(branch=>branch.id === this.edit.branch_id)
             this.branchesValue = branch;

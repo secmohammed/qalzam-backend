@@ -72,7 +72,7 @@
                                 <div class="row container-fluid mb-5">
                                     <div class="col-xl-0"></div>
                                     <div class="col-xl-10" id="app">
-                                       
+
                                   <category
                                   action="edit"
                                   :categories="{{$categories  }}"
