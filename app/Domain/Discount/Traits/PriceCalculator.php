@@ -14,6 +14,7 @@ class PriceCalculator
      */
     public function calculcateDiscountedPrice(Discount $discount, Collection $products)
     {
+        
         switch ($discount->discountable_type) {
             case 'category':
                 return $this->calculcateDiscountedPriceBasedOnCategory($discount, $products);

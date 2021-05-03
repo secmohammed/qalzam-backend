@@ -16,6 +16,7 @@ class Cart
     protected $type;
     protected $branch;
     protected $discount;
+    const VAT = .15;
     public function __construct(User $user = null)
     {
         $this->user = $user;
@@ -102,11 +103,22 @@ class Cart
     public function total()
     {
         if ($this->subtotal()->amount()) {
-            return $this->subtotal()->add(new Money($this->branch->delivery_fee));
+            return $this->subtotal()->add(new Money($this->branch->delivery_fee + $this->subtotal()->amount()*self::VAT));
 
         }
         return $this->subtotal();
     }
+    public function Vat()
+    {
+            return new Money( $this->subtotal()->amount()* self::VAT);
+
+    }
+    public function deliveryFee()
+    {
+            return new Money($this->branch->delivery_fee);
+
+    }
+
     public function products()
     {
         return $this->user->{$this->getType()}->where('pivot.branch_id', $this->branch->id);

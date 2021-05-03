@@ -2,6 +2,8 @@
 
 namespace App\Domain\Discount\Http\Controllers;
 
+use App\Common\Cart\Cart;
+use App\Domain\Branch\Entities\Branch;
 use App\Domain\Category\Entities\Category;
 use App\Domain\Category\Repositories\Contracts\CategoryRepository;
 use App\Domain\Discount\Datatables\DiscountDataTable;
@@ -222,21 +224,6 @@ class DiscountController extends Controller
         $this->setData('data', $discount);
         $this->useCollection(DiscountResource::class, 'data');
 
-        return $this->response();
-    }
-    public function checkDiscount(Request $request, Discount $discount)
-    {
-        $discount = $discount->where([["code", $request->code], ['status', "active"]])->first();
-        if ($discount) {
-            if (auth()->user()->discounts()->where("id", $discount->id)->exists()) {
-
-                $this->setApiResponse(fn() => response()->json(["data" => $discount, 'isAvailable' => true, 'message' => 'added to cart successfully']));
-                $this->redirectBack();
-            }
-        }
-        // dd(1);
-        $this->setApiResponse(fn() => response()->json(['message' => "discount not available"]));
-        $this->redirectBack();
         return $this->response();
     }
 
