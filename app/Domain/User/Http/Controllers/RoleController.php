@@ -2,6 +2,7 @@
 
 namespace App\Domain\User\Http\Controllers;
 
+use App\Domain\User\Datatables\RoleDataTable;
 use Illuminate\Http\Request;
 use Joovlly\DDD\Traits\Responder;
 use App\Domain\User\Entities\Role;
@@ -71,6 +72,14 @@ class RoleController extends Controller
         return $this->response();
     }
 
+    /**
+     * @param RoleDataTable $dataTable
+     * @return mixed
+     */
+    public function dataTable(RoleDataTable $dataTable)
+    {
+        return $dataTable->render("{$this->domainAlias}::{$this->viewPath}.index");
+    }
     /**
      * Show the form for creating a new resource.
      *
