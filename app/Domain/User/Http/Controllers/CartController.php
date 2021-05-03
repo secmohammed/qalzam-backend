@@ -141,6 +141,7 @@ class CartController extends Controller
         if (!$cart->setCartType('cart')->withBranch($branch)->update($productVariation->id, $request->quantity)) {
             $this->setApiResponse(fn() => response()->json(['message' => 'Cart Could not be updated.'], 422));
         }
+        
         // $this->redirectRoute("{$this->resourceRoute}.show", [$update->id]);
         $this->setData('data', $request->user());
         $this->useCollection(UserResource::class, 'data');

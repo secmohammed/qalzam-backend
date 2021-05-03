@@ -84,12 +84,11 @@ class DiscountUserController extends Controller
         }
         if($discount->validate()) {
             $cart->setCartType('cart')->withBranch($branch)->withDiscount($discount);
-            // dd();
-            // dd($cart);
-// dd($cart->hasBranch(),$cart->branch,$cart->getType());
+        
 
-            $this->setApiResponse(fn() => response()->json(['valid' => true, 'message' =>'Valid Coupon','discount'=>$discount , new UserResource(auth()->user())], 200));
-
+            $this->setApiResponse(fn() => response()->json(['valid' => true, 'message' =>'Valid Coupon', "discount"=> $cart->discountValue()->formatted()], 200));
+            // $this->setData('data', $request->user());
+            // $this->useCollection(UserResource::class, 'data');
             return $this->response();
         }
         $this->setApiResponse(fn() => response()->json(['valid' => false, 'message' =>'invalid'], 400));
