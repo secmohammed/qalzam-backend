@@ -35,7 +35,7 @@
                 <!--end::Layout Themes-->
                 @livewireStyles
                 @stack('styles')
-                <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
+                <link rel="shortcut icon" href="{{ asset('assets/images/qalzam-logo.svg') }}" />
             </head>
             <!--end::Head-->
             <!--begin::Body-->
