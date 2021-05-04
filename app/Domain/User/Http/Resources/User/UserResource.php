@@ -45,7 +45,7 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'name_ar' => $this->name,
             'mobile' => $this->mobile,
-            'avatar' => $this->getFirstMediaUrl('avatar'),
+            'avatar' => $this->getFirstMediaUrl('image'),
             'created_at_human' => $this->created_at->diffForHumans(),
             'wishlist' => new WishlistResource($this->whenLoaded('wishlist')),
             $this->mergeWhen(array_key_exists('roles', $this->getRelations()), [
