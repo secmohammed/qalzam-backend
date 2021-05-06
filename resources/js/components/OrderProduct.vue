@@ -281,18 +281,19 @@ export default {
         this.users = this.allUsers
         this.users.forEach(function(user){
             user.nameMobile = user.name + ' | ' + user.mobile
-            console.log(user.nameMobile)
         })
         if (this.action === 'edit') {
             const branch = this.branches.find(branch=>branch.id === this.edit.branch_id)
             this.branchesValue = branch;
 
+            this.edit.user.nameMobile = this.edit.user.name + ' | ' + this.edit.user.mobile;
             this.usersValue = this.edit.user;
+
             this.addressesValue = this.edit.address;
             this.statusValue = this.edit.status;
 
             this.edit.products.forEach((product, index) => {
-            console.log("🚀 ~ file: OrderProduct.vue ~ line 267 ~ this.edit.products.forEach ~ product", product)
+            // console.log("🚀 ~ file: OrderProduct.vue ~ line 267 ~ this.edit.products.forEach ~ product", product)
 
                 this.productsValue[index] = product
                 this.form.products[index].quantity = product.pivot.quantity
@@ -301,7 +302,7 @@ export default {
 
         }
 
-        console.log("🚀 ~ file: OrderProduct.vue ~ line 194 ~ mounted ~ this.edit", this.edit, this.branches)
+        // console.log("🚀 ~ file: OrderProduct.vue ~ line 194 ~ mounted ~ this.edit", this.edit, this.branches)
     },
     // ,
     methods: {
@@ -322,9 +323,9 @@ export default {
             this.step = step
         },
             productSelected(product,productIndex) {
-                console.log("🚀 ~ file: OrderProduct.vue ~ line 295 ~ productSelected ~ var2", productIndex,product)
+                // console.log("🚀 ~ file: OrderProduct.vue ~ line 295 ~ productSelected ~ var2", productIndex,product)
                 this.form.products[productIndex].id=product.id
-                console.log("🚀 ~ file: OrderProduct.vue ~ line 295 ~ productSelected ~ var2",this.form.products)
+                // console.log("🚀 ~ file: OrderProduct.vue ~ line 295 ~ productSelected ~ var2",this.form.products)
 
                 },
         removeProduct(index) {
@@ -337,7 +338,7 @@ export default {
             })
         },
         userCreated(user){
-            console.log("🚀 ~ file: OrderProduct.vue ~ line 269 ~ userCreated ~ id", user)
+            // console.log("🚀 ~ file: OrderProduct.vue ~ line 269 ~ userCreated ~ id", user)
             this.users.push(user);
 
           this.form.user_id =user.user.id;
@@ -345,13 +346,13 @@ export default {
             this.step = 0.5
         },
         addressCreated(id){
-            console.log("🚀 ~ file: OrderProduct.vue ~ line 269 ~ addressCreated ~ id", id)
+            // console.log("🚀 ~ file: OrderProduct.vue ~ line 269 ~ addressCreated ~ id", id)
             this.form.address_id =id;
             this.step = 2
         }
         ,
         save() {
-console.log("🚀 ~ file: OrderProduct.vue ~ line 314 ~ save ~ this.form", this.form)
+// console.log("🚀 ~ file: OrderProduct.vue ~ line 314 ~ save ~ this.form", this.form)
 
             axios.post("/api/orders", this.form, {
                 headers: {
