@@ -164,7 +164,7 @@ export default {
     },
     watch: {
            "usersValue"(val) {
-           console.log("🚀 ~ file: ReservationProduct.vue ~ line 167 ~ val", val)
+           // console.log("🚀 ~ file: ReservationProduct.vue ~ line 167 ~ val", val)
             this.form.user_id= val.id
         },
           "branchesValue"(val) {
@@ -201,14 +201,15 @@ export default {
         this.users = this.allUsers
         this.users.forEach(function(user){
             user.nameMobile = user.name + ' | ' + user.mobile
-            console.log(user.nameMobile)
         })
         if (this.action === 'edit') {
+            this.edit.user.nameMobile = this.edit.user.name + ' | ' +  this.edit.user.mobile
             this.usersValue = this.edit.user;
 
             // this.form.branch_id = this.edit.branch_id
             this.branchesValue =  this.edit.accommodation.branch
             this.accommodationsValue = this.edit.accommodation
+            this.accommodations = this.edit.accommodation.branch.accommodations
             this.form.start_date = this.edit.start_date
             this.form.end_date = this.edit.end_date
 
