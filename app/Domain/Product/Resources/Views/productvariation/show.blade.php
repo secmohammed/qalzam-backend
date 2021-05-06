@@ -157,11 +157,11 @@
                                 <div class="col-md-12">
                                     <div class="row mb-2">
                                         <strong class='ml-3'><span>{{ __("main.image") }} : </span></strong>
-                                        @if($show->getFirstMedia('product_variation-images'))
+                                        @if($show->getLastMedia('product_variation-images'))
                                         <div id="lightgallery">
-                                            <div data-src="{{ $show->getFirstMedia('product_variation-images')->getUrl() }}">
-                                                <a href="{{ $show->getFirstMedia('product_variation-images')->getUrl() }}">
-                                                    <img class="d-block" src="{{ $show->getFirstMedia('product_variation-images')->getUrl() }}"
+                                            <div data-src="{{ $show->getLastMediaUrl('product_variation-images')}}">
+                                                <a href="{{ $show->getLastMediaUrl('product_variation-images') }}">
+                                                    <img class="d-block" src="{{ $show->getLastMediaUrl('product_variation-images') }}"
                                                          style="width:100%" alt="...">
                                                 </a>
                                             </div>

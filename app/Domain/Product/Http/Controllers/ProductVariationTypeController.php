@@ -100,6 +100,7 @@ class ProductVariationTypeController extends Controller
      */
     public function edit(ProductVariationType $product_variation_type)
     {
+        $product_variation_type->load('translations');
         $this->setData('title', __('main.edit') . ' ' . __('main.product_variation_type') . ' : ' . $product_variation_type->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
@@ -177,6 +178,10 @@ class ProductVariationTypeController extends Controller
     {
         $store = $this->productvariationtypeRepository->create($request->validated());
 
+        $store->setTranslation([
+            'name' => $request->name_ar,
+        ], 'ar');
+
         $this->setData('data', $store);
 
         $this->redirectRoute("{$this->resourceRoute}.show", [$store->id]);
@@ -195,6 +200,11 @@ class ProductVariationTypeController extends Controller
     public function update(ProductVariationTypeUpdateFormRequest $request, ProductVariationType $productVariationType)
     {
         $productVariationType->update($request->validated());
+
+        $productVariationType->setTranslation([
+            'name' => $request->name_ar,
+        ], 'ar', true);
+
         $this->redirectRoute("{$this->resourceRoute}.show", [$productVariationType->id]);
         $this->setData('data', $productVariationType);
         $this->useCollection(ProductVariationTypeResource::class, 'data');

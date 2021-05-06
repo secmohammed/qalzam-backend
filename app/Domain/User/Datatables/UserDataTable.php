@@ -31,13 +31,36 @@ class UserDataTable extends DataTable
                 $created_at     = (new Carbon($model->created_at))->format('Y-m-d H:i');
                 return "<span>$created_at</span>";
             })
+            ->editColumn('type' ,function ($model){
+                switch ($model->type) {
+                    case 'user':
+                        $color = 'primary';
+                        break;
+                    case 'admin':
+                        $color = 'info';
+                        break;
+                    case 'branch':
+                        $color = 'secondary';
+                        break;
+                    case 'kitchen':
+                        $color = 'danger';
+                        break;
+                    default :
+                        $color = 'warning';
+                        break;
+                }
+                return "<span class='badge badge-$color'>$model->type</span>";
+            })
+            ->editColumn('checkbox', function ($model){
+                return "<input type='checkbox' name='users[]' value='$model->id' id='selectResource'/>";
+            })
             ->addColumn('actions', function ($model) {
                 $btn = "<a href=" . route('users.show', ['user' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
                 $btn = $btn . "<a href=" . route('users.edit', ['user' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
 
                 return $btn;
             })
-            ->rawColumns(['actions', 'status','created_at']);
+            ->rawColumns(['actions','checkbox','type', 'status','created_at']);
     }
 
     /**
@@ -50,6 +73,7 @@ class UserDataTable extends DataTable
         return $this->builder()
             ->setTableId('user-table')
             ->columns($this->getColumns())
+            ->addCheckbox([],true)
             ->minifiedAjax()
             ->dom("<'row'<'col-3' l><'col-6 text-right' B><'col-3' f>>
                                 <'row'<'col-12' tr>>
@@ -65,7 +89,11 @@ class UserDataTable extends DataTable
      */
     public function query(user $model)
     {
-        return $model->newQuery()->select('users.*');
+        return $model->newQuery()->when(request('type') === 'user', function ($query){
+            return $query->where('type', 'user');
+        })->when(request('type') != 'user', function ($query){
+            return $query->whereIn('type', ['admin', 'branch','kitchen']);
+        })->select('users.*');
     }
 
     /**
@@ -86,7 +114,9 @@ class UserDataTable extends DataTable
     protected function getColumns()
     {
         return [
+//            Column::computed('checkbox'),
             Column::make('id')->title(__('main.id')),
+            Column::make('type')->title(__('main.type')),
             Column::make('name')->title(__('main.name')),
             Column::make('email')->title(__('main.email')),
             Column::make('mobile')->title(__('main.mobile')),

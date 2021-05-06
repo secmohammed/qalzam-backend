@@ -2,6 +2,8 @@
 
 namespace App\Domain\Category\Http\Requests\Category;
 
+use App\Common\Http\Rules\UniqueValidationArNameRule;
+use App\Domain\Category\Entities\Category;
 use App\Infrastructure\Http\AbstractRequests\BaseRequest as FormRequest;
 
 class CategoryStoreFormRequest extends FormRequest
@@ -26,7 +28,7 @@ class CategoryStoreFormRequest extends FormRequest
     {
         $rules = [
             'name' => 'required|unique:categories,name',
-            'name_ar' => 'required|unique:categories,name',
+            'name_ar' => ['required', new UniqueValidationArNameRule(Category::class)],
             'type' => 'required|in:posts,products,accommodations',
             'categorizable_type' => 'required|in:posts,products,accommodations',
             'categorizable_id' => 'required',

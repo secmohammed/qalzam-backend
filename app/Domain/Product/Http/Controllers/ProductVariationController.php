@@ -107,6 +107,7 @@ class ProductVariationController extends Controller
      */
     public function edit(ProductVariation $product_variation)
     {
+        $product_variation->load('translations');
         $this->setData('title', __('main.edit') . ' ' . __('main.productvariation') . ' : ' . $product_variation->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
@@ -184,10 +185,15 @@ class ProductVariationController extends Controller
     public function store(ProductVariationStoreFormRequest $request)
     {
         $productVariation = $this->productvariationRepository->create($request->validated());
+
+        $productVariation->setTranslation([
+            'name' => $request->name_ar,
+        ], 'ar', true);
+
         app(Pipeline::class)->send([
             'model' => $productVariation,
             'request' => $request,
-            'name' => 'product-variation-images',
+            'name' => 'product_variation-images',
         ])->through([
             HandleFileUpload::class,
         ])->thenReturn();
@@ -210,10 +216,15 @@ class ProductVariationController extends Controller
     public function update(ProductVariationUpdateFormRequest $request, ProductVariation $productVariation)
     {
         $productVariation->update($request->validated());
+
+        $productVariation->setTranslation([
+            'name' => $request->name_ar,
+        ], 'ar', true);
+
         app(Pipeline::class)->send([
             'model' => $productVariation,
             'request' => $request,
-            'name' => 'product-variation-images',
+            'name' => 'product_variation-images',
         ])->through([
             HandleFileUpload::class,
         ])->thenReturn();

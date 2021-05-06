@@ -100,6 +100,7 @@ class IngredientController extends Controller
      */
     public function edit(Ingredient $ingredient)
     {
+        $ingredient->load('translations');
         $this->setData('title', __('main.edit') . ' ' . __('main.ingredient') . ' : ' . $ingredient->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
@@ -176,6 +177,11 @@ class IngredientController extends Controller
     public function store(IngredientStoreFormRequest $request)
     {
         $ingredient = $this->ingredientRepository->create($request->validated());
+
+        $ingredient->setTranslation([
+            'name' => $request->name_ar,
+        ], 'ar');
+
         app(Pipeline::class)->send([
             'model' => $ingredient,
             'request' => $request,
@@ -202,6 +208,11 @@ class IngredientController extends Controller
     public function update(IngredientUpdateFormRequest $request, Ingredient $ingredient)
     {
         $ingredient->update($request->validated());
+
+        $ingredient->setTranslation([
+            'name' => $request->name_ar,
+        ], 'ar', true);
+
         app(Pipeline::class)->send([
             'model' => $ingredient,
             'request' => $request,

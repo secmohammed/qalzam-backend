@@ -78,6 +78,7 @@
                                   :categories="{{$categories  }}"
                                   auth_token="{{ $auth_token }}"
                                   :edit="{{ $edit }}"
+                                  :translations="{{$translations}}"
                                   :type-data="{{ $type_data }}"
                               />
                                 </div>
