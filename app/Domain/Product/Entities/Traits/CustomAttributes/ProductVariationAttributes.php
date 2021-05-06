@@ -22,6 +22,7 @@ trait ProductVariationAttributes
     {
         // dd($this->branches->pluck('id'));
         // dump($this,$this->branches->pluck('id'),session('current_branch'));
+        // dd($this->branches->where('id', session('current_branch')));
         if (session()->has('current_branch')) {
             $value = $this->branches->where('id', session('current_branch'))->first()->pivot->price;
         }
@@ -29,7 +30,7 @@ trait ProductVariationAttributes
         if (is_null($value)) {
             return $this->product->price;
         }
-
+        // dd((new Money($value * 100))->amount());
         return new Money($value * 100);
     }
 

@@ -19,11 +19,11 @@ class MeController extends Controller
     public function update(UserUpdateProfileFormRequest $request)
     {
         auth()->user()->update($request->validated());
-        if ($request->has('avatar')) {
-            if (auth()->user()->hasMedia('avatar')) {
-                auth()->user()->clearMediaCollection('avatar');
+        if ($request->has('image')) {
+            if (auth()->user()->hasMedia('image')) {
+                auth()->user()->clearMediaCollection('image');
             }
-            auth()->user()->addMedia($request->file('avatar'))->toMediaCollection('avatar');
+            auth()->user()->addMedia($request->file('image'))->toMediaCollection('image');
         }
 
         return new UserResource(auth()->user()->fresh());

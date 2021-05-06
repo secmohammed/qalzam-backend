@@ -47,7 +47,6 @@ class CreateOrderPipeline implements Pipeline
         });
         $subtotal = app(PriceCalculator::class)->calculcateDiscountedPrice($request->discount ?? new Discount, $products);
         $attributes = Arr::except($request->validated(), ['products', 'discount_id']) + compact('subtotal');
-
         if ($request->order) {
             $order = $request->order->update($attributes);
         } else {
