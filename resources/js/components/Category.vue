@@ -78,7 +78,6 @@
     </div>
 
     <div class="d-flex justify-content-center mt-5">
-
         <button class="btn btn-secondary" v-if="action === 'create'" @click.prevent="save">
             Create Category
         </button>
@@ -128,6 +127,10 @@ export default {
             default: () => {},
             type: Object,
         },
+        translations: {
+            required: false,
+            type: Array,
+        }
     },
     data() {
         return {
@@ -157,6 +160,7 @@ export default {
                 categorizable_type: null,
                 image: "",
                 name: "",
+                name_ar: "",
                 parent_id: ""
             },
         };
@@ -229,6 +233,9 @@ export default {
             console.log("🚀 ~ file: Category.vue ~ line 254 ~ mounted ~ this.edit", )
 
             this.form.name = this.edit.name
+            this.form.name_ar = this.translations.filter(obj => {
+                return obj.key === 'name'
+            })[0].value
             // this.form.accommodation_id = this.accommodation.id
             // this.branch_id = this.accommodation.branch.id
             // this.form.start_date = this.edit.start_date
@@ -258,7 +265,6 @@ export default {
 
             console.log("🚀 ~ file: Discount.vue ~ line 302 ~ addTagToUser ~ this.form.users", this.form.users)
         },
-
         save() {
             let data = new FormData();
             for (let key in this.form) {

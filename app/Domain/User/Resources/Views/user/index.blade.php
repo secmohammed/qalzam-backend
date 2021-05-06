@@ -70,7 +70,7 @@
 
         </div>
         <div class="card-body">
-            <form action="{{route('users.delete-all')}}" method="post">
+            <form action="{{route('users.delete-all', ['type' => request('type')])}}" method="post">
                 @csrf
                 @method('DELETE')
                 {!! $dataTable->table(['class' => 'table table-separate table-head-custom table-checkable'])  !!}

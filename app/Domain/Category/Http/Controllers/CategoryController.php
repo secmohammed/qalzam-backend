@@ -105,6 +105,7 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         // dd($category);
+//        $category->load('translations');
         $this->setData('title', __('main.edit') . ' ' . __('main.category') . ' : ' . $category->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
@@ -114,8 +115,10 @@ class CategoryController extends Controller
         $this->setData('categories', $categories);
         $this->setData('auth_token', auth()->user()->generateAuthToken());
 
-        $this->setData('edit', $category->load($category->type));
+//        $this->setData('translations', $category->load('translations'));
+        $this->setData('edit', $category->load([$category->type, 'translations']));
         $this->setData('type_data', $category->{$category->type});
+        $this->setData('translations', $category->translations);
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.edit");
 
@@ -184,12 +187,10 @@ class CategoryController extends Controller
      */
     public function store(CategoryStoreFormRequest $request)
     {
-        // dd($request->validated());
         $category = $this->categoryRepository->make($request->validated());
         $category->user()->associate(auth()->user());
         $category->save();
         $category->{$request->type}()->attach($request->categorizable_id);
-        // dd($category->categorizable(), 23);
 
         $category->setTranslation([
             'name' => $request->name_ar,

@@ -2,7 +2,9 @@
 
 namespace App\Domain\Ingredient\Http\Requests\Ingredient;
 
+use App\Common\Http\Rules\UniqueValidationArNameRule;
 use App\Domain\Ingredient\Http\Requests\Ingredient\IngredientStoreFormRequest;
+use Illuminate\Validation\Rule;
 
 class IngredientUpdateFormRequest extends IngredientStoreFormRequest
 {
@@ -34,7 +36,8 @@ class IngredientUpdateFormRequest extends IngredientStoreFormRequest
     public function rules()
     {
         $rules = [
-            'name' => ['required', 'unique:ingredients,name,' . $this->ingredient->name],
+            'name' => ['required', Rule::unique('ingredients', 'name')->ignore($this->ingredient)],
+            'name_ar' => ['required', new UniqueValidationArNameRule('App\Domain\Ingredient\Entities\Ingredient')],
             'ingredient-icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
         ];

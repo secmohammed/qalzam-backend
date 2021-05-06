@@ -40,7 +40,7 @@ class UniqueValidationArNameRule implements Rule
     public function passes($attribute, $value)
     {
         $lowerClassName = lcfirst(explode('\\', $this->class)[4]);
-        if (request()->method() === 'POST') {
+        if (request()->method() === 'POST') { //todo change this validation rule
             return !DB::table('translations')->where('translatable_type', $this->class)->where('value', $value)->exists();
         }
 
