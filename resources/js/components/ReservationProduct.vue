@@ -27,7 +27,7 @@
                     <option label="Label"></option>
                     <option v-for="user in  users" :value="user.id">{{user.name}}</option>
                 </select> -->
-                <multiselect :searchable="true" v-model="usersValue" track-by="id" label="mobile" :options="users"></multiselect>
+                <multiselect :searchable="true" v-model="usersValue" track-by="id" label="nameMobile" :options="users"></multiselect>
 
                 <div v-if="errors['user_id'] " class="fv-plugins-message-container">
 
@@ -199,6 +199,10 @@ export default {
     },
     mounted() {
         this.users = this.allUsers
+        this.users.forEach(function(user){
+            user.nameMobile = user.name + ' | ' + user.mobile
+            console.log(user.nameMobile)
+        })
         if (this.action === 'edit') {
             this.usersValue = this.edit.user;
 

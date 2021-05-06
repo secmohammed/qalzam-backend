@@ -1,13 +1,16 @@
 @extends('theme.app')
 
-@section('styles')
+@push('styles')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.9.2/tailwind.min.css"
           integrity="sha512-l7qZAq1JcXdHei6h2z8h8sMe3NbMrmowhOl+QkP3UhifPpCW2MC4M0i26Y8wYpbz1xD9t61MLT9L1N773dzlOA=="
           crossorigin="anonymous"/>
+    <!--begin::Page Vendors Styles(used by this page)-->
+    <link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
+    <!--end::Page Vendors Styles-->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.min.js" defer></script>
 
-@endsection
+@endpush
 
 @section('content')
 
@@ -49,10 +52,33 @@
         </div>
     </div>
 
-    <livewire:role-datatable
-        model="App\Domain\User\Entities\Role"
-        exclude="updated_at"
-        hideable="select"
-        params="roles"
-    />
+
+    <div class="card card-custom gutter-b">
+        <div class="card-header">
+            <h3 class="card-title">
+                {{ __('main.roles') }}
+            </h3>
+            <div class="card-toolbar">
+                <a href="{{ route('roles.create') }}"
+                   class="btn btn-light-primary font-weight-bolder mr-2">
+                    <i class="ki ki-plus icon-sm"
+                       style="color: #fff"></i> {{ __('main.create') }} </a>
+            </div>
+
+        </div>
+        <div class="card-body">
+            {!! $dataTable->table(['class' => 'table table-separate table-head-custom table-checkable'])  !!}
+        </div>
+    </div>
 @endsection
+
+@push('scripts')
+
+    <!--begin::Page Vendors(used by this page)-->
+    <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+    <!--end::Page Vendors-->
+    <!--begin::Page Scripts(used by this page)-->
+    <script src="{{asset('assets/js/pages/crud/datatables/basic/basic.js')}}"></script>
+    <!--end::Page Scripts-->
+    {!! $dataTable->scripts() !!}
+@endpush
