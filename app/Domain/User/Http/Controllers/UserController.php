@@ -103,6 +103,12 @@ class UserController extends Controller
         return $this->response();
     }
 
+    public function deleteAll(Request $request)
+    {
+        return $request;
+        //todo implement the method logic....
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

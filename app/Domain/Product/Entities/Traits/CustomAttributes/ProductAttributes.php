@@ -21,4 +21,13 @@ trait ProductAttributes
             return $variation->stock_count;
         });
     }
+//
+//    public function getArAttribute($key)
+//    {
+//        if($this->translations->first() != null) {
+//            return $this->translations->first()->where('key', $key)->where('translatable_id', $this->id)->first()->value;
+//        } else {
+//            return '';
+//        }
+//    }
 }

@@ -109,7 +109,7 @@ class ProductController extends Controller
 
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('categories', $this->categoryRepository->where('status', 'active')->where('type', 'products  ')->get());
-
+        $product->load('translations');
         $this->setData('edit', $product);
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.edit");
@@ -179,6 +179,11 @@ class ProductController extends Controller
     {
         $product = $this->productRepository->create($request->validated());
         $product->categories()->attach($request->categories);
+
+        $product->setTranslation([
+            'name' => $request->name_ar,
+        ], 'ar');
+
         app(Pipeline::class)->send([
             'model' => $product,
             'request' => $request,
@@ -207,6 +212,10 @@ class ProductController extends Controller
 
         $product->update($request->validated());
         $product->categories()->sync($request->categories);
+
+        $product->setTranslation([
+            'name' => $request->name_ar,
+        ], 'ar', true);
 
         app(Pipeline::class)->send([
             'model' => $product,

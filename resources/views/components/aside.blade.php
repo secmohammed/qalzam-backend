@@ -786,6 +786,14 @@
                                     <span class="menu-text">{{ __('main.show-all'). ' ' . __('main.users') }}</span>
                                 </a>
                             </li>
+                            <li class="menu-item" aria-haspopup="true">
+                                <a href="{{ route('users.index',['type'=> 'user']) }}" class="menu-link">
+                                    <i class="menu-bullet menu-bullet-dot">
+                                        <span></span>
+                                    </i>
+                                    <span class="menu-text">{{ __('main.show-all'). ' ' . __('main.clients') }}</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>

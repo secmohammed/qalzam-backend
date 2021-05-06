@@ -62,11 +62,24 @@
                    class="btn btn-light-primary font-weight-bolder mr-2">
                     <i class="ki ki-plus icon-sm"
                        style="color: #fff"></i> {{ __('main.create') }} </a>
+                <a href="#" id="testing"
+                   class="btn btn-light-warning text-danger font-weight-bolder mr-2">
+                    <i class="fa fa-trash icon-sm"
+                       style="color: #fff"></i> {{ __('main.delete') }} </a>
             </div>
 
         </div>
         <div class="card-body">
-            {!! $dataTable->table(['class' => 'table table-separate table-head-custom table-checkable'])  !!}
+            <form action="{{route('users.delete-all')}}" method="post">
+                @csrf
+                @method('DELETE')
+                {!! $dataTable->table(['class' => 'table table-separate table-head-custom table-checkable'])  !!}
+
+                <button type="submit" id="testing"
+                   class="btn btn-danger font-weight-bolder mr-2">
+                    <i class="fa fa-trash icon-sm"
+                       style="color: #fff"></i> {{ __('main.delete') }} </button>
+            </form>
         </div>
     </div>
 @endsection
@@ -80,4 +93,14 @@
     <script src="{{asset('assets/js/pages/crud/datatables/basic/basic.js')}}"></script>
     <!--end::Page Scripts-->
     {!! $dataTable->scripts() !!}
+
+@endpush
+@push('scripts')
+    <script>
+        $(document).ready(function() {   //same as: $(function() {
+            $('#dataTablesCheckbox').change(function(){
+                $('input:checkbox').not(this).prop('checked', this.checked);
+            })
+        });
+    </script>
 @endpush

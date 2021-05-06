@@ -62,7 +62,7 @@ class Product extends Model implements HasMedia
     /**
      * @var array
      */
-    protected static $translatables = [];
+    protected static $translatables = ['name'];
 
     public static function newFactory()
     {
