@@ -2,6 +2,7 @@
 
 namespace App\Domain\Order\Http\Controllers;
 
+use App\Common\Transformers\Money;
 use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 use App\Domain\Discount\Repositories\Contracts\DiscountRepository;
 use App\Domain\Location\Repositories\Contracts\LocationRepository;
@@ -204,8 +205,10 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
+        // dd($order->branch);
         $this->setData('title', __('main.show') . ' ' . __('main.order') . ' : ' . $order->id, 'web');
-
+        session(['current_branch' => $order->branch->id]);
+        // dd($order);
         $this->setData('alias', $this->domainAlias, 'web');
 
         $this->setData('show', $order);

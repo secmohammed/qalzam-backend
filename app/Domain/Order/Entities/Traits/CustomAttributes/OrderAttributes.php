@@ -11,7 +11,7 @@ trait OrderAttributes
      */
     public function getSubtotalAttribute($subtotal)
     {
-        return new Money($subtotal * 100);
+        return new Money($subtotal );
     }
 
     /**

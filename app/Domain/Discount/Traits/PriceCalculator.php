@@ -85,6 +85,7 @@ class PriceCalculator
             return !$matchedProducts->contains('id', $product->id);
         });
         return $filteredProducts->reduce(function ($carry, $product) {
+            // dd($product->price->amount() * $product->pivot->quantity);
             return $carry + ($product->price->amount() * $product->pivot->quantity);
         }, $discountedPrice);
     }

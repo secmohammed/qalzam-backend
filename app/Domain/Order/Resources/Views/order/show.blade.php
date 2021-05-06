@@ -130,9 +130,10 @@
                                                                             </div>
                                                                             <!--end::Symbol-->
                                                                             {{ $product->name }} </td>
+                                                                            {{-- @dd($product->price->formatted(), $product->price->amount()) --}}
                                                                             <td class="border-top-0 text-right py-4 align-middle">{{ $product->pivot->quantity }} </td>
                                                                             <td class="border-top-0 text-right py-4 align-middle">{{ $product->price->formatted() }}</td>
-                                                                            <td class="text-primary border-top-0 pr-0 py-4 text-right align-middle">{{ $product->pivot->quantity * $product->price->amount() }} </td>
+                                                                            <td class="text-primary border-top-0 pr-0 py-4 text-right align-middle">{{ (new App\Common\Transformers\Money($product->pivot->quantity * $product->price->amount()))->formatted() }} </td>
                                                                         </tr>
 
                                                                     @endforeach
