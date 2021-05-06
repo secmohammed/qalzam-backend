@@ -85,7 +85,7 @@
                                    data-target="#delete_{{$contract->id}}">
                                     <i class="flaticon2-trash"></i> {{ __("main.delete") }} {{ __("main.contract") }}
                                 </a>
-                              
+
                                 <a title="{{ __('main.edit') }} {{ __('main.contract') }}"
                                    href="{{ route('contracts.edit', $contract->id) }}"
                                    class="btn btn-light-warning font-weight-bolder mr-2">
@@ -112,21 +112,21 @@
                                 <div class="col-md-6 mb-5">
                                     <div class="row mb-2">
                                         <strong class="ml-3"><span>{{ __("main.days") }} : </span></strong>
-                                      
+
                                       @forelse ($contract->days as $day)
-                                          
+
                                       <span>{{ $day }} </span> @if (!$loop->last)
                                       ,
-                                      @endif 
-                                      @empty 
+                                      @endif
+                                      @empty
                                       <span>{{  'N/A' }} </span>
-                                          
+
                                       @endforelse
-                                      
+
                                     </div>
                                     <hr>
                                 </div>
-                            
+
                                 <div class="col-md-6 mb-5">
                                     <div class="row mb-2">
                                         <strong class='ml-3'><span>{{ __("main.status") }} : </span></strong>
@@ -134,7 +134,7 @@
                                     </div>
                                     <hr>
                                 </div>
-                              
+
                                 <div class="col-md-6 mb-5">
                                     <div class="row mb-2">
                                         <strong class='ml-3'><span>{{ __("main.created_at") }} : </span></strong>
@@ -142,7 +142,7 @@
                                     </div>
                                     <hr>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -152,6 +152,32 @@
     </div>
 
 
+    <div class="modal fade" id="delete_{{$contract->id}}" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ __('main.delete') }} {{ __('main.contract') }}
+                        : {{ __('main.contracts') }} #({{ $contract->name }})</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <form action="{{ route('contracts.destroy', $contract->id) }}" method="post">
+                    @csrf
+                    @method("DELETE")
+                    <div class="modal-body">
+                        {{ __('main.delete') }} {{ __('main.contracts') }}: {{ __('main.contracts') }}
+                        #({{ $contract->name }})
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                                data-dismiss="modal">{{ __('main.close') }}</button>
+                        <button type="submit" class="btn btn-danger">{{ __('main.delete') }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 
