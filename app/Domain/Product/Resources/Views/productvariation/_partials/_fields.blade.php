@@ -59,12 +59,12 @@
     <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.images") }}</label>
 
     <div class="col-lg-10 col-md-9 col-sm-12">
-        <input type="file" name="product-variation-images[]" multiple class="form-control {{$errors->has('product-variation-images') ? 'is-invalid':''}}">
+        <input type="file" name="product_variation-images[]" multiple class="form-control {{$errors->has('product_variation-images') ? 'is-invalid':''}}">
         <div class="row">
             <div class="col-md-12">
-                @if($errors->has('product-variation-images'))
+                @if($errors->has('product_variation-images'))
                     <div class="alert alert-danger w-100 m-0" role="alert">
-                        {{$errors->first('product-variation-images')}}
+                        {{$errors->first('product_variation-images')}}
                     </div>
                 @endif
             </div>

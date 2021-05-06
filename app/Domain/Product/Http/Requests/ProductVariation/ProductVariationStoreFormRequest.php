@@ -40,8 +40,8 @@ class ProductVariationStoreFormRequest extends FormRequest
             'price' => ['nullable', 'numeric', 'min:1', 'max:10000'],
             'product_id' => 'required|exists:products,id',
             'product_variation_type_id' => 'required|exists:product_variation_types,id',
-            'product-variation-images' => 'required|array',
-            'product-variation-images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'product_variation-images' => 'required|array',
+            'product_variation-images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'name' => 'required|string|max:255',
         ];
 
