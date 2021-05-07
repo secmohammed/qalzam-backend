@@ -113,9 +113,9 @@
                                 <div class="col-md-12 mb-5">
                                     <div class="row mb-2">
                                         <strong class='ml-3'><span>{{ __("main.gallery") }} : </span></strong>
-                                        @if($album->getFirstMedia('album-gallery'))
+                                        @if($album->getLastMedia('album-gallery'))
                                         <div id="lightgallery">
-                                            <div data-src="{{ $album->getFirstMedia('album-gallery')->getUrl() }}">
+                                            <div data-src="{{ $album->getLastMediaUrl('album-gallery') }}">
                                                 @foreach($album->getMediaCollectionUrl('album-gallery') as $url)
                                                 <a href="{{ $url }}">
                                                     <img class="d-block" src="{{ $url }}"

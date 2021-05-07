@@ -101,7 +101,7 @@
                                     </div>
                                     <hr>
                                 </div>
-                                
+
                                 <div class="col-md-6 mb-5">
                                     <div class="row mb-2">
                                         <strong class="ml-3"><span>{{ __("main.capacity") }} : </span></strong>
@@ -147,11 +147,11 @@
                                 <div class="col-md-12 mb-5">
                                     <div class="row mb-2">
                                         <strong class='ml-3'><span>{{ __("main.accommodation-gallery") }} : </span></strong>
-                                        @if($accommodation->getFirstMedia('accommodation-gallery'))
+                                        @if($accommodation->getLastMedia('accommodation-gallery'))
                                         <div id="lightgallery">
-                                            <div data-src="{{ $accommodation->getFirstMedia('accommodation-gallery')->getUrl() }}">
-                                                <a href="{{ $accommodation->getFirstMedia('accommodation-gallery')->getUrl() }}">
-                                                    <img class="d-block" src="{{ $accommodation->getFirstMedia('accommodation-gallery')->getUrl() }}"
+                                            <div data-src="{{ $accommodation->getLastMediaUrl('accommodation-gallery')}}">
+                                                <a href="{{ $accommodation->getLastMediaUrl('accommodation-gallery')}}">
+                                                    <img class="d-block" src="{{ $accommodation->getLastMediaUrl('accommodation-gallery')}}"
                                                          style="width:100%" alt="...">
                                                 </a>
                                             </div>

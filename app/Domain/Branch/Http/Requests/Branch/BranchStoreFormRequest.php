@@ -43,7 +43,7 @@ class BranchStoreFormRequest extends FormRequest
             'address_1' => 'required|min:8',
             'latitude' => ['nullable', 'regex:/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/', 'unique:branches,latitude'],
             'longitude' => ['nullable', 'regex:/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/', 'unique:branches,longitude'],
-            'branch-gallery' => ['required', 'array'],
+            'branch-gallery' => ['nullable', 'image', 'mimes:png,jpeg,jpg', 'max:2048'],
             'delivery_fee' => 'required|numeric|min:1|max:999',
             'branch-gallery.*' => ['required', 'image', 'mimes:png,jpeg,jpg', 'max:2048'],
             'users' => 'required|array',

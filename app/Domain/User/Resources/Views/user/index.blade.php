@@ -62,10 +62,6 @@
                    class="btn btn-light-primary font-weight-bolder mr-2">
                     <i class="ki ki-plus icon-sm"
                        style="color: #fff"></i> {{ __('main.create') }} </a>
-                <a href="#" id="testing"
-                   class="btn btn-light-warning text-danger font-weight-bolder mr-2">
-                    <i class="fa fa-trash icon-sm"
-                       style="color: #fff"></i> {{ __('main.delete') }} </a>
             </div>
 
         </div>
