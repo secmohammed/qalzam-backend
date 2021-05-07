@@ -112,6 +112,7 @@ class AccommodationController extends Controller
         $this->setData('title', __('main.edit') . ' ' . __('main.accommodation') . ' : ' . $accommodation->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
+        $this->setData('categories', $this->categoryRepository->where('status', 'active')->where('type', 'accommodations')->get());
         $this->setData('branches', $branchRepository->all());
         $this->setData('edit', $accommodation);
         $this->setData('contracts', $contractRepository->all());

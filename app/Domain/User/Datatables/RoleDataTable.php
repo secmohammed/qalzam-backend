@@ -35,8 +35,8 @@ class RoleDataTable extends DataTable
                 return "<span class='font-weight-bold text-info font-size-h3'>$permissions</span>";
             })
             ->addColumn('actions', function ($model) {
-                $btn = "<a href=" . route('users.show', ['user' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
-                $btn = $btn . "<a href=" . route('users.edit', ['user' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
+                $btn = "<a href=" . route('roles.show', ['role' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
+                $btn = $btn . "<a href=" . route('roles.edit', ['role' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
 
                 return $btn;
             })

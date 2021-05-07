@@ -1,6 +1,6 @@
 <br>
 
-<x-forms.days   :action="$action"  :edit="$edit??null" :name="'day'" label="main.day" />
+<x-forms.day   :action="$action"  :edit="$edit??null" :name="'day'" label="main.day" />
 <x-forms.status :action="$action"  :edit="$edit??null"/>
 
 
@@ -9,10 +9,10 @@
     <label  class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.start-time") }}</label>
     <div class="col-lg-10 col-md-9 col-sm-12">
         <input   class="form-control kt_timepicker_1 {{$errors->has('start_time') ? 'is-invalid':''}}"
-        name="start_time" type="time" 
+        name="start_time" type="time"
        id="example-time-input"
         value="{{ $action == 'edit' ? $edit->start_time : '13:45' }}">
-        
+
         <div class="row">
             <div class="col-md-12">
                 @if($errors->has('start_time'))
@@ -29,11 +29,11 @@
     <label  class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.end-time") }}</label>
     <div class="col-lg-10 col-md-9 col-sm-12">
         <input   class="form-control kt_timepicker_1 {{$errors->has('end_time') ? 'is-invalid':''}}"
-       type="time" 
+       type="time"
         id="example-time-input"
-        name="end_time" 
+        name="end_time"
         value="{{ $action == 'edit' ? $edit->end_time : '13:45' }}">
-        
+
         <div class="row">
             <div class="col-md-12">
                 @if($errors->has('end_time'))

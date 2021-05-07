@@ -70,7 +70,7 @@ class DiscountController extends Controller
         $this->setData('categories', $this->categoryRepository->where('type', 'product')->get());
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('users', $this->userRepository->whereHas('roles', function ($query) {
-            $query->where('slug', '!=', 'admin');
+            $query->where('slug', 'user');
         })->get());
         $this->setData('auth_token', auth()->user()->generateAuthToken());
 

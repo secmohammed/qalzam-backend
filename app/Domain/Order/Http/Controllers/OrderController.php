@@ -102,7 +102,7 @@ class OrderController extends Controller
         $this->setData('roles', $this->roleRepository->all());
         $this->setData('locations', $this->locationRepository->all());
         $this->setData('branches', $this->branchRepository->with(['products'])->all(), 'web');
-        $this->setData('users', $this->userRepository->with(['addresses', 'discounts'])->get(), 'web');
+        $this->setData('users', $this->userRepository->with(['addresses', 'discounts'])->findWhere([['type','=','user']]), 'web');
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
 
         $this->setApiResponse(fn() => response()->json(['create_your_own_form' => true]));
@@ -156,7 +156,7 @@ class OrderController extends Controller
         $this->setData('edit', $order->load("products"));
         $this->setData('auth_token', auth()->user()->generateAuthToken());
         $this->setData('branches', $this->branchRepository->with(['products'])->all(), 'web');
-        $this->setData('users', $this->userRepository->with(['addresses', 'discounts'])->get(), 'web');
+        $this->setData('users', $this->userRepository->with(['addresses', 'discounts'])->findWhere(['type' => 'user']), 'web');
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.edit");
 

@@ -9,6 +9,7 @@ use App\Domain\Accommodation\Http\Requests\Contract\ContractUpdateFormRequest;
 use App\Domain\Accommodation\Http\Resources\Contract\ContractResource;
 use App\Domain\Accommodation\Http\Resources\Contract\ContractResourceCollection;
 use App\Domain\Accommodation\Repositories\Contracts\ContractRepository;
+use App\Domain\Category\Repositories\Contracts\CategoryRepository;
 use App\Domain\Product\Repositories\Contracts\TemplateRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 use Illuminate\Http\Request;
@@ -23,6 +24,7 @@ class ContractController extends Controller
      */
     protected $contractRepository;
     protected $templateRepository;
+    protected $categoryRepository;
 
     /**
      * Domain Alias.
@@ -48,10 +50,11 @@ class ContractController extends Controller
     /**
      * @param ContractRepository $contractRepository
      */
-    public function __construct(ContractRepository $contractRepository, TemplateRepository $templateRepository)
+    public function __construct(ContractRepository $contractRepository, TemplateRepository $templateRepository, CategoryRepository $categoryRepository)
     {
         $this->contractRepository = $contractRepository;
         $this->templateRepository = $templateRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**

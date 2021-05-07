@@ -167,7 +167,7 @@
         {{ __("main.branch-gallery") }}
     </label>
     <div class="col-lg-10 col-md-9 col-sm-12">
-        <input type="file" multiple class="form-control {{$errors->has('branch-gallery') ? 'is-invalid':''}}" id="customFile" name="branch-gallery[]">
+        <input type="file" multiple class="form-control {{$errors->has('branch-gallery') ? 'is-invalid':''}}" id="customFile" name="branch-gallery">
         <div class="row">
             <div class="col-md-12">
                 @if($errors->has('branch-gallery'))

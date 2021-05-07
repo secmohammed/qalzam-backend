@@ -210,7 +210,7 @@ export default {
             discounts: [],
             discountIds: [],
             discountTypes: ['product', 'variation', 'category'],
-            status: ['active', 'inActive'],
+            status: ['active', 'inactive'],
             broadcasts: [{id:1,name:'yes'}, {id:0,name:'no'}],
             type: ['percentage', 'amount'],
             users: [],
@@ -220,7 +220,7 @@ export default {
 
                 users: [],
                 type: "",
-                discountable_id: null,
+                discountable_id: [],
                 discountable_type: null,
                 expires_at: "",
                 value: "",
@@ -262,7 +262,7 @@ export default {
 
         },
         "discountIdValue"(val) {
-            this.form.discountable_id = val.id
+            this.form.discountable_id = val
         },
         "broadcastValue"(val) {
             this.form.broadcast = val.id

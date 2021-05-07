@@ -139,11 +139,11 @@
                                 <div class="col-md-12 mb-5">
                                     <div class="row mb-2">
                                         <strong class='ml-3'><span>{{ __("main.icon") }} : </span></strong>
-                                        @if($branch->getFirstMedia('icon'))
+                                        @if($branch->getLastMedia('branch-gallery'))
                                         <div id="lightgallery">
-                                            <div data-src="{{ $branch->getFirstMedia('branch-gallery')->getUrl() }}">
-                                                <a href="{{ $branch->getFirstMedia('branch-gallery')->getUrl() }}">
-                                                    <img class="d-block" src="{{ $branch->getFirstMedia('branch-gallery')->getUrl() }}"
+                                            <div data-src="{{ $branch->getLastMediaUrl('branch-gallery') }}">
+                                                <a href="{{ $branch->getLastMediaUrl('branch-gallery') }}">
+                                                    <img class="d-block" src="{{ $branch->getLastMediaUrl('branch-gallery') }}"
                                                          style="width:100%" alt="...">
                                                 </a>
                                             </div>

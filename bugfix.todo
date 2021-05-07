@@ -1,0 +1,9 @@
+ ☐ Edit update name Ar in Category Domain When Update
+ ☐ Create Order Doesn't Work
+ ☐ Create User Logic Not Correct (insert Address with the user is Wrong)
+ ☐ Create User Logic Not Correct when adding him while creating Order(insert Address with the user is Wrong)
+ ☐ Finish Inout Blade
+ ☐ Clear Media When Delete Resource
+ ☐ Handle discountable_id [] in Discoun.vue (store, update still not working)
+ ☐ Create/Edit Album Should has array of images when create or edit
+

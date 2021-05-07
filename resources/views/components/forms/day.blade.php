@@ -1,16 +1,13 @@
-<!--
- Using When Resource has multiple Days
--->
 <div class="form-group row">
     <label class="col-form-label text-right col-lg-2 col-sm-12">{{__($label) }}  <span
             style="color: red"> * </span></label>
     <div class="col-lg-10 col-md-9 col-sm-12">
         <select class="form-control select2 {{$errors->has($name) ? 'is-invalid':''}}" name="{{ $name}}" {{ $multiple??"" }}>
             <option label="Label"></option>
-            @for ($i = 0; $i < count(config("days.days")); $i++)
-                        <option value="{{  config('days.days')[$i] }}" {{ $action == 'edit' && in_array(config('days.days')[$i], $edit->days) ? 'selected' : '' }}>{{  __('main.'. config('days.days')[$i]) }}</option>
-                    {{-- {{-- {{ dd(config("days")[0]) }} --}}
-            @endfor
+                @for ($i = 0; $i < count(config("days.days")); $i++)
+                <option value="{{  config('days.days')[$i] }}" {{ ($action == 'edit') && $edit->day == config('days.days')[$i] ? 'selected' : '' }}>{{  __('main.'. config('days.days')[$i]) }}</option>
+                {{-- {{-- {{ dd(config("days")[0]) }} --}}
+                @endfor
 
 
         </select>
