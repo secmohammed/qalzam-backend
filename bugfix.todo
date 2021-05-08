@@ -6,4 +6,5 @@
  ☐ Clear Media When Delete Resource
  ☐ Handle discountable_id [] in Discoun.vue (store, update still not working)
  ☐ Create/Edit Album Should has array of images when create or edit
+ ☐ In any nested Set Parent Should have the same type of the selected type in (Location,Category)
 
