@@ -1,0 +1,48 @@
+ .partners {
+     width: $fullwidth;
+     position: relative;
+     margin-top: 80px;
+     @media (max-width: 991px) {
+         margin-top: $com-spacing-7;
+     }
+     .title {
+         @include title;
+     }
+     .partners-slider {
+         @include style-slider;
+         direction: ltr;
+     }
+     .item {
+         display: inline-block;
+         margin: $zero $com-spacing-3;
+         @include style-inner;
+         box-shadow: 0px 0px 11px rgba(0, 0, 0, 0.08);
+         p {
+             position: relative;
+             z-index: 1;
+             font-size: 16px;
+             line-height: 29px;
+             color: $blak;
+         }
+         .name {
+             @include title;
+             margin-top: $com-spacing-6;
+             color: $red;
+             font-size: 16px !important;
+             line-height: 20px;
+             z-index: 1;
+         }
+         .photo {
+             position: absolute;
+             left: $com-spacing-3;
+             bottom: $com-spacing-3;
+             width: 155px;
+             height: 155px;
+             overflow: hidden;
+             avg,
+             img {
+                 width: $fullwidth;
+             }
+         }
+     }
+ }

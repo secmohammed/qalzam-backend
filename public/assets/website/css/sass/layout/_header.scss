@@ -1,0 +1,396 @@
+.header {
+    position: absolute;
+    left: $zero;
+    top: $zero;
+    width: $fullwidth;
+    z-index: 1000;
+    padding: 38px $zero;
+    @include transition(all 0.5s ease-in-out 0s);
+    @media (max-width: 991px) {
+        padding: $com-spacing-3 $zero;
+    }
+    .container {
+        @include flex;
+        justify-content: space-between;
+    }
+    &.sticky {
+        position: fixed;
+        background: $white;
+        padding: $com-spacing-3 $zero;
+        @include transition(all 0.5s ease-in-out 0s);
+        @include prefixer (box-shadow, 4px 4px 60px rgba(0, 0, 0, 0.1), webkit moz o ms);
+        @media (max-width: 991px) {
+            padding: $com-spacing-2 $zero;
+            #cssmenu ul {
+                top: 46px;
+            }
+        }
+    }
+    .logo {
+        img {
+            max-width: 106px;
+        }
+    }
+    #cssmenu {
+        @include position(relative);
+        z-index: 10;
+        #menu-button {
+            display: $none;
+        }
+        ul {
+            li {
+                float: $right;
+                @include position(relative);
+                margin-left: $com-spacing-7;
+                &:hover>ul {
+                    right: $auto;
+                    z-index: ($zindex - 850);
+                    li {
+                        height: 41px;
+                    }
+                }
+                a {
+                    display: $block;
+                    @include position(relative);
+                    text-transform: uppercase;
+                    color: $blak;
+                    font-family: 'GESSTwoBold-Bold';
+                    @include transition(all 0.5s ease-in-out 0s);
+                    outline: $none;
+                    &:hover,
+                    &.active {
+                        color: $red;
+                        &:after {
+                            width: $fullwidth;
+                        }
+                    }
+                    &:after {
+                        content: "";
+                        @include position(absolute, $bottom: 0px, $right: 0px);
+                        width: 0;
+                        background: $red;
+                        height: 2px;
+                        @include transition(all 0.5s ease-in-out 0s);
+                        @media (max-width: 991px) {
+                            display: $none;
+                        }
+                    }
+                }
+            }
+            ul {
+                @include position(absolute, $top: 100%, $right: -9999px);
+                display: block;
+                padding-top: 5px;
+                li {
+                    margin: $zero !important;
+                    height: $zero;
+                    background: #0f1923;
+                    @include transition(all 0.5s ease-in-out 0s);
+                    overflow: hidden;
+                    &.has-sub>a:after {
+                        content: '';
+                        @include position(absolute, $top: 16px, $left: auto, $right: 11px, $bottom: auto);
+                        width: ($zero + 8);
+                        height: ($zero + 2);
+                        display: $block;
+                        background: $white;
+                    }
+                    &.has-sub>a:before {
+                        content: '';
+                        @include position(absolute, $top: 13px, $left: auto, $right: 14px, $bottom: auto);
+                        display: $block;
+                        width: ($zero + 2);
+                        height: ($zero + 8);
+                    }
+                    &.has-sub:hover>a:before {
+                        top: ($zero + 17);
+                        height: $zero;
+                    }
+                    a {
+                        padding: 10px $com-spacing-6 !important;
+                        min-width: 190px !important;
+                        height: $auto !important;
+                        position: relative;
+                        color: $ofwhite !important;
+                        background: $none !important;
+                        font-weight: normal !important;
+                        &::after {
+                            display: $none;
+                        }
+                        &::before {
+                            @include position(absolute, $top: 10px, $right: 14px);
+                            content: "-";
+                            display: $inline;
+                            font-size: 13px;
+                        }
+                        &:hover {
+                            color: $blue !important;
+                        }
+                    }
+                    ul {
+                        margin-left: 100%;
+                        top: $zero !important;
+                        z-index: ($zindex - 830);
+                        &:after {
+                            display: $none;
+                        }
+                    }
+                    &:last-child a {
+                        border: $zero;
+                        padding-bottom: $zero;
+                    }
+                }
+            }
+        }
+    }
+    .icons {
+        display: flex;
+        a {
+            @include flex;
+            width: 48px;
+            height: 48px;
+            background: $white;
+            @include border-radius(50%);
+            box-shadow: 10px 5px 40px rgba(227, 29, 26, 0.25);
+            @media (max-width: 991px) {
+                width: 35px;
+                height: 35px;
+                svg {
+                    width: 18px;
+                }
+            }
+            &:last-child {
+                background: $red;
+                margin-right: $com-spacing-5;
+                @media (max-width: 991px) {
+                    margin-right: $com-spacing-2;
+                }
+            }
+        }
+        .language {
+            position: relative;
+            margin-left: $com-spacing-5;
+            padding-left: $com-spacing-5;
+            @media (max-width: 991px) {
+                margin-left: $com-spacing-2;
+                padding-left: $com-spacing-2;
+            }
+            &::before {
+                content: '';
+                position: absolute;
+                left: $zero;
+                top: $com-spacing-3;
+                width: 1px;
+                height: 24px;
+                background: #C4C4C4;
+                @media (max-width: 991px) {
+                    top: 6px;
+                }
+            }
+            a {
+                background: $none;
+                width: 47px;
+                height: 47px;
+                border: 1px solid $red;
+                color: $red;
+                text-transform: uppercase;
+                font-family: 'Cairo', sans-serif;
+                box-shadow: $none;
+                @media (max-width: 991px) {
+                    width: 34px;
+                    height: 34px;
+                }
+            }
+        }
+    }
+    &.header-inner {
+        position: relative;
+        top: $auto;
+        left: $auto;
+        background: $white;
+        padding: $com-spacing-3 $zero;
+        @include prefixer (box-shadow, 4px 4px 60px rgba(0, 0, 0, 0.1), webkit moz o ms);
+        #cssmenu ul {
+            @media (max-width: 991px) {
+                top: 49px;
+            }
+        }
+        &.sticky {
+            position: fixed;
+            @media (max-width: 991px) {
+                padding: $com-spacing-2 $zero;
+                #cssmenu ul {
+                    top: 45px !important;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:991px) {
+    .header {
+        #cssmenu {
+            @include position(absolute, $left: 154px);
+            width: 180px;
+            z-index: 100;
+            #menu-button {
+                float: $left;
+                display: $block;
+            }
+            ul {
+                @include position(absolute, $top: 25px);
+                width: $fullwidth;
+                display: $none;
+                background: $white;
+                box-shadow: -5px 5px 50px rgba(0, 0, 0, 0.08);
+                z-index: 120;
+                li {
+                    width: $fullwidth;
+                    margin: $zero !important;
+                    position: relative;
+                    a {
+                        width: $fullwidth;
+                        padding: 10px $minmargin;
+                        height: $auto;
+                        margin: $zero;
+                        font-weight: normal;
+                        border-bottom: 1px solid #f1f1f1;
+                    }
+                }
+            }
+            #menu-button {
+                display: $block !important;
+                cursor: pointer;
+                height: 20px;
+                width: 20px;
+                &:after {
+                    @include position(absolute, $top: 10px, $left: 0px);
+                    display: $block;
+                    height: 8px;
+                    width: 20px;
+                    border-top: 2px solid $blak;
+                    border-bottom: 2px solid $blak;
+                    content: '';
+                    @include transition(all 0.3s ease-in-out 0s);
+                }
+                &:before {
+                    @include position(absolute, $top: 4px, $left: 0px);
+                    display: $block;
+                    height: 2px;
+                    width: 20px;
+                    background: $blak;
+                    content: '';
+                    @include transition(all 0.3s ease-in-out 0s);
+                }
+                &.menu-opened:after {
+                    @include rotate(45deg);
+                    background: $red;
+                    top: 11px;
+                    border: $zero;
+                    height: 2px;
+                    width: 20px;
+                    @include transition(all 0.3s ease-in-out 0s);
+                }
+                &.menu-opened:before {
+                    @include rotate(-45deg);
+                    background: $red;
+                    top: 11px;
+                    width: 20px;
+                    @include transition(all 0.3s ease-in-out 0s);
+                }
+            }
+            .submenu-button {
+                @include position(absolute, $top: 0px, $left: 0px);
+                display: $block;
+                border-right: 1px solid #ffffff0f;
+                height: 41px;
+                width: 48px;
+                cursor: pointer;
+                z-index: 10;
+                &.submenu-button.submenu-opened {
+                    background: $blue;
+                }
+            }
+        }
+        #cssmenu ul ul {
+            padding: $zero !important;
+        }
+        #cssmenu ul ul li {
+            height: $auto !important;
+        }
+        #cssmenu ul ul li a {
+            min-width: $fullwidth;
+            border: $zero;
+        }
+        #cssmenu ul ul ul li a {
+            padding-left: 35px;
+        }
+        #cssmenu ul ul li a {
+            min-width: $fullwidth !important;
+            color: $white;
+            background: $none;
+        }
+        #cssmenu ul ul li:hover>a,
+        #cssmenu ul ul li.active>a {
+            color: $white;
+        }
+        #cssmenu ul ul,
+        #cssmenu ul ul ul,
+        #cssmenu.align-right ul ul {
+            position: relative !important;
+            left: 0px;
+            width: 100%;
+            top: 0px !important;
+        }
+        #cssmenu>ul>li.has-sub>a:after,
+        #cssmenu>ul>li.has-sub>a:before,
+        #cssmenu ul ul>li.has-sub>a:after,
+        #cssmenu ul ul>li.has-sub>a:before {
+            display: $none;
+        }
+        #cssmenu ul ul .submenu-button {
+            height: 34px;
+            width: 34px;
+        }
+        #cssmenu .submenu-button:after {
+            @include position(absolute, $top: 20px, $right: 18px);
+            width: 8px;
+            height: 2px;
+            display: block;
+            background: $white;
+            content: '';
+        }
+        #cssmenu ul ul .submenu-button:after {
+            top: 15px;
+            right: 13px;
+        }
+        #cssmenu .submenu-button.submenu-opened:after {
+            background: $white;
+        }
+        #cssmenu .submenu-button:before {
+            @include position(absolute, $top: 17px, $right: 21px);
+            display: $block;
+            width: 2px;
+            height: 8px;
+            background: $white;
+            content: '';
+        }
+        #cssmenu ul ul .submenu-button:before {
+            top: 12px;
+            right: 16px;
+        }
+        #cssmenu .submenu-button.submenu-opened:before {
+            display: $none;
+        }
+    }
+}
+
+@media (max-width:450px) {
+    .header {
+        #cssmenu {
+            width: 152px;
+        }
+    }
+}
+
+// End Header

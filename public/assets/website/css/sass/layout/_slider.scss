@@ -1,0 +1,202 @@
+.slider {
+    width: $fullwidth;
+    position: relative;
+    height: 885px;
+    background: url(../images/slider.png) no-repeat top center/cover;
+    background-size: 100% 100%;
+    padding-top: 140px;
+    @media (max-width: 991px) {
+        padding: 65px $zero 95px $zero;
+        background-size: cover;
+        height: $auto;
+    }
+    .carousel-item {
+        img {
+            object-fit: cover;
+        }
+    }
+    .container {
+        .item {
+            @media (max-width: 991px) {
+                max-width: $fullwidth;
+                flex: $fullwidth;
+                margin-top: $com-spacing-8;
+            }
+            &.flex {
+                display: flex;
+                align-items: center;
+                .inner-text {
+                    margin-top: -70px;
+                    @media (max-width: 991px) {
+                        width: $fullwidth;
+                        text-align: center;
+                        margin-top: $zero;
+                    }
+                }
+            }
+        }
+        .title {
+            @include title;
+            line-height: 45px;
+            @media (max-width: 991px) {
+                line-height: 32px;
+                br {
+                    display: $none;
+                }
+            }
+        }
+        .text {
+            display: block;
+            line-height: 23px;
+            font-size: 16px;
+            color: $blak;
+            margin-top: $com-spacing-5;
+            @media (max-width: 991px) {
+                br {
+                    display: $none;
+                }
+            }
+        }
+        .bottom {
+            @include bottom;
+            width: 166px;
+            margin-top: $com-spacing-8;
+            @media (max-width: 991px) {
+                margin: $zero $auto;
+                margin-top: $com-spacing-6;
+            }
+            svg {
+                margin-right: $com-spacing-5;
+            }
+        }
+        .inner {
+            @include flex;
+            margin: $zero $auto;
+            width: 570px;
+            height: 570px;
+            border: 1px solid #d1362a4f;
+            background: linear-gradient(269.51deg, #FFF5F5 1.27%, #FFF8F8 99.59%);
+            @include border-radius(50%);
+            @media (max-width: 1199px) {
+                width: 465px;
+                height: 465px;
+            }
+            @media (max-width:550px) {
+                width: 270px;
+                height: 270px;
+            }
+            .carousel,
+            .carousel-inner {
+                width: 430px;
+                height: 430px;
+                @include border-radius(50%);
+                @media (max-width: 1199px) {
+                    width: 345px;
+                    height: 345px
+                }
+                @media (max-width:550px) {
+                    width: 200px;
+                    height: 200px;
+                }
+            }
+            .carousel-inner {
+                @include prefixer (box-shadow, 0px 0px 40px #0000005e, webkit moz o ms);
+                .carousel-item {
+                    width: $fullwidth;
+                    height: 430px;
+                    @media (max-width: 1199px) {
+                        height: 345px
+                    }
+                    @media (max-width:550px) {
+                        height: 200px;
+                    }
+                    img {
+                        width: $fullwidth;
+                        min-height: $fullwidth;
+                        object-fit: cover;
+                    }
+                }
+            }
+            ol.carousel-indicators {
+                right: auto;
+                left: -90px;
+                width: auto;
+                display: block;
+                margin: $zero;
+                @media (max-width: 1199px) {
+                    left: -75px;
+                    bottom: -34px;
+                }
+                @media (max-width: 550px) {
+                    left: -41px;
+                    bottom: -66px;
+                }
+                li {
+                    width: 65px;
+                    height: 65px;
+                    @include border-radius(50%);
+                    border: 1px solid #ccc;
+                    margin: $zero;
+                    overflow: hidden;
+                    background: $none;
+                    padding: $com-spacing-1;
+                    @media (max-width: 550px) {
+                        width: 45px;
+                        height: 45px;
+                    }
+                    &.active {
+                        border: 1px solid $red;
+                    }
+                    &:nth-child(1) {
+                        left: 84px;
+                        bottom: 132px;
+                        @media (max-width: 1199px) {
+                            bottom: 110px;
+                        }
+                        @media (max-width: 550px) {
+                            bottom: 94px;
+                        }
+                    }
+                    &:nth-child(2) {
+                        left: 18px;
+                        bottom: 106px;
+                        @media (max-width: 1199px) {
+                            left: 14px;
+                            bottom: 99px;
+                        }
+                    }
+                    &:nth-child(3) {
+                        left: -15px;
+                        bottom: 70px;
+                    }
+                    &:nth-child(4) {
+                        left: -5px;
+                        bottom: 30px;
+                        @media (max-width: 550px) {
+                            left: -3px;
+                            bottom: 37px;
+                        }
+                    }
+                    &:nth-child(5) {
+                        left: 43px;
+                        @media (max-width: 1199px) {
+                            left: 55px;
+                            bottom: 9px;
+                        }
+                        @media (max-width: 550px) {
+                            bottom: 27px;
+                            left: 49px;
+                        }
+                    }
+                    img {
+                        display: block;
+                        width: $fullwidth;
+                        min-height: $fullwidth;
+                        @include border-radius(50%);
+                        object-fit: cover;
+                    }
+                }
+            }
+        }
+    }
+}

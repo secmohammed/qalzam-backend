@@ -186,6 +186,7 @@ return [
         \App\Domain\Branch\Providers\DomainServiceProvider::class,
         \App\Domain\Reservation\Providers\DomainServiceProvider::class,
         \App\Domain\Accommodation\Providers\DomainServiceProvider::class,
+        \App\Domain\Website\Providers\DomainServiceProvider::class
         ###DOMAINS SERVICE PROVIDERS###
     ],
 

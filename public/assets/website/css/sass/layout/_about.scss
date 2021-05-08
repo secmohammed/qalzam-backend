@@ -1,0 +1,220 @@
+.about {
+    width: $fullwidth;
+    position: relative;
+    &:before {
+        content: '';
+        @include position(absolute, $top: 0, $right: -450px);
+        width: 952px;
+        height: 952px;
+        @include border-radius(50%);
+        background: linear-gradient(50.11deg, #FFF8F8 26.49%, rgba(255, 255, 255, 0) 157.03%);
+        @media (max-width: 550px) {
+            right: -645px;
+        }
+    }
+    .item {
+        margin-top: $com-spacing-6;
+        @media (max-width: 991px) {
+            max-width: $fullwidth;
+            flex: $fullwidth;
+        }
+        img {
+            width: $fullwidth;
+        }
+        .title {
+            @include title;
+        }
+        p {
+            display: block;
+            line-height: 23px;
+            font-size: 16px;
+            color: $blak;
+            margin-top: $com-spacing-6;
+            @media (max-width: 991px) {
+                font-size: 12px;
+            }
+        }
+        .bottom {
+            @include bottom;
+            width: 144px;
+            color: $red;
+            border: 1px solid $red;
+            background: #FEF7F7;
+            border: 1px solid #D1362A;
+            box-shadow: 10px 5px 40px rgba(227, 29, 26, 0.15);
+            margin-top: $com-spacing-8;
+            @media (max-width: 991px) {
+                width: 125px;
+                height: 42px;
+                margin-top: $com-spacing-6;
+            }
+            svg {
+                margin-right: $com-spacing-2;
+            }
+        }
+    }
+    .flex {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.aboutus,
+.restaurant-questionnaire,
+.employment {
+    @include section;
+    padding: 56px $zero $com-spacing-5 $zero;
+    @media (max-width: 991px) {
+        padding: $com-spacing-7 $zero;
+    }
+    .wizard {
+        margin-bottom: $com-spacing-4;
+    }
+    .title {
+        @include title;
+    }
+    .content {
+        margin-top: 61px;
+        @media (max-width: 991px) {
+            margin-top: $com-spacing-6;
+        }
+        .title {
+            font-size: 18px !important;
+            line-height: 25px;
+        }
+    }
+    .text {
+        margin-top: $com-spacing-5;
+        line-height: 23px;
+        font-size: 16px;
+        color: $blak;
+    }
+    .item {
+        margin-top: 56px;
+        @media (max-width: 991px) {
+            max-width: $fullwidth;
+            flex: $fullwidth;
+            margin-top: $com-spacing-6;
+        }
+        .inner {
+            @include style-inner;
+            min-height: 242px;
+            @media (max-width: 991px) {
+                min-height: inherit;
+            }
+            .text {
+                margin-top: $com-spacing-2;
+                height: 161px;
+                overflow: hidden;
+                @media (max-width: 991px) {
+                    height: $auto;
+                }
+            }
+        }
+    }
+}
+
+.restaurant-questionnaire,
+.employment {
+    padding: 56px $zero;
+    .item {
+        margin-top: $com-spacing-8;
+        @media (max-width: 991px) {
+            margin-top: $com-spacing-6;
+        }
+        img {
+            max-width: $fullwidth;
+        }
+        .inner {
+            .title {
+                font-size: 15px !important;
+                line-height: 23px;
+                margin-bottom: 36px;
+            }
+            .field {
+                position: relative;
+                margin-bottom: $com-spacing-6;
+                label {
+                    color: $blak;
+                    font-size: 16px;
+                }
+                svg,
+                img {
+                    @include position(absolute, $bottom: $com-spacing-3, $left: 17px);
+                }
+                .form-control,
+                .custom-file-label,
+                .custom-file-input {
+                    width: $fullwidth;
+                    outline: $zero !important;
+                    height: 40px;
+                    @include border-radius(60px !important);
+                    border: 1px solid #C9CCD4;
+                    padding: $com-spacing-2 $com-spacing-4;
+                    color: $blak;
+                }
+                .custom-file-label {
+                    border: 1px dashed #C9CCD4;
+                    padding-right: 170px;
+                }
+                .custom-file-input:lang(en)~.custom-file-label::after {
+                    content: "إرفاق السيرة الذاتية";
+                    background: $none;
+                    height: 40px;
+                    background: url(../images/up.svg) no-repeat center right;
+                    border: $zero;
+                    padding: $zero;
+                    display: flex;
+                    align-items: center;
+                    right: $com-spacing-4;
+                    padding-right: 22px;
+                }
+                select.form-control {
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    text-indent: 1px;
+                    text-overflow: '';
+                }
+                .bottom {
+                    @include bottom;
+                    direction: rtl;
+                    width: $fullwidth;
+                    height: 40px;
+                    @include border-radius(60px);
+                }
+            }
+        }
+    }
+}
+
+.privacy-policy,
+.terms-and-conditions {
+    @include section;
+    padding: 56px 0px;
+    @media (max-width: 991px) {
+        padding: $com-spacing-7 $zero;
+    }
+    .wizard {
+        margin-bottom: $com-spacing-4;
+    }
+    .title {
+        @include title;
+        font-size: 24px;
+    }
+    p {
+        line-height: 26px;
+        font-size: 16px;
+        color: $blak;
+        margin-top: $com-spacing-5;
+    }
+    .content {
+        margin-top: 56px;
+        .title {
+            font-size: 20px !important;
+            line-height: 24px;
+        }
+        .text {
+            margin-top: $com-spacing-5;
+        }
+    }
+}

@@ -1,0 +1,84 @@
+ .best-seller {
+     width: $fullwidth;
+     position: relative;
+     margin-top: -100px;
+     text-align: center;
+     @media (max-width: 991px) {
+         margin-top: -55px;
+     }
+     .title {
+         @include title;
+     }
+     .seller-slider {
+         @include style-slider;
+         direction: ltr;
+     }
+     .item {
+         display: inline-block;
+         margin: $zero $com-spacing-3;
+         padding: $com-spacing-3;
+         background: $white;
+         box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.08);
+         border-radius: 20px 150px 150px 70px;
+         a {
+             display: flex;
+             align-items: center;
+             direction: rtl;
+             .photo {
+                 width: 110px;
+                 height: 110px;
+                 overflow: hidden;
+                 position: relative;
+                 @include border-radius(50%);
+                 @include prefixer (box-shadow, 0px 0px 15px #0000005e, webkit moz o ms);
+                 @media (max-width: 550px) {
+                     max-width: 45px;
+                     height: 45px;
+                 }
+                 img {
+                     width: $fullwidth;
+                     min-height: $fullwidth;
+                     object-fit: cover;
+                 }
+             }
+             .content {
+                 padding-right: $com-spacing-5;
+                 text-align: $right;
+                 @media (max-width: 550px) {
+                     padding-right: $com-spacing-3;
+                 }
+                 .title {
+                     font-size: 14px !important;
+                     line-height: 20px;
+                     font-family: 'GESSTwoMedium-Medium';
+                     height: 40px;
+                     overflow: hidden;
+                     @media (max-width: 550px) {
+                         height: 18px;
+                         br {
+                             display: $none;
+                         }
+                     }
+                 }
+                 .price {
+                     display: block;
+                     margin-top: $com-spacing-6;
+                     color: $red;
+                     font-family: 'GESSTwoBold-Bold';
+                     font-size: 16px;
+                     line-height: 20px;
+                     @media (max-width: 550px) {
+                         margin-top: $com-spacing-1;
+                         font-size: 14px;
+                     }
+                 }
+             }
+         }
+     }
+ }
+ 
+ .bg-seller {
+     margin: $zero;
+     padding: 56px $zero;
+     background: linear-gradient(50.11deg, #FEF7F7 26.49%, rgba(255, 255, 255, 0) 157.03%);
+ }

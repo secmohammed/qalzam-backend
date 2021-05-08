@@ -1,0 +1,125 @@
+.contact,
+.branches {
+    width: $fullwidth;
+    position: relative;
+    background: $white;
+    padding-top: 56px;
+    min-height: 588px;
+    @media (max-width: 991px) {
+        padding: $zero;
+        padding-bottom: $com-spacing-7;
+    }
+    #map {
+        position: absolute;
+        left: $zero;
+        top: $zero;
+        width: 50%;
+        height: 588px;
+        z-index: 10;
+        @media (max-width: 991px) {
+            position: relative;
+            left: $auto;
+            top: $auto;
+            width: $fullwidth;
+            height: 400px;
+        }
+    }
+    .container {
+        z-index: 0;
+        @media (max-width: 991px) {
+            margin-top: $com-spacing-6;
+        }
+    }
+    .wizard {
+        margin-bottom: $com-spacing-4;
+    }
+    .title {
+        @include title;
+        font-size: 28px;
+    }
+    .item {
+        margin-top: $com-spacing-8;
+        @media (max-width: 991px) {
+            max-width: $fullwidth;
+            flex: $fullwidth;
+            margin-top: $com-spacing-4;
+        }
+        .inquiry {
+            @include title;
+            font-size: 16px !important;
+            line-height: 23px;
+        }
+        .con-item {
+            margin-top: $com-spacing-7;
+            @media (max-width: 991px) {
+                margin-bottom: $com-spacing-6;
+            }
+            .title {
+                display: block;
+                margin-top: $com-spacing-2;
+                font-size: 14px !important;
+                line-height: 23px;
+            }
+            a.title {
+                font-weight: bold;
+                font-family: 'Cairo', sans-serif;
+            }
+            .text {
+                line-height: 17px;
+                color: $blak;
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+// End contactus
+.branches {
+    min-height: 1200px;
+    #map {
+        height: 1200px;
+        @media (max-width: 991px) {
+            height: 400px;
+        }
+    }
+    .item {
+        .con-item {
+            margin: $zero;
+            margin-bottom: $com-spacing-7;
+            &:last-child {
+                margin: $zero;
+            }
+            .title {
+                font-size: 18px !important;
+                line-height: 24px;
+                margin: $zero;
+            }
+            .text {
+                margin-top: $com-spacing-4;
+                font-size: 16px;
+                line-height: 23px;
+            }
+            .con-item {
+                display: flex;
+                margin-top: 10px;
+                a {
+                    display: flex;
+                    align-items: center;
+                    margin-left: $com-spacing-7;
+                    font-size: 16px;
+                    line-height: 20px;
+                    color: $blak;
+                    font-weight: 600;
+                    font-family: 'Cairo', sans-serif;
+                    &:last-child {
+                        margin: $zero;
+                    }
+                    img {
+                        max-width: 16px;
+                        margin-left: $com-spacing-2;
+                    }
+                }
+            }
+        }
+    }
+}

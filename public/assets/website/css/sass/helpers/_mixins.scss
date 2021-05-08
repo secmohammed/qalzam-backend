@@ -1,0 +1,432 @@
+@mixin reset {
+    margin: $zero;
+    padding: $zero;
+    border: $zero;
+    text-decoration: $none;
+    list-style: $none;
+    font-size: $fontsize;
+    color: $colortext;
+    font-family: "GESSTextUltraLight-UltraLight";
+}
+
+@mixin position($position, $top: null, $right: null, $bottom: null, $left: null) {
+    position: $position;
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+}
+
+@mixin overlay {
+    content: '';
+    @include position(absolute, $top: 0, $left: 0, $right: auto, $bottom: auto);
+    width: $fullwidth;
+    height: $fullwidth;
+}
+
+@mixin section {
+    width: $fullwidth;
+    @include position(relative);
+    @media (max-width: 991px) {}
+}
+
+@mixin flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin transition($transition...) {
+    -moz-transition: $transition;
+    -o-transition: $transition;
+    -webkit-transition: $transition;
+    transition: $transition;
+}
+
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    border-radius: $radius;
+    background-clip: padding-box;
+}
+
+@mixin rotate($degrees) {
+    -webkit-transform: rotate($degrees);
+    -moz-transform: rotate($degrees);
+    -ms-transform: rotate($degrees);
+    -o-transform: rotate($degrees);
+    transform: rotate($degrees);
+}
+
+@mixin scale($degscale) {
+    -webkit-transform: scale($degscale);
+    -moz-transform: scale($degscale);
+    -ms-transform: scale($degscale);
+    -o-transform: scale($degscale);
+    transform: scale($degscale);
+}
+
+@mixin bottom {
+    @include flex;
+    text-align: center;
+    @include position(relative);
+    overflow: hidden;
+    color: $white;
+    height: 48px;
+    outline: $none;
+    outline-style: $none;
+    border: $zero;
+    background: $red;
+    font-family: 'GESSTwoMedium-Medium';
+    @include border-radius(60px);
+    @include transition(all 0.5s ease-in-out 0s);
+    cursor: pointer;
+    font-size: 12px;
+    &:hover {}
+}
+
+@mixin prefixer ($property, $value, $prefixes: ()) {
+    @each $prefix in $prefixes {
+        #{'-' + $prefix + '-' + $property}: $value;
+    }
+    #{$property}: $value;
+}
+
+@mixin keyFrame ($animation-name) {
+    @-webkit-keyframes #{$animation-name} {
+        @content;
+    }
+    @-moz-keyframes #{$animation-name} {
+        @content;
+    }
+    @keyframes #{$animation-name} {
+        @content;
+    }
+}
+
+@mixin quantity {
+    display: flex;
+    position: absolute;
+    width: 176px;
+    right: $zero;
+    @media (max-width: 450px) {
+        position: relative;
+        right: $auto;
+    }
+    .form-control,
+    .btn {
+        @include flex;
+        text-align: center;
+        color: $blak;
+        @include border-radius(50% !important);
+        width: 48px;
+        height: 48px;
+        background: $none !important;
+        outline: 0px !important;
+        border: $zero;
+        font-family: 'GESSTwoMedium-Medium';
+        font-size: 16px;
+        border: 1px solid #E1E1E1;
+    }
+    .form-control {
+        margin: $zero $com-spacing-4;
+        background: #FEF7F7;
+        border: 1px solid $red;
+        color: $red;
+        box-shadow: 10px 5px 40px rgba(209, 54, 42, 0.25);
+    }
+}
+
+@mixin cancel-icon {
+    @include position(absolute, $top: 16px, $left: 30px);
+    cursor: pointer;
+    display: $none;
+    z-index: 10;
+    @media (max-width: 991px) {
+        display: $block;
+    }
+    &:before,
+    &:after {
+        @include position(absolute, $top: 4px, $right: 0px);
+        display: $block;
+        height: 2px;
+        width: 20px;
+        background: $blak;
+        content: '';
+        @include transition(all 0.3s ease-in-out 0s);
+        @include rotate(-45deg);
+    }
+    &:after {
+        @include rotate(45deg);
+    }
+}
+
+@mixin social {
+    display: flex;
+    direction: ltr;
+    a {
+        @include flex;
+        @include transition(all 0.5s ease-in-out 0s);
+        color: $white;
+        width: 35px;
+        height: 35px;
+        @each $type in $social {
+            &.icon-#{nth($type, 1)} {
+                background: nth($type, 2);
+                &:hover {
+                    color: nth($type, 2);
+                    background: $ofwhite;
+                }
+            }
+        }
+    }
+}
+
+@mixin input {
+    height: 50px;
+    @include border-radius(30px);
+    padding: 8px $minmargin+1px;
+    text-transform: $none;
+    border: 1px solid $ofwhite;
+}
+
+@mixin title {
+    font-size: 24px;
+    color: $blak;
+    line-height: 35px;
+    font-family: 'GESSTwoBold-Bold';
+    @include position(relative);
+    @media (max-width: 991px) {
+        font-size: 20px;
+    }
+}
+
+@mixin map-back {
+    @include section;
+    height: 350px;
+    padding: $zero;
+    background: $white url(../images/slides/img1.jpg) no-repeat fixed center center/cover;
+    @include flex;
+    @media (max-width: 991px) {
+        height: 250px;
+    }
+    &:before {
+        @include overlay;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    .title {
+        @include title;
+        color: $white;
+        padding: $zero;
+        margin-top: $zero;
+        font-size: 28px;
+        &:before {
+            display: $none;
+        }
+    }
+    .maplink {
+        margin-top: 10px;
+        text-align: center;
+        @media (max-width: 991px) {
+            margin-top: $zero;
+        }
+        li {
+            display: $inline;
+            color: $ofwhite;
+            font-weight: bold;
+            font-size: 14px;
+            a {
+                color: $white;
+                position: relative;
+                padding-right: $minmargin;
+                font-size: 14px;
+                @include transition(all 0.5s ease-in-out 0s);
+                &:hover {
+                    color: $green;
+                }
+                &:before {
+                    @include position(absolute, $top: 0px, $right: 2px);
+                    content: "/";
+                    display: $inline;
+                    color: $white;
+                }
+            }
+        }
+    }
+}
+
+@mixin wizard-style {
+    li {
+        display: $inline;
+        margin-left: $com-spacing-4;
+        color: $blak;
+        font-size: 16px;
+        line-height: 14.4px;
+        font-family: 'GESSTwoBold-Bold';
+        a {
+            @include flex;
+            position: relative;
+            color: $blak;
+            font-size: 16px;
+            line-height: 14.4px;
+            @include transition(all 0.5s ease-in-out 0s);
+            &:hover {
+                color: $red;
+            }
+            svg {
+                margin-right: $com-spacing-4;
+                @include rotate(180deg);
+            }
+        }
+    }
+}
+
+@mixin hyprlink {
+    display: inline-block;
+    width: $fullwidth;
+    color: #888888;
+    @include transition(all 0.5s ease-in-out 0s);
+    &:hover {
+        color: $red;
+    }
+}
+
+@mixin style-slider {
+    @include position(relative);
+    .slick-list {
+        @include position(relative);
+        display: $block;
+        overflow: hidden;
+        outline: $none;
+        margin: $zero -12px;
+        .slick-track {
+            @include position(relative, $top: 0, $left: auto, $right: auto, $bottom: auto);
+            display: $block;
+            overflow: hidden;
+            padding: $com-spacing-6 $zero $com-spacing-5 $zero;
+            &:after,
+            &:before {
+                display: table;
+                content: '';
+            }
+        }
+        /// End .slick-track
+    }
+    /// End .Slick-list
+    .slick-next,
+    .slick-prev {
+        @include position(absolute, $top: -14px, $left: 32px);
+        background: $none;
+        color: $blak;
+        cursor: pointer;
+        padding: $zero;
+        outline: $none;
+        border: $zero;
+        @include flex;
+        @include transition(all 0.5s ease-in-out 0s);
+        @media (max-width: 991px) {}
+    }
+    .slick-prev {
+        left: 0px;
+        @media (max-width: 991px) {}
+    }
+    .slick-dots {
+        width: $fullwidth;
+        padding: $zero;
+        list-style: $none;
+        text-align: $senter;
+        margin-top: $com-spacing-6;
+        display: $none !important;
+        li {
+            @include position(relative);
+            display: $inline;
+            margin: $zero 3px;
+            width: 10px;
+            height: 10px;
+            padding: $zero;
+            cursor: pointer;
+            background: $ofwhite;
+            @include border-radius(50%);
+            button {
+                font-size: $zero;
+                line-height: $zero;
+                display: $block;
+                cursor: pointer;
+                color: $white;
+                width: 10px;
+                height: 10px;
+                border: $zero;
+                outline: $none;
+                @include border-radius(50%);
+                background: transparent;
+            }
+        }
+        li.slick-active {
+            background: $blue;
+        }
+    }
+}
+
+@mixin check-box {
+    position: relative;
+    cursor: pointer;
+    font-weight: normal;
+    margin: $zero;
+    padding-right: $com-spacing-6;
+    input[type="checkbox"],
+    input[type="radio"] {
+        @include position(absolute, $left: 9000px);
+    }
+    input[type="checkbox"]+.label-text:before,
+    input[type="radio"]+.label-text:before {
+        content: "";
+        position: absolute;
+        right: 0px;
+        top: 3px;
+        background: $white;
+        border: 1px solid #C4C4C4;
+        box-sizing: border-box;
+        width: 16px;
+        height: 16px;
+        font-style: initial;
+        font-size: 10px;
+    }
+    input[type="checkbox"]:checked+.label-text:before,
+    input[type="radio"]:checked+.label-text:before {
+        content: "\f00c";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: $white;
+        border: 1px solid $red;
+        background: $red;
+        line-height: 1.4em;
+        text-align: center;
+        font-style: initial;
+        animation: effect 250ms ease-in;
+    }
+    span.label-text {
+        color: $blak;
+    }
+    // @keyframes effect {
+    //     0% {
+    //         transform: scale(0);
+    //     }
+    //     25% {
+    //         transform: scale(1.3);
+    //     }
+    //     75% {
+    //         transform: scale(1.4);
+    //     }
+    //     100% {
+    //         transform: scale(1);
+    //     }
+    // }
+}
+
+@mixin style-inner {
+    width: $fullwidth;
+    position: relative;
+    padding: $com-spacing-6;
+    background: $white;
+    @include border-radius(10px);
+    box-shadow: -5px 5px 50px rgba(0, 0, 0, 0.08);
+}
