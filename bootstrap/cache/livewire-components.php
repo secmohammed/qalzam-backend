@@ -3,6 +3,8 @@
   'album-datatable' => 'App\\Http\\Livewire\\AlbumDatatable',
   'branch-datatable' => 'App\\Http\\Livewire\\BranchDatatable',
   'branch-shift-datatable' => 'App\\Http\\Livewire\\BranchShiftDatatable',
+  'card.horizontal-card' => 'App\\Http\\Livewire\\Card\\HorizontalCard',
+  'card.vertical-card' => 'App\\Http\\Livewire\\Card\\VerticalCard',
   'category-datatable' => 'App\\Http\\Livewire\\CategoryDatatable',
   'contract-datatable' => 'App\\Http\\Livewire\\ContractDatatable',
   'delivery-order-datatable' => 'App\\Http\\Livewire\\DeliveryOrderDatatable',

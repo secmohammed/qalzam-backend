@@ -58,6 +58,8 @@ class Branch extends Model implements HasMedia
      */
     protected $table = "branches";
 
+    protected $appends = ['preview_name', 'preview_status'];
+
     public static function newFactory()
     {
         return app(\App\Domain\Branch\Database\Factories\BranchFactory::class)->new();

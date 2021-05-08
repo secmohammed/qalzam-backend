@@ -16,9 +16,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['guest'])->group(function () {
     ###CRUD_PLACEHOLDER###
-    Route::get('test', function (){
-        return 'Hamadaa';
-    });
 
-    Route::get('home', 'PagesController@home');
 });

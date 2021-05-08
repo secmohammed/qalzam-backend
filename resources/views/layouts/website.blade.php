@@ -32,15 +32,10 @@
     </head>
     <body>
         @include('layouts.partials.website.header')
-
-        <section class="slider">
-            <div class="container">
-                <div class="row">
-                    @yield('content')
-                </div>
-            </div>
-        </section>
-        @stack('scripts')
+            @yield('content')
         @include('layouts.partials.website.footer')
+
+        @livewireScripts
+        @stack('scripts')
     </body>
 </html>

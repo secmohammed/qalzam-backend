@@ -1045,6 +1045,7 @@
       'expiration' => 1,
     ),
     'currency' => 'ar_SA',
+    'dashboard-prefix' => 'admin-panel',
   ),
   'queue' => 
   array (
