@@ -1,13 +1,13 @@
 
 <header class="header {{$headerClass ?? ''}}">
     <div class="container">
-        <div class="logo"><a href="index.html"> <img src="{{asset('assets/images/logo.svg')}}" alt="" title=""></a></div>
+        <div class="logo"><a href="{{route('website.home')}}"> <img src="{{asset('assets/images/logo.svg')}}" alt="" title=""></a></div>
         <div id="cssmenu">
             <ul>
                 <li><a class="{{$activeRoute === 'home' ? 'active' : ''}}" href="{{route('website.home')}}">الرئيسية</a></li>
                 <li><a class="{{$activeRoute === 'branches' ? 'active' : ''}}" href="{{route('website.branches')}}">القائمة</a></li>
                 <li><a class="{{$activeRoute === 'gallery' ? 'active' : ''}}" href="{{route('website.galleries')}}">معرض الصور</a></li>
-                <li><a class="{{$activeRoute === 'reservation' ? 'active' : ''}}" href="branch-reservations.html">حجوزات الفروع</a></li>
+                <li><a class="{{$activeRoute === 'reservation' ? 'active' : ''}}" href="{{route('website.reservation')}}">حجوزات الفروع</a></li>
             </ul>
         </div>
         <div class="icons">

@@ -18,3 +18,4 @@ Route::get('/', 'PagesController@home')->name('website.home');
 Route::get('/branches', 'PagesController@branches')->name('website.branches');
 Route::get('galleries', 'PagesController@galleries')->name('website.galleries');
 Route::get('galleries/{gallery}', 'PagesController@gallery')->name('website.gallery');
+Route::get('reservation/', 'PagesController@reservation')->name('website.reservation');

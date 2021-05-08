@@ -3,6 +3,7 @@
 
 namespace App\Domain\Website\Http\Controllers;
 
+use App\Common\Criteria\StatusIsCriteria;
 use App\Domain\Branch\Criteria\BranchHasGalleriesCriteria;
 use App\Domain\Branch\Repositories\Contracts\AlbumRepository;
 use App\Domain\Branch\Repositories\Contracts\BranchRepository;
@@ -79,6 +80,18 @@ class PagesController extends Controller
 
         $this->setData('alias', $this->domainAlias, 'web');
         $this->addView("{$this->domainAlias}::{$this->viewPath}.gallery");
+        return $this->response();
+    }
+
+    public function reservation()
+    {
+        $this->branchRepository->pushCriteria(new StatusIsCriteria(true));
+        $index = $this->branchRepository->orderBy('created_at', 'desc')->all();
+
+        $this->setData('branches', $index, 'web');
+
+        $this->setData('alias', $this->domainAlias, 'web');
+        $this->addView("{$this->domainAlias}::{$this->viewPath}.reservation");
         return $this->response();
     }
 }
