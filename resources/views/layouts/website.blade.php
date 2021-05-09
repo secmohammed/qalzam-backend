@@ -13,7 +13,7 @@
         <link rel="stylesheet" type="text/css" href="{{asset('assets/website/css/jquery-clockpicker.min.css')}}">
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&amp;display=swap" rel="stylesheet">
         <!--link(rel='stylesheet',href='css/home-ltr.css')-->
-        <link rel="icon" href="images/favicon.png" type="image/png">
+        <link rel="icon" href="{{asset('assets/website/images/favicon.png')}}" type="image/png">
         <script src="{{asset('assets/website/js/jquery.js')}}"></script>
         <script src="{{asset('assets/website/js/popper.min.js')}}"></script>
         <script src="{{asset('assets/website/js/bootstrap.min.js')}}"></script>

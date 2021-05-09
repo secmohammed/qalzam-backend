@@ -10,11 +10,21 @@
             </div>
             <div class="col-sm-2 boxfot">
                 <h6 class="title">روابط سريعة</h6>
-                <nav class="navmenu"> <a href="index.html">الرئيسية</a><a href="list-branches.html">القائمة</a><a href="gallary.html">معرض الصور</a><a href="branch-reservations.html">حجوزات الفروع</a><a href="restaurant-questionnaire.html">استبيان المطعم</a></nav>
+                <nav class="navmenu">
+                    <a href="{{route('website.home')}}">الرئيسية</a>
+                    <a href="{{route('website.branches')}}">القائمة</a>
+                    <a href="{{route('website.galleries')}}">معرض الصور</a>
+                    <a href="{{route('website.reservation')}}">حجوزات الفروع</a>
+                    <a href="restaurant-questionnaire.html">استبيان المطعم</a></nav>
             </div>
             <div class="col-sm-2 boxfot">
                 <h6 class="title">من نحن</h6>
-                <nav class="navmenu"> <a href="aboutus.html">عن الشركه</a><a href="branches.html">فروعنا</a><a href="terms-and-conditions.html">الشروط والأحكام</a><a href="privacy-policy.html">سياسة الخصوصية</a><a href="contactus.html">تواصل معانا </a></nav>
+                <nav class="navmenu">
+                    <a href="{{route('website.about')}}">عن الشركه</a>
+                    <a href="{{route('website.branches')}}">فروعنا</a>
+                    <a href="{{route('website.terms-and-conditions')}}">الشروط والأحكام</a>
+                    <a href="{{route('website.policy')}}">سياسة الخصوصية</a>
+                    <a href="{{route('website.contact')}}">تواصل معانا </a></nav>
             </div>
         </div>
     </div>

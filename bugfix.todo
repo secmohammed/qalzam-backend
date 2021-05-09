@@ -6,4 +6,6 @@
  ☐ Clear Media When Delete Resource
  ☐ Handle discountable_id [] in Discoun.vue (store, update still not working)
  ☐ Create/Edit Album Should has array of images when create or edit
-
+ ☐ Add Phone Number To Branch Model
+ ☐ Add Description To Product Variation and description translatable
+ ☐ Make Rate For Order

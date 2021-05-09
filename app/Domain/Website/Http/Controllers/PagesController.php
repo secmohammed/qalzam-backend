@@ -57,6 +57,20 @@ class PagesController extends Controller
         return $this->response();
     }
 
+    /**
+     * @param $branch
+     */
+    public function branch($branch)
+    {
+        $this->branchRepository->pushCriteria(new StatusIsCriteria(true));
+        $show = $this->branchRepository->find($branch);
+        $this->setData('alias', $this->domainAlias, 'web');
+        $this->setData('branch', $show, 'web');
+
+        $this->addView("{$this->domainAlias}::{$this->viewPath}.branch");
+        return $this->response();
+    }
+
     public function galleries()
     {
         $this->branchRepository->pushCriteria(BranchHasGalleriesCriteria::class);
@@ -83,7 +97,7 @@ class PagesController extends Controller
         return $this->response();
     }
 
-    public function reservation()
+    public function showReservation()
     {
         $this->branchRepository->pushCriteria(new StatusIsCriteria(true));
         $index = $this->branchRepository->orderBy('created_at', 'desc')->all();
@@ -93,5 +107,39 @@ class PagesController extends Controller
         $this->setData('alias', $this->domainAlias, 'web');
         $this->addView("{$this->domainAlias}::{$this->viewPath}.reservation");
         return $this->response();
+    }
+
+    public function reservation()
+    {
+        //todo implement submit reservation
+    }
+
+    public function about()
+    {
+        $this->setData('alias', $this->domainAlias, 'web');
+        $this->addView("{$this->domainAlias}::{$this->viewPath}.about");
+        return $this->response();
+    }
+
+    public function contact()
+    {
+        $this->setData('alias', $this->domainAlias, 'web');
+        $this->addView("{$this->domainAlias}::{$this->viewPath}.contact");
+        return $this->response();
+    }
+
+    public function termsAndConditions()
+    {
+        $this->setData('alias', $this->domainAlias, 'web');
+        $this->addView("{$this->domainAlias}::{$this->viewPath}.terms-and-conditions");
+        return $this->response();
+    }
+
+    public function policy()
+    {
+        $this->setData('alias', $this->domainAlias, 'web');
+        $this->addView("{$this->domainAlias}::{$this->viewPath}.policy");
+        return $this->response();
+
     }
 }
