@@ -16,6 +16,6 @@ Route::get('/', function () {
 })->prefix(config('qalzam.dashboard-prefix'));
 
 Route::get('login', 'Auth\LoginController@showLoginForm')->prefix(config('qalzam.dashboard-prefix'))->name('login');
-Route::post('login', 'Auth\LoginController@login');
+Route::post('login', 'Auth\LoginController@login')->name('auth.login');
 
 Route::post('/reset_password/{token}', 'Auth\ResetPasswordController@resetPassword')->name('reset_password');

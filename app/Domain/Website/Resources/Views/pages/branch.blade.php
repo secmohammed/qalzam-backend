@@ -43,7 +43,7 @@
         </div>
         <div class="most-wanted">
             <div class="row">
-                <livewire:most-ordered-product
+                <livewire:branch-products
                     :action="'add-to-cart'"
                     :pagination="'true'"
                     :branchId="$branch->id"

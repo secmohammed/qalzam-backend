@@ -11,33 +11,34 @@
             </div>
             <form action="{{route('auth.register')}}" method="post">
                 @csrf
-                <!--div.alert.alert-success
-                svg(width="30" height="30" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg")
-                  path(d="M39.2853 18.2363V20.0106C39.2829 24.1694 37.9363 28.2161 35.4461 31.547C32.956 34.8779 29.4559 37.3147 25.4678 38.4939C21.4796 39.673 17.2172 39.5314 13.3161 38.0902C9.41497 36.6489 6.08427 33.9852 3.82072 30.4964C1.55717 27.0075 0.482036 22.8805 0.755672 18.7307C1.02931 14.5809 2.63705 10.6307 5.33912 7.46926C8.04119 4.30784 11.6928 2.10457 15.7494 1.18804C19.8059 0.271518 24.0501 0.690841 27.8489 2.38348M39.2853 4.58207L19.9996 23.8871L14.2139 18.1014" stroke="white" stroke-linecap="round" stroke-linejoin="round")
-                div.contant
-                  p تم التسجيل بنجاح
-                -->
-                <!--div.alert.alert-danger
-                 svg(width="30" height="36" viewBox="0 0 40 46" fill="none" xmlns="http://www.w3.org/2000/svg")
-                   path(d="M30.3317 9.61971L31.7399 10.699C35.0394 13.2307 37.432 16.7611 38.5611 20.7637C39.6901 24.7664 39.4951 29.0267 38.005 32.9094C36.5149 36.7921 33.8097 40.0892 30.2927 42.3088C26.7757 44.5284 22.6355 45.5517 18.4894 45.226C14.3434 44.9003 10.4137 43.2431 7.28642 40.5016C4.15914 37.7601 2.00185 34.0812 1.13628 30.0134C0.270714 25.9457 0.743244 21.7071 2.4834 17.9299C4.22355 14.1526 7.1381 11.0391 10.7924 9.05358M20.4942 1.31382L20.7017 27.5582" stroke="white" stroke-linecap="round" stroke-linejoin="round")
-                 div.contant
-                   p هناك خطأ ما , يرجى إعاده المحاولة
 
-                div.field
-                 input(type="text" class="form-control" placeholder="Username" value="")
-                 svg(width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg")
-                  g(opacity="0.15")
-                   path(fill-rule="evenodd" clip-rule="evenodd" d="M11.2505 11.9998V10.4997C11.588 10.3324 12.5533 9.18338 12.6545 8.2856C12.92 8.26534 13.3371 8.02158 13.4601 7.05929C13.5261 6.54252 13.2636 6.25226 13.1045 6.16076C13.1045 6.16076 13.5006 5.40848 13.5006 4.50019C13.5006 2.67911 12.7858 1.12505 11.2505 1.12505C11.2505 1.12505 10.7172 0 9.00037 0C5.81874 0 4.50019 2.04084 4.50019 4.50019C4.50019 5.32822 4.8962 6.16076 4.8962 6.16076C4.7372 6.25226 4.47469 6.54327 4.54069 7.05929C4.66369 8.02158 5.08071 8.26534 5.34622 8.2856C5.44748 9.18338 6.41277 10.3324 6.75028 10.4997V11.9998C6.00025 14.2498 0 12.7498 0 18H18.0007C18.0007 12.7498 12.0005 14.2498 11.2505 11.9998Z" fill="#1C1C1C")
-                -->
+{{--                <div class="alert alert-success">--}}
+{{--                    <svg width="30" height="30" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
+{{--                        <path d="M39.2853 18.2363V20.0106C39.2829 24.1694 37.9363 28.2161 35.4461 31.547C32.956 34.8779 29.4559 37.3147 25.4678 38.4939C21.4796 39.673 17.2172 39.5314 13.3161 38.0902C9.41497 36.6489 6.08427 33.9852 3.82072 30.4964C1.55717 27.0075 0.482036 22.8805 0.755672 18.7307C1.02931 14.5809 2.63705 10.6307 5.33912 7.46926C8.04119 4.30784 11.6928 2.10457 15.7494 1.18804C19.8059 0.271518 24.0501 0.690841 27.8489 2.38348M39.2853 4.58207L19.9996 23.8871L14.2139 18.1014" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>--}}
+{{--                    </svg>--}}
+{{--                    <div class="contant">--}}
+{{--                        <p>تم التسجيل بنجاح</p>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+                <div class="alert alert-danger" id="errorContainer">
+                    <svg width="30" height="36" viewBox="0 0 40 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M30.3317 9.61971L31.7399 10.699C35.0394 13.2307 37.432 16.7611 38.5611 20.7637C39.6901 24.7664 39.4951 29.0267 38.005 32.9094C36.5149 36.7921 33.8097 40.0892 30.2927 42.3088C26.7757 44.5284 22.6355 45.5517 18.4894 45.226C14.3434 44.9003 10.4137 43.2431 7.28642 40.5016C4.15914 37.7601 2.00185 34.0812 1.13628 30.0134C0.270714 25.9457 0.743244 21.7071 2.4834 17.9299C4.22355 14.1526 7.1381 11.0391 10.7924 9.05358M20.4942 1.31382L20.7017 27.5582" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <div class="contant">
+                        <p>هناك خطأ ما , يرجى إعاده المحاولة</p>
+                        <div class="" id="registerErrors"></div>
+                    </div>
+                </div>
+
                 <div class="row">
-                    <div class="col-sm-6 field">
-                        <input class="form-control" type="text" placeholder="الإسم الأول" value="">
-                    </div>
-                    <div class="col-sm-6 field">
-                        <input class="form-control" type="text" placeholder="الإسم الأخير" value="">
-                    </div>
                     <div class="col-sm-12 field">
-                        <input class="form-control" type="text" placeholder="البريد الإلكتروني" value="">
+                        <input class="form-control" name="name" type="text" placeholder="الإسم" value="">
+                    </div>
+{{--                    <div class="col-sm-6 field">--}}
+{{--                        <input class="form-control" type="text" placeholder="الإسم الأخير" value="">--}}
+{{--                    </div>--}}
+                    <div class="col-sm-12 field">
+                        <input class="form-control" name="registerEmail" type="text" placeholder="البريد الإلكتروني" value="">
                     </div>
                     <div class="col-sm-12 field">
                         <div class="row">
@@ -50,18 +51,18 @@
                                 </select>
                             </div>
                             <div class="col-sm-8 item">
-                                <input class="form-control" type="number" placeholder="رقم الجوال" value="">
+                                <input class="form-control" name="phone_number" type="number" placeholder="رقم الجوال" value="">
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-12 field">
-                        <input class="form-control" type="password" placeholder="الرقم السري" value="">
+                        <input class="form-control" name="registerPassword" type="password" placeholder="الرقم السري" value="">
                     </div>
                     <div class="col-sm-12 field">
-                        <input class="form-control" type="password" placeholder="تأكيد الرقم السري" value="">
+                        <input class="form-control" name="password_confirmation" type="password" placeholder="تأكيد الرقم السري" value="">
                     </div>
                     <div class="col-sm-12 field">
-                        <button class="bottom" type="submit">إنشاء حساب  </button>
+                        <button class="bottom" type="button" id="signupButton">إنشاء حساب  </button>
                     </div>
                     <div class="col-sm-12 field">
                         <p class="textsign">   لديك حساب ؟<a href="#login" data-toggle="modal" data-dismiss="modal">تسجيل الدخول  </a></p>
@@ -71,3 +72,41 @@
         </div>
     </div>
 </div>
+@push('scripts')
+    <script>
+        $("#errorContainer").hide()
+        $("#signupButton").click(function (event){
+            event.preventDefault();
+            let name = $("input[name=name]").val();
+            let mobile = $("input[name=phone_number]").val();
+            let email = $("input[name=registerEmail]").val();
+            let password = $("input[name=registerPassword]").val();
+            let password_confirmation = $("input[name=password_confirmation]").val();
+            let _token   = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: "{!! route('auth.register') !!}",
+                type:"POST",
+                data:{
+                    name:name,
+                    mobile:mobile,
+                    email:email,
+                    password:password,
+                    password_confirmation:password_confirmation,
+                    _token:_token
+                },
+                success:function(response){
+                    window.location.href = response
+                },
+                error:function (response){
+                    $("#registerErrors").empty();
+                    $("#errorContainer").show();
+                    $.each(response.responseJSON.errors, function (key, item)
+                    {
+                        console.log(item)
+                        $("#registerErrors").append("<li class='text-light m-2 font-weight-bold'>"+item+"</li>")
+                    });
+                }
+            });
+        })
+    </script>
+@endpush

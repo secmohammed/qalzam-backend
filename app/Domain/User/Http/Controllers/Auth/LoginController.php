@@ -108,7 +108,12 @@ class LoginController extends Controller
 
         }
 
-        $this->redirectRoute('dashboard');
+        if(auth()->user()->type == 'user'){
+
+            return route('website.home');
+        }
+        else
+            $this->redirectRoute('dashboard');
 
         return $this->response();
     }
@@ -120,7 +125,7 @@ class LoginController extends Controller
     {
         auth()->logout();
         $this->setData('message', __('main.user.logout'));
-        $this->redirectRoute('login');
+        $this->redirectRoute('website.home');
         $this->setApiResponse(fn() => response()->json([
             'message' => __('main.user.logout'),
         ]));

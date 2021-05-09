@@ -2,6 +2,7 @@
   'accommodation-datatable' => 'App\\Http\\Livewire\\AccommodationDatatable',
   'album-datatable' => 'App\\Http\\Livewire\\AlbumDatatable',
   'branch-datatable' => 'App\\Http\\Livewire\\BranchDatatable',
+  'branch-products' => 'App\\Http\\Livewire\\BranchProducts',
   'branch-shift-datatable' => 'App\\Http\\Livewire\\BranchShiftDatatable',
   'card.cart-card' => 'App\\Http\\Livewire\\Card\\CartCard',
   'card.horizontal-card' => 'App\\Http\\Livewire\\Card\\HorizontalCard',
