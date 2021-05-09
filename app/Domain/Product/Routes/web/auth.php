@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->prefix(config('qalzam.dashboard-prefix'))->group(function () {
     Route::resource('/products', 'ProductController')->except('index');
     Route::get('/products', 'ProductController@datatable')->name('products.index');
     Route::resource('/product_variations', 'ProductVariationController')->except('index');

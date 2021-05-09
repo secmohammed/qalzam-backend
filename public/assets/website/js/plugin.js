@@ -174,14 +174,14 @@
      });
 
 
-     (function($) {
-         $('.spinner .btn:first-of-type').on('click', function() {
-             $('.spinner input').val(parseInt($('.spinner input').val(), 10) + 1);
-         });
-         $('.spinner .btn:last-of-type').on('click', function() {
-             $('.spinner input').val(parseInt($('.spinner input').val(), 10) - 1);
-         });
-     })(jQuery);
+     // (function($) {
+     //     $('.spinner .btn:first-of-type').on('click', function() {
+     //         $('.spinner input').val(parseInt($('.spinner input').val(), 10) + 1);
+     //     });
+     //     $('.spinner .btn:last-of-type').on('click', function() {
+     //         $('.spinner input').val(parseInt($('.spinner input').val(), 10) - 1);
+     //     });
+     // })(jQuery);
 
 
      $('.onshow').click(function() {
@@ -270,7 +270,7 @@
          padding: 0,
          border_w: 0,
      });
-     //End slider photo  
+     //End slider photo
 
      var date_input = $('input[name="date"]'); //our date input has the name "date"
      var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";

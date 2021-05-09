@@ -58,7 +58,7 @@ class RegisterController extends Controller
         $this->setData('data', $user);
 
         $this->useCollection(UserResource::class, 'data');
-        $this->redirectRoute('dashboard');
+        $this->redirectRoute('website.login');
 
         return $this->response();
     }

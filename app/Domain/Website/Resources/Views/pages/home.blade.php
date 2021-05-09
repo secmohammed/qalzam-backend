@@ -47,7 +47,7 @@
                 <h2 class="title">الأكثر مبيعاً</h2>
             </div>
                 <div class="seller-slider">
-                    <livewire:card.horizontal-card />
+                    <livewire:most-sell-product />
                 </div>
         </div>
     </section>
@@ -85,7 +85,10 @@
                     </svg></a>
             </div>
             <div class="row">
-                <livewire:card.vertical-card />
+                <livewire:most-ordered-product
+                    :action="'start-shopping'"
+                    :pagination="'false'"
+                />
             </div>
         </div>
     </section>

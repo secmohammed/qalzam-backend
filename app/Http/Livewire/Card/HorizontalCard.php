@@ -6,6 +6,7 @@ use Livewire\Component;
 
 class HorizontalCard extends Component
 {
+    public $product;
     public function render()
     {
         return view('livewire.card.horizontal-card');

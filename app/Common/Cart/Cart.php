@@ -62,7 +62,7 @@ class Cart
     public function getDiscountId()
     {
         return optional($this->discount)->id;
-    }    
+    }
     public function update($productId, $quantity)
     {
         return $this->user->{$this->getType()}()->wherePivot('branch_id', $this->branch->id)->wherePivot('type', $this->getType())->updateExistingPivot($productId, [
@@ -86,7 +86,7 @@ class Cart
             $this->hasDiscount() ?   $this->subtotalWithoutDiscount()->amount() - $this->subtotal()->amount():0
         );
 
-         
+
     }
     function empty() {
         $this->user->{$this->getType()}()->wherePivot('branch_id', $this->branch->id)->wherePivot('type', $this->getType())->detach();
@@ -149,7 +149,7 @@ class Cart
     // public function discountValue()
     // {
     //         if($this->discount)
-    //         return   $this->subtotal() -   
+    //         return   $this->subtotal() -
     // }
 
     public function products()

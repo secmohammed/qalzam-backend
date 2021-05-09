@@ -112,6 +112,7 @@
       'Sms' => 'Joovlly\\SMS\\Facades\\SMS',
       'PDF' => 'Barryvdh\\DomPDF\\Facade',
       'Toaster' => 'Joovlly\\Toaster\\Facades\\Toaster',
+      'Cart' => 'App\\Common\\Facades\\Cart',
     ),
   ),
   'auth' => 
@@ -1046,6 +1047,7 @@
     ),
     'currency' => 'ar_SA',
     'dashboard-prefix' => 'admin-panel',
+    'vat' => 0.15,
   ),
   'queue' => 
   array (

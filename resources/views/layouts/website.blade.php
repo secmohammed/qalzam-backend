@@ -35,7 +35,13 @@
             @yield('content')
         @include('layouts.partials.website.footer')
 
+        <script src="{{asset('assets/website/js/cart.js')}}"></script>
         @livewireScripts
         @stack('scripts')
+        <script>
+            Livewire.on('amountChanged' ,()=> {
+                alert('amount Changed')
+            })
+        </script>
     </body>
 </html>

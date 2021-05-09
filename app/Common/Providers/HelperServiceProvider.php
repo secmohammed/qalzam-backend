@@ -2,6 +2,7 @@
 
 namespace App\Common\Providers;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
 class HelperServiceProvider extends ServiceProvider
@@ -14,6 +15,9 @@ class HelperServiceProvider extends ServiceProvider
     public function register()
     {
         $this->loadHelpers();
+        App::bind('cart',function() {
+            return new \App\Common\Helpers\Cart;
+        });
     }
 
     /**
