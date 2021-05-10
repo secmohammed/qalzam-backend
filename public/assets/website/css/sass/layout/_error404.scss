@@ -1,0 +1,27 @@
+ .error404 {
+     width: $fullwidth;
+     background: #f9f9f9;
+     @include flex;
+     height: 100vh;
+     text-align: center;
+     .title {
+         @include title;
+         font-size: 140px;
+         @media (max-width: 991px) {
+             font-size: 120px;
+         }
+     }
+     p {
+         color: $blak;
+         font-size: 24px;
+         padding: $com-spacing-7 $zero;
+     }
+     .bottom {
+         @include bottom;
+         float: $none;
+         display: inline-flex;
+         padding: $zero $com-spacing-6;
+     }
+ }
+ 
+ //* End Error404

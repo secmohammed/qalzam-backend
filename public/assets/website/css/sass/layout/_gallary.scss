@@ -1,0 +1,145 @@
+ .gallary {
+     width: $fullwidth;
+     position: relative;
+     background: $white;
+     padding: 56px $zero 80px $zero;
+     @media (max-width: 991px) {
+         padding: $com-spacing-7 $zero;
+     }
+     .wizard {
+         margin-bottom: $com-spacing-4;
+     }
+     .title {
+         @include title;
+     }
+     .nav-tabs {
+         @include style-inner;
+         display: flex;
+         flex-wrap: inherit;
+         border: $zero;
+         height: 56px;
+         padding: 18px $com-spacing-6;
+         overflow: hidden;
+         overflow-x: scroll;
+         margin-top: $com-spacing-8;
+         @media (max-width: 991px) {
+             margin-top: $com-spacing-6;
+         }
+         .nav-item {
+             margin: $zero;
+             border: $zero;
+             margin-left: 40px;
+             white-space: nowrap;
+             text-overflow: ellipsis;
+             .nav-link {
+                 margin: $zero;
+                 border: $zero;
+                 border-bottom: 2px solid transparent;
+                 font-size: 16px;
+                 line-height: 20px;
+                 padding: $zero;
+                 color: $blak;
+                 background: $none;
+                 padding-bottom: 15px;
+                 @media (max-width: 667px) {
+                     font-size: 14px;
+                 }
+                 &.active {
+                     border-bottom: 2px solid $red;
+                     color: $red;
+                     font-family: 'GESSTwoBold-Bold';
+                 }
+             }
+         }
+     }
+     .item-bra {
+         margin-top: $com-spacing-6;
+         @media (max-width: 991px) {
+             max-width: 50%;
+             flex: 50%;
+             margin-top: $com-spacing-4;
+         }
+         @media (max-width: 500px) {
+             max-width: $fullwidth;
+             flex: $fullwidth;
+         }
+         .photo {
+             display: block;
+             width: $fullwidth;
+             height: 240px;
+             overflow: hidden;
+             background: $ofwhite;
+             @include border-radius(5px);
+             filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.3));
+             position: relative;
+             &::after {
+                 content: '';
+                 @include position(absolute, $top: 0px, $left: 0px);
+                 width: $fullwidth;
+                 height: $fullwidth;
+                 z-index: 5;
+                 background: linear-gradient(0.29deg, rgba(227, 29, 26, 0.6) 0.2%, rgba(118, 118, 118, 0.6) 107.55%, rgba(75, 75, 75, 0.6) 107.56%);
+                 opacity: 0.8;
+             }
+             img {
+                 width: $fullwidth;
+                 min-height: $fullwidth;
+                 object-fit: cover;
+                 @include transition(all 0.5s ease-in-out 0s);
+             }
+             &:hover {
+                 img {
+                     @include scale(1.15);
+                 }
+             }
+         }
+         .content {
+             @include position(absolute, $top: 0, $left: 0px);
+             z-index: 10;
+             @include flex;
+             width: $fullwidth;
+             height: $fullwidth;
+             @include transition(all 0.3s ease-in-out 0s);
+             padding: $zero $com-spacing-6;
+             .title {
+                 color: $white;
+                 font-size: 18px !important;
+             }
+             span {
+                 display: block;
+                 margin-top: $com-spacing-1;
+                 color: $white;
+                 font-size: 16px;
+                 line-height: 22px;
+                 text-align: center;
+             }
+         }
+     }
+     .photo-gall {
+         margin-top: $com-spacing-6;
+         @media (max-width: 991px) {
+             max-width: 50%;
+             flex: 50%;
+             margin-top: $com-spacing-4;
+         }
+         @media (max-width: 500px) {
+             max-width: $fullwidth;
+             flex: $fullwidth;
+         }
+         a.elem {
+             display: block;
+             width: $fullwidth;
+             height: 240px;
+             overflow: hidden;
+             border-radius: 15px;
+         }
+     }
+     .elem>span {
+         display: $block;
+         cursor: pointer;
+         height: $fullwidth;
+         padding-bottom: $fullwidth;
+         background-size: cover;
+         background-position: center center;
+     }
+ }

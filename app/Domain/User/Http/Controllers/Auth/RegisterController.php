@@ -7,6 +7,7 @@ use App\Domain\User\Http\Requests\Auth\UserRegisterFormRequest;
 use App\Domain\User\Http\Resources\User\UserResource;
 use App\Domain\User\Repositories\Contracts\UserRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use Illuminate\Support\Facades\Auth;
 use Joovlly\DDD\Traits\Responder;
 
 class RegisterController extends Controller
@@ -58,8 +59,9 @@ class RegisterController extends Controller
         $this->setData('data', $user);
 
         $this->useCollection(UserResource::class, 'data');
-        $this->redirectRoute('dashboard');
-
-        return $this->response();
+        $this->redirectRoute('website.home');
+        Auth::login($user);
+        return route('website.home');
+//        return $this->response();
     }
 }

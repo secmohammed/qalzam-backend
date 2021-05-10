@@ -1,0 +1,162 @@
+ .login,
+ .add-ad {
+     padding: $com-spacing-7;
+     border: $zero;
+     .headtitle {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         .close {
+             @include flex;
+             width: 32px;
+             height: 32px;
+             border: 1px solid #E1E1E1;
+             opacity: 1;
+             text-shadow: $none;
+             outline: $none;
+             z-index: 100;
+             @include border-radius(50%);
+         }
+         .title {
+             @include title;
+             font-size: 20px;
+         }
+     }
+     .text {
+         line-height: 26px;
+         font-size: 18px;
+         color: $blak;
+         margin-top: $com-spacing-4;
+         span {
+             font-family: 'GESSTwoBold-Bold';
+             font-size: 16px;
+         }
+     }
+     .field {
+         position: relative;
+         margin-top: $com-spacing-6;
+         .item {}
+         svg {
+             @include position(absolute, $top: 21px, $left: 28px);
+         }
+         .form-control {
+             width: $fullwidth;
+             outline: $zero !important;
+             height: 48px;
+             @include border-radius(60px);
+             border: 1px solid #C9CCD4;
+             padding: $com-spacing-2 $com-spacing-4;
+             color: $blak;
+             font-weight: 400;
+         }
+         .dr-left {
+             direction: ltr;
+             padding-left: $com-spacing-7;
+         }
+         textarea.form-control {
+             height: 130px;
+             resize: $none;
+             @include border-radius(5px);
+         }
+         select.form-control {
+             -webkit-appearance: none;
+             -moz-appearance: none;
+             text-indent: 1px;
+             text-overflow: '';
+         }
+         .bottom {
+             @include bottom;
+             direction: rtl;
+             width: $fullwidth;
+             height: 48px;
+             @include border-radius(60px);
+             svg {
+                 position: relative;
+                 right: $auto;
+                 left: $auto;
+                 width: 18px;
+                 height: 18px;
+                 top: $auto;
+                 margin-left: $com-spacing-2;
+             }
+         }
+     }
+     .flex {
+         display: flex;
+         justify-content: flex-end;
+         .forgetlink {
+             display: $block;
+             color: $red;
+             font-family: 'GESSTwoMedium-Medium';
+             text-decoration: underline;
+             &:hover {
+                 text-decoration: none;
+             }
+         }
+     }
+     .textsign {
+         font-family: 'GESSTwoMedium-Medium';
+         color: $blak;
+         text-align: center;
+         a {
+             margin-right: 5px;
+             color: $red;
+             font-family: 'GESSTwoMedium-Medium';
+             line-height: 18px;
+             text-decoration: underline;
+             &:hover {
+                 text-decoration: none;
+             }
+         }
+     }
+ }
+ 
+ .add-ad {
+     .field {
+         direction: rtl;
+         svg {
+             right: $auto;
+             left: $com-spacing-6;
+         }
+     }
+ }
+ 
+ //  End signup & login & forget
+ .modal {
+     padding: $zero $com-spacing-4 !important;
+     overflow-x: hidden;
+     overflow-y: auto;
+     background: rgba(0, 0, 0, 0.64);
+     .modal-dialog {
+         max-width: 455px;
+     }
+     .alert {
+         margin: $zero;
+         margin-bottom: $com-spacing-4;
+     }
+     #stars {
+         margin-top: 16px;
+         @media (max-width: 991px) {
+             padding-left: 16px;
+         }
+         @media (max-width: 767px) {
+             padding-left: $zero;
+         }
+         li.star {
+             display: $inline;
+             svg {
+                 position: relative;
+                 left: $auto;
+                 top: $auto;
+                 cursor: pointer;
+             }
+         }
+         li.star.hover>svg,
+         li.star.selected>svg {
+             path {
+                 stroke: $yellow;
+                 fill: $yellow;
+             }
+         }
+     }
+ }

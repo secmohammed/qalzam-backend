@@ -1,0 +1,573 @@
+.overlay {
+    @include overlay;
+    background: #000000c7;
+    z-index: 1000;
+    display: $none;
+}
+
+.show-card {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: $white;
+    width: 516px;
+    overflow: hidden;
+    height: 100vh;
+    //padding: 40px $com-spacing-6;
+    z-index: 1004;
+    -webkit-transform: translateX(-516px);
+    -ms-transform: translateX(-516px);
+    transform: translateX(-516px);
+    @include transition(all 0.3s ease-in-out 0s);
+    @media (max-width: 550px) {
+        width: 300px;
+    }
+    &.active {
+        -webkit-transform: translateX(0px);
+        -ms-transform: translateX(0px);
+        transform: translateX(0px);
+    }
+    .headtitle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 40px $com-spacing-6 $zero $com-spacing-6;
+        @media (max-width: 550px) {
+            padding-top: $com-spacing-6;
+        }
+        .close-card {
+            @include flex;
+            width: 40px;
+            height: 40px;
+            background: #FEF7F7;
+            border: 1px solid $red;
+            box-shadow: 5px 5px 30px rgba(209, 54, 42, 0.35);
+            @include border-radius(50%);
+            @media (max-width: 550px) {
+                width: 30px;
+                height: 30px;
+            }
+        }
+        .title {
+            @include title;
+            font-size: 24px;
+            line-height: 30px;
+        }
+    }
+    .all-items {
+        padding: 40px $com-spacing-6;
+        overflow: hidden;
+        overflow-y: scroll;
+        height: 51%;
+    }
+    .total-price {
+        @include style-inner;
+        position: absolute;
+        bottom: $zero;
+        left: $zero;
+        @include border-radius(0px);
+        .list-price {
+            li {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: $com-spacing-4;
+                p {
+                    font-size: 16px;
+                    color: $blak;
+                    line-height: 20px;
+                }
+                span {
+                    font-size: 16px;
+                    color: $blak;
+                    font-family: 'GESSTwoMedium-Medium';
+                }
+                &:last-child {
+                    border-top: 1px solid #E7EDEF;
+                    padding-top: $com-spacing-4;
+                }
+            }
+        }
+        .bottom {
+            @include bottom;
+            margin-top: $com-spacing-7;
+            svg,
+            img {
+                width: 18px;
+                height: 18px;
+                margin-left: $com-spacing-2;
+                @media (max-width: 991px) {
+                    width: 18px;
+                    height: 18px;
+                }
+            }
+        }
+    }
+}
+
+.itemcard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding-right: 36px;
+    margin-bottom: $com-spacing-5;
+    @media (max-width: 550px) {
+        display: block;
+    }
+    .delet-card {
+        position: absolute;
+        right: $zero;
+        @include flex;
+        width: 24px;
+        height: 24px;
+        background: $white;
+        border: 1px solid #E1E1E1;
+        @include border-radius(50%);
+        @media (max-width: 550px) {
+            top: 18px;
+        }
+    }
+    .item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        @media (max-width: 550px) {
+            justify-content: flex-start;
+        }
+        .photo {
+            @include style-inner;
+            width: 56px;
+            height: 56px;
+            padding: $com-spacing-2;
+            display: block;
+            overflow: hidden;
+            img {
+                width: $fullwidth;
+                min-height: $fullwidth;
+                object-fit: cover;
+                @include border-radius(50%);
+            }
+        }
+        .content {
+            padding-right: 10px;
+            span {
+                color: $red;
+                font-size: 12px;
+            }
+            .title {
+                @include title;
+                font-size: 12px !important;
+                line-height: 14.94px;
+                margin-top: $com-spacing-1;
+            }
+            p {
+                display: block;
+                font-size: 12px;
+                color: $blak;
+                margin-top: $com-spacing-1;
+            }
+        }
+    }
+    .price {
+        display: block;
+        font-family: 'GESSTwoBold-Bold';
+        color: $red;
+        font-size: 16px;
+        @media (max-width: 991px) {
+            font-size: 14px;
+        }
+        @media (max-width: 550px) {
+            position: absolute;
+            left: $zero;
+            top: $zero;
+            margin: $zero;
+        }
+    }
+    .spinner {
+        position: relative;
+        right: $auto;
+        width: $auto;
+        @media (max-width: 550px) {
+            margin-top: $com-spacing-3;
+            justify-content: flex-end;
+        }
+        .form-control,
+        .btn {
+            width: 32px;
+            height: 32px;
+        }
+        .form-control {
+            margin: $zero $com-spacing-2;
+        }
+    }
+}
+
+.shopping-basket {
+    width: $fullwidth;
+    position: relative;
+    background: $white;
+    padding: 56px $zero 80px $zero;
+    @media (max-width: 991px) {
+        padding: $com-spacing-7 $zero;
+    }
+    .wizard {
+        margin-bottom: $com-spacing-4;
+    }
+    .title {
+        @include title;
+        margin-bottom: $com-spacing-6;
+        @media (max-width: 991px) {
+            margin: $zero;
+        }
+    }
+    .item-basket {
+        @media (max-width: 991px) {
+            max-width: $fullwidth;
+            flex: $fullwidth;
+        }
+        .inner {
+            @include style-inner;
+            margin-top: $com-spacing-6;
+            .itemcard {
+                margin-bottom: $com-spacing-3;
+                &:last-child {
+                    margin: $zero;
+                }
+            }
+            .field {
+                position: relative;
+                padding-left: 110px;
+                .form-control {
+                    width: $fullwidth;
+                    outline: $zero !important;
+                    height: 40px;
+                    @include border-radius(60px);
+                    border: 1px solid #C9CCD4;
+                    padding: $com-spacing-2;
+                    color: $blak;
+                    font-weight: 400;
+                }
+                .bottom {
+                    @include bottom;
+                    position: absolute;
+                    left: $zero;
+                    top: 0;
+                    width: 100px;
+                    height: 40px;
+                    background: $none;
+                    border: 1px solid $red;
+                    color: $red;
+                    padding: $com-spacing-2;
+                    font-size: 12px;
+                    @include border-radius(60px);
+                    &:hover {
+                        background: $red;
+                        color: $white;
+                    }
+                }
+            }
+            .title {
+                margin: $zero;
+            }
+            .total-price {
+                margin-top: 28px;
+                .list-price {
+                    li {
+                        display: flex;
+                        justify-content: space-between;
+                        margin-bottom: $com-spacing-4;
+                        p {
+                            font-size: 16px;
+                            color: $blak;
+                            line-height: 20px;
+                        }
+                        span {
+                            font-size: 16px;
+                            color: $blak;
+                            font-family: 'GESSTwoMedium-Medium';
+                        }
+                        .red {
+                            color: $red;
+                        }
+                        &:last-child {
+                            border-top: 1px solid #E7EDEF;
+                            padding-top: $com-spacing-4;
+                        }
+                    }
+                }
+                .textred {
+                    display: block;
+                    margin-top: $com-spacing-6;
+                    font-family: 'GESSTwoMedium-Medium';
+                    color: $red;
+                }
+                .bottom {
+                    @include bottom;
+                    width: $fullwidth;
+                    margin-top: $com-spacing-4;
+                    svg,
+                    img {
+                        width: 18px;
+                        height: 18px;
+                        margin-left: $com-spacing-2;
+                        @media (max-width: 991px) {
+                            width: 18px;
+                            height: 18px;
+                        }
+                    }
+                }
+            }
+            .alert {
+                margin: $zero;
+                margin-bottom: $com-spacing-3;
+            }
+            .pricered {
+                @include flex;
+                position: relative;
+                color: $blak;
+                span {
+                    font-family: 'GESSTwoMedium-Medium';
+                }
+                img {
+                    margin-left: 10px;
+                    max-width: 20px;
+                }
+            }
+        }
+        .paying {
+            @include style-inner;
+            margin-top: $com-spacing-6;
+            .title {
+                font-size: 16px !important;
+                margin: $zero;
+                line-height: 1;
+            }
+            .selection {
+                margin-top: $com-spacing-4;
+                @media (max-width: 767px) {
+                    max-width: $fullwidth;
+                    flex: $fullwidth;
+                }
+                .che-box {
+                    display: block;
+                    position: relative;
+                    width: $fullwidth;
+                    height: 115px;
+                    margin: $zero;
+                    border: $zero;
+                    .label-text {
+                        display: block;
+                        position: relative;
+                        width: $fullwidth;
+                    }
+                    .text-chek {
+                        position: absolute;
+                        top: $zero;
+                        left: $zero;
+                        width: $fullwidth;
+                        height: $fullwidth;
+                        padding: $com-spacing-5;
+                        cursor: pointer;
+                        .title {
+                            font-size: 12px !important;
+                            line-height: 15px;
+                            height: 15px;
+                            overflow: hidden;
+                            margin-top: $com-spacing-1;
+                            padding-left: $com-spacing-5;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                        }
+                        p {
+                            margin-top: $com-spacing-3;
+                            color: $blak;
+                            height: 15px;
+                            overflow: hidden;
+                            line-height: 15px;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                        }
+                        .ac-link {
+                            display: flex;
+                            margin-top: $com-spacing-4;
+                            position: absolute;
+                            z-index: 10;
+                            a {
+                                height: 16px;
+                                line-height: 16px;
+                                svg,
+                                img {
+                                    margin-left: $com-spacing-2;
+                                }
+                                &:last-child {
+                                    margin-right: $com-spacing-5;
+                                    padding-right: $com-spacing-5;
+                                    border-right: 1px solid #C4C4C4;
+                                    color: $red;
+                                }
+                            }
+                        }
+                    }
+                    input[type="radio"] {
+                        @include position(absolute, $left: 9000px);
+                    }
+                    input[type="radio"]+.label-text:before {
+                        content: "";
+                        position: absolute;
+                        left: 0px;
+                        top: 0px;
+                        width: 100%;
+                        height: 115px;
+                        border: 0.5px solid #D0D0D0;
+                        border-radius: 5px;
+                        font-style: initial;
+                    }
+                    input[type="radio"]+.label-text::after {
+                        content: "";
+                        position: absolute;
+                        left: $com-spacing-5;
+                        top: $com-spacing-5;
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 50%;
+                        border: 0.5px solid #D0D0D0;
+                    }
+                    input[type="radio"]:checked+.label-text:after {
+                        border: 0.5px solid $red;
+                        background: $red url(../images/tick.svg) no-repeat center center;
+                    }
+                    input[type="radio"]:checked+.label-text:before {
+                        content: "";
+                        background: #FEF7F7;
+                        border: 1px solid #D1362A;
+                        box-sizing: border-box;
+                        box-shadow: 0px 0px 30px rgba(209, 54, 42, 0.15);
+                        line-height: 1.4em;
+                        font-size: 10px;
+                        text-align: center;
+                        font-style: initial;
+                        animation: effect 250ms ease-in;
+                    }
+                }
+            }
+            .add-address {
+                margin-top: $com-spacing-4;
+                @media (max-width: 767px) {
+                    max-width: $fullwidth;
+                    flex: $fullwidth;
+                }
+                .add {
+                    @include flex;
+                    padding: $com-spacing-5;
+                    width: 100%;
+                    height: 115px;
+                    border: 0.5px solid #D0D0D0;
+                    border-radius: 5px;
+                    img,
+                    svg {
+                        width: 40px;
+                    }
+                    .title {
+                        font-size: 12px !important;
+                        line-height: 15px;
+                        margin-right: $com-spacing-2;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.paying-inner {
+    margin-top: $com-spacing-4;
+    .che-box {
+        @include check-box;
+        margin: $zero;
+        padding: $zero;
+        width: $fullwidth;
+        border-bottom: 1px solid #dadada;
+        padding-bottom: $com-spacing-6;
+        margin-bottom: $com-spacing-6;
+        &.m-bank {
+            padding: $zero;
+            border: $zero;
+            margin: $zero;
+        }
+        input[type="radio"]+.label-text:before {
+            top: $zero;
+            @include border-radius(50%);
+        }
+        input[type="radio"]:checked+.label-text:before {
+            content: "";
+            background: $red url(../images/tick.svg) no-repeat center center;
+        }
+        .label-text {
+            @include title;
+            font-size: 12px !important;
+            line-height: 15px;
+            padding-right: $com-spacing-6;
+            span {
+                display: block;
+                margin-top: $com-spacing-2;
+                font-family: 'GESSTextUltraLight-UltraLight';
+                color: $blak;
+                font-size: 12px;
+                line-height: 15px;
+            }
+        }
+        &.bo-no {
+            margin: $zero;
+            padding: $zero;
+            border: $zero;
+        }
+        &.addborde {
+            margin: $zero;
+            padding: $zero;
+            border: $zero;
+            border-top: 1px solid #dadada;
+            padding-top: $com-spacing-6;
+            margin-top: $com-spacing-6;
+        }
+    }
+    .hidebank {
+        width: $fullwidth;
+        display: $none;
+        margin-top: $com-spacing-6;
+        .items-img {
+            display: flex;
+            img {
+                max-width: 48px;
+                max-height: 48px;
+                margin-left: $com-spacing-2;
+                &:last-child {
+                    margin: $zero;
+                }
+            }
+        }
+        .field {
+            position: relative;
+            margin-top: $com-spacing-6;
+            label {
+                color: $blak;
+            }
+            svg {
+                @include position(absolute, $top: 18px, $left: 24px);
+            }
+            .form-control {
+                width: $fullwidth;
+                outline: $zero !important;
+                height: 40px;
+                @include border-radius(60px);
+                border: 1px solid #C9CCD4;
+                padding: 10px $com-spacing-4;
+                color: $blak;
+            }
+            select.form-control {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                text-indent: 1px;
+                text-overflow: '';
+            }
+        }
+    }
+}

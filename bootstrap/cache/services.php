@@ -74,6 +74,7 @@
     70 => 'App\\Domain\\Branch\\Providers\\DomainServiceProvider',
     71 => 'App\\Domain\\Reservation\\Providers\\DomainServiceProvider',
     72 => 'App\\Domain\\Accommodation\\Providers\\DomainServiceProvider',
+    73 => 'App\\Domain\\Website\\Providers\\DomainServiceProvider',
   ),
   'eager' => 
   array (
@@ -135,6 +136,7 @@
     55 => 'App\\Domain\\Branch\\Providers\\DomainServiceProvider',
     56 => 'App\\Domain\\Reservation\\Providers\\DomainServiceProvider',
     57 => 'App\\Domain\\Accommodation\\Providers\\DomainServiceProvider',
+    58 => 'App\\Domain\\Website\\Providers\\DomainServiceProvider',
   ),
   'deferred' => 
   array (
@@ -149,6 +151,7 @@
     'cache.store' => 'Illuminate\\Cache\\CacheServiceProvider',
     'cache.psr6' => 'Illuminate\\Cache\\CacheServiceProvider',
     'memcached.connector' => 'Illuminate\\Cache\\CacheServiceProvider',
+    'cache.dynamodb.client' => 'Illuminate\\Cache\\CacheServiceProvider',
     'Illuminate\\Cache\\RateLimiter' => 'Illuminate\\Cache\\CacheServiceProvider',
     'command.cache.clear' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
     'command.cache.forget' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',

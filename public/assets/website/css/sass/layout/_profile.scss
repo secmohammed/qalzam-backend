@@ -1,0 +1,461 @@
+.profile,
+.branch-reservations {
+    width: $fullwidth;
+    position: relative;
+    background: $white;
+    padding: 56px $zero 80px $zero;
+    @media (max-width: 991px) {
+        padding: $com-spacing-7 $zero;
+    }
+    .wizard {
+        margin-bottom: $com-spacing-4;
+    }
+    .nav-tabs {
+        @include style-inner;
+        border: $zero;
+        height: 56px;
+        padding: 18px $com-spacing-6;
+        margin-top: $com-spacing-8;
+        @media (max-width: 991px) {
+            margin: $zero;
+        }
+        @media (max-width:667px) {
+            padding: 18px $com-spacing-2;
+        }
+        .nav-item {
+            margin: $zero;
+            border: $zero;
+            margin-left: 40px;
+            @media (max-width: 667px) {
+                margin-left: $com-spacing-3;
+            }
+            &:last-child {
+                margin: $zero;
+                @media (max-width: 667px) {
+                    margin: $zero;
+                }
+            }
+            .nav-link {
+                margin: $zero;
+                border: $zero;
+                border-bottom: 2px solid transparent;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 20px;
+                padding: $zero;
+                color: $blak;
+                background: $none;
+                padding-bottom: $com-spacing-4;
+                @media (max-width: 667px) {
+                    font-size: 14px;
+                }
+                &.active {
+                    border-bottom: 2px solid $red;
+                    color: $red;
+                    font-family: 'GESSTwoBold-Bold';
+                }
+            }
+        }
+    }
+    .tab-pane {
+        .all-contant {
+            .inner {
+                padding: $com-spacing-6;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                @media (max-width: 991px) {
+                    overflow: hidden;
+                    overflow-x: scroll;
+                }
+                .contant {
+                    @media (max-width: 991px) {
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        margin-left: $com-spacing-7;
+                    }
+                    p {
+                        font-size: 12px;
+                        color: $blak;
+                    }
+                    .red {
+                        color: $red;
+                    }
+                    .title {
+                        @include title;
+                        font-size: 12px !important;
+                        line-height: 15px;
+                        margin-top: $com-spacing-1;
+                        &.red {
+                            color: $red;
+                        }
+                    }
+                    .bottom {
+                        @include flex;
+                        min-width: 184px;
+                        max-width: 184px;
+                        height: 48px;
+                        color: $blak;
+                        font-family: 'GESSTwoBold-Bold';
+                        border: 0.5px solid #C4C4C4;
+                        @include border-radius(60px);
+                        @media (max-width: 991px) {
+                            margin-left: $com-spacing-6;
+                        }
+                    }
+                }
+                .item {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    @media (max-width: 991px) {
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        justify-content: flex-start;
+                        margin-left: $com-spacing-7;
+                    }
+                    .photo {
+                        @include style-inner;
+                        width: 56px;
+                        height: 56px;
+                        padding: $com-spacing-2;
+                        display: block;
+                        overflow: hidden;
+                        img {
+                            width: $fullwidth;
+                            min-height: $fullwidth;
+                            object-fit: cover;
+                            @include border-radius(50%);
+                        }
+                    }
+                    .content {
+                        padding-right: 10px;
+                        span {
+                            color: $red;
+                            font-size: 12px;
+                        }
+                        .title {
+                            @include title;
+                            font-size: 12px !important;
+                            line-height: 14.94px;
+                            margin-top: $com-spacing-1;
+                        }
+                        p {
+                            display: block;
+                            font-size: 12px;
+                            color: $blak;
+                            margin-top: $com-spacing-1;
+                        }
+                    }
+                }
+            }
+            .addcard {
+                @include flex;
+                min-width: 182px;
+                max-width: 182px;
+                height: 48px;
+                @include border-radius(60px);
+                color: $white;
+                font-family: 'GESSTwoMedium-Medium';
+                background: $red;
+                border: 1px solid $red;
+                @media (max-width: 991px) {
+                    margin-left: $com-spacing-6;
+                }
+                svg,
+                img {
+                    width: 18px;
+                    height: 18px;
+                    margin-left: $com-spacing-2;
+                    @media (max-width: 991px) {
+                        width: 18px;
+                        height: 18px;
+                    }
+                }
+            }
+            .itemcard {
+                @include style-inner;
+                margin: $zero;
+                padding-right: 88px;
+                margin-top: $com-spacing-6;
+                @media (max-width: 767px) {
+                    display: block;
+                    padding-right: 60px;
+                }
+                .addcard {
+                    @media (max-width: 991px) {
+                        margin-top: $com-spacing-6;
+                    }
+                    @media (max-width: 767px) {
+                        min-width: $fullwidth;
+                        max-width: $fullwidth;
+                    }
+                }
+                .delet-card {
+                    right: $com-spacing-6;
+                    width: 40px;
+                    height: 40px;
+                    @media (max-width: 767px) {
+                        width: 24px;
+                        height: 24px;
+                        top: 25px !important;
+                        svg {
+                            width: 6px;
+                            height: 6px;
+                        }
+                    }
+                }
+                .item {
+                    justify-content: flex-start;
+                    .photo {
+                        min-width: 72px;
+                        max-width: 72px;
+                        height: 72px;
+                    }
+                    .content {
+                        .title {
+                            font-size: 16px !important;
+                            margin-top: $com-spacing-2;
+                            @media (max-width: 767px) {
+                                font-size: 14px !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .inner {
+        @include style-inner;
+        padding: $com-spacing-7;
+        margin-top: $com-spacing-6;
+        @media (max-width: 991px) {
+            padding: $com-spacing-6;
+        }
+        .field {
+            position: relative;
+            margin-bottom: $com-spacing-6;
+            @media (max-width: 991px) {
+                margin-bottom: $com-spacing-4;
+            }
+            &:last-child {
+                margin: $zero;
+                @media (max-width: 991px) {
+                    margin: $zero;
+                }
+            }
+            label {
+                color: $blak;
+                font-size: 16px;
+            }
+            .form-control {
+                width: $fullwidth;
+                outline: $zero !important;
+                height: 40px;
+                @include border-radius(60px);
+                border: 1px solid #C9CCD4;
+                padding: 10px $com-spacing-4;
+                color: $blak;
+            }
+            textarea {
+                height: 43px !important;
+                resize: none;
+            }
+            select.form-control {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                text-indent: 1px;
+                text-overflow: '';
+            }
+            .bottom {
+                @include bottom;
+                width: $fullwidth;
+                height: 40px;
+            }
+            img,
+            svg {
+                max-width: 16px;
+                position: absolute;
+                left: 28px;
+                bottom: $com-spacing-3;
+            }
+        }
+        .alert {
+            margin: $zero;
+            margin-bottom: $com-spacing-3;
+        }
+        .selection {
+            @media (max-width: 991px) {
+                max-width: $fullwidth;
+                flex: $fullwidth;
+                margin-bottom: $com-spacing-4;
+            }
+            .che-box {
+                display: block;
+                position: relative;
+                width: $fullwidth;
+                height: 115px;
+                margin: $zero;
+                .label-text {
+                    display: block;
+                    position: relative;
+                    width: $fullwidth;
+                }
+                .text-chek {
+                    position: absolute;
+                    top: $zero;
+                    left: $zero;
+                    width: $fullwidth;
+                    height: $fullwidth;
+                    padding: $com-spacing-5;
+                    cursor: pointer;
+                    .title {
+                        @include title;
+                        font-size: 12px !important;
+                        line-height: 15px;
+                        height: 15px;
+                        overflow: hidden;
+                        margin-top: $com-spacing-1;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                    }
+                    p {
+                        margin-top: $com-spacing-3;
+                        color: $blak;
+                        height: 15px;
+                        overflow: hidden;
+                        line-height: 15px;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                    }
+                    .ac-link {
+                        display: flex;
+                        margin-top: $com-spacing-4;
+                        position: absolute;
+                        z-index: 10;
+                        a {
+                            height: 16px;
+                            line-height: 16px;
+                            svg,
+                            img {
+                                margin-left: $com-spacing-2;
+                            }
+                            &:last-child {
+                                margin-right: $com-spacing-5;
+                                padding-right: $com-spacing-5;
+                                border-right: 1px solid #C4C4C4;
+                                color: $red;
+                            }
+                        }
+                    }
+                }
+                input[type="radio"] {
+                    @include position(absolute, $left: 9000px);
+                }
+                input[type="radio"]+.label-text:before {
+                    content: "";
+                    position: absolute;
+                    left: 0px;
+                    top: 0px;
+                    width: 100%;
+                    height: 115px;
+                    border: 0.5px solid #D0D0D0;
+                    border-radius: 5px;
+                    font-style: initial;
+                }
+                input[type="radio"]+.label-text::after {
+                    content: "";
+                    position: absolute;
+                    left: $com-spacing-5;
+                    top: $com-spacing-5;
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    border: 0.5px solid #D0D0D0;
+                }
+                input[type="radio"]:checked+.label-text:after {
+                    border: 0.5px solid $red;
+                    background: $red url(../images/tick.svg) no-repeat center center;
+                }
+                input[type="radio"]:checked+.label-text:before {
+                    content: "";
+                    background: #FEF7F7;
+                    border: 1px solid #D1362A;
+                    box-sizing: border-box;
+                    box-shadow: 0px 0px 30px rgba(209, 54, 42, 0.15);
+                    line-height: 1.4em;
+                    font-size: 10px;
+                    text-align: center;
+                    font-style: initial;
+                    animation: effect 250ms ease-in;
+                }
+            }
+        }
+        .add-address {
+            @media (max-width: 991px) {
+                max-width: $fullwidth;
+                flex: $fullwidth;
+            }
+            .add {
+                @include flex;
+                padding: $com-spacing-5;
+                width: 100%;
+                height: 115px;
+                border: 0.5px solid #D0D0D0;
+                border-radius: 5px;
+                .title {
+                    @include title;
+                    font-size: 12px !important;
+                    line-height: 15px;
+                    margin-right: $com-spacing-3;
+                }
+            }
+        }
+    }
+}
+
+.branch-reservations {
+    .title {
+        @include title;
+    }
+    .listorder {
+        margin-top: $com-spacing-8;
+        @media (max-width: 991px) {
+            margin-top: $com-spacing-4;
+        }
+        .text {
+            font-size: 16px !important;
+            color: $colortext;
+        }
+    }
+    .list-filter {
+        display: flex;
+        width: $fullwidth;
+        a {
+            display: inline-flex;
+            align-items: center;
+            background: $white;
+            color: $blak;
+            margin-top: $com-spacing-3;
+            font-family: 'GESSTwoMedium-Medium';
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            line-height: 24px;
+            border: 1px solid transparent;
+            padding: $zero $com-spacing-4;
+            @include border-radius(60px);
+            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.08);
+            height: 40px;
+            margin-left: $com-spacing-3;
+            &:last-child {
+                margin-left: $zero;
+            }
+            &.active {
+                background: #FEF7F7;
+                border: 1px solid $red;
+                color: $red;
+                box-shadow: 0px 0px 4px rgba(209, 54, 42, 0.25);
+            }
+        }
+    }
+}

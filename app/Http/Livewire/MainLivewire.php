@@ -10,21 +10,21 @@ use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Database\Query\Expression;
-use Mediconesystems\LivewireDatatables\ColumnSet;
+//use Mediconesystems\LivewireDatatables\ColumnSet;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Mediconesystems\LivewireDatatables\Traits\WithCallbacks;
-use Mediconesystems\LivewireDatatables\Exports\DatatableExport;
-use Mediconesystems\LivewireDatatables\Traits\WithPresetDateFilters;
-use Mediconesystems\LivewireDatatables\Traits\WithPresetTimeFilters;
+//use Mediconesystems\LivewireDatatables\Traits\WithCallbacks;
+//use Mediconesystems\LivewireDatatables\Exports\DatatableExport;
+//use Mediconesystems\LivewireDatatables\Traits\WithPresetDateFilters;
+//use Mediconesystems\LivewireDatatables\Traits\WithPresetTimeFilters;
 
 class MainLivewire extends Component
 {
-    use WithPagination, WithCallbacks, WithPresetDateFilters, WithPresetTimeFilters;
+    use WithPagination;
 
     const SEPARATOR = '|**lwdt**|';
 

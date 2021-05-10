@@ -1,0 +1,137 @@
+.min-video {
+    display: flex;
+    align-items: center;
+    width: $fullwidth;
+    position: relative;
+    background: $ofwhite url(../images/video.jpg) no-repeat fixed center center/cover;
+    margin-top: 60px;
+    height: 600px;
+    @media (max-width: 991px) {
+        margin-top: $com-spacing-7;
+    }
+    &:after {
+        @include overlay;
+        background: linear-gradient(250.88deg, #D1362A 10.19%, rgba(0, 0, 0, 0) 111.21%);
+        mix-blend-mode: normal;
+        opacity: 0.7;
+    }
+    .container {
+        position: relative;
+        z-index: 100;
+        .row {
+            align-items: center;
+        }
+    }
+    .item {
+        @media (max-width: 991px) {
+            max-width: $fullwidth;
+            flex: $fullwidth;
+            padding-left: 120px;
+        }
+    }
+    .title {
+        @include title;
+        line-height: 34px;
+        color: $white;
+    }
+    p {
+        display: block;
+        font-weight: 300;
+        line-height: 23px;
+        font-size: 16px;
+        color: $white;
+        margin-top: $com-spacing-6;
+        @media (max-width: 991px) {
+            br {
+                display: $none;
+            }
+        }
+    }
+    .cd-single-point {
+        @include position(absolute, $left: 12px);
+        list-style-type: $none;
+        width: 72px;
+        cursor: pointer;
+        text-align: $senter;
+        z-index: 20;
+        &::after {
+            content: '';
+            @include position(absolute, $top: 0, $left: 0, );
+            border-radius: 50%;
+            width: $fullwidth;
+            height: $fullwidth;
+            animation: cd-pulse 2s infinite;
+        }
+        .cd-img-replace {
+            position: relative;
+            z-index: 2;
+            display: $block;
+            width: 72px;
+            height: 72px;
+            @include border-radius(50%);
+            @include transition(all 0.2s ease-in-out 0s);
+        }
+        .innerbc {
+            @include position(absolute, $top: 0px, $left: 0px);
+            @include flex;
+            width: 72px;
+            height: 72px;
+            @include border-radius(50%);
+            background: $white;
+            z-index: 10;
+            color: $yellow;
+            @keyframes cd-pulse {
+                0% {
+                    box-shadow: 0 0 0 0 $white;
+                }
+                100% {
+                    box-shadow: 0 0 0 30px rgba(255, 150, 44, 0)
+                }
+            }
+        }
+    }
+}
+
+.YouTubePopUp-Wrap {
+    @include position(fixed, $top: 0px, $left: 0px);
+    width: $fullwidth;
+    height: $fullwidth;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 9999999999999;
+    padding: $minmargin;
+    .YouTubePopUp-Content {
+        max-width: 680px;
+        display: $block;
+        margin: $zero $auto;
+        height: $fullwidth;
+        position: relative;
+        iframe {
+            @include position(absolute, $top: 0px, $bottom: 0px);
+            max-width: $fullwidth !important;
+            width: $fullwidth !important;
+            display: $block !important;
+            height: 480px !important;
+            border: $none !important;
+            margin: $auto $zero;
+            background: $white;
+            padding: $minmargin;
+            @media (max-width: 767px) {
+                height: 300px !important;
+            }
+        }
+    }
+    .YouTubePopUp-Close {
+        @include position(absolute, $top: 0px, $right: 0px, $bottom: 528px);
+        cursor: pointer;
+        margin: $auto $zero;
+        @include flex;
+        width: 30px;
+        height: 30px;
+        background: $white;
+        background-size: $fullwidth;
+        @include transition(all 0.5s ease-in-out 0s);
+        &:hover {}
+    }
+}
+
+/// End Brand Video

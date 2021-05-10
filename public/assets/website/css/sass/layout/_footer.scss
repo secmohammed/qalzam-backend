@@ -1,0 +1,108 @@
+.footer {
+    @include section;
+    background: $white;
+    .boxfot {
+        margin-top: 70px;
+        @media (max-width: 991px) {
+            max-width: $fullwidth;
+            flex: $fullwidth;
+            text-align: center;
+            margin-top: $com-spacing-7;
+        }
+        p.text {
+            line-height: 23px;
+            color: $blak;
+            font-size: 16px;
+            margin-top: $com-spacing-6;
+        }
+        .title {
+            @include title;
+            font-size: 16px !important;
+            line-height: 20px;
+            margin-bottom: 40px;
+            @media (max-width: 991px) {
+                margin-bottom: $com-spacing-4;
+            }
+        }
+        .navmenu {
+            a {
+                @include hyprlink;
+                margin-bottom: $com-spacing-6;
+                font-family: 'GESSTwoMedium-Medium';
+                font-size: 12px;
+                line-height: 15px;
+                @media (max-width: 991px) {
+                    margin-bottom: $com-spacing-3;
+                }
+                &:last-child {
+                    margin: $zero;
+                }
+            }
+        }
+    }
+    .item-bg {
+        width: $fullwidth;
+        height: 88px;
+        margin-top: 60px;
+        img {
+            width: $fullwidth;
+            min-height: $fullwidth;
+            object-fit: cover;
+        }
+    }
+    .copyright {
+        position: relative;
+        padding: 56px $zero;
+        width: $fullwidth;
+        @media (max-width: 767px) {
+            padding: $com-spacing-7 $zero;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            @media (max-width: 767px) {
+                display: block;
+            }
+        }
+        p {
+            color: #656565;
+            font-size: 12px;
+            font-family: 'GESSTwoMedium-Medium';
+            @media (max-width: 767px) {
+                text-align: center;
+                margin-top: $com-spacing-3;
+            }
+        }
+        .powrby {
+            display: flex;
+            align-items: center;
+            @media (max-width: 767px) {
+                justify-content: center;
+            }
+            img {
+                margin: $zero $com-spacing-2;
+            }
+        }
+        .social {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            direction: ltr;
+            @media (max-width: 767px) {
+                justify-content: center;
+                margin-top: $com-spacing-3;
+            }
+            a {
+                margin-right: $com-spacing-6;
+                @include transition(all 0.5s ease-in-out 0s);
+                @media (max-width: 767px) {
+                    margin: $zero $com-spacing-2;
+                }
+                &:hover {
+                    opacity: 0.7;
+                }
+            }
+        }
+    }
+}

@@ -27,6 +27,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('change-password', 'Auth\ChangePasswordController@changePasswordForm')->name('change_password');
     Route::put('change-password', 'Auth\ChangePasswordController@update')->name('change_password.update');
 
-//    Route::resource('/addresses', 'AddressController')->except('index');
+    Route::resource('/addresses', 'AddressController')->except('index');
     Route::get('/addresses', 'AddressController@datTable')->name('addresses.index');
 });

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['guest'])->group(function () {
 
+    Route::post('/register','Auth\RegisterController@store')->name('auth.register');
     Route::get('/forget_password', 'Auth\ForgotPasswordController@forgetPassword')->name('password.request');
 
     Route::post('/forget_password', 'Auth\ForgotPasswordController')->name('password.email');

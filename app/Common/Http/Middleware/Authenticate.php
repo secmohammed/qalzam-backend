@@ -15,7 +15,10 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            return route('login');
+            if(isDashboardPath())
+                return route('login');
+            session()->flash('shouldLogin');
+            return route(previousRouteName());
         }
     }
 }

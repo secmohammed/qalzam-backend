@@ -16,7 +16,12 @@ class EventServiceProvider extends ServiceProvider
             \App\Domain\User\Listeners\Http\SendSMSVerification::class,
         ],
 
-        ###EVENTS###
+		\App\Domain\User\Events\Http\UserloggedinEvent::class => [
+			\App\Domain\User\Listeners\Http\SyncCartIfExistListener::class,
+				###LISTENERS_Http_UserloggedinEvent###
+
+		],
+		###EVENTS###
     ];
 
     /**

@@ -24,3 +24,27 @@ if (!function_exists('compress_image')) {
         }
     }
 }
+
+if(!function_exists('isDashboardPath'))
+{
+    /**
+     * @return bool
+     */
+    function isDashboardPath():bool
+    {
+        $path = request()->path();
+        $full_path =  explode('/', $path);
+        return $full_path[0] == config('qalzam.dashboard-prefix');
+    }
+}
+
+if(!function_exists('previousRouteName'))
+{
+    /**
+     * @return mixed
+     */
+    function previousRouteName()
+    {
+        return app('router')->getRoutes()->match(app('request')->create(url()->previous()))->getName();
+    }
+}
