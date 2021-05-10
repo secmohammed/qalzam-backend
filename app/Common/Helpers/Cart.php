@@ -5,7 +5,8 @@ namespace App\Common\Helpers;
 
 
 use App\Domain\Product\Entities\ProductVariation;
-
+use App\Domain\Branch\Entities\Branch as Branch;
+use App\Common\Facades\Branch as BranchFacade;
 class Cart
 {
     public function __construct()
@@ -19,9 +20,15 @@ class Cart
         $cart = $this->get();
         $cartProductsIds = array_column($cart['products'], 'id');
 
-        $product->amount = !empty($product->amount) ? $product->amount + $amount : $this->addedAmount($amount);
+        $product->quantity = !empty($product->qunatity) ? $product->qunatity + $amount : $this->addedAmount($amount);
 
         $product->image = $product->getLastMediaUrl('product_variation-images');
+        $product->type = 'cart';
+        $product->product_variation_id  = $product->id;
+        $product->branch_id = BranchFacade::get()->id;
+        // check Porduct in the same Session Branch
+        if(!$this->inBranch(BranchFacade::get(),$product))
+            return ;
         if (in_array($product->id, $cartProductsIds)) {
             $cart['products'] = $this->productCartIncrement($product->id, $cart['products'],$amount);
             $this->set($cart);
@@ -66,7 +73,7 @@ class Cart
         $amount = $this->addedAmount($amount);
         $cartItems = array_map(function ($item) use ($productId, $amount) {
             if ($productId == $item['id']) {
-                $item['amount'] += $amount;
+                $item['quantity'] += $amount;
                 $item['total_price'] += $item['total_price'];
             }
 
@@ -81,7 +88,7 @@ class Cart
         $amount = 1;
         $cartItems = array_map(function ($item) use ($productId, $amount) {
             if ($productId == $item['id']) {
-                $item['amount'] -= $amount;
+                $item['quantity'] -= $amount;
                 $item['total_price'] -= $item['total_price'];
             }
 
@@ -109,7 +116,7 @@ class Cart
         }
 
         foreach ($products as $product){
-            $total_price += $product->price->amount() * $product->amount;
+            $total_price += $product->price->amount() * $product->quantity;
         }
         return $total_price;
     }
@@ -119,13 +126,51 @@ class Cart
         return $this->totalPrice() * config('qalzam.vat');
     }
 
-//    public function s
+    public function syncAfterLogin()
+    {
+        $cart = $this->get();
+        $products = $cart['products'];
+
+        $products = collect($products)->collapse()->keyBy('id')->map(function ($product) {
+            return [
+                'quantity' =>  $product['quantity'] ,
+                'type' => $product['type'],
+                'branch_id' => $product['branch_id'],
+            ];
+        })->toArray();
+
+//        $products = $products->only('product_variation_id', 'branch_id', 'quantity', 'type');
+        if(count($products) > 0)
+            auth()->user()->cart()->firstOrCreate($products);
+    }
+
+    public function getProductsToBeOrdered()
+    {
+        $cart = $this->get();
+        $products = array_map(function ($product){
+            return array(
+                'id' => $product['id'],
+                'quantity' => $product['quantity'],
+            );
+        },$cart['products']);
+        return collect($products);
+    }
+
     private function addedAmount($amount)
     {
         if($amount > 0)
             return $amount;
         return 1;
     }
+
+    public function inBranch(Branch $branch,$product):bool
+    {
+        $branch = $product->branches()->where('branch_id', $branch->id)->first();
+        if($branch)
+            return true;
+        return false;
+    }
+
     public function getProduct($productId)
     {
         $cart = $this->get();

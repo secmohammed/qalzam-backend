@@ -11,7 +11,7 @@ class CartCard extends Component
 
     public function render()
     {
-        $amount = $this->product->amount;
+        $amount = $this->product->quantity;
         return view('livewire.card.cart-card', compact('amount'));
     }
 
@@ -33,7 +33,7 @@ class CartCard extends Component
         $cart = Cart::get();
         $products = collect($cart['products']);
         $product = $products->where('id', $productId)->first();
-        if($product->amount > 1)
+        if($product->quantity > 1)
             Cart::ProductCartReduce($product->id, $cart['products']);
         else
             $this->removeProduct($productId);

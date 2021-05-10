@@ -41,6 +41,11 @@
     </div>
 </div>
 @push('scripts')
+    @if(session()->get('shouldLogin'))
+        <script>
+            $("#login").modal('show');
+        </script>
+    @endif
     <script>
         $("#errorContainerLogin").hide()
         $("#loginButton").click(function (event){

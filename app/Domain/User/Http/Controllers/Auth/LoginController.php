@@ -2,6 +2,8 @@
 
 namespace App\Domain\User\Http\Controllers\Auth;
 
+use App\Common\Facades\Cart;
+use App\Domain\User\Events\Http\UserLoggedInEvent;
 use App\Domain\User\Http\Requests\Auth\UserLoginFormRequest;
 use App\Domain\User\Http\Resources\User\UserResource;
 use App\Domain\User\Repositories\Contracts\UserRepository;
@@ -109,7 +111,8 @@ class LoginController extends Controller
         }
 
         if(auth()->user()->type == 'user'){
-
+//            event(new UserLoggedInEvent(auth()->user()));
+            Cart::syncAfterLogin();
             return route('website.home');
         }
         else

@@ -98,6 +98,7 @@ class Kernel extends HttpKernel
         'guest.api' => \App\Common\Http\Middleware\GuestJWTMiddleware::class,
         'cart.sync' => \App\Common\Http\Middleware\Cart\Sync::class,
         'cart.isnotempty' => \App\Common\Http\Middleware\Cart\RespondIfEmpty::class,
+        'cart.notempty' => \App\Common\Http\Middleware\Cart\CheckIfEmpty::class
         /**ROUTE MIDDLEWARE**/
     ];
 }

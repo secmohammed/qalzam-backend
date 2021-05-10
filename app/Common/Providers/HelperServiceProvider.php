@@ -18,6 +18,9 @@ class HelperServiceProvider extends ServiceProvider
         App::bind('cart',function() {
             return new \App\Common\Helpers\Cart;
         });
+        App::bind('branch',function() {
+            return new \App\Common\Helpers\Branch;
+        });
     }
 
     /**

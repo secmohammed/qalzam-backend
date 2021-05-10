@@ -2,6 +2,8 @@
 
 namespace App\Domain\Order\Http\Controllers;
 
+use App\Common\Facades\Branch;
+use App\Common\Facades\Cart;
 use App\Common\Transformers\Money;
 use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 use App\Domain\Discount\Repositories\Contracts\DiscountRepository;
@@ -236,7 +238,8 @@ class OrderController extends Controller
             NotifyUserWithPlacedOrder::class,
         ])->then(fn($order) => $order);
         GenerateOrderPdfInvoice::dispatch($order);
-
+        Cart::clear();
+        Branch::clear(); // todo replace these with event
         $this->setData('data', $order);
 
         $this->redirectRoute("{$this->resourceRoute}.show", [$order->id]);

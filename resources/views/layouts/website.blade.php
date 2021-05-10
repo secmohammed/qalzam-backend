@@ -40,8 +40,21 @@
         @livewireScripts
         @stack('scripts')
         <script>
-            Livewire.on('amountChanged' ,()=> {
-                alert('amount Changed')
+            Livewire.on('toaster', (message,type) =>{
+                switch (type){
+                    case 'success':
+                        toastr.success(message);
+                        break;
+                    case 'error':
+                        toastr.error(message);
+                        break;
+                    case 'warning':
+                        toastr.warning(message);
+                        break;
+                    default :
+                        toastr.info(message);
+                        break;
+                }
             })
         </script>
     </body>

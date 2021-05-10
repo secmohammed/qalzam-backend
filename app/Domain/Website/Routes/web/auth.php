@@ -15,5 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/finish-order', 'ProfileController@finishOrder')->name('website.finish-order');
     ###CRUD_PLACEHOLDER###
 });

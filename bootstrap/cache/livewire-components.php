@@ -20,6 +20,7 @@
   'most-sell-product' => 'App\\Http\\Livewire\\MostSellProduct',
   'order-datatable' => 'App\\Http\\Livewire\\OrderDatatable',
   'order-product' => 'App\\Http\\Livewire\\OrderProduct',
+  'price-card' => 'App\\Http\\Livewire\\PriceCard',
   'product-datatable' => 'App\\Http\\Livewire\\ProductDatatable',
   'product-variation-datatable' => 'App\\Http\\Livewire\\ProductVariationDatatable',
   'product-variation-type-datatable' => 'App\\Http\\Livewire\\ProductVariationTypeDatatable',

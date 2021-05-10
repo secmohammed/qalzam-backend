@@ -4,6 +4,8 @@
 namespace App\Domain\Website\Http\Controllers;
 
 use App\Common\Criteria\StatusIsCriteria;
+use App\Domain\Branch\Entities\Branch ;
+use App\Common\Facades\Branch as BranchFacade;
 use App\Domain\Branch\Criteria\BranchHasGalleriesCriteria;
 use App\Domain\Branch\Repositories\Contracts\AlbumRepository;
 use App\Domain\Branch\Repositories\Contracts\BranchRepository;
@@ -64,6 +66,7 @@ class PagesController extends Controller
     {
         $this->branchRepository->pushCriteria(new StatusIsCriteria(true));
         $show = $this->branchRepository->find($branch);
+        BranchFacade::setBranch($show);
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('branch', $show, 'web');
 
