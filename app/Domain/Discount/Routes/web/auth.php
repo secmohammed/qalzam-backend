@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->prefix(config('qalzam.dashboard-prefix'))->group(function () {
     Route::resource('/discounts','DiscountController')->except('index');
     Route::get('/discounts','DiscountController@dataTable')->name('discounts.index');
 	###CRUD_PLACEHOLDER###

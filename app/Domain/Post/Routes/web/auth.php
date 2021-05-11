@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->prefix(config('qalzam.dashboard-prefix'))->group(function () {
     Route::resource('/posts','PostController')->except('index');
     Route::get('/posts','PostController@dataTable')->name('posts.index');
 	###CRUD_PLACEHOLDER###
