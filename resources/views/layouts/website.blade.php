@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{GetLanguage()}}" dir="{{GetDirection()}}">
     <head>
         <meta charset="utf-8">
         <meta name="description" content="Lorem PugJs">
@@ -13,7 +13,9 @@
         <link rel="stylesheet" href="{{asset('assets/website/css/bootstrap-datepicker3.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/website/css/jquery-clockpicker.min.css')}}">
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&amp;display=swap" rel="stylesheet">
-        <!--link(rel='stylesheet',href='css/home-ltr.css')-->
+        @if(GetLanguage() === 'en')
+            <link rel='stylesheet' href='{{asset('assets/website/css/home-ltr.css')}}'>
+        @endif
         <link rel="icon" href="{{asset('assets/website/images/favicon.png')}}" type="image/png">
         <script src="{{asset('assets/website/js/jquery.js')}}"></script>
         <script src="{{asset('assets/website/js/popper.min.js')}}"></script>
