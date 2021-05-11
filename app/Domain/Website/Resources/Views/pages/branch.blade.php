@@ -56,66 +56,7 @@
             <h2 class="title">الأكثر مبيعاً</h2>
         </div>
         <div class="seller-slider">
-            <div class="item"><a href="list-details.html">
-                    <div class="photo"><img src="images/slider/img-1.jpg" alt=""></div>
-                    <div class="content">
-                        <h2 class="title">طاجن ثمار<br/>البحر</h2>
-                        <p class="price">80 ريال</p>
-                    </div></a></div>
-            <div class="item"><a href="list-details.html">
-                    <div class="photo"><img src="images/slider/img-1.jpg" alt=""></div>
-                    <div class="content">
-                        <h2 class="title">طاجن ثمار<br/>البحر</h2>
-                        <p class="price">80 ريال</p>
-                    </div></a></div>
-            <div class="item"><a href="list-details.html">
-                    <div class="photo"><img src="images/slider/img-1.jpg" alt=""></div>
-                    <div class="content">
-                        <h2 class="title">طاجن ثمار<br/>البحر</h2>
-                        <p class="price">80 ريال</p>
-                    </div></a></div>
-            <div class="item"><a href="list-details.html">
-                    <div class="photo"><img src="images/slider/img-1.jpg" alt=""></div>
-                    <div class="content">
-                        <h2 class="title">طاجن ثمار<br/>البحر</h2>
-                        <p class="price">80 ريال</p>
-                    </div></a></div>
-            <div class="item"><a href="list-details.html">
-                    <div class="photo"><img src="images/slider/img-1.jpg" alt=""></div>
-                    <div class="content">
-                        <h2 class="title">طاجن ثمار<br/>البحر</h2>
-                        <p class="price">80 ريال</p>
-                    </div></a></div>
-            <div class="item"><a href="list-details.html">
-                    <div class="photo"><img src="images/slider/img-1.jpg" alt=""></div>
-                    <div class="content">
-                        <h2 class="title">طاجن ثمار<br/>البحر</h2>
-                        <p class="price">80 ريال</p>
-                    </div></a></div>
-            <div class="item"><a href="list-details.html">
-                    <div class="photo"><img src="images/slider/img-1.jpg" alt=""></div>
-                    <div class="content">
-                        <h2 class="title">طاجن ثمار<br/>البحر</h2>
-                        <p class="price">80 ريال</p>
-                    </div></a></div>
-            <div class="item"><a href="list-details.html">
-                    <div class="photo"><img src="images/slider/img-1.jpg" alt=""></div>
-                    <div class="content">
-                        <h2 class="title">طاجن ثمار<br/>البحر</h2>
-                        <p class="price">80 ريال</p>
-                    </div></a></div>
-            <div class="item"><a href="list-details.html">
-                    <div class="photo"><img src="images/slider/img-1.jpg" alt=""></div>
-                    <div class="content">
-                        <h2 class="title">طاجن ثمار<br/>البحر</h2>
-                        <p class="price">80 ريال</p>
-                    </div></a></div>
-            <div class="item"><a href="list-details.html">
-                    <div class="photo"><img src="images/slider/img-1.jpg" alt=""></div>
-                    <div class="content">
-                        <h2 class="title">طاجن ثمار<br/>البحر</h2>
-                        <p class="price">80 ريال</p>
-                    </div></a></div>
+            <livewire:most-sell-product />
         </div>
     </div>
 </section>
