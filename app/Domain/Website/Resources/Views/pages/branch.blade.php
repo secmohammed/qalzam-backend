@@ -42,13 +42,11 @@
             </ul>
         </div>
         <div class="most-wanted">
-            <div class="row">
                 <livewire:branch-products
                     :action="'add-to-cart'"
                     :pagination="'true'"
                     :branchId="$branch->id"
                 />
-            </div>
         </div>
     </div>
 </section>

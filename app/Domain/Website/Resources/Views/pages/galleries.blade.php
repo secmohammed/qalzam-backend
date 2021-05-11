@@ -1,4 +1,4 @@
-@extends('layouts.website', ['activeRoute' => 'gallery'])
+@extends('layouts.website', ['activeRoute' => 'gallery', 'headerClass' => 'header-inner'])
 @section('content')
     <section class="gallary">
         <div class="container">

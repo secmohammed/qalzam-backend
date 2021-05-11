@@ -149,8 +149,8 @@ class Cart
         $cart = $this->get();
         $products = array_map(function ($product){
             return array(
-                'id' => $product['id'],
-                'quantity' => $product['quantity'],
+                'id' => (int)$product['id'],
+                'quantity' => (int)$product['quantity'],
             );
         },$cart['products']);
         return collect($products);

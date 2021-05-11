@@ -63,7 +63,7 @@ class OrderStoreFormRequest extends FormRequest
             'creator_id' => auth()->id(),
             'products' => collect($this->request->get('products'))->keyBy('id')->map(function ($product) {
                 return [
-                    'quantity' => $product['quantity'],
+                    'quantity' => (int)$product['quantity'],
                 ];
             })->toArray(),
         ]);

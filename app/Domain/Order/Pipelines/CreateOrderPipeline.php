@@ -33,7 +33,7 @@ class CreateOrderPipeline implements Pipeline
      */
     public function handle($request, \Closure $next)
     {
-        $products = $this->productVariationRepository->whereIn('id', $request->products ?? $request->order->products->pluck('id'))->with(['branches' => function ($query) use ($request) {
+        $products = $this->productVariationRepository->whereIn('id', array_column($request->products, 'id') ?? $request->order->products->pluck('id'))->with(['branches' => function ($query) use ($request) {
             $query->where('id', $request->branch_id);
         },
         ])->get()->map(function ($product) use ($request) {

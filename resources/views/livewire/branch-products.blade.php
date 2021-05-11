@@ -1,7 +1,9 @@
+<div class="row">
 @foreach($products as $index => $product)
     <livewire:card.vertical-card
         :product="$product"
         :action="$action"
-        :wire:key="'horizontal-product-'. $product->id"
+        key="'horizontal-product-'. $product->id"
     />
 @endforeach
+</div>
