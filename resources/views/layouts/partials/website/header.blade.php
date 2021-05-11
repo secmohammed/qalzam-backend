@@ -11,7 +11,13 @@
             </ul>
         </div>
         <div class="icons">
-            <div class="language">  <a href="en/index.html">En</a></div>
+            <div class="language">
+                @if(GetLanguage() == 'ar')
+                    <a href="{{url()->current() . '?lang=en'}}">En</a>
+                @else
+                    <a href="{{url()->current() . '?lang=ar'}}">Ar</a>
+                @endif
+            </div>
 
             @guest
             <a href="#login" data-toggle="modal">

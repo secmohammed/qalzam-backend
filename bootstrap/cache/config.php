@@ -18,7 +18,7 @@
     'url' => 'http://127.0.0.1:8000',
     'asset_url' => NULL,
     'timezone' => 'UTC',
-    'locale' => 'en',
+    'locale' => 'ar',
     'available_locales' => 
     array (
       0 => 'en',

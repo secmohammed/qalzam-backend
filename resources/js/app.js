@@ -7,7 +7,7 @@
 require("./bootstrap");
 
 window.Vue = require("vue").default;
-
+Vue.prototype.$dashboardPrefix = 'admin-panel';
 Vue.component(
     "reservation-form",
     require("./components/ReservationProduct.vue").default

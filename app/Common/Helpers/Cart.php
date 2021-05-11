@@ -17,6 +17,10 @@ class Cart
 
     public function add(ProductVariation $product, $amount = 0): void
     {
+        // check Porduct in the same Session Branch
+        if(! $this->inBranch(BranchFacade::get(),$product))
+            return ;
+
         $cart = $this->get();
         $cartProductsIds = array_column($cart['products'], 'id');
 
@@ -26,9 +30,6 @@ class Cart
         $product->type = 'cart';
         $product->product_variation_id  = $product->id;
         $product->branch_id = BranchFacade::get()->id;
-        // check Porduct in the same Session Branch
-        if(!$this->inBranch(BranchFacade::get(),$product))
-            return ;
         if (in_array($product->id, $cartProductsIds)) {
             $cart['products'] = $this->productCartIncrement($product->id, $cart['products'],$amount);
             $this->set($cart);
@@ -149,8 +150,8 @@ class Cart
         $cart = $this->get();
         $products = array_map(function ($product){
             return array(
-                'id' => $product['id'],
-                'quantity' => $product['quantity'],
+                'id' => (int)$product['id'],
+                'quantity' => (int)$product['quantity'],
             );
         },$cart['products']);
         return collect($products);

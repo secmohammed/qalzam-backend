@@ -31,13 +31,7 @@
     <div class="item-bg"><img src="images/bg.svg" alt="" title=""></div>
     <div class="copyright">
         <div class="container">
-            <!--p.powrby
-            | تم التصميم بكل حب
-            img(src='images/heart.svg' alt="" title="")
-            | في
-            a(href="https://joovlly.com/" target="_blank")
-             img(src='images/joovlly.svg' alt="" title="")
-            -->
+            <p class="powrby">تم التصميم بكل حب<img src="images/heart.svg" alt="" title=""/>في<a href="https://joovlly.com/" target="_blank"><img src="{{asset('assets/website/images/joovlly.svg')}}" alt="" title=""/></a></p>
             <p>جميع الحقوق محفوظه 2020 ,القلزم</p>
             <nav class="social"><a href="#">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
