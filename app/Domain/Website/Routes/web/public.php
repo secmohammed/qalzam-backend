@@ -25,3 +25,4 @@ Route::get('/contact', 'PagesController@contact')->name('website.contact');
 Route::get('/terms-and-conditions', 'PagesController@termsAndConditions')->name('website.terms-and-conditions');
 Route::get('/policy', 'PagesController@policy')->name('website.policy');
 Route::get('/my-cart', 'ProfileController@myCart')->name('website.my-cart');
+Route::get('/profile', 'PagesController@profile')->name('website.profile');

@@ -7,7 +7,11 @@
     </a>
 
     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <button class="dropdown-item p-3" id="profileButton" href="#">{{__('website.my-profile')}}</button>
+        <form action="{{route('website.profile')}}" method="get">
+            @csrf
+        <button class="dropdown-item p-3" id="profileButton" >{{__('website.my-profile')}}</button>
+    </form>
+    
         <form action="{{route('logout')}}" method="POST">
             @csrf
             <button class="dropdown-item p-3" type="submit">{{__('website.logout')}}</button>

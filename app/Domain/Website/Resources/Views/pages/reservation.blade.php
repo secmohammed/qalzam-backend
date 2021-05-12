@@ -13,13 +13,14 @@
         <h2 class="title">حجوزات القلزم</h2>
         <div class="listorder">
             <p class="text">إختر الفرع</p>
-            <nav class="list-filter">
-                <div class="row">
+            <nav class="list-filter" style="  width: 100%;
+            overflow: hidden;
+            overflow-x: scroll;
+            white-space: nowrap;">
 
                     @foreach($branches as $branch)
                         <a class="list-branches " id="branch-{{$branch->id}}" href="#" onclick="activeLinkById({{$branch->id}})">{{$branch->name}}</a>
                     @endforeach
-                </div>
             </nav>
         </div>
         <!--div.alert.alert-success
@@ -34,40 +35,50 @@
         div.contant
          p هناك خطأ ما , يرجى إعاده المحاولة
         -->
+        {{-- @include('layouts.partials.website.include._successMessage',['success_component' => 'reservation-success']) --}}
+        @include('layouts.partials.website.include._successMessage', ['success_component' => 'reservation-success'])
+        @include('layouts.partials.website.include._errorMessage')
         <div class="inner">
-            <form action="#" method="post">
+            <form action="{{ route("reservations.store") }}" method="post">
+                @csrf
                 <div class="row">
                     <div class="col-sm-6 field">
-                        <label>الإسم الأول</label>
-                        <input class="form-control" type="text" placeholder="الإسم الأول" value="">
+                        <label>الإسم </label>
+                        <input disabled   class="form-control" type="text" placeholder="الإسم " value="{{ auth()->user()->name }}">
                     </div>
-                    <div class="col-sm-6 field">
-                        <label>الإسم الأخير</label>
-                        <input class="form-control" type="text" placeholder="الإسم الأخير" value="">
-                    </div>
+                 
                     <div class="col-sm-6 field">
                         <label>الجول</label>
-                        <input class="form-control" type="number" placeholder="الجول" value="">
+                        <input disabled   class="form-control" type="number" placeholder="الجول" value="{{ auth()->user()->mobile }}">
                     </div>
-                    <div class="col-sm-6 field">
+                    <div class="col-sm-12 field">
                         <label>البريد الإلكتروني</label>
-                        <input class="form-control" type="email" placeholder="البريد الإلكتروني" value="">
+                        <input disabled   class="form-control" type="email" placeholder="البريد الإلكتروني" value="{{ auth()->user()->email }}">
+                    </div>
+                   
+                    <div class="col-sm-6 field">
+                        <label>تاريخ بداية الحجز </label>
+                        {{-- <div class="clockpicker"> --}}
+                            <input class="form-control" name="start_date" type="datetime-local" placeholder="توقيت الوصول" value=""><img src="images/time.svg" alt="" title="">
+                        {{-- </div> --}}
+                    </div>
+                    <input class="form-control" name="website" type="hidden" placeholder="توقيت الوصول" value="website"><img src="images/time.svg" alt="" title="">
+
+                    <div class="col-sm-6 field">
+                        <label>تاريخ نهاية الحجز </label>
+                        {{-- <div class="clockpicker"> --}}
+                            <input class="form-control" name="end_date"  type="datetime-local" placeholder="توقيت الوصول" value=""><img src="images/time.svg" alt="" title="">
+                        {{-- </div> --}}
                     </div>
                     <div class="col-sm-6 field">
-                        <label>التاريخ </label>
-                        <input class="form-control" placeholder="التاريخ" id="date" name="date" value=""><img src="images/calendar.svg" alt="" title="">
-                    </div>
-                    <div class="col-sm-6 field">
-                        <label>توقيت الوصول </label>
-                        <div class="clockpicker">
-                            <input class="form-control" type="text" placeholder="توقيت الوصول" value=""><img src="images/time.svg" alt="" title="">
-                        </div>
-                    </div>
-                    <div class="col-sm-6 field">
-                        <label>غرفة/طاولة </label>
-                        <select class="form-control">
-                            <option>إختر غرفة/طاولة</option>
-                            <option>مصر</option>
+                        <label>الاقامة </label>
+                        <select name="accommodation_id" id="accommodation_id" class="form-control">
+                            {{-- @foreach ($accommodations as $accommodation)
+
+                            <option value="{{ $accommodation->id }}">{{ $accommodation->name }}</option>
+                                
+                            @endforeach --}}
+                            {{-- <option>مصر</option> --}}
                         </select>
                         <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0)">
@@ -75,13 +86,14 @@
                             </g>
                         </svg>
                     </div>
-                    <div class="col-sm-6 field">
+                    <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                    {{-- <div class="col-sm-6 field">
                         <label>رقم غرفة/طاولة</label>
                         <input class="form-control" type="text" placeholder="رقم غرفة/طاولة" value="">
-                    </div>
-                    <div class="col-sm-12 field">
+                    </div> --}}
+                    <div class="col-sm-6 field">
                         <label>ملاحظات أخري</label>
-                        <textarea class="form-control" name="" placeholder="ملاحظات أخري"> </textarea>
+                        <textarea class="form-control" name="notes" placeholder="ملاحظات أخري"> </textarea>
                     </div>
                     <div class="col-sm-12 field">
                         <button class="bottom" type="submit">إرسال الأن</button>
@@ -93,11 +105,29 @@
 </section>
 @push('scripts')
     <script>
+        const branches = {!! $branches !!}
         function activeLinkById(id)
         {
             $(".list-branches").removeClass('active')
             $("#branch-" + id).addClass('active')
+            let branch = branches.find(branch => branch.id === id)
+            branch.accommodations.map(accommodation => {
+                $('#accommodation_id')
+    .find('option')
+    .remove()
+    .end()
+    .append(`<option value="${accommodation.id}">${accommodation.name}</option>`)
+    // .val('whatever')
+    // $("select#accommodation_id").append( $("<option>")
+    // .val(accommodation.id)
+    // .html(accommodation.name)
+    //         )
+    
+         
+    });
+            
         }
+    
     </script>
 @endpush
 @endsection
