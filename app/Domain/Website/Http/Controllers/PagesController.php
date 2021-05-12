@@ -48,7 +48,7 @@ class PagesController extends Controller
 
     public function branches()
     {
-        $index = $this->branchRepository->spatie()->paginate(
+        $index = $this->branchRepository->orderBy('created_at', 'desc')->spatie()->paginate(
             $request->per_page ?? config('qalzam.pagination')
         );
 
@@ -65,10 +65,13 @@ class PagesController extends Controller
     public function branch($branch)
     {
         $this->branchRepository->pushCriteria(new StatusIsCriteria(true));
-        $show = $this->branchRepository->find($branch);
+        $show = $this->branchRepository->with(['products' => function($query){ return $query->where('status', 'active');}])->find($branch);
         BranchFacade::setBranch($show);
+//        return $show->products;
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('branch', $show, 'web');
+        $filters =  [['id' => 1, 'name' => 'hamada'], ['id' => 2, 'name' => 'mahmoud']];
+        $this->setData('filters',$filters, 'web');
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.branch");
         return $this->response();

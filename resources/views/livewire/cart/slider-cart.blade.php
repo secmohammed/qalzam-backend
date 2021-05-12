@@ -1,5 +1,5 @@
 {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
-<div class="show-card">
+<div>
     <div class="headtitle">
         <h3 class="title">سلة المشتريات</h3><a class="close-card" href="#">
             <svg width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
