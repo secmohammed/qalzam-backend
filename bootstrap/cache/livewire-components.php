@@ -28,6 +28,8 @@
   'product-datatable' => 'App\\Http\\Livewire\\ProductDatatable',
   'product-variation-datatable' => 'App\\Http\\Livewire\\ProductVariationDatatable',
   'product-variation-type-datatable' => 'App\\Http\\Livewire\\ProductVariationTypeDatatable',
+  'profile.my-orders' => 'App\\Http\\Livewire\\Profile\\MyOrders',
+  'profile.update-user' => 'App\\Http\\Livewire\\Profile\\UpdateUser',
   'reservation-datatable' => 'App\\Http\\Livewire\\ReservationDatatable',
   'role-datatable' => 'App\\Http\\Livewire\\RoleDatatable',
   'single-list-filter' => 'App\\Http\\Livewire\\SingleListFilter',

@@ -167,7 +167,7 @@ export default {
                 },
             }).then((res) => {
 
-                window.location = "/branches"
+                window.location = `/${this.$dashboardPrefix}/branches`
             }).catch((err) => {
                 // console.log("🚀 ~ file: OrderProduct.vue ~ line 257 ~ save ~ err.response.data.errors", err.response.data.errors, err.response)
                 this.errors = err.response.data.errors;

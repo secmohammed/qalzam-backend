@@ -18,6 +18,7 @@ Route::middleware(['auth'])->prefix(config('qalzam.dashboard-prefix'))->group(fu
     Route::get('/users', 'UserController@dataTable')->name('users.index');
     Route::delete('/users', 'UserController@deleteAll')->name('users.delete-all');
     Route::resource('/roles', 'RoleController')->except('index');
+    Route::resource('/user/orders', 'RoleController')->except('index');
     Route::get('/roles', 'RoleController@dataTable')->name('roles.index');
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');
     Route::get('notifications', 'NotificationController@index')->name('notifications.index');

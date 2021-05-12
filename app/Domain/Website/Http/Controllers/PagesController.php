@@ -6,9 +6,11 @@ namespace App\Domain\Website\Http\Controllers;
 use App\Common\Criteria\StatusIsCriteria;
 use App\Domain\Branch\Entities\Branch ;
 use App\Common\Facades\Branch as BranchFacade;
+use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
 use App\Domain\Branch\Criteria\BranchHasGalleriesCriteria;
 use App\Domain\Branch\Repositories\Contracts\AlbumRepository;
 use App\Domain\Branch\Repositories\Contracts\BranchRepository;
+use App\Domain\Reservation\Repositories\Contracts\ReservationRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 use Joovlly\DDD\Traits\Responder;
 
@@ -32,11 +34,13 @@ class PagesController extends Controller
 
     protected $branchRepository;
     protected $galleryRepository;
+    protected $accommodationRepository;
 
-    public function __construct(BranchRepository $branchRepository, AlbumRepository $galleryRepository)
+    public function __construct(BranchRepository $branchRepository, AlbumRepository $galleryRepository,AccommodationRepository $accommodationRepository)
     {
         $this->branchRepository = $branchRepository;
         $this->galleryRepository = $galleryRepository;
+        $this->accommodationRepository = $accommodationRepository;
     }
 
     public function home()
@@ -103,23 +107,20 @@ class PagesController extends Controller
         return $this->response();
     }
 
-    public function showReservation()
+    public function createReservation()
     {
         $this->branchRepository->pushCriteria(new StatusIsCriteria(true));
+       $accommodations= $this->accommodationRepository->orderBy('created_at', 'desc')->all();
         $index = $this->branchRepository->orderBy('created_at', 'desc')->all();
-
-        $this->setData('branches', $index, 'web');
+        $this->setData('branches', $index->load('accommodations'), 'web');
+        $this->setData('accommodations', $accommodations, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
         $this->addView("{$this->domainAlias}::{$this->viewPath}.reservation");
         return $this->response();
     }
 
-    public function reservation()
-    {
-        //todo implement submit reservation
-    }
-
+ 
     public function about()
     {
         $this->setData('alias', $this->domainAlias, 'web');

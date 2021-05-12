@@ -28,10 +28,4 @@ Route::get('/contact', 'PagesController@contact')->name('website.contact');
 Route::get('/terms-and-conditions', 'PagesController@termsAndConditions')->name('website.terms-and-conditions');
 Route::get('/policy', 'PagesController@policy')->name('website.policy');
 Route::get('/my-cart', 'ProfileController@myCart')->name('website.my-cart');
-
-
-Route::get('/testing', function (\App\Domain\Product\Entities\ProductVariation $productVariation, ProductVariationRepository $productRepository){
-    $productRepository->pushCriteria(new BranchIdCriteria(94));
-    $productRepository->pushCriteria(new StatusIsCriteria(true));
-    return    $productRepository->with(['branches'])->all();
-});
+Route::get('/profile', 'PagesController@profile')->name('website.profile');
