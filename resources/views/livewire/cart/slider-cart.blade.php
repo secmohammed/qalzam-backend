@@ -8,7 +8,9 @@
     </div>
     <div class="all-items" id="cart-side-items">
         @foreach($products as $product)
-            <livewire:card.cart-card :wire:key="'cart-side-card-'. $product->id"  :product="$product" />
+            <livewire:card.cart-card
+                :wire:key="'cart-side-card-'. $product->id"
+                :product="$product" />
         @endforeach
     </div>
     <div class="total-price">

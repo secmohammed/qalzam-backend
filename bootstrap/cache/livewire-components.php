@@ -34,6 +34,7 @@
   'stock-datatable' => 'App\\Http\\Livewire\\StockDatatable',
   'template-datatable' => 'App\\Http\\Livewire\\TemplateDatatable',
   'template-product' => 'App\\Http\\Livewire\\TemplateProduct',
+  'total-products' => 'App\\Http\\Livewire\\TotalProducts',
   'user-datatable' => 'App\\Http\\Livewire\\UserDatatable',
   'step1' => 'App\\Http\\Livewire\\step1',
   'step2' => 'App\\Http\\Livewire\\step2',

@@ -37,23 +37,19 @@ class BranchProducts extends Component
         return view('livewire.branch-products');
     }
 
-    public function productsWithCategory($category_id,ProductVariationRepository $productRepository, BranchRepository $branchRepository)
+    public function productsWithCategory($category_id, BranchRepository $branchRepository)
     {
-        $this->productRepository = $productRepository;
         $this->branchRepository = $branchRepository;
-//        $this->productRepository->pushCriteria(new BranchIdCriteria($this->branchId));
-//        $this->productRepository->pushCriteria(new StatusIsCriteria(true));
-//        $this->productRepository->pushCriteria(new ProductVariationCategoriesCriteria($category_id));
-//        $this->products = $this->productRepository->all();
         $this->branchRepository->pushCriteria(new StatusIsCriteria(true));
-        $this->products = $this->branchRepository->with(['products' => function($q) use($category_id){ return $q->categories($category_id);}])->find($this->branchId)->products ?: [];
+        $this->products = $this->branchRepository->with(['products' => function($q) use($category_id){ return $q->where('status', 'active')->categories($category_id);}])->find($this->branchId)->products ?: [];
+        $this->emitTo('total-products', 'totalCount', count($this->products));
     }
 
     public function rendProducts(ProductVariationRepository $productRepository, BranchRepository $branchRepository)
     {
-        $this->productRepository = $productRepository;
         $this->branchRepository = $branchRepository;
         $this->branchRepository->pushCriteria(new StatusIsCriteria(true));
-        $this->products = $this->branchRepository->with(['products'])->find($this->branchId)->products;
+        $this->products = $this->branchRepository->with(['products' => function($q) {return $q->where('status', 'active');}])->find($this->branchId)->products;
+        $this->emitTo('total-products', 'totalCount', $this->products->count());
     }
 }

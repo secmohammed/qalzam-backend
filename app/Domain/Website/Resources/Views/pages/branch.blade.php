@@ -10,7 +10,7 @@
                     </svg></a></li>
             <li> القائمة </li>
         </ul>
-        <h2 class="title">قائمه القلزم <span>{{$branch->products->count()}} نتيجه</span></h2>
+        <h2 class="title"> قائمه القلزم <livewire:total-products :key="'total-products'" :totalCount="$branch->products->count()" /></h2>
         <livewire:filter.products-filter />
         <div class="listicons">
             <nav class="tags"> <a href="#">
