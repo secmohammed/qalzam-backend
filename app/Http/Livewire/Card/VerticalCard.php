@@ -14,6 +14,8 @@ class VerticalCard extends Component
     public $productId;
     public $productImage;
     public $productPrice;
+    public $productName;
+
     public function render()
     {
         return view('livewire.card.vertical-card');

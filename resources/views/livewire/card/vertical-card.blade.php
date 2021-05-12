@@ -2,7 +2,7 @@
     {{-- Nothing in the world is as soft and yielding as water. --}}
     <div class="inner">
         <a class="photo" href="#"><img src="{{$productImage}}" alt=""></a>
-        <div class="content"><a class="title" href="list-details.html"> بوبيت سمك بحشوة<br/>السالمون المدخن</a>
+        <div class="content"><a class="title" href="list-details.html">{{$productName}}<br/>السالمون المدخن</a>
             <p class="price">{{$productPrice }} ريال</p>
             <a class="addcard" href="{{$action === 'start-shopping' ? route('website.branches') : '#'}}" @if($action != 'start-shopping') wire:click="addToCart({{$productId}})" @endif>
                 <svg width="24" height="24" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">

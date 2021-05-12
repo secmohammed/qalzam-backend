@@ -17,7 +17,7 @@
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5 11.2H2L6.5 16V0H5V11.2ZM9.5 2.4V16H11V4.8H14L9.5 0V2.4Z" fill="#D1362A"></path>
                     </svg>ترتيب بواسطه</a></nav>
-            <ul class="gred-icons">
+{{--            <ul class="gred-icons">--}}
 {{--                <li class="grad-row">--}}
 {{--                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
 {{--                        <rect width="12" height="2.76922"></rect>--}}
@@ -25,21 +25,21 @@
 {{--                        <rect y="9.23071" width="12" height="2.76922"></rect>--}}
 {{--                    </svg>--}}
 {{--                </li>--}}
-                <li class="grad-col active">
-                    <svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="2.76929" height="2.76922"></rect>
-                        <rect width="2.76929" height="2.76922"></rect>
-                        <rect x="4.61536" width="2.76929" height="2.76922"></rect>
-                        <rect x="9.23071" width="2.76929" height="2.76922"></rect>
-                        <rect y="4.6153" width="2.76929" height="2.76928"></rect>
-                        <rect x="4.61523" y="4.6153" width="2.76929" height="2.76928"></rect>
-                        <rect x="9.23047" y="4.6153" width="2.76929" height="2.76928"></rect>
-                        <rect y="9.23071" width="2.76929" height="2.76922"></rect>
-                        <rect x="4.61523" y="9.23071" width="2.76929" height="2.76922"></rect>
-                        <rect x="9.23047" y="9.23071" width="2.76929" height="2.76922"></rect>
-                    </svg>
-                </li>
-            </ul>
+{{--                <li class="grad-col active">--}}
+{{--                    <svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">--}}
+{{--                        <rect width="2.76929" height="2.76922"></rect>--}}
+{{--                        <rect width="2.76929" height="2.76922"></rect>--}}
+{{--                        <rect x="4.61536" width="2.76929" height="2.76922"></rect>--}}
+{{--                        <rect x="9.23071" width="2.76929" height="2.76922"></rect>--}}
+{{--                        <rect y="4.6153" width="2.76929" height="2.76928"></rect>--}}
+{{--                        <rect x="4.61523" y="4.6153" width="2.76929" height="2.76928"></rect>--}}
+{{--                        <rect x="9.23047" y="4.6153" width="2.76929" height="2.76928"></rect>--}}
+{{--                        <rect y="9.23071" width="2.76929" height="2.76922"></rect>--}}
+{{--                        <rect x="4.61523" y="9.23071" width="2.76929" height="2.76922"></rect>--}}
+{{--                        <rect x="9.23047" y="9.23071" width="2.76929" height="2.76922"></rect>--}}
+{{--                    </svg>--}}
+{{--                </li>--}}
+{{--            </ul>--}}
         </div>
         <div class="most-wanted">
                 <livewire:branch-products

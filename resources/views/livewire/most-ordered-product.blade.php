@@ -1,6 +1,5 @@
 {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
 @foreach($products as $index => $product)
-    <div class="col-sm-3 item">
         <livewire:card.vertical-card
             :product="$product"
             :productPrice="$product->price->amount()"
@@ -9,7 +8,6 @@
             :action="$action"
             :key="'vertical-card-'. $product->id"
         />
-    </div>
 @endforeach
 @if($pagination === 'true')
     <ul class="pagination">
