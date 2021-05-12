@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->prefix(config('qalzam.dashboard-prefix'))->group(function () {
     Route::resource('/reservations', 'ReservationController')->except('index');
     Route::get('/reservations', 'ReservationController@dataTable')->name('reservations.index');
     Route::get('reservations/{reservation}/pdf', 'ReservationController@generatePdf')->name('reservations.pdf');
