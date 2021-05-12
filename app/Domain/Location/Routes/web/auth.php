@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->prefix(config('qalzam.dashboard-prefix'))->group(function () {
     Route::resource('/locations', 'LocationController')->except('index');
     Route::get('/locations', 'LocationController@dataTable')->name('locations.index');
     Route::get('/welcome', function () {

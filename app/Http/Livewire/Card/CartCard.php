@@ -8,6 +8,7 @@ use Livewire\Component;
 class CartCard extends Component
 {
     public $product;
+    protected $listeners = ['amountChanged' => '$refresh'];
 
     public function render()
     {

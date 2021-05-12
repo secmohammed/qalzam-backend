@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::middleware(['auth'])->prefix(config('qalzam.dashboard-prefix'))  ->group(function () {
+Route::middleware(['auth'])->prefix(config('qalzam.dashboard-prefix'))->group(function () {
     Route::resource('/categories','CategoryController')->except('index');
     Route::get('/categories','CategoryController@dataTable')->name('categories.index');
 	###CRUD_PLACEHOLDER###
