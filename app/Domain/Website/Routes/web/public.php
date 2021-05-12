@@ -22,7 +22,7 @@ Route::get('/branches', 'PagesController@branches')->name('website.branches');
 Route::get('/branches/{branch}', 'PagesController@branch')->name('website.branch');
 Route::get('/galleries', 'PagesController@galleries')->name('website.galleries');
 Route::get('/galleries/{gallery}', 'PagesController@gallery')->name('website.gallery');
-Route::get('/reservation/', 'PagesController@reservation')->name('website.reservation');
+//Route::get('/reservation/', 'PagesController@createReservation')->name('website.reservation');
 Route::get('/about', 'PagesController@about')->name('website.about');
 Route::get('/contact', 'PagesController@contact')->name('website.contact');
 Route::get('/terms-and-conditions', 'PagesController@termsAndConditions')->name('website.terms-and-conditions');

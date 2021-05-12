@@ -1,5 +1,6 @@
 <?php return array (
   'accommodation-datatable' => 'App\\Http\\Livewire\\AccommodationDatatable',
+  'add-address' => 'App\\Http\\Livewire\\AddAddress',
   'album-datatable' => 'App\\Http\\Livewire\\AlbumDatatable',
   'branch.single-product' => 'App\\Http\\Livewire\\Branch\\SingleProduct',
   'branch-datatable' => 'App\\Http\\Livewire\\BranchDatatable',

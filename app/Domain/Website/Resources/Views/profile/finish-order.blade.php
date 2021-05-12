@@ -131,7 +131,7 @@
             </form>
         </div>
     </section>
-   @include('layouts.partials.website.include.add_address')
+   @include('layouts.partials.website.include._add_address')
     <div class="modal fade" id="completion" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content login">
@@ -204,43 +204,6 @@
                 },
                 success:function(response){
                     window.location.replace("{!! route('website.home') !!}")
-                },
-                error:function (response){
-                    $("#loginErrors").empty();
-                    $("#errorContainerLogin").show();
-                    $.each(response.responseJSON.errors, function (key, item)
-                    {
-                        console.log(item)
-                        $("#loginErrors").append("<li class='text-light m-2 font-weight-bold'>"+item+"</li>")
-                    });
-                }
-            });
-        })
-        $("#addLocation").click(function (event){
-            event.preventDefault();
-            let name = $("input[name=addressName]").val();
-            let landmark = $("input[name=addressLandmark]").val();
-            let postal_code = $("input[name=addressPostalCode]").val();
-            // let location_id = $("input[name=addressLocationId]").val();
-            let location_id = 3;
-            let user_id = '{{auth()->id()}}';
-            let _token   = $('meta[name="csrf-token"]').attr('content');
-            let address_1 = `${landmark}, ${name} `;
-            $.ajax({
-                url: "{!! route('addresses.store') !!}",
-                type:"POST",
-                data:{
-                    name:name,
-                    landmark:landmark,
-                    postal_code:postal_code,
-                    location_id:location_id,
-                    user_id:user_id,
-                    address_1:address_1,
-                    default:1,
-                    _token:_token
-                },
-                success:function(response){
-                    window.location.reload();
                 },
                 error:function (response){
                     $("#loginErrors").empty();
