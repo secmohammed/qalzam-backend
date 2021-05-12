@@ -241,7 +241,12 @@ class ReservationController extends Controller
         GenerateReservationPdfInvoice::dispatch($reservation);
 
         $this->setData('data', $reservation);
+        if($request->website)
+        {
+            session()->flash("user-success" ,"user updated successfully");
+            return redirect()->back();
 
+        }
         $this->redirectRoute("{$this->resourceRoute}.show", [$reservation->id]);
         $this->useCollection(ReservationResource::class, 'data');
 

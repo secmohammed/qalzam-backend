@@ -239,7 +239,7 @@ export default {
                     Authorization: "Bearer " + this.auth_token,
                 },
             }).then((res) => {
-                window.location = "/reservations"
+                window.location = `/${this.$dashboardPrefix}/reservations`
             }).catch((err) => {
 
               this.errors = err.response.data.errors;
@@ -257,7 +257,7 @@ export default {
                     Authorization: "Bearer " + this.auth_token,
                 },
             }).then((res) => {
-                window.location = `/reservations/${this.edit.id }`
+                window.location = `/${this.$dashboardPrefix}/reservations/${this.edit.id }`
             }).catch((err) => {
                 this.errors = err.response.data.errors;
 

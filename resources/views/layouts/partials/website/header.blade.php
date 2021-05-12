@@ -91,7 +91,9 @@
 @include('layouts.partials.website.include._forget')
 @include('layouts.partials.website.include._code')
 @endguest
-<livewire:cart.slider-cart />
+<div  class="show-card">
+    <livewire:cart.slider-cart />
+</div>
 <div class="overlay"></div>
 <!--End Header-->
 

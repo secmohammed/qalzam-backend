@@ -332,7 +332,7 @@ export default {
                     Authorization: "Bearer " + this.auth_token,
                 },
             }).then((res) => {
-                window.location = "/discounts"
+                window.location = `/${this.$dashboardPrefix}/discounts`
             }).catch((err) => {
                 this.errors = err.response.data.errors;
                 if ("user_id" in this.errors || "address_id" in this.errors || "branch_id" in this.errors) {
@@ -348,7 +348,7 @@ export default {
                     Authorization: "Bearer " + this.auth_token,
                 },
             }).then((res) => {
-                window.location = `/discounts/${this.edit.id }`
+                window.location =  `/${this.$dashboardPrefix}/discounts//${this.edit.id}`
             }).catch((err) => {
                 this.errors = err.response.data.errors;
 

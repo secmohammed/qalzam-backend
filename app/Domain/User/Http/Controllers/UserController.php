@@ -15,6 +15,7 @@ use App\Domain\User\Repositories\Contracts\RoleRepository;
 use App\Domain\User\Repositories\Contracts\UserRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 use App\Mail\SendPassword;
+use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\Mail;
@@ -308,7 +309,12 @@ class UserController extends Controller
                 'name' => $request->name_ar,
             ], 'ar', true);
         }
+            if($request->website)
+            {
+                session()->flash("user-success" ,"user updated successfully");
+                return redirect()->back();
 
+            }
         $this->redirectRoute("{$this->resourceRoute}.show", [$user->id]);
         $this->setData('data', $user);
         $this->useCollection(UserResource::class, 'data');

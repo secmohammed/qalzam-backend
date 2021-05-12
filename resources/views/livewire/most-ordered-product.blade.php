@@ -1,10 +1,14 @@
 {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
 @foreach($products as $index => $product)
-    <livewire:card.vertical-card
-        :product="$product"
-        :action="$action"
-        :wire:key="'horizontal-product-'. $product->id"
-    />
+        <livewire:card.vertical-card
+            :product="$product"
+            :productPrice="$product->price->amount()"
+            :productImage="$product->getLastMediaUrl('product_variation-images') ?: asset('/assets/website/images/slider/img-1.jpg')"
+            :productId="$product->id"
+            :productName="$product->name"
+            :action="$action"
+            :key="'vertical-card-'. $product->id"
+        />
 @endforeach
 @if($pagination === 'true')
     <ul class="pagination">

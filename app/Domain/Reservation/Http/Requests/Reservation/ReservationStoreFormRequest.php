@@ -40,6 +40,7 @@ class ReservationStoreFormRequest extends FormRequest
      */
     public function rules()
     {
+        // dd($this->request);
         $rules = [
             'start_date' => ['required','after_or_equal:' . now()->format('Y-m-d H:i:s')],
             'end_date' => ['nullable', 'after_or_equal:' . $this->request->get('start_date'), new EnsureEndDateIsSameDayAsStartDate($this->request->get('start_date'))],

@@ -32,6 +32,12 @@ class ProfileController extends BaseController
         $this->addView("{$this->domainAlias}::{$this->viewPath}.my-cart");
         return $this->response();
     }
+    public function profile()
+    {
+        $this->setData('alias', $this->domainAlias, 'web');
+        $this->addView("{$this->domainAlias}::{$this->viewPath}.index");
+        return $this->response();
+    }
 
     public function finishOrder()
     {

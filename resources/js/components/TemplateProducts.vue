@@ -115,7 +115,7 @@
                         Authorization: 'Bearer ' + this.auth_token
                     }
                 }).then(res => {
-                    window.location = `/templates/${this.template.id}`
+                    window.location = `/${this.$dashboardPrefix}/templates/${this.template.id}`
                 }).catch(err => {
                     this.errors = err.response.data?.errors || [];
                 })
