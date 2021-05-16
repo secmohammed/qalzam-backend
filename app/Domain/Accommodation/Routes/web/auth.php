@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->prefix(config('qalzam.dashboard-prefix'))->group(function () {
     Route::resource('/accommodations','AccommodationController')->except('index');
     Route::get('/accommodations','AccommodationController@dataTable')->name('accommodations.index');
 	Route::resource('/contracts','ContractController')->except('index');

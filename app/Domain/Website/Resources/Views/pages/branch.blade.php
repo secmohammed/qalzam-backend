@@ -10,42 +10,44 @@
                     </svg></a></li>
             <li> القائمة </li>
         </ul>
-        <h2 class="title">قائمه القلزم <span>68 نتيجه</span></h2>
-        <nav class="list-filter"><a class="active" href="#">جميع المنتجات</a><a href="#">الاسماك</a><a href="#">ثمار البحر</a><a href="#">كوزي القلزم المميز</a><a href="#">الأطباق الرئيسية</a><a href="#">الشوربات</a></nav>
+        <h2 class="title"> قائمه القلزم <livewire:total-products :key="'total-products'" :totalCount="$branch->products->count()" /></h2>
+        <livewire:filter.products-filter />
         <div class="listicons">
             <nav class="tags"> <a href="#">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5 11.2H2L6.5 16V0H5V11.2ZM9.5 2.4V16H11V4.8H14L9.5 0V2.4Z" fill="#D1362A"></path>
                     </svg>ترتيب بواسطه</a></nav>
-            <ul class="gred-icons">
-                <li class="grad-row">
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="12" height="2.76922"></rect>
-                        <rect y="4.6153" width="12" height="2.76928"></rect>
-                        <rect y="9.23071" width="12" height="2.76922"></rect>
-                    </svg>
-                </li>
-                <li class="grad-col active">
-                    <svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="2.76929" height="2.76922"></rect>
-                        <rect width="2.76929" height="2.76922"></rect>
-                        <rect x="4.61536" width="2.76929" height="2.76922"></rect>
-                        <rect x="9.23071" width="2.76929" height="2.76922"></rect>
-                        <rect y="4.6153" width="2.76929" height="2.76928"></rect>
-                        <rect x="4.61523" y="4.6153" width="2.76929" height="2.76928"></rect>
-                        <rect x="9.23047" y="4.6153" width="2.76929" height="2.76928"></rect>
-                        <rect y="9.23071" width="2.76929" height="2.76922"></rect>
-                        <rect x="4.61523" y="9.23071" width="2.76929" height="2.76922"></rect>
-                        <rect x="9.23047" y="9.23071" width="2.76929" height="2.76922"></rect>
-                    </svg>
-                </li>
-            </ul>
+{{--            <ul class="gred-icons">--}}
+{{--                <li class="grad-row">--}}
+{{--                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
+{{--                        <rect width="12" height="2.76922"></rect>--}}
+{{--                        <rect y="4.6153" width="12" height="2.76928"></rect>--}}
+{{--                        <rect y="9.23071" width="12" height="2.76922"></rect>--}}
+{{--                    </svg>--}}
+{{--                </li>--}}
+{{--                <li class="grad-col active">--}}
+{{--                    <svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">--}}
+{{--                        <rect width="2.76929" height="2.76922"></rect>--}}
+{{--                        <rect width="2.76929" height="2.76922"></rect>--}}
+{{--                        <rect x="4.61536" width="2.76929" height="2.76922"></rect>--}}
+{{--                        <rect x="9.23071" width="2.76929" height="2.76922"></rect>--}}
+{{--                        <rect y="4.6153" width="2.76929" height="2.76928"></rect>--}}
+{{--                        <rect x="4.61523" y="4.6153" width="2.76929" height="2.76928"></rect>--}}
+{{--                        <rect x="9.23047" y="4.6153" width="2.76929" height="2.76928"></rect>--}}
+{{--                        <rect y="9.23071" width="2.76929" height="2.76922"></rect>--}}
+{{--                        <rect x="4.61523" y="9.23071" width="2.76929" height="2.76922"></rect>--}}
+{{--                        <rect x="9.23047" y="9.23071" width="2.76929" height="2.76922"></rect>--}}
+{{--                    </svg>--}}
+{{--                </li>--}}
+{{--            </ul>--}}
         </div>
         <div class="most-wanted">
                 <livewire:branch-products
                     :action="'add-to-cart'"
                     :pagination="'true'"
+                    :products="$branch->products"
                     :branchId="$branch->id"
+                    :key="'branch-products-'.$branch->id"
                 />
         </div>
     </div>
@@ -56,7 +58,9 @@
             <h2 class="title">الأكثر مبيعاً</h2>
         </div>
         <div class="seller-slider">
-            <livewire:most-sell-product />
+            <livewire:most-sell-product
+                :key="'branch-most-sell-products-'.$branch->id"
+            />
         </div>
     </div>
 </section>

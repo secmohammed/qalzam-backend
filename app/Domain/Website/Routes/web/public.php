@@ -1,5 +1,8 @@
 <?php
 
+use App\Common\Criteria\StatusIsCriteria;
+use App\Domain\Product\Criteria\BranchIdCriteria;
+use App\Domain\Product\Repositories\Contracts\ProductVariationRepository;
 use Illuminate\Support\Facades\Route;
 
 /*
