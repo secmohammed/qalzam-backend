@@ -1,46 +1,22 @@
 <div class="tab-pane fade" id="requests" role="tabpanel" aria-labelledby="requests-tab">
-    <div class="all-contant"> 
+    <div class="all-contant">
       @foreach ($orders as $order)
-      <div class="inner">
-       
-        <div class="contant">
-          <p class="red">أسماك، أطباق رئيسية</p><a class="title" href="#">كوزي القلزم المميز</a>
-        </div>
-        <div class="contant">
-          <p>الفرع</p>
-          <h4 class="title">{{ $order->branch->name }}</h4>
-        </div>
-        <div class="contant">
-          <p>التاريخ</p>
-          <h4 class="title"> {{ \Carbon\Carbon::parse( $order->created_at)->format("Y-m M") }}</h4>
-        </div>
-        <div class="contant">
-          <p>نوع الطلب</p>
-          <h4 class="title">توصيل للمنزل</h4>
-        </div>
-        <div class="contant">
-          <p>عنوان الطلب</p>
-          <h4 class="title">الدمام، الخبر</h4>
-        </div>
-        <div class="contant">
-          <p>حالة الطلب</p>
-          <h4 class="title">{{ $order->status }}</h4>
-        </div>
-        <div class="contant">
-          <p>تكلفه الطلب</p>
-          <h4 class="title red">{{ $order->total()->formatted() }}</h4>
-        </div>
-        <div class="contant"><a class="bottom" href="#evaluation" data-toggle="modal">تقييم الطلبب</a></div>
-      </div>   
+          <livewire:card.order-card
+              :price="$order->total()->formatted()"
+              :branchName="$order->branch->name"
+              :createdAt="\Carbon\Carbon::parse( $order->created_at)->format('Y-m M')"
+              :status="$order->status"
+              key="'order-card-'.$order->id"
+          />
       @endforeach
-     
-    
+
+
     </div>
-    <!--div.all-contant 
+    <!--div.all-contant
     div.inner
      div.item
       div.photo
-       img(src="images/slider/img-1.jpg" alt="") 
+       img(src="images/slider/img-1.jpg" alt="")
       div.content
        span أسماك
        h2.title كوزي القلزم المميز
@@ -74,7 +50,7 @@
     div.inner
      div.item
       div.photo
-       img(src="images/slider/img-1.jpg" alt="") 
+       img(src="images/slider/img-1.jpg" alt="")
       div.content
        span أسماك
        h2.title كوزي القلزم المميز
@@ -108,7 +84,7 @@
     div.inner
      div.item
       div.photo
-       img(src="images/slider/img-1.jpg" alt="") 
+       img(src="images/slider/img-1.jpg" alt="")
       div.content
        span أسماك
        h2.title كوزي القلزم المميز
@@ -142,7 +118,7 @@
     div.inner
      div.item
       div.photo
-       img(src="images/slider/img-1.jpg" alt="") 
+       img(src="images/slider/img-1.jpg" alt="")
       div.content
        span أسماك
        h2.title كوزي القلزم المميز
@@ -176,7 +152,7 @@
     div.inner
      div.item
       div.photo
-       img(src="images/slider/img-1.jpg" alt="") 
+       img(src="images/slider/img-1.jpg" alt="")
       div.content
        span أسماك
        h2.title كوزي القلزم المميز

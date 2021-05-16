@@ -11,15 +11,14 @@ class MyOrders extends Component
 {
 
     public $orders;
- 
+
     public function render()
     {
         return view('livewire.profile.my_orders');
     }
- 
+
     public function mount()
     {
         $this->orders = app(OrderRepository::class)->where("user_id",auth()->id())->with('branch',"address")->get();
-    // dd($this->orders);
     }
 }
