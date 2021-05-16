@@ -2,37 +2,37 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6 boxfot"><img src="{{asset('assets/images/logo.svg')}}" alt="" title="">
-                <p class="text">  شركة القلزم المتميزة للمأكولات المحدودة هي شركة سعودية متخصصة في تقديم المأكولات البحرية. وقد تأسست الشركة في عام ٢٠٠٣م بشهر يناير حيث أنشئت اول مشاريعها منتزه القلزم بطريق المدينة المنورة بمدينة جدة، وواصلت من خلال مسيرتها التنموية التوسع في مجال المطاعم حيث افتتحت العديد من الفروع بمدينتي جدة والرياض تتمتع شركة القلزم بحصة سوقية كبيرة في قطاع مطاعم الأسماك،</p>
+                <p class="text">{{__('website.footer.desc')}}</p>
             </div>
             <div class="col-sm-2 boxfot">
-                <h6 class="title">فروع القلزم </h6>
-                <nav class="navmenu"> <a href="#">فرع شارع الأمير سلطان - جدة</a><a href="#">فرع شارع عابر القارات -جدة</a><a href="#">فرع طريق أنس بن مالك-الرياض </a><a href="#">فرع شارع التخصصي - الرياض</a></nav>
+                <h6 class="title"> {{__('website.footer.branches.title')}}</h6>
+                <nav class="navmenu"> <a href="#"> {{__('website.footer.branches.link-1')}}</a><a href="#"> {{__('website.footer.branches.link-2')}}</a><a href="#"> {{__('website.footer.branches.link-3')}}</a><a href="#">{{__('website.footer.branches.link-4')}}</a></nav>
             </div>
             <div class="col-sm-2 boxfot">
-                <h6 class="title">روابط سريعة</h6>
+                <h6 class="title">{{__('website.footer.quick-links.title')}}</h6>
                 <nav class="navmenu">
-                    <a href="{{route('website.home')}}">الرئيسية</a>
-                    <a href="{{route('website.branches')}}">القائمة</a>
-                    <a href="{{route('website.galleries')}}">معرض الصور</a>
-                    <a href="{{route('website.reservation')}}">حجوزات الفروع</a>
-                    <a href="restaurant-questionnaire.html">استبيان المطعم</a></nav>
+                    <a href="{{route('website.home')}}"> {{__('website.footer.quick-links.link-1')}}</a>
+                    <a href="{{route('website.branches')}}"> {{__('website.footer.quick-links.link-2')}}</a>
+                    <a href="{{route('website.galleries')}}"> {{__('website.footer.quick-links.link-3')}}</a>
+                    <a href="{{route('website.reservation')}}"> {{__('website.footer.quick-links.link-4')}}</a>
+{{--                    <a href="restaurant-questionnaire.html"> {{__('website.footer.quick-links.link-5')}}</a></nav>--}}
             </div>
             <div class="col-sm-2 boxfot">
-                <h6 class="title">من نحن</h6>
+                <h6 class="title"> {{__('website.footer.about-us.title')}}</h6>
                 <nav class="navmenu">
-                    <a href="{{route('website.about')}}">عن الشركه</a>
-                    <a href="{{route('website.branches')}}">فروعنا</a>
-                    <a href="{{route('website.terms-and-conditions')}}">الشروط والأحكام</a>
-                    <a href="{{route('website.policy')}}">سياسة الخصوصية</a>
-                    <a href="{{route('website.contact')}}">تواصل معانا </a></nav>
+                    <a href="{{route('website.about')}}">{{__('website.footer.about-us.link-1')}}</a>
+                    <a href="{{route('website.branches')}}">{{__('website.footer.about-us.link-2')}}</a>
+                    <a href="{{route('website.terms-and-conditions')}}">{{__('website.footer.about-us.link-3')}}</a>
+                    <a href="{{route('website.policy')}}">{{__('website.footer.about-us.link-4')}}</a>
+                    <a href="{{route('website.contact')}}">{{__('website.footer.about-us.link-5')}}</a></nav>
             </div>
         </div>
     </div>
-    <div class="item-bg"><img src="images/bg.svg" alt="" title=""></div>
+    <div class="item-bg"><img src="{{asset('/assets/website/images/bg.svg')}}" alt="" title=""></div>
     <div class="copyright">
         <div class="container">
-            <p class="powrby">تم التصميم بكل حب<img src="images/heart.svg" alt="" title=""/>في<a href="https://joovlly.com/" target="_blank"><img src="{{asset('assets/website/images/joovlly.svg')}}" alt="" title=""/></a></p>
-            <p>جميع الحقوق محفوظه 2020 ,القلزم</p>
+            <p class="powrby">تم التصميم بكل حب<img src="{{asset("/assets/website/images/heart.svg")}}" alt="" title=""/>في<a href="https://joovlly.com/" target="_blank"><img src="{{asset('assets/website/images/joovlly.svg')}}" alt="" title=""/></a></p>
+            <p>{{__('website.copy-rights')}}</p>
             <nav class="social"><a href="#">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0)">

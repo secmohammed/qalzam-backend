@@ -19,6 +19,6 @@ class MyOrders extends Component
 
     public function mount()
     {
-        $this->orders = app(OrderRepository::class)->where("user_id",auth()->id())->with('branch',"address")->get();
+        $this->orders = app(OrderRepository::class)->orderBy('created_at', 'desc')->where("user_id",auth()->id())->with('branch',"address")->get();
     }
 }

@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class MyCart extends Component
 {
-//    protected $listeners = ['productAdded' => '$refresh', 'amountChanged' => '$refresh'];
+    protected $listeners = ['amountChanged' => '$refresh'];
 
 
     public function render()
