@@ -9,8 +9,13 @@
     <div class="all-items" id="cart-side-items">
         @foreach($products as $product)
             <livewire:card.cart-card
-                :wire:key="'cart-side-card-'. $product->id"
-                :product="$product" />
+                :key="'cart-side-card-'. $product['id']"
+                :quantity="$product['quantity']"
+                :productId="$product['id']"
+                :productName="$product['name']"
+                :productTotalPrice="$product['total_price']"
+                :productImage="$product->image ?: asset('assets/website/images/slider/img-1.jpg')"
+            />
         @endforeach
     </div>
     <div class="total-price">

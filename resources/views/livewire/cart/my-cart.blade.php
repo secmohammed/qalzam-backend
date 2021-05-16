@@ -17,7 +17,14 @@
         <div class="col-sm-8 item-basket">
             <div class="inner">
                 @foreach($products as $product)
-                    <livewire:card.cart-card key="'my-cart-product-'.{{$product->id}}"  :product="$product"/>
+                    <livewire:card.cart-card
+                        key="'my-cart-product-'.{{$product->id}}"
+                        :quantity="$product['quantity']"
+                        :productId="$product['id']"
+                        :productName="$product['name']"
+                        :productTotalPrice="$product['total_price']"
+                        :productImage="$product->image ?: asset('assets/website/images/slider/img-1.jpg')"
+                    />
                 @endforeach
             </div>
         </div>
