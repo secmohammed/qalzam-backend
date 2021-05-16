@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth'])->group(function () {
     Route::get('/finish-order', 'ProfileController@finishOrder')->name('website.finish-order');
     Route::get('/profile', 'ProfileController@profile')->name('website.profile');
-    Route::get('/reservations/create', 'PagesController@createReservation')->name('website.reservations.create');
+    Route::get('/reservations/website/create', 'PagesController@createReservation')->name('website.reservations.create');
     Route::get('/test',function (){
        return config('app.locale');
     });

@@ -11,3 +11,5 @@
 |
  */
 ###CRUD_PLACEHOLDER###
+Route::get('/location/city-districts', 'LocationController@indexCityDistricts')->name('city.districts');
+
