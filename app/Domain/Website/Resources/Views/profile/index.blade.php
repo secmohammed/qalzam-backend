@@ -30,7 +30,7 @@
       <div class="tab-content" id="myTabContent">
         {{-- <livewire:profile.update-user/> --}}
         <livewire:profile.my-orders/>
-        @include("{$alias}::profile.partials._addresses", ['addresses' => $user->addresses])
+        <livewire:profile.addresses/>
         @include("{$alias}::profile.partials._update-my-profile")
         @include('layouts.partials.website.profile.my_favourite')
 

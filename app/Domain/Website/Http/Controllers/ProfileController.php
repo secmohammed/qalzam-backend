@@ -35,8 +35,6 @@ class ProfileController extends BaseController
     }
     public function profile(UserRepository $repository)
     {
-        $authUser = $repository->with(['addresses.location.parent', 'orders.products'])->find(auth()->id());
-        $this->setData('user', $authUser,'web');
         $this->setData('alias', $this->domainAlias, 'web');
         $this->addView("{$this->domainAlias}::{$this->viewPath}.index");
         return $this->response();
