@@ -10,38 +10,51 @@ use App\Domain\Branch\Entities\Branch as Branch;
 use App\Common\Facades\Branch as BranchFacade;
 class Cart
 {
+    /**
+     * Cart constructor.
+     * Initial Cart if Not Exist Before
+     */
     public function __construct()
     {
         if($this->get() === null)
             $this->set($this->empty());
     }
 
-    public function add(ProductVariation $product, $amount = 0): void
+    /**
+     * Add Product OR Increase product quantity by quantity if exist
+     * @param ProductVariation $product
+     * @param int $quantity
+     * @return bool
+     */
+    public function add(ProductVariation $product,int $quantity = 1): bool
     {
-        // check Porduct in the same Session Branch
-        if(! $this->inBranch(BranchFacade::get(),$product))
-            return ;
+        // check Product in the same Session Branch
+        if(! $this->inBranch(BranchFacade::get(),$product)) // todo return true or false instead of void, to use false in flash toast
+            return false;
+
+        // Get Single Instance Product
         $product = $this->getProductInstance($product->id);
-//        $product = $product->load(['branches' => function ($q) { return $q->where('branch_id',BranchFacade::get()->id); }]);
+
+        // get Cart From Session
         $cart = $this->get();
-        $cartProductsIds = array_column($cart['products'], 'id');
 
-        $product->quantity = !empty($product->qunatity) ? $product->qunatity + $amount : $this->addedAmount($amount);
+        $this->setProductCustomData($product,$quantity);
 
-        $product->image = $product->getLastMediaUrl('product_variation-images');
-        $product->type = 'cart';
-        $product->product_variation_id  = $product->id;
-        $product->branch_id = BranchFacade::get()->id;
-        if (in_array($product->id, $cartProductsIds)) {
-            $cart['products'] = $this->productCartIncrement($product->id, $cart['products'],$amount);
+        if (in_array($product->id, $this->productsIds())) {
+            $cart['products'] = $this->productCartIncrement($product->id, $cart['products'],$quantity);
             $this->set($cart);
-            return;
+            return true;
         }
-        $product->total_price = $product->pivot->price * $this->addedAmount($amount);
+        $product->total_price = $product->pivot->price * $quantity;
         array_push($cart['products'], $product);
         $this->set($cart);
+        return true;
     }
 
+    /**
+     * remove single product from cart by product id
+     * @param int $productId
+     */
     public function remove(int $productId): void
     {
         $cart = $this->get();
@@ -49,11 +62,18 @@ class Cart
         $this->set($cart);
     }
 
+    /**
+     * Remove Products from session cart
+     */
     public function clear(): void
     {
         $this->set($this->empty());
     }
 
+    /**
+     * assign cart products to empty array to clear session cart
+     * @return array[]
+     */
     public function empty(): array
     {
         return [
@@ -61,37 +81,56 @@ class Cart
         ];
     }
 
+    /**
+     * return cart from session
+     * @return mixed
+     */
     public function get()
     {
         return request()->session()->get('cart');
     }
 
+    /**
+     * initial cart in session
+     * @param $cart
+     */
     private function set($cart): void
     {
         request()->session()->put('cart', $cart);
     }
 
-    public function productCartIncrement($productId, $cartItems, $amount = 0)
+    /**
+     * increase quantity of product
+     * @param $productId
+     * @param $cartItems
+     * @param int $quantity
+     * @return array
+     */
+    public function productCartIncrement($productId, $cartItems,int $quantity = 1)
     {
-        $amount = $this->addedAmount($amount);
-        $cartItems = array_map(function ($item) use ($productId, $amount) {
+        $cartItems = array_map(function ($item) use ($productId, $quantity) {
             if ($productId == $item['id']) {
-                $item['quantity'] += $amount;
+                $item['quantity'] += $quantity;
                 $item['total_price'] += $item['pivot']->price;
             }
-
             return $item;
         }, $cartItems);
 
         return $cartItems;
     }
 
-    public function ProductCartReduce($productId, $cartItems,$amount = 0)
+    /**
+     * reduce quantity of product
+     * @param $productId
+     * @param $cartItems
+     * @param int $quantity
+     * @return array
+     */
+    public function ProductCartReduce($productId, $cartItems,int $quantity = 1):array
     {
-        $amount = $this->addedAmount($amount);
-        $cartItems = array_map(function ($item) use ($productId, $amount) {
+        $cartItems = array_map(function ($item) use ($productId, $quantity) {
             if ($productId == $item['id']) {
-                $item['quantity'] -= $amount;
+                $item['quantity'] -= $quantity;
                 $item['total_price'] = $item['total_price'] -  $item['pivot']->price;
             }
 
@@ -101,16 +140,25 @@ class Cart
         return $cartItems;
     }
 
-    public function cartTotalProductsAmount($products = null)
+    /**
+     * sum all products quantity
+     * @param null $products
+     * @return float|int
+     */
+    public function totalProductsQuantity($products = null)
     {
         if ((is_null($products))) {
             $cart = $this->get();
             $products = $cart['products'];
         }
-        return array_sum(array_column($products,'amount'));
-//        return  collect($products)->sum('amount');
+        return array_sum(array_column($products,'quantity'));
     }
 
+    /**
+     * get total price for products in cart
+     * @param null $products
+     * @return float|int
+     */
     public function totalPrice($products = null)
     {
         $total_price = 0;
@@ -118,41 +166,33 @@ class Cart
             $cart = $this->get();
             $products = $cart['products'];
         }
-
         foreach ($products as $product){
-            $total_price += $product->total_price * $product->quantity;
+            $total_price += $product->total_price;
         }
         return $total_price;
     }
 
+    /**
+     * get VAT value from total price
+     * @return float|int
+     */
     public function afterVat()
     {
         return $this->totalPrice() * config('qalzam.vat');
     }
 
+    /**
+     * get total price after VAT
+     * @return float|int
+     */
     public function totalPriceAfterVat()
     {
         return $this->totalPrice() + $this->afterVat();
     }
 
-    public function syncAfterLogin()
-    {
-        $cart = $this->get();
-        $products = $cart['products'];
-
-        $products = collect($products)->collapse()->keyBy('id')->map(function ($product) {
-            return [
-                'quantity' =>  $product['quantity'] ,
-                'type' => $product['type'],
-                'branch_id' => $product['branch_id'],
-            ];
-        })->toArray();
-
-//        $products = $products->only('product_variation_id', 'branch_id', 'quantity', 'type');
-        if(count($products) > 0)
-            auth()->user()->cart()->firstOrCreate($products);
-    }
-
+    /**
+     * get products ready to store new order
+     */
     public function getProductsToBeOrdered()
     {
         $cart = $this->get();
@@ -165,13 +205,12 @@ class Cart
         return collect($products);
     }
 
-    private function addedAmount($amount)
-    {
-        if($amount > 0)
-            return $amount;
-        return 1;
-    }
-
+    /**
+     * Check product in the branch_products
+     * @param Branch $branch
+     * @param $product
+     * @return bool
+     */
     public function inBranch(Branch $branch,$product):bool
     {
         $branch = $product->branches()->where('branch_id', $branch->id)->first();
@@ -180,6 +219,11 @@ class Cart
         return false;
     }
 
+    /**
+     * get single product from cart using product_id
+     * @param $productId
+     * @return mixed|null
+     */
     public function getProduct($productId)
     {
         $cart = $this->get();
@@ -199,5 +243,28 @@ class Cart
     {
         $branch = Branch::where('status', 'active')->with(['products' => function($q) {return $q->where('status', 'active');}])->find(BranchFacade::get()->id);
         return $branch->products->firstWhere('id',$product_id);
+    }
+
+    /**
+     * set product Custom Data To be saved in the Cart Session
+     * @param ProductVariation $product
+     * @param $quantity
+     */
+    private function setProductCustomData(ProductVariation $product,$quantity)
+    {
+        $product->quantity = $product->qunatity + $quantity;
+
+        $product->image = $product->getLastMediaUrl('product_variation-images');
+        $product->type = 'cart';
+        $product->product_variation_id  = $product->id;
+        $product->branch_id = BranchFacade::get()->id;
+    }
+    /**
+     * get array of ids to the cart products
+     * @return array
+     */
+    private function productsIds():array
+    {
+        return array_column($this->get()['products'], 'id');
     }
 }
