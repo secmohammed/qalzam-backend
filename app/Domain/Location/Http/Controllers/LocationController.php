@@ -155,7 +155,7 @@ class LocationController extends Controller
      */
     public function indexCityDistricts(Request $request)
     {
-        $index = $this->locationRepository->descendantsOf($request->id)->where('type', "zone")->where('status', "active");
+        $index = $this->locationRepository->descendantsOf($request->id)->where('type', "district")->where('status', "active");
 
         $this->setData('title', __('main.show-all') . ' ' . __('main.locations'));
 

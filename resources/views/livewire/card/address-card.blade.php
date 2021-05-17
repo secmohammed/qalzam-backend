@@ -4,7 +4,10 @@
         <div class="text-chek">
             <h4 class="title">{{$city}}، {{$district}}</h4>
             <p>{{$fullAddress}}</p>
-            <nav class="ac-link"><a href="#add-address" data-toggle="modal"><img src="{{asset('assets/website/images/edit.svg')}}" alt="" title=""> تعديل</a><a href="#delete" data-toggle="modal"><img src="{{asset('assets/website/images/delete.svg')}}" alt="" title=""> حذف</a></nav>
+            <nav class="ac-link">
+                <a href="#edit-address" data-toggle="modal" wire:click="editAddressForm({{$addressId}})"><img src="{{asset('assets/website/images/edit.svg')}}" alt="" title=""> تعديل</a>
+                <a href="#delete" data-toggle="modal" wire:click="deleteAddress({{$addressId}})"><img src="{{asset('assets/website/images/delete.svg')}}" alt="" title=""> حذف</a>
+            </nav>
         </div>
     </label>
 </div>

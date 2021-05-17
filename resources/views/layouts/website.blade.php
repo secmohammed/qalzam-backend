@@ -58,6 +58,10 @@
                         break;
                 }
             })
+            Livewire.on('openAddressForm', () => {
+                alert('Hello')
+                $("#add-address").modal('show')
+            })
         </script>
     </body>
 </html>

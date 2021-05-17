@@ -17,6 +17,7 @@
   'contract-datatable' => 'App\\Http\\Livewire\\ContractDatatable',
   'delivery-order-datatable' => 'App\\Http\\Livewire\\DeliveryOrderDatatable',
   'discount-datatable' => 'App\\Http\\Livewire\\DiscountDatatable',
+  'edit-adress' => 'App\\Http\\Livewire\\EditAdress',
   'filter.clear-filter' => 'App\\Http\\Livewire\\Filter\\ClearFilter',
   'filter.products-filter' => 'App\\Http\\Livewire\\Filter\\ProductsFilter',
   'ingredient-datatable' => 'App\\Http\\Livewire\\IngredientDatatable',

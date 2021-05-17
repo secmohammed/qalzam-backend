@@ -8,12 +8,16 @@ use Livewire\Component;
 class CartCard extends Component
 {
     public $product;
-    protected $listeners = ['amountChanged' => '$refresh'];
+    public $quantity;
+    public $productId;
+    public $productName;
+    public $productTotalPrice;
+    public $productImage;
+//    protected $listeners = ['amountChanged' => '$refresh'];
 
     public function render()
     {
-        $amount = $this->product->quantity;
-        return view('livewire.card.cart-card', compact('amount'));
+        return view('livewire.card.cart-card');
     }
 
     public function removeProduct($productId)

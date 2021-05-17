@@ -7,6 +7,7 @@
                         :city="$address->location->parent->name"
                         :district="$address->location->name"
                         :fullAddress="$address->address_1"
+                        :addressId="$address->id"
                         key="'my-profile-address-card'.$address->id"
                     />
                 @endforeach
