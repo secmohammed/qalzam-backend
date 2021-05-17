@@ -58,9 +58,9 @@
                         break;
                 }
             })
-            Livewire.on('openAddressForm', () => {
-                alert('Hello')
-                $("#add-address").modal('show')
+            Livewire.on('deleteAddressConfirmation', (id) => {
+                // alert(id)
+                $("#delete-modal").modal('show')
             })
         </script>
     </body>

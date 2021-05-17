@@ -4,6 +4,7 @@
 namespace App\Common\Helpers;
 
 
+use App\Domain\Discount\Entities\Discount;
 use App\Domain\Product\Entities\ProductVariation;
 use App\Domain\Branch\Entities\Branch as Branch;
 use App\Common\Facades\Branch as BranchFacade;
@@ -20,7 +21,8 @@ class Cart
         // check Porduct in the same Session Branch
         if(! $this->inBranch(BranchFacade::get(),$product))
             return ;
-
+        $product = $this->getProductInstance($product->id);
+//        $product = $product->load(['branches' => function ($q) { return $q->where('branch_id',BranchFacade::get()->id); }]);
         $cart = $this->get();
         $cartProductsIds = array_column($cart['products'], 'id');
 
@@ -35,7 +37,7 @@ class Cart
             $this->set($cart);
             return;
         }
-        $product->total_price = $product->price->amount() * $amount;
+        $product->total_price = $product->pivot->price * $this->addedAmount($amount);
         array_push($cart['products'], $product);
         $this->set($cart);
     }
@@ -75,7 +77,7 @@ class Cart
         $cartItems = array_map(function ($item) use ($productId, $amount) {
             if ($productId == $item['id']) {
                 $item['quantity'] += $amount;
-                $item['total_price'] += $item['total_price'];
+                $item['total_price'] += $item['pivot']->price;
             }
 
             return $item;
@@ -84,17 +86,18 @@ class Cart
         return $cartItems;
     }
 
-    public function ProductCartReduce($productId, $cartItems)
+    public function ProductCartReduce($productId, $cartItems,$amount = 0)
     {
-        $amount = 1;
+        $amount = $this->addedAmount($amount);
         $cartItems = array_map(function ($item) use ($productId, $amount) {
             if ($productId == $item['id']) {
                 $item['quantity'] -= $amount;
-                $item['total_price'] -= $item['total_price'];
+                $item['total_price'] = $item['total_price'] -  $item['pivot']->price;
             }
 
             return $item;
         }, $cartItems);
+
         return $cartItems;
     }
 
@@ -117,7 +120,7 @@ class Cart
         }
 
         foreach ($products as $product){
-            $total_price += $product->price->amount() * $product->quantity;
+            $total_price += $product->total_price * $product->quantity;
         }
         return $total_price;
     }
@@ -125,6 +128,11 @@ class Cart
     public function afterVat()
     {
         return $this->totalPrice() * config('qalzam.vat');
+    }
+
+    public function totalPriceAfterVat()
+    {
+        return $this->totalPrice() + $this->afterVat();
     }
 
     public function syncAfterLogin()
@@ -180,5 +188,16 @@ class Cart
             return $item->id = $productId;
         });
         return $product ?: null;
+    }
+
+    /**
+     * get single product instance with pivot and branch where branch_id = branch in session
+     * @param $product_id
+     * @return ProductVariation
+     */
+    private function getProductInstance($product_id):ProductVariation
+    {
+        $branch = Branch::where('status', 'active')->with(['products' => function($q) {return $q->where('status', 'active');}])->find(BranchFacade::get()->id);
+        return $branch->products->firstWhere('id',$product_id);
     }
 }

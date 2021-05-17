@@ -16,6 +16,7 @@ class MyCart extends Component
         $products = $cart['products'];
         $totalPrice = Cart::totalPrice();
         $afterVat = Cart::afterVat();
-        return view('livewire.cart.my-cart', compact('products', 'totalPrice', 'afterVat'));
+        $totalAfterVat = Cart::totalPriceAfterVat();
+        return view('livewire.cart.my-cart', compact('products', 'totalPrice', 'afterVat', 'totalAfterVat'));
     }
 }

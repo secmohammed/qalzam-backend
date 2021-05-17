@@ -1,4 +1,4 @@
-<div class="col-sm-3 selection m-1">
+<div class="col-sm-3 selection">
     <label class="che-box">
         <input type="radio" name="radio"><span class="label-text"></span>
         <div class="text-chek">

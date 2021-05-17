@@ -2,12 +2,37 @@
 return [
     'my-profile' => 'My Profile',
     'logout' => 'Logout',
-    'main' => 'Main',
+    'main' => 'Home',
+    'branches' => 'Branches',
+    'branches-list' => 'List Of Branches',
+    'list' => 'List',
+    'photo-gallery' => 'Photo Gallery',
+    'qulzam-list' => 'Qulzam List',
+    'resort' => 'Qulzam Resort',
+    'result' => 'Result',
+    'photo' => 'Photos',
+    'terms-and-conditions' => 'Terms & Conditions',
+    'policy' => 'Privacy policy',
+    'qulzam-reservations' => 'Qulzam reservations',
+    'select-branch' => 'Select the branch',
+    'contact-us' => 'Contact Us',
     'header' => [
         'home' => 'Home',
         'list' => 'list',
         'photo-gallery' => 'Photo Gallery',
         'branch-reservations' => 'Branch reservations'
+    ],
+    'cart' => [
+        'basket' => 'shopping basket',
+        'total-value' => 'The total value',
+        'added-taxes' => 'Value Added Tax (15%)',
+        'total-summation' => ' total summation',
+        'main-dish' => 'Main dishes',
+        'enter-coupon' => 'Enter The Coupon',
+        'vat-note' => 'All prices are inclusive of VAT',
+        'submit-coupon' => 'Application',
+        'submit-buy' => 'Complete the purchase process',
+        'buy-note' => 'Minimum order 720 riyals , And when the request reaches the value 1000 riyals Free delivery',
     ],
     'start-shopping' => 'Start Shopping ',
     'add-to-cart' => 'Add To Cart',
@@ -40,7 +65,17 @@ return [
             'desc-1' => '  They say that the taste of food has an artistic sense that many people do not have, and therefore restaurants offer each special dish similar to it, in Qulzam we offer dishes that resemble our restaurant with the highest quality standards to have a different taste between customer segments, leaving a special character and a distinctive taste, where the quality of food is considered The best things to guide you to the quality standards of any restaurant',
         ]
     ],
+    'reservation' => [
+        'name' => 'Name',
+        'phone' => 'Phone',
+        'email' => 'Email',
+        'start-reservation' => 'Start Reservation Date',
+        'end-reservation' => 'End Reservation Date',
+        'notes' => 'Notes',
+        'residence' => 'Residence',
+        'send' => 'Send Now',
 
+    ],
     'about' =>
         [
             'about-us' => 'about us',
@@ -59,6 +94,23 @@ return [
                     'desc-1' => 'They say that the taste of food has an artistic sense that many people do not have, and therefore restaurants offer each special dish similar to it, in Qulzam we offer dishes that resemble our restaurant with the highest quality standards to have a different taste between customer segments, leaving a special character and a distinctive taste, where the quality of food is considered The best things to guide you to the quality standards of any'
                 ]
         ],
+    'contact-us-page' => [
+        'desc-1' => 'Dear customer, do not hesitate to call to inquire about any request or information you may need',
+        'unified-number' => 'Unified number',
+        'address' => 'Address',
+        'desc-2' => 'Main Center - Haddah Al Madinah Road in front of the Ministry of Interior headquarters, before Dhahban Bridge',
+        'postal-code' => 'Postal code',
+        'building-no' => 'Building No. ',
+        'email' => 'Email',
+    ],
+    'terms-conditions' => [
+        'desc-1' => "Dear customer, by your reading of the terms and conditions on the website, you agree and accept the website's usage policy, and you must visit this page from time to time to view the modifications that may occur to some of the conditions and the information listed below, noting that none of the credit and debit cards data will be stored In addition toDear customer, by your reading of the terms and conditions on the website, you agree and accept the website's usage policy, and you must visit this page from time to time to view the modifications that may occur to some of the conditions and the information listed below, noting that none of the credit and debit cards data will be stored In addition to",
+        'title-2' => 'Refund and cancellation policy',
+        'desc-2' => 'Refunds will be made using the original method of payment ',
+    ],
+    'policy-page' => [
+        'desc-1' => "Dear customer, by your reading of the terms and conditions on the website, you agree and accept the website's usage policy, and you must visit this page from time to time to view the modifications that may occur to some of the conditions and the information listed below, noting that none of the credit and debit cards data will be stored In addition toDear customer, by your reading of the terms and conditions on the website, you agree and accept the website's usage policy, and you must visit this page from time to time to view the modifications that may occur to some of the conditions and the information listed below, noting that none of the credit and debit cards data will be stored In addition to",
+    ],
     'footer' => [
         'desc' => '  Al Qulzam Excellence Food Company Ltd. is a Saudi company specialized in serving seafood. The company was established in 2003 in January, when its first project was established in Qalzam Park on Madinah Road in Jeddah, and through its development path it continued to expand in the field of restaurants, as it opened many branches in Jeddah and Riyadh. Al-Qalzam Company has a large market share in the fish restaurants sector.',
         'branches' => [

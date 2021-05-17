@@ -16,6 +16,7 @@ class PriceCard extends Component
     {
         $totalPrice =Cart::totalPrice();
         $afterVat =Cart::afterVat();
-        return view('livewire.price-card', compact('totalPrice', 'afterVat'));
+        $totalAfterVat = Cart::totalPriceAfterVat();
+        return view('livewire.price-card', compact('totalPrice', 'afterVat' , 'totalAfterVat'));
     }
 }

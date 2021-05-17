@@ -4,6 +4,7 @@
 namespace App\Domain\Website\Http\Controllers;
 
 use App\Common\Criteria\StatusIsCriteria;
+use App\Domain\Branch\Criteria\BranchHasAccommodationsCriteria;
 use App\Domain\Branch\Entities\Branch ;
 use App\Common\Facades\Branch as BranchFacade;
 use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
@@ -110,17 +111,18 @@ class PagesController extends Controller
     public function createReservation()
     {
         $this->branchRepository->pushCriteria(new StatusIsCriteria(true));
-       $accommodations= $this->accommodationRepository->orderBy('created_at', 'desc')->all();
-        $index = $this->branchRepository->orderBy('created_at', 'desc')->all();
-        $this->setData('branches', $index->load('accommodations'), 'web');
-        $this->setData('accommodations', $accommodations, 'web');
+        $this->branchRepository->pushCriteria(new BranchHasAccommodationsCriteria(true));
+//       $accommodations= $this->accommodationRepository->orderBy('created_at', 'desc')->all();
+        $index = $this->branchRepository->orderBy('created_at', 'desc')->with('accommodations')->all();
+        $this->setData('branches', $index, 'web');
+//        $this->setData('accommodations', $accommodations, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
         $this->addView("{$this->domainAlias}::{$this->viewPath}.reservation");
         return $this->response();
     }
 
- 
+
     public function about()
     {
         $this->setData('alias', $this->domainAlias, 'web');

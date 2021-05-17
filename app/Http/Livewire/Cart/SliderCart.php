@@ -17,6 +17,7 @@ class SliderCart extends Component
         $products = $cart['products'];
         $total_price = Cart::totalPrice();
         $after_vat =Cart::afterVat();
-        return view('livewire.cart.slider-cart' , compact('products', 'total_price', 'after_vat'));
+        $total_after_vat = Cart::totalPriceAfterVat();
+        return view('livewire.cart.slider-cart' , compact('products', 'total_price', 'after_vat', 'total_after_vat'));
     }
 }
