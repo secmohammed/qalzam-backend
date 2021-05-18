@@ -7,13 +7,12 @@
     </a>
     <div class="item">
         <div class="photo"><img src="{{$productImage}}" alt=""></div>
-        <div class="content"><span>الأطباق الرئيسيه</span>
+        <div class="content"><span>{{__('website.cart.main-dish')}}</span>
             <h2 class="title">سمك هامور ..</h2>
             <p>{{$productName}}</p>
         </div>
     </div>
     <p class="price">{{$productTotalPrice}}</p>
-    <p class="text-danger text-center">{{$quantity}}</p>
     <div class="spinner">
         <button class="btn btn-default ault" type="button" wire:click="increaseAmount({{$productId}})">
             <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">

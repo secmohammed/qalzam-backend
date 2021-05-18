@@ -1,6 +1,6 @@
-<div class="col-sm-3 selection m-1">
+<div class="col-sm-3 selection">
     <label class="che-box">
-        <input type="radio" name="radio"><span class="label-text"></span>
+        <input type="radio" name="address_id" value="{{$addressId}}"><span class="label-text"></span>
         <div class="text-chek">
             <h4 class="title">{{$city}}، {{$district}}</h4>
             <p>{{$fullAddress}}</p>

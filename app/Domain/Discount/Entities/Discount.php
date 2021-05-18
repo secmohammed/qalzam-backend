@@ -10,6 +10,17 @@ use App\Domain\Discount\Repositories\Contracts\DiscountRepository;
 use App\Domain\Discount\Entities\Traits\Relations\DiscountRelations;
 use App\Domain\Discount\Entities\Traits\CustomAttributes\DiscountAttributes;
 
+/**
+ * Class Discount
+ * @property $value
+ * @property $code
+ * @property $type
+ * @property $status
+ * @property $expires_at
+ * @property $discountable_id
+ * @property $discountable_type
+ * @package App\Domain\Discount\Entities
+ */
 class Discount extends Model
 {
     use DiscountRelations, DiscountAttributes, Discountable, HasFactory;

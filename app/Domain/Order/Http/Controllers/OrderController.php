@@ -237,14 +237,17 @@ class OrderController extends Controller
             CreateOrderPipeline::class,
             NotifyUserWithPlacedOrder::class,
         ])->then(fn($order) => $order);
+        //todo fix next line error
         GenerateOrderPdfInvoice::dispatch($order);
         Cart::clear();
+        Cart::clearCoupon();
         Branch::clear(); // todo replace these with event
         $this->setData('data', $order);
 
         $this->redirectRoute("{$this->resourceRoute}.show", [$order->id]);
         $this->useCollection(OrderResource::class, 'data');
-
+//        session()->flash('message', 'order Created!');
+        toastr()->success('Order Created!', 'Order');
         return $this->response();
     }
 

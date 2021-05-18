@@ -4,20 +4,19 @@
     <div class="container">
         <ul class="wizard">
             <li> <a href="index.html">
-                    الرئيسيه
+                {{__('website.main')}}
                     <svg width="9" height="9" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7.58102 4.72562L2.96341 0.108013C2.81055 -0.0396239 2.56695 -0.0353851 2.41931 0.117483C2.27528 0.266608 2.27528 0.503012 2.41931 0.652115L6.76487 4.99767L2.41931 9.34322C2.26908 9.49347 2.26908 9.73707 2.41931 9.88733C2.56959 10.0376 2.81316 10.0376 2.96341 9.88733L7.58102 5.26972C7.73125 5.11944 7.73125 4.87587 7.58102 4.72562Z"></path>
                     </svg></a></li>
-            <li> حجوزات القلزم</li>
+            <li>{{__('website.qulzam-reservations')}}</li>
         </ul>
-        <h2 class="title">حجوزات القلزم</h2>
+        <h2 class="title">{{__('website.qulzam-reservations')}}</h2>
         <div class="listorder">
-            <p class="text">إختر الفرع</p>
+            <p class="text p-1">{{__('website.select-branch')}}</p>
             <nav class="list-filter" style="  width: 100%;
             overflow: hidden;
             overflow-x: scroll;
             white-space: nowrap;">
-
                     @foreach($branches as $branch)
                         <a class="list-branches " id="branch-{{$branch->id}}" href="#" onclick="activeLinkById({{$branch->id}})">{{$branch->name}}</a>
                     @endforeach
@@ -43,40 +42,40 @@
                 @csrf
                 <div class="row">
                     <div class="col-sm-6 field">
-                        <label>الإسم </label>
-                        <input disabled   class="form-control" type="text" placeholder="الإسم " value="{{ auth()->user()->name }}">
+                        <label>{{__('website.reservation.name')}} </label>
+                        <input disabled   class="form-control" type="text" placeholder="{{__('website.reservation.name')}} " value="{{ auth()->user()->name }}">
                     </div>
-                 
-                    <div class="col-sm-6 field">
-                        <label>الجول</label>
-                        <input disabled   class="form-control" type="number" placeholder="الجول" value="{{ auth()->user()->mobile }}">
-                    </div>
-                    <div class="col-sm-12 field">
-                        <label>البريد الإلكتروني</label>
-                        <input disabled   class="form-control" type="email" placeholder="البريد الإلكتروني" value="{{ auth()->user()->email }}">
-                    </div>
-                   
-                    <div class="col-sm-6 field">
-                        <label>تاريخ بداية الحجز </label>
-                        {{-- <div class="clockpicker"> --}}
-                            <input class="form-control" name="start_date" type="datetime-local" placeholder="توقيت الوصول" value=""><img src="images/time.svg" alt="" title="">
-                        {{-- </div> --}}
-                    </div>
-                    <input class="form-control" name="website" type="hidden" placeholder="توقيت الوصول" value="website"><img src="images/time.svg" alt="" title="">
 
                     <div class="col-sm-6 field">
-                        <label>تاريخ نهاية الحجز </label>
+                        <label>{{__('website.reservation.phone')}}</label>
+                        <input disabled   class="form-control" type="number" placeholder="{{__('website.reservation.phone')}}" value="{{ auth()->user()->mobile }}">
+                    </div>
+                    <div class="col-sm-12 field">
+                        <label>{{__('website.reservation.email')}}</label>
+                        <input disabled   class="form-control" type="email" placeholder="{{__('website.reservation.email')}}" value="{{ auth()->user()->email }}">
+                    </div>
+
+                    <div class="col-sm-6 field">
+                        <label>{{__('website.reservation.start-reservation')}}</label>
                         {{-- <div class="clockpicker"> --}}
-                            <input class="form-control" name="end_date"  type="datetime-local" placeholder="توقيت الوصول" value=""><img src="images/time.svg" alt="" title="">
+                            <input class="form-control" name="start_date" type="datetime-local" placeholder="{{__('website.reservation.start-reservation')}}" value=""><img src="{{asset("assets/website/images/time.svg")}}" alt="" title="">
+                        {{-- </div> --}}
+                    </div>
+                    <input class="form-control" name="website" type="hidden" placeholder="توقيت الوصول" value="website">
+
+                    <div class="col-sm-6 field">
+                        <label>{{__('website.reservation.end-reservation')}}</label>
+                        {{-- <div class="clockpicker"> --}}
+                            <input class="form-control" name="end_date"  type="datetime-local" placeholder="{{__('website.reservation.end-reservation')}}" value=""><img src="{{asset("assets/website/images/time.svg")}}" alt="" title="">
                         {{-- </div> --}}
                     </div>
                     <div class="col-sm-6 field">
-                        <label>الاقامة </label>
+                        <label>{{__('website.reservation.residence')}} </label>
                         <select name="accommodation_id" id="accommodation_id" class="form-control">
                             {{-- @foreach ($accommodations as $accommodation)
 
                             <option value="{{ $accommodation->id }}">{{ $accommodation->name }}</option>
-                                
+
                             @endforeach --}}
                             {{-- <option>مصر</option> --}}
                         </select>
@@ -92,11 +91,11 @@
                         <input class="form-control" type="text" placeholder="رقم غرفة/طاولة" value="">
                     </div> --}}
                     <div class="col-sm-6 field">
-                        <label>ملاحظات أخري</label>
-                        <textarea class="form-control" name="notes" placeholder="ملاحظات أخري"> </textarea>
+                        <label>{{__('website.reservation.notes')}}</label>
+                        <textarea class="form-control" name="notes" placeholder="{{__('website.reservation.notes')}}"> </textarea>
                     </div>
                     <div class="col-sm-12 field">
-                        <button class="bottom" type="submit">إرسال الأن</button>
+                        <button class="bottom" type="submit">{{__('website.reservation.send')}}</button>
                     </div>
                 </div>
             </form>
@@ -122,12 +121,12 @@
     // .val(accommodation.id)
     // .html(accommodation.name)
     //         )
-    
-         
+
+
     });
-            
+
         }
-    
+
     </script>
 @endpush
 @endsection

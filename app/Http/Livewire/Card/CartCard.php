@@ -39,7 +39,7 @@ class CartCard extends Component
         $products = collect($cart['products']);
         $product = $products->where('id', $productId)->first();
         if($product->quantity > 1)
-            Cart::ProductCartReduce($product->id, $cart['products']);
+            Cart::ProductCartReduce($productId, $cart['products']);
         else
             $this->removeProduct($productId);
         $this->emit('amountChanged');

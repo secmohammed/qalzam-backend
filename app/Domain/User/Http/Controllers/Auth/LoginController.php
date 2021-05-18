@@ -112,7 +112,7 @@ class LoginController extends Controller
 
         if(auth()->user()->type == 'user'){
 //            event(new UserLoggedInEvent(auth()->user()));
-            Cart::syncAfterLogin();
+            session()->flash('message','You Have Logged In!');
             return route('website.home');
         }
         else
