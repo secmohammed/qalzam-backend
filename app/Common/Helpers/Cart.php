@@ -4,12 +4,16 @@
 namespace App\Common\Helpers;
 
 
+use App\Common\Traits\HasCoupon;
 use App\Domain\Discount\Entities\Discount;
 use App\Domain\Product\Entities\ProductVariation;
 use App\Domain\Branch\Entities\Branch as Branch;
 use App\Common\Facades\Branch as BranchFacade;
 class Cart
 {
+    use HasCoupon;
+
+    public $total_price = 0;
     /**
      * Cart constructor.
      * Initial Cart if Not Exist Before
@@ -155,7 +159,17 @@ class Cart
     }
 
     /**
-     * get total price for products in cart
+     * @return int|float
+     */
+    public function getTotalPrice()
+    {
+        $this->total_price = $this->totalPriceAfterVat();
+        $this->applyCouponValueWhenExist();
+        return $this->total_price;
+    }
+
+    /**
+     * get total price for products in cart Before VAt & Discount
      * @param null $products
      * @return float|int
      */
@@ -179,6 +193,11 @@ class Cart
     public function afterVat()
     {
         return $this->totalPrice() * config('qalzam.vat');
+    }
+
+    public function applyVat()
+    {
+        $this->total_price *= config('qalzam.vat');
     }
 
     /**

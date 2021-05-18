@@ -2,8 +2,9 @@
 <div class="col-sm-4 item-basket">
     <div class="inner">
         <div class="field">
-            <input class="form-control" type="text" placeholder="{{__('website.cart.enter-coupon')}}" value="">
-            <button class="bottom">{{__('website.cart.submit-coupon')}}</button>
+            <input class="form-control" type="text" placeholder="{{__('website.cart.enter-coupon')}}" value="" wire:model="code">
+            @error('code') <p class="text-danger text-center font-weight-bold">{{$message}}</p>@enderror
+            <button class="bottom" type="button" wire:click="applyCoupon()">{{__('website.cart.submit-coupon')}}</button>
         </div>
         <div class="total-price">
             <ul class="list-price">
@@ -14,10 +15,10 @@
                     <p>{{__('website.cart.added-taxes')}}</p><span>{{$afterVat}}</span>
                 </li>
                 <li>
-                    <p class="red">خصم الكوبون </p><span class="red">450</span>
+                    <p class="red">خصم الكوبون </p><span class="red">{{$totalAfterCoupon}}</span>
                 </li>
                 <li>
-                    <p>{{__('website.cart.total-summation')}}</p><span>{{$totalAfterVat}}</span>
+                    <p>{{__('website.cart.total-summation')}}</p><span>{{$priceTotal}}</span>
                 </li>
             </ul>
             <p class="textred">{{__('website.cart.vat-note')}}</p><a class="bottom" id="completionButton" href="{{$finishOrder === 'true' ?'#completion': route('website.finish-order')}}" data-toggle="{{$finishOrder === 'true' ?'modal': ''}}">

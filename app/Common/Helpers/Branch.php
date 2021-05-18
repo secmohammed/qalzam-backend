@@ -54,7 +54,7 @@ class Branch
         return request()->session()->get('branch');
     }
 
-    private function set(BranchModel $branch)
+    private function set(BranchModel $branch = null)
     {
         request()->session()->put('branch', $branch);
     }

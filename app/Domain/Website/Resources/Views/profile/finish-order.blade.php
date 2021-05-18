@@ -123,7 +123,7 @@
                             </div>
                         </div>
                     </div>
-                    <livewire:price-card :finishOrder="'true'"/>
+                    <livewire:price-card key="'price-card-in-finish-order'" :finishOrder="'true'"/>
                 </div>
             </form>
         </div>
@@ -151,7 +151,7 @@
             </div>
         </div>
     </div>
-    <livewire:delete-address />
+    <livewire:delete-address key="'delete-address'" />
 {{--    <div class="modal fade" id="delete" role="dialog">--}}
 {{--        <div class="modal-dialog">--}}
 {{--            <div class="modal-content login">--}}
@@ -187,6 +187,8 @@
             let address_id = $('input[name="address_id"]:checked').val();
             let branch_id = {!! \App\Common\Facades\Branch::get()->id !!};
             let user_id = {!! auth()->id() !!};
+            let discount_id =' {!! \App\Common\Facades\Cart::getCouponId() !!}';
+            let subtotal = {!! \App\Common\Facades\Cart::getTotalPrice() !!};
             let _token   = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
                 url: "{!! route('orders.store') !!}",
@@ -194,9 +196,10 @@
                 data:{
                     products:products,
                     address_id:address_id,
+                    discount_id:discount_id,
                     branch_id:branch_id,
+                    subtotal:subtotal,
                     user_id:user_id,
-                    discount_id:null,
                     _token:_token
                 },
                 success:function(response){
@@ -214,11 +217,7 @@
             });
         })
         $("#completion").click(function (){
-            let address_id = $('input[name="address_id"]:checked').val();
-            let address = $('input[name="address_id"]:checked').data("address");
-            let products = {!! \App\Common\Facades\Cart::getProductsToBeOrdered()!!}
-            console.log(address)
-            console.log(products)
+
         })
     </script>
     @endPush
