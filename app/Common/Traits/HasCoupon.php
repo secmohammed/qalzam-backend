@@ -12,10 +12,15 @@ trait HasCoupon
 
     /**
      * @param Discount $discount
+     * @return bool
      */
-    public function applyCoupon(Discount $discount)
+    public function applyCoupon(Discount $discount):bool
     {
-        $this->setCoupon($discount);
+        if($this->getCoupon() != $discount){
+            $this->setCoupon($discount);
+            return true;
+        }
+        return false;
     }
 
     /**

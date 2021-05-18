@@ -14,12 +14,13 @@ class Branch
     {
         if($this->checkBranchIdentical($branch))
             $this->set($branch);
+        $this->setChangeableBranch($branch);
     }
     /**
      * @param BranchModel $branch
      * @return bool
      */
-    public function checkBranchIdentical(BranchModel $branch):bool
+    public function checkBranchIdentical(BranchModel $branch = null):bool
     {
         $current_branch = $this->get();
         if($current_branch == null)
@@ -59,11 +60,22 @@ class Branch
         request()->session()->put('branch', $branch);
     }
 
+    public function setChangeableBranch(BranchModel $branch = null)
+    {
+        request()->session()->put('changeable_branch',$branch);
+    }
+
+    public function getChangeableBranch()
+    {
+        return request()->session()->get('changeable_branch');
+    }
+
     public function getBranchFromUrl()
     {
-        $path = request()->path();
+        $path = request()->url();
         $full_path =  explode('/', $path);
-        $branch_id = end($full_path->last);
+        $branch_id = end($full_path);
+        dd($branch_id);
         return BranchModel::find($branch_id);
     }
 }

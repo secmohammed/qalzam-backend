@@ -246,7 +246,8 @@ class OrderController extends Controller
 
         $this->redirectRoute("{$this->resourceRoute}.show", [$order->id]);
         $this->useCollection(OrderResource::class, 'data');
-
+//        session()->flash('message', 'order Created!');
+        toastr()->success('Order Created!', 'Order');
         return $this->response();
     }
 

@@ -33,10 +33,13 @@ class PriceCard extends Component
         try {
             $discount = Discount::where('code', $this->code)->first();
             $discount->validate();
-            Cart::applyCoupon($discount);
+            if(Cart::applyCoupon($discount))
+                $this->emit('toaster', 'Coupon Activated!', 'success');
+            else
+                $this->emit('toaster', 'Coupon Already Activated Before!', 'error');
         }
         catch (\Exception $e){
-            $this->addError('code', $e->getMessage());
+            $this->emit('toaster', $e->getMessage(),'error');
         }
     }
 }

@@ -23,7 +23,14 @@ class VerticalCard extends Component
 
     public function addToCart(ProductVariation $productId)
     {
-        $product = Cart::add($productId);
-        $this->emit('amountChanged');
+        $added = Cart::add($productId);
+        if($added)
+        {
+            $this->emit('toaster', 'Added To Cart Successfully','success');
+            $this->emit('amountChanged');
+            return;
+        }
+        $this->emit('toaster', 'You Should Choose Product From The Same Current Branch Or Clear The Cart', 'error');
+        return;
     }
 }

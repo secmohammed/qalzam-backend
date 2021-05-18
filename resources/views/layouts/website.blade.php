@@ -29,12 +29,15 @@
         <script src="{{asset('assets/website/js/bootstrap-datepicker.min.js')}}"></script>
         <script src="{{asset('assets/website/js/bootstrap-clockpicker.min.js')}}"></script>
         <script src="{{asset('assets/website/js/plugin.js')}}"></script>
+        <link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+        <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 
         @livewireStyles
         @stack('styles')
     </head>
     <body>
         @include('layouts.partials.website.header')
+        {!! toastr()->message() !!}
             @yield('content')
         @include('layouts.partials.website.footer')
 

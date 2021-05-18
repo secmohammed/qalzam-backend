@@ -33,7 +33,7 @@ class Cart
     public function add(ProductVariation $product,int $quantity = 1): bool
     {
         // check Product in the same Session Branch
-        if(! $this->inBranch(BranchFacade::get(),$product)) // todo return true or false instead of void, to use false in flash toast
+        if(! BranchFacade::checkBranchIdentical(BranchFacade::getChangeableBranch())) // todo return true or false instead of void, to use false in flash toast
             return false;
 
         // Get Single Instance Product
