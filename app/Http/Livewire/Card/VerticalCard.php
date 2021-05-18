@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Card;
 
+use App\Common\Facades\Branch;
 use App\Common\Facades\Cart;
 use App\Domain\Product\Entities\ProductVariation;
 use Livewire\Component;
@@ -18,7 +19,8 @@ class VerticalCard extends Component
 
     public function render()
     {
-        return view('livewire.card.vertical-card');
+        $branch = Branch::get();
+        return view('livewire.card.vertical-card',["branch"=>$branch]);
     }
 
     public function addToCart(ProductVariation $productId)

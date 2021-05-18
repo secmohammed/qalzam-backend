@@ -31,14 +31,17 @@
         {{-- <livewire:profile.update-user/> --}}
         <livewire:profile.my-orders/>
         <livewire:profile.addresses/>
+      <livewire:profile.my-wishlist
+      />
         @include("{$alias}::profile.partials._update-my-profile")
-        @include('layouts.partials.website.profile.my_favourite')
 
       </div>
     </div>
   </section>
 @push('scripts')
     <script>
+       Livewire.emit('toggleWishlist')
+
         // Livewire.on('canNotBeAdd', product => {
         //     alert('THis Can not Be Added' + product.totalPrice)
         // })
