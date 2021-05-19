@@ -8,7 +8,7 @@
     <div class="item">
         <div class="photo"><img src="{{$productImage}}" alt=""></div>
         <div class="content"><span>{{__('website.cart.main-dish')}}</span>
-            <h2 class="title">سمك هامور ..</h2>
+            <h2 class="title">{{$productName}}</h2>
             <p>{{$productName}}</p>
         </div>
     </div>
