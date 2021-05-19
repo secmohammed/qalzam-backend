@@ -17,8 +17,10 @@ class Authenticate extends Middleware
         if (! $request->expectsJson()) {
             if(isDashboardPath())
                 return route('login');
+            toastr()->warning("Oops,Just few steps to complete this request", 'login');
             session()->flash('shouldLogin');
-            return route(previousRouteName());
+            return url()->previous();
         }
+
     }
 }
