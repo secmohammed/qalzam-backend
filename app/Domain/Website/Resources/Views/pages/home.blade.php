@@ -59,7 +59,7 @@
                 <div class="col-sm-5 item flex">
                     <div class="inner">
                         <h2 class="title">{{__('website.index.experience.title')}}</h2>
-                        <p>{{__('website.index.experience.dec-1')}} <br/><br/>{{__('website.index.experience.desc-2')}}</p>
+                        <p>{{__('website.index.experience.desc-2')}}</p>
                         <a class="bottom" href="{{route('website.about')}}">
                             {{__('website.index.experience.more')}}
                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
