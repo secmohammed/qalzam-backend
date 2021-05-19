@@ -11,6 +11,7 @@ use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
 use App\Domain\Branch\Criteria\BranchHasGalleriesCriteria;
 use App\Domain\Branch\Repositories\Contracts\AlbumRepository;
 use App\Domain\Branch\Repositories\Contracts\BranchRepository;
+use App\Domain\Product\Entities\ProductVariation;
 use App\Domain\Reservation\Repositories\Contracts\ReservationRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 use Joovlly\DDD\Traits\Responder;
@@ -79,6 +80,15 @@ class PagesController extends Controller
         $this->setData('filters',$filters, 'web');
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.branch");
+        return $this->response();
+    }
+    public function showProduct( ProductVariation $product_variation)
+    {
+        $branch  = BranchFacade::get();
+        $this->setData('alias', $this->domainAlias, 'web');
+        $this->setData('branch', $branch, 'web');
+        $this->setData('product', $product_variation, 'web');
+        $this->addView("{$this->domainAlias}::{$this->viewPath}.product_details");
         return $this->response();
     }
 
