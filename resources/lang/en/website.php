@@ -114,7 +114,7 @@ return [
     'footer' => [
         'desc' => '  Alqalzam Food Distinguished Company LTD. Is a Saudi company specialized in serving seafood. The company was established in 2003 in January, when its first project was established in Jeddah , Madinah Road and through its development path it continued to expand in the field of restaurants, as it opened many branches in Jeddah and Riyadh. Al-Qalzam Company has a large market share in the fish restaurants sector.',
         'branches' => [
-            'title' =>' Branches of Alqalzam -Jed',
+            'title' =>' Branches of Alqalzam',
             'link-1' => 'Madina Highway road -Jed',
             'link-2' => 'Prince Sultan Street -Jed',
             'link-3' => 'Sharm Obhor -Jeddah',
@@ -125,10 +125,10 @@ return [
         'quick-links' => [
             'title' => 'Quick links',
             'link-1' => 'home',
-            'link-2' => 'list',
+            'link-2' => 'Menu',
             'link-3' => 'Photo Gallery',
             'link-4' => 'Reservations',
-            'link-5' => 'Restaurant Survey',
+            'link-5' => 'Survey',
         ],
         'about-us' => [
             'title' => 'about us',
@@ -139,5 +139,5 @@ return [
             'link-5' => 'contact us',
         ]
     ],
-    'copy-rights' => 'All rights reserved 2021, Alqalzam Food Distinguished Company .LTD'
+    'copy-rights' => 'All rights reserved 2021 . Alqalzam Food Distinguished Company .LTD'
 ];
