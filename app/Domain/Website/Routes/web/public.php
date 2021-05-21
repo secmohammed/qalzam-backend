@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'PagesController@home')->name('website.home');
 Route::get('/branches', 'PagesController@branches')->name('website.branches');
 Route::get('/branches/{branch}', 'PagesController@branch')->name('website.branch');
-Route::get('/product_variations/{product_variation}', 'PagesController@showProduct')->name('website.show.product');
+Route::get('/product/{product_variation}', 'PagesController@showProduct')->name('website.show.product');
 Route::get('/galleries', 'PagesController@galleries')->name('website.galleries');
 Route::get('/galleries/{gallery}', 'PagesController@gallery')->name('website.gallery');
 //Route::get('/reservation/', 'PagesController@createReservation')->name('website.reservation');

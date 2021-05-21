@@ -6,7 +6,7 @@
         :productImage="$product->getLastMediaUrl('product_variation-images') ?: asset('/assets/website/images/slider/img-1.jpg')"
         :productId="$product->id"
         :productName="$product->name"
-        :action="$action"
+        :action="route('website.show.product', ['product_variation' => $product->id])"
         :key="'branch-vertical-card-'. $product->id"
     />
 @endforeach
