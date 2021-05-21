@@ -10,18 +10,22 @@ use App\Domain\Branch\Entities\Branch;
 
 class Wishlist
 {
-    
 
     public function __construct()
     {
-    
+        if($this->get() === null)
+            $this->set($this->empty());
     }
 
-    public function toggleWishlist(ProductVariation $product): void
+    /**
+     * @param ProductVariation $product
+     * @return false|string
+     */
+    public function toggleWishlist(ProductVariation $product)
     {
-        // check Porduct in the same Session Branch
+        // check Product in the same Session Branch
         if(! $this->inBranch(BranchFacade::get(),$product))
-            return ;
+            return false;
 
         $wishlist = $this->get();
         $wishlistProductsIds = array_column($wishlist['products'], 'id');
@@ -34,10 +38,10 @@ class Wishlist
         // dd($product->id, $wishlistProductsIds);
         if (in_array($product->id, $wishlistProductsIds)) {
              $this->remove($product->id);
-            return;
+            return 'removed';
         }
         $this->add($product);
-      
+        return 'added';
     }
 
     public function add(ProductVariation $product): void
@@ -45,7 +49,7 @@ class Wishlist
         $wishlist = $this->get();
         array_push($wishlist['products'], $product);
         $this->set($wishlist);
-      
+
     }
     public function remove( $productId): void
     {
@@ -71,9 +75,9 @@ class Wishlist
         $wishlist = $this->get();
 
        if(array_search($productId, array_column($wishlist['products'], 'id')) !== false )
-       return true;
+           return true;
        return false;
-       
+
     }
 
     public function get()
@@ -86,10 +90,6 @@ class Wishlist
         request()->session()->put('wishlist', $wishlist);
     }
 
-  
-
-
-
     public function inBranch(Branch $branch,$product):bool
     {
         $branch = $product->branches()->where('branch_id', $branch->id)->first();
@@ -98,5 +98,5 @@ class Wishlist
         return false;
     }
 
- 
+
 }
