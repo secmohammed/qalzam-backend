@@ -173,6 +173,9 @@
          ]
      });
 
+     function spinner() {
+
+     }
 
      // (function($) {
      //     $('.spinner .btn:first-of-type').on('click', function() {

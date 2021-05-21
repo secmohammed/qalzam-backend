@@ -7,9 +7,9 @@ use Livewire\Component;
 
 class AddWishlist extends Component
 {
-    protected $listeners = ['toggleWishlist'];
+    protected $listeners = ['toggleWishlist', 'setIsFavorite' => 'setIsFavorite'];
 
-    public $product;    
+    public $product;
     public $isFavorite;
 
     public function render()
@@ -18,16 +18,19 @@ class AddWishlist extends Component
     }
     public function toggleWishlist()
     {
-       Wishlist::toggleWishlist($this->product);
+        $toggle_wish_list = Wishlist::toggleWishlist($this->product);
+        if($toggle_wish_list)
+            $this->emit('toaster', "$toggle_wish_list from wishlist", 'success');
        $this->setIsFavorite();
     }
+
     public function mount()
     {
         $this->setIsFavorite();
     }
-    protected function setIsFavorite()
+
+    public function setIsFavorite()
     {
         $this->isFavorite = Wishlist::isFavorite($this->product->id);
-        // dd($this->isFavorite);
     }
 }

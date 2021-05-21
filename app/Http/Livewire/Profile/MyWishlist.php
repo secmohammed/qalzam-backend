@@ -13,23 +13,18 @@ class MyWishlist extends Component
 
     public function render()
     {
+        $this->getProducts();
         return view('livewire.profile.my_wishlists');
     }
     public function toggleWishlist($product)
-    
     {
-        dd(1);
        Wishlist::toggleWishlist($product);
        $this->getProducts();
     }
 
-    public function mount()
-    {
-        $this->getProducts();
-    }
     public function getProducts(Type $var = null)
     {
-        $this->products = Wishlist::get()['products']; 
+        $this->products = Wishlist::get()['products'];
 
     }
 }
