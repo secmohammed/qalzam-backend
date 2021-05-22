@@ -85,12 +85,18 @@ class PagesController extends Controller
         $this->addView("{$this->domainAlias}::{$this->viewPath}.branch");
         return $this->response();
     }
-    public function showProduct( Product $product)
+    public function showProduct(Product $product)
     {
-        $branch  = BranchFacade::get();
+        $branch = \App\Common\Facades\Branch::getChangeableBranch();
+        $variations = $product->variations()->whereHas('branches', function ($query) use($branch){
+            return $query->where('branches.id', $branch->id);
+        })->with('type')->get();
+
+//        dd($variations->);
+
         $this->setData('alias', $this->domainAlias, 'web');
-        $this->setData('branch', $branch, 'web');
         $this->setData('product', $product, 'web');
+        $this->setData('variations', $variations, 'web');
         $this->addView("{$this->domainAlias}::{$this->viewPath}.product_details");
         return $this->response();
     }

@@ -38,12 +38,11 @@
                         </div>
                         <div class="tab-pane fade" id="product-options" role="tabpanel" aria-labelledby="product-options-tab">
                             <ul class="options">
-                                <li>
-                                    <p>مشوي </p> <span>123 ريال سعودي</span>
-                                </li>
-                                <li>
-                                    <p>مقلي </p> <span>1898 ريال سعودي</span>
-                                </li>
+                                @foreach($variations as $index => $variation)
+                                    <li>
+                                        <p>{{$variation->type->name}} </p> <span>{{$variation->branches->where('id', \App\Common\Facades\Branch::getChangeableBranch()->id)->first()->pivot->price}}  ريال سعودي </span>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
