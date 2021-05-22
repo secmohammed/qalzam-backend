@@ -7,6 +7,7 @@
             :productId="$product->id"
             :productName="$product->name"
             :action="route('website.branches')"
+            :button="'start-shopping'"
             :key="'vertical-card-'. $product->id"
         />
 @endforeach
