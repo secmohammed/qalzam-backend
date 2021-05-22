@@ -24,7 +24,7 @@ class Lang
                 app()->setLocale(session('lang'));
             }
         }
-        app()->setLocale(session('lang'));
+        app()->setLocale(config('app.locale'));
 
         config(['qalzam.currency' => session('lang') . '_SA']);
 
