@@ -11,6 +11,8 @@ class CartCard extends Component
     public $quantity;
     public $productId;
     public $productName;
+    public $productVariationName;
+    public $productCategory;
     public $productTotalPrice;
     public $productImage;
 //    protected $listeners = ['amountChanged' => '$refresh'];
@@ -30,6 +32,7 @@ class CartCard extends Component
     {
         $cart = Cart::get();
         Cart::productCartIncrement($productId,$cart['products']);
+        $this->quantity += 1;
         $this->emit('amountChanged');
     }
 
@@ -38,8 +41,10 @@ class CartCard extends Component
         $cart = Cart::get();
         $products = collect($cart['products']);
         $product = $products->where('id', $productId)->first();
-        if($product->quantity > 1)
+        if($product->quantity > 1){
             Cart::ProductCartReduce($productId, $cart['products']);
+            $this->quantity -= 1;
+        }
         else
             $this->removeProduct($productId);
         $this->emit('amountChanged');

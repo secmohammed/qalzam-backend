@@ -12,6 +12,7 @@ use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
 use App\Domain\Branch\Criteria\BranchHasGalleriesCriteria;
 use App\Domain\Branch\Repositories\Contracts\AlbumRepository;
 use App\Domain\Branch\Repositories\Contracts\BranchRepository;
+use App\Domain\Product\Entities\Product;
 use App\Domain\Product\Entities\ProductVariation;
 use App\Domain\Product\Repositories\Contracts\ProductRepository;
 use App\Domain\Reservation\Repositories\Contracts\ReservationRepository;
@@ -84,12 +85,12 @@ class PagesController extends Controller
         $this->addView("{$this->domainAlias}::{$this->viewPath}.branch");
         return $this->response();
     }
-    public function showProduct( ProductVariation $product_variation)
+    public function showProduct( Product $product)
     {
         $branch  = BranchFacade::get();
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('branch', $branch, 'web');
-        $this->setData('product', $product_variation, 'web');
+        $this->setData('product', $product, 'web');
         $this->addView("{$this->domainAlias}::{$this->viewPath}.product_details");
         return $this->response();
     }

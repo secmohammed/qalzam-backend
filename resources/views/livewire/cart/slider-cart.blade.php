@@ -13,7 +13,9 @@
                 :key="'cart-side-card-'. $product['id']"
                 :quantity="$product['quantity']"
                 :productId="$product['id']"
-                :productName="$product['name']"
+                :productName="$product->product->name"
+                :productCategory="$product->product->categories()->first()->name"
+                :productVariationName="$product['name']"
                 :productTotalPrice="$product['total_price']"
                 :productImage="$product->image ?: asset('assets/website/images/slider/img-1.jpg')"
             />

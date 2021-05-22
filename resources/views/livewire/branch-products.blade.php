@@ -8,7 +8,7 @@
         :productImage="$product->getLastMediaUrl('product-images') ?: asset('/assets/website/images/slider/img-1.jpg')"
         :productId="$product->id"
         :productName="$product->name"
-        :action="route('website.show.product', ['product_variation' => $product->id])"
+        :action="route('website.show.product', ['product' => $product->id])"
         :button="'add-to-cart'"
         :key="'branch-vertical-card-'. $product->id"
     />

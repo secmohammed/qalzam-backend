@@ -10,7 +10,7 @@
                     </svg></a></li>
             <li> {{__('website.list')}} </li>
         </ul>
-        <h2 class="title"> {{$branch->name}} <livewire:total-products :key="'total-products'" :totalCount="$branch->products->pluck('product')->count()" /></h2>
+        <h2 class="title"> {{$branch->name}} <livewire:total-products :key="'total-products'" :totalCount="$branch->mainProducts->duplicatesstrict()->count()" /></h2>
         <livewire:filter.products-filter :key="'product-filter'"/>
         <div class="listicons">
             <nav class="tags"> <a href="#">
