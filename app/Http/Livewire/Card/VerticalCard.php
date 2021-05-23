@@ -9,14 +9,13 @@ use Livewire\Component;
 
 class VerticalCard extends Component
 {
-    public $product;
     public $action;
 
     public $productId;
     public $productImage;
     public $productPrice;
     public $productName;
-
+    public $button;
     public function render()
     {
         $branch = Branch::get();

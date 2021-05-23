@@ -88,7 +88,7 @@ class BranchProductController extends Controller
      */
     public function store(Branch $branch, BranchProductStoreFormRequest $request)
     {
-        $branch->products()->sync(
+        $branch->products()->syncWithoutDetaching(
             $request->validated()
         );
         $this->setData('data', $branch);

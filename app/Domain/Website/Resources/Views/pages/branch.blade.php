@@ -10,8 +10,8 @@
                     </svg></a></li>
             <li> {{__('website.list')}} </li>
         </ul>
-        <h2 class="title"> {{__('website.qulzam-list')}} <livewire:total-products :key="'total-products'" :totalCount="$branch->products->count()" /></h2>
-        <livewire:filter.products-filter />
+        <h2 class="title"> {{$branch->name}} <livewire:total-products :key="'total-products'" :totalCount="$branch->mainProducts->duplicatesstrict()->count()" /></h2>
+        <livewire:filter.products-filter :key="'product-filter'"/>
         <div class="listicons">
             <nav class="tags"> <a href="#">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -45,7 +45,7 @@
                 <livewire:branch-products
                     :action="'add-to-cart'"
                     :pagination="'true'"
-                    :products="$branch->products"
+                    :rendProducts="$branch->mainProducts->duplicatesstrict()"
                     :branchId="$branch->id"
                     :key="'branch-products-'.$branch->id"
                 />

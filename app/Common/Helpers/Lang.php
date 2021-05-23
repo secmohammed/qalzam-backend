@@ -36,7 +36,7 @@ function AppLanguages(): array
  */
 function GetLanguage() : string
 {
-    return session('lang') == null ? 'ar' : app()->getLocale();
+    return session('lang') == null ? GetDefaultLang() : app()->getLocale();
 }
 
 /**
@@ -56,7 +56,7 @@ function GetDirection() : string
  */
 function GetDefaultLang() : string
 {
-    return config('app.locale');
+    return 'ar';
 }
 
 /**

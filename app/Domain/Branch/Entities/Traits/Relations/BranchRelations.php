@@ -7,6 +7,7 @@ use App\Domain\Branch\Entities\Album;
 use App\Domain\Branch\Entities\BranchShift;
 use App\Domain\Location\Entities\Location;
 use App\Domain\Order\Entities\Order;
+use App\Domain\Product\Entities\Product;
 use App\Domain\Product\Entities\ProductVariation;
 use App\Domain\User\Entities\User;
 
@@ -66,9 +67,17 @@ trait BranchRelations
     /**
      * @return mixed
      */
-    public function products()
+    public function products() //todo change the relation name
     {
         return $this->belongsToMany(ProductVariation::class, 'branch_product', 'branch_id', 'product_variation_id')->withPivot('price');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function mainProducts() //todo change the relation name
+    {
+        return $this->belongsToMany(Product::class, 'branch_product', 'branch_id', 'product_id')->withPivot('price');
     }
 
     /**

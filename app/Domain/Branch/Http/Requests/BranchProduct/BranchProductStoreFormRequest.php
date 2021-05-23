@@ -2,6 +2,7 @@
 
 namespace App\Domain\Branch\Http\Requests\BranchProduct;
 
+use App\Domain\Product\Entities\ProductVariation;
 use App\Infrastructure\Http\AbstractRequests\BaseRequest as FormRequest;
 
 class BranchProductStoreFormRequest extends FormRequest
@@ -51,6 +52,7 @@ class BranchProductStoreFormRequest extends FormRequest
         return collect($this->request->get('products'))->keyBy('id')->map(function ($product) {
             return [
                 'price' => $product['price'],
+                'product_id' => ProductVariation::find($product['id'])->product_id, // todo change that in future
             ];
         })->toArray();
     }

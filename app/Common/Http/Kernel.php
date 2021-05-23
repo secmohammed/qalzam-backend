@@ -98,7 +98,9 @@ class Kernel extends HttpKernel
         'guest.api' => \App\Common\Http\Middleware\GuestJWTMiddleware::class,
         'cart.sync' => \App\Common\Http\Middleware\Cart\Sync::class,
         'cart.isnotempty' => \App\Common\Http\Middleware\Cart\RespondIfEmpty::class,
-        'cart.not.empty' => \App\Common\Http\Middleware\Cart\CheckIfEmpty::class
+        'cart.not.empty' => \App\Common\Http\Middleware\Cart\CheckIfEmpty::class,
+        'product.has.variations' => \App\Common\Http\Middleware\ProductHasVariations::class,
+        'current.branch.available' => \App\Common\Http\Middleware\Branch\CurrentBranchAvailable::class
         /**ROUTE MIDDLEWARE**/
     ];
 }

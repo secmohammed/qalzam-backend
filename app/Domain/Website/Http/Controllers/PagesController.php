@@ -4,6 +4,7 @@
 namespace App\Domain\Website\Http\Controllers;
 
 use App\Common\Criteria\StatusIsCriteria;
+use App\Criteria\BranchProductsCriteriaCriteria;
 use App\Domain\Branch\Criteria\BranchHasAccommodationsCriteria;
 use App\Domain\Branch\Entities\Branch ;
 use App\Common\Facades\Branch as BranchFacade;
@@ -11,7 +12,9 @@ use App\Domain\Accommodation\Repositories\Contracts\AccommodationRepository;
 use App\Domain\Branch\Criteria\BranchHasGalleriesCriteria;
 use App\Domain\Branch\Repositories\Contracts\AlbumRepository;
 use App\Domain\Branch\Repositories\Contracts\BranchRepository;
+use App\Domain\Product\Entities\Product;
 use App\Domain\Product\Entities\ProductVariation;
+use App\Domain\Product\Repositories\Contracts\ProductRepository;
 use App\Domain\Reservation\Repositories\Contracts\ReservationRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 use Joovlly\DDD\Traits\Responder;
@@ -40,6 +43,7 @@ class PagesController extends Controller
 
     public function __construct(BranchRepository $branchRepository, AlbumRepository $galleryRepository,AccommodationRepository $accommodationRepository)
     {
+        // todo implement every repo in required function, or better make Invoke Controllers
         $this->branchRepository = $branchRepository;
         $this->galleryRepository = $galleryRepository;
         $this->accommodationRepository = $accommodationRepository;
@@ -71,9 +75,8 @@ class PagesController extends Controller
     public function branch($branch)
     {
         $this->branchRepository->pushCriteria(new StatusIsCriteria(true));
-        $show = $this->branchRepository->with(['products' => function($query){ return $query->where('status', 'active');}])->find($branch);
+        $show = $this->branchRepository->with(['mainProducts' => function($product){ return $product->where('status', 'active');}])->find($branch);
         BranchFacade::setBranch($show);
-//        return $show->products;
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('branch', $show, 'web');
         $filters =  [['id' => 1, 'name' => 'hamada'], ['id' => 2, 'name' => 'mahmoud']];
@@ -82,12 +85,18 @@ class PagesController extends Controller
         $this->addView("{$this->domainAlias}::{$this->viewPath}.branch");
         return $this->response();
     }
-    public function showProduct( ProductVariation $product_variation)
+    public function showProduct(Product $product)
     {
-        $branch  = BranchFacade::get();
+        $branch = \App\Common\Facades\Branch::getChangeableBranch();
+        $variations = $product->variations()->whereHas('branches', function ($query) use($branch){
+            return $query->where('branches.id', $branch->id);
+        })->with('type')->get();
+
+//        dd($variations->);
+
         $this->setData('alias', $this->domainAlias, 'web');
-        $this->setData('branch', $branch, 'web');
-        $this->setData('product', $product_variation, 'web');
+        $this->setData('product', $product, 'web');
+        $this->setData('variations', $variations, 'web');
         $this->addView("{$this->domainAlias}::{$this->viewPath}.product_details");
         return $this->response();
     }

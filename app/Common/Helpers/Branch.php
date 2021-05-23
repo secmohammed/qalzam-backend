@@ -70,6 +70,14 @@ class Branch
         return request()->session()->get('changeable_branch');
     }
 
+    /**
+     * @return bool
+     */
+    public function hasChangeableBranch():bool
+    {
+        return request()->session()->has('changeable_branch');
+    }
+
     public function getBranchFromUrl()
     {
         $path = request()->url();

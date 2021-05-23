@@ -2,11 +2,12 @@
 @foreach($products as $index => $product)
         <livewire:card.vertical-card
             :product="$product"
-            :productPrice="$product->price->amount()"
+            :productPrice="$product->price->formatted()"
             :productImage="$product->getLastMediaUrl('product_variation-images') ?: asset('/assets/website/images/slider/img-1.jpg')"
             :productId="$product->id"
             :productName="$product->name"
-            :action="$action"
+            :action="route('website.branches')"
+            :button="'start-shopping'"
             :key="'vertical-card-'. $product->id"
         />
 @endforeach

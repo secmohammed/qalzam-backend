@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Common\Criteria\LimitRecordsCriteria;
 use App\Common\Criteria\StatusIsCriteria;
 use App\Common\Facades\Cart;
 use App\Domain\Branch\Repositories\Contracts\BranchRepository;
@@ -31,6 +32,7 @@ class MostOrderedProduct extends Component
     public function render()
     {
         $this->productRepository->pushCriteria(new StatusIsCriteria(true));
+        $this->productRepository->pushCriteria(new LimitRecordsCriteria(2));
         $products = $this->productRepository->spatie()->paginate(
             $request->per_page ?? config('qalzam.pagination')
         );

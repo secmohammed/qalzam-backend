@@ -8,6 +8,7 @@ use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 use App\Domain\Product\Criteria\BranchIdCriteria;
 use App\Domain\Product\Criteria\ProductVariationCategoriesCriteria;
 use App\Domain\Product\Repositories\Contracts\ProductVariationRepository;
+use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -18,7 +19,7 @@ class BranchProducts extends Component
     private $productRepository;
     private $branchRepository;
     public $branchId;
-    public $products;
+    protected $rendProducts;
     public $pagination;
     public $action;
 
@@ -32,24 +33,36 @@ class BranchProducts extends Component
         $this->productRepository = $productRepository;
         $this->branchRepository = $branchRepository;
     }
+
+    public function mount($rendProducts)
+    {
+        $this->rendProducts = $rendProducts;
+    }
     public function render()
     {
-        return view('livewire.branch-products');
+        $products = $this->rendProducts;
+        return view('livewire.branch-products',compact('products'));
     }
 
     public function productsWithCategory($category_id, BranchRepository $branchRepository)
     {
         $this->branchRepository = $branchRepository;
         $this->branchRepository->pushCriteria(new StatusIsCriteria(true));
-        $this->products = $this->branchRepository->with(['products' => function($q) use($category_id){ return $q->where('status', 'active')->categories($category_id);}])->find($this->branchId)->products ?: [];
-        $this->emitTo('total-products', 'totalCount', count($this->products));
+        $this->rendProducts = $this->branchRepository->with(['mainProducts' => function($q) use($category_id)
+            {
+                return $q->where('status', 'active')->whereHas('categories', function ($category) use ($category_id)
+                {
+                    return $category->where('category_id', $category_id);
+                });
+            }])->find($this->branchId)->mainProducts->duplicatesStrict() ?: [];
+        $this->emitTo('total-products', 'totalCount', $this->rendProducts->count());
     }
 
-    public function rendProducts(ProductVariationRepository $productRepository, BranchRepository $branchRepository)
+    public function rendProducts(BranchRepository $branchRepository)
     {
         $this->branchRepository = $branchRepository;
         $this->branchRepository->pushCriteria(new StatusIsCriteria(true));
-        $this->products = $this->branchRepository->with(['products' => function($q) {return $q->where('status', 'active');}])->find($this->branchId)->products;
-        $this->emitTo('total-products', 'totalCount', $this->products->count());
+        $this->rendProducts = $this->branchRepository->with(['mainProducts' => function($q) {return $q->where('status', 'active');}])->find($this->branchId)->mainproducts->duplicatesStrict();
+        $this->emitTo('total-products', 'totalCount', $this->rendProducts->count());
     }
 }

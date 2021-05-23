@@ -6,9 +6,12 @@ namespace App\Common\Helpers;
 
 use App\Common\Traits\HasCoupon;
 use App\Domain\Discount\Entities\Discount;
+use App\Domain\Product\Entities\Product;
 use App\Domain\Product\Entities\ProductVariation;
 use App\Domain\Branch\Entities\Branch as Branch;
 use App\Common\Facades\Branch as BranchFacade;
+use App\Domain\Product\Entities\Stock;
+
 class Cart
 {
     use HasCoupon;
@@ -33,8 +36,10 @@ class Cart
     public function add(ProductVariation $product,int $quantity = 1): bool
     {
         // check Product in the same Session Branch
-        if(! BranchFacade::checkBranchIdentical(BranchFacade::getChangeableBranch())) // todo return true or false instead of void, to use false in flash toast
+        if(! BranchFacade::checkBranchIdentical(BranchFacade::getChangeableBranch()))
             return false;
+        // Check Product Available in stock
+//        $this->availableInStock($product,$quantity);
 
         // Get Single Instance Product
         $product = $this->getProductInstance($product->id);
@@ -252,6 +257,38 @@ class Cart
         });
         return $product ?: null;
     }
+
+    /**
+     * @param ProductVariation $productId
+     * @return int
+     */
+//    public function totalInStock(ProductVariation $product):int
+//    {
+//        return Stock::where('product_variation_id', $product->id)->count();
+//    }
+
+    /**
+     * @param ProductVariation $product
+     * @return bool
+     */
+//    public function hasNoStock(ProductVariation $product):bool
+//    {
+//        return dd($product->stock()->count()) ;
+//    }
+    /**
+     * @param ProductVariation $product
+     * @param $quantity
+     * @throws \Exception
+     */
+//    public function availableInStock(ProductVariation $product,$quantity = 1)
+//    {
+//        if( $this->hasNoStock($product))
+//            throw new \ErrorException('our Of Stocksa', 422);
+////        throw new \Exception('Out Of Stock');
+//        if($this->totalInStock($product) - $quantity <= 0 )
+//            throw new \ErrorException('out Of Stock', 422);
+////            throw new \Exception('Out Of Stock!');
+//    }
 
     /**
      * get single product instance with pivot and branch where branch_id = branch in session
