@@ -62,7 +62,7 @@
                     _token:_token
                 },
                 success:function(response){
-                    window.location.href = response
+                    window.location.href = '/'
                 },
                 error:function (response){
                     $("#loginErrors").empty();
