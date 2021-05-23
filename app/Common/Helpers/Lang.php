@@ -56,7 +56,7 @@ function GetDirection() : string
  */
 function GetDefaultLang() : string
 {
-    return config('app.locale');
+    return 'ar';
 }
 
 /**

@@ -17,6 +17,10 @@ class CartCard extends Component
     public $productImage;
 //    protected $listeners = ['amountChanged' => '$refresh'];
 
+    public function mount($quantity)
+    {
+        $this->quantity = $quantity;
+    }
     public function render()
     {
         return view('livewire.card.cart-card');
@@ -26,6 +30,7 @@ class CartCard extends Component
     {
         Cart::remove($productId);
         $this->emit('productRemoved');
+        $this->emit('amountChanged');
     }
 
     public function increaseAmount($productId)
