@@ -59,7 +59,7 @@
                 <div class="col-sm-5 item flex">
                     <div class="inner">
                         <h2 class="title">{{__('website.index.experience.title')}}</h2>
-                        <p>{{__('website.index.experience.dec-1')}} <br/><br/>{{__('website.index.experience.desc-2')}}</p>
+                        <p>{{__('website.index.experience.desc-2')}}</p>
                         <a class="bottom" href="{{route('website.about')}}">
                             {{__('website.index.experience.more')}}
                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -183,7 +183,7 @@
                 <div class="col-sm-4 item">
                     <h2 class="title">{{__('website.index.resort.title-1')}}<br/>{{__('website.index.resort.title-2')}}</h2>
                     <p>{{__('website.index.resort.desc-1')}}</p>
-                </div><a class="bla-2 cd-single-point" href="https://youtu.be/8-0CjqUhvsk"> <i class="cd-img-replace"> </i><i class="innerbc">
+                </div><a class="bla-2 cd-single-point" href="https://www.youtube.com/watch?v=QAaDq0X4X-U"> <i class="cd-img-replace"> </i><i class="innerbc">
                         <svg width="23" height="29" viewBox="0 0 23 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0.835352 0.998526C0.479041 1.20118 0.258911 1.57953 0.258911 1.98921V26.9983C0.258911 27.6277 0.769257 28.1379 1.3985 28.1379C2.02774 28.1379 2.53809 27.6277 2.53809 26.9983V3.99394L19.4103 14.0381L7.00319 22.0317C6.47423 22.3727 6.32152 23.0779 6.66245 23.6069C7.00356 24.136 7.70859 24.2887 8.23774 23.9476L22.191 14.9576C22.5227 14.7439 22.7202 14.3739 22.7132 13.9794C22.7061 13.5849 22.4957 13.2221 22.1567 13.0203L1.9814 1.00992C1.62889 0.800427 1.19166 0.795869 0.835352 0.998526Z" fill="#D1362A"></path>
                         </svg></i></a>

@@ -24,8 +24,8 @@
         <h4 class="title">{{ $status }}</h4>
     </div>
     <div class="contant">
-        <p>تكلفه الطلب</p>
+        <p>اجمالي الطلب</p>
         <h4 class="title red">{{ $price }}</h4>
     </div>
-    <div class="contant"><a class="bottom" href="#evaluation" data-toggle="modal">تقييم الطلبب</a></div>
+    <div class="contant"><a class="bottom" href="#evaluation" data-toggle="modal">تقييم الطلب</a></div>
 </div>

@@ -36,7 +36,7 @@
                             <div class="paying-inner">
                                 <label class="che-box bo-no">
                                     <input type="radio" name="addras">
-                                    <h4 class="label-text">إشحن إلي عنواني مباشرة</h4>
+                                    <h4 class="label-text">توصيل إلي عنواني مباشرة</h4>
                                     <div class="row">
 {{--                                        <div class="col-sm-4 add-address"><a class="add" href="#add-address" data-toggle="modal"><img src="images/gps.svg" alt="" title="">--}}
 {{--                                                <h4 class="title">توصيل للموقع الحالي</h4></a></div>--}}
@@ -74,21 +74,21 @@
                                     <h4 class="label-text">الدفع عند الإستلام   <span>الدفع كاش عند الإستلام</span></h4>
                                 </label>
                                 <label class="che-box m-bank">
-                                    <input type="radio" name="radio"><span class="label-text">الدفع بإستخدام بطاقة الائتمان والمحافظ الإلكترونية</span>
+                                    <input type="radio" name="radio"><span class="label-text">الدفع بإستخدام بطاقة الائتمان وبطاقات مدى</span>
                                 </label>
                                 <div class="hidebank">
                                     <div class="items-img"><img src="images/ba-1.png" alt="" title=""><img src="images/ba-2.png" alt="" title=""><img src="images/ba-3.png" alt="" title=""></div>
                                     <div class="row">
                                         <div class="col-sm-6 field">
                                             <label>إسم حامل البطاقه*</label>
-                                            <input class="form-control" type="text" placeholder="الإسم علي البطاقه" value="">
+                                            <input class="form-control" type="text" placeholder="الإسم علي البطاقه*" value="">
                                         </div>
                                         <div class="col-sm-6 field">
-                                            <label>رقم البطاقه</label>
-                                            <input class="form-control" type="text" placeholder="رقم البطاقه" value="">
+                                            <label>رقم البطاقة*</label>
+                                            <input class="form-control" type="text" placeholder="رقم البطاقة*" value="">
                                         </div>
                                         <div class="col-sm-12 field">
-                                            <label>تاريخ إنتهاء البطاقه</label>
+                                            <label>تاريخ إنتهاء البطاقة*</label>
                                             <div class="row">
                                                 <div class="col itemselect">
                                                     <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -109,13 +109,13 @@
                                                     </svg>
                                                     <select class="form-control">
                                                         <option>إختر السنة</option>
-                                                        <option>2020</option>
+                                                        <option>2021</option>
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-sm-6 field">
-                                            <label>رقم أمان البطاقه</label>
+                                            <label>رمز أمان البطاقة</label>
                                             <input class="form-control" type="text" placeholder="CVV" value="">
                                         </div>
                                     </div>
@@ -163,7 +163,7 @@
 {{--                        </svg>--}}
 {{--                    </button>--}}
 {{--                </div>--}}
-{{--                <p class="text"> هل انت متأكد من ازالة العنوان</p>--}}
+{{--                <p class="text"> هل انت متأكد من حذف العنوان</p>--}}
 {{--                <div class="field"><a class="bottom" href="#">نعم بالتأكيد</a></div>--}}
 {{--            </div>--}}
 {{--        </div>--}}
