@@ -39,7 +39,9 @@ class AddAddress extends Component
     public function saveAddress(AddressRepository $addressRepository)
     {
         $this->validate();
-        $address_1 = "$this->landmark, $this->name";
+        $location = Location::with('parent')->find($this->location_id);
+        $parent_location = $location->parent;
+        $address_1 = "$this->landmark, $this->name, $location->name, $parent_location->name";
         $default = 1;
         $address = $addressRepository->create([
             'name' => $this->name,

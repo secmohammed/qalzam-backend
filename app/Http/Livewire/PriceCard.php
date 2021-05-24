@@ -21,10 +21,10 @@ class PriceCard extends Component
     {
         $totalPrice =Cart::totalPrice();
         $afterVat =Cart::afterVat();
-        $totalAfterVat = Cart::totalPriceAfterVat();
+        $totalBeforeVat = Cart::totalPriceBeforeVat();
         $totalAfterCoupon = Cart::CouponValue();
-        $priceTotal = Cart::getTotalPrice();
-        return view('livewire.price-card', compact('totalPrice', 'afterVat' , 'totalAfterVat', 'totalAfterCoupon', 'priceTotal'));
+        $priceTotalBeforeVat = Cart::getTotalPrice();
+        return view('livewire.price-card', compact('totalPrice', 'afterVat' , 'totalBeforeVat', 'totalAfterCoupon', 'priceTotalBeforeVat'));
     }
 
     public function applyCoupon()

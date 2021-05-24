@@ -29,14 +29,14 @@ trait HasCoupon
     public function applyCouponValue()
     {
         $this->getCoupon()->users()->attach(auth()->id(), ['used_at' => now()]);
-        return $this->totalPriceAfterCoupon();
+        return $this->totalPrice();
     }
 
     public function CouponValue()
     {
         $discount =  $this->getCoupon();
         if($discount)
-            return $discount->type == 'amount' ? $discount->value : $this->totalPriceAfterVat() * ($discount->value/100);
+            return $discount->type == 'amount' ? $discount->value : $this->totalPrice() * ($discount->value/100);
         return 0;
     }
     /**
@@ -67,9 +67,9 @@ trait HasCoupon
     public function totalPriceAfterCoupon()
     {
         $discount = $this->getCoupon();
-        $total_after_vat = $this->totalPriceAfterVat();
+        $total_after_vat = $this->totalPrice();
         if($discount)
-            return $total_after_vat -= $discount->type == 'percentage' ? $this->byPercentage($discount->value,$this->totalPriceAfterVat()) : $this->byAmount($discount->value);
+            return $total_after_vat -= $discount->type == 'percentage' ? $this->byPercentage($discount->value,$this->totalPrice()) : $this->byAmount($discount->value);
         return $this->totalPrice();
     }
 

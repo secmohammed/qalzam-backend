@@ -49,7 +49,7 @@
                             <path d="M3.78049 6.06472L0.0864105 2.37063C-0.0316992 2.24834 -0.0283081 2.05346 0.0939863 1.93535C0.213286 1.82013 0.40241 1.82013 0.521692 1.93535L3.99814 5.41179L7.47458 1.93535C7.59478 1.81517 7.78966 1.81517 7.90986 1.93535C8.03005 2.05557 8.03005 2.25043 7.90986 2.37063L4.21578 6.06472C4.09556 6.1849 3.9007 6.1849 3.78049 6.06472Z" fill="#252525"></path>
                         </g>
                     </svg>
-                    <select class="form-control" name="addressLocationId" wire:model="location_id" id="hamada">
+                    <select class="form-control" name="addressLocationId" wire:model="location_id">
                         <option>إختر الحي</option>
                         @foreach($districts as $district)
                             <option value="{{$district->id}}">{{$district->name}}</option>
@@ -64,12 +64,5 @@
                     </div>
             </form>
     </div>
-    @push('scripts')
-        <script>
-            $("#hamada").change(function(){
-                alert('Hamada')
-            })
-        </script>
-    @endpush
 </div>
 

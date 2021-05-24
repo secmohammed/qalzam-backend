@@ -110,13 +110,7 @@ class LoginController extends Controller
 
         }
 
-        if(auth()->user()->type == 'user'){
-//            event(new UserLoggedInEvent(auth()->user()));
-            session()->flash('message','You Have Logged In!');
-            return route('website.home');
-        }
-        else
-            $this->redirectRoute('dashboard');
+        $this->redirectRoute('dashboard');
 
         return $this->response();
     }

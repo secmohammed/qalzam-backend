@@ -9,7 +9,7 @@
         <div class="total-price">
             <ul class="list-price">
                 <li>
-                    <p>{{__('website.cart.total-value')}}</p><span>{{$totalPrice}}</span>
+                    <p>{{__('website.cart.total-value')}}</p><span>{{$priceTotalBeforeVat}}</span>
                 </li>
                 <li>
                     <p>{{__('website.cart.added-taxes')}}</p><span>{{$afterVat}}</span>
@@ -18,7 +18,7 @@
                     <p class="red">خصم الكوبون </p><span class="red">{{$totalAfterCoupon}}</span>
                 </li>
                 <li>
-                    <p>{{__('website.cart.total-summation')}}</p><span>{{$priceTotal}}</span>
+                    <p>{{__('website.cart.total-summation')}}</p><span>{{$totalPrice}}</span>
                 </li>
             </ul>
             <p class="textred">{{__('website.cart.vat-note')}}</p><a class="bottom" id="completionButton" href="{{$finishOrder === 'true' ?'#completion': route('website.finish-order')}}" data-toggle="{{$finishOrder === 'true' ?'modal': ''}}">

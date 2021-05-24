@@ -4,6 +4,7 @@ namespace App\Common\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class Lang
 {
@@ -24,8 +25,7 @@ class Lang
                 app()->setLocale(session('lang'));
             }
         }
-        app()->setLocale(GetLanguage());
-
+        app()->setLocale(session('lang'));
         config(['qalzam.currency' => session('lang') . '_SA']);
 
         return $next($request);
