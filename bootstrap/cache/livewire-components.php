@@ -14,6 +14,7 @@
   'cart.my-cart' => 'App\\Http\\Livewire\\Cart\\MyCart',
   'cart.slider-cart' => 'App\\Http\\Livewire\\Cart\\SliderCart',
   'category-datatable' => 'App\\Http\\Livewire\\CategoryDatatable',
+  'confirm-order-message' => 'App\\Http\\Livewire\\ConfirmOrderMessage',
   'contract-datatable' => 'App\\Http\\Livewire\\ContractDatatable',
   'delete-address' => 'App\\Http\\Livewire\\DeleteAddress',
   'delivery-order-datatable' => 'App\\Http\\Livewire\\DeliveryOrderDatatable',
