@@ -168,13 +168,13 @@ class Cart
      */
     public function getTotalPrice()
     {
-        $this->total_price = $this->totalPriceAfterVat();
+        $this->total_price = $this->totalPriceBeforeVat();
         $this->applyCouponValueWhenExist();
         return $this->total_price;
     }
 
     /**
-     * get total price for products in cart Before VAt & Discount
+     * get total price for products in cart Which Include VAt But without Discount
      * @param null $products
      * @return float|int
      */
@@ -206,12 +206,12 @@ class Cart
     }
 
     /**
-     * get total price after VAT
+     * get total price Before VAT
      * @return float|int
      */
-    public function totalPriceAfterVat()
+    public function totalPriceBeforeVat()
     {
-        return $this->totalPrice() + $this->afterVat();
+        return $this->totalPrice() - $this->afterVat();
     }
 
     /**
@@ -220,13 +220,14 @@ class Cart
     public function getProductsToBeOrdered()
     {
         $cart = $this->get();
-        $products = array_map(function ($product){
+//        return $cart['products'];
+        return array_map(function ($product){
             return array(
                 'id' => (int)$product['id'],
                 'quantity' => (int)$product['quantity'],
             );
         },$cart['products']);
-        return collect($products);
+//        return collect($products)->toArray();
     }
 
     /**

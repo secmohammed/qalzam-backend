@@ -24,13 +24,13 @@
     <div class="total-price">
         <ul class="list-price">
             <li>
-                <p>{{__('website.cart.total-value')}}</p><span>{{$total_price}}</span>
+                <p>{{__('website.cart.total-value')}}</p><span>{{$total_before_vat}}</span>
             </li>
             <li>
                 <p>{{__('website.cart.added-taxes')}}</p><span>{{$after_vat}}</span>
             </li>
             <li>
-                <p>{{__('website.cart.total-summation')}}</p><span>{{$total_after_vat}}</span>
+                <p>{{__('website.cart.total-summation')}}</p><span>{{$total_price}}</span>
             </li>
         </ul><a class="bottom" href="{{route('website.my-cart')}}">
             <svg width="24" height="24" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">

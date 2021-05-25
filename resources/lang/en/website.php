@@ -16,6 +16,7 @@ return [
     'qulzam-reservations' => 'Alqalzam reservations',
     'select-branch' => 'Select the branch',
     'contact-us' => 'Contact Us',
+    'riyals' => 'Riyals',
     'header' => [
         'home' => 'Home',
         'list' => 'Menu',
@@ -137,6 +138,7 @@ return [
             'link-3' => 'Terms & Conditions',
             'link-4' => 'Privacy policy',
             'link-5' => 'contact us',
+            'link-6' => 'Work With US',
         ]
     ],
     'copy-rights' => 'All rights reserved 2021 . Alqalzam Food Distinguished Company .LTD'

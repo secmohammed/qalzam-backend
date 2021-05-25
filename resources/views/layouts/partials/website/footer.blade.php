@@ -15,13 +15,14 @@
                     <a href="{{route('website.branches')}}"> {{__('website.footer.quick-links.link-2')}}</a>
                     <a href="{{route('website.galleries')}}"> {{__('website.footer.quick-links.link-3')}}</a>
                     <a href="{{route('website.reservation')}}"> {{__('website.footer.quick-links.link-4')}}</a>
-{{--                    <a href="restaurant-questionnaire.html"> {{__('website.footer.quick-links.link-5')}}</a></nav>--}}
+                    <a href="{{route('website.questionnaire')}}"> {{__('website.footer.quick-links.link-5')}}</a></nav>
             </div>
             <div class="col-sm-2 boxfot">
                 <h6 class="title"> {{__('website.footer.about-us.title')}}</h6>
                 <nav class="navmenu">
                     <a href="{{route('website.about')}}">{{__('website.footer.about-us.link-1')}}</a>
                     <a href="{{route('website.branches')}}">{{__('website.footer.about-us.link-2')}}</a>
+                    <a href="{{route('website.employment')}}">{{__('website.footer.about-us.link-6')}}</a>
                     <a href="{{route('website.terms-and-conditions')}}">{{__('website.footer.about-us.link-3')}}</a>
                     <a href="{{route('website.policy')}}">{{__('website.footer.about-us.link-4')}}</a>
                     <a href="{{route('website.contact')}}">{{__('website.footer.about-us.link-5')}}</a></nav>
@@ -31,7 +32,7 @@
     <div class="item-bg"><img src="{{asset('/assets/website/images/bg.svg')}}" alt="" title=""></div>
     <div class="copyright">
         <div class="container">
-            
+
             <p>{{__('website.copy-rights')}}</p>
             <nav class="social"><a href="https://www.facebook.com/alqalzamksa/?ref=bookmarks" target="_blank">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

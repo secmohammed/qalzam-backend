@@ -230,8 +230,6 @@ class OrderController extends Controller
      */
     public function store(OrderStoreFormRequest $request)
     {
-
-
         $order = app(Pipeline::class)->send($request)->through([
             ApplyDiscountToOrderIfPresent::class,
             CreateOrderPipeline::class,

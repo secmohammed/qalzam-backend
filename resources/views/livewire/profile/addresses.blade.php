@@ -2,15 +2,17 @@
     <form action="#" method="post">
         <div class="inner">
             <div class="row">
-                {{-- @foreach($addresses as $address)
+                @foreach($addresses as $address)
                     <livewire:card.address-card
                         :city="$address->location->parent->name"
                         :district="$address->location->name"
+                        :streetName="$address->name"
+                        :landmark="$address->landmark"
                         :fullAddress="$address->address_1"
                         :addressId="$address->id"
                         key="'my-profile-address-card'.$address->id"
                     />
-                @endforeach --}}
+                @endforeach
                 <div class="col-sm-3 add-address"><a class="add" href="#add-address" data-toggle="modal">
                         <svg width="38" height="48" viewBox="0 0 38 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M34.6263 47.9996L31.2837 37.3433H21.5078L18.999 41.2204L16.4901 37.3433H6.71424L3.37158 47.9996L3.37177 47.9998H34.6262L34.6263 47.9996Z" fill="#F2F2F2"></path>

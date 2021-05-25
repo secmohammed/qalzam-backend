@@ -360,7 +360,6 @@ export default {
                 },
             }).then((res) => {
                 console.log("🚀 ~ file: OrderProduct.vue ~ line 259 ~ save ~ res", res)
-
                 window.location = '/' + this.$dashboardPrefix+'/orders'
             }).catch((err) => {
                 // console.log("🚀 ~ file: OrderProduct.vue ~ line 257 ~ save ~ err.response.data.errors", err.response.data.errors, err.response)

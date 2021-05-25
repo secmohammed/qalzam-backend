@@ -11,10 +11,18 @@ class AddressCard extends Component
     public $district;
     public $fullAddress;
     public $addressId;
-
+    public $landmark;
+    public $streetName;
+    public $selectedAddressId;
     public function render()
     {
         return view('livewire.card.address-card');
+    }
+
+    public function updatedSelectedAddressId()
+    {
+        $address = app(AddressRepository::class)->with('location.parent')->find($this->selectedAddressId);
+        $this->emit('selectedAddress', $address,true);
     }
 
     public function editAddressForm($id)

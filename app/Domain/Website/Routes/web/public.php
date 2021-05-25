@@ -28,3 +28,8 @@ Route::get('/about', 'PagesController@about')->name('website.about');
 Route::get('/contact', 'PagesController@contact')->name('website.contact');
 Route::get('/terms-and-conditions', 'PagesController@termsAndConditions')->name('website.terms-and-conditions');
 Route::get('/policy', 'PagesController@policy')->name('website.policy');
+Route::get('/work-with-us', 'EmploymentController@show')->name('website.employment');
+Route::post('/work-with-us', 'EmploymentController@store')->name('website.employment.store');
+Route::get('/questionnaire', 'QuestionnaireController@show')->name('website.questionnaire');
+Route::post('/questionnaire', 'QuestionnaireController@store')->name('website.questionnaire.store');
+
