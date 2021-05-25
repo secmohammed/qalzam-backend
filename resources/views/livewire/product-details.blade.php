@@ -29,9 +29,9 @@
 {{--                    <a class="{{$index == 0 ? 'active' : ''}}" href="#" wire:click="changeVariationType({{$type->id}})">{{$type->name}}</a>--}}
 {{--                @endforeach--}}
 {{--            </nav>--}}
-            <p class="text">يحتوي علي ١٥٠٠ سعر حراري</p>
+            <p class="text">{{$product->slug}}</p>
         </div>
-        <p class="price">{{$productVariationPrice}}</p>
+        <p class="price">{{$productVariationPrice}}  {{__('website.riyals')}} </p>
         <div class="ac-bot">
             <form class="spinner" action="#" method="">
                 <button class="btn btn-default ault" type="button"wire:click="increaseQuantity"  >
