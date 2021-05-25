@@ -152,6 +152,8 @@
 @endsection
 @push('scripts')
     <script>
+        console.log({!! \App\Common\Facades\Branch::get()->id !!})
+        console.log({!! \App\Common\Facades\Branch::getchangeableBranch()->id !!})
         $("#errorContainerLogin").hide()
         $("#finishOrder").click(function (event){
             event.preventDefault();
@@ -173,8 +175,8 @@
                     _token:_token
                 },
                 success:function(response){
-                    // console.log(response)
-                    window.location.replace("{!! route('website.home') !!}")
+                    console.log(response)
+                    {{--window.location.replace("{!! route('website.home') !!}")--}}
                 },
                 error:function (response){
                     $("#loginErrors").empty();

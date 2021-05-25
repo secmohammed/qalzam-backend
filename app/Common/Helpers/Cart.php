@@ -220,13 +220,14 @@ class Cart
     public function getProductsToBeOrdered()
     {
         $cart = $this->get();
-        $products = array_map(function ($product){
+//        return $cart['products'];
+        return array_map(function ($product){
             return array(
                 'id' => (int)$product['id'],
                 'quantity' => (int)$product['quantity'],
             );
         },$cart['products']);
-        return collect($products)->toArray();
+//        return collect($products)->toArray();
     }
 
     /**
