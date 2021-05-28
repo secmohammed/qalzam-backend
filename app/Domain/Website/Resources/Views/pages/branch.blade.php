@@ -45,7 +45,7 @@
                 <livewire:branch-products
                     :action="'add-to-cart'"
                     :pagination="'true'"
-                    :rendProducts="$branch->mainProducts->duplicatesstrict()"
+                    :rendProducts="$branch->mainProducts->unique('id')->values()->collect()"
                     :branchId="$branch->id"
                     :key="'branch-products-'.$branch->id"
                 />

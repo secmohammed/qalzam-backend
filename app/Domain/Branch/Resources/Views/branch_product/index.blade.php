@@ -1,13 +1,16 @@
 @extends('theme.app')
 
-@section('styles')
+@push('styles')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.9.2/tailwind.min.css"
           integrity="sha512-l7qZAq1JcXdHei6h2z8h8sMe3NbMrmowhOl+QkP3UhifPpCW2MC4M0i26Y8wYpbz1xD9t61MLT9L1N773dzlOA=="
           crossorigin="anonymous"/>
+    <!--begin::Page Vendors Styles(used by this page)-->
+    <link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
+    <!--end::Page Vendors Styles-->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.min.js" defer></script>
 
-@endsection
+@endpush
 
 @section('content')
 
@@ -26,7 +29,7 @@
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
                     <!--begin::Page Title-->
                     <h5 class=" text-dark font-weight-bold my-1 mr-5 {{ GetLanguage() == 'ar' ? 'ml-2' : '' }}">
-                        {{ __('main.show-all') }} {{ __('main.branches') }} </h5>
+                        {{ __('main.show-all') }} {{ __('main.branch_products') }} </h5>
                     <!--end::Page Title-->
 
                     <!--begin::Breadcrumb-->
@@ -37,7 +40,7 @@
                         </li>
                         <li class="breadcrumb-item">
                             <a href="{{ route('branches.index') }}" class="text-muted">
-                                {{ __('main.branches') }} </a>
+                                {{ __('main.branch_products') }} </a>
                         </li>
                     </ul>
                     <!--end::Breadcrumb-->
@@ -49,10 +52,32 @@
         </div>
     </div>
 
-    <livewire:branch-datatable
-        model="App\Domain\Branch\Entities\Branch"
-        exclude="updated_at"
-        hideable="select"
-        params="branches"
-    />
+    <div class="card card-custom gutter-b">
+        <div class="card-header">
+            <h3 class="card-title">
+                {{ __('main.branch_products') }}
+            </h3>
+{{--            <div class="card-toolbar">--}}
+{{--                <a href="{{ route('branch.products.create') }}"--}}
+{{--                   class="btn btn-light-primary font-weight-bolder mr-2">--}}
+{{--                    <i class="ki ki-plus icon-sm"--}}
+{{--                       style="color: #fff"></i> {{ __('main.create') }} </a>--}}
+{{--            </div>--}}
+
+        </div>
+        <div class="card-body">
+            {!! $dataTable->table(['class' => 'table table-separate table-head-custom table-checkable'])  !!}
+        </div>
+    </div>
 @endsection
+
+@push('scripts')
+
+    <!--begin::Page Vendors(used by this page)-->
+    <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+    <!--end::Page Vendors-->
+    <!--begin::Page Scripts(used by this page)-->
+    <script src="{{asset('assets/js/pages/crud/datatables/basic/basic.js')}}"></script>
+    <!--end::Page Scripts-->
+    {!! $dataTable->scripts() !!}
+@endpush

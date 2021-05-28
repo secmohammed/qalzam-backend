@@ -19,7 +19,11 @@ class BranchProducts extends Component
     private $productRepository;
     private $branchRepository;
     public $branchId;
-    protected $rendProducts;
+    /**
+     * @var
+     * @type Collection
+     */
+    protected  $rendProducts;
     public $pagination;
     public $action;
 
@@ -48,13 +52,13 @@ class BranchProducts extends Component
     {
         $this->branchRepository = $branchRepository;
         $this->branchRepository->pushCriteria(new StatusIsCriteria(true));
-        $this->rendProducts = $this->branchRepository->with(['mainProducts' => function($q) use($category_id)
+        $this->rendProducts = collect($this->branchRepository->with(['mainProducts' => function($q) use($category_id)
             {
                 return $q->where('status', 'active')->whereHas('categories', function ($category) use ($category_id)
                 {
                     return $category->where('category_id', $category_id);
                 });
-            }])->find($this->branchId)->mainProducts->duplicatesStrict() ?: [];
+            }])->find($this->branchId)->mainProducts)->unique('id')->values()->collect() ?: new Collection([]);
         $this->emitTo('total-products', 'totalCount', $this->rendProducts->count());
     }
 
@@ -62,7 +66,7 @@ class BranchProducts extends Component
     {
         $this->branchRepository = $branchRepository;
         $this->branchRepository->pushCriteria(new StatusIsCriteria(true));
-        $this->rendProducts = $this->branchRepository->with(['mainProducts' => function($q) {return $q->where('status', 'active');}])->find($this->branchId)->mainproducts->duplicatesStrict();
+        $this->rendProducts = collect($this->branchRepository->with(['mainProducts' => function($q) {return $q->where('status', 'active');}])->find($this->branchId)->mainProducts)->unique('id')->values()->collect();
         $this->emitTo('total-products', 'totalCount', $this->rendProducts->count());
     }
 }

@@ -31,7 +31,7 @@
 {{--            </nav>--}}
             <p class="text">{{$product->slug}}</p>
         </div>
-        <p class="price">{{$productVariationPrice}}  {{__('website.riyals')}} </p>
+        <p class="price">{{$productVariationPrice}}</p>
         <div class="ac-bot">
             <form class="spinner" action="#" method="">
                 <button class="btn btn-default ault" type="button"wire:click="increaseQuantity"  >

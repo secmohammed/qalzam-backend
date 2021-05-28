@@ -40,7 +40,7 @@
                             <ul class="options">
                                 @foreach($variations as $index => $variation)
                                     <li>
-                                        <p>{{$variation->type->name}} </p> <span>{{$variation->branches->where('id', \App\Common\Facades\Branch::getChangeableBranch()->id)->first()->pivot->price}} {{__('website.riyals')}} </span>
+                                        <p>{{$variation->type->name}} </p> <span>{{priceFormatted($variation->branches->where('id', \App\Common\Facades\Branch::getChangeableBranch()->id)->first()->pivot->price)}}  {{__('website.riyals')}}</span>
                                     </li>
                                 @endforeach
                             </ul>
