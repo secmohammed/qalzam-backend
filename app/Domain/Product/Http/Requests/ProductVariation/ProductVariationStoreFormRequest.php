@@ -3,6 +3,7 @@
 namespace App\Domain\Product\Http\Requests\ProductVariation;
 
 use App\Infrastructure\Http\AbstractRequests\BaseRequest as FormRequest;
+use Illuminate\Validation\Rule;
 
 class ProductVariationStoreFormRequest extends FormRequest
 {
@@ -39,7 +40,7 @@ class ProductVariationStoreFormRequest extends FormRequest
             'status' => 'nullable|in:active,inactive',
             'price' => ['nullable', 'numeric', 'min:1', 'max:10000'],
             'product_id' => 'required|exists:products,id',
-            'product_variation_type_id' => 'required|exists:product_variation_types,id',
+            'product_variation_type_id' => ['required','exists:product_variation_types,id', Rule::unique('product_variations', 'product_variation_type_id')->where('product_id',$this->product_id)],
             'product_variation-images' => 'required|array',
             'product_variation-images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'name' => 'required|string|max:255',

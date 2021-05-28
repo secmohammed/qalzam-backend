@@ -2,12 +2,17 @@
 
 namespace App\Domain\Branch\Http\Controllers;
 
+use App\Domain\Branch\Datatables\BranchProductDataTable;
 use App\Domain\Branch\Entities\Branch;
+use App\Domain\Branch\Entities\BranchProduct;
 use App\Domain\Branch\Http\Requests\BranchProduct\BranchProductStoreFormRequest;
 use App\Domain\Branch\Http\Resources\Branch\BranchResource;
 use App\Domain\Branch\Repositories\Contracts\BranchRepository;
+use App\Domain\Product\Entities\Product;
+use App\Domain\Product\Entities\ProductVariation;
 use App\Domain\Product\Repositories\Contracts\ProductVariationRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use Illuminate\Support\Facades\DB;
 use Joovlly\DDD\Traits\Responder;
 
 class BranchProductController extends Controller
@@ -48,10 +53,36 @@ class BranchProductController extends Controller
         $this->branchRepository = $branchRepository;
         $this->productVariationRepository = $productVariationRepository;
     }
-    public function index()
-    {
 
+    /**
+     * @param BranchProductDataTable $datatable
+     * @return mixed
+     */
+    public function dataTable(BranchProductDataTable  $datatable)
+    {
+        return $datatable->render("{$this->domainAlias}::{$this->viewPath}.index");
     }
+
+
+//    /**
+//     * Display the specified resource.
+//     *
+//     * @param int $id
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function show(BranchProduct $branchProduct)
+//    {
+//        $this->setData('title', __('main.show') . ' ' . __('main.user') . ' : ' . $branchProduct->id, 'web');
+//
+//        $this->setData('alias', $this->domainAlias, 'web');
+//
+//        $this->setData('show', $branchProduct);
+//
+//        $this->addView("{$this->domainAlias}::{$this->viewPath}.show");
+//
+//        return $this->response();
+//    }
+
     public function create()
     {
         $this->setData('title', __('main.add') . ' ' . __('main.branch_product'), 'web');
@@ -97,5 +128,12 @@ class BranchProductController extends Controller
 
         return $this->response();
 
+    }
+
+    public function destroy(Branch $branch,Product $product,ProductVariation $productVariation)
+    {
+        //todo implement this delete func
+        $this->redirectRoute("branch.products.index");
+        return $this->response();
     }
 }
