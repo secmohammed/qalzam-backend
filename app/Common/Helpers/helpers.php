@@ -48,3 +48,12 @@ if(!function_exists('previousRouteName'))
         return app('router')->getRoutes()->match(app('request')->create(url()->previous()))->getName();
     }
 }
+
+IF(! function_exists('priceFormatted'))
+{
+    function priceFormatted($price)
+    {
+        $money = new \App\Common\Transformers\Money($price * 100);
+        return $money->formatted();
+    }
+}

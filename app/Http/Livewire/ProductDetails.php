@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Common\Facades\Branch;
 use App\Common\Facades\Cart;
+use App\Common\Transformers\Money;
 use App\Domain\Product\Entities\ProductVariation;
 use App\Domain\Product\Entities\ProductVariationType;
 use App\Domain\Product\Repositories\Contracts\ProductVariationRepository;
@@ -21,8 +22,9 @@ class ProductDetails extends Component
     protected $listeners = ['changeVariationType'];
     public function getVariationTypesProperty()
     {
-        return $this->product->variations->pluck('type');
+        return $this->product->variations()->whereHas('branches', function ($q){ return $q->where('branch_id', 91);})->get()->pluck('type');
     }
+
     public function getProductIdProperty()
     {
         return $this->product->id;
@@ -115,10 +117,16 @@ class ProductDetails extends Component
         $this->productVariationId = $this->productVariation->id;
         $this->resetQuantity();
         $this->productVariationName = $this->productVariation->name;
-        $this->productVariationPrice = $this->productVariation->branches->first()->pivot->price;
+        $this->productVariationPrice = $this->formatPrice($this->productVariation->branches->first()->pivot->price * 100);
     }
     private function resetQuantity()
     {
         $this->quantity = 1;
+    }
+
+    private function formatPrice($price)
+    {
+        $newMoney = new Money($price);
+        return $newMoney->formatted();
     }
 }

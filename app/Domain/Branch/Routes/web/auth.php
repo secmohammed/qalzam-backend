@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth'])->prefix(config('qalzam.dashboard-prefix'))->group(function () {
     Route::post('branch_products/{branch}', 'BranchProductController@store')->name('branch.products.store');
     Route::get('branch_products/{branch}/create', 'BranchProductController@create')->name('branch.products.create');
+    Route::get('branch_products', 'BranchProductController@dataTable')->name('branch.products.index');
+    Route::delete('branch_products/{branch}/{product}/{product_variation}', 'BranchProductController@destroy')->name('branch.products.delete');
     Route::resource('/branches', 'BranchController')->except('index');
     Route::get('/branches', 'BranchController@dataTable')->name('branches.index');
     Route::get('branch_products/create', 'BranchProductController@create')->name('branch_products.create');

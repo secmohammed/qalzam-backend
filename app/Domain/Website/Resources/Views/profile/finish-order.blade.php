@@ -35,7 +35,7 @@
                             <h3 class="title">العنوان</h3>
                             <div class="paying-inner">
                                 <label class="che-box bo-no">
-                                    <input type="radio" name="addras">
+                                    <input type="radio" name="is_address" value="true">
                                     <h4 class="label-text">توصيل إلي عنواني مباشرة</h4>
                                     <div class="row">
 {{--                                        <div class="col-sm-4 add-address"><a class="add" href="#add-address" data-toggle="modal"><img src="images/gps.svg" alt="" title="">--}}
@@ -63,7 +63,7 @@
                                     </div>
                                 </label>
                                 <label class="che-box addborde">
-                                    <input type="radio" name="addras">
+                                    <input type="radio" name="is_address" value="false" data-is_address="false">
                                     <h4 class="label-text">إستلام من الفرع  <span>{{\App\Common\Facades\Branch::get()->name}}</span></h4>
                                 </label>
                             </div>
@@ -79,7 +79,7 @@
                                     <input type="radio" name="radio"><span class="label-text">الدفع بإستخدام بطاقة الائتمان وبطاقات مدى</span>
                                 </label>
                                 <div class="hidebank">
-                                    <div class="items-img"><img src="images/ba-1.png" alt="" title=""><img src="images/ba-2.png" alt="" title=""><img src="images/ba-3.png" alt="" title=""></div>
+                                    <div class="items-img"><img src="{{asset('assets/images/ba-1.png')}}" alt="" title=""><img src="{{asset('assets/images/ba-2.png')}}" alt="" title=""><img src="images/ba-3.png" alt="" title=""></div>
                                     <div class="row">
                                         <div class="col-sm-6 field">
                                             <label>إسم حامل البطاقه*</label>
@@ -189,8 +189,8 @@
                 }
             });
         })
-        $("#completion").click(function (){
-
+        $("input[name='is_address']").change(function (){
+            alert($("input[name='is_address']").val());
         })
     </script>
     @endPush
