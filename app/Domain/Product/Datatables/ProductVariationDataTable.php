@@ -27,6 +27,12 @@ class ProductVariationDataTable extends DataTable
                 $product = $model->product ? $model->product->name: '' ;
                 return "<span>$product</span>";
             })
+
+            ->editColumn('type.name', function ($model){
+                $type = $model->type ? $model->type->name: '' ;
+                return "<span>$type</span>";
+            })
+
             ->editColumn('user.name', function ($model){
                 $user = $model->user ? $model->user->name: '' ;
                 return "<span>$user</span>";
@@ -49,7 +55,7 @@ class ProductVariationDataTable extends DataTable
 
                 return $btn;
             })
-            ->rawColumns(['actions','price', 'status','product.name', 'created_at','user.name']);
+            ->rawColumns(['actions','price', 'status','product.name', 'created_at','user.name', 'type.name']);
     }
 
     /**
@@ -100,9 +106,10 @@ class ProductVariationDataTable extends DataTable
         return [
             Column::make('id')->title(__('main.id')),
             Column::make('name')->title(__('main.name')),
+            Column::make('product.name')->title(__('main.product')),
+            Column::make('type.name')->title(__('main.type')),
             Column::make('price')->title(__('main.price')),
             Column::make('user.name')->title(__('main.user')),
-            Column::make('product.name')->title(__('main.product')),
             Column::make('status')->title(__('main.status')),
             Column::make('created_at')->title(__('main.created_at')),
             Column::computed('actions')->title(__('main.actions')),
