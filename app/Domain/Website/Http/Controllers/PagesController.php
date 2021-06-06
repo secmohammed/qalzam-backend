@@ -69,6 +69,12 @@ class PagesController extends Controller
         return $this->response();
     }
 
+    public function ourBranches()
+    {
+        $this->setData('alias', $this->domainAlias, 'web');
+        $this->addView("{$this->domainAlias}::{$this->viewPath}.our_branches");
+        return $this->response();
+    }
     /**
      * @param $branch
      */
