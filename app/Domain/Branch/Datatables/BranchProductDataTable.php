@@ -41,7 +41,11 @@ class BranchProductDataTable extends DataTable
                 $productVariation = $model->productVariation ? $model->productVariation->name: '' ;
                 return "<span>$productVariation</span>";
             })
-            ->rawColumns(['actions', 'product.name','productVariation.name','branch.name']);
+            ->editColumn('price', function ($model){
+                $price = $model->price->formatted();
+                return "<span>$price</span>";
+            })
+            ->rawColumns(['actions', 'product.name','productVariation.name','branch.name', 'price']);
     }
 
     /**
