@@ -1,6 +1,7 @@
 <div class="row" >
     <div class="col-sm-5 item-inner">
         <div class="carousel slide carousel-fade" id="carouselExampleIndicators" data-ride="carousel">
+{{--            {{$this->branch_id}}--}}
             <div class="carousel-inner">
                 @foreach($product->getMediaCollectionUrl('product-images') as $index => $url)
                     <div class="carousel-item {{$index == 0 ? 'active' : ''}}"><img src="{{$url}}" alt=""></div>

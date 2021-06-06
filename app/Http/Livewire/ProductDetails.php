@@ -103,11 +103,11 @@ class ProductDetails extends Component
     {
         $branch_id = $this->branch_id;
         $this->productVariation = $productVariationRepository
-            ->with(['branches' => function ($q) use($branch_id)
+            ->whereHas('branches', function ($q) use($branch_id)
             {
                 return $q->where('branch_id' , $branch_id);
             }
-            ])->findWhere(['product_variation_type_id' => $product_variation_type_id, 'product_id' => $this->product_id])->first();
+            )->findWhere(['product_variation_type_id' => $product_variation_type_id, 'product_id' => $this->product_id])->first();
         $this->productVariationChanged();
     }
 
