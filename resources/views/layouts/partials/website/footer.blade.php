@@ -12,7 +12,7 @@
                 <h6 class="title">{{__('website.footer.quick-links.title')}}</h6>
                 <nav class="navmenu">
                     <a href="{{route('website.home')}}"> {{__('website.footer.quick-links.link-1')}}</a>
-                    <a href="{{route('website.branches')}}"> {{__('website.footer.quick-links.link-2')}}</a>
+                    <a href="{{route('website.our.branches')}}"> {{__('website.footer.quick-links.link-2')}}</a>
                     <a href="{{route('website.galleries')}}"> {{__('website.footer.quick-links.link-3')}}</a>
                     <a href="{{route('website.reservation')}}"> {{__('website.footer.quick-links.link-4')}}</a>
                     <a href="{{route('website.questionnaire')}}"> {{__('website.footer.quick-links.link-5')}}</a></nav>
@@ -21,7 +21,7 @@
                 <h6 class="title"> {{__('website.footer.about-us.title')}}</h6>
                 <nav class="navmenu">
                     <a href="{{route('website.about')}}">{{__('website.footer.about-us.link-1')}}</a>
-                    <a href="{{route('website.branches')}}">{{__('website.footer.about-us.link-2')}}</a>
+                    <a href="{{route('website.our.branches')}}">{{__('website.footer.about-us.link-2')}}</a>
                     <a href="{{route('website.employment')}}">{{__('website.footer.about-us.link-6')}}</a>
                     <a href="{{route('website.terms-and-conditions')}}">{{__('website.footer.about-us.link-3')}}</a>
                     <a href="{{route('website.policy')}}">{{__('website.footer.about-us.link-4')}}</a>
