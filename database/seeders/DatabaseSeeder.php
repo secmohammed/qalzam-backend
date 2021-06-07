@@ -30,12 +30,12 @@ class DatabaseSeeder extends Seeder
         \App\Domain\Location\Entities\Location::factory()->withChildren(2)->count(10)->create();
         \App\Domain\Order\Entities\Order::factory()->withProducts(3)->count(10)->create();
         \App\Domain\Reservation\Entities\Reservation::factory()->count(10)->create();
-        \App\Domain\Post\Entities\Post::factory()->count(30)->create();
-        Album::factory()->count(30)->create();
-        Contract::factory()->count(30)->create();
-        BranchShift::factory()->count(30)->create();
+        \App\Domain\Post\Entities\Post::factory()->count(20)->create();
+        Album::factory()->count(20)->create();
+        Contract::factory()->count(20)->create();
+        BranchShift::factory()->count(20)->create();
         Category::factory()->count(20)->create();
-        Template::factory()->withProducts([], 10)->count(30)->create();
+        Template::factory()->withProducts([], 10)->count(20)->create();
         Accommodation::factory()->count(10)->create();
 
         $user = \App\Domain\User\Entities\User::first();
