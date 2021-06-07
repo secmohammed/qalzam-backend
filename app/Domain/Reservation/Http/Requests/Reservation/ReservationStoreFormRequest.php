@@ -47,7 +47,6 @@ class ReservationStoreFormRequest extends FormRequest
             'accommodation_id' => [
                 'required',
                 'exists:accommodations,id',new EnsureStartDateOfReservationInSameBranchDay()
-                // new EnsureAccommodationIsAvailableTodayForReservationAtContractDays,
             ],
             'user_id' => 'required|exists:users,id',
             "notes" => "nullable",

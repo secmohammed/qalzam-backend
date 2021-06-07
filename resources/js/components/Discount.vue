@@ -203,7 +203,7 @@ export default {
         return {
             branchesValue: {},
             broadcastValue: {},
-            discountIdValue: {},
+            discountIdValue: null,
             usersValue: [],
             errors: [],
             step: 1,
@@ -255,7 +255,7 @@ export default {
                     break;
             }
             this.discountIds = await discountIds.data.data
-            this.discountIdValue = {}
+            this.discountIdValue = null
             //   console.log("🚀 ~ file: ReservationProduct.vue ~ line 170 ~ val", val)
             //       const branch = this.branches.find(branch => branch.id == val.id);
             //       console.log("🚀 ~ file: ReservationProduct.vue ~ line 228 ~ this.branches", this.branches)

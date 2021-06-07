@@ -45,7 +45,7 @@ class UserFastStoreFormRequest extends FormRequest
         // dd($this->request);
         $rules = [
             'name' => ['required', 'string', 'max:255'],
-            'email' => 'required|email:rfc,dns|unique:users,email',
+            'email' => 'nullable|email:rfc,dns|unique:users,email',
             'mobile' => ['required', 'unique:users,mobile'],
         ];
 
