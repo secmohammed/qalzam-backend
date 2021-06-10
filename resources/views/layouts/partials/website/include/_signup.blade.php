@@ -51,7 +51,7 @@
                                 </select>
                             </div>
                             <div class="col-sm-8 item">
-                                <input class="form-control" name="phone_number" type="number" placeholder="رقم الجوال" value="">
+                                <input class="form-control" name="phone_number" type="text" placeholder="رقم الجوال" value="">
                             </div>
                         </div>
                     </div>
