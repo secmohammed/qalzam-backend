@@ -13,7 +13,6 @@
 @endpush
 
 @section('content')
-
     <div class="subheader subheader-transparent " id="kt_subheader">
         <div class="container-fluid  d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
             <!--begin::Info-->
@@ -66,8 +65,17 @@
 
         </div>
         <div class="card-body">
+            <form action="{{route('discounts.delete-all', ['type' => request('type')])}}" method="post">
+                @csrf
+                @method('DELETE')
             {!! $dataTable->table(['class' => 'table table-separate table-head-custom table-checkable'])  !!}
+            <button type="submit" id="testing"
+            class="btn btn-danger font-weight-bolder mr-2">
+             <i class="fa fa-trash icon-sm"
+                style="color: #fff"></i> {{ __('main.delete') }} </button>
         </div>
+    </form>
+
     </div>
 @endsection
 
@@ -80,4 +88,15 @@
     <script src="{{asset('assets/js/pages/crud/datatables/basic/basic.js')}}"></script>
     <!--end::Page Scripts-->
     {!! $dataTable->scripts() !!}
+ 
+@endpush
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {   //same as: $(function() {
+            $('#dataTablesCheckbox').change(function(){
+                $('input:checkbox').not(this).prop('checked', this.checked);
+            })
+        });
+    </script>
 @endpush

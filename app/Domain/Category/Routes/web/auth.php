@@ -17,5 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth'])->prefix(config('qalzam.dashboard-prefix'))->group(function () {
     Route::resource('/categories','CategoryController')->except('index');
     Route::get('/categories','CategoryController@dataTable')->name('categories.index');
-	###CRUD_PLACEHOLDER###
+    Route::delete('/categories/delete/all', 'CategoryController@deleteAll')->name('categories.delete-all');
+
+    ###CRUD_PLACEHOLDER###
 });

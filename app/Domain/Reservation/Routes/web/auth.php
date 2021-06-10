@@ -20,5 +20,9 @@ Route::middleware(['auth'])->prefix(config('qalzam.dashboard-prefix'))->group(fu
     Route::get('reservations/{reservation}/pdf', 'ReservationController@generatePdf')->name('reservations.pdf');
 
     Route::get('/inout', 'ReservationController@inout')->name('inout');
+  
+    Route::delete('/reservations/delete/all', 'ReservationController@deleteAll')->name('reservations.delete-all');
+  
+  
     ###CRUD_PLACEHOLDER###
 });

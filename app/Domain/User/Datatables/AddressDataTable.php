@@ -44,11 +44,14 @@ class AddressDataTable extends DataTable
                 }
                 return "<span class='badge badge-$color'>$default</span>";
             })
+            ->editColumn('checkbox', function ($model){
+                return "<input type='checkbox' name='items[]' value='$model->id' id='selectResource'/>";
+            })
             ->editColumn('created_at', function ($model){
                 $created_at = (new Carbon($model->created_at))->format('Y-m-d H:m');
                 return "<span>$created_at</span>";
             })
-            ->rawColumns(['created_at','default','status','user.name', 'location.name']);
+            ->rawColumns(['created_at','checkbox','default','status','user.name', 'location.name']);
     }
 
     /**
@@ -61,6 +64,8 @@ class AddressDataTable extends DataTable
         return $this->builder()
             ->setTableId('address-table')
             ->columns($this->getColumns())
+            ->addCheckbox([],true)
+
             ->minifiedAjax()
             ->dom("<'row'<'col-3' l><'col-6 text-right' B><'col-3' f>>
                                 <'row'<'col-12' tr>>

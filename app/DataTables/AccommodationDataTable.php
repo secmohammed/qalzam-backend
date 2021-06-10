@@ -19,9 +19,15 @@ class AccommodationDataTable extends DataTable
      */
     public function dataTable($query)
     {
+        dd(1);
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'accommodation.action');
+            ->editColumn('checkbox', function ($model){
+                return "<input type='checkbox' name='items[]' value='$model->id' id='selectResource'/>";
+            })
+            ->addColumn('action', 'accommodation.action')
+            ->rawColumns(['checkbox']);
+            ;
     }
 
     /**
@@ -47,6 +53,8 @@ class AccommodationDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
+            ->addCheckbox([],true)
+
                     ->orderBy(1)
                     ->buttons(
                         Button::make('create'),

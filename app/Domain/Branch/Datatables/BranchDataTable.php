@@ -41,6 +41,10 @@ class BranchDataTable extends DataTable
                 $creator = $model->creator ? $model->creator->name: '' ;
                 return "<span>$creator</span>";
             })
+            ->editColumn('checkbox', function ($model){
+                return "<input type='checkbox' name='items[]' value='$model->id' id='selectResource'/>";
+            })
+            
             ->editColumn('created_at' ,function ($model) {
                 $created_at     = (new Carbon($model->created_at))->format('Y-m-d H:i');
                 return "<span>$created_at</span>";
@@ -49,7 +53,7 @@ class BranchDataTable extends DataTable
                 $color = $model->status == 'active' ? 'primary' : 'warning';
                 return "<span class='badge badge-$color'>$model->status</span>";
             })
-            ->rawColumns(['actions', 'location.name','creator.name','created_at','user.name','status']);
+            ->rawColumns(['actions','checkbox', 'location.name','creator.name','created_at','user.name','status']);
     }
 
     /**
@@ -62,6 +66,8 @@ class BranchDataTable extends DataTable
         return $this->builder()
             ->setTableId('branch-table')
             ->columns($this->getColumns())
+            ->addCheckbox([],true)
+
             ->minifiedAjax()
             ->dom("<'row'<'col-3' l><'col-6 text-right' B><'col-3' f>>
                                 <'row'<'col-12' tr>>
