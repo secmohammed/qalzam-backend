@@ -3,6 +3,7 @@
 namespace App\Domain\Product\Http\Requests\ProductVariation;
 
 use App\Domain\Product\Http\Requests\ProductVariation\ProductVariationStoreFormRequest;
+use Illuminate\Validation\Rule;
 
 class ProductVariationUpdateFormRequest extends ProductVariationStoreFormRequest
 {
@@ -36,6 +37,8 @@ class ProductVariationUpdateFormRequest extends ProductVariationStoreFormRequest
         $rules = [
             'product-variation-images' => 'nullable|array',
             'product-variation-images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'product_variation_type_id' => ['required','exists:product_variation_types,id', Rule::unique('product_variations', 'product_variation_type_id')->ignore($this->product_variation)->where('product_id',$this->product_id)],
+
         ];
 
         return array_merge(parent::rules(), $rules);
