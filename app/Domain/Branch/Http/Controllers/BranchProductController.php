@@ -12,6 +12,7 @@ use App\Domain\Product\Entities\Product;
 use App\Domain\Product\Entities\ProductVariation;
 use App\Domain\Product\Repositories\Contracts\ProductVariationRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Joovlly\DDD\Traits\Responder;
 
@@ -135,5 +136,27 @@ class BranchProductController extends Controller
         //todo implement this delete func
         $this->redirectRoute("branch.products.index");
         return $this->response();
+    }
+    public function deleteAll(Request $request)
+    {
+        $ids = implode(',', $request->items);
+
+        // dd($id,$this->branchRepository->mainProducts());
+        $delete = $this->branchRepository->mainProducts()-detach($ids)->count();
+
+        if ($delete) {
+            $args = [];
+            $type = $request->get('type');
+            if($type != '')
+                $args = ['type' => $type];
+            $this->redirectRoute("{$this->resourceRoute}.index", $args);
+            $this->setApiResponse(fn() => response()->json(['deleted' => true], 200));
+        } else {
+            $this->redirectBack();
+            $this->setApiResponse(fn() => response()->json(['updated' => false], 404));
+        }
+
+        return $this->response();
+        //todo implement the method logic....
     }
 }

@@ -31,6 +31,9 @@ class ProductVariationDataTable extends DataTable
                 $type = $model->type ? $model->type->name: '' ;
                 return "<span>$type</span>";
             })
+            ->editColumn('checkbox', function ($model){
+                return "<input type='checkbox' name='items[]' value='$model->id' id='selectResource'/>";
+            })
             ->editColumn('user.name', function ($model){
                 $user = $model->user ? $model->user->name: '' ;
                 return "<span>$user</span>";
@@ -53,10 +56,7 @@ class ProductVariationDataTable extends DataTable
 
                 return $btn;
             })
-            ->addColumn('translation.name', function ($model) {
-                return $model->translations->first() ? $model->translations->first()->value : '';
-            })
-            ->rawColumns(['actions','price', 'status','product.name', 'created_at','user.name', 'type.name', 'translations.name']);
+            ->rawColumns(['actions','checkbox','price', 'status','product.name', 'created_at','user.name', 'type.name']);
     }
 
     /**
@@ -70,6 +70,8 @@ class ProductVariationDataTable extends DataTable
             ->setTableId('product-variation-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
+            ->addCheckbox([],true)
+
             ->dom("<'row'<'col-3' l><'col-6 text-right' B><'col-3' f>>
                                 <'row'<'col-12' tr>>
                                 <'row'<'col-5'i><'col-7 dataTables_pager'p>>")
@@ -108,7 +110,6 @@ class ProductVariationDataTable extends DataTable
             Column::make('id')->title(__('main.id')),
             Column::make('name')->title(__('main.name')),
             Column::make('product.name')->title(__('main.product')),
-            Column::make('translation.name')->title(__('main.name')),
             Column::make('type.name')->title(__('main.type')),
             Column::make('price')->title(__('main.price')),
             Column::make('user.name')->title(__('main.user')),

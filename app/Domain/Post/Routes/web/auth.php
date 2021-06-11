@@ -17,5 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth'])->prefix(config('qalzam.dashboard-prefix'))->group(function () {
     Route::resource('/posts','PostController')->except('index');
     Route::get('/posts','PostController@dataTable')->name('posts.index');
-	###CRUD_PLACEHOLDER###
+    Route::delete('/posts/delete/all', 'PostController@deleteAll')->name('posts.delete-all');
+	
+    ###CRUD_PLACEHOLDER###
 });

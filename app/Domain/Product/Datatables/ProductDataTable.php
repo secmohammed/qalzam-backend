@@ -39,13 +39,16 @@ class ProductDataTable extends DataTable
                 $price = $model->price->amount();
                 return "<span>$price</span>";
             })
+            ->editColumn('checkbox', function ($model){
+                return "<input type='checkbox' name='items[]' value='$model->id' id='selectResource'/>";
+            })
             ->addColumn('actions', function ($model) {
                 $btn = "<a href=" . route('products.show', ['product' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
                 $btn = $btn . "<a href=" . route('products.edit', ['product' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
 
                 return $btn;
             })
-            ->rawColumns(['actions','price','user.name','status', 'created_at']);
+            ->rawColumns(['actions','checkbox','price','user.name','status', 'created_at']);
     }
 
     /**
@@ -58,6 +61,8 @@ class ProductDataTable extends DataTable
         return $this->builder()
             ->setTableId('product-table')
             ->columns($this->getColumns())
+            ->addCheckbox([],true)
+
             ->minifiedAjax()
             ->dom("<'row'<'col-3' l><'col-6 text-right' B><'col-3' f>>
                                 <'row'<'col-12' tr>>

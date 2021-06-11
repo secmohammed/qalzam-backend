@@ -3,9 +3,7 @@
             style="color: red"> * </span> </label>
     <div class="col-lg-10 col-md-9 col-sm-12">
         <input name="name_ar" type="text" class="form-control {{$errors->has('name_ar') ? 'is-invalid':''}}"
-               value="{{ ($action == 'edit') ? optional($edit->translations->first(), function ($translation) use ($edit) {
-                    return $translation->where('translatable_id', $edit->id)->first()->value;
-               }) ?? old('name_ar') : old('name_ar') }}" placeholder="{{ __("main.name_ar") }}">
+               value="{{ ($action == 'edit') ? $edit->translations->first()->value ?? old('name_ar') : old('name_ar') }}" placeholder="{{ __("main.name_ar") }}">
         <div class="row">
             <div class="col-md-12">
                 @if($errors->has('name_ar'))

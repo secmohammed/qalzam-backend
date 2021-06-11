@@ -34,13 +34,16 @@ class RoleDataTable extends DataTable
                 $permissions = implode('  ||  ', $permissions);
                 return "<span class='font-weight-bold text-info font-size-h3'>$permissions</span>";
             })
+            ->editColumn('checkbox', function ($model){
+                return "<input type='checkbox' name='items[]' value='$model->id' id='selectResource'/>";
+            })
             ->addColumn('actions', function ($model) {
                 $btn = "<a href=" . route('roles.show', ['role' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
                 $btn = $btn . "<a href=" . route('roles.edit', ['role' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
 
                 return $btn;
             })
-            ->rawColumns(['actions','permissions','created_at']);
+            ->rawColumns(['actions','checkbox','permissions','created_at']);
     }
 
     /**
@@ -53,6 +56,8 @@ class RoleDataTable extends DataTable
         return $this->builder()
             ->setTableId('role-table')
             ->columns($this->getColumns())
+            ->addCheckbox([],true)
+
             ->minifiedAjax()
             ->dom("<'row'<'col-3' l><'col-6 text-right' B><'col-3' f>>
                                 <'row'<'col-12' tr>>

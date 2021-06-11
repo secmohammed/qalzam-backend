@@ -232,5 +232,26 @@ class AccommodationController extends Controller
 
         return $this->response();
     }
+    public function deleteAll(Request $request)
+    {
+        $ids = implode(',', $request->items);
+
+        $delete = $this->accommodationRepository->destroy($ids)->count();
+
+        if ($delete) {
+            $args = [];
+            $type = $request->get('type');
+            if($type != '')
+                $args = ['type' => $type];
+            $this->redirectRoute("{$this->resourceRoute}.index", $args);
+            $this->setApiResponse(fn() => response()->json(['deleted' => true], 200));
+        } else {
+            $this->redirectBack();
+            $this->setApiResponse(fn() => response()->json(['updated' => false], 404));
+        }
+
+        return $this->response();
+        //todo implement the method logic....
+    }
 
 }

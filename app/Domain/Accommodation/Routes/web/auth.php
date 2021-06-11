@@ -19,5 +19,9 @@ Route::middleware(['auth'])->prefix(config('qalzam.dashboard-prefix'))->group(fu
     Route::get('/accommodations','AccommodationController@dataTable')->name('accommodations.index');
 	Route::resource('/contracts','ContractController')->except('index');
 	Route::get('/contracts','ContractController@dataTable')->name('contracts.index');
+	
+    Route::delete('/accommodations/delete/all', 'AccommodationController@deleteAll')->name('accommodations.delete-all');
+    Route::delete('/contracts/delete/all', 'ContractController@deleteAll')->name('contracts.delete-all');
+	
 	###CRUD_PLACEHOLDER###
 });

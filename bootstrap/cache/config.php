@@ -12,10 +12,10 @@
   ),
   'app' => 
   array (
-    'name' => 'qalzam',
+    'name' => 'Laravel',
     'env' => 'local',
     'debug' => true,
-    'url' => 'http://localhost:8000',
+    'url' => 'http://127.0.0.1:8000',
     'asset_url' => NULL,
     'timezone' => 'UTC',
     'locale' => 'ar',
@@ -26,7 +26,7 @@
     ),
     'fallback_locale' => 'ar',
     'faker_locale' => 'en_US',
-    'key' => 'base64:mRJ78VSzDRFzv3hMW8VEwsXjy/ey3Pc3thN5j21sgiU=',
+    'key' => 'base64:E+TTFvuoBDQcES3PXK5TFHJ3V9am36pn6Y8uSSMpzKU=',
     'cipher' => 'AES-256-CBC',
     'providers' => 
     array (
@@ -218,7 +218,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'M:\\other things\\joovlly\\qalzam\\serverSide\\storage\\framework/cache/data',
+        'path' => '/home/badawy/Joovlly/qalzam/storage/framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -257,7 +257,7 @@
         'endpoint' => NULL,
       ),
     ),
-    'prefix' => 'qalzam_cache',
+    'prefix' => 'laravel_cache',
   ),
   'cors' => 
   array (
@@ -296,7 +296,7 @@
       array (
         'driver' => 'sqlite',
         'url' => NULL,
-        'database' => 'qalzam1',
+        'database' => 'qalzam_production',
         'prefix' => '',
         'foreign_key_constraints' => true,
       ),
@@ -326,7 +326,7 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'qalzam1',
+        'database' => 'qalzam_production',
         'username' => 'root',
         'password' => '',
         'unix_socket' => '',
@@ -346,7 +346,7 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'qalzam1',
+        'database' => 'qalzam_production',
         'username' => 'root',
         'password' => '',
         'charset' => 'utf8',
@@ -376,7 +376,7 @@
       'options' => 
       array (
         'cluster' => 'redis',
-        'prefix' => 'qalzam_database_',
+        'prefix' => 'laravel_database_',
       ),
       'default' => 
       array (
@@ -646,13 +646,13 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'M:\\other things\\joovlly\\qalzam\\serverSide\\storage\\app',
+        'root' => '/home/badawy/Joovlly/qalzam/storage/app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'M:\\other things\\joovlly\\qalzam\\serverSide\\storage\\app/public',
-        'url' => 'http://localhost:8000/storage',
+        'root' => '/home/badawy/Joovlly/qalzam/storage/app/public',
+        'url' => 'http://127.0.0.1:8000/storage',
         'visibility' => 'public',
       ),
       's3' => 
@@ -668,7 +668,7 @@
     ),
     'links' => 
     array (
-      'M:\\other things\\joovlly\\qalzam\\serverSide\\public\\storage' => 'M:\\other things\\joovlly\\qalzam\\serverSide\\storage\\app/public',
+      '/home/badawy/Joovlly/qalzam/public/storage' => '/home/badawy/Joovlly/qalzam/storage/app/public',
     ),
   ),
   'firebase' => 
@@ -750,7 +750,7 @@
   ),
   'jwt' => 
   array (
-    'secret' => '58KnctSC9Yg2Fpb5O7DiCFK3D8r5pce46rIN5g6vQKULr1KVymkyVh599SsQPUIn',
+    'secret' => 'DsG303fThJFeRzRnRuhMyfAgLtfCgXvS7magV52rtUF3Zy5UlSiOH3HWy7gsjpF4',
     'keys' => 
     array (
       'public' => NULL,
@@ -786,7 +786,7 @@
   'livewire' => 
   array (
     'class_namespace' => 'App\\Http\\Livewire',
-    'view_path' => 'M:\\other things\\joovlly\\qalzam\\serverSide\\resources\\views/livewire',
+    'view_path' => '/home/badawy/Joovlly/qalzam/resources/views/livewire',
     'layout' => 'layouts.app',
     'asset_url' => NULL,
     'middleware_group' => 'web',
@@ -841,13 +841,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'M:\\other things\\joovlly\\qalzam\\serverSide\\storage\\logs/laravel.log',
+        'path' => '/home/badawy/Joovlly/qalzam/storage/logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'M:\\other things\\joovlly\\qalzam\\serverSide\\storage\\logs/laravel.log',
+        'path' => '/home/badawy/Joovlly/qalzam/storage/logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -897,7 +897,7 @@
       ),
       'emergency' => 
       array (
-        'path' => 'M:\\other things\\joovlly\\qalzam\\serverSide\\storage\\logs/laravel.log',
+        'path' => '/home/badawy/Joovlly/qalzam/storage/logs/laravel.log',
       ),
     ),
   ),
@@ -909,11 +909,11 @@
       'smtp' => 
       array (
         'transport' => 'smtp',
-        'host' => 'smtp.mailtrap.io',
-        'port' => '2525',
-        'encryption' => '',
-        'username' => '404fe08e654db6',
-        'password' => 'e0b8b497970ca0',
+        'host' => 'mailhog',
+        'port' => '1025',
+        'encryption' => NULL,
+        'username' => NULL,
+        'password' => NULL,
         'timeout' => NULL,
         'auth_mode' => NULL,
       ),
@@ -956,14 +956,14 @@
     'from' => 
     array (
       'address' => NULL,
-      'name' => 'qalzam',
+      'name' => 'Laravel',
     ),
     'markdown' => 
     array (
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'M:\\other things\\joovlly\\qalzam\\serverSide\\resources\\views/vendor/mail',
+        0 => '/home/badawy/Joovlly/qalzam/resources/views/vendor/mail',
       ),
     ),
   ),
@@ -1051,7 +1051,7 @@
   ),
   'queue' => 
   array (
-    'default' => 'database',
+    'default' => 'sync',
     'connections' => 
     array (
       'sync' => 
@@ -1133,7 +1133,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => 'M:\\other things\\joovlly\\qalzam\\serverSide\\storage\\framework/sessions',
+    'files' => '/home/badawy/Joovlly/qalzam/storage/framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -1142,7 +1142,7 @@
       0 => 2,
       1 => 100,
     ),
-    'cookie' => 'qalzam_session',
+    'cookie' => 'laravel_session',
     'path' => '/',
     'domain' => NULL,
     'secure' => NULL,
@@ -1153,9 +1153,9 @@
   array (
     'paths' => 
     array (
-      0 => 'M:\\other things\\joovlly\\qalzam\\serverSide\\resources\\views',
+      0 => '/home/badawy/Joovlly/qalzam/resources/views',
     ),
-    'compiled' => 'M:\\other things\\joovlly\\qalzam\\serverSide\\storage\\framework\\views',
+    'compiled' => '/home/badawy/Joovlly/qalzam/storage/framework/views',
   ),
   'dompdf' => 
   array (
@@ -1163,10 +1163,10 @@
     'orientation' => 'portrait',
     'defines' => 
     array (
-      'font_dir' => 'M:\\other things\\joovlly\\qalzam\\serverSide\\storage\\fonts/',
-      'font_cache' => 'M:\\other things\\joovlly\\qalzam\\serverSide\\storage\\fonts/',
-      'temp_dir' => 'C:\\Users\\muham\\AppData\\Local\\Temp',
-      'chroot' => 'M:\\other things\\joovlly\\qalzam\\serverSide',
+      'font_dir' => '/home/badawy/Joovlly/qalzam/storage/fonts/',
+      'font_cache' => '/home/badawy/Joovlly/qalzam/storage/fonts/',
+      'temp_dir' => '/tmp',
+      'chroot' => '/home/badawy/Joovlly/qalzam',
       'enable_font_subsetting' => false,
       'pdf_backend' => 'CPDF',
       'default_media_type' => 'screen',
@@ -1205,7 +1205,7 @@
     array (
     ),
     'auto_language_detection' => false,
-    'temp_dir' => 'C:\\Users\\muham\\AppData\\Local\\Temp',
+    'temp_dir' => '/tmp',
     'pdfa' => false,
     'pdfaauto' => false,
   ),
@@ -1359,7 +1359,7 @@
     ),
     'temporary_files' => 
     array (
-      'local_path' => 'M:\\other things\\joovlly\\qalzam\\serverSide\\storage\\framework/laravel-excel',
+      'local_path' => '/home/badawy/Joovlly/qalzam/storage/framework/laravel-excel',
       'remote_disk' => NULL,
       'remote_prefix' => NULL,
       'force_resync_remote' => NULL,
@@ -1858,9 +1858,9 @@
     ),
     'generator' => 
     array (
-      'basePath' => 'M:\\other things\\joovlly\\qalzam\\serverSide\\app',
+      'basePath' => '/home/badawy/Joovlly/qalzam/app',
       'rootNamespace' => 'App\\',
-      'stubsOverridePath' => 'M:\\other things\\joovlly\\qalzam\\serverSide\\app',
+      'stubsOverridePath' => '/home/badawy/Joovlly/qalzam/app',
       'paths' => 
       array (
         'models' => 'Entities',

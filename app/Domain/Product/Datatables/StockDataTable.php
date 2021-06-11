@@ -35,6 +35,9 @@ class StockDataTable extends DataTable
                 $color = $model->status == 'active' ? 'primary' : 'warning';
                 return "<span class='badge badge-$color'>$model->status</span>";
             })
+            ->editColumn('checkbox', function ($model){
+                return "<input type='checkbox' name='items[]' value='$model->id' id='selectResource'/>";
+            })
             ->editColumn('created_at' ,function ($model) {
                 $created_at     = (new Carbon($model->created_at))->format('Y-m-d H:i');
                 return "<span>$created_at</span>";
@@ -45,7 +48,7 @@ class StockDataTable extends DataTable
 
                 return $btn;
             })
-            ->rawColumns(['actions','user.name','variation.name', 'status','created_at']);
+            ->rawColumns(['actions','checkbox','user.name','variation.name', 'status','created_at']);
     }
 
     /**
@@ -58,6 +61,8 @@ class StockDataTable extends DataTable
         return $this->builder()
             ->setTableId('stock-table')
             ->columns($this->getColumns())
+            ->addCheckbox([],true)
+
             ->minifiedAjax()
             ->dom("<'row'<'col-3' l><'col-6 text-right' B><'col-3' f>>
                                 <'row'<'col-12' tr>>
