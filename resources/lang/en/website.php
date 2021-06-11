@@ -1,8 +1,19 @@
 <?php
 return [
     'my-profile' => 'My Profile',
+    'my-addresses' => 'Addresses',
+    'my-orders' => 'Orders',
+    'my-favourites' => 'Favourites',
     'logout' => 'Logout',
+    'branch' => 'Branch',
+    'date' => 'Date',
     'main' => 'Home',
+    'name' => 'Name',
+    'mobile' => 'Mobile',
+    'email' => 'Email',
+    'save' => 'Save',
+    'add_address' => 'Add New Address',
+    'all_products' => 'All Products',
     'branches' => 'Branches',
     'branches-list' => 'Menu Of Branches',
     'list' => 'Menu',
@@ -140,6 +151,15 @@ return [
             'link-5' => 'contact us',
             'link-6' => 'Work With US',
         ]
+    ],
+    'order' => [
+            'delivery' =>   'Delivery to home',
+            'branch' => 'Receive From Branch',
+            'status' => 'Order Status',
+            'address' => 'Order Address',
+            'type' => 'Order Type',
+            'total' => 'Order Total',
+            'rate' => 'Rate The Order'
     ],
     'copy-rights' => 'All rights reserved 2021 . Alqalzam Food Distinguished Company .LTD'
 ];

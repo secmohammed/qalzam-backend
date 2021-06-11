@@ -17,8 +17,24 @@ if (!function_exists('__')) {
         return trans($key, $replace, $locale ?? session('lang') ?? config('app.locale'));
     }
 }
+if(!function_exists('__website')) {
+    /**
+     * Translate the given message.
+     *
+     * @param string|null $key
+     * @param array $replace
+     * @param string|null $locale
+     * @return string|array|null
+     */
+    function __website($key = null, $replace = [], $locale = null)
+    {
+        $website_file_name = 'website';
+        if(is_null($key))
+            return $key;
+        return __($website_file_name . '.' . $key, $replace, $locale);
+    }
 
-
+}
 /**
  * Get The Common Languages.
  *
