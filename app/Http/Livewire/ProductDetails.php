@@ -18,7 +18,7 @@ class ProductDetails extends Component
     public $productVariationId;
     public $productVariationName;
     public $productVariationPrice;
-
+    public $productName;
     protected $listeners = ['changeVariationType'];
     public function getVariationTypesProperty()
     {
@@ -28,10 +28,6 @@ class ProductDetails extends Component
     public function getProductIdProperty()
     {
         return $this->product->id;
-    }
-    public function getProductNameProperty()
-    {
-        return $this->product->name;
     }
 
     /**
@@ -51,6 +47,7 @@ class ProductDetails extends Component
     {
         $branch_id = $this->branch->id;
         $this->quantity = 1;
+        $this->productName =$this->product->name;
         // get First Product Variation
         $this->productVariation = $productVariationRepository
             ->with(['branches' => function ($q) use($branch_id) { return $q->where('branch_id', $branch_id);}])
@@ -102,7 +99,7 @@ class ProductDetails extends Component
     public function changeVariationType($product_variation_type_id,ProductVariationRepository $productVariationRepository)
     {
         $branch_id = $this->branch_id;
-        $this->productVariation = $productVariationRepository
+        $this->productVariation = $productVariationRepository->with('branches')
             ->whereHas('branches', function ($q) use($branch_id)
             {
                 return $q->where('id' , $branch_id);
@@ -117,7 +114,7 @@ class ProductDetails extends Component
         $this->productVariationId = $this->productVariation->id;
         $this->resetQuantity();
         $this->productVariationName = $this->productVariation->name;
-        $this->productVariationPrice = $this->formatPrice($this->productVariation->branches->first()->pivot->price * 100);
+        $this->productVariationPrice = $this->formatPrice($this->productVariation->branches->filter(function($branch){ return $branch->id == $this->branchId;})->first()->pivot->price * 100);
     }
     private function resetQuantity()
     {
