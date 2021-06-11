@@ -86,6 +86,13 @@ class BranchProductController extends Controller
 
     public function create()
     {
+        $branch = 0;
+        if($id = request()->branch ) 
+        {
+         $branch =  $this->branchRepository->find($id);
+        }   
+        
+        $this->setData('branch',$branch , 'web');
         $this->setData('title', __('main.add') . ' ' . __('main.branch_product'), 'web');
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('auth_token', auth()->user()->generateAuthToken());
@@ -121,6 +128,18 @@ class BranchProductController extends Controller
     public function store(Branch $branch, BranchProductStoreFormRequest $request)
     {
         $branch->products()->syncWithoutDetaching(
+            $request->validated()
+        );
+        $this->setData('data', $branch);
+        $this->redirectRoute("{$this->resourceRoute}.show", [$branch->id]);
+        $this->useCollection(BranchResource::class, 'data');
+
+        return $this->response();
+
+    }
+    public function update(Branch $branch, BranchProductStoreFormRequest $request)
+    {
+        $branch->products()->sync(
             $request->validated()
         );
         $this->setData('data', $branch);

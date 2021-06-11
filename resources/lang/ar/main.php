@@ -41,6 +41,7 @@ return [
     'accommodation' => 'غرفة / طاولة',
     'accommodations' => 'الغرف / الطاولات',
 
+    'product-to-branch' => 'منتج الى الفرع',
 
     'Meeting has been created' => 'تم إنشاء اجتماع',
     'Meeting has been Updated' => 'تم تعديل اجتماع',
