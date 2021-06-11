@@ -4,18 +4,18 @@
 <section class="profile">
     <div class="container">
       <ul class="wizard">
-        <li> <a href="index.html">
-             الرئيسيه
+        <li> <a href="{{route('website.home')}}">
+            {{__website('main')}}
             <svg width="9" height="9" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
               <path d="M7.58102 4.72562L2.96341 0.108013C2.81055 -0.0396239 2.56695 -0.0353851 2.41931 0.117483C2.27528 0.266608 2.27528 0.503012 2.41931 0.652115L6.76487 4.99767L2.41931 9.34322C2.26908 9.49347 2.26908 9.73707 2.41931 9.88733C2.56959 10.0376 2.81316 10.0376 2.96341 9.88733L7.58102 5.26972C7.73125 5.11944 7.73125 4.87587 7.58102 4.72562Z"></path>
             </svg></a></li>
-        <li> الصفحة الشخصية</li>
+        <li>{{__website('my-profile')}}</li>
       </ul>
       <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item"><a class="nav-link active" id="profile-personly-tab" data-toggle="tab" href="#profile-personly" role="tab" aria-controls="profile-personly" aria-selected="true">الملف الشخصي</a></li>
-        <li class="nav-item"><a class="nav-link" id="address-tab" data-toggle="tab" href="#address" role="tab" aria-controls="address" aria-selected="false">العناوين</a></li>
-        <li class="nav-item"><a class="nav-link" id="requests-tab" data-toggle="tab" href="#requests" role="tab" aria-controls="requests" aria-selected="false">طلباتي</a></li>
-        <li class="nav-item"><a class="nav-link" id="favorite-tab" data-toggle="tab" href="#favorite" role="tab" aria-controls="favorite" aria-selected="false">المفضلة</a></li>
+        <li class="nav-item"><a class="nav-link active" id="profile-personly-tab" data-toggle="tab" href="#profile-personly" role="tab" aria-controls="profile-personly" aria-selected="true">{{__website('my-profile')}}</a></li>
+        <li class="nav-item"><a class="nav-link" id="address-tab" data-toggle="tab" href="#address" role="tab" aria-controls="address" aria-selected="false">{{__website('my-addresses')}}</a></li>
+        <li class="nav-item"><a class="nav-link" id="requests-tab" data-toggle="tab" href="#requests" role="tab" aria-controls="requests" aria-selected="false">{{__website('my-orders')}}</a></li>
+        <li class="nav-item"><a class="nav-link" id="favorite-tab" data-toggle="tab" href="#favorite" role="tab" aria-controls="favorite" aria-selected="false">{{__website('my-favourites')}}</a></li>
       </ul>
       <!--div.alert.alert-success
       svg(width="30" height="30" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg")
