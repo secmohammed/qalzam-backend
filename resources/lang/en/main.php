@@ -15,6 +15,7 @@ return [
 
     'template' => 'Contarct Product Template',
     'product-to-template' => 'product to template',
+    'product-to-branch' => 'product to branch',
     'add-template' => 'Add Contract Template',
     'templates' => 'Contartcs Products Templates',
     'next' => 'next',

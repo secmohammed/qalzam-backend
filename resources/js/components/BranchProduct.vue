@@ -87,6 +87,10 @@ export default {
             required: false,
             type: Object,
         },
+        branch_value: {
+            required: false,
+
+        },
         products: {
             required: true,
             type: Array,
@@ -126,6 +130,13 @@ export default {
         },
     },
     mounted() {
+
+if(this.branch_value)
+{
+
+    this.branchesValue = this.branch_value;
+}
+
      if (this.action === 'edit') {
             this.branchesValue = this.branch;
  
@@ -161,13 +172,30 @@ export default {
         },
         save() {
 
+if(this.action === 'edit')
+{
+    console.log(this.form,'form')
+    axios.put(`/api/branch_products/${this.branchesValue.id}/update`, this.form, {
+                headers: {
+                    Authorization: "Bearer " + this.auth_token,
+                },
+            }).then((res) => {
+
+                window.location = `/${this.$dashboardPrefix}/branches/${this.branchesValue.id}`
+            }).catch((err) => {
+                // console.log("🚀 ~ file: OrderProduct.vue ~ line 257 ~ save ~ err.response.data.errors", err.response.data.errors, err.response)
+                this.errors = err.response.data.errors;
+
+            });
+}
+
             axios.post(`/api/branch_products/${this.branchesValue.id}`, this.form, {
                 headers: {
                     Authorization: "Bearer " + this.auth_token,
                 },
             }).then((res) => {
 
-                window.location = `/${this.$dashboardPrefix}/branches`
+                window.location = `/${this.$dashboardPrefix}/branches/${this.branchesValue.id}`
             }).catch((err) => {
                 // console.log("🚀 ~ file: OrderProduct.vue ~ line 257 ~ save ~ err.response.data.errors", err.response.data.errors, err.response)
                 this.errors = err.response.data.errors;

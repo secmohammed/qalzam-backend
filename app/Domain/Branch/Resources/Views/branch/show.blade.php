@@ -47,6 +47,8 @@
                             <a href="{{ url('/') }}" class="text-muted">
                                 {{ __('main.home') }} </a>
                         </li>
+
+                     
                         <li class="breadcrumb-item">
                             <a href="{{ route('branches.index') }}" class="text-muted">
                                 {{ __('main.branches') }} </a>
@@ -74,6 +76,13 @@
                                 {{ __('main.show') }} {{ __('main.branch') }} : # {{ $branch->id }}
                             </h3>
                             <div class="card-toolbar">
+                                <a title="{{ __('main.create') }} {{ __('main.product-to-branch') }}"
+                                href="{{ route('branch_products.create',['branch' =>$branch->id]) }}"
+                                class="btn btn-light-primary font-weight-bolder mr-2">
+                                 <i class="flaticon2-plus"
+                                    style="color: #FFF"></i> {{ __("main.add") }} {{ __("main.product-to-branch") }} </a>
+                               
+                     
                                 <a title="{{ __('main.create') }} {{ __('main.branch') }}"
                                    href="{{ route('branches.create') }}"
                                    class="btn btn-light-primary font-weight-bolder mr-2">
@@ -89,6 +98,10 @@
                                    href="{{ route('branches.edit', $branch->id) }}"
                                    class="btn btn-light-warning font-weight-bolder mr-2">
                                     <i class="flaticon2-edit"></i> {{ __("main.edit") }} {{ __("main.branch") }} </a>
+                                    <a title="{{ __('main.edit') }} {{ __('main.product-to-branch') }}"
+                                    href="{{ route('branch_products.edit',['branch' =>$branch->id]) }}"
+                                    class="btn btn-light-primary font-weight-bolder mr-2">
+                                    <i class="flaticon2-edit"></i> {{ __("main.edit") }} {{ __("main.product-to-branch") }} </a>
                             </div>
 
                         </div>
@@ -172,6 +185,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
+
                 <form action="{{ route('branches.destroy', $branch->id) }}" method="post">
                     @csrf
                     @method("DELETE")
@@ -188,6 +202,11 @@
             </div>
         </div>
     </div>
+
+
+<x-product_grid :products="$branch_products" />
+    
+
 @endsection
 
 
