@@ -21,6 +21,7 @@ class ProductVariationTypes extends Component
 
     public function changeVariationType($product_variation_type_id)
     {
+//        dd($product_variation_type_id . ' this is ');
         $this->emit('changeVariationType', $product_variation_type_id);
     }
 }

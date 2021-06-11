@@ -11,6 +11,8 @@ class OrderCard extends Component
     public $createdAt;
     public $status;
     public $price;
+    public $address;
+    public $orderType;
     public function mount($price)
     {
         $this->price = $price;
