@@ -27,7 +27,7 @@ return [
     'qulzam-reservations' => 'Alqalzam reservations',
     'select-branch' => 'Select the branch',
     'contact-us' => 'Contact Us',
-    'riyals' => 'Riyals',
+    'riyals' => ' SAR',
     'header' => [
         'home' => 'Home',
         'list' => 'Menu',

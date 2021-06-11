@@ -88,7 +88,7 @@
                     <option label="Label"></option>
                     <option v-for="accommodation in accommodations" :value="accommodation.id">{{accommodation.name}}</option>
                 </select> -->
-                <multiselect :searchable="true" v-model="discountIdValue" :multiple="true" track-by="id" label="name" :options="discountIds"></multiselect>
+                <multiselect :searchable="true" v-model="discountIdValue" track-by="id" label="name" :options="discountIds"></multiselect>
 
                 <div v-if="errors['discountable_id'] " class="fv-plugins-message-container">
 
@@ -203,7 +203,7 @@ export default {
         return {
             branchesValue: {},
             broadcastValue: {},
-            discountIdValue: {},
+            discountIdValue: null,
             usersValue: [],
             errors: [],
             step: 1,
@@ -255,14 +255,14 @@ export default {
                     break;
             }
             this.discountIds = await discountIds.data.data
-            this.discountIdValue = {}
+            this.discountIdValue = null
             //   console.log("🚀 ~ file: ReservationProduct.vue ~ line 170 ~ val", val)
             //       const branch = this.branches.find(branch => branch.id == val.id);
             //       console.log("🚀 ~ file: ReservationProduct.vue ~ line 228 ~ this.branches", this.branches)
 
         },
         "discountIdValue"(val) {
-            this.form.discountable_id = val
+            this.form.discountable_id = val.id
         },
         "broadcastValue"(val) {
             this.form.broadcast = val.id

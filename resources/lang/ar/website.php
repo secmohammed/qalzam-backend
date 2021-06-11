@@ -26,7 +26,7 @@ return [
     'policy' => 'سياسة الخصوصية',
     'contact-us' => 'تواصل معنا',
     'terms-and-conditions' => 'الشروط والأحكام',
-    'riyals' => 'ريال',
+    'riyals' => 'ر.س ',
     'header' => [
         'home' => 'الرئيسية',
         'list' => 'القائمة',

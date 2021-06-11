@@ -40,9 +40,6 @@ class EnsureStartDateOfReservationInSameBranchDay implements Rule
     public function passes($attribute, $value)
     {
         $accommodation = Accommodation::find($value);
-        // dd($accommodation->branch->shifts,strtolower(Carbon::parse(request()->start_date)->dayName),$accommodation->branch->shifts->where('day', strtolower(Carbon::parse(request()->start_date)->dayName))->first(),$attribute, $value);
-       
-        // return now()->lt($this->reservation->start_date);
-        return $accommodation->branch->shifts->where('day', strtolower(Carbon::parse(request()->start_date)->dayName))->count()>0;
+             return $accommodation->branch->shifts->where('day', strtolower(Carbon::parse(request()->start_date)->locale('en')->dayName))->count()>0;
     }
 }

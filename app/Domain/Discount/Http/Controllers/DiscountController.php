@@ -194,9 +194,12 @@ class DiscountController extends Controller
      */
     public function store(DiscountStoreFormRequest $request)
     {
+
         $discount = $this->discountRepository->make($request->validated());
-        $discount->owner()->associate(auth()->user());
+        $discount->owner()->associate(auth()->id());
+        
         $discount->save();
+        // dd($discount);
         $discount->users()->attach($request->validated()['users']);
         $this->userRepository->find($request->validated()['users'])->each(function ($user) use ($discount) {
             $user->notify(new DiscountAttachedToUser($discount));

@@ -4,6 +4,7 @@ namespace App\Domain\Reservation\Http\Rules;
 
 use Carbon\Carbon;
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Str;
 
 class EnsureEndDateIsSameDayAsStartDate implements Rule
 {
@@ -40,6 +41,6 @@ class EnsureEndDateIsSameDayAsStartDate implements Rule
     public function passes($attribute, $value)
     {
 
-        return Carbon::parse($value)->dayName === Carbon::parse($this->start_date)->dayName;
+        return   Str::lower( Carbon::parse($value)->dayName) === Str::lower( Carbon::parse($this->start_date)->dayName);
     }
 }
