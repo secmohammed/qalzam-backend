@@ -100,7 +100,7 @@
                                                             </div>
                                                             <div class="d-flex flex-column flex-root">
                                                                 <span class="font-weight-bolder mb-2">DELIVERED TO.</span>
-                                                                <span class="opacity-70">{{ $show->user->full_address }}
+                                                                <span class="opacity-70">{{ $show->user->address1 }}
                                                                 <br> By {{ optional($show->deliverers->first())->name ?? 'N/A'}}</span>
                                                             </div>
                                                         </div>
@@ -172,9 +172,9 @@
                                                 <!-- begin: Invoice action-->
                                                 <div class="row justify-content-center py-8 px-8 py-md-10 px-md-0">
                                                     <div class="col-md-10">
-                                                        <div class="d-flex justify-content-between">
+                                                        <div class="d-flex justify-content-center">
                                                             <a href="{{ route('orders.pdf',$show->id) }}" title="{{ __('main.export') }} {{ __('main.order') }}" class="btn btn-light-primary font-weight-bold">Download Order Details</a>
-                                                            <button type="button" class="btn btn-primary font-weight-bold" onclick="window.print();">Print Order Details</button>
+                                                            {{-- <button type="button" class="btn btn-primary font-weight-bold" onclick="window.print();">Print Order Details</button> --}}
                                                         </div>
                                                     </div>
                                                 </div>

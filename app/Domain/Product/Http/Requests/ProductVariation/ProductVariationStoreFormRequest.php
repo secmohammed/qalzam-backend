@@ -44,6 +44,7 @@ class ProductVariationStoreFormRequest extends FormRequest
             'product_variation-images' => 'required|array',
             'product_variation-images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'name' => 'required|string|max:255',
+            'name_ar' => 'required|string|max:255'
         ];
 
         return $rules;

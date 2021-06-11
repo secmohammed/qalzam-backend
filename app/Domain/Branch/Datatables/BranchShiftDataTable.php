@@ -34,6 +34,9 @@ class BranchShiftDataTable extends DataTable
                 $branch = $model->branch ? $model->branch->name: '' ;
                 return "<span>$branch</span>";
             })
+            ->editColumn('checkbox', function ($model){
+                return "<input type='checkbox' name='items[]' value='$model->id' id='selectResource'/>";
+            })
             ->editColumn('status', function ($model){
                 $color = $model->status == 'active' ? 'primary' : 'warning';
                 return "<span class='badge badge-$color'>$model->status</span>";
@@ -44,7 +47,7 @@ class BranchShiftDataTable extends DataTable
 
                 return $btn;
             })
-            ->rawColumns(['created_at', 'user.name', 'branch.name', 'status','actions']);
+            ->rawColumns(['created_at','checkbox', 'user.name', 'branch.name', 'status','actions']);
     }
 
     /**
@@ -57,6 +60,8 @@ class BranchShiftDataTable extends DataTable
         return $this->builder()
             ->setTableId('branch-shift-table')
             ->columns($this->getColumns())
+            ->addCheckbox([],true)
+
             ->minifiedAjax()
             ->dom("<'row'<'col-3' l><'col-6 text-right' B><'col-3' f>>
                                 <'row'<'col-12' tr>>

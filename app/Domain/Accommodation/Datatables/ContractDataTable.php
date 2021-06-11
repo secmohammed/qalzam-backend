@@ -41,6 +41,9 @@ class ContractDataTable extends DataTable
                 $color = $model->status == 'active' ? 'primary' : 'warning';
                 return "<span class='badge badge-$color'>$model->status</span>";
             })
+            ->editColumn('checkbox', function ($model){
+                return "<input type='checkbox' name='items[]' value='$model->id' id='selectResource'/>";
+            })
             ->editColumn('days', function ($model) {
                 $days = implode(', ', $model->days);
                 return "<span>$days</span>";
@@ -49,7 +52,7 @@ class ContractDataTable extends DataTable
                 $created_at     = (new Carbon($model->created_at))->format('Y-m-d H:i');
                 return "<span>$created_at</span>";
             })
-            ->rawColumns(['actions','template.name','user.name','created_at', 'status', 'days']);
+            ->rawColumns(['actions','checkbox','template.name','user.name','created_at', 'status', 'days']);
     }
 
     /**
@@ -62,6 +65,8 @@ class ContractDataTable extends DataTable
         return $this->builder()
             ->setTableId('contract-table')
             ->columns($this->getColumns())
+            ->addCheckbox([],true)
+
             ->minifiedAjax()
             ->dom("<'row'<'col-3' l><'col-6 text-right' B><'col-3' f>>
                                 <'row'<'col-12' tr>>

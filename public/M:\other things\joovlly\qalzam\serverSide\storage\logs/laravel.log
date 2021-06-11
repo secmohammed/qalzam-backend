@@ -1,4 +1,6 @@
+
 [2021-06-11 03:06:36] local.ERROR: SQLSTATE[HY000] [1049] Unknown database 'qalzam1' (SQL: select * from `branches` where `status` = active and `branches`.`id` = 6 limit 1) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 1049): SQLSTATE[HY000] [1049] Unknown database 'qalzam1' (SQL: select * from `branches` where `status` = active and `branches`.`id` = 6 limit 1) at /home/badawy/Joovlly/qalzam/vendor/laravel/framework/src/Illuminate/Database/Connection.php:678)
+
 [stacktrace]
 #0 /home/badawy/Joovlly/qalzam/vendor/laravel/framework/src/Illuminate/Database/Connection.php(638): Illuminate\\Database\\Connection->runQueryCallback()
 #1 /home/badawy/Joovlly/qalzam/vendor/laravel/framework/src/Illuminate/Database/Connection.php(346): Illuminate\\Database\\Connection->run()
@@ -6,6 +8,7 @@
 #3 /home/badawy/Joovlly/qalzam/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(2301): Illuminate\\Database\\Query\\Builder->runSelect()
 #4 /home/badawy/Joovlly/qalzam/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(2796): Illuminate\\Database\\Query\\Builder->Illuminate\\Database\\Query\\{closure}()
 #5 /home/badawy/Joovlly/qalzam/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(2302): Illuminate\\Database\\Query\\Builder->onceWithColumns()
+
 #6 /home/badawy/Joovlly/qalzam/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php(588): Illuminate\\Database\\Query\\Builder->get()
 #7 /home/badawy/Joovlly/qalzam/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php(572): Illuminate\\Database\\Eloquent\\Builder->getModels()
 #8 /home/badawy/Joovlly/qalzam/vendor/laravel/framework/src/Illuminate/Database/Concerns/BuildsQueries.php(242): Illuminate\\Database\\Eloquent\\Builder->get()
@@ -375,6 +378,7 @@
 #38 {main}
 "} 
 [2021-06-11 03:06:45] local.ERROR: SQLSTATE[HY000] [1049] Unknown database 'qalzam1' (SQL: select count(*) as aggregate from `branches`) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 1049): SQLSTATE[HY000] [1049] Unknown database 'qalzam1' (SQL: select count(*) as aggregate from `branches`) at /home/badawy/Joovlly/qalzam/vendor/laravel/framework/src/Illuminate/Database/Connection.php:678)
+
 [stacktrace]
 #0 /home/badawy/Joovlly/qalzam/vendor/laravel/framework/src/Illuminate/Database/Connection.php(638): Illuminate\\Database\\Connection->runQueryCallback()
 #1 /home/badawy/Joovlly/qalzam/vendor/laravel/framework/src/Illuminate/Database/Connection.php(346): Illuminate\\Database\\Connection->run()
@@ -388,6 +392,7 @@
 #9 /home/badawy/Joovlly/qalzam/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php(23): Illuminate\\Database\\Eloquent\\Builder->paginate()
 #10 /home/badawy/Joovlly/qalzam/vendor/spatie/laravel-query-builder/src/QueryBuilder.php(109): Spatie\\QueryBuilder\\QueryBuilder->forwardCallTo()
 #11 /home/badawy/Joovlly/qalzam/vendor/prettus/l5-repository/src/Prettus/Repository/Eloquent/BaseRepository.php(482): Spatie\\QueryBuilder\\QueryBuilder->__call()
+
 #12 /home/badawy/Joovlly/qalzam/app/Domain/Website/Http/Controllers/PagesController.php(62): Prettus\\Repository\\Eloquent\\BaseRepository->paginate()
 #13 /home/badawy/Joovlly/qalzam/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): App\\Domain\\Website\\Http\\Controllers\\PagesController->branches()
 #14 /home/badawy/Joovlly/qalzam/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\\Routing\\Controller->callAction()
@@ -442,6 +447,7 @@
 #63 /home/badawy/Joovlly/qalzam/server.php(21): require_once('/home/badawy/Jo...')
 #64 {main}
 
+
 [previous exception] [object] (PDOException(code: 1049): SQLSTATE[HY000] [1049] Unknown database 'qalzam1' at /home/badawy/Joovlly/qalzam/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php:70)
 [stacktrace]
 #0 /home/badawy/Joovlly/qalzam/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php(70): PDO->__construct()
@@ -466,6 +472,7 @@
 #19 /home/badawy/Joovlly/qalzam/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php(23): Illuminate\\Database\\Eloquent\\Builder->paginate()
 #20 /home/badawy/Joovlly/qalzam/vendor/spatie/laravel-query-builder/src/QueryBuilder.php(109): Spatie\\QueryBuilder\\QueryBuilder->forwardCallTo()
 #21 /home/badawy/Joovlly/qalzam/vendor/prettus/l5-repository/src/Prettus/Repository/Eloquent/BaseRepository.php(482): Spatie\\QueryBuilder\\QueryBuilder->__call()
+
 #22 /home/badawy/Joovlly/qalzam/app/Domain/Website/Http/Controllers/PagesController.php(62): Prettus\\Repository\\Eloquent\\BaseRepository->paginate()
 #23 /home/badawy/Joovlly/qalzam/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): App\\Domain\\Website\\Http\\Controllers\\PagesController->branches()
 #24 /home/badawy/Joovlly/qalzam/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\\Routing\\Controller->callAction()
@@ -521,6 +528,7 @@
 #74 {main}
 "} 
 [2021-06-11 03:06:46] local.ERROR: file_put_contents(M:\other things\joovlly\qalzam\serverSide\storage\framework/sessions/AWxhIBJLgks995Wr202uDJhSQY1gFg1iFAo2Z6nx): failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): file_put_contents(M:\\other things\\joovlly\\qalzam\\serverSide\\storage\\framework/sessions/AWxhIBJLgks995Wr202uDJhSQY1gFg1iFAo2Z6nx): failed to open stream: No such file or directory at /home/badawy/Joovlly/qalzam/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:185)
+
 [stacktrace]
 #0 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError()
 #1 /home/badawy/Joovlly/qalzam/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(185): file_put_contents()

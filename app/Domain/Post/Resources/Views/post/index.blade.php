@@ -65,9 +65,17 @@
             </div>
 
         </div>
+        <form action="{{route('posts.delete-all', ['type' => request('type')])}}" method="post">
+            @csrf
+            @method('DELETE')
         <div class="card-body">
             {!! $dataTable->table(['class' => 'table table-separate table-head-custom table-checkable'])  !!}
         </div>
+        <button type="submit" id="testing"
+        class="btn btn-danger font-weight-bolder mr-2">
+         <i class="fa fa-trash icon-sm"
+            style="color: #fff"></i> {{ __('main.delete') }} </button>
+
     </div>
 @endsection
 
@@ -80,4 +88,14 @@
     <script src="{{asset('assets/js/pages/crud/datatables/basic/basic.js')}}"></script>
     <!--end::Page Scripts-->
     {!! $dataTable->scripts() !!}
+@endpush
+
+@push('scripts')    
+    <script>
+        $(document).ready(function() {   //same as: $(function() {
+            $('#dataTablesCheckbox').change(function(){
+                $('input:checkbox').not(this).prop('checked', this.checked);
+            })
+        });
+    </script>
 @endpush

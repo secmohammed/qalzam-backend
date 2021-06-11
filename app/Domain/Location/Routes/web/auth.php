@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth'])->prefix(config('qalzam.dashboard-prefix'))->group(function () {
     Route::resource('/locations', 'LocationController')->except('index');
     Route::get('/locations', 'LocationController@dataTable')->name('locations.index');
+   
+    Route::delete('/locations/delete/all', 'LocationController@deleteAll')->name('locations.delete-all');
+   
     Route::get('/welcome', function () {
         // GenerateOrderPdfInvoice::dispatch(Order::all()->first());
         // Carbon::parse(Reservation::first()->start_date)->isoFormat("dddd");

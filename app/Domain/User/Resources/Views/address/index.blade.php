@@ -54,27 +54,19 @@
 
     <div class="card card-custom gutter-b">
         <div class="card-body">
+            <form action="{{route('addresses.delete-all', ['type' => request('type')])}}" method="post">
+                @csrf
+                @method('DELETE')
             {!! $dataTable->table(['class' => 'table table-separate table-head-custom table-checkable'])  !!}
+            <button type="submit" id="testing"
+            class="btn btn-danger font-weight-bolder mr-2">
+             <i class="fa fa-trash icon-sm"
+                style="color: #fff"></i> {{ __('main.delete') }} </button>
+  
         </div>
     </div>
 @endsection
-@section('content')
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <!--begin: Datatable -->
-                    <div class="card card-custom gutter-b">
-                        <div class="card-body">
-                            {!! $dataTable->table(['class' => 'table table-separate table-head-custom table-checkable'])  !!}
-                        </div>
-                    </div>
-                    <!--end: Datatable -->
-                </div>
-            </div>
-        </div>
-    </div>
-@endsection
+
 
 @push('scripts')
     <!--begin::Page Vendors(used by this page)-->
@@ -84,4 +76,14 @@
     <script src="{{asset('assets/js/pages/crud/datatables/basic/basic.js')}}"></script>
     <!--end::Page Scripts-->
     {!! $dataTable->scripts() !!}
+@endpush
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {   //same as: $(function() {
+            $('#dataTablesCheckbox').change(function(){
+                $('input:checkbox').not(this).prop('checked', this.checked);
+            })
+        });
+    </script>
 @endpush

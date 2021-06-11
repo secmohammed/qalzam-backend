@@ -30,4 +30,8 @@ Route::middleware(['auth'])->prefix(config('qalzam.dashboard-prefix'))->group(fu
 
     Route::resource('/addresses', 'AddressController')->except('index');
     Route::get('/addresses', 'AddressController@datTable')->name('addresses.index');
+    Route::delete('/roles/delete/all', 'RoleController@deleteAll')->name('roles.delete-all');
+    Route::delete('/addresses/delete/all', 'AddressController@deleteAll')->name('addresses.delete-all');
+
+
 });

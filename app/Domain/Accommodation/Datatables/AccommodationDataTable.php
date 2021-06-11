@@ -39,13 +39,16 @@ class AccommodationDataTable extends DataTable
                 $created_at     = (new Carbon($model->created_at))->format('Y-m-d H:i');
                 return "<span>$created_at</span>";
             })
+            ->editColumn('checkbox', function ($model){
+                return "<input type='checkbox' name='items[]' value='$model->id' id='selectResource'/>";
+            })
             ->addColumn('actions', function ($model) {
                 $btn = "<a href=" . route('accommodations.show', ['accommodation' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
                 $btn = $btn . "<a href=" . route('accommodations.edit', ['accommodation' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
 
                 return $btn;
             })
-            ->rawColumns(['actions','type','user.name','created_at','branch.name']);
+            ->rawColumns(['actions','type','checkbox','user.name','created_at','branch.name']);
     }
 
     /**
@@ -59,6 +62,8 @@ class AccommodationDataTable extends DataTable
             ->setTableId('accommodation-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
+            ->addCheckbox([],true)
+
             ->dom("<'row'<'col-3' l><'col-6 text-right' B><'col-3' f>>
                                 <'row'<'col-12' tr>>
                                 <'row'<'col-5'i><'col-7 dataTables_pager'p>>")
