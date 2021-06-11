@@ -3,6 +3,7 @@
 namespace App\Domain\Product\Http\Requests\Product;
 
 use App\Infrastructure\Http\AbstractRequests\BaseRequest as FormRequest;
+use Illuminate\Validation\Rule;
 
 class ProductStoreFormRequest extends FormRequest
 {
@@ -36,7 +37,7 @@ class ProductStoreFormRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'slug' => ['required', 'string', 'max:255', 'unique:products,slug'],
+            'slug' => ['required', 'string', 'max:255', Rule::unique('products', 'slug')],
             'description' => ['required', 'string', 'max:255'],
             'price' => ['required', 'numeric', 'min:0', 'max:10000'],
             'product-images' => 'required|array',
