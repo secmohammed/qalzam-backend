@@ -22,7 +22,7 @@ class ProductDetails extends Component
     protected $listeners = ['changeVariationType'];
     public function getVariationTypesProperty()
     {
-        return $this->product->variations()->whereHas('branches', function ($q){ return $q->where('branch_id', Branch::getChangeableBranch()->id);})->get()->pluck('type');
+        return $this->product->variations()->whereHas('branches', function ($q){ return $q->where('branches.id', Branch::getChangeableBranch()->id);})->get()->pluck('type');
     }
 
     public function getProductIdProperty()
@@ -105,7 +105,7 @@ class ProductDetails extends Component
         $this->productVariation = $productVariationRepository
             ->whereHas('branches', function ($q) use($branch_id)
             {
-                return $q->where('branch_id' , $branch_id);
+                return $q->where('id' , $branch_id);
             }
             )->findWhere(['product_variation_type_id' => $product_variation_type_id, 'product_id' => $this->product_id])->first();
         $this->productVariationChanged();

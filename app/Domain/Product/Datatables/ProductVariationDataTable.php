@@ -27,12 +27,10 @@ class ProductVariationDataTable extends DataTable
                 $product = $model->product ? $model->product->name: '' ;
                 return "<span>$product</span>";
             })
-
             ->editColumn('type.name', function ($model){
                 $type = $model->type ? $model->type->name: '' ;
                 return "<span>$type</span>";
             })
-
             ->editColumn('checkbox', function ($model){
                 return "<input type='checkbox' name='items[]' value='$model->id' id='selectResource'/>";
             })
@@ -88,7 +86,7 @@ class ProductVariationDataTable extends DataTable
      */
     public function query(ProductVariation $model)
     {
-        return $model->newQuery()->with(['user','type','product'])->select('product_variations.*');
+        return $model->newQuery()->with(['user','type','product', 'translations'])->select('product_variations.*');
     }
 
     /**
