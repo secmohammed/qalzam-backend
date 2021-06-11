@@ -44,7 +44,7 @@
     <section class="best-seller">
         <div class="container">
             <div class="head-title">
-                <h2 class="title">{{__('website.index.best-seller')}}ً</h2>
+                <h2 class="title">{{__('website.index.best-seller')}}</h2>
             </div>
                 <div class="seller-slider">
                     <livewire:most-sell-product />
@@ -76,7 +76,7 @@
     <section class="most-wanted">
         <div class="container">
             <div class="head-title">
-                <h2 class="title">{{__('website.index.most-wanted')}}ً</h2><a class="more" href="{{route('website.branches')}}">
+                <h2 class="title">{{__('website.index.most-wanted')}}</h2><a class="more" href="{{route('website.branches')}}">
                     {{__('website.index.food-menu')}}
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0)">
