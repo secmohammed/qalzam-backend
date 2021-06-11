@@ -33,7 +33,6 @@ class ValidateReservationStartDateAndEndDateIsWithinBranchAvailability implement
         $reservationEndDate = Carbon::parse($request->end_date);
         $accommodation = $this->accommodationRepository->find($request->accommodation_id);
         $shift = $accommodation->branch->shifts()->where('day', strtolower(Carbon::parse($request->start_date)->dayName))->first();
-        // dd($shift,1      );
         $shiftStartDate = Carbon::parse($shift->start_time);
 
         $shiftEndDate = Carbon::parse($shift->end_time);

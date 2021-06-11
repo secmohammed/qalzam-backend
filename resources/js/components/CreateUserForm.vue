@@ -18,8 +18,7 @@
     </div>
   
        <div class="form-group row">
-        <label class=   "col-form-label text-right col-lg-2 col-sm-12">email <span
-                style="color: red"> * </span> </label>
+        <label class=   "col-form-label text-right col-lg-2 col-sm-12">email </label>
         <div class="col-lg-10 col-md-9 col-sm-12">
             <input type="email"  v-model="form.email" class="form-control email"
                    value="" placeholder="email">
