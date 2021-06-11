@@ -189,8 +189,8 @@
                 }
             });
         })
-        $("input[name='is_address']").change(function (){
-            alert($("input[name='is_address']").val());
-        })
+        // $("input[name='is_address']").change(function (){
+        //     alert($("input[name='is_address']").val());
+        // })
     </script>
     @endPush

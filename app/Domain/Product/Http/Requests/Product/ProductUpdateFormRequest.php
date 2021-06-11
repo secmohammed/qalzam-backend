@@ -3,6 +3,7 @@
 namespace App\Domain\Product\Http\Requests\Product;
 
 use App\Domain\Product\Http\Requests\Product\ProductStoreFormRequest;
+use Illuminate\Validation\Rule;
 
 class ProductUpdateFormRequest extends ProductStoreFormRequest
 {
@@ -34,7 +35,7 @@ class ProductUpdateFormRequest extends ProductStoreFormRequest
     public function rules()
     {
         $rules = [
-            'slug' => ['required', 'unique:products,slug,' . $this->product->id],
+            'slug' => ['required', Rule::unique('products', 'slug')->ignore($this->product->id)],
             'product-images' => 'nullable|array',
             'product-images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'categories' => 'nullable|array',
