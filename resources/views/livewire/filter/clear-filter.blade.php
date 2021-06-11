@@ -1,3 +1,3 @@
 <a class="active" href="#" wire:click="clearFilter" wire:ignore>
-    جميع المنتجات
+    {{__website('all_products')}}
 </a>
