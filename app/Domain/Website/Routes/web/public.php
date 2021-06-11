@@ -18,9 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 ###CRUD_PLACEHOLDER###
 Route::get('/', 'PagesController@home')->name('website.home');
-Route::get('/branches', 'PagesController@branches')->name('website.branches');
+Route::get('/menu', 'PagesController@branches')->name('website.branches');
 Route::get('/our_branches', 'PagesController@ourBranches')->name('website.our.branches');
-Route::get('/branches/{branch}', 'PagesController@branch')->name('website.branch');
+Route::get('/menu/{branch}', 'PagesController@branch')->name('website.branch');
 Route::get('/product/{product}', 'PagesController@showProduct')->middleware(['product.has.variations', 'current.branch.available'])->name('website.show.product');
 Route::get('/galleries', 'PagesController@galleries')->name('website.galleries');
 Route::get('/galleries/{gallery}', 'PagesController@gallery')->name('website.gallery');
