@@ -176,7 +176,7 @@
                 },
                 success:function(response){
                     console.log(response)
-                    {{--window.location.replace("{!! route('website.home') !!}")--}}
+                    window.location.replace("{!! route('website.home') !!}")
                 },
                 error:function (response){
                     $("#loginErrors").empty();

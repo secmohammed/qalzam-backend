@@ -69,6 +69,7 @@ class NameFieldByLang extends Component
         if($this->current_lang == 'en') // default used lang in the developing system
             return $this->langFromModelValue = $this->edit->name;
         $edit = $this->edit;
-        return $this->langFromModelValue  = $edit->translations->where('key','name')->where('lang', $this->current_lang)->first()->value;
+        return $this->langFromModelValue  = $edit->translations->where('key','name')->where('lang', $this->current_lang)->first() ?
+                    $edit->translations->where('key','name')->where('lang', $this->current_lang)->first()->value : '';
     }
 }
