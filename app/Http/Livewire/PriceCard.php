@@ -19,7 +19,7 @@ class PriceCard extends Component
 
     public function render()
     {
-        $totalPrice =Cart::totalPrice();
+        $totalPrice =Cart::totalPriceAfterCoupon();
         $afterVat =Cart::afterVat();
         $totalBeforeVat = Cart::totalPriceBeforeVat();
         $totalAfterCoupon = Cart::CouponValue();

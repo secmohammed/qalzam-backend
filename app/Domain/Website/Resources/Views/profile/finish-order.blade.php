@@ -175,8 +175,8 @@
                     _token:_token
                 },
                 success:function(response){
-                    // console.log(response)
-                    window.location.replace("{!! route('website.home') !!}")
+                    console.log(response)
+                    {{--window.location.replace("{!! route('website.home') !!}")--}}
                 },
                 error:function (response){
                     $("#loginErrors").empty();
