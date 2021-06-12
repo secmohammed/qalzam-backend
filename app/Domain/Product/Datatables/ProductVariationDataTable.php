@@ -53,10 +53,7 @@ class ProductVariationDataTable extends DataTable
 
                 return $btn;
             })
-            ->addColumn('translation.name', function ($model) {
-                return $model->translations->first() ? $model->translations->first()->value : '';
-            })
-            ->rawColumns(['actions','price', 'status','product.name', 'created_at','user.name', 'type.name', 'translations.name']);
+            ->rawColumns(['actions','price', 'status','product.name', 'created_at','user.name', 'type.name']);
     }
 
     /**
@@ -108,7 +105,6 @@ class ProductVariationDataTable extends DataTable
             Column::make('id')->title(__('main.id')),
             Column::make('name')->title(__('main.name')),
             Column::make('product.name')->title(__('main.product')),
-            Column::make('translation.name')->title(__('main.name')),
             Column::make('type.name')->title(__('main.type')),
             Column::make('price')->title(__('main.price')),
             Column::make('user.name')->title(__('main.user')),
