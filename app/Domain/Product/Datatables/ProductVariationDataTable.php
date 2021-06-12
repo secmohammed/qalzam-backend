@@ -31,6 +31,9 @@ class ProductVariationDataTable extends DataTable
                 $type = $model->type ? $model->type->name: '' ;
                 return "<span>$type</span>";
             })
+            ->editColumn('checkbox', function ($model){
+                return "<input type='checkbox' name='items[]' value='$model->id' id='selectResource'/>";
+            })
             ->editColumn('user.name', function ($model){
                 $user = $model->user ? $model->user->name: '' ;
                 return "<span>$user</span>";
@@ -53,7 +56,7 @@ class ProductVariationDataTable extends DataTable
 
                 return $btn;
             })
-            ->rawColumns(['actions','price', 'status','product.name', 'created_at','user.name', 'type.name']);
+            ->rawColumns(['actions','checkbox','price', 'status','product.name', 'created_at','user.name', 'type.name']);
     }
 
     /**
@@ -67,6 +70,8 @@ class ProductVariationDataTable extends DataTable
             ->setTableId('product-variation-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
+            ->addCheckbox([],true)
+
             ->dom("<'row'<'col-3' l><'col-6 text-right' B><'col-3' f>>
                                 <'row'<'col-12' tr>>
                                 <'row'<'col-5'i><'col-7 dataTables_pager'p>>")

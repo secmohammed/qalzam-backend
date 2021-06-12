@@ -25,5 +25,11 @@ Route::middleware(['auth'])->prefix(config('qalzam.dashboard-prefix'))->prefix(c
     Route::resource('/templates', 'TemplateController')->except('index');
     Route::get('/templates', 'TemplateController@datatable')->name('templates.index');
     Route::get('/templates/{template}/products', 'TemplateProductController@create')->name("template_product.create");
+    Route::delete('/product_variations/delete/all', 'ProductVariationController@deleteAll')->name('product_variations.delete-all');
+    Route::delete('/products/delete/all', 'ProductController@deleteAll')->name('products.delete-all');
+    Route::delete('/stocks/delete/all', 'StockController@deleteAll')->name('stocks.delete-all');
+    Route::delete('/templates/delete/all', 'TemplateController@deleteAll')->name('templates.delete-all');
+    Route::delete('/product_variation_types/delete/all', 'ProductVariationTypeController@deleteAll')->name('product_variation_types.delete-all');
+   
     ###CRUD_PLACEHOLDER###
 });

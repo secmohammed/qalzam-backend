@@ -89,6 +89,7 @@ class DiscountController extends Controller
      */
     public function destroy($id)
     {
+        dd(1);
         $ids = request()->get('ids', $id);
 
         $delete = $this->discountRepository->destroy($ids);
@@ -140,7 +141,6 @@ class DiscountController extends Controller
         $index = $this->discountRepository->spatie()->paginate(
             $request->per_page ?? config('qalzam.pagination')
         );
-
         $this->setData('title', __('main.show-all') . ' ' . __('main.discount'));
 
         $this->setData('alias', $this->domainAlias);
@@ -228,6 +228,30 @@ class DiscountController extends Controller
         $this->useCollection(DiscountResource::class, 'data');
 
         return $this->response();
+    }
+
+    
+
+    public function deleteAll(Request $request)
+    {
+        $ids = implode(',', $request->items);
+
+        $delete = $this->discountRepository->destroy($ids)->count();
+
+        if ($delete) {
+            $args = [];
+            $type = $request->get('type');
+            if($type != '')
+                $args = ['type' => $type];
+            $this->redirectRoute("{$this->resourceRoute}.index", $args);
+            $this->setApiResponse(fn() => response()->json(['deleted' => true], 200));
+        } else {
+            $this->redirectBack();
+            $this->setApiResponse(fn() => response()->json(['updated' => false], 404));
+        }
+
+        return $this->response();
+        //todo implement the method logic....
     }
 
 }

@@ -51,13 +51,16 @@ class OrderDataTable extends DataTable
                 $created_at     = (new Carbon($model->created_at))->format('Y-m-d H:i');
                 return "<span>$created_at</span>";
             })
+            ->editColumn('checkbox', function ($model){
+                return "<input type='checkbox' name='items[]' value='$model->id' id='selectResource'/>";
+            })
             ->addColumn('actions', function ($model) {
                 $btn = "<a href=" . route('orders.show', ['order' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
                 $btn = $btn . "<a href=" . route('orders.edit', ['order' => $model->id]) . " class='fa fa-edit text-primary mx-1'></a>";
 
                 return $btn;
             })
-            ->rawColumns(['actions','subtotal','status','address.name','branch.name', 'user.name', 'creator.name','created_at']);
+            ->rawColumns(['actions','checkbox','subtotal','status','address.name','branch.name', 'user.name', 'creator.name','created_at']);
     }
 
     /**
@@ -70,6 +73,8 @@ class OrderDataTable extends DataTable
         return $this->builder()
             ->setTableId('order-table')
             ->columns($this->getColumns())
+            ->addCheckbox([],true)
+
             ->minifiedAjax()
             ->dom("<'row'<'col-3' l><'col-6 text-right' B><'col-3' f>>
                                 <'row'<'col-12' tr>>

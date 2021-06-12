@@ -34,7 +34,10 @@ class CategoryDataTable extends DataTable
             ->editColumn('type', function ($model){
                 $color = $model->type == 'products' ? 'primary' : ($model->type == 'posts' ? 'info' : 'secondary');
                 return "<span class='badge badge-$color'>$model->type</span>";
+            })->editColumn('checkbox', function ($model){
+                return "<input type='checkbox' name='items[]' value='$model->id' id='selectResource'/>";
             })
+            
             ->editColumn('created_at' ,function ($model) {
                 $created_at     = (new Carbon($model->created_at))->format('Y-m-d H:i');
                 return "<span>$created_at</span>";
@@ -45,7 +48,7 @@ class CategoryDataTable extends DataTable
 
                 return $btn;
             })
-            ->rawColumns(['actions','user.name','status','created_at','type']);
+            ->rawColumns(['actions','checkbox','user.name','status','created_at','type']);
     }
 
     /**
@@ -58,6 +61,8 @@ class CategoryDataTable extends DataTable
         return $this->builder()
             ->setTableId('category-table')
             ->columns($this->getColumns())
+            ->addCheckbox([],true)
+
             ->minifiedAjax()
             ->dom("<'row'<'col-3' l><'col-6 text-right' B><'col-3' f>>
                                 <'row'<'col-12' tr>>

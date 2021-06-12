@@ -18,6 +18,7 @@ Route::middleware(['auth'])->prefix(config('qalzam.dashboard-prefix'))->group(fu
     Route::get('/orders', 'OrderController@dataTable')->name('orders.index');
     Route::resource('/delivery_orders', 'DeliveryOrderController');
     Route::get('orders/{order}/pdf', 'OrderController@generatePdf')->name('orders.pdf');
+    Route::delete('/orders/delete/all', 'OrderController@deleteAll')->name('orders.delete-all');
 
     ###CRUD_PLACEHOLDER###
 });
