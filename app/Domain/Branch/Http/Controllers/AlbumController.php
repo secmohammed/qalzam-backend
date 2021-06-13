@@ -187,6 +187,9 @@ class AlbumController extends Controller
         ])->through([
             HandleFileUpload::class,
         ])->thenReturn();
+        $album->setTranslation([
+            'name' => $request->name_ar,
+        ], 'ar', true);
 
         $this->setData('data', $album);
 
@@ -213,6 +216,10 @@ class AlbumController extends Controller
         ])->through([
             HandleFileUpload::class,
         ])->thenReturn();
+
+        $album->setTranslation([
+            'name' => $request->name_ar,
+        ], 'ar', true);
 
         $this->redirectRoute("{$this->resourceRoute}.show", [$album->id]);
         $this->setData('data', $album);

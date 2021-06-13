@@ -41,6 +41,7 @@ class OrderStoreFormRequest extends FormRequest
             'discount_id' => 'nullable|exists:discounts,id',
             'branch_id' => 'required|exists:branches,id',
 
+            'payment_type' => 'in:visa,cash',
             'products' => 'required|array',
             'products.*.id' => 'required|exists:product_variations,id',
             'products.*.quantity' => 'required|numeric|min:1',

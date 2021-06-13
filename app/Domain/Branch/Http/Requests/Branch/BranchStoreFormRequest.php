@@ -52,6 +52,8 @@ class BranchStoreFormRequest extends FormRequest
             'user_id' => 'required|exists:users,id',
             'deliverers.*' => 'required|exists:users,id',
             'users.*' => 'required|exists:users,id',
+            'name_ar' => 'required|string|max:255'
+
         ];
 
         return $rules;

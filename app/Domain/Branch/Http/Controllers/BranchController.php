@@ -211,6 +211,9 @@ class BranchController extends Controller
         // dd($validatedRequest);
         // dd(array_merge($request->get('users'), $request->get('deliverers', [])), $request->get('users'), $request->get('deliverers', []));
         $branch = $this->branchRepository->create($validatedRequest);
+        $branch->setTranslation([
+            'name' => $request->name_ar,
+        ], 'ar', true);
         $branch->employees()->attach($validatedRequest['users']);
         app(Pipeline::class)->send([
             'model' => $branch,
@@ -251,6 +254,9 @@ class BranchController extends Controller
         ])->through([
             HandleFileUpload::class,
         ])->thenReturn();
+        $branch->setTranslation([
+            'name' => $request->name_ar,
+        ], 'ar', true);
 
         $this->redirectRoute("{$this->resourceRoute}.show", [$branch->id]);
         $this->setData('data', $branch);

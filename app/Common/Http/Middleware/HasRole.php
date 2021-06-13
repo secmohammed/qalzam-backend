@@ -20,6 +20,7 @@ class HasRole
         'api.branch.products.store',
         'api.auth.logout',
         'api.auth.me.update',
+        'api.orders.update_status',
         'api.auth.forgot-password',
         'api.auth.reset-password',
         'api.discounts.purchase',

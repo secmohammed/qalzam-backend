@@ -1,5 +1,6 @@
 <br>
 <x-forms.name :action="$action" :edit="$edit??null"/>
+<x-forms.ar_name :action="$action" :edit="$edit??null"/>
 
 
 <div class="form-group row">
