@@ -9,15 +9,20 @@ use App\Infrastructure\AbstractModels\BaseModel as Model;
 use App\Domain\Branch\Repositories\Contracts\AlbumRepository;
 use App\Domain\Branch\Entities\Traits\Relations\AlbumRelations;
 use App\Domain\Branch\Entities\Traits\CustomAttributes\AlbumAttributes;
+use Joovlly\Translatable\Traits\Translatable;
 
 class Album extends Model implements HasMedia
 {
-    use AlbumRelations, AlbumAttributes, FetchesMediaCollection, HasFactory;
+    use AlbumRelations, AlbumAttributes,Translatable, FetchesMediaCollection, HasFactory;
 
     /**
      * @var array
      */
     public static $logAttributes = ["*"];
+
+
+    protected static $translatables = ['name'];
+
 
     /**
      * The attributes that are mass assignable.

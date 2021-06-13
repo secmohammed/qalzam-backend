@@ -64,7 +64,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-group row">
+        <!-- <div class="form-group row">
             <label class="col-form-label text-right col-lg-2 col-sm-12">End date <span style="color: red"> * </span></label>
             <div class="col-lg-10 col-md-9 col-sm-12">
                 <input type="datetime-local" class="form-control" placeholder="end date" v-model="form.end_date" name="end_date" id="end_date" data-toggle="datetimepicker" data-target="#end_date">
@@ -73,7 +73,7 @@
                     <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["end_date"][0] }}</div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="d-flex justify-content-center mt-5">
 
@@ -158,7 +158,7 @@ export default {
                 user_id: null,
                 accommodation_id: null,
                 start_date: "",
-                end_date: "",
+                // end_date: "",
             },
         };
     },
@@ -215,7 +215,7 @@ export default {
 
         } else {
             this.form.start_date = moment().format("MM/DD/YYYY HH:MM");
-            this.form.end_date = moment(this.form.start_date).add(4, "hours").format("MM/DD/YYYY HH:MM");
+            // this.form.end_date = moment(this.form.start_date).add(4, "hours").format("MM/DD/YYYY HH:MM");
 
         }
         console.log(this.edit,'edit')
@@ -239,7 +239,7 @@ export default {
                     Authorization: "Bearer " + this.auth_token,
                 },
             }).then((res) => {
-                window.location = `/${this.$dashboardPrefix}/reservations`
+                // window.location = `/${this.$dashboardPrefix}/reservations`
             }).catch((err) => {
 
               this.errors = err.response.data.errors;

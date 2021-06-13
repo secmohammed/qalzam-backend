@@ -58,17 +58,12 @@
                     <div class="col-sm-6 field">
                         <label>{{__('website.reservation.start-reservation')}}</label>
                         {{-- <div class="clockpicker"> --}}
-                            <input class="form-control" name="start_date" type="datetime-local" placeholder="{{__('website.reservation.start-reservation')}}" value=""><img src="{{asset("assets/website/images/time.svg")}}" alt="" title="">
+                            <input class="form-control" name="start_date" type="datetime-local" placeholder="{{__('website.reservation.start-reservation')}}" value="">
                         {{-- </div> --}}
                     </div>
                     <input class="form-control" name="website" type="hidden" placeholder="توقيت الوصول" value="website">
 
-                    <div class="col-sm-6 field">
-                        <label>{{__('website.reservation.end-reservation')}}</label>
-                        {{-- <div class="clockpicker"> --}}
-                            <input class="form-control" name="end_date"  type="datetime-local" placeholder="{{__('website.reservation.end-reservation')}}" value=""><img src="{{asset("assets/website/images/time.svg")}}" alt="" title="">
-                        {{-- </div> --}}
-                    </div>
+                 
                     <div class="col-sm-6 field">
                         <label>{{__('website.reservation.residence')}} </label>
                         <select name="accommodation_id" id="accommodation_id" class="form-control">

@@ -50,9 +50,22 @@
 
                 <multiselect :searchable="true" v-model="statusValue" :options="statuses"></multiselect>
 
-                <div v-if="errors['address_id'] " class="fv-plugins-message-container">
+                <div v-if="errors['status'] " class="fv-plugins-message-container">
 
-                    <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["address_id"][0] }}</div>
+                    <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["status"][0] }}</div>
+                </div>
+            </div>
+
+        </div>
+        <div   class="form-group row">
+            <label class="col-form-label text-right col-lg-2 col-sm-12">payment type </label>
+            <div class="col-lg-10 col-md-9 col-sm-12">
+
+                <multiselect :show-labels="false"  v-model="paymentTypeValue" :options="paymentWays"></multiselect>
+
+                <div v-if="errors['payment_type'] " class="fv-plugins-message-container">
+
+                    <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["payment_type"][0] }}</div>
                 </div>
             </div>
 
@@ -218,7 +231,11 @@ export default {
             statuses: [
                 'pending','picked','processing','delivered'
             ],
+            paymentWays: [
+               'visa','cash'
+            ],
             statusValue:{},
+            paymentTypeValue:'',
             products: [],
             newUserToken:"",
             form: {
@@ -263,6 +280,10 @@ export default {
         "statusValue"(val) {
             console.log(val)
             this.form.status = val
+        },
+        "paymentTypeValue"(val) {
+            console.log(val)
+            this.form.payment_type = val
         }
     },
     computed: {
@@ -290,6 +311,7 @@ export default {
             this.usersValue = this.edit.user;
 
             this.addressesValue = this.edit.address;
+            this.paymentTypeValue = this.edit.payment_type;
             this.statusValue = this.edit.status;
 
             this.edit.products.forEach((product, index) => {

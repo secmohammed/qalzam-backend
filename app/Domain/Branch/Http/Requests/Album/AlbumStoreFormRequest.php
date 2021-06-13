@@ -37,6 +37,8 @@ class AlbumStoreFormRequest extends FormRequest
     {
         $rules = [
             'name' => ['required', 'string', 'max:255', 'unique:albums,name'],
+            'name_ar' => 'required|string|max:255',
+
             'branch_id' => 'required|exists:branches,id',
             'album-gallery' => ['required', 'array'],
             'album-gallery.*' => ['required', 'image', 'mimes:png,jpeg,jpg', 'max:2048'],

@@ -1,5 +1,4 @@
 @extends('theme.app')
-
 @section('content')
     <div class="subheader py-2 py-lg-6  subheader-transparent" id="kt_subheader">
         <div class="container-fluid  d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
@@ -158,8 +157,17 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr class="font-weight-bolder">
-                                                                        <td>Cash On Delivery</td>
-                                                                        <td>{{ $show->status }} </td>
+                                                                        <td>{{ $show->payment_type }}</td>
+                                                                        <td>
+                                                                            
+                                                                        <select   id="status">
+                                                                            @foreach ($statuses as $status)
+                                                                            <option {{$show->status === $status ?"selected":"" }}  value="{{$status }}">{{$status }}</option>
+                                                                                
+                                                                            @endforeach
+                                                                          
+                                                                        </select>
+                                                                        </td>
                                                                         <td>{{ $show->created_at->toDateTimeString() }} </td>
                                                                         <td class="text-primary font-size-h3 font-weight-boldest text-right">{{ $show->total()->formatted() }}</td>
                                                                     </tr>
@@ -223,3 +231,19 @@
         </div>
     </div>
 @endsection
+
+
+@push('scripts')
+<script>
+    $('#status').on('change', function() {
+            $.ajax({
+    url: '{!! env("APP_URL","http://localhost:8000") !!}'+'/api/orders/'+'{!! $show->id !!}'+'/update_status',
+    headers: {"Authorization": "Bearer "+ "{!! $auth_token !!}"},
+    type: 'put',
+    data:{status:this.value}
+
+});
+
+});
+</script>
+@endpush

@@ -4,6 +4,7 @@ namespace App\Domain\Reservation\Http\Requests\Reservation;
 
 use App\Domain\Reservation\Http\Rules\EnsureAccommodationIsAvailableTodayForReservationAtContractDays;
 use App\Domain\Reservation\Http\Rules\EnsureEndDateIsSameDayAsStartDate;
+use App\Domain\Reservation\Http\Rules\EnsureSelectedDateNotReserved;
 use App\Domain\Reservation\Http\Rules\EnsureStartDateOfReservationInSameBranchDay;
 use App\Infrastructure\Http\AbstractRequests\BaseRequest as FormRequest;
 use Carbon\Carbon;
@@ -39,11 +40,11 @@ class ReservationStoreFormRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {
+        {
         // dd($this->request);
         $rules = [
-            'start_date' => ['required','after_or_equal:' . now()->format('Y-m-d H:i:s')],
-            'end_date' => ['nullable', 'after_or_equal:' . $this->request->get('start_date'), new EnsureEndDateIsSameDayAsStartDate($this->request->get('start_date'))],
+            'start_date' => ['required','after_or_equal:' . now()->format('Y-m-d H:i:s'),new EnsureSelectedDateNotReserved()],
+            // 'end_date' => ['nullable', 'after_or_equal:' . $this->request->get('start_date'), new EnsureEndDateIsSameDayAsStartDate($this->request->get('start_date'))],
             'accommodation_id' => [
                 'required',
                 'exists:accommodations,id',new EnsureStartDateOfReservationInSameBranchDay()

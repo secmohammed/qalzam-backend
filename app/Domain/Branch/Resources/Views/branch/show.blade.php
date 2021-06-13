@@ -1,4 +1,4 @@
-{{-- {{ dd() }} --}}
+{{-- {{ dd($branch) }} --}}
 @extends('theme.app')
 @push('styles')
 

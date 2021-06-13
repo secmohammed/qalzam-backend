@@ -6,9 +6,11 @@ namespace App\Common\Helpers;
 use App\Domain\Branch\Entities\Branch as BranchModel;
 use App\Domain\Product\Entities\ProductVariation ;
 use \App\Common\Facades\Cart;
+use Joovlly\Translatable\Traits\Translatable;
 
 class Branch
 {
+    
 
     public function setBranch(BranchModel $branch)
     {

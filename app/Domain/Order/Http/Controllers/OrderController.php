@@ -14,6 +14,7 @@ use App\Domain\Order\Http\Events\GenerateOrderPdfInvoice;
 use App\Domain\Order\Http\Events\OrderDestroyed;
 use App\Domain\Order\Http\Requests\Order\OrderStoreFormRequest;
 use App\Domain\Order\Http\Requests\Order\OrderUpdateFormRequest;
+use App\Domain\Order\Http\Requests\Order\UpdateStatusFormRequest;
 use App\Domain\Order\Http\Resources\Order\OrderResource;
 use App\Domain\Order\Http\Resources\Order\OrderResourceCollection;
 use App\Domain\Order\Pipelines\ApplyDiscountToOrderIfPresent;
@@ -210,10 +211,12 @@ class OrderController extends Controller
         // dd($order->branch);
         $this->setData('title', __('main.show') . ' ' . __('main.order') . ' : ' . $order->id, 'web');
         session(['current_branch' => $order->branch->id]);
-        // dd($order);
+        $statuses =['pending', 'processing', 'picked', 'delivered'];
         $this->setData('alias', $this->domainAlias, 'web');
+        $this->setData('auth_token', auth()->user()->generateAuthToken());
 
         $this->setData('show', $order);
+        $this->setData('statuses', $statuses);
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.show");
 
@@ -279,6 +282,18 @@ class OrderController extends Controller
         $pdf = PDF::loadView('orders::order.invoice', $data);
         $pdf->download($order->id . '.pdf');
         return redirect()->back();
+
+    }
+    public function updateStatus(UpdateStatusFormRequest $request, Order $order)
+    {
+         $order->update($request->validated());
+        if($order)
+        {
+
+          return  response()->json(['message'=>'updated successfully']);
+        }
+        return  response()->json(['message'=>"can't update status "],400);
+
 
     }
     public function deleteAll(Request $request)

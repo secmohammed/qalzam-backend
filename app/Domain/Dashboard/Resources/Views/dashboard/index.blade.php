@@ -10,7 +10,7 @@
                 <ul class="dashboard-tabs nav nav-pills nav-danger row row-paddingless m-0 p-0 flex-column flex-sm-row" role="tablist">
                     <!--begin::Item-->
                     <li class="nav-item d-flex col-sm flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0" >
-                        <a  href="{{ route('orders.index')}}" class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"  data-toggle="pill" >
+                        <a  href="{{ route('orders.index')}}" class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"   >
                             <span class="nav-icon py-2 w-auto">
                                 <span class="svg-icon svg-icon-3x">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/Home/Library.svg-->
@@ -30,7 +30,7 @@
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="nav-item d-flex col-sm flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0">
-                        <a href="{{ route('reservations.index') }}" class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill" >
+                        <a href="{{ route('reservations.index') }}" class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"  >
                             <span class="nav-icon py-2 w-auto">
                                 <span class="svg-icon svg-icon-3x">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
@@ -50,7 +50,7 @@
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="nav-item d-flex col-sm flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0">
-                        <a href="{{  route('albums.index') }}" class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill">
+                        <a href="{{  route('albums.index') }}" class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" >
                             <span class="nav-icon py-2 w-auto">
                                 <span class="svg-icon svg-icon-3x">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/Media/Movie-Lane2.svg-->
@@ -70,7 +70,7 @@
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="nav-item d-flex col-sm flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0">
-                        <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill" href="{{ route('branches.index') }}">
+                        <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"  href="{{ route('branches.index') }}">
                             <span class="nav-icon py-2 w-auto">
                                 <span class="svg-icon svg-icon-3x">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/Media/Equalizer.svg-->
@@ -92,7 +92,7 @@
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="nav-item d-flex col-sm flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0">
-                        <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill" href="{{  route('discounts.index') }}">
+                        <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"  href="{{  route('discounts.index') }}">
                             <span class="nav-icon py-2 w-auto">
                                 <span class="svg-icon svg-icon-3x">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/General/Shield-check.svg-->
@@ -112,7 +112,7 @@
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="nav-item d-flex col-sm flex-grow-1 flex-shrink-0 mr-0 mb-3 mb-lg-0">
-                        <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill" href=" {{  route('users.index') }}">
+                        <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"  href=" {{  route('users.index') }}">
                             <span class="nav-icon py-2 w-auto">
                                 <span class="svg-icon svg-icon-3x">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->

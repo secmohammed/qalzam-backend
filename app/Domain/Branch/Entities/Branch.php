@@ -9,12 +9,14 @@ use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 use App\Infrastructure\AbstractModels\BaseModel as Model;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Joovlly\Translatable\Traits\Translatable;
 use Spatie\MediaLibrary\HasMedia;
 
 class Branch extends Model implements HasMedia
 {
-    use BranchRelations, BranchAttributes, FetchesMediaCollection, HasFactory;
+    use BranchRelations,Translatable, BranchAttributes, FetchesMediaCollection, HasFactory;
 
+    protected static $translatables = ['name'];
     /**
      * @var array
      */
