@@ -1,6 +1,7 @@
 <?php
 namespace App\Domain\Discount\Traits;
 
+use App\Common\Transformers\Money;
 use App\Domain\Discount\Entities\Discount;
 use App\Domain\Product\Entities\ProductVariation;
 use Illuminate\Database\Eloquent\Relations\Pivot;
@@ -79,14 +80,14 @@ class PriceCalculator
         $count = $matchedProducts->count() ? $matchedProducts->count() : 1;
         $discountedPrice = $matchedProducts->sum(function ($product) use ($count, $discount) {
 
-            return $this->calculatePriceBasedOnDiscountType($discount, $product->price->amount() * $product->pivot->quantity, $count);
+            return $this->calculatePriceBasedOnDiscountType($discount, $product->branches()->where(['branch_id' => request()->branch_id])->first()->pivot->price * 100 * $product->pivot->quantity, $count);
         });
         $filteredProducts = $products->filter(function ($product) use ($matchedProducts) {
             return !$matchedProducts->contains('id', $product->id);
         });
         return $filteredProducts->reduce(function ($carry, $product) {
             // dd($product->price->amount() * $product->pivot->quantity);
-            return $carry + ($product->price->amount() * $product->pivot->quantity);
+            return $carry + ($product->branches()->where(['branch_id' => request()->branch_id])->first()->pivot->price * 100 * $product->pivot->quantity);
         }, $discountedPrice);
     }
 

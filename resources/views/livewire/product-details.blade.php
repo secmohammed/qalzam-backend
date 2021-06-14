@@ -20,7 +20,7 @@
         <h2 class="title">{{$productVariationName}} </h2>
         <p class="text">{{$product->description}}</p> <!-- todo change it to product variation description -->
         <div class="listorder">
-            <h3 class="title"> {{$this->productName}}</h3>
+            <h3 class="title"> {{$productName}}</h3>
             <livewire:product-variation-types
                 :variationTypes="$this->variationTypes"
                 :key="'product-variation-types'"

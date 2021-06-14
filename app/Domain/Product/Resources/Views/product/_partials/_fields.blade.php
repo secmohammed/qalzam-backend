@@ -1,9 +1,7 @@
-
-<x-forms.name :action="$action" :edit="$edit??null"/>
+@foreach(config('app.available_locales') as $index => $lang)
+    <x-form.name-field-by-lang  :lang="$lang" :action="$action" :edit="$edit??null"/>
+@endforeach
 <x-forms.status :action="$action"  :edit="$edit??null"/>
-
-<x-forms.ar_name :action="$action" :edit="$edit??null"/>
-
 
 <div class="form-group row">
     <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.slug") }} <span

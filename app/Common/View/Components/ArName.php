@@ -6,6 +6,7 @@ use Illuminate\View\Component;
 
 class ArName extends Component
 {
+//    public
     /**
      * Create a new component instance.
      *

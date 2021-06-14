@@ -175,7 +175,7 @@
                     _token:_token
                 },
                 success:function(response){
-                    // console.log(response)
+                    console.log(response)
                     window.location.replace("{!! route('website.home') !!}")
                 },
                 error:function (response){
@@ -189,8 +189,8 @@
                 }
             });
         })
-        $("input[name='is_address']").change(function (){
-            alert($("input[name='is_address']").val());
-        })
+        // $("input[name='is_address']").change(function (){
+        //     alert($("input[name='is_address']").val());
+        // })
     </script>
     @endPush
