@@ -27,7 +27,7 @@ class AddPaymentTypeToOrders extends Migration
     public function down()
     {
         Schema::table('orders', function (Blueprint $table) {
-            //
+            $table->dropColumn('payment_type');
         });
     }
 }
