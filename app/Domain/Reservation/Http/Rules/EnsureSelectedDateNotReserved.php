@@ -28,7 +28,7 @@ class EnsureSelectedDateNotReserved implements Rule
      */
     public function message()
     {
-        return 'this selected date has been reserved';
+        return 'this accommodation  has been reserved ';
     }
 
     /**
@@ -42,6 +42,6 @@ class EnsureSelectedDateNotReserved implements Rule
     {
         
         // dd(Reservation::whereBetween('start_date', [Carbon::parse(request()->start_date)->locale('en')->format('Y-m-d H:i:s'),Carbon::parse(request()->start_date)->addHours(4)->locale('en')->format('Y-m-d H:i:s')])->orWhereBetween('end_date', [Carbon::parse(request()->start_date)->locale('en')->format('Y-m-d H:i:s'),Carbon::parse(request()->start_date)->addHours(4)->locale('en')->format('Y-m-d H:i:s')])->first());
-             return Reservation::whereBetween('start_date', [Carbon::parse(request()->start_date)->locale('en')->format('Y-m-d H:i:s'),Carbon::parse(request()->start_date)->addHours(4)->locale('en')->format('Y-m-d H:i:s')])->orWhereBetween('end_date', [Carbon::parse(request()->start_date)->locale('en')->format('Y-m-d H:i:s'),Carbon::parse(request()->start_date)->addHours(4)->locale('en')->format('Y-m-d H:i:s')])->count()===0;
+             return Reservation::whereBetween('start_date', [Carbon::parse(request()->start_date)->locale('en')->format('Y-m-d H:i:s'),Carbon::parse(request()->start_date)->addHours(4)->locale('en')->format('Y-m-d H:i:s')])->orWhereBetween('end_date', [Carbon::parse(request()->start_date)->locale('en')->format('Y-m-d H:i:s'),Carbon::parse(request()->start_date)->addHours(4)->locale('en')->format('Y-m-d H:i:s')])->where('accommodation_id',request()->accommodation_id)->count()===0;
     }
 }

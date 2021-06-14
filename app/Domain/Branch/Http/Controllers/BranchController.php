@@ -113,7 +113,7 @@ class BranchController extends Controller
      */
     public function edit(Branch $branch, UserRepository $userRepository, LocationRepository $locationRepository)
     {
-
+        $branch->load('translations');
         $this->setData('title', __('main.edit') . ' ' . __('main.branch') . ' : ' . $branch->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');

@@ -203,6 +203,7 @@ export default {
             user.nameMobile = user.name + ' | ' + user.mobile
         })
         if (this.action === 'edit') {
+            console.log(this.edit,"edit",moment(this.edit.start_date ).format("HH"));
             this.edit.user.nameMobile = this.edit.user.name + ' | ' +  this.edit.user.mobile
             this.usersValue = this.edit.user;
 
@@ -210,14 +211,12 @@ export default {
             this.branchesValue =  this.edit.accommodation.branch
             this.accommodationsValue = this.edit.accommodation
             this.accommodations = this.edit.accommodation.branch.accommodations
-            this.form.start_date = this.edit.start_date
-            this.form.end_date = this.edit.end_date
+            this.form.start_date = moment(this.edit.start_date).subtract(2,'hours').format("YYYY-MM-DDTHH:mm");
+            // this.form.end_date = moment(this.edit.end_date).format("YYYY-MM-DDTHH:mm");
 
-        } else {
-            this.form.start_date = moment().format("MM/DD/YYYY HH:MM");
-            // this.form.end_date = moment(this.form.start_date).add(4, "hours").format("MM/DD/YYYY HH:MM");
+      
 
-        }
+        } 
         console.log(this.edit,'edit')
     },
     methods: {
@@ -257,10 +256,16 @@ export default {
                     Authorization: "Bearer " + this.auth_token,
                 },
             }).then((res) => {
-                window.location = `/${this.$dashboardPrefix}/reservations/${this.edit.id }`
+                // window.location = `/${this.$dashboardPrefix}/reservations/${this.edit.id }`
             }).catch((err) => {
                 this.errors = err.response.data.errors;
+              const toastMessage = err.response.data.message
 
+                if(toastMessage)
+                {
+
+}
+toastr.error(toastMessage)
 
             });
         },

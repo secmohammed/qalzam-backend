@@ -37,7 +37,7 @@ class ReservationUpdateFormRequest extends ReservationStoreFormRequest
     {
         $rules = [
             'start_date' => ['required_with:end_date', new EnsureStartDateOfReservationIsInFuture($this->reservation), 'after_or_equal:' . now()->format('Y-m-d H:i:s')],
-            'end_date' => ['required_with:start_date', 'after_or_equal:' . $this->request->get('start_date'), new EnsureEndDateOfReservationIsInFuture($this->reservation)],
+            // 'end_date' => ['required_with:start_date', 'after_or_equal:' . $this->request->get('start_date'), new EnsureEndDateOfReservationIsInFuture($this->reservation)],
         ];
 
         return array_merge(parent::rules(), $rules);

@@ -39,6 +39,15 @@
                 </div>
                 @endif
             </div>
+            @if ($edit->getMediaCollectionUrl('album-gallery')&& ($action == 'edit'))
+            <div class="d-flex flex-row  flex-row-wrap">
+                @foreach ($edit->getMediaCollectionUrl('album-gallery') as $image)
+                {{-- @dd($image) --}}
+     <x-forms.small_image :image="$image"/>
+     @endforeach
+    </div>
+    
+    @endif
         </div>
     </div>
 </div>

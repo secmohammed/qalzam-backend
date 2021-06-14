@@ -43,11 +43,11 @@ class ReservationStoreFormRequest extends FormRequest
         {
         // dd($this->request);
         $rules = [
-            'start_date' => ['required','after_or_equal:' . now()->format('Y-m-d H:i:s'),new EnsureSelectedDateNotReserved()],
+            'start_date' => ['required','after_or_equal:' . now()->format('Y-m-d H:i:s')],
             // 'end_date' => ['nullable', 'after_or_equal:' . $this->request->get('start_date'), new EnsureEndDateIsSameDayAsStartDate($this->request->get('start_date'))],
             'accommodation_id' => [
                 'required',
-                'exists:accommodations,id',new EnsureStartDateOfReservationInSameBranchDay()
+                'exists:accommodations,id',new EnsureStartDateOfReservationInSameBranchDay(),new EnsureSelectedDateNotReserved()
             ],
             'user_id' => 'required|exists:users,id',
             "notes" => "nullable",
@@ -68,7 +68,7 @@ class ReservationStoreFormRequest extends FormRequest
 
         ];
 
-        if (!$this->request->get('end_date') && $this->method() !== "PUT") {
+        if (!$this->request->get('end_date') ) {
             $validated = array_merge($validated, [
                 'end_date' => Carbon::parse($this->request->get('start_date'))->addHour(4)->format('Y-m-d H:i:s'),
 

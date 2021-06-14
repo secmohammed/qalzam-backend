@@ -53,14 +53,20 @@
     </div>
 
     <div class="form-group row">
-        <label class="col-form-label text-right col-lg-2 col-sm-12">image</label>
+        <label class="col-form-label text-right col-lg-2 col-sm-12">icon</label>
         <div class="col-lg-10 col-md-9 col-sm-12">
             <input type="file" @change="selectFile" class="form-control">
 
-            <div v-if="errors['image'] " class="fv-plugins-message-container">
+            <div v-if="errors['icon'] " class="fv-plugins-message-container">
 
-                <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["image"][0] }}</div>
+                <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["icon"][0] }}</div>
             </div>
+<div class="my-3 mx-3 "  v-if="(action==='edit') &&edit.icon  " >
+    <img :src="edit.icon " style="cursor:pointer" class="rounded  gallery_pics small-icon "  alt="" >
+
+</div>
+
+
         </div>
     </div>
     <div class="form-group row">
@@ -158,7 +164,7 @@ export default {
                 type: "",
                 categorizable_id: null,
                 categorizable_type: null,
-                image: "",
+                icon: "",
                 name: "",
                 name_ar: "",
                 parent_id: ""
@@ -228,18 +234,11 @@ export default {
             this.parentsValue = parent
             this.form.categorizable_type = this.edit.type;
             this.categoryIdValue = this.typeData[0];
-            // this.categoryIdValue = this.edit.category.[this.type]
-            console.log("🚀 ~ file: Category.vue ~ line 219 ~ mounted ~ this.edit.category.[this.type]", this.edit[this.type + "s"])
-            console.log("🚀 ~ file: Category.vue ~ line 254 ~ mounted ~ this.edit", )
 
             this.form.name = this.edit.name
             this.form.name_ar = this.translations.filter(obj => {
                 return obj.key === 'name'
             })[0].value
-            // this.form.accommodation_id = this.accommodation.id
-            // this.branch_id = this.accommodation.branch.id
-            // this.form.start_date = this.edit.start_date
-            // this.form.end_date = this.edit.end_date
 
         }
     },
@@ -249,7 +248,7 @@ export default {
         },
 
         selectFile(event) {
-            this.form.image = event.target.files[0];
+            this.form.icon = event.target.files[0];
         },
         userCreated(user) {
             this.users.push(user);
@@ -268,6 +267,7 @@ export default {
         save() {
             let data = new FormData();
             for (let key in this.form) {
+                console.log("🚀 ~ file: Category.vue ~ line 276 ~ save ~ this.form[key]", this.form[key])
                 data.append(key, this.form[key]);
 
             }
@@ -288,12 +288,20 @@ export default {
         },
 
         editCategory() {
-            axios.put(`/api/categories/${this.edit.id}`, this.form, {
+                 let data = new FormData();
+            for (let key in this.form) {
+                console.log("🚀 ~ file: Category.vue ~ line 276 ~ save ~ this.form[key]", this.form[key])
+                data.append(key, this.form[key]);
+
+            }
+            console.log("🚀 ~ file: Category.vue ~ line 245 ~ save ~ data", data)
+      data.append('_method','put')
+            axios.post(`/api/categories/${this.edit.id}`, data, {
                 headers: {
                     Authorization: "Bearer " + this.auth_token,
                 },
             }).then((res) => {
-                window.location =  `/${this.$dashboardPrefix}/categories/${this.edit.id }`
+                // window.location =  `/${this.$dashboardPrefix}/categories/${this.edit.id }`
             }).catch((err) => {
                 this.errors = err.response.data.errors;
 

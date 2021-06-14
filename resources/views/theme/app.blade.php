@@ -29,6 +29,28 @@
                 .nav.nav-pills .nav-link{
                 background: #fff;
                 }
+                .gallery_pics {
+ 
+}
+
+                .gallery_pics.fullscreen {
+  z-index: 9999;
+  position: fixed;
+  margin: 0 auto;
+  width: 90%;
+  height: 90%;
+  top: 5%;
+  left: 5%;
+}
+.flex-row-wrap{
+    flex-flow: row wrap;
+}
+.small-icon{
+    float: left;
+            width:  150px;
+            height: 150px;
+            object-fit: cover;
+}
                 </style>
                 <!--end::Global Theme Styles-->
                 <!--begin::Layout Themes(used by all pages)-->
@@ -255,6 +277,7 @@
         },
         "font-family": "Poppins"
     };</script>
+ 
                     <!--end::Global Config-->
                     <!--begin::Global Theme Bundle(used by all pages)-->
                     <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
@@ -270,6 +293,15 @@
                     @livewireScripts
                     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
                     @stack('scripts')
+                    <script>
+
+
+                        $(document).ready(function() {
+                          $('.gallery_pics').click(function(e) {
+                            $(this).toggleClass('fullscreen');
+                          });
+                        });
+                            </script>
                     <!--end::Page Scripts-->
                 </body>
                 <!--end::Body-->

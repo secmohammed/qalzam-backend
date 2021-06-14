@@ -104,6 +104,7 @@ class AlbumController extends Controller
      */
     public function edit(Album $album)
     {
+        $album->load('translations');
         $this->setData('title', __('main.edit') . ' ' . __('main.album') . ' : ' . $album->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');

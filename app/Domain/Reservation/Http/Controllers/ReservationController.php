@@ -224,6 +224,7 @@ class ReservationController extends Controller
      */
     public function store(ReservationStoreFormRequest $request)
     {
+        dd(1);
         try {
             $reservation = app(Pipeline::class)->send($request)->through([
                 ValidateReservationStartDateAndEndDateIsWithinBranchAvailability::class,
