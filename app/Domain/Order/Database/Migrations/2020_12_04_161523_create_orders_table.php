@@ -29,7 +29,6 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('creator_id');
             $table->enum('status', ['pending', 'processing', 'picked', 'delivered'])->default('pending');
-            $table->enum('payment_type', ['visa', 'cash'])->default('cash');
             $table->integer('subtotal');
             $table->unsignedBigInteger('address_id')->unsigned()->index()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
