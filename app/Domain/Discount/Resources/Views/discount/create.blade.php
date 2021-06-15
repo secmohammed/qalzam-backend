@@ -71,7 +71,6 @@
                                     <div class="col-xl-0"></div>
                                     <div class="col-xl-10"  id="app">
                                         <discount
-                                        :all-users="{{ $users }}"
                                         action="create"
                                         auth_token="{{ $auth_token }}"
                                     />

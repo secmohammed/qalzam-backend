@@ -64,6 +64,20 @@
                 </div>
             </div>
         </div>
+
+         <div v-if="action === 'edit'"  class="form-group row">
+            <label class="col-form-label text-right col-lg-2 col-sm-12">Status</label>
+            <div class="col-lg-10 col-md-9 col-sm-12">
+
+                <multiselect :searchable="true" v-model="statusValue" :options="statuses"></multiselect>
+
+                <div v-if="errors['status'] " class="fv-plugins-message-container">
+
+                    <div data-field="email" data-validator="notEmpty" class="fv-help-block">{{ errors["status"][0] }}</div>
+                </div>
+            </div>
+
+        </div>
         <!-- <div class="form-group row">
             <label class="col-form-label text-right col-lg-2 col-sm-12">End date <span style="color: red"> * </span></label>
             <div class="col-lg-10 col-md-9 col-sm-12">
@@ -135,10 +149,8 @@ export default {
             type: Array,
         },
 
-        edit: {
+        id: {
             required: false,
-            default: () => {},
-            type: Object,
         },
     },
     data() {
@@ -148,16 +160,22 @@ export default {
             usersValue: {},
             errors: [],
             step: 1,
+            edit:{},
             discounts: [],
             accommodations: [],
+            statusValue:"",
             users:[],
             newUserToken: "",
+                statuses: [
+                'upcoming', 'done', 'delivered'
+            ],
             branch_id: "",
             form: {
 
                 user_id: null,
                 accommodation_id: null,
                 start_date: "",
+                status:''
                 // end_date: "",
             },
         };
@@ -177,6 +195,10 @@ export default {
             this.form.accommodation_id = val.id
         },
 
+     "statusValue"(val) {
+            console.log(val)
+            this.form.status = val
+        },
 
 
         "form.start_date"() {
@@ -197,21 +219,28 @@ export default {
         // },
 
     },
-    mounted() {
+ async   mounted() {
         this.users = this.allUsers
         this.users.forEach(function(user){
             user.nameMobile = user.name + ' | ' + user.mobile
         })
         if (this.action === 'edit') {
+              const {data:{data:edit}} =   await axios.get(`/api/reservations/${this.id}?include=user,accommodation,accommodation.branch.accommodations`, {
+                headers: {
+                    Authorization: "Bearer " + this.auth_token,
+                },
+            });
+            this.edit = edit;
             console.log(this.edit,"edit",moment(this.edit.start_date ).format("HH"));
             this.edit.user.nameMobile = this.edit.user.name + ' | ' +  this.edit.user.mobile
             this.usersValue = this.edit.user;
+            this.statusValue = this.edit.status;
 
             // this.form.branch_id = this.edit.branch_id
             this.branchesValue =  this.edit.accommodation.branch
             this.accommodationsValue = this.edit.accommodation
             this.accommodations = this.edit.accommodation.branch.accommodations
-            this.form.start_date = moment(this.edit.start_date).subtract(2,'hours').format("YYYY-MM-DDTHH:mm");
+            this.form.start_date = moment(this.edit.start_date).format("YYYY-MM-DDTHH:mm");
             // this.form.end_date = moment(this.edit.end_date).format("YYYY-MM-DDTHH:mm");
 
       
@@ -238,7 +267,7 @@ export default {
                     Authorization: "Bearer " + this.auth_token,
                 },
             }).then((res) => {
-                // window.location = `/${this.$dashboardPrefix}/reservations`
+                window.location = `/${this.$dashboardPrefix}/reservations`
             }).catch((err) => {
 
               this.errors = err.response.data.errors;
@@ -256,7 +285,7 @@ export default {
                     Authorization: "Bearer " + this.auth_token,
                 },
             }).then((res) => {
-                // window.location = `/${this.$dashboardPrefix}/reservations/${this.edit.id }`
+                window.location = `/${this.$dashboardPrefix}/reservations/${this.edit.id }`
             }).catch((err) => {
                 this.errors = err.response.data.errors;
               const toastMessage = err.response.data.message

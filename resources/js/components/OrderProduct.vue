@@ -174,6 +174,7 @@
 import CreateAddressForm from './CreateAddressForm.vue';
 import CreateUserForm from './CreateUserForm.vue';
  import Multiselect from 'vue-multiselect'
+import axios from 'axios';
 export default {
     components: {
         CreateUserForm,
@@ -193,26 +194,16 @@ export default {
             required: true,
             type: String,
         },
-        branches: {
-            required: true,
-            type: Array,
-        },
-       allUsers: {
-            required: true,
-            type: Array,
-        },
+    
+
         roles: {
             required: true,
             type: Array,
         },
-        locations: {
-            required: true,
-            type: Array,
-        },
-        edit: {
+  
+        id: {
             required: false,
-            default: () => {},
-            type: Object,
+           
         },
     },
     data() {
@@ -225,8 +216,12 @@ export default {
             productsValue: [],
             errors: [],
             step: 1,
+            edit:{},
             discounts: [],
             addresses: [],
+            locations:[],
+            allUsers:[],
+
             users:[],
             statuses: [
                 'pending','picked','processing','delivered'
@@ -234,7 +229,8 @@ export default {
             paymentWays: [
                'visa','cash'
             ],
-            statusValue:{},
+            statusValue:'',
+            branches:[],
             paymentTypeValue:'',
             products: [],
             newUserToken:"",
@@ -278,7 +274,6 @@ export default {
             this.form.discount_id= val.id
         },
         "statusValue"(val) {
-            console.log(val)
             this.form.status = val
         },
         "paymentTypeValue"(val) {
@@ -299,13 +294,41 @@ export default {
 
     },
   async  mounted() {
-        this.users = this.allUsers
+
+        
+         const {data:{data:branches}} =   await axios.get('/api/branches?per_page=10000000&include=products', {
+                headers: {
+                    Authorization: "Bearer " + this.auth_token,
+                },
+            });
+         const {data:{data:users}} =   await axios.get('/api/users?per_page=10000000&include=addresses,discounts', {
+                headers: {
+                    Authorization: "Bearer " + this.auth_token,
+                },
+            });
+         const {data:{data:locations}} =   await axios.get('/api/locations?per_page=10000000', {
+                headers: {
+                    Authorization: "Bearer " + this.auth_token,
+                },
+            });
+     this.branches = branches
+     this.users =users
+     this.locations =locations
+
         this.users.forEach(function(user){
             user.nameMobile = user.name + ' | ' + user.mobile
         })
         if (this.action === 'edit') {
-            const branch = this.branches.find(branch=>branch.id === this.edit.branch_id)
+             const {data:{data:edit}} =   await axios.get(`/api/orders/${this.id}?include=user,address,branch,products`, {
+                headers: {
+                    Authorization: "Bearer " + this.auth_token,
+                },
+            });
+            this.edit = edit;
+            const branch = this.branches.find(branch=>branch.id === this.edit.branch.id)
+            console.log("🚀 ~ file: OrderProduct.vue ~ line 329 ~ mounted ~ branch", branch)
             this.branchesValue = branch;
+            console.log("🚀 ~ file: OrderProduct.vue ~ line 330 ~ mounted ~ this.branchesValue", this.branchesValue)
 
             this.edit.user.nameMobile = this.edit.user.name + ' | ' + this.edit.user.mobile;
             this.usersValue = this.edit.user;
@@ -319,6 +342,7 @@ export default {
 
                 this.productsValue[index] = product
                 this.form.products[index].quantity = product.pivot.quantity
+                this.form.products[index].id = product.id
 
             });
 
@@ -400,7 +424,7 @@ export default {
                 },
             }).then((res) => {
                 // console.log(res);
-                window.location = `/orders/${this.edit.id }`
+                window.location = `/${this.$dashboardPrefix}/orders/${this.edit.id }`
             }).catch((err) => {
                 this.errors = err.response.data.errors;
 

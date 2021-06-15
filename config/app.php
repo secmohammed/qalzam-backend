@@ -244,5 +244,6 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Toaster' => \Joovlly\Toaster\Facades\Toaster::class,
         'Cart' => \App\Common\Facades\Cart::class,
+        'variation' => 'App\Domain\Product\Entities\ProductVariation',
     ],
 ];

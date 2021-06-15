@@ -22,12 +22,16 @@ use App\Domain\Order\Pipelines\CreateOrderPipeline;
 use App\Domain\Order\Pipelines\NotifyUserWithOrderStatus;
 use App\Domain\Order\Pipelines\NotifyUserWithPlacedOrder;
 use App\Domain\Order\Repositories\Contracts\OrderRepository;
+use App\Domain\Product\Entities\Product;
+use App\Domain\Product\Entities\ProductVariation;
+use App\Domain\Product\Repositories\Contracts\ProductVariationRepository;
 use App\Domain\User\Entities\Address;
 use App\Domain\User\Repositories\Contracts\RoleRepository;
 use App\Domain\User\Repositories\Contracts\UserRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
+use Illuminate\Support\Facades\DB;
 use Joovlly\DDD\Traits\Responder;
 use PDF;
 
@@ -94,18 +98,21 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(ProductVariationRepository $productVariation)
     {
         // dd($locationRepository->all());
 
         $this->setData('title', __('main.add') . ' ' . __('main.order'), 'web');
-
+        // dd($this->branchRepository->with(['products'])->first()->products[0]->name);
+//         DB::connection()->enableQueryLog();
+//         $this->branchRepository->with(['products','products.translations'])->first();
+// //   $product =$productVariation->first();
+//   $queries = DB::getQueryLog();
+//   return dd($queries);
+//   dd($product ,  $this->branchRepository->first());
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('auth_token', auth()->user()->generateAuthToken());
         $this->setData('roles', $this->roleRepository->all());
-        $this->setData('locations', $this->locationRepository->all());
-        $this->setData('branches', $this->branchRepository->with(['products'])->all(), 'web');
-        $this->setData('users', $this->userRepository->with(['addresses', 'discounts'])->findWhere([['type','=','user']]), 'web');
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
 
         $this->setApiResponse(fn() => response()->json(['create_your_own_form' => true]));
@@ -152,14 +159,12 @@ class OrderController extends Controller
         $order->address = $address;
         // $order->append'user' => $user, 'address' => $address]);
         // dd($order);
+        // dd($order->load("products"));
         $this->setData('roles', $this->roleRepository->all());
-        $this->setData('locations', $this->locationRepository->get());
 
         $this->setData('alias', $this->domainAlias, 'web');
         $this->setData('edit', $order->load("products"));
         $this->setData('auth_token', auth()->user()->generateAuthToken());
-        $this->setData('branches', $this->branchRepository->with(['products'])->all(), 'web');
-        $this->setData('users', $this->userRepository->with(['addresses', 'discounts'])->findWhere(['type' => 'user']), 'web');
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.edit");
 

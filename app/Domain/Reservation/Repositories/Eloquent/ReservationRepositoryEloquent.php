@@ -38,6 +38,7 @@ class ReservationRepositoryEloquent extends EloquentRepository implements Reserv
         'user',
         'creator',
         'accommodation',
+        'accommodation.branch.accommodations',
         'branch',
         'order.products',
     ];

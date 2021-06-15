@@ -69,7 +69,7 @@
                                 <div class="row container-fluid mb-5">
                                     <div class="col-xl-0"></div>
                                     <div class="col-xl-10" id="app">
-                                    <branch-product  :products="{{ $products }}"    :branch_value="{{$branch}}"    :branches="{{ $branches}}" auth_token="{{ $auth_token }}" action="create" />
+                                    <branch-product     :branch_value="{{$branch}}" auth_token="{{ $auth_token }}" action="create" />
                                      
                                     </div>
                                 </div>

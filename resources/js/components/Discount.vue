@@ -284,16 +284,20 @@ export default {
         // },
 
     },
-    mounted() {
-        this.users = this.allUsers
+   async mounted() {
+  const {data:{data:users}} =   await axios.get('/api/users?per_page=10000000&filter[has_role]=user', {
+                headers: {
+                    Authorization: "Bearer " + this.auth_token,
+                },
+            });
+
+        this.users = users
         this.users.forEach(function(user){
             user.nameMobile = user.name + ' | ' + user.mobile
             console.log(user.nameMobile)
         })
         if (this.action === 'edit') {
 
-            console.log("🚀 ~ file: Discount.vue ~ line 293 ~ mounted ~ this.edit", this.edit)
-            console.log("🚀 ~ file: Discount.vue ~ line 296 ~ mounted ~ this.discountable", this.discountable)
             this.form.code = this.edit.code
             this.form.value = this.edit.value
             this.form.type = this.edit.type

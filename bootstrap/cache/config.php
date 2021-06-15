@@ -113,6 +113,7 @@
       'PDF' => 'Barryvdh\\DomPDF\\Facade',
       'Toaster' => 'Joovlly\\Toaster\\Facades\\Toaster',
       'Cart' => 'App\\Common\\Facades\\Cart',
+      'variation' => 'App\\Domain\\Product\\Entities\\ProductVariation',
     ),
   ),
   'auth' => 

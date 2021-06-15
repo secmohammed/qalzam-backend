@@ -2,6 +2,7 @@
 
 namespace App\Domain\Order\Http\Resources\Order;
 
+use App\Domain\Branch\Http\Resources\Branch\BranchResource;
 use Illuminate\Http\Request;
 use App\Domain\User\Http\Resources\User\UserResource;
 use App\Domain\User\Http\Resources\Address\AddressResource;
@@ -22,6 +23,8 @@ class OrderResource extends JsonResource
         return [
             'id' => $this->id,
             'status' => $this->status,
+            'payment_type' => $this->payment_type,
+            'branch' => new BranchResource($this->whenLoaded('branch')),
             'created_at' => $this->created_at->toDateTimeString(),
             'subtotal' => $this->subtotal->formatted(),
             'total' => $this->total()->formatted(),

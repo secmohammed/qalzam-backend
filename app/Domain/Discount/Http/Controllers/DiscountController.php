@@ -66,12 +66,12 @@ class DiscountController extends Controller
      */
     public function create()
     {
+     
         $this->setData('title', __('main.add') . ' ' . __('main.discount'), 'web');
-        $this->setData('categories', $this->categoryRepository->where('type', 'product')->get());
         $this->setData('alias', $this->domainAlias, 'web');
-        $this->setData('users', $this->userRepository->whereHas('roles', function ($query) {
-            $query->where('slug', 'user');
-        })->get());
+        // $this->setData('users', $this->userRepository->whereHas('roles', function ($query) {
+        //     $query->where('slug', 'user');
+        // })->get());
         $this->setData('auth_token', auth()->user()->generateAuthToken());
 
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
@@ -89,7 +89,6 @@ class DiscountController extends Controller
      */
     public function destroy($id)
     {
-        dd(1);
         $ids = request()->get('ids', $id);
 
         $delete = $this->discountRepository->destroy($ids);
@@ -119,6 +118,7 @@ class DiscountController extends Controller
 
         $this->setData('alias', $this->domainAlias, 'web');
         $discount->load('users');
+        // dd($discount->discountable);
         $this->setData('edit', $discount);
         $this->setData('discountable', $discount->discountable);
         $this->setData('users', $this->userRepository->whereHas('roles', function ($query) {

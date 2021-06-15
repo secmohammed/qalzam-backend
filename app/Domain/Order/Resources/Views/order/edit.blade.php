@@ -1,3 +1,4 @@
+{{-- @dd($edit) --}}
 @extends('theme.app')
 
 @section('content')
@@ -68,7 +69,7 @@
                             <div class="row container-fluid mb-5">
                                 <div class="col-xl-0"></div>
                                 <div class="col-xl-10" id="app">
-                                <order-form :all-users="{{ $users }}" :locations="{{ $locations }}" :roles="{{ $roles }}" :branches="{{ $branches}}" auth_token="{{ $auth_token }}" :edit="{{$edit}}" action="edit" />
+                                <order-form :roles="{{ $roles }}" auth_token="{{ $auth_token }}" :id="{{request('order')->id}}" action="edit" />
                                 </div>
                                
                             </div>

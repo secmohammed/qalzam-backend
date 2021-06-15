@@ -79,10 +79,7 @@ export default {
         Multiselect
     },
     props: {
-        branches: {
-            required: true,
-            type: Array,
-        },
+      
         branch: {
             required: false,
             type: Object,
@@ -91,10 +88,7 @@ export default {
             required: false,
 
         },
-        products: {
-            required: true,
-            type: Array,
-        },
+     
         action: {
             required: true,
             type: String,
@@ -114,7 +108,8 @@ export default {
             productsValue: [],
             branchesValue: {},
             errors: [],
-
+            products:[],
+            branches:[],
             form: {
                 products: [{
                     id: null,
@@ -129,8 +124,20 @@ export default {
             return this.form.products.length && this.branchesValue.id
         },
     },
-    mounted() {
-
+   async mounted() {
+        
+  const {data:{data:products}} =   await axios.get('/api/products?per_page=10000000', {
+                headers: {
+                    Authorization: "Bearer " + this.auth_token,
+                },
+            });
+  const {data:{data:branches}} =   await axios.get('/api/branches?per_page=10000000', {
+                headers: {
+                    Authorization: "Bearer " + this.auth_token,
+                },
+            });
+            this.products =products;
+            this.branches =branches;
 if(this.branch_value)
 {
 
