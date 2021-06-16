@@ -3,8 +3,11 @@
 namespace App\Domain\User\Http\Resources\User;
 
 use App\Common\Cart\Cart;
+use App\Domain\Discount\Http\Resources\Discount\DiscountResource;
 use App\Domain\Reservation\Http\Resources\Reservation\ReservationResource;
 use App\Domain\User\Entities\User;
+use App\Domain\User\Http\Resources\Address\AddressResource;
+use App\Domain\User\Http\Resources\Address\AddressResourceCollection;
 use App\Infrastructure\Http\AbstractResources\BaseResource as JsonResource;
 use Illuminate\Http\Request;
 
@@ -48,6 +51,8 @@ class UserResource extends JsonResource
             'avatar' => $this->getFirstMediaUrl('image'),
             'created_at_human' => $this->created_at->diffForHumans(),
             'wishlist' => new WishlistResource($this->whenLoaded('wishlist')),
+            'addresses' => AddressResource::collection($this->whenLoaded('addresses')),
+            'discounts' => DiscountResource::collection($this->whenLoaded('discounts')),
             $this->mergeWhen(array_key_exists('roles', $this->getRelations()), [
                 'permissions' => array_merge($this->roles->sortByDesc('created_at')->pluck('permissions')->collapse()->toArray(), $this->permissions ?? []),
             ]),

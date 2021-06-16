@@ -138,6 +138,7 @@ class ReservationController extends Controller
     public function edit(Reservation $reservation)
     {
         $this->setData('title', __('main.edit') . ' ' . __('main.reservation') . ' : ' . $reservation->id, 'web');
+        // $reservation->start_date = Carbon::parse($reservation->start_date)
         // dd($this->accommodationRepository->find($reservation->accommodation_id)->with("branch")->first());
 
 //        $reservation->user = $this->userRepository->find($reservation->user_id);
@@ -232,9 +233,7 @@ class ReservationController extends Controller
                 CreateReservation::class,
             ])->thenReturn();
         } catch (\Throwable $th) {
-            // dd($th);
             return response(['message'=>$th->getMessage()],422);
-            //throw $th;
         }
 
         $reservation->user->notify(new ReservationCreated($reservation));
@@ -268,7 +267,7 @@ class ReservationController extends Controller
             CalculateReservationPrice::class,
 
         ])->thenReturn();
-
+        
         $reservation->update($request->validated() + ['price' => $request->price]);
         $reservation->user->notify(new ReservationUpdated($reservation));
 

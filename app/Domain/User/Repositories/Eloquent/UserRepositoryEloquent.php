@@ -5,6 +5,7 @@ namespace App\Domain\User\Repositories\Eloquent;
 use App\Domain\User\Entities\User;
 use App\Domain\User\Repositories\Contracts\UserRepository;
 use App\Infrastructure\AbstractRepositories\EloquentRepository;
+use Spatie\QueryBuilder\AllowedFilter;
 
 /**
  * Class UserRepositoryEloquent.
@@ -22,6 +23,9 @@ class UserRepositoryEloquent extends EloquentRepository implements UserRepositor
         ###allowedFields###
         ###\allowedFields###
     ];
+    protected $allowedFilters = [
+     
+    ];
 
     /**
      * Include Relationships
@@ -32,6 +36,7 @@ class UserRepositoryEloquent extends EloquentRepository implements UserRepositor
         'users',
         'children',
         'wishlist',
+        'discounts',
         'cart',
         'wishlist.product',
         'cart.product',
@@ -61,6 +66,18 @@ class UserRepositoryEloquent extends EloquentRepository implements UserRepositor
         return User::class;
     }
 
+
+
+    public function __construct()
+    {
+        parent::__construct(app());
+        $this->allowedFilters = [
+           
+            AllowedFilter::scope('has_role'),
+        
+
+        ];
+    }
     /**
      * Specify Model Relationships
      *

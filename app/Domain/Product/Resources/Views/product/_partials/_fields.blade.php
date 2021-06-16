@@ -1,3 +1,4 @@
+{{-- @dd($edit->getMediaCollectionUrl('product-images')) --}}
 @foreach(config('app.available_locales') as $index => $lang)
     <x-form.name-field-by-lang  :lang="$lang" :action="$action" :edit="$edit??null"/>
 @endforeach
@@ -66,5 +67,16 @@
                 @endif
             </div>
         </div>
+@if ($edit->getMediaCollectionUrl('product-images')&& ($action == 'edit'))
+<div class="d-flex flex-row  flex-row-wrap">
+@foreach ($edit->getMediaCollectionUrl('product-images') as $image)
+{{-- @dd($image) --}}
+ <x-forms.small_image :image="$image"/>
+@endforeach
+</div>
+
+@endif
+       
     </div>
 </div>
+

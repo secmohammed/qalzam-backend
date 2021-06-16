@@ -42,6 +42,9 @@ class OrderRepositoryEloquent extends EloquentRepository implements OrderReposit
         'products.stock',
         'address',
         'user',
+        'branch',
+        'products.pivot.quantity
+        ',
 
     ];
 

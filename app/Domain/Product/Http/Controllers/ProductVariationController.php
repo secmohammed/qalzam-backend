@@ -15,6 +15,7 @@ use App\Domain\Product\Repositories\Contracts\ProductVariationTypeRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
+use Illuminate\Support\Facades\DB;
 use Joovlly\DDD\Traits\Responder;
 
 class ProductVariationController extends Controller
@@ -52,6 +53,9 @@ class ProductVariationController extends Controller
      */
     public function __construct(ProductVariationRepository $productvariationRepository, ProductRepository $productRepository, ProductVariationTypeRepository $productVariationTypeRepository)
     {
+        // DB::connection()->enableQueryLog();
+        // $queries = DB::getQueryLog();
+        // return dd($queries);
         $this->productvariationRepository = $productvariationRepository;
         $this->productRepository = $productRepository;
         $this->productVariationTypeRepository = $productVariationTypeRepository;
@@ -163,6 +167,8 @@ class ProductVariationController extends Controller
      */
     public function show(ProductVariation $productVariation)
     {
+        $productVariation;
+      
         $this->setData('title', __('main.show') . ' ' . __('main.productvariation') . ' : ' . $productVariation->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
@@ -216,7 +222,6 @@ class ProductVariationController extends Controller
     public function update(ProductVariationUpdateFormRequest $request, ProductVariation $productVariation)
     {
         $productVariation->update($request->validated());
-
         $productVariation->setTranslation([
             'name' => $request->name_ar,
         ], 'ar', true);

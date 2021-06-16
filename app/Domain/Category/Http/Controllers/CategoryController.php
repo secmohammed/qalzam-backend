@@ -221,7 +221,7 @@ class CategoryController extends Controller
     public function update(CategoryUpdateFormRequest $request, Category $category)
     {
         $category->update($request->validated());
-        $category->{$request->type.'s'}()->attach($request->categorizable_id);
+        $category->{$request->type}()->attach($request->categorizable_id);
 
         $category->setTranslation([
             'name' => $request->name_ar,

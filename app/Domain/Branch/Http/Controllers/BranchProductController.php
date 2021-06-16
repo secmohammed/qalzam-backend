@@ -99,7 +99,7 @@ class BranchProductController extends Controller
         $this->setData('products', $this->productVariationRepository->all());
         $this->setData('branches', $this->branchRepository->all(), 'web');
         $this->addView("{$this->domainAlias}::{$this->viewPath}.create");
-
+        
         $this->setApiResponse(fn() => response()->json(['create_your_own_form' => true]));
 
         return $this->response();

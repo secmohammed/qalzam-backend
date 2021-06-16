@@ -5,6 +5,8 @@ namespace App\Domain\Reservation\Http\Requests\Reservation;
 use App\Domain\Reservation\Http\Rules\EnsureEndDateOfReservationIsInFuture;
 use App\Domain\Reservation\Http\Rules\EnsureStartDateOfReservationIsInFuture;
 use App\Domain\Reservation\Http\Requests\Reservation\ReservationStoreFormRequest;
+use App\Domain\Reservation\Http\Rules\EnsureSelectedDateNotReserved;
+use App\Domain\Reservation\Http\Rules\EnsureStartDateOfReservationInSameBranchDay;
 
 class ReservationUpdateFormRequest extends ReservationStoreFormRequest
 {
@@ -37,7 +39,13 @@ class ReservationUpdateFormRequest extends ReservationStoreFormRequest
     {
         $rules = [
             'start_date' => ['required_with:end_date', new EnsureStartDateOfReservationIsInFuture($this->reservation), 'after_or_equal:' . now()->format('Y-m-d H:i:s')],
-            'end_date' => ['required_with:start_date', 'after_or_equal:' . $this->request->get('start_date'), new EnsureEndDateOfReservationIsInFuture($this->reservation)],
+            'status' => 'in:upcoming,done,delivered',
+            'accommodation_id' => [
+                'required',
+                'exists:accommodations,id',new EnsureStartDateOfReservationInSameBranchDay(),new EnsureSelectedDateNotReserved()
+            ],
+
+            // 'end_date' => ['required_with:start_date', 'after_or_equal:' . $this->request->get('start_date'), new EnsureEndDateOfReservationIsInFuture($this->reservation)],
         ];
 
         return array_merge(parent::rules(), $rules);

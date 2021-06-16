@@ -147,6 +147,12 @@ class User extends Authenticatable implements JWTSubject, HasMedia
             $query->where('default', true)->limit(1);
         }]);
     }
+    public function scopeHasRole(Builder $builder, $role)
+    {
+        return $builder->whereHas('roles', function ($query) use ($role) {
+            $query->where('slug', $role);
+        });
+    }
     public static function newFactory()
     {
         self::flushEventListeners();

@@ -18,6 +18,7 @@ class ReservationResource extends JsonResource
      */
     public function data(Request $request): array
     {
+        // dd($this->start_date->toDateTimeString());
         return [
             'id' => $this->id,
             'price' => $this->formatted_price,

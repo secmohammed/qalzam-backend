@@ -8,11 +8,7 @@ use App\Domain\Category\Entities\Category;
 use App\Domain\Product\Entities\ProductVariation;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
-Relation::morphMap([
-    'category' => Category::class,
-    'product' => Product::class,
-    'variation' => ProductVariation::class,
-]);
+
 
 trait DiscountRelations
 {
@@ -21,6 +17,12 @@ trait DiscountRelations
      */
     public function discountable()
     {
+
+        Relation::morphMap([
+            'category' => Category::class,
+            'product' => Product::class,
+            'variation' => ProductVariation::class,
+        ]);
         return $this->morphTo();
     }
 

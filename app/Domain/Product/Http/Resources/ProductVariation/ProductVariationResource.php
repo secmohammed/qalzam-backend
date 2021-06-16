@@ -31,6 +31,7 @@ class ProductVariationResource extends JsonResource
             'stock_count' => $this->stock_count,
             'status' => $this->status,
             'in_stock' => $this->in_stock,
+            'pivot' => $this->pivot,
             'type' => new ProductVariationTypeResource($this->whenLoaded('type')),
             // 'product' => new ProductResource($this->whenLoaded('product')),
             'user' => new UserResource($this->whenLoaded('user')),
