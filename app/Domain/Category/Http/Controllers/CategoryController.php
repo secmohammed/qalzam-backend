@@ -220,14 +220,15 @@ class CategoryController extends Controller
      */
     public function update(CategoryUpdateFormRequest $request, Category $category)
     {
+        
         $category->update($request->validated());
         $category->{$request->type}()->attach($request->categorizable_id);
-
+        
         $category->setTranslation([
             'name' => $request->name_ar,
         ], 'ar', true);
-
-        if ($request->has('icon') && $category) {
+        
+        if ($request->hasFile('icon') && $category) {
             if ($category->hasMedia('icon')) {
                 $category->clearMediaCollection('icon');
             }

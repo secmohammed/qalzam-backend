@@ -145,10 +145,8 @@ class ReservationController extends Controller
 //        $reservation->accommodation = $this->accommodationRepository->find($reservation->accommodation_id)->with("branch")->first();
         // dd($reservation);
         $this->setData('alias', $this->domainAlias, 'web');
-        $this->setData('users', $this->userRepository->all());
         $this->setData('roles', $this->roleRepository->all());
 
-        $this->setData('branches', $this->branchRepository->with("accommodations")->all());
         $this->setData('auth_token', auth()->user()->generateAuthToken());
         $this->setData('edit', $reservation->load(['user','accommodation.branch.accommodations']));
 

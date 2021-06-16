@@ -182,6 +182,8 @@ class ProductController extends Controller
 
         $product->setTranslation([
             'name' => $request->name_ar,
+            'description' => $request->description_ar,
+            'slug' => $request->slug_ar,
         ], 'ar');
 
         app(Pipeline::class)->send([
@@ -215,7 +217,9 @@ class ProductController extends Controller
 
         $product->setTranslation([
             'name' => $request->name_ar,
-        ], 'ar', true);
+            'description' => $request->description_ar,
+            'slug' => $request->slug_ar,
+        ], 'ar');
 
         app(Pipeline::class)->send([
             'model' => $product,

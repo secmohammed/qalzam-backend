@@ -244,6 +244,8 @@ return [
     'permission' => 'الصلاحية',
     'permissions' => 'الصلاحيات',
     'slug' => 'الوصف المختصر',
+    'slug_ar' => 'الوصف المختصر بالعربى',
+
     'competition' => 'مسابقة',
     'competitions' => 'المسابقات',
     'age' => 'السن',

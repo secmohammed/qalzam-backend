@@ -36,7 +36,6 @@ class CategoryUpdateFormRequest extends CategoryStoreFormRequest
     {
         $rules = [
             'name' => ['required', 'unique:categories,name,' . $this->category->id],
-
         ];
 
         return array_merge(parent::rules(), $rules);

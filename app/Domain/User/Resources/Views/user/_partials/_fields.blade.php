@@ -131,7 +131,14 @@
                         {{$errors->first('image')}}
                     </div>
                 @endif
+
             </div>
+            @if (  isset($edit)&& $edit->getFirstMediaUrl('image')&& ($action == 'edit'))
+<div class="d-flex flex-row  flex-row-wrap">
+ <x-forms.small_image :image="$edit->getFirstMediaUrl('image')"/>
+</div>
+@endif
+
         </div>
     </div>
 </div>

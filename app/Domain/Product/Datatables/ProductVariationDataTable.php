@@ -90,7 +90,7 @@ class ProductVariationDataTable extends DataTable
      */
     public function query(ProductVariation $model)
     {
-        return $model->newQuery()->with(['user','type','product', 'translations'])->select('product_variations.*');
+        return $model->newQuery()->with(['user','type','product'])->select('product_variations.*');
     }
 
     /**

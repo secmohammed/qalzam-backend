@@ -136,14 +136,8 @@ export default {
             required: true,
             type: String,
         },
-        branches: {
-            required: true,
-            type: Array,
-        },
-        allUsers: {
-            required: true,
-            type: Array,
-        },
+     
+       
         roles: {
             required: true,
             type: Array,
@@ -165,6 +159,8 @@ export default {
             accommodations: [],
             statusValue:"",
             users:[],
+            branches:[],
+            users:[],
             newUserToken: "",
                 statuses: [
                 'upcoming', 'done', 'delivered'
@@ -182,7 +178,6 @@ export default {
     },
     watch: {
            "usersValue"(val) {
-           // console.log("🚀 ~ file: ReservationProduct.vue ~ line 167 ~ val", val)
             this.form.user_id= val.id
         },
           "branchesValue"(val) {
@@ -220,7 +215,18 @@ export default {
 
     },
  async   mounted() {
-        this.users = this.allUsers
+      const {data:{data:branches}} =   await axios.get('/api/branches?per_page=10000000&include=accommodations', {
+                headers: {
+                    Authorization: "Bearer " + this.auth_token,
+                },
+            });
+         const {data:{data:users}} =   await axios.get('/api/users?per_page=10000000s', {
+                headers: {
+                    Authorization: "Bearer " + this.auth_token,
+                },
+            });
+        this.users = users
+        this.branches = branches
         this.users.forEach(function(user){
             user.nameMobile = user.name + ' | ' + user.mobile
         })

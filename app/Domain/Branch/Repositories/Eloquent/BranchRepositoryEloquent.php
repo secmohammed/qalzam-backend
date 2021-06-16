@@ -45,6 +45,7 @@ class BranchRepositoryEloquent extends EloquentRepository implements BranchRepos
         'shifts',
         'employees',
         'deliverers',
+        'accommodations',
     ];
 
     /**

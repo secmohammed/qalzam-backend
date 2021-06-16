@@ -77,7 +77,7 @@
                                   action="edit"
                                   :categories="{{$categories  }}"
                                   auth_token="{{ $auth_token }}"
-                                  :edit="{{ $edit }}"
+                                  :id="{{ request('category')->id }}"
                                   :translations="{{$translations}}"
                                   :type-data="{{ $type_data }}"
                               />

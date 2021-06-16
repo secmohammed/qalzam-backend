@@ -179,7 +179,7 @@
             </div>
         </div>
         
-        @if ($edit->getMediaCollectionUrl('branch-gallery')&& ($action == 'edit'))
+        @if (  isset($edit)&& $edit->getMediaCollectionUrl('branch-gallery')&& ($action == 'edit'))
         <div class="d-flex flex-row  flex-row-wrap">
             @foreach ($edit->getMediaCollectionUrl('branch-gallery') as $image)
             {{-- @dd($image) --}}

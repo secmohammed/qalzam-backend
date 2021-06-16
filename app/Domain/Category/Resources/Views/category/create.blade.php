@@ -1,3 +1,4 @@
+
 @extends('theme.app')
 
 @section('content')
@@ -72,7 +73,6 @@
                                     <div class="col-xl-10"  id="app">
                                         <category
                                         action="create"
-                                        :categories="{{$categories  }}"
                                         auth_token="{{ $auth_token }}"
                                     />
                                     </div>

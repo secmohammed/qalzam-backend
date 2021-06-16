@@ -185,6 +185,7 @@ class AccommodationController extends Controller
      */
     public function store(AccommodationStoreFormRequest $request)
     {
+        // dd($request->validated());
         $accommodation = $this->accommodationRepository->create($request->validated());
         $accommodation->categories()->attach($request->categories);
         app(Pipeline::class)->send([
@@ -217,15 +218,15 @@ class AccommodationController extends Controller
         if ($request->categories) {
             $accommodation->categories()->sync($request->categories);
         }
-
-        app(Pipeline::class)->send([
+        if ($request->{'accommodation-gallery'}) {
+            app(Pipeline::class)->send([
             'model' => $accommodation,
             'request' => $request,
             'name' => 'accommodation-gallery',
         ])->through([
             HandleFileUpload::class,
         ])->thenReturn();
-
+        }
         $this->redirectRoute("{$this->resourceRoute}.show", [$accommodation->id]);
         $this->setData('data', $accommodation);
         $this->useCollection(AccommodationResource::class, 'data');

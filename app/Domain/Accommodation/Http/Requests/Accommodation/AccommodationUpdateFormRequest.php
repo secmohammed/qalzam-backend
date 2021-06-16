@@ -37,6 +37,10 @@ class AccommodationUpdateFormRequest extends AccommodationStoreFormRequest
             'name' => 'required|string|max:255',
             'categories' => 'nullable|array',
             'code' => 'required|unique:accommodations,code,' . $this->accommodation->id,
+            'accommodation-gallery' => 'nullable|array',
+
+            'accommodation-gallery.*' => ['required', 'image', 'mimes:png,jpeg,jpg', 'max:2048'],
+
         ];
 
         return array_merge(parent::rules(), $rules);

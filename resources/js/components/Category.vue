@@ -114,10 +114,7 @@ export default {
             type: String,
         },
 
-        categories: {
-            required: true,
-            type: Array,
-        },
+
 
         action: {
             required: true,
@@ -127,12 +124,11 @@ export default {
             required: false,
             type: Array,
         },
-
-        edit: {
+        id: {
             required: false,
-            default: () => {},
-            type: Object,
         },
+
+
         translations: {
             required: false,
             type: Array,
@@ -147,6 +143,8 @@ export default {
             errors: [],
             step: 1,
             discounts: [],
+            edit:{},
+            categories:[],
             categoryIds: [],
             categoriesTypes: ['posts', 'products', 'accommodations'],
             status: ['active', 'inActive'],
@@ -224,9 +222,23 @@ export default {
         // },
 
     },
-    mounted() {
+   async mounted() {
         // toastr.error('')
+     const {data:{data:categories}} =   await axios.get('/api/categories?per_page=10000000', {
+                headers: {
+                    Authorization: "Bearer " + this.auth_token,
+                },
+            });
+
+            this.categories = categories;
+
         if (this.action === 'edit') {
+               const {data:{data:edit}} =   await axios.get(`/api/categories/${this.id}?include=parent`, {
+                headers: {
+                    Authorization: "Bearer " + this.auth_token,
+                },
+            });
+            this.edit = edit
             console.log(this.edit)
             this.form.parent_id = this.edit.parent_id
             const parent = this.categories.find(category => category.parent_id === this.edit.parent_id)
@@ -301,7 +313,7 @@ export default {
                     Authorization: "Bearer " + this.auth_token,
                 },
             }).then((res) => {
-                // window.location =  `/${this.$dashboardPrefix}/categories/${this.edit.id }`
+                window.location =  `/${this.$dashboardPrefix}/categories/${this.edit.id }`
             }).catch((err) => {
                 this.errors = err.response.data.errors;
 

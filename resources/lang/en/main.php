@@ -93,6 +93,7 @@ return [
     'title_ar' => 'Ar Title',
     'name_en' => 'En Name',
     'name_ar' => 'Ar Name',
+    'slug_ar' => 'Ar Slug',
     'invalid-credentials' => 'invalid email or password',
     'description' => 'Description',
     'description_ar' => 'Ar Description',

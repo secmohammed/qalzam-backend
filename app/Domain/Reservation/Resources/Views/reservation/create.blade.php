@@ -71,8 +71,6 @@
                                     <div class="col-xl-0"></div>
                                     <div class="col-xl-10" id="app">
                                        <reservation-form
-                                            :branches="{{ $branches }}"
-                                            :all-users="{{ $users }}"
                                             :roles="{{ $roles }}"
                                             action="create"
                                             auth_token="{{ $auth_token }}"
