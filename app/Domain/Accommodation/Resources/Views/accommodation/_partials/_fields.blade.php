@@ -115,7 +115,7 @@
                 </div>
                 @endif
             </div>
-            @if ($edit->getMediaCollectionUrl('accommodation-gallery')&& ($action == 'edit'))
+            @if (($action == 'edit') && isset($edit)&& $edit->getMediaCollectionUrl('accommodation-gallery') )
             <div class="d-flex flex-row  flex-row-wrap">
                 @foreach ($edit->getMediaCollectionUrl('accommodation-gallery') as $image)
                 {{-- @dd($image) --}}

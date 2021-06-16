@@ -1,3 +1,4 @@
+{{-- @dd(1) --}}
 @extends('theme.app')
 
 @section('content')
