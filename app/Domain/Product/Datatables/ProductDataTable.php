@@ -27,6 +27,10 @@ class ProductDataTable extends DataTable
                 $user = $model->user ? $model->user->name: '' ;
                 return "<span>$user</span>";
             })
+            ->editColumn('name', function ($model){
+                $variation_name = $model->name?? '' ;
+                return "<span>$variation_name</span>";
+            })
             ->editColumn('created_at' ,function ($model) {
                 $created_at     = (new Carbon($model->created_at))->format('Y-m-d H:i');
                 return "<span>$created_at</span>";
@@ -48,7 +52,7 @@ class ProductDataTable extends DataTable
 
                 return $btn;
             })
-            ->rawColumns(['actions','checkbox','price','user.name','status', 'created_at']);
+            ->rawColumns(['actions','name','checkbox','price','user.name','status', 'created_at']);
     }
 
     /**

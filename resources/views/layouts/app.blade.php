@@ -23,6 +23,8 @@
     <!--begin::Layout Themes(used by all pages)-->
     <!--end::Layout Themes-->
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link href="{{ asset('assets/css/profile.css') }}" rel="stylesheet" type="text/css"/>
+
 
     @livewireStyles
     @stack('styles')

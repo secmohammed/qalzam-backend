@@ -319,13 +319,13 @@ font-family: DejaVu Sans;
           </ul>
           <ul class="last"> 
             <li>
-              <p>{{ __("main.value-product-without-tax") }}</p> <span>{{ $order->total()->formatted() }}</span>
+              <p>{{ __("main.value-product-without-tax") }}</p> <span>{{ (new App\Common\Transformers\Money ( $order->amount() - $order->amount() * .15   ))->formatted() }}</span>
             </li>
             <li>
               <p>{{ __("main.tax-additive") }}</p> <span>{{ (new App\Common\Transformers\Money ($order->amount() * .15))->formatted()}} </span>
             </li>
             <li>
-              <p>{{ __("main.subtotal-inclusive-tax") }}</p> <span>{{ (new App\Common\Transformers\Money ($order->amount() * .15 + $order->amount() ))->formatted()   }}</span>
+              <p>{{ __("main.subtotal-inclusive-tax") }}</p> <span>{{  $order->total()->formatted()   }}</span>
             </li>
             <li>
               <p>{{ __("main.delivery") }}</p> <span>{{(new App\Common\Transformers\Money ( $order->deliverersWithFee()->first()->delivery_fee))->formatted() }}</span>

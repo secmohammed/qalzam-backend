@@ -12,6 +12,7 @@ class OrderCard extends Component
     public $status;
     public $price;
     public $address;
+    public $isBack =false;
     public $orderType;
     public function mount($price)
     {

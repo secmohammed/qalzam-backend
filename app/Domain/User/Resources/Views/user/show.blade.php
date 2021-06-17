@@ -1,3 +1,6 @@
+{{-- @dd($show->address) --}}
+{{-- @dd($show->addresses) --}}
+
 @extends('theme.app')
 
 @push('styles')
@@ -12,11 +15,19 @@
           integrity="sha512-gk6oCFFexhboh5r/6fov3zqTCA2plJ+uIoUx941tQSFg6TNYahuvh1esZVV0kkK+i5Kl74jPmNJTTaHAovWIhw=="
           crossorigin="anonymous"/>
 
+          <link href="{{ asset('assets/css/profile.css') }}" rel="stylesheet" type="text/css"/>
+
     @if(GetLanguage() == 'ar')
         <style>
             .lg-outer {
                 direction: ltr;
             }
+
+
+
+
+
+            
         </style>
     @endif
 
@@ -114,6 +125,13 @@
                                     </div>
                                     <hr>
                                 </div>
+                                <div class="col-md-6 mb-5">
+                                    <div class="row mb-2">
+                                        <strong class='ml-3'><span>{{ __("main.mobile") }} : </span></strong>
+                                        <span>{{ $show->mobile ?? 'N/A' }} </span>
+                                    </div>
+                                    <hr>
+                                </div>
 
                                 <div class="col-md-6 mb-5">
                                     <div class="row mb-2">
@@ -137,8 +155,7 @@
                                     </div>
                                     <hr>
                                 </div>
-                                <br>
-                                <br>
+                            
 
                                 <div class="col-md-12">
                                     <div class="row mb-2">
@@ -158,6 +175,25 @@
                                         @endif
                                     </div>
                                 </div>
+                                <div class="col-md-12 ">
+                                    <div class="profile">
+                               
+    
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item"><a class="nav-link active" id="address-tab" data-toggle="tab" href="#address" role="tab" aria-controls="address" aria-selected="true">{{__website('my-addresses')}}</a></li>
+                                        <li class="nav-item"><a class="nav-link" id="requests-tab" data-toggle="tab" href="#requests" role="tab" aria-controls="requests" aria-selected="false">{{__website('my-orders')}}</a></li>
+                                      </ul>
+                                 
+                                
+                                @include('layouts.partials.website.include._successMessage',['success_component'=>"user-success"])
+                                @include('layouts.partials.website.include._errorMessage')
+                                      <div class="tab-content" id="myTabContent">
+                                        {{-- <livewire:profile.update-user/> --}}
+                                        <livewire:profile.addresses :addresses="$show->addresses" :isBack="true"/>
+                                        <livewire:profile.my-orders :orders="$show->orders" :isBack="true"/>
+                                    
+                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>

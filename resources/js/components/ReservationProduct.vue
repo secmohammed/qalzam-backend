@@ -20,6 +20,16 @@
 
             </div>
         </div>
+         <div   class="form-group row">
+            <label class="col-form-label text-right col-lg-2 col-sm-12">Accommodation Type</label>
+            <div class="col-lg-10 col-md-9 col-sm-12">
+
+                <multiselect :searchable="true" v-model="accommodationTypeValue" :options="accommodationTypes"></multiselect>
+
+                
+            </div>
+
+        </div>
       </form>  <div class="form-group row align-items-center">
             <label class="col-form-label text-right col-lg-2 col-sm-12">customer</label>
             <div class="col-lg-8 col-md-7 col-sm-10">
@@ -54,6 +64,7 @@
             </div>
 
         </div>
+        
         <div class="form-group row">
             <label class="col-form-label text-right col-lg-2 col-sm-12">Start date <span style="color: red"> * </span></label>
             <div class="col-lg-10 col-md-9 col-sm-12">
@@ -151,12 +162,14 @@ export default {
         return {
             branchesValue: {},
             accommodationsValue: {},
+            accommodationTypeValue: '',
             usersValue: {},
             errors: [],
             step: 1,
             edit:{},
             discounts: [],
             accommodations: [],
+            accommodationTypes:['table', 'room', 'hall'],
             statusValue:"",
             users:[],
             branches:[],
@@ -193,6 +206,10 @@ export default {
      "statusValue"(val) {
             console.log(val)
             this.form.status = val
+        },
+     "accommodationTypeValue"(val) {
+        this.accommodations =this.branchesValue.accommodations.filter(accommdation=> accommdation.type === val)
+
         },
 
 

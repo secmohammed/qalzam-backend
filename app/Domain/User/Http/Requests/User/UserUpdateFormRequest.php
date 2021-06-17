@@ -40,7 +40,7 @@ class UserUpdateFormRequest extends UserStoreFormRequest
             'mobile' => ['required', 'unique:users,mobile,' . $this->user->id, 'regex:/^(010|011|012|015)([0-9]{8})$/'],
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'password' => 'nullable|min:8|max:32|confirmed',
-            'name_ar' => 'nullable|min:8|max:32|confirmed',
+            'name_ar' => 'nullable|min:8|max:32',
             'role_id' => 'nullable|exists:roles,id',
         ];
 

@@ -27,6 +27,10 @@ class UserDataTable extends DataTable
                 $color = $model->status == 'active' ? 'primary' : 'warning';
                 return "<span class='badge badge-$color'>$model->status</span>";
             })
+            ->editColumn('name', function ($model){
+                $variation_name = $model->name?? '' ;
+                return "<span>$variation_name</span>";
+            })
             ->editColumn('created_at' ,function ($model) {
                 $created_at     = (new Carbon($model->created_at))->format('Y-m-d H:i');
                 return "<span>$created_at</span>";
@@ -60,7 +64,7 @@ class UserDataTable extends DataTable
 
                 return $btn;
             })
-            ->rawColumns(['actions','checkbox','type', 'status','created_at']);
+            ->rawColumns(['actions','checkbox','name','type', 'status','created_at']);
     }
 
     /**

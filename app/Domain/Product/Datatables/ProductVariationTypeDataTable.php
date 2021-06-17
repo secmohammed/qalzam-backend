@@ -23,6 +23,10 @@ class ProductVariationTypeDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->editColumn('name', function ($model){
+                $variation_name = $model->name?? '' ;
+                return "<span>$variation_name</span>";
+            })
             ->editColumn('user.name', function ($model){
                 $user = $model->user ? $model->user->name: '' ;
                 return "<span>$user</span>";
@@ -44,7 +48,7 @@ class ProductVariationTypeDataTable extends DataTable
 
                 return $btn;
             })
-            ->rawColumns(['actions','checkbox', 'status', 'user.name' , 'created_at']);
+            ->rawColumns(['actions','name','checkbox', 'status', 'user.name' , 'created_at']);
     }
 
     /**

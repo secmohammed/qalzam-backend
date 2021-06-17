@@ -70,7 +70,7 @@ class ReservationStoreFormRequest extends FormRequest
 
         if (!$this->request->get('end_date') ) {
             $validated = array_merge($validated, [
-                'end_date' => Carbon::parse($this->request->get('start_date'))->addHour(4)->format('Y-m-d H:i:s'),
+                'end_date' => Carbon::parse($this->request->get('start_date'))->addHour(3)->addMinutes(55)->format('Y-m-d H:i:s'),
 
             ]);
         }

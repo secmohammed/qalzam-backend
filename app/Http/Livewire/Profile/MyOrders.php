@@ -11,6 +11,7 @@ class MyOrders extends Component
 {
 
     public $orders;
+    public $isBack = false;
 
     public function render()
     {
@@ -19,6 +20,10 @@ class MyOrders extends Component
 
     public function mount()
     {
-        $this->orders = app(OrderRepository::class)->orderBy('created_at', 'desc')->where("user_id",auth()->id())->with('branch',"address")->get();
+        if(!$this->isBack)
+        {
+
+            $this->orders = app(OrderRepository::class)->orderBy('created_at', 'desc')->where("user_id",auth()->id())->with('branch',"address")->get();
+        }
     }
 }

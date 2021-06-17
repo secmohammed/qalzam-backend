@@ -9,6 +9,7 @@
               :createdAt="\Carbon\Carbon::parse( $order->created_at)->format('Y-m-d')"
               :status="$order->status"
               key="'order-card-'.$order->id"
+              :isBack="$isBack"
           />
       @endforeach
 

@@ -20,12 +20,10 @@ class CheckInOut extends Component
     }
      public function mount()
     {
-        $this->reservations = Reservation::whereDate('start_date','>',Carbon::now()->format('Y-m-d H:i:s'))->with(['accommodation','branch','user'])->where('status','upcoming')->get();
-        // dd($this->reservations);
+        $this->reservations = Reservation::whereDate('start_date',Carbon::today())->with(['accommodation','branch','user'])->where('status','upcoming')->get();
     }
      public function deleteReservation($item)
     {
-        // dd($item);
         Reservation::find($item['id'])->update(['status'=>'done']);
        $this->reservations = $this->reservations->filter(function ($reservation) use ($item)
        {

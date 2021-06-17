@@ -25,7 +25,8 @@
             <link href="{{ asset('assets/plugins/custom/prismjs/prismjs.bundle'.addRtl().'.css') }}" rel="stylesheet"
                 type="text/css"/>
                 <link href="{{ asset('assets/css/style.bundle'.addRtl().'.css') }}" rel="stylesheet" type="text/css"/>
-                <style>
+              
+              <style>
                 .nav.nav-pills .nav-link{
                 background: #fff;
                 }

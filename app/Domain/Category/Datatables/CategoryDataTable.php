@@ -27,6 +27,10 @@ class CategoryDataTable extends DataTable
                 $user = $model->user ? $model->user->name: '' ;
                 return "<span>$user</span>";
             })
+            ->editColumn('name', function ($model){
+                $variation_name = $model->name?? '' ;
+                return "<span>$variation_name</span>";
+            })
             ->editColumn('status', function ($model){
                 $color = $model->status == 'active' ? 'primary' : 'warning';
                 return "<span class='badge badge-$color'>$model->status</span>";
@@ -48,7 +52,7 @@ class CategoryDataTable extends DataTable
 
                 return $btn;
             })
-            ->rawColumns(['actions','checkbox','user.name','status','created_at','type']);
+            ->rawColumns(['actions','name','checkbox','user.name','status','created_at','type']);
     }
 
     /**

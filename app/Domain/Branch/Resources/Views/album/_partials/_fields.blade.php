@@ -39,7 +39,7 @@
                 </div>
                 @endif
             </div>
-            @if ($edit->getMediaCollectionUrl('album-gallery')&& ($action == 'edit'))
+            @if ( isset($edit)&& $edit->getMediaCollectionUrl('album-gallery')&& ($action == 'edit'))
             <div class="d-flex flex-row  flex-row-wrap">
                 @foreach ($edit->getMediaCollectionUrl('album-gallery') as $image)
                 {{-- @dd($image) --}}

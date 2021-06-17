@@ -29,6 +29,10 @@ class AlbumDataTable extends DataTable
 
                 return $btn;
             })
+            ->editColumn('name', function ($model){
+                $variation_name = $model->name?? '' ;
+                return "<span>$variation_name</span>";
+            })
             ->editColumn('user.name', function ($model){
                 $user = $model->user ? $model->user->name: '' ;
                 return "<span>$user</span>";
@@ -48,7 +52,7 @@ class AlbumDataTable extends DataTable
                 $color = $model->status == 'active' ? 'primary' : 'warning';
                 return "<span class='badge badge-$color'>$model->status</span>";
             })
-            ->rawColumns(['actions','checkbox', 'branch.name', 'user.name','created_at','status']);
+            ->rawColumns(['actions','checkbox','name', 'branch.name', 'user.name','created_at','status']);
     }
 
     /**

@@ -27,5 +27,8 @@
         <p>{{__website('order.total')}}</p>
         <h4 class="title red">{{ $price }}</h4>
     </div>
+    @if (!$isBack)
+        
     <div class="contant"><a class="bottom" href="#evaluation" data-toggle="modal">{{__website('order.rate')}}</a></div>
+    @endif
 </div>

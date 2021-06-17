@@ -9,6 +9,7 @@ class AddressCard extends Component
 {
     public $city;
     public $district;
+    public $isBack=false;
     public $fullAddress;
     public $addressId;
     public $landmark;

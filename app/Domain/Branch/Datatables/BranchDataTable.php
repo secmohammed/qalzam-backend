@@ -29,6 +29,10 @@ class BranchDataTable extends DataTable
 
                 return $btn;
             })
+            ->editColumn('name', function ($model){
+                $variation_name = $model->name?? '' ;
+                return "<span>$variation_name</span>";
+            })
             ->editColumn('user.name', function ($model){
                 $user = $model->user ? $model->user->name: '' ;
                 return "<span>$user</span>";
@@ -53,7 +57,7 @@ class BranchDataTable extends DataTable
                 $color = $model->status == 'active' ? 'primary' : 'warning';
                 return "<span class='badge badge-$color'>$model->status</span>";
             })
-            ->rawColumns(['actions','checkbox', 'location.name','creator.name','created_at','user.name','status']);
+            ->rawColumns(['actions','checkbox','name', 'location.name','creator.name','created_at','user.name','status']);
     }
 
     /**
