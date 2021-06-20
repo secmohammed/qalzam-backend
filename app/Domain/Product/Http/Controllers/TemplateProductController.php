@@ -67,11 +67,22 @@ class TemplateProductController extends Controller
 
         return $this->response();
     }
-
-    public function edit()
+    public function edit(Template $template)
     {
-        //TODO
+
+        $this->setData('title', __('main.add') . ' ' . __('main.order'), 'web');
+        $this->setData('auth_token', auth()->user()->generateAuthToken());
+        $this->setData('alias', $this->domainAlias, 'web');
+        $this->setData('products', $this->productVariationRepository->all(), 'web');
+
+        $this->addView("{$this->domainAlias}::{$this->viewPath}.edit");
+
+        $this->setApiResponse(fn() => response()->json(['create_your_own_form' => true]));
+
+        return $this->response();
     }
+
+
 
     /**
      * @param Template $template
@@ -81,6 +92,15 @@ class TemplateProductController extends Controller
     {
 
         $template->products()->syncWithoutDetaching(
+            $request->validated()
+        );
+
+        return $template;
+    }
+    public function update(Template $template, TemplateProductStoreFormRequest $request)
+    {
+
+        $template->products()->sync(
             $request->validated()
         );
 

@@ -63,7 +63,7 @@
                         {{-- <form class="form  action="{{ route('templates.store') }}" method="POST"> --}}
                             @csrf
 
-                            <template-products action="create" :id={{ request('template')->id }} auth_token="{{ $auth_token}}"/>
+                            <template-products action="edit" :id={{ request('template')->id }} auth_token="{{ $auth_token}}"/>
                           
                     </div>
                 </div>

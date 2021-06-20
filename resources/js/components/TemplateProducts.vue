@@ -60,9 +60,9 @@
 
         <div class="d-flex justify-content-between mt-12">
 
-            <button class=" btn btn-secondary" @click.prevent="addProduct">Add Product</button>
-                        <button type="submit" class="btn btn-primary" @click.prevent="save">Create Product Template</button>
-
+            <button class=" btn btn-secondary"  @click.prevent="addProduct">Add Product</button>
+                        <button type="submit" v-if="action === 'create'" class="btn btn-primary" @click.prevent="save">Create Product Template</button>
+   <button class="btn btn-primary" v-if="action === 'edit'"@click.prevent="save">edit Product Template</button>
         </div>
     </form>
 </template>
@@ -80,23 +80,21 @@
                 type: String,
             },
 
-            template: {
-                required: true,
-                type: Object
-            },
-            products: {
-                required: true,
-                type: Array
-            },
+          
             auth_token: {
                 required: true,
                 type: String
+            },
+            id: {
+                required: true,
             }
         },
         data() {
             return {
                 errors: [],
             productsValue: [],
+            products: [],
+            template: {},
 
                 form: {
                     products: [
@@ -105,10 +103,60 @@
                 }
             }
         },
-        mounted() {
+       async mounted() {
+
+             const {data:{data:products}} =   await axios.get('/api/product_variations?per_page=10000000', {
+                headers: {
+                    Authorization: "Bearer " + this.auth_token,
+                },
+            });
+
+             const {data:{data:template}} =   await axios.get(`/api/templates/${this.id}?include=products`, {
+                headers: {
+                    Authorization: "Bearer " + this.auth_token,
+                },
+            });
+            this.products =products;
+            this.template =template;
+
+             if (this.action === 'edit') {
+ 
+
+            this.template.products.forEach((product, index) => {
+            // console.log("🚀 ~ file: OrderProduct.vue ~ line 267 ~ this.edit.products.forEach ~ product", product,products.length)
+
+                this.productsValue[index] = product
+               this.form.products[index].id = product.id
+
+                this.form.products[index].price = product.pivot.price
+                this.form.products[index].quantity = product.pivot.quantity
+                  if( index < this.template.products.length-1) this.addProduct()
+
+            });
+
+        }
+
         },
         methods: {
             save() {
+
+
+                if(this.action === 'edit')
+{
+    console.log(this.form,'form')
+    axios.put(`/api/template_products/${this.template.id}/update`, this.form, {
+                headers: {
+                    Authorization: "Bearer " + this.auth_token,
+                },
+            }).then((res) => {
+
+                window.location = `/${this.$dashboardPrefix}/templates/${this.template.id}`
+            }).catch((err) => {
+                // console.log("🚀 ~ file: OrderProduct.vue ~ line 257 ~ save ~ err.response.data.errors", err.response.data.errors, err.response)
+                this.errors = err.response.data.errors;
+
+            });
+}
                 // console.log(`temlpates/${this.template.id}/products`);
                 axios.post(`/api/templates/${this.template.id}/products`, this.form, {
                     headers: {

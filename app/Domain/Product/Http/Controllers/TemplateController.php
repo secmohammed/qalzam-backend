@@ -154,7 +154,7 @@ class TemplateController extends Controller
     public function show(Template $template)
     {
         $template_products = $template->products->map(function ($product) {
-            return array_merge($product->pivot->only("quantity", "price"), $product->product->only("name", "id"), ["image" => $product->getFirstMediaUrl("product-images")]);
+            return array_merge($product->pivot->only("quantity", "price"), $product->only("name", "id"), ["image" => $product->getFirstMediaUrl("product-images")]);
         });
 
         $this->setData('title', __('main.show') . ' ' . __('main.template') . ' : ' . $template->id, 'web');

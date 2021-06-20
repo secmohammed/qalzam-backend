@@ -30,6 +30,7 @@ Route::middleware(['auth'])->prefix(config('qalzam.dashboard-prefix'))->prefix(c
     Route::delete('/stocks/delete/all', 'StockController@deleteAll')->name('stocks.delete-all');
     Route::delete('/templates/delete/all', 'TemplateController@deleteAll')->name('templates.delete-all');
     Route::delete('/product_variation_types/delete/all', 'ProductVariationTypeController@deleteAll')->name('product_variation_types.delete-all');
+    Route::get('template_products/{template}/edit', 'TemplateProductController@edit')->name('template_products.edit');
    
     ###CRUD_PLACEHOLDER###
 });

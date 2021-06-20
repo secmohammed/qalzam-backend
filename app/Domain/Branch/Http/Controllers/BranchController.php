@@ -182,7 +182,7 @@ class BranchController extends Controller
     public function show(Branch $branch)
     {
         $branch_products = $branch->products->map(function ($product) {
-            return array_merge($product->pivot->only("quantity", "price"), $product->product->only("name", "id"), ["image" => $product->getFirstMediaUrl("product-images")]);
+            return array_merge($product->pivot->only("quantity", "price"), $product->only("name", "id"), ["image" => $product->getFirstMediaUrl("product-images")]);
         });
 
         $this->setData('title', __('main.show') . ' ' . __('main.branch') . ' : ' . $branch->id, 'web');

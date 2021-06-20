@@ -93,6 +93,10 @@
                                    href="{{ route('templates.edit', $show->id) }}"
                                    class="btn btn-light-warning font-weight-bolder mr-2">
                                     <i class="flaticon2-edit"></i> {{ __("main.edit") }} {{ __("main.template") }} </a>
+                                <a title="{{ __('main.edit') }} {{ __('main.template-to-product') }}"
+                                   href="{{ route('template_products.edit',['template' =>$show->id]) }}"
+                                   class="btn btn-light-warning font-weight-bolder mr-2">
+                                    <i class="flaticon2-edit"></i> {{ __("main.edit") }} {{ __("main.products-to-template") }} </a>
                             </div>
 
                         </div>

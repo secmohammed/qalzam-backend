@@ -22,6 +22,7 @@ Route::group(['middleware' => 'auth.api'], function () {
     Route::apiResource('/stocks', 'StockController')->except('index', 'show');
     Route::resource('/templates', 'TemplateController');
     Route::post('/templates/{template}/products', 'TemplateProductController@store')->name('templates.products.store');
+    Route::put('template_products/{template}/update', 'templateProductController@update')->name('template.products.update');
 
     ###CRUD_PLACEHOLDER###
 });

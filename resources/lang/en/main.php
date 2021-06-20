@@ -12,9 +12,11 @@ return [
     'branch_products' => 'Branch products',
     'add_branch_products' => 'Add Branch products',
     'branch_product' => 'Branch product',
+    'branch_product' => 'Branch product',
 
     'template' => 'Contarct Product Template',
     'product-to-template' => 'product to template',
+    'products-to-template' => 'products to template',
     'product-to-branch' => 'product to branch',
     'add-template' => 'Add Contract Template',
     'templates' => 'Contartcs Products Templates',

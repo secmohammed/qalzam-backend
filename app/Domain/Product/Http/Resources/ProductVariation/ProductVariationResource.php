@@ -22,7 +22,6 @@ class ProductVariationResource extends JsonResource
         if ($this->resource instanceof Collection) {
             return self::collection($this->resource)->toArray($request);
         }
-
         return [
             'id' => $this->id,
             'name' => $this->name,

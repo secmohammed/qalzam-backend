@@ -126,7 +126,7 @@ export default {
     },
    async mounted() {
         
-  const {data:{data:products}} =   await axios.get('/api/products?per_page=10000000', {
+  const {data:{data:products}} =   await axios.get('/api/product_variations?per_page=10000000', {
                 headers: {
                     Authorization: "Bearer " + this.auth_token,
                 },
