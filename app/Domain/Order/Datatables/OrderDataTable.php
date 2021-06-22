@@ -39,6 +39,10 @@ class OrderDataTable extends DataTable
                 $address = $model->address ? $model->address->name: '' ;
                 return "<span>$address</span>";
             })
+            ->editColumn('deliverer.name', function ($model){
+                $deliverer = $model->deliverer ? $model->deliverer->name: '' ;
+                return "<span>$deliverer</span>";
+            })
             ->editColumn('subtotal', function ($model){
                 $subtotal = $model->subtotal->amount();
                 return "<span>$subtotal</span>";
@@ -47,12 +51,16 @@ class OrderDataTable extends DataTable
                 $color =  $model->status == 'pending' ? 'primary' : ($model->status == 'processing' ? 'warning' : ($model->status == 'picked'? 'secondary' : 'success'));
                 return "<span class='badge badge-$color'>$model->status</span>";
             })
+            ->editColumn('order.type', function ($model){
+                $color =  $model->type == 'delivery' ? 'secondary' : 'warning';
+                return "<span class='badge badge-$color'>$model->type</span>";
+            })
             ->editColumn('created_at' ,function ($model) {
                 $created_at     = (new Carbon($model->created_at))->format('Y-m-d H:i');
                 return "<span>$created_at</span>";
             })
             ->editColumn('checkbox', function ($model){
-                return "<input type='checkbox' name='items[]' value='$model->id' id='selectResource'/>";
+                return "<input type='checkbox' name='items[]'  value='$model->id' id='selectResource'/>";
             })
             ->addColumn('actions', function ($model) {
                 $btn = "<a href=" . route('orders.show', ['order' => $model->id]) . " class='fa fa-eye text-primary mx-1'></a>";
@@ -60,7 +68,7 @@ class OrderDataTable extends DataTable
 
                 return $btn;
             })
-            ->rawColumns(['actions','checkbox','subtotal','status','address.name','branch.name', 'user.name', 'creator.name','created_at']);
+            ->rawColumns(['actions','checkbox','order.type','deliverer.name','subtotal','status','address.name','branch.name', 'user.name', 'creator.name','created_at']);
     }
 
     /**
@@ -116,6 +124,8 @@ class OrderDataTable extends DataTable
             Column::make('status')->title(__('main.status')),
             Column::make('user.name')->title(__('main.user')),
             Column::make('creator.name')->title(__('main.creator')),
+            Column::make('deliverer.name')->title(__('main.deliverer')),
+            Column::make('order.type')->title(__('main.delivery-type')),
             Column::make('address.name')->title(__('main.address')),
             Column::make('branch.name')->title(__('main.branch')),
             Column::make('created_at')->title(__('main.created_at')),

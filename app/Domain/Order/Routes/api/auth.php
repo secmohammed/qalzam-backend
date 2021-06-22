@@ -20,6 +20,7 @@ Route::group(['middleware' => 'auth.api'], function () {
     Route::put('orders/{order}/update_status', 'OrderController@updateStatus')->name('orders.update_status');
     
     Route::apiResource('orders', 'OrderController');
+    Route::get('deliverer/orders', 'DeliveryOrderController@delivererOrders')->name('deliverer.orders');
     Route::resource('/delivery_orders', 'DeliveryOrderController');
     ###CRUD_PLACEHOLDER###
 });

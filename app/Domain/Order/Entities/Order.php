@@ -40,6 +40,7 @@ class Order extends Model
         'branch_id',
         'creator_id',
         'user_id',
+        'delivery_id',
     ];
 
     /**

@@ -68,6 +68,7 @@
       35 => 'App\\Domain\\Reservation\\Providers\\DomainServiceProvider',
       36 => 'App\\Domain\\Accommodation\\Providers\\DomainServiceProvider',
       37 => 'App\\Domain\\Website\\Providers\\DomainServiceProvider',
+      38 => 'App\\Domain\\Payment\\Providers\\DomainServiceProvider',
     ),
     'aliases' => 
     array (
@@ -114,6 +115,7 @@
       'Toaster' => 'Joovlly\\Toaster\\Facades\\Toaster',
       'Cart' => 'App\\Common\\Facades\\Cart',
       'variation' => 'App\\Domain\\Product\\Entities\\ProductVariation',
+      'Payfort' => 'LaravelPayfort\\Facades\\Payfort',
     ),
   ),
   'auth' => 
@@ -1038,6 +1040,17 @@
       'generate_responsive_images' => 'Spatie\\MediaLibrary\\ResponsiveImages\\Jobs\\GenerateResponsiveImagesJob',
     ),
     'media_downloader' => 'Spatie\\MediaLibrary\\Downloaders\\DefaultDownloader',
+  ),
+  'payfort' => 
+  array (
+    'sandbox' => true,
+    'merchant_identifier' => '7250ac7d',
+    'access_code' => '7UNZtwCzeAeLLf5QCaD0',
+    'sha_type' => 'sha256',
+    'sha_request_phrase' => '$2y$10$zr1VRjRJk',
+    'sha_response_phrase' => '$2y$10$oTycpOGHi',
+    'currency' => 'SAR',
+    'return_url' => '',
   ),
   'qalzam' => 
   array (

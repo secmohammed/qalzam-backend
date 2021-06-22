@@ -67,9 +67,56 @@
             class="btn btn-danger font-weight-bolder mr-2">
              <i class="fa fa-trash icon-sm"
                 style="color: #fff"></i> {{ __('main.delete') }} </button>
+            <a 
+            class="btn btn-secondary font-weight-bolder mr-2"
+            data-toggle="modal" data-target="#assign-delivery"
+            >
+           {{ __('main.assign-to-delivery') }} </a>
 
         </div>
     </div>
+    <div class="modal fade" id="assign-delivery" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">assign delivery</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger hidden" id="errorContainerLogin">
+                    <svg width="30" height="36" viewBox="0 0 40 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M30.3317 9.61971L31.7399 10.699C35.0394 13.2307 37.432 16.7611 38.5611 20.7637C39.6901 24.7664 39.4951 29.0267 38.005 32.9094C36.5149 36.7921 33.8097 40.0892 30.2927 42.3088C26.7757 44.5284 22.6355 45.5517 18.4894 45.226C14.3434 44.9003 10.4137 43.2431 7.28642 40.5016C4.15914 37.7601 2.00185 34.0812 1.13628 30.0134C0.270714 25.9457 0.743244 21.7071 2.4834 17.9299C4.22355 14.1526 7.1381 11.0391 10.7924 9.05358M20.4942 1.31382L20.7017 27.5582" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <div class="contant">
+                        <p>هناك خطأ ما , يرجى إعاده المحاولة</p>
+                        <div class="" id="loginErrors"></div>
+                    </div>
+                </div>
+                <div class="form-group row w-full">
+                    <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.deliverers") }}</label>
+                    <div class="col-lg-10 col-md-9 col-sm-12">
+                        <select id="delivery_id" class="form-control  select2" style="width: 100%" name="delivery_id" data-placeholder="{{ __('main.select') .' '.__('main.deliverers')  }}">
+                            <option label="Label"></option>
+                         
+                            @foreach ($deliverers as $delivery)
+                            <option
+                            value="{{$delivery->id }}" >{{ $delivery->name}}</option>
+                                  
+                            @endforeach
+                              </select>
+                     
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button"  id="save-delivery" class="btn btn-primary">Save </button>
+            </div>
+          </div>
+        </div>
+      </div>
 @endsection
 
 @push('scripts')
@@ -84,11 +131,60 @@
 @endpush
 
 @push('scripts')
+<script src="{{ asset('assets/js/pages/crud/forms/widgets/select2.js?v=7.1.5') }}"></script>
+<script>
+    $('.select2').select2({
+        placeholder: '{{ __('main.select_option') }}'
+    });
+
+</script>
     <script>
         $(document).ready(function() {   //same as: $(function() {
             $('#dataTablesCheckbox').change(function(){
                 $('input:checkbox').not(this).prop('checked', this.checked);
             })
         });
+        $(document).ready(function() {   //same as: $(function() {
+            $('#save-delivery').click(function(){
+                let orders = $("input[name='items[]']")
+                .map(function(){ 
+                if(!$(this)[0].checked)return ;
+                return $(this).val()
+                }).get();
+                let delivery_id = $('#delivery_id').val();
+            let _token   = "{!! csrf_token() !!}";
+console.log(delivery_id,_token)
+                $.ajax({
+                url: "{!! route('orders.assign.deliverer') !!}",
+                type:"POST",
+                data:{
+                    orders,
+                    delivery_id,
+                    _token
+                },
+                success:function(response){
+                    console.log(response)
+                    window.location.reload()
+                },
+                error:function (response){
+                    $("#loginErrors").empty();
+                    $("#errorContainerLogin").show();
+                    $.each(response.responseJSON.errors, function (key, item)
+                    {
+
+                        console.log(item)
+                        $("#loginErrors").append("<li class='text-light m-2 font-weight-bold'>"+ key +' ' +item+"</li>")
+                    });
+                }
+            });
+        })
+
+
+
+
+            });
+        
+
+
     </script>
 @endpush

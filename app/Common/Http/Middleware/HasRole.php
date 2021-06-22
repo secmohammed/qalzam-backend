@@ -16,6 +16,8 @@ class HasRole
         // 'api.temlpates.products.store',
         'auth.cart.branches.index',
         'api.media.destroy',
+        'api.deliverer.orders',
+        'api.payments.store',
         'api.categories.index',
         'api.branch.products.store',
         'api.auth.logout',

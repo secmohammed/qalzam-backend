@@ -42,6 +42,10 @@ trait OrderRelations
     {
         return $this->belongsTo(User::class);
     }
+    public function deliverer()
+    {
+        return $this->belongsTo(User::class,'delivery_id','id','users')->where('type','delivery');
+    }
 
     public function creator()
     {

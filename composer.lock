@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a276a0052986c636b0f45daee2608128",
+    "content-hash": "e33f4718c37eef2165e776d5472e09c3",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -306,6 +306,70 @@
                 }
             ],
             "time": "2021-05-24T07:46:03+00:00"
+        },
+        {
+            "name": "dev-object/larafort",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AhmedAliGad/larafort.git",
+                "reference": "31c9315ff0d80a6d8eef9339e37ae52ff7d95c59"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AhmedAliGad/larafort/zipball/31c9315ff0d80a6d8eef9339e37ae52ff7d95c59",
+                "reference": "31c9315ff0d80a6d8eef9339e37ae52ff7d95c59",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~5.0|~6.0|~7.0",
+                "illuminate/support": "*",
+                "nesbot/carbon": "^2.30.0",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "fabpot/goutte": "~3.2",
+                "phpunit/phpunit": "~4.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LaravelPayfort\\Providers\\PayfortServiceProvider"
+                    ],
+                    "aliases": {
+                        "Payfort": "LaravelPayfort\\Facades\\Payfort"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LaravelPayfort\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ahmed Gad",
+                    "email": "ahmed.ali-gad@outlook.com"
+                }
+            ],
+            "description": "Larafort is a simple package to process payments throught PAYFORT Online Payment Gateway. (Using wshurafa/laravel-payfort)",
+            "keywords": [
+                "gateway",
+                "laravel",
+                "payfort",
+                "payment"
+            ],
+            "support": {
+                "issues": "https://github.com/dev-object/larafort/issues",
+                "source": "https://github.com/dev-object/larafort/tree/master"
+            },
+            "time": "2020-04-14T08:35:19+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -12345,6 +12409,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "dev-object/larafort": 20,
         "joovlly/authorizable": 20,
         "joovlly/commentable": 20,
         "joovlly/ddd": 20,

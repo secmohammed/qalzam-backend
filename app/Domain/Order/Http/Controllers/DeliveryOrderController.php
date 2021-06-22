@@ -5,9 +5,11 @@ namespace App\Domain\Order\Http\Controllers;
 use App\Domain\Branch\Entities\Branch;
 use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 use App\Domain\Order\Entities\Deliveryorder;
+use App\Domain\Order\Http\Requests\DeliveryOrder\AssignDeliverersFormRequest;
 use App\Domain\Order\Http\Requests\Deliveryorder\DeliveryorderStoreFormRequest;
 use App\Domain\Order\Http\Requests\Deliveryorder\DeliveryorderUpdateFormRequest;
 use App\Domain\Order\Http\Resources\Order\OrderResource;
+use App\Domain\Order\Http\Resources\Order\OrderResourceCollection;
 use App\Domain\Order\Repositories\Contracts\DeliveryorderRepository;
 use App\Domain\Order\Repositories\Contracts\OrderRepository;
 use App\Domain\User\Repositories\Contracts\UserRepository;
@@ -142,6 +144,48 @@ class DeliveryOrderController extends Controller
         }
 
         return $this->response();
+    }
+    public function assignDeliverer(AssignDeliverersFormRequest $request)
+    {
+        // dd($request->all());
+        
+        $orders = $this->orderRepository->whereIn('id',$request->orders)->get();
+        $orders->map(function ($order)
+        {
+            // dd(request()->delivery_id);
+            $order->delivery_id = request()->delivery_id;
+            $order->assign_date = now();
+            $order->save();
+            return $order;
+        });
+        // dd($orders);
+
+     
+            $this->redirectBack();
+            $this->setApiResponse(fn() => response()->json(['created' => true]));
+
+        return $this->response();
+    }
+    public function delivererOrders(Request $request)
+    {
+        // dd($request->all());
+        
+        $index = $this->orderRepository->spatie()->where('delivery_id',auth()->id())->paginate(
+            $request->per_page ?? config('qalzam.pagination')
+        );
+        $this->setData('title', __('main.show-all') . ' ' . __('main.order'));
+
+        $this->setData('alias', $this->domainAlias);
+
+        $this->setData('data', $index);
+
+        $this->addView("{$this->domainAlias}::{$this->viewPath}.index");
+
+        $this->useCollection(OrderResourceCollection::class, 'data');
+
+        return $this->response();
+
+    
     }
 
     /**

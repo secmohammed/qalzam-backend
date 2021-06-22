@@ -187,6 +187,7 @@ return [
         \App\Domain\Reservation\Providers\DomainServiceProvider::class,
         \App\Domain\Accommodation\Providers\DomainServiceProvider::class,
         \App\Domain\Website\Providers\DomainServiceProvider::class,
+		\App\Domain\Payment\Providers\DomainServiceProvider::class,
 		###DOMAINS SERVICE PROVIDERS###
     ],
 
@@ -245,5 +246,7 @@ return [
         'Toaster' => \Joovlly\Toaster\Facades\Toaster::class,
         'Cart' => \App\Common\Facades\Cart::class,
         'variation' => 'App\Domain\Product\Entities\ProductVariation',
+        'Payfort' => LaravelPayfort\Facades\Payfort::class,
+
     ],
 ];

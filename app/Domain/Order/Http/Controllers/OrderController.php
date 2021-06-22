@@ -26,6 +26,7 @@ use App\Domain\Product\Entities\Product;
 use App\Domain\Product\Entities\ProductVariation;
 use App\Domain\Product\Repositories\Contracts\ProductVariationRepository;
 use App\Domain\User\Entities\Address;
+use App\Domain\User\Entities\User;
 use App\Domain\User\Repositories\Contracts\RoleRepository;
 use App\Domain\User\Repositories\Contracts\UserRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
@@ -203,7 +204,9 @@ class OrderController extends Controller
      */
     public function dataTable(OrderDataTable $dataTable)
     {
-        return $dataTable->render("{$this->domainAlias}::{$this->viewPath}.index");
+        // dd(Order::find(5)->deliverer);
+        $deliverers = User::where('type','delivery')->get();
+        return $dataTable->render("{$this->domainAlias}::{$this->viewPath}.index",['deliverers'=>$deliverers]);
     }
     /**
      * Display the specified resource.

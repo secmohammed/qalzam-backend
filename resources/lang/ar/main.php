@@ -57,6 +57,8 @@ return [
     'out_of' => 'من',
     'type' => 'النوع',
     'meeting_reason' => 'أسباب الاجتماع',
+    'assign-to-delivery' => 'توصيل ',
+
     'code' => 'الكود',
     'logo' => 'الشعار',
     'phone' => 'الهاتف',
@@ -334,6 +336,8 @@ return [
     'quick-actions' => 'الاجراءات السريعة',
     'profile' => 'الصفحة الشخصية',
     "deliverers" => "مناديب التوصيل",
+    "deliverer" => "مندوب التوصيل",
+    "delivery-type" => "نوع التوصيل",
 
     "pay-on-delivery" => "الدفع عند الإستلام ",
     "invoice-print-date" => "تاريخ طباعة الفاتورة",

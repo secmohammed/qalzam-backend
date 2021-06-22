@@ -16,6 +16,7 @@ return [
 
     'template' => 'Contarct Product Template',
     'product-to-template' => 'product to template',
+    'assign-to-delivery' => 'assign to delivery',
     'products-to-template' => 'products to template',
     'product-to-branch' => 'product to branch',
     'add-template' => 'Add Contract Template',
@@ -257,6 +258,7 @@ return [
     'discounts' => 'Coupons',
     'discount' => 'Coupon',
     "deliverers" => "deliverers",
+    "deliverer" => "deliverer",
 
     "pay-on-delivery" => "Pay on delivery",
     "order-date" => "Order date",
@@ -274,6 +276,7 @@ return [
     "subtotal-inclusive-tax " => "The subtotal is inclusive of (VAT)",
 
     "delivery" => "Delivery",
+    "delivery-type" => "Delivery type",
     "value" => "value",
     "pay-on-delivery" => "Pay On Delivery",
     "subtotal" => "subtotal",

@@ -21,6 +21,17 @@
       'PDF' => 'Meneses\\LaravelMpdf\\Facades\\LaravelMpdf',
     ),
   ),
+  'dev-object/larafort' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'LaravelPayfort\\Providers\\PayfortServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Payfort' => 'LaravelPayfort\\Facades\\Payfort',
+    ),
+  ),
   'facade/ignition' => 
   array (
     'providers' => 
