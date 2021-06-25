@@ -127,7 +127,13 @@ return [
     'zone' => 'Zone',
     'active' => 'Active',
     'inactive' => 'Inactive',
+    'is_available_delivery' => 'available for delivery',
+    'is_available_receipt' => 'available for receipt from branch',
+    'not'=>'not' , 
+    'closed'=>'closed' , 
+    
     'Sign In' => 'Sign In',
+
     'Reset Password' => 'Reset Password',
     'Enter your password' => 'Enter your password',
     'Change Password' => 'Change Password',

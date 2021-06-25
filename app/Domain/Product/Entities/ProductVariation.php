@@ -41,11 +41,15 @@ class ProductVariation extends Model implements HasMedia
         'user_id',
         'product_variation_type_id',
         'product_id',
+        'description',
+        'slug',
+   
     ];
     protected $casts = [
         'details' => 'array',
     ];
-    protected static $translatables = ['name'];
+    protected static $translatables = ['name','description','slug'];
+
     /**
      * The attributes that are going to be logged.
      *

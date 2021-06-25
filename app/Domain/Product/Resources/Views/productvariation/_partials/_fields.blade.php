@@ -26,6 +26,64 @@
 </div>
 
 <x-forms.status :action="$action"  :edit="$edit??null"/>
+<div class="form-group row">
+    <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.slug") }} <span
+            style="color: red"> * </span> </label>
+    <div class="col-lg-10 col-md-9 col-sm-12">
+        <input type="text" name="slug" class="form-control {{$errors->has('slug') ? 'is-invalid':''}}"
+               value="{{ ($action == 'edit') ? $edit->slug : old('slug') }}" placeholder="{{ __("main.slug") }}">
+        <div class="row">
+            <div class="col-md-12">
+                @if($errors->has('slug'))
+                    <div class="alert alert-danger w-100 m-0" role="alert">
+                        {{$errors->first('slug')}}
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group row">
+    <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.slug_ar") }}  
+        <span
+        style="color: red"> * </span>
+    </label>
+    <div class="col-lg-10 col-md-9 col-sm-12">
+        <input type="text" name="slug_ar" class="form-control {{$errors->has('slug_ar') ? 'is-invalid':''}}"
+               value="{{ ($action == 'edit') ? $edit->slug_ar : old('slug_ar') }}" placeholder="{{ __("main.slug_ar") }}">
+        <div class="row">
+            <div class="col-md-12">
+                @if($errors->has('slug_ar'))
+                    <div class="alert alert-danger w-100 m-0" role="alert">
+                        {{$errors->first('slug_ar')}}
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
+
+<x-forms.description :action="$action" :edit="$edit??null"/>
+
+<div class="form-group row">
+    <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.description_ar") }} <span
+            style="color: red"> * </span> </label>
+    <div class="col-lg-10 col-md-9 col-sm-12">
+        <textarea  name="description_ar" class="form-control {{$errors->has('description_ar') ? 'is-invalid':''}}"
+               placeholder="{{ __("main.description_ar") }}">
+               {{ ($action == 'edit') ? $edit->description_ar : old('description_ar') }}
+            </textarea>
+        <div class="row">
+            <div class="col-md-12">
+                @if($errors->has('description_ar'))
+                    <div class="alert alert-danger w-100 m-0" role="alert">
+                        {{$errors->first('description_ar')}}
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="form-group row">
     <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.product_variation_type") }} <span

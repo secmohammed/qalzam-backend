@@ -18,7 +18,7 @@
     </div>
     <div class="col-sm-7 item-inner">
         <h2 class="title">{{$productVariationName}} </h2>
-        <p class="text">{{$product->description}}</p> <!-- todo change it to product variation description -->
+        <p class="text">{{$productVariationDescription}}</p> <!-- todo change it to product variation description -->
         <div class="listorder">
             <h3 class="title"> {{$productName}}</h3>
             <livewire:product-variation-types
@@ -30,7 +30,7 @@
 {{--                    <a class="{{$index == 0 ? 'active' : ''}}" href="#" wire:click="changeVariationType({{$type->id}})">{{$type->name}}</a>--}}
 {{--                @endforeach--}}
 {{--            </nav>--}}
-            <p class="text">{{$product->slug}}</p>
+            <p class="text">{{$productVariationSlug}}</p>
         </div>
         <p class="price">{{$productVariationPrice}}</p>
         <div class="ac-bot">

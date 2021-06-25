@@ -18,6 +18,5 @@ Route::middleware(['auth'])->prefix(config('qalzam.dashboard-prefix'))->group(fu
     Route::resource('/categories','CategoryController')->except('index');
     Route::get('/categories','CategoryController@dataTable')->name('categories.index');
     Route::delete('/categories/delete/all', 'CategoryController@deleteAll')->name('categories.delete-all');
-
     ###CRUD_PLACEHOLDER###
 });

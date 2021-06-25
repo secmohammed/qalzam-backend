@@ -49,6 +49,8 @@ class BranchStoreFormRequest extends FormRequest
             'users' => 'required|array',
             'deliverers' => 'nullable|array',
             'status' => 'nullable|in:active,inactive',
+            'is_available_delivery' => 'nullable|in:active,inactive',
+            'is_available_receipt' => 'nullable|in:active,inactive',
             'user_id' => 'required|exists:users,id',
             'deliverers.*' => 'required|exists:users,id',
             'users.*' => 'required|exists:users,id',

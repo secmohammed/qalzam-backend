@@ -38,6 +38,9 @@ class ProductVariationStoreFormRequest extends FormRequest
     {
         $rules = [
             'status' => 'nullable|in:active,inactive',
+            'slug' => ['required', 'string', 'max:255', Rule::unique('product_variations', 'slug')],
+            'description' => ['required', 'string', 'max:255'],
+  
             'price' => ['nullable', 'numeric', 'min:1', 'max:10000'],
             'product_id' => 'required|exists:products,id',
             'product_variation_type_id' => ['required','exists:product_variation_types,id', Rule::unique('product_variations', 'product_variation_type_id')->where('product_id',$this->product_id)],

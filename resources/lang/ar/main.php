@@ -45,6 +45,13 @@ return [
     'product-to-template' => 'منتجات الى نموذج',
     'products-to-template' => 'منتج الى نموذج ',
 
+    'is_available_delivery' => 'متاح التوصيل ',
+    'is_available_receipt' => 'متاح الاستلام من الفرع',
+    'not'=>'غير' , 
+    'closed'=>'مغلق' , 
+
+
+
     'Meeting has been created' => 'تم إنشاء اجتماع',
     'Meeting has been Updated' => 'تم تعديل اجتماع',
     'notifications' => 'الإشعارات',

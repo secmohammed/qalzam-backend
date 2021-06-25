@@ -36,6 +36,8 @@ class Branch extends Model implements HasMedia
         'address_1',
         'latitude',
         'longitude',
+        'is_available_delivery',
+        'is_available_receipt'
 
     ];
 
@@ -65,6 +67,10 @@ class Branch extends Model implements HasMedia
     public static function newFactory()
     {
         return app(\App\Domain\Branch\Database\Factories\BranchFactory::class)->new();
+    }
+    public function getIsClosedAttribute()
+    {
+        return $this->status === "inactive" ||($this->is_available_delivery === "inactive"&&$this->is_available_receipt === "inactive") || !$this->isCurrentAvailable();
     }
     public function isCurrentAvailable()
     {

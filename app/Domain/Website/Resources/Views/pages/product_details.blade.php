@@ -33,9 +33,10 @@
                         <li class="nav-item"><a class="nav-link" id="product-options-tab" data-toggle="tab" href="#product-options" role="tab" aria-controls="product-options" aria-selected="false">خيارات المنتج</a></li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-                            <p class="text">{{$product->description}}</p>
-                        </div>
+                        <livewire:product-details-information
+                :product="$product"
+                        
+                        />
                         <div class="tab-pane fade" id="product-options" role="tabpanel" aria-labelledby="product-options-tab">
                             <ul class="options">
                                 @foreach($variations as $index => $variation)

@@ -195,7 +195,9 @@ class ProductVariationController extends Controller
 
         $productVariation->setTranslation([
             'name' => $request->name_ar,
-        ], 'ar', true);
+            'description' => $request->description_ar,
+            'slug' => $request->slug_ar,
+        ], 'ar');
 
         app(Pipeline::class)->send([
             'model' => $productVariation,
@@ -227,6 +229,11 @@ class ProductVariationController extends Controller
             'name' => $request->name_ar,
         ], 'ar', true);
 
+        $productVariation->setTranslation([
+            'name' => $request->name_ar,
+            'description' => $request->description_ar,
+            'slug' => $request->slug_ar,
+        ], 'ar');
         app(Pipeline::class)->send([
             'model' => $productVariation,
             'request' => $request,

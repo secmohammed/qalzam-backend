@@ -33,8 +33,8 @@ class Product extends Model implements HasMedia
         'name',
         'status',
         'price',
-        'description',
         'user_id',
+        'description',
         'slug',
     ];
 

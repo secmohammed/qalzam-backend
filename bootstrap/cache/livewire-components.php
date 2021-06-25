@@ -33,6 +33,7 @@
   'price-card' => 'App\\Http\\Livewire\\PriceCard',
   'product-datatable' => 'App\\Http\\Livewire\\ProductDatatable',
   'product-details' => 'App\\Http\\Livewire\\ProductDetails',
+  'product-details-information' => 'App\\Http\\Livewire\\ProductDetailsInformation',
   'product-variation-datatable' => 'App\\Http\\Livewire\\ProductVariationDatatable',
   'product-variation-type-datatable' => 'App\\Http\\Livewire\\ProductVariationTypeDatatable',
   'product-variation-types' => 'App\\Http\\Livewire\\ProductVariationTypes',

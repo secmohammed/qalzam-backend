@@ -28,6 +28,51 @@
 <x-forms.status :action="$action" :edit="$edit??null"/>
 
 <div class="form-group row">
+    <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.is_available_delivery") }} <span
+            style="color: red"> * </span> </label>
+    <div class="col-lg-10 col-md-9 col-sm-12">
+        <select class="form-control select2 {{$errors->has('is_available_delivery') ? 'is-invalid':''}}" name="is_available_delivery">
+            <option label="Label"></option>
+                <option
+                    value="active" {{ ($action == 'edit') && $edit->is_available_delivery == 'active' ? 'selected' : '' }}>{{ __('main.active') }}</option>
+                    <option
+                    value="inactive" {{ ($action == 'edit') && $edit->is_available_delivery == 'inactive' ? 'selected' : '' }}>{{ __('main.inactive') }}</option>
+        </select>
+        <div class="row">
+            <div class="col-md-12">
+                @if($errors->has('is_available_delivery'))
+                    <div class="alert alert-danger w-100 m-0" role="alert">
+                        {{$errors->first('is_available_delivery')}}
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group row">
+    <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.is_available_receipt") }} <span
+            style="color: red"> * </span> </label>
+    <div class="col-lg-10 col-md-9 col-sm-12">
+        <select class="form-control select2 {{$errors->has('is_available_receipt') ? 'is-invalid':''}}" name="is_available_receipt">
+            <option label="Label"></option>
+                <option
+                    value="active" {{ ($action == 'edit') && $edit->is_available_receipt == 'active' ? 'selected' : '' }}>{{ __('main.active') }}</option>
+                    <option
+                    value="inactive" {{ ($action == 'edit') && $edit->is_available_receipt == 'inactive' ? 'selected' : '' }}>{{ __('main.inactive') }}</option>
+        </select>
+        <div class="row">
+            <div class="col-md-12">
+                @if($errors->has('is_available_receipt'))
+                    <div class="alert alert-danger w-100 m-0" role="alert">
+                        {{$errors->first('is_available_receipt')}}
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-group row">
     <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.users") }}</label>
     <div class="col-lg-10 col-md-9 col-sm-12">
         <select class="form-control select2 {{$errors->has('users') ? 'is-invalid':''}}" name="users[]" data-placeholder="{{ __('main.select') .' '.__('main.users')  }}" multiple>

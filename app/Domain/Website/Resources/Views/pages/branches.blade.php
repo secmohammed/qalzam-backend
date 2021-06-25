@@ -13,14 +13,28 @@
         <h2 class="title">{{__('website.branches-list')}}</h2>
         <div class="row">
             @foreach($branches as $branch)
-                <div class="col-sm-3 item-bra"><a class="photo {{$branch->status === 'inactive' ? 'unavailable' :''}}" href="{{$branch->status === 'active' ? route('website.branch', ['branch' => $branch]) : '#'}}"><img src="{{$branch->getLastMediaUrl('branch-gallery')}}" alt="" title="">
+                <div class="col-sm-3 item-bra ">
+                    <a class="photo {{$branch->isClosed ? ' unavailable' :''}}" href="{{!$branch->isClosed  ? route('website.branch', ['branch' => $branch]) : '#'}}">
+                    <img src="{{$branch->getLastMediaUrl('branch-gallery')}}" alt="" title="">
                         <div class="content">
-                            <div>
-                                <h3 class="title">{{$branch->preview_name}}</h3>
-                                <p class="text">{{$branch->status}}</p>
-                            </div>
+                            <div class="d-flex flex-column">
+
+                                <h3 class="title " >{{$branch->preview_name}}</h3>
+                                <h3 class="title " >{{$branch->isClosed ?__('main.closed'):""}}</h3>
+                                <p style="display:{{$branch->isClosed ?'none':'block'}}" class="text font-weight-bold mt-2 "> {{$branch->is_available_receipt === "active" ? __('main.is_available_receipt'):"" }}</p>
+                                <p style="display:  {{$branch->isClosed ?'none':'block'}}  " class="text font-weight-bold " > {{$branch->is_available_delivery === "active" ? __('main.is_available_delivery'):""}}</p>
+                                </div>
+
+                                    {{-- <div class=" mt-3 " style="margin-right: 58px"> --}}
+        
+                            {{-- </div> --}}
                         </div>
+                   
+               
                     </a>
+                   
+
+                    
                 </div>
             @endforeach
         </div>

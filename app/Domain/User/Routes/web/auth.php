@@ -34,4 +34,10 @@ Route::middleware(['auth'])->prefix(config('qalzam.dashboard-prefix'))->group(fu
     Route::delete('/addresses/delete/all', 'AddressController@deleteAll')->name('addresses.delete-all');
 
 
+
+    Route::get('/cartTest','CartController@testCart');
+
+
+
+
 });

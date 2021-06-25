@@ -17,6 +17,8 @@ class ProductDetails extends Component
     public $productVariation;
     public $productVariationId;
     public $productVariationName;
+    public $productVariationDescription;
+    public $productVariationSlug;
     public $productVariationPrice;
     public $productName;
     protected $listeners = ['changeVariationType'];
@@ -52,11 +54,13 @@ class ProductDetails extends Component
         $this->productVariation = $productVariationRepository
             ->with(['branches' => function ($q) use($branch_id) { return $q->where('branch_id', $branch_id);}])
             ->findWhere(['product_id' => $this->product->id])->first();
-        $this->productVariationChanged();
+       
+            $this->productVariationChanged();
     }
 
     public function render()
     {
+        
         return view('livewire.product-details');
     }
     /**
@@ -106,14 +110,18 @@ class ProductDetails extends Component
             }
             )->findWhere(['product_variation_type_id' => $product_variation_type_id, 'product_id' => $this->product_id])->first();
         $this->productVariationChanged();
-    }
 
+    }
 
     private function productVariationChanged()
     {
+        $this->emit('variationDescriptionChanged',$this->productVariation->description  );
+
         $this->productVariationId = $this->productVariation->id;
         $this->resetQuantity();
         $this->productVariationName = $this->productVariation->name;
+        $this->productVariationDescription = $this->productVariation->description;
+        $this->productVariationSlug = $this->productVariation->slug;
         $this->productVariationPrice = $this->formatPrice($this->productVariation->branches->filter(function($branch){ return $branch->id == $this->branchId;})->first()->pivot->price * 100);
     }
     private function resetQuantity()

@@ -10,7 +10,9 @@ use App\Domain\User\Http\Requests\Cart\CartStoreFormRequest;
 use App\Domain\User\Http\Requests\Cart\CartUpdateFormRequest;
 use App\Domain\User\Http\Resources\User\UserResource;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Joovlly\DDD\Traits\Responder;
 
 class CartController extends Controller
@@ -106,6 +108,18 @@ class CartController extends Controller
         $this->useCollection(BranchResourceCollection::class, 'data');
 
         return $this->response();
+    }
+
+    public function testCart()
+    {
+        $client = new Client();
+        $res = $client->post('https://sbpaymentservices.payfort.com/FortAPI/paymentApi',[
+            "merchant_identifier"=>"7250ac7d",
+            "access_code"=>"Ef21nMr7K7Ooa90Xtnlr",
+            "card_security_code"=>"123",
+            "expiry_date"=>"05/25",
+        ]);
+        dd($res->getBody(),$res->getStatusCode());
     }
 
     /**
