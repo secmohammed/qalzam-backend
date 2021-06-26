@@ -43,6 +43,10 @@ class ValidateReservationStartDateAndEndDateIsWithinBranchAvailability implement
             Carbon::parse($reservationEndDate)->locale('en')->format('H:i:s')
         );
 
+        // dd( $shiftStartDate->gt($parseReservationStartDateToToday) ,
+        // $shiftEndDate->lt($parseReservationEndDateToToday) ,
+        // $parseReservationStartDateToToday->gt($shiftEndDate) ,
+        // $parseReservationEndDateToToday->lt($shiftStartDate));
         throw_if(
             $shiftStartDate->gt($parseReservationStartDateToToday) ||
             $shiftEndDate->lt($parseReservationEndDateToToday) ||

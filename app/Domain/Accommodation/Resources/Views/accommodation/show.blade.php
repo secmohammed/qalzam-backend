@@ -1,3 +1,13 @@
+{{-- @dd($accommodation->contracts->filter(function ($item) 
+        {
+            dump($item->id);
+            // @dd( \App\Domain\Accommodation\Entities\Contract::whereId($item->id)->ContainingDays(strtolower(\Carbon\Carbon::parse('2021-10-02T17:25')->locale('en')->dayName))->exists(), $item,$item->ContainingDays(strtolower(\Carbon\Carbon::parse('2021-10-02T17:25')->locale('en')->dayName))->exists(),strtolower(\Carbon\Carbon::parse('2021-10-02T17:25')->locale('en')->dayName));
+       return  \App\Domain\Accommodation\Entities\Contract::whereId($item->id)->ContainingDays(strtolower(\Carbon\Carbon::parse('2021-10-02T17:25')->locale('en')->dayName))->exists();
+        })->first()) --}}
+        {{-- @dd($accommodation->contracts->filter(function ($item) 
+        {
+       return  $item->ContainingDays(strtolower(\Carbon\Carbon::parse('2021-10-02T17:25')->locale('en')->dayName))->exists();
+        })->first()->template  ) --}}
 @extends('theme.app')
 
 @push('styles')
@@ -113,6 +123,25 @@
                                     <div class="row mb-2">
                                         <strong class="ml-3"><span>{{ __("main.code") }} : </span></strong>
                                         <span>{{ $accommodation->code ?? 'N/A' }} </span>
+                                    </div>
+                                    <hr>
+                                </div>
+                                <div class="col-md-6 mb-5">
+                                    <div class="row mb-2">
+                                        <strong class="ml-3"><span>{{ __("main.contracts") }} : </span></strong>
+                                        @forelse ($accommodation->contracts as $contract)
+                                        <span>{{ $contract->name . " "}} </span>
+                                        @if (!$loop->last)
+                                        <span> , </span>
+                                            
+                                        @endif
+                                        
+                                            
+                                        @empty
+                                        <span> N/A </span>
+                                            
+                                        @endforelse
+                                    
                                     </div>
                                     <hr>
                                 </div>

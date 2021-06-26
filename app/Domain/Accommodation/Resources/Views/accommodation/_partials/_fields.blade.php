@@ -157,21 +157,21 @@
 
 
 <div class="form-group row">
-    <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.contract") }}</label>
+    <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.contracts") }}</label>
     <div class="col-lg-10 col-md-9 col-sm-12">
-        <select class="form-control select2 {{$errors->has('contract_id') ? 'is-invalid':''}}" name="contract_id" data-placeholder="{{ __('main.select') .' '.__('main.contract')  }}">
+        <select class="form-control select2 {{$errors->has('contracts') ? 'is-invalid':''}}" name="contracts[]" multiple="true" data-placeholder="{{ __('main.select') .' '.__('main.contract')  }}">
             <option label="Label"></option>
             @foreach ($contracts as $contract)
             <option
-            value="{{ $contract->id }}" {{ ($action == 'edit') && $edit->contract_id == $contract->id ? 'selected' : '' }}>{{ $contract->name}}</option>
+            value="{{ $contract->id }}" {{ ($action == 'edit') && $edit->contracts->contains($contract->id)  ? 'selected' : '' }}>{{ $contract->name}}</option>
                   
             @endforeach
               </select>
         <div class="row">
             <div class="col-md-12">
-                @if($errors->has('contract_id'))
+                @if($errors->has('contracts'))
                 <div class="alert alert-danger w-100 m-0" role="alert">
-                    {{$errors->first('contract_id')}}
+                    {{$errors->first('contracts')}}
                 </div>
                 @endif
             </div>

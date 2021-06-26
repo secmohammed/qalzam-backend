@@ -2,6 +2,7 @@
 
 namespace App\Domain\Accommodation\Entities\Traits\Relations;
 
+use App\Domain\Accommodation\Entities\AccommodationContract;
 use App\Domain\Accommodation\Entities\Contract;
 use App\Domain\Branch\Entities\Branch;
 use App\Domain\Category\Entities\Category;
@@ -29,18 +30,18 @@ trait AccommodationRelations
     /**
      * @return mixed
      */
-    public function contract()
+    public function contracts()
     {
-        return $this->belongsTo(Contract::class);
+        return $this->belongsToMany(Contract::class);
     }
 
     /**
      * @return mixed
      */
-    public function template()
-    {
-        return $this->hasOneThrough(Template::class, Contract::class, 'id', 'id', 'contract_id', 'template_id');
-    }
+    // public function template()
+    // {
+    //     return $this->hasOneThrough(Template::class, AccommodationContract::class, 'accommodation_id', 'contract_id', 'id', 'contract_id');
+    // }
 
     /**
      * @return mixed

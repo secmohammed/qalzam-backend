@@ -70,6 +70,7 @@ class Contract extends Model
      */
     public function scopeContainingDays(Builder $builder, ...$days)
     {
+        // dd($builder->whereJsonContains('days ', $days)->toSql(),$builder->whereJsonContains('days', $days)->getBindings());
         $builder->whereJsonContains('days', $days);
     }
 }

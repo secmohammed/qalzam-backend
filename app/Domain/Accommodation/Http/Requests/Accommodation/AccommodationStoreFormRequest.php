@@ -48,10 +48,10 @@ class AccommodationStoreFormRequest extends FormRequest
             'categories' => 'required|array',
             'categories.*' => 'required|exists:categories,id',
             'capacity' => 'required|integer|min:1|max:100',
-            'contract_id' => [
-                'nullable',
-                new EnsureContractHasTemplateProducts,
+            'contracts' => [
+                'nullable','array'
             ],
+            'contracts.*' =>'required|exists:contracts,id',
 
         ];
         // if ($this->request->get('type') === 'room') {
@@ -76,10 +76,10 @@ class AccommodationStoreFormRequest extends FormRequest
         
         return array_merge(parent::validated(), [
             'user_id' => auth()->id(),
-            'contract_id'=> $this->request->get('contract_id')?? Contract::whereHas('template',function ($query)
+            'contracts'=>  $this->request->get('contracts')?? [ Contract::whereHas('template',function ($query)
             {
                 return $query->where('name','free');
-            })->first()->id
+            })->first()->id]
 
         ]);
     }

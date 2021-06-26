@@ -164,6 +164,8 @@ class AccommodationController extends Controller
      */
     public function show(Accommodation $accommodation)
     {
+        // dd($accommodation->contracts/);
+        
         $this->setData('title', __('main.show') . ' ' . __('main.accommodation') . ' : ' . $accommodation->id, 'web');
 
         $this->setData('alias', $this->domainAlias, 'web');
@@ -185,9 +187,10 @@ class AccommodationController extends Controller
      */
     public function store(AccommodationStoreFormRequest $request)
     {
-        // dd($request->validated());
+
         $accommodation = $this->accommodationRepository->create($request->validated());
         $accommodation->categories()->attach($request->categories);
+        $accommodation->contracts()->syncWithoutDetaching($request->contracts);
         app(Pipeline::class)->send([
             'model' => $accommodation,
             'request' => $request,
@@ -218,6 +221,10 @@ class AccommodationController extends Controller
         if ($request->categories) {
             $accommodation->categories()->sync($request->categories);
         }
+        if ($request->contracts) {
+            $accommodation->contracts()->sync($request->contracts);
+        }
+
         if ($request->{'accommodation-gallery'}) {
             app(Pipeline::class)->send([
             'model' => $accommodation,
