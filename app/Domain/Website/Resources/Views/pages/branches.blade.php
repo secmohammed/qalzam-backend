@@ -1,3 +1,4 @@
+
 @extends('layouts.website', ['headerClass' => 'header-inner', 'activeRoute' => 'branches'])
 @section('content')
 <section class="list">

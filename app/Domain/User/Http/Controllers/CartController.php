@@ -119,7 +119,6 @@ class CartController extends Controller
             "card_security_code"=>"123",
             "expiry_date"=>"05/25",
         ]);
-        dd($res->getBody(),$res->getStatusCode());
     }
 
     /**

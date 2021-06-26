@@ -74,7 +74,7 @@ class Branch extends Model implements HasMedia
     }
     public function isCurrentAvailable()
     {
-        $shift = $this->shifts()->where("day", strtolower(Carbon::now()->isoFormat("dddd")))->first();
+        $shift = $this->shifts()->where("day", strtolower(Carbon::now()->locale('en')->isoFormat("dddd")))->first();
         if (!$shift) {
             return false;
         }
