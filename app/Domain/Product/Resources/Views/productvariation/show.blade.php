@@ -136,6 +136,13 @@
                                     </div>
                                     <hr>
                                 </div>
+                                <div class="col-md-6 mb-5">
+                                    <div class="row mb-2">
+                                        <strong class='ml-3'><span>{{ __("main.slug") }} : </span></strong>
+                                        <span>{{ $show->slug ? __("main.{$show->slug}") : 'N/A' }} </span>
+                                    </div>
+                                    <hr>
+                                </div>
 
                                 <div class="col-md-6 mb-5">
                                     <div class="row mb-2">
@@ -148,6 +155,15 @@
                                     <div class="row mb-2">
                                         <strong class='ml-3'><span>{{ __("main.created_at") }} : </span></strong>
                                         <span>{{$show->created_at}}</span>
+                                    </div>
+                                    <hr>
+                                </div>
+                                <br>
+                                <br>
+                                <div class="col-md-12 mb-5">
+                                    <div class="row mb-2">
+                                        <strong class='ml-3'><span>{{ __("main.description") }} : </span></strong>
+                                        <span>{{$show->description}}</span>
                                     </div>
                                     <hr>
                                 </div>

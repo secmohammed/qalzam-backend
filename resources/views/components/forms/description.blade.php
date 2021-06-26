@@ -4,7 +4,7 @@
     <div class="col-lg-10 col-md-9 col-sm-12">
         <textarea  name="description" class="form-control {{$errors->has('description') ? 'is-invalid':''}}"
                placeholder="{{ __("main.description") }}">
-               {{ ($action == 'edit') ? $edit->description : old('description') }}
+               {{ ($action == 'edit' && $edit->description) ? $edit->description : old('description') }}
             </textarea>
         <div class="row">
             <div class="col-md-12">

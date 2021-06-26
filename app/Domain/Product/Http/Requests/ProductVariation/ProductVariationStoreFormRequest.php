@@ -40,6 +40,8 @@ class ProductVariationStoreFormRequest extends FormRequest
             'status' => 'nullable|in:active,inactive',
             'slug' => ['required', 'string', 'max:255', Rule::unique('product_variations', 'slug')],
             'description' => ['required', 'string', 'max:255'],
+            'description_ar' => ['nullable'],
+            'slug_ar' => ['nullable'],
   
             'price' => ['nullable', 'numeric', 'min:1', 'max:10000'],
             'product_id' => 'required|exists:products,id',

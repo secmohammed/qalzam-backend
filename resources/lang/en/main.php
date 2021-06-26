@@ -273,6 +273,7 @@ return [
     "invoice-print-date" => "invoice print date",
     "from" => "from",
     "to" => "to",
+    "notes" => "notes",
     "product-code" => "Product Code",
     "shipping-method" => "Shipping Method",
     "expected-time-deliver-service" => "the expected time To deliver the Order",

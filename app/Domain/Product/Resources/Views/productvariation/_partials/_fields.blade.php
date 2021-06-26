@@ -31,7 +31,7 @@
             style="color: red"> * </span> </label>
     <div class="col-lg-10 col-md-9 col-sm-12">
         <input type="text" name="slug" class="form-control {{$errors->has('slug') ? 'is-invalid':''}}"
-               value="{{ ($action == 'edit') ? $edit->slug : old('slug') }}" placeholder="{{ __("main.slug") }}">
+               value="{{ ($action == 'edit' && $edit->slug) ? $edit->slug : old('slug') }}" placeholder="{{ __("main.slug") }}">
         <div class="row">
             <div class="col-md-12">
                 @if($errors->has('slug'))
@@ -50,7 +50,7 @@
     </label>
     <div class="col-lg-10 col-md-9 col-sm-12">
         <input type="text" name="slug_ar" class="form-control {{$errors->has('slug_ar') ? 'is-invalid':''}}"
-               value="{{ ($action == 'edit') ? $edit->slug_ar : old('slug_ar') }}" placeholder="{{ __("main.slug_ar") }}">
+               value="{{ ($action == 'edit' && $edit->slug_ar) ? $edit->slug_ar : old('slug_ar') }}" placeholder="{{ __("main.slug_ar") }}">
         <div class="row">
             <div class="col-md-12">
                 @if($errors->has('slug_ar'))
@@ -71,7 +71,7 @@
     <div class="col-lg-10 col-md-9 col-sm-12">
         <textarea  name="description_ar" class="form-control {{$errors->has('description_ar') ? 'is-invalid':''}}"
                placeholder="{{ __("main.description_ar") }}">
-               {{ ($action == 'edit') ? $edit->description_ar : old('description_ar') }}
+               {{ ($action == 'edit' && $edit->description_ar ) ? $edit->description_ar : old('description_ar') }}
             </textarea>
         <div class="row">
             <div class="col-md-12">

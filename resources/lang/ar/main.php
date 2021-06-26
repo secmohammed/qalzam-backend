@@ -335,6 +335,8 @@ return [
     'working-hours' => 'ساعات العمل',
     'start-time' => 'موعد البداية',
     'end-time' => 'موعد النهاية',
+    "notes" => "ملاحظات",
+
     'branch-gallery' => 'صورة الفرع',
     'about-us' => 'من نحن',
     'team' => 'فريق العمل',
