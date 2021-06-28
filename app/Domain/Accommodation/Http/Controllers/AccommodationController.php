@@ -14,6 +14,7 @@ use App\Domain\Accommodation\Repositories\Contracts\ContractRepository;
 use App\Domain\Branch\Repositories\Contracts\BranchRepository;
 use App\Domain\Category\Repositories\Contracts\CategoryRepository;
 use App\Infrastructure\Http\AbstractControllers\BaseController as Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 use Joovlly\DDD\Traits\Responder;

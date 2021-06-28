@@ -4,6 +4,7 @@
           <livewire:card.order-card
               :price="$order->total()->formatted()"
               :branchName="$order->branch->name"
+              :orderId="$order->id"
               :address="$order->address ? $order->address->address_1 : '__________'"
               :orderType="$order->address ? __('website.order.delivery') : __('website.order.branch')"
               :createdAt="\Carbon\Carbon::parse( $order->created_at)->format('Y-m-d')"

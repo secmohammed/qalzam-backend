@@ -23,6 +23,7 @@ class ProductDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+           
             ->editColumn('user.name', function ($model){
                 $user = $model->user ? $model->user->name: '' ;
                 return "<span>$user</span>";
@@ -31,6 +32,7 @@ class ProductDataTable extends DataTable
                 $variation_name = $model->name?? '' ;
                 return "<span>$variation_name</span>";
             })
+      
             ->editColumn('created_at' ,function ($model) {
                 $created_at     = (new Carbon($model->created_at))->format('Y-m-d H:i');
                 return "<span>$created_at</span>";
@@ -52,6 +54,9 @@ class ProductDataTable extends DataTable
 
                 return $btn;
             })
+            // ->filterColumn('name', function ($query, $keywords)   {
+            //     dd($query);
+            // })
             ->rawColumns(['actions','name','checkbox','price','user.name','status', 'created_at']);
     }
 
@@ -82,7 +87,7 @@ class ProductDataTable extends DataTable
      */
     public function query(product $model)
     {
-        return $model->newQuery()->with(['user'])->select('products.*');
+        return $model->newQuery()->with(['user','translations'])->select('products.*');
     }
 
     /**

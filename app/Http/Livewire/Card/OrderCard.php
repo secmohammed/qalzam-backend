@@ -11,6 +11,7 @@ class OrderCard extends Component
     public $createdAt;
     public $status;
     public $price;
+    public $orderId;
     public $address;
     public $isBack =false;
     public $orderType;

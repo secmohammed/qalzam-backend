@@ -27,6 +27,13 @@
         <p>{{__website('order.total')}}</p>
         <h4 class="title red">{{ $price }}</h4>
     </div>
+    @if ($isBack)
+    <a href="{{ route('orders.show',$orderId) }}" class='fa fa-eye text-primary mx-1'>
+
+    </a> 
+    @endif
+
+ 
     @if (!$isBack)
         
     <div class="contant"><a class="bottom" href="#evaluation" data-toggle="modal">{{__website('order.rate')}}</a></div>

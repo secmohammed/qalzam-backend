@@ -4,7 +4,7 @@
 
 <div class="form-group row">
     <label class="col-form-label text-right col-lg-2 col-sm-12">{{ __("main.product") }} <span
-            style="color: red"> * </span> </label>
+           style="color: red"> * </span> </label>
     <div class="col-lg-10 col-md-9 col-sm-12">
         <select class="form-control select2 {{$errors->has('product_id') ? 'is-invalid':''}}" name="product_id">
             <option label="Label"></option>
@@ -23,7 +23,7 @@
             </div>
         </div>
     </div>
-</div>
+</>
 
 <x-forms.status :action="$action"  :edit="$edit??null"/>
 <div class="form-group row">
